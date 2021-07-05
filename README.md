@@ -1,6 +1,8 @@
-# Ubuntu Yaru icons for Flutter
+<h1 align="center">Ubuntu Yaru icons for Flutter</h1>
 
 A set of [Yaru](https://github.com/ubuntu/yaru) icons for your Flutter application.
+
+![example](./.github/screenshots/example.png)
 
 # Usage
 
