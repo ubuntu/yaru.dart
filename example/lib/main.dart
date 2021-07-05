@@ -1,4 +1,4 @@
-import 'package:yaru_icons/widgets/icons.dart';
+import 'package:yaru_icons/widgets/yaru_icons.dart';
 import 'package:flutter/material.dart';
 
 void main() {
