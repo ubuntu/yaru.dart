@@ -1,6 +1,37 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(-372 -160)" fill="gray">
-        <path d="M376.994 161c-1.258.015-2.179-.03-2.932.385a1.88 1.88 0 0 0-.837.998c-.165.438-.225.96-.225 1.617v11h14v-11c0-.658-.06-1.179-.225-1.617a1.88 1.88 0 0 0-.837-.998c-.753-.416-1.674-.37-2.932-.385H376.998zm.006 1h6c1.259.015 2.087.06 2.453.262.184.1.29.212.387.472.097.26.16.674.16 1.266v10h-12v-10c0-.592.063-1.006.16-1.266.098-.26.202-.371.385-.472.366-.202 1.196-.247 2.455-.262z" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;marker:none" color="#000" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible"/>
-        <rect height="4" width="8" x="376" y="162"/>
-    </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="16"
+   width="16"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="zip.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="56"
+     inkscape:cx="7.9910714"
+     inkscape:cy="8.0089286"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <path
+     id="path2"
+     style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;marker:none"
+     d="M 4.9941406 1 C 3.7361406 1.015 2.8155 0.96976562 2.0625 1.3847656 A 1.88 1.88 0 0 0 1.2246094 2.3828125 C 1.0596094 2.8208125 1 3.343 1 4 L 1 15 L 15 15 L 15 4 C 15 3.342 14.940391 2.8208125 14.775391 2.3828125 A 1.88 1.88 0 0 0 13.9375 1.3847656 C 13.1845 0.96876563 12.263859 1.015 11.005859 1 L 4.9980469 1 L 4.9941406 1 z M 4 2.0253906 L 4 6 L 12 6 L 12 2.0253906 C 12.704334 2.0563019 13.195566 2.1195685 13.453125 2.2617188 C 13.637125 2.3617188 13.742844 2.474375 13.839844 2.734375 C 13.936844 2.994375 14 3.408 14 4 L 14 14 L 2 14 L 2 4 C 2 3.408 2.0631563 2.994375 2.1601562 2.734375 C 2.2581562 2.474375 2.3619219 2.3627188 2.5449219 2.2617188 C 2.8025702 2.1195194 3.2946857 2.0562894 4 2.0253906 z " />
 </svg>
