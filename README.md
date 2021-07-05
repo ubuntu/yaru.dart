@@ -1,5 +1,7 @@
 <h1 align="center">Ubuntu Yaru icons for Flutter</h1>
 
+![Pub](https://img.shields.io/pub/v/yaru_icons)
+
 A set of [Yaru](https://github.com/ubuntu/yaru) icons for your Flutter application.
 
 ![example](./.github/screenshots/example.png)
