@@ -9,7 +9,7 @@ A set of [Yaru](https://github.com/ubuntu/yaru) icons for your Flutter applicati
 # Usage
 
 ```dart
-import 'package:yaru_icons/widgets/icons.dart';
+import 'package:yaru_icons/widgets/yaru_icons.dart';
 
 ...
 
