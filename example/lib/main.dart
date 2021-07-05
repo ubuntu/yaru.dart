@@ -33,7 +33,7 @@ class MyHomePage extends StatelessWidget {
           return Column(
             children: [
               Icon(YaruIconsData(code), size: 48),
-              Text(code.toRadixString(16)),
+              Text('ex' + code.toRadixString(16)),
             ],
           );
         }),
