@@ -1,6 +1,6 @@
 name: yaru_icons
-version: 0.0.0-dev
-
+version: 0.0.1
+homepage: https://github.com/ubuntu/flutter-yaru-icons
 description: Ubuntu Yaru Icon theme
 
 environment:
