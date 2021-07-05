@@ -1,40 +1,43 @@
 import 'package:yaru_icons/widgets/icons.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: MyHomePage(),
-      );
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      home: MyHomePage(),
+    );
+  }
 }
 
 class MyHomePage extends StatelessWidget {
+  static const _from = 0xf101;
+  static const _to = 0xf175;
+
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          leading: Icon(YaruIcons.ubuntu),
-        ),
-        body: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: Icon(YaruIcons.ubuntu_logo),
+        title: Text('Flutter Yaru Icons'),
+      ),
+      body: GridView.extent(
+        maxCrossAxisExtent: 72,
+        children: List.generate(_to - _from + 1, (index) {
+          final code = index + _from;
+          return Column(
             children: [
-              YaruIcons.folder,
-              YaruIcons.document,
-            ]
-                .map((iconData) => Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Icon(iconData),
-                    ))
-                .cast<Widget>()
-                .toList(),
-          ),
-        ),
-      );
+              Icon(YaruIconsData(code), size: 48),
+              Text(code.toRadixString(16)),
+            ],
+          );
+        }),
+      ),
+    );
+  }
 }
