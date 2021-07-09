@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="chip-filled.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <path
+     id="rect5102"
+     style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     d="M 7.625 2 C 7.27875 2 7 2.27875 7 2.625 L 7 4.5 C 5.615 4.5 4.5 5.615 4.5 7 L 2.625 7 C 2.27875 7 2 7.27875 2 7.625 L 2 8.875 C 2 9.22125 2.27875 9.5 2.625 9.5 L 4.5 9.5 L 4.5 10.75 L 2.625 10.75 C 2.27875 10.75 2 11.02875 2 11.375 L 2 12.625 C 2 12.97125 2.27875 13.25 2.625 13.25 L 4.5 13.25 L 4.5 14.5 L 2.625 14.5 C 2.27875 14.5 2 14.77875 2 15.125 L 2 16.375 C 2 16.72125 2.27875 17 2.625 17 L 4.5 17 C 4.5 18.385 5.615 19.5 7 19.5 L 7 21.375 C 7 21.72125 7.27875 22 7.625 22 L 8.875 22 C 9.22125 22 9.5 21.72125 9.5 21.375 L 9.5 19.5 L 10.75 19.5 L 10.75 21.375 C 10.75 21.72125 11.02875 22 11.375 22 L 12.625 22 C 12.97125 22 13.25 21.72125 13.25 21.375 L 13.25 19.5 L 14.5 19.5 L 14.5 21.375 C 14.5 21.72125 14.77875 22 15.125 22 L 16.375 22 C 16.72125 22 17 21.72125 17 21.375 L 17 19.5 C 18.385 19.5 19.5 18.385 19.5 17 L 21.375 17 C 21.72125 17 22 16.72125 22 16.375 L 22 15.125 C 22 14.77875 21.72125 14.5 21.375 14.5 L 19.5 14.5 L 19.5 13.25 L 21.375 13.25 C 21.72125 13.25 22 12.97125 22 12.625 L 22 11.375 C 22 11.02875 21.72125 10.75 21.375 10.75 L 19.5 10.75 L 19.5 9.5 L 21.375 9.5 C 21.72125 9.5 22 9.22125 22 8.875 L 22 7.625 C 22 7.27875 21.72125 7 21.375 7 L 19.5 7 C 19.5 5.615 18.385 4.5 17 4.5 L 17 2.625 C 17 2.27875 16.72125 2 16.375 2 L 15.125 2 C 14.77875 2 14.5 2.27875 14.5 2.625 L 14.5 4.5 L 13.25 4.5 L 13.25 2.625 C 13.25 2.27875 12.97125 2 12.625 2 L 11.375 2 C 11.02875 2 10.75 2.27875 10.75 2.625 L 10.75 4.5 L 9.5 4.5 L 9.5 2.625 C 9.5 2.27875 9.22125 2 8.875 2 L 7.625 2 z M 7.625 7 L 16.375 7 C 16.72125 7 17 7.27875 17 7.625 L 17 16.375 C 17 16.72125 16.72125 17 16.375 17 L 7.625 17 C 7.27875 17 7 16.72125 7 16.375 L 7 7.625 C 7 7.27875 7.27875 7 7.625 7 z M 8.25 8.25 L 8.25 15.75 L 15.75 15.75 L 15.75 8.25 L 8.25 8.25 z " />
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     id="namedview6"
+     showgrid="true"
+     inkscape:zoom="15.25"
+     inkscape:cx="6"
+     inkscape:cy="8.2295081"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4"
+     inkscape:document-rotation="0"
+     inkscape:pagecheckerboard="0"
+     width="24px">
+    <inkscape:grid
+       type="xygrid"
+       id="grid886" />
+  </sodipodi:namedview>
+</svg>

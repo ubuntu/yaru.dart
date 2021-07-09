@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="16"
-   height="16"
+   width="24"
+   height="24"
    version="1.1"
    id="svg835"
-   sodipodi:docname="face-smirk-symbolic.svg"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+   sodipodi:docname="smirk.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <metadata
      id="metadata841">
     <rdf:RDF>
@@ -40,30 +40,31 @@
      id="namedview837"
      showgrid="true"
      inkscape:zoom="19.445436"
-     inkscape:cx="9.3220754"
-     inkscape:cy="4.3482252"
+     inkscape:cx="5.8111322"
+     inkscape:cy="6.1968269"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg835">
+     inkscape:current-layer="svg835"
+     inkscape:pagecheckerboard="0">
     <inkscape:grid
        type="xygrid"
        id="grid1436" />
   </sodipodi:namedview>
   <path
-     d="m 3.0002856,8.201 c 0.78,3.306 4.693,4.432 7.7050004,3.287 0.007,0.598 -0.195,1.097 -1.1540004,1.286 -2.166,0.426 -5.161,-0.143 -6.68,-2.594 -0.666,-1.074 -0.127,-1.685 0.129,-1.98 z"
+     d="m 6.3753567,11.626264 c 0.9749999,4.1325 5.8662493,5.54 9.6312493,4.10875 0.0088,0.7475 -0.24375,1.37125 -1.4425,1.6075 -2.7075,0.532499 -6.4512494,-0.17875 -8.3499993,-3.2425 -0.8324999,-1.3425 -0.15875,-2.10625 0.16125,-2.475 z"
      id="path1452"
-     style="fill:#808080;fill-opacity:1" />
+     style="fill:#808080;fill-opacity:1;stroke-width:1" />
   <path
-     style="display:inline;fill:#808080;fill-opacity:1;stroke:none"
-     d="m 10.000021,5 c 0.55833,0 1,0.47292 1,1.0312501 v 0.96875 c 0,0.5583299 -0.44167,1 -1,1 -0.558331,0 -1.000001,-0.4416701 -1.000001,-1 v -0.96875 c 0,-0.5583301 0.44167,-1.0312501 1.000001,-1.0312501 z"
+     style="display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1"
+     d="m 15.125025,7.6250148 c 0.697913,0 1.25,0.59115 1.25,1.2890625 v 1.2109377 c 0,0.697912 -0.552087,1.25 -1.25,1.25 -0.697913,0 -1.250001,-0.552088 -1.250001,-1.25 v -1.2109377 c 0,-0.6979125 0.552088,-1.2890625 1.250001,-1.2890625 z"
      id="path985" />
   <path
-     style="display:inline;fill:#808080;fill-opacity:1;stroke:none"
-     d="m 4.96875,4.984375 c 0.55833,0 1.03125,0.47292 1.03125,1.0312501 v 0.96875 c 0,0.5583299 -0.47292,1 -1.03125,1 -0.55833,0 -1,-0.4416701 -1,-1 v -0.96875 c 0,-0.5583301 0.44167,-1.0312501 1,-1.0312501 z"
+     style="display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1"
+     d="m 8.835937,7.6054836 c 0.6979124,0 1.289062,0.5911499 1.289062,1.2890625 v 1.2109369 c 0,0.697913 -0.5911496,1.25 -1.289062,1.25 -0.6979124,0 -1.2499999,-0.552087 -1.2499999,-1.25 v -1.2109369 c 0,-0.6979126 0.5520875,-1.2890625 1.2499999,-1.2890625 z"
      id="path983" />
   <path
      id="path993"
      style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.75;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
-     d="m 7.462891,1 a 7.5,7.5 0 0 0 -7.462891,7.5000001 7.5,7.5 0 0 0 7.5,7.4999999 7.5,7.5 0 0 0 7.500001,-7.4999999 7.5,7.5 0 0 0 -7.500001,-7.5000001 7.5,7.5 0 0 0 -0.037109,0 z m 0.03711,1 a 6.5,6.5 0 0 1 6.5,6.5000001 6.5,6.5 0 0 1 -6.500001,6.4999999 6.5,6.5 0 0 1 -6.5,-6.4999999 6.5,6.5 0 0 1 6.500001,-6.5000001 z" />
+     d="m 11.953613,2.6250152 a 9.3749993,9.3749993 0 0 0 -9.328613,9.3749988 9.3749993,9.3749993 0 0 0 9.374999,9.374999 9.3749993,9.3749993 0 0 0 9.375001,-9.374999 9.3749993,9.3749993 0 0 0 -9.375001,-9.3749988 9.3749993,9.3749993 0 0 0 -0.04639,0 z m 0.04639,1.2499999 a 8.1249994,8.1249994 0 0 1 8.125,8.1249989 8.1249994,8.1249994 0 0 1 -8.125001,8.124999 8.1249994,8.1249994 0 0 1 -8.1249996,-8.124999 8.1249994,8.1249994 0 0 1 8.1250006,-8.1249989 z" />
 </svg>

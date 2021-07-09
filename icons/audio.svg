@@ -1,3 +1,45 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13.514.041a2.807 2.807 0 0 0-.41.016l-7.21 1.125c-.813.082-.901.462-.894.935v9.52c-.413-.272-.856-.465-1.445-.465-.76 0-1.213.29-1.487.674-.274.383-.365.865-.365 1.238 0 .45.155.929.488 1.295.334.366.846.623 1.582.623.832 0 1.416-.232 1.747-.686.26-.357.405-.835.457-1.423.007-.072.01-.146.015-.221.004-.06.003-.102.004-.172H6V4.797c.022-.62.584-.711.584-.711l5.854-.914c.561-.172.562.523.562.523v6.942c-.413-.272-.856-.465-1.445-.465-.76 0-1.213.29-1.487.674-.274.383-.365.865-.365 1.238 0 .45.155.929.488 1.295.334.366.846.623 1.582.623.832 0 1.416-.232 1.747-.686.26-.357.405-.835.457-1.423.007-.072.01-.146.015-.221.004-.06.003-.102.004-.172H14V.932c.012-.686-.14-.867-.486-.891z" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal" color="#000" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible" fill="gray" fill-rule="evenodd"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="audio.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:snap-page="true"
+     inkscape:zoom="28"
+     inkscape:cx="5.6964286"
+     inkscape:cy="8.7321429"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     d="m 18.8925,2.05125 a 3.50875,3.50875 0 0 0 -0.5125,0.02 l -9.0125,1.40625 c -1.01625,0.1025 -1.12625,0.5775 -1.1175,1.16875 v 11.9 c -0.51625,-0.34 -1.07,-0.58125 -1.80625,-0.58125 -0.95,0 -1.51625,0.3625 -1.85875,0.8425 -0.3425,0.47875 -0.45625,1.08125 -0.45625,1.5475 0,0.5625 0.19375,1.16125 0.61,1.61875 0.4175,0.4575 1.0575,0.77875 1.9775,0.77875 1.04,0 1.77,-0.29 2.18375,-0.8575 0.325,-0.44625 0.50625,-1.04375 0.57125,-1.77875 0.00875,-0.09 0.0125,-0.1825 0.01875,-0.27625 0.005,-0.075 0.00375,-0.1275 0.005,-0.215 h 0.005 v -9.62875 c 0.0275,-0.775 0.73,-0.88875 0.73,-0.88875 l 7.3175,-1.1425 c 0.70125,-0.215 0.7025,0.65375 0.7025,0.65375 v 8.6775 c -0.51625,-0.34 -1.07,-0.58125 -1.80625,-0.58125 -0.95,0 -1.51625,0.3625 -1.85875,0.8425 -0.3425,0.47875 -0.45625,1.08125 -0.45625,1.5475 0,0.5625 0.19375,1.16125 0.61,1.61875 0.4175,0.4575 1.0575,0.77875 1.9775,0.77875 1.04,0 1.77,-0.29 2.18375,-0.8575 0.325,-0.44625 0.50625,-1.04375 0.57125,-1.77875 0.0087,-0.09 0.0125,-0.1825 0.01875,-0.27625 0.005,-0.075 0.0038,-0.1275 0.005,-0.215 h 0.005 v -13.21 c 0.015,-0.8575 -0.175,-1.08375 -0.6075,-1.11375 z"
+     style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:1"
+     color="#000000"
+     font-weight="400"
+     font-family="sans-serif"
+     white-space="normal"
+     overflow="visible"
+     fill="#808080"
+     fill-rule="evenodd"
+     id="path2" />
 </svg>

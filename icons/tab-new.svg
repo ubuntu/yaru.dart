@@ -1,6 +1,58 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <g color="#000" font-weight="400" font-family="sans-serif" white-space="normal" fill="gray">
-        <path d="M5.994 3c-1.258.015-2.179-.03-2.932.385a1.88 1.88 0 0 0-.837.998C2.06 4.82 2 5.343 2 6v7H1v1h2V6c0-.592.063-1.006.16-1.266.098-.26.202-.371.385-.472C3.91 4.06 4.74 4.015 6 4h5c1.259.015 2.087.06 2.453.262.184.1.29.212.387.472.097.26.16.674.16 1.266v8h2v-1h-1V6c0-.658-.06-1.179-.225-1.617a1.88 1.88 0 0 0-.838-.998c-.752-.416-1.673-.37-2.931-.385H5.998z" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;marker:none" overflow="visible"/>
-        <path d="M8 7v2H6v1h2v2h1v-2h2V9H9V7z" style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;isolation:auto;mix-blend-mode:normal;marker:none" overflow="visible"/>
-    </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="tab-new.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:snap-page="true"
+     inkscape:zoom="19.79899"
+     inkscape:cx="2.7021581"
+     inkscape:cy="6.237692"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1013" />
+  </sodipodi:namedview>
+  <g
+     color="#000000"
+     font-weight="400"
+     font-family="sans-serif"
+     white-space="normal"
+     fill="#808080"
+     id="g6"
+     transform="matrix(1.25,0,0,1.25,1.375,2)"
+     style="stroke-width:0.8">
+    <path
+       d="m 5.994,3 c -1.258,0.015 -2.179,-0.03 -2.932,0.385 a 1.88,1.88 0 0 0 -0.837,0.998 c -0.165,0.437 -0.225,0.96 -0.225,1.617 v 7 h -1 v 1 h 2 v -8 c 0,-0.592 0.063,-1.006 0.16,-1.266 0.098,-0.26 0.202,-0.371 0.385,-0.472 0.365,-0.202 1.195,-0.247 2.455,-0.262 h 5 c 1.259,0.015 2.087,0.06 2.453,0.262 0.184,0.1 0.29,0.212 0.387,0.472 0.097,0.26 0.16,0.674 0.16,1.266 v 8 h 2 v -1 h -1 v -7 c 0,-0.658 -0.06,-1.179 -0.225,-1.617 a 1.88,1.88 0 0 0 -0.838,-0.998 c -0.752,-0.416 -1.673,-0.37 -2.931,-0.385 h -5.008 z"
+       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.533333;marker:none"
+       overflow="visible"
+       id="path2" />
+    <path
+       d="m 8,7 v 2 h -2 v 1 h 2 v 2 h 1 v -2 h 2 v -1 h -2 v -2 z"
+       style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;isolation:auto;mix-blend-mode:normal;stroke-width:0.533333;marker:none"
+       overflow="visible"
+       id="path4" />
+  </g>
 </svg>

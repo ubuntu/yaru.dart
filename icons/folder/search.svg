@@ -1,7 +1,60 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <g color="#000" fill="gray" font-family="sans-serif" font-weight="400" white-space="normal">
-        <path d="M3.994 1c-1.258.015-2.179-.029-2.932.387a1.878 1.878 0 0 0-.84.996C.058 2.821 0 3.343 0 4v8c0 .658.058 1.179.223 1.617.164.439.463.79.84.998.526.29 1.188.342 1.937.36L4 15v-1l-1-.04c-.666-.031-1.204-.084-1.453-.222-.184-.1-.29-.212-.387-.472C1.063 13.006 1 12.592 1 12V4c0-.592.063-1.006.16-1.266.098-.26.203-.371.387-.472.367-.203 1.195-.247 2.459-.262h2.53l2.02 2h3.436c1.264.015 2.092.06 2.46.262.183.1.288.212.386.472.098.26.162.674.162 1.266v6h1V6c0-.658-.06-1.179-.225-1.617a1.88 1.88 0 0 0-.837-.998c-.753-.416-1.674-.37-2.932-.385H8.967L6.945 1H3.996z" overflow="visible" style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;marker:none"/>
-        <path d="M9 5c-2.755 0-5 2.245-5 5s2.245 5 5 5 5-2.245 5-5-2.245-5-5-5zm0 1.04A3.954 3.954 0 0 1 12.96 10 3.954 3.954 0 0 1 9 13.96 3.954 3.954 0 0 1 5.04 10 3.954 3.954 0 0 1 9 6.04z" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal"/>
-        <path d="M12.354 12.646l-.708.708 2.5 2.5.708-.708z" fill-rule="evenodd" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal"/>
-    </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="search.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:snap-page="true"
+     inkscape:zoom="14"
+     inkscape:cx="-4.3214286"
+     inkscape:cy="13.892857"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10" />
+  <g
+     color="#000000"
+     fill="#808080"
+     font-family="sans-serif"
+     font-weight="400"
+     white-space="normal"
+     id="g8"
+     transform="matrix(1.25,0,0,1.25,2,2)"
+     style="stroke-width:0.8">
+    <path
+       d="m 3.994,1 c -1.258,0.015 -2.179,-0.029 -2.932,0.387 a 1.878,1.878 0 0 0 -0.84,0.996 c -0.164,0.438 -0.222,0.96 -0.222,1.617 v 8 c 0,0.658 0.058,1.179 0.223,1.617 0.164,0.439 0.463,0.79 0.84,0.998 0.526,0.29 1.188,0.342 1.937,0.36 l 1,0.025 v -1 l -1,-0.04 c -0.666,-0.031 -1.204,-0.084 -1.453,-0.222 -0.184,-0.1 -0.29,-0.212 -0.387,-0.472 -0.097,-0.26 -0.16,-0.674 -0.16,-1.266 v -8 c 0,-0.592 0.063,-1.006 0.16,-1.266 0.098,-0.26 0.203,-0.371 0.387,-0.472 0.367,-0.203 1.195,-0.247 2.459,-0.262 h 2.53 l 2.02,2 h 3.436 c 1.264,0.015 2.092,0.06 2.46,0.262 0.183,0.1 0.288,0.212 0.386,0.472 0.098,0.26 0.162,0.674 0.162,1.266 v 6 h 1 v -6 c 0,-0.658 -0.06,-1.179 -0.225,-1.617 a 1.88,1.88 0 0 0 -0.837,-0.998 c -0.753,-0.416 -1.674,-0.37 -2.932,-0.385 h -3.039 l -2.022,-2 h -2.949 z"
+       overflow="visible"
+       style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64;marker:none"
+       id="path2" />
+    <path
+       d="m 9,5 c -2.755,0 -5,2.245 -5,5 0,2.755 2.245,5 5,5 2.755,0 5,-2.245 5,-5 0,-2.755 -2.245,-5 -5,-5 z m 0,1.04 a 3.954,3.954 0 0 1 3.96,3.96 3.954,3.954 0 0 1 -3.96,3.96 3.954,3.954 0 0 1 -3.96,-3.96 3.954,3.954 0 0 1 3.96,-3.96 z"
+       overflow="visible"
+       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
+       id="path4" />
+    <path
+       d="m 12.354,12.646 -0.708,0.708 2.5,2.5 0.708,-0.708 z"
+       fill-rule="evenodd"
+       overflow="visible"
+       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
+       id="path6" />
+  </g>
 </svg>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   height="16"
-   width="16"
+   height="24"
+   width="24"
    version="1.1"
    id="svg8"
    sodipodi:docname="wireless-signal-good.svg"
@@ -21,17 +21,18 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      showgrid="false"
-     inkscape:zoom="56"
-     inkscape:cx="7.9910714"
-     inkscape:cy="8.0089286"
+     inkscape:zoom="39.59798"
+     inkscape:cx="6.6038723"
+     inkscape:cy="8.9524769"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg8" />
+     inkscape:current-layer="svg8"
+     inkscape:snap-page="true" />
   <path
      id="path2"
-     style="color:#000000;line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;marker:none;fill:#808080;fill-opacity:1"
-     d="M 8.0039062 2 C 5.3939063 2 2.7835156 2.8375781 0.60351562 4.5175781 L 0.33789062 4.7226562 L 0.54296875 4.9863281 L 7.9980469 14.658203 L 15.667969 4.7265625 L 15.402344 4.5214844 A 12.105 12.105 0 0 0 8.0039062 2 z M 8.0039062 3 C 10.184906 3 12.347469 3.6721719 14.230469 4.9511719 L 13.021484 6.5175781 A 9.129 9.125 0 0 0 2.984375 6.5136719 L 1.7753906 4.9472656 C 3.6583906 3.6692656 5.8229063 2.999 8.0039062 3 z " />
+     style="color:#000000;line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;fill-opacity:1;stroke-width:1;marker:none"
+     d="m 12.004883,4.5 c -3.2625001,0 -6.5254885,1.0469726 -9.2504885,3.1469726 l -0.3320312,0.2563476 0.2563476,0.3295899 9.3188481,12.0898439 9.587402,-12.4145509 -0.332031,-0.2563476 a 15.13125,15.13125 0 0 0 -9.248047,-3.1518555 z m 0,1.25 c 2.726249,0 5.429453,0.8402149 7.783203,2.4389649 l -1.511231,1.9580081 a 11.41125,11.40625 0 0 0 -12.5463862,-0.0049 l -1.5112305,-1.9580082 c 2.3537499,-1.5975 5.0593946,-2.435332 7.7856447,-2.434082 z" />
 </svg>

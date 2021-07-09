@@ -1,6 +1,55 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <g color="#000" font-weight="400" font-family="sans-serif" white-space="normal" fill="gray">
-        <path d="M7.5 1A6.508 6.508 0 0 0 1 7.5C1 11.084 3.916 14 7.5 14S14 11.084 14 7.5 11.084 1 7.5 1zm0 1.04c3.022 0 5.46 2.438 5.46 5.46s-2.438 5.46-5.46 5.46A5.454 5.454 0 0 1 2.039 7.5c0-3.022 2.44-5.46 5.461-5.46z" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal" overflow="visible"/>
-        <path d="M11.853 11.146l-.707.708 3.5 3.5.707-.708zM5 7v1h5V7z" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal" overflow="visible" fill-rule="evenodd"/>
-    </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="out.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:snap-page="true"
+     inkscape:zoom="28"
+     inkscape:cx="11.517857"
+     inkscape:cy="11.303571"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <g
+     color="#000000"
+     font-weight="400"
+     font-family="sans-serif"
+     white-space="normal"
+     fill="#808080"
+     id="g6"
+     transform="matrix(1.25,0,0,1.25,2,2)"
+     style="stroke-width:0.8">
+    <path
+       d="m 7.5,1 a 6.508,6.508 0 0 0 -6.5,6.5 c 0,3.584 2.916,6.5 6.5,6.5 3.584,0 6.5,-2.916 6.5,-6.5 0,-3.584 -2.916,-6.5 -6.5,-6.5 z m 0,1.04 c 3.022,0 5.46,2.438 5.46,5.46 0,3.022 -2.438,5.46 -5.46,5.46 a 5.454,5.454 0 0 1 -5.461,-5.46 c 0,-3.022 2.44,-5.46 5.461,-5.46 z"
+       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
+       overflow="visible"
+       id="path2" />
+    <path
+       d="m 11.853,11.146 -0.707,0.708 3.5,3.5 0.707,-0.708 z m -6.853,-4.146 v 1 h 5 v -1 z"
+       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
+       overflow="visible"
+       fill-rule="evenodd"
+       id="path4" />
+  </g>
 </svg>

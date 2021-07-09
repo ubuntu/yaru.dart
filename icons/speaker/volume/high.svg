@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="filled.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:snap-page="true"
+     inkscape:zoom="28"
+     inkscape:cx="9.7678571"
+     inkscape:cy="11.946429"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10">
+    <inkscape:grid
+       type="xygrid"
+       id="grid912" />
+  </sodipodi:namedview>
+  <path
+     id="path4"
+     style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;stroke-width:0.8"
+     d="m 11.967484,3.213379 -4.6337892,4.633789 h -3.286133 l -0.158692,0.390625 c -0.920256,2.269497 -0.854559,4.548038 -0.0024,6.713867 l 0.15625,0.395508 h 3.261719 l 4.6630872,5.439453 z m 5.805664,1.889649 -0.883789,0.883789 0.444336,0.441894 a 7.49875,7.49875 0 0 1 0,10.605468 l -0.444336,0.441895 0.883789,0.883789 0.441895,-0.441894 a 8.75,8.75 0 0 0 0,-12.373047 z m -7.055664,1.127929 v 11.176758 l -2.8369142,-3.310547 h -2.912598 c -0.567467,-1.652447 -0.597698,-3.293858 0,-5 h 2.883301 z m 4.404298,1.523438 -0.88379,0.883789 0.444336,0.441894 a 3.74875,3.74875 0 0 1 0,5.302735 l -0.444336,0.441894 0.88379,0.883789 0.444335,-0.441894 a 5,5 0 0 0 0,-7.070313 z" />
+</svg>

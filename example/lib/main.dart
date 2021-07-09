@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   static const _from = 0xf101;
-  static const _to = 0xf226;
+  static const _to = 0xf26c;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class MyHomePage extends StatelessWidget {
           final code = index + _from;
           return Column(
             children: [
-              Icon(YaruIconsData(code), size: 48),
+              Icon(YaruIconsData(code)),
               Text('ex' + code.toRadixString(16)),
             ],
           );

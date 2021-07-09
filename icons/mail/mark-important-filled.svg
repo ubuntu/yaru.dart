@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="mark-important-filled.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="14"
+     inkscape:cx="16.964286"
+     inkscape:cy="18.071429"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g6"
+     units="mm" />
+  <g
+     fill="#808080"
+     id="g6"
+     transform="matrix(1.25,0,0,1.25,2,2)"
+     style="stroke-width:0.8">
+    <path
+       id="path2"
+       style="stroke-width:1"
+       d="M 12 2 C 6.4771525 2 2 6.4771525 2 12 C 2 17.522848 6.4771525 22 12 22 C 17.522848 22 22 17.522848 22 12 C 22 6.4771525 17.522848 2 12 2 z M 11.115234 5.75 L 12.884766 5.75 L 12.884766 9.078125 C 12.884766 10.069792 12.85013 10.972943 12.779297 11.787109 C 12.708464 12.589609 12.619505 13.392812 12.513672 14.195312 L 11.486328 14.195312 C 11.380495 13.392813 11.291536 12.589609 11.220703 11.787109 C 11.14987 10.972943 11.115234 10.069792 11.115234 9.078125 L 11.115234 5.75 z M 12 15.876953 C 12.366667 15.876953 12.655521 15.994635 12.867188 16.230469 C 13.079687 16.467135 13.185547 16.74612 13.185547 17.064453 C 13.185547 17.382786 13.079687 17.659818 12.867188 17.896484 C 12.655521 18.132318 12.366667 18.25 12 18.25 C 11.633333 18.25 11.344479 18.132318 11.132812 17.896484 C 10.920312 17.659818 10.814453 17.382786 10.814453 17.064453 C 10.814453 16.74612 10.920313 16.467135 11.132812 16.230469 C 11.345313 15.994635 11.634167 15.876953 12 15.876953 z "
+       transform="matrix(0.8,0,0,0.8,-1.6,-1.6)" />
+  </g>
+</svg>

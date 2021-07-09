@@ -1,6 +1,58 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <g color="#000" fill="gray">
-        <path d="M0 8.5c0 1.5.64 2.493 1.558 2.974.918.482 2.019.526 3.071.526h8.54v-1H4.63c-1.012 0-1.975-.08-2.606-.411C1.393 10.258 1 9.75 1 8.5V4H0z" style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;marker:none" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible"/>
-        <path d="M11 9l.002 5c.76-.348 1.535-.737 2.323-1.166.781-.431 1.534-.876 2.26-1.334-.726-.449-1.479-.889-2.26-1.32A43.084 43.084 0 0 0 11.001 9z" style="marker:none" overflow="visible"/>
-    </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="forward.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:snap-page="true"
+     inkscape:zoom="7"
+     inkscape:cx="-29.357143"
+     inkscape:cy="40.785714"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8">
+    <inkscape:grid
+       type="xygrid"
+       id="grid829" />
+  </sodipodi:namedview>
+  <g
+     color="#000000"
+     fill="#808080"
+     id="g6"
+     transform="matrix(1.25,0,0,1.25,2,1.1)"
+     style="stroke-width:0.8">
+    <path
+       d="m 0,8.5 c 0,1.5 0.64,2.493 1.558,2.974 0.918,0.482 2.019,0.526 3.071,0.526 h 8.54 v -1 h -8.539 c -1.012,0 -1.975,-0.08 -2.606,-0.411 -0.631,-0.331 -1.024,-0.839 -1.024,-2.089 v -4.5 h -1 z"
+       style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64;marker:none"
+       font-weight="400"
+       font-family="sans-serif"
+       white-space="normal"
+       overflow="visible"
+       id="path2" />
+    <path
+       d="m 11,9 0.002,5 c 0.76,-0.348 1.535,-0.737 2.323,-1.166 0.781,-0.431 1.534,-0.876 2.26,-1.334 -0.726,-0.449 -1.479,-0.889 -2.26,-1.32 a 43.084,43.084 0 0 0 -2.324,-1.18 z"
+       style="stroke-width:0.64;marker:none"
+       overflow="visible"
+       id="path4" />
+  </g>
 </svg>

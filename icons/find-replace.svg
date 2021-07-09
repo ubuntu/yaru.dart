@@ -1,6 +1,58 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <g font-weight="400" fill="gray">
-        <path d="M7 1C3.69 1 1 3.69 1 7c0 1.171.342 2.261.924 3.186.025-.043.098-.19.115-.217l.006-.008.088-.137.463-.469A4.998 4.998 0 0 1 2 7a5 5 0 0 1 5-5 5 5 0 0 1 2.295.563l.726-.739A5.955 5.955 0 0 0 7 1zm5.986 6.152l-1.164 1.149a5 5 0 0 1-3.593 3.54L7.06 12.995a5.951 5.951 0 0 0 3.603-1.267l2.863 2.863 1.063-1.063-2.863-2.863a5.956 5.956 0 0 0 1.26-3.512z" style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;marker:none" color="#000" font-family="sans-serif" white-space="normal" overflow="visible"/>
-        <path d="M12.238 1l-.353.36-8.969 9.095-.03.045c-.061.099-.27.45-.583 1.088-.314.638-.7 1.51-1.012 2.492L1 15l.92-.291a18.163 18.163 0 0 0 2.492-1.012c.638-.313.987-.52 1.088-.584l.045-.029L15 3.762zm-8.347 9.89l1.218 1.22-.177.175c.007-.005-.379.227-.961.514-.214.105-.536.222-.834.338l-.274-.274c.116-.298.233-.62.338-.834.287-.582.518-.966.514-.96z" style="line-height:125%;-inkscape-font-specification:Ubuntu;text-align:center" font-size="15" font-family="Ubuntu" letter-spacing="0" word-spacing="0" text-anchor="middle"/>
-    </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="find-replace.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:snap-page="true"
+     inkscape:zoom="28"
+     inkscape:cx="5.5535714"
+     inkscape:cy="8.6607143"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <g
+     font-weight="400"
+     fill="#808080"
+     id="g6"
+     transform="matrix(1.25,0,0,1.25,2,2)"
+     style="stroke-width:0.8">
+    <path
+       d="m 7,1 c -3.31,0 -6,2.69 -6,6 0,1.171 0.342,2.261 0.924,3.186 0.025,-0.043 0.098,-0.19 0.115,-0.217 l 0.006,-0.008 0.088,-0.137 0.463,-0.469 a 4.998,4.998 0 0 1 -0.596,-2.355 5,5 0 0 1 5,-5 5,5 0 0 1 2.295,0.563 l 0.726,-0.739 a 5.955,5.955 0 0 0 -3.021,-0.824 z m 5.986,6.152 -1.164,1.149 a 5,5 0 0 1 -3.593,3.54 l -1.169,1.154 a 5.951,5.951 0 0 0 3.603,-1.267 l 2.863,2.863 1.063,-1.063 -2.863,-2.863 a 5.956,5.956 0 0 0 1.26,-3.512 z"
+       style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64;marker:none"
+       color="#000000"
+       font-family="sans-serif"
+       white-space="normal"
+       overflow="visible"
+       id="path2" />
+    <path
+       d="m 12.238,1 -0.353,0.36 -8.969,9.095 -0.03,0.045 c -0.061,0.099 -0.27,0.45 -0.583,1.088 -0.314,0.638 -0.7,1.51 -1.012,2.492 l -0.291,0.92 0.92,-0.291 a 18.163,18.163 0 0 0 2.492,-1.012 c 0.638,-0.313 0.987,-0.52 1.088,-0.584 l 0.045,-0.029 9.455,-9.322 z m -8.347,9.89 1.218,1.22 -0.177,0.175 c 0.007,-0.005 -0.379,0.227 -0.961,0.514 -0.214,0.105 -0.536,0.222 -0.834,0.338 l -0.274,-0.274 c 0.116,-0.298 0.233,-0.62 0.338,-0.834 0.287,-0.582 0.518,-0.966 0.514,-0.96 z"
+       style="line-height:125%;-inkscape-font-specification:Ubuntu;text-align:center;stroke-width:0.64"
+       font-size="15px"
+       font-family="Ubuntu"
+       letter-spacing="0"
+       word-spacing="0"
+       text-anchor="middle"
+       id="path4" />
+  </g>
 </svg>

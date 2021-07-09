@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="high-filled.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     width="24px"
+     inkscape:zoom="39.59798"
+     inkscape:cx="7.3614867"
+     inkscape:cy="12.058696"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10">
+    <inkscape:grid
+       type="xygrid"
+       id="grid831" />
+  </sodipodi:namedview>
+  <g
+     color="#000000"
+     fill="#808080"
+     id="g8"
+     transform="matrix(1.25,0,0,1.25,1.96875,2)"
+     style="stroke-width:0.8">
+    <path
+       d="m 15.343,4.926 0.707,0.707 -0.354,0.354 a 2.999,2.999 0 0 0 0,4.242 l 0.354,0.353 -0.707,0.707 -0.354,-0.353 a 4,4 0 0 1 0,-5.656 z"
+       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
+       font-weight="400"
+       font-family="sans-serif"
+       white-space="normal"
+       overflow="visible"
+       id="path2" />
+    <path
+       d="m 13.221,2.805 0.707,0.707 -0.353,0.353 a 5.999,5.999 0 0 0 0,8.485 l 0.353,0.353 -0.707,0.707 -0.353,-0.353 a 7,7 0 0 1 0,-9.899 z"
+       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
+       font-weight="400"
+       font-family="sans-serif"
+       white-space="normal"
+       overflow="visible"
+       id="path4" />
+    <path
+       d="m 4.496,0 c -1.409,0 -2.496,0.842 -2.496,2.537 v 5.924 c 0,1.695 1.087,2.539 2.496,2.539 1.41,0 2.494,-0.846 2.494,-2.54 v -5.922 c 0,-1.693 -1.085,-2.538 -2.494,-2.538 z m -4.496,7 v 1.5 c 0,2.321 1.748,4.199 4,4.45 v 2.073 c -0.6833211,0.05419 -1.3561276,0.200857 -2,0.436 v 0.541 h 5 v -0.541 c -0.6448908,-0.231255 -1.3172613,-0.37716 -2,-0.434 v -2.075 c 2.252,-0.25 4,-2.128 4,-4.449 v -1.501 h -1 v 1.5 c 0.00126,1.737778 -1.2789515,3.210446 -3,3.451 v -0.451 h -1 v 0.451 c -1.7210485,-0.240554 -3.00125864,-1.713222 -3,-3.451 v -1.5 z"
+       style="stroke-width:0.64;marker:none"
+       overflow="visible"
+       id="path6"
+       sodipodi:nodetypes="ssssssscsccccccccscccccccccc" />
+  </g>
+</svg>

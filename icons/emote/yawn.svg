@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="16"
-   height="16"
+   width="24"
+   height="24"
    version="1.1"
    id="svg836"
-   sodipodi:docname="face-yawn-symbolic.svg"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+   sodipodi:docname="yawn.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <metadata
      id="metadata842">
     <rdf:RDF>
@@ -40,12 +40,13 @@
      id="namedview838"
      showgrid="true"
      inkscape:zoom="27.5"
-     inkscape:cx="2.2920978"
-     inkscape:cy="8.2120674"
+     inkscape:cx="2.3090909"
+     inkscape:cy="8.2"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg836">
+     inkscape:current-layer="svg836"
+     inkscape:pagecheckerboard="0">
     <inkscape:grid
        type="xygrid"
        id="grid1441" />
@@ -53,20 +54,20 @@
   <path
      id="path993"
      style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.75;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:1"
-     d="m 7.4628914,1.0000005 a 7.5,7.5 0 0 0 -7.4628914,7.4999997 7.5,7.5 0 0 0 7.5000004,7.4999998 7.5,7.5 0 0 0 7.4999996,-7.4999998 7.5,7.5 0 0 0 -7.4999996,-7.4999997 7.5,7.5 0 0 0 -0.037109,0 z m 0.03711,1 a 6.5,6.5 0 0 1 6.4999996,6.4999997 6.5,6.5 0 0 1 -6.4999996,6.4999998 6.5,6.5 0 0 1 -6.5000004,-6.4999998 6.5,6.5 0 0 1 6.5000004,-6.4999997 z" />
+     d="m 11.953614,2.6250144 a 9.375,9.375 0 0 0 -9.328614,9.3749996 9.375,9.375 0 0 0 9.375001,9.375 9.375,9.375 0 0 0 9.374999,-9.375 9.375,9.375 0 0 0 -9.374999,-9.3749996 9.375,9.375 0 0 0 -0.04639,0 z m 0.04639,1.25 a 8.125,8.125 0 0 1 8.124999,8.1249996 8.125,8.125 0 0 1 -8.124999,8.125 8.125,8.125 0 0 1 -8.1250002,-8.125 8.125,8.125 0 0 1 8.1250002,-8.1249996 z" />
   <path
-     d="m 9.9689997,5.1880002 c 0.7340003,0 1.4690003,0.446 1.5310003,1.312 0.125,1.733 -1.5000003,-0.338 -3,0 0,-0.866 0.734,-1.312 1.4689997,-1.312 z"
+     d="m 15.08625,7.8600141 c 0.9175,0 1.83625,0.5575 1.91375,1.64 0.15625,2.1662499 -1.875,-0.4225 -3.75,0 0,-1.0825 0.9175,-1.64 1.83625,-1.64 z"
      id="path1410"
-     style="fill:#808080;fill-opacity:1" />
+     style="fill:#808080;fill-opacity:1;stroke-width:1" />
   <path
-     d="m 5.0377847,5.1890002 c 0.735,0 1.469,0.446 1.469,1.311 -1.5,-0.338 -3.1250003,1.733 -3.0000003,0 0.063,-0.866 0.7970003,-1.312 1.5310003,-1.312 z"
+     d="m 8.9222309,7.8612641 c 0.91875,0 1.8362501,0.5575 1.8362501,1.63875 -1.8750001,-0.4225 -3.9062505,2.1662499 -3.7500005,0 0.07875,-1.0825 0.9962504,-1.64 1.9137504,-1.64 z"
      id="path1408"
-     style="fill:#808080;fill-opacity:1" />
+     style="fill:#808080;fill-opacity:1;stroke-width:1" />
   <ellipse
      style="fill:#808080;fill-rule:evenodd;stroke:none;stroke-width:1"
      id="path1447"
-     cx="7.5"
-     cy="10.5"
-     rx="1.75"
-     ry="2.5" />
+     cx="12"
+     cy="14.500014"
+     rx="2.1875"
+     ry="3.125" />
 </svg>

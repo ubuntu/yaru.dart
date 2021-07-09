@@ -1,3 +1,44 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4.998 1c-.76.348-1.535.736-2.323 1.166-.78.43-1.534.876-2.26 1.334.726.45 1.48.89 2.26 1.32C3.464 5.25 4.24 5.643 5 6V4h4.37c1.013 0 1.975.08 2.606.41.631.331 1.024.948 1.024 2.09V9h1V6.5c0-1.5-.642-2.493-1.56-2.975C11.524 3.044 10.424 3 9.37 3H4.999zM2 7v2.5c0 1.5.64 2.493 1.558 2.975.918.481 2.018.525 3.07.525h4.373v2c.76-.348 1.536-.736 2.325-1.166.78-.43 1.532-.876 2.257-1.334a51.85 51.85 0 0 0-2.257-1.32A43.07 43.07 0 0 0 11 10H11v2H6.628c-1.012 0-1.974-.08-2.605-.41C3.392 11.259 3 10.75 3 9.5V7z" style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;marker:none" color="#000" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible" fill="gray"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="send-receive.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:snap-page="true"
+     inkscape:zoom="28"
+     inkscape:cx="7.6607143"
+     inkscape:cy="11.178571"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     d="m 8.2475,3.25 c -0.95,0.435 -1.91875,0.92 -2.90375,1.4575 -0.975,0.5375 -1.9175,1.095 -2.825,1.6675 0.9075,0.5625 1.85,1.1125 2.825,1.65 0.98625,0.5375 1.95625,1.02875 2.90625,1.475 v -2.5 h 5.4625 c 1.26625,0 2.46875,0.1 3.2575,0.5125 0.78875,0.41375 1.28,1.185 1.28,2.6125 v 3.125 h 1.25 v -3.125 c 0,-1.875 -0.8025,-3.11625 -1.95,-3.71875 -1.145,-0.60125 -2.52,-0.65625 -3.8375,-0.65625 h -5.46375 z m -3.7475,7.5 v 3.125 c 0,1.875 0.8,3.11625 1.9475,3.71875 1.1475,0.60125 2.5225,0.65625 3.8375,0.65625 h 5.46625 v 2.5 c 0.95,-0.435 1.92,-0.92 2.90625,-1.4575 0.975,-0.5375 1.915,-1.095 2.82125,-1.6675 a 64.8125,64.8125 0 0 0 -2.82125,-1.65 53.8375,53.8375 0 0 0 -2.9075,-1.475 v 0 2.5 h -5.465 c -1.265,0 -2.4675,-0.1 -3.25625,-0.5125 -0.78875,-0.41375 -1.27875,-1.05 -1.27875,-2.6125 v -3.125 z"
+     style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:1;marker:none"
+     color="#000000"
+     font-weight="400"
+     font-family="sans-serif"
+     white-space="normal"
+     overflow="visible"
+     fill="#808080"
+     id="path2" />
 </svg>

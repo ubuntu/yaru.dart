@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   id="svg7384"
+   version="1.1"
+   width="24"
+   sodipodi:docname="stopwatch-filled.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview24"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="6.9997355"
+     inkscape:cx="-32.358366"
+     inkscape:cy="4.9287577"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg7384" />
+  <metadata
+     id="metadata20854">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs7386">
+    <linearGradient
+       id="linearGradient5606"
+       inkscape:swatch="solid">
+      <stop
+         id="stop5608"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4526"
+       inkscape:swatch="solid">
+      <stop
+         id="stop4528"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3600-4"
+       inkscape:swatch="gradient">
+      <stop
+         id="stop3602-7"
+         offset="0"
+         style="stop-color:#f4f4f4;stop-opacity:1" />
+      <stop
+         id="stop3604-6"
+         offset="1"
+         style="stop-color:#dbdbdb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path
+     id="path5143"
+     style="vector-effect:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:2.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     d="M 17.037109 5.75 A 1.8749233 1.8749233 0 0 0 16.904297 5.7519531 A 1.8749233 1.8749233 0 0 0 15.476562 6.5351562 A 8.1246679 8.1246679 0 0 0 11.585938 5.7597656 A 8.1246679 8.1246679 0 0 0 3.8847656 14.287109 A 8.1246679 8.1246679 0 0 0 12.412109 21.990234 A 8.1246679 8.1246679 0 0 0 20.115234 13.464844 L 20.115234 13.458984 A 8.1246679 8.1246679 0 0 0 18.394531 8.8769531 A 1.8749233 1.8749233 0 0 0 18.873047 7.5292969 A 1.8749233 1.8749233 0 0 0 17.037109 5.75 z M 11.75 8.25 L 12.375 8.25 L 12.554688 12.757812 A 1.2499489 1.2499489 0 0 1 13.248047 13.810547 A 1.2499489 1.2499489 0 0 1 12.064453 15.123047 A 1.2499489 1.2499489 0 0 1 10.751953 13.9375 A 1.2499489 1.2499489 0 0 1 11.480469 12.742188 L 11.75 8.25 z " />
+  <g
+     id="layer9"
+     label="status"
+     style="display:inline;stroke-width:0.800033"
+     transform="matrix(1.2499489,0,0,1.2499489,-413.60778,-214.24116)" />
+  <g
+     id="layer2"
+     style="display:inline;stroke-width:0.800033"
+     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
+  <g
+     id="layer4"
+     style="display:inline;stroke-width:0.800033"
+     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
+  <g
+     id="g1812"
+     style="display:inline;stroke-width:0.800033"
+     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
+  <g
+     id="g6217"
+     style="display:inline;stroke-width:0.800033"
+     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
+  <g
+     id="layer3"
+     style="display:inline;stroke-width:0.800033"
+     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
+  <g
+     id="g1833"
+     style="display:inline;stroke-width:0.800033"
+     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
+  <rect
+     height="2.4998977"
+     id="rect5109"
+     rx="0.99999994"
+     ry="0.99999994"
+     style="vector-effect:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:2.00001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     width="6.2497444"
+     x="8.8751936"
+     y="1.9999959" />
+</svg>

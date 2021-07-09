@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   height="16"
-   width="16"
+   height="24"
+   width="24"
    version="1.1"
    id="svg4"
    sodipodi:docname="find-location.svg"
@@ -21,22 +21,24 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      showgrid="true"
-     inkscape:zoom="56"
-     inkscape:cx="7.9910714"
-     inkscape:cy="8"
+     inkscape:zoom="28"
+     inkscape:cx="3.8035714"
+     inkscape:cy="6.7321429"
      inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4">
+     inkscape:current-layer="svg4"
+     inkscape:snap-page="true">
     <inkscape:grid
        type="xygrid"
        id="grid825" />
   </sodipodi:namedview>
   <path
-     d="m 8,1 h -1 v 1.025 c -3.1927129,0.246969 -5.7298944,2.7824531 -5.979,5.975 h -1.021 v 1 h 1.025 c 0.246969,3.192713 2.7824531,5.729894 5.975,5.979 v 1.021 h 1 v -1.025 c 3.192713,-0.246969 5.729894,-2.782453 5.979,-5.975 h 1.021 v -1 h -1.025 c -0.246969,-3.1927129 -2.782453,-5.7298944 -5.975,-5.979 z m -0.5,2 c 3.037566,0 5.5,2.4624339 5.5,5.5 0,3.037566 -2.462434,5.5 -5.5,5.5 -3.0375661,0 -5.5,-2.462434 -5.5,-5.5 0,-3.0375661 2.4624339,-5.5 5.5,-5.5 z m 0,3 c -1.3807119,0 -2.5,1.1192881 -2.5,2.5 0,1.3807119 1.1192881,2.5 2.5,2.5 1.3807119,0 2.5,-1.1192881 2.5,-2.5 0,-1.3807119 -1.1192881,-2.5 -2.5,-2.5 z"
+     d="m 12.625,2.625 h -1.25 v 1.28125 c -3.9908911,0.3087113 -7.162368,3.4780664 -7.47375,7.46875 h -1.27625 v 1.25 h 1.28125 c 0.3087112,3.990891 3.4780664,7.162367 7.46875,7.47375 v 1.27625 h 1.25 v -1.28125 c 3.990891,-0.308711 7.162367,-3.478066 7.47375,-7.46875 h 1.27625 v -1.25 h -1.28125 c -0.308711,-3.9908911 -3.478066,-7.162368 -7.46875,-7.47375 z m -0.625,2.5 c 3.796958,0 6.875,3.0780424 6.875,6.875 0,3.796958 -3.078042,6.875 -6.875,6.875 -3.7969576,0 -6.875,-3.078042 -6.875,-6.875 0,-3.7969576 3.0780424,-6.875 6.875,-6.875 z m 0,3.75 c -1.72589,0 -3.125,1.39911 -3.125,3.125 0,1.72589 1.39911,3.125 3.125,3.125 1.72589,0 3.125,-1.39911 3.125,-3.125 0,-1.72589 -1.39911,-3.125 -3.125,-3.125 z"
      fill="#808080"
      id="path2"
-     sodipodi:nodetypes="cccccccccccccccccssssssssss" />
+     sodipodi:nodetypes="cccccccccccccccccssssssssss"
+     style="stroke-width:1" />
 </svg>

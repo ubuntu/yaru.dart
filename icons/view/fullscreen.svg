@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   height="16"
-   width="16"
+   height="24"
+   width="24"
    version="1.1"
    id="svg8"
    sodipodi:docname="fullscreen.svg"
@@ -15,8 +15,8 @@
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <path
      id="path930"
-     style="color:#000000;fill:#808080;-inkscape-stroke:none;fill-opacity:1"
-     d="M 10 1 L 10 1.5 L 10 2 L 10.5 2 L 13.292969 2 L 8.6464844 6.6464844 L 9.3535156 7.3535156 L 14 2.7070312 L 14 5.5 L 14 6 L 14.5 6 L 15 6 L 15 5.5 L 15 1.5 L 15 1 L 14.5 1 L 10.5 1 L 10 1 z M 6.6464844 8.6464844 L 2 13.292969 L 2 10 L 1 10 L 1 10.5 L 1 14.5 L 1 15 L 6 15 L 6 14 L 5.5 14 L 2.7070312 14 L 7.3535156 9.3535156 L 6.6464844 8.6464844 z " />
+     style="color:#000000;fill:#808080;fill-opacity:1;stroke-width:1;-inkscape-stroke:none"
+     d="m 14.5,3.25 v 0.625 0.625 h 0.625 3.491211 l -5.808106,5.808106 0.883789,0.883789 5.808106,-5.808106 v 3.491211 0.625 h 0.625 0.625 v -0.625 -5 -0.625 h -0.625 -5 z m -4.191894,9.558106 -5.808106,5.808105 v -4.116211 h -1.25 v 0.625 5 0.625 h 6.25 v -1.25 h -0.625 -3.491211 l 5.808106,-5.808105 z" />
   <metadata
      id="metadata14">
     <rdf:RDF>
@@ -44,14 +44,15 @@
      id="namedview10"
      showgrid="true"
      inkscape:zoom="22.627417"
-     inkscape:cx="16.948466"
-     inkscape:cy="6.9163882"
+     inkscape:cx="4.7508737"
+     inkscape:cy="6.5186406"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg8"
      inkscape:document-rotation="0"
-     inkscape:pagecheckerboard="0">
+     inkscape:pagecheckerboard="0"
+     inkscape:snap-page="true">
     <inkscape:grid
        type="xygrid"
        id="grid847" />

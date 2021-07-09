@@ -1,3 +1,44 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1.98 1.98V13H3V3h8v1H4.004v11H14V4h-2V3h.012V1.98h-8.53zM5.006 5H13v9H5.006zM6 6v1h6.02V6zm0 2v1h6.02V8zm-.008 2v1H9v-1z" fill="gray" overflow="visible" style="marker:none" color="#000"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="copy.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:zoom="14"
+     inkscape:cx="-3.1785714"
+     inkscape:cy="8.25"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4">
+    <inkscape:grid
+       type="xygrid"
+       id="grid825" />
+  </sodipodi:namedview>
+  <path
+     d="m 4.475,4.475 v 13.775 h 1.275 v -12.5 h 10 v 1.25 h -8.745 v 13.75 h 12.495 v -13.75 h -2.5 v -1.25 h 0.015 v -1.275 h -10.6625 z m 3.7825,3.775 h 9.9925 v 11.25 h -9.9925 z m 1.2425,1.25 v 1.25 h 7.525 v -1.25 z m 0,2.5 v 1.25 h 7.525 v -1.25 z m -0.01,2.5 v 1.25 h 3.76 v -1.25 z"
+     fill="#808080"
+     overflow="visible"
+     style="stroke-width:1;marker:none"
+     color="#000000"
+     id="path2" />
 </svg>

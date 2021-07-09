@@ -1,3 +1,48 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7 2v.5h1V2zm0 1v.5h1V3zm0 1v3H3.5a.494.494 0 0 0-.1.008A3.5 3.5 0 0 0 .12 9.594a3.505 3.505 0 0 0 1.63 3.937 3.502 3.502 0 0 0 4.195-.53h3.11a3.502 3.502 0 0 0 4.195.53 3.505 3.505 0 0 0 1.63-3.937 3.5 3.5 0 0 0-3.286-2.586A.477.477 0 0 0 11.5 7H8V4zM3.5 8h8c1.134 0 2.123.758 2.416 1.854a2.497 2.497 0 0 1-1.166 2.812 2.489 2.489 0 0 1-2.877-.28c-.13-.129-.259-.39-.494-.386H5.62c-.234-.003-.394.268-.492.385-.8.693-1.95.817-2.879.281a2.496 2.496 0 0 1-1.164-2.812A2.495 2.495 0 0 1 3.5 8zM3 9v1H2v1h1v1h1v-1h1v-1H4V9zm8.5 0a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm-1 1a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm2 0a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm-1 1a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1z" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;marker:none" color="#000" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible" fill="gray"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="gaming.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     width="24px"
+     inkscape:zoom="3.5"
+     inkscape:cx="80.428571"
+     inkscape:cy="14.714286"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4">
+    <inkscape:grid
+       type="xygrid"
+       id="grid825" />
+  </sodipodi:namedview>
+  <path
+     d="m 11.333204,2.3320427 v 0.6667957 h 1.333592 v -0.6667957 z m 0,1.3335914 v 0.6667957 h 1.333592 v -0.6667957 z m 0,1.3335914 v 4.0007745 h -4.6675696 a 0.65879415,0.65879415 0 0 0 -0.1333592,0.01067 4.6675699,4.6675699 0 0 0 -4.3741798,3.448667 4.6742379,4.6742379 0 0 0 2.173754,5.250349 4.6702371,4.6702371 0 0 0 5.594416,-0.706803 h 4.1474696 a 4.6702371,4.6702371 0 0 0 5.594416,0.706803 4.6742379,4.6742379 0 0 0 2.173754,-5.250349 4.6675699,4.6675699 0 0 0 -4.382181,-3.448667 0.6361231,0.6361231 0 0 0 -0.125358,-0.01067 h -4.66757 v -4.0007745 z m -4.6675696,5.3343655 h 10.6687316 c 1.512293,0 2.831215,1.010863 3.221957,2.472479 a 3.3299777,3.3299777 0 0 1 -1.554968,3.750059 3.319309,3.319309 0 0 1 -3.836742,-0.373406 c -0.173367,-0.172033 -0.3454,-0.5201 -0.658794,-0.514766 h -5.0129708 c -0.3120604,-0.004 -0.5254351,0.357403 -0.656127,0.513433 -1.0668731,0.924179 -2.6005032,1.089544 -3.8394097,0.374739 a 3.3286441,3.3286441 0 0 1 -1.5523003,-3.750059 3.3273105,3.3273105 0 0 1 3.2206232,-2.472479 z m -0.6667957,1.333592 v 1.333591 h -1.3335914 v 1.333592 h 1.3335914 v 1.333591 h 1.3335914 v -1.333591 h 1.3335914 v -1.333592 h -1.3335914 v -1.333591 z m 11.3355273,0 a 0.6667957,0.6667957 0 1 0 0,1.333591 0.6667957,0.6667957 0 0 0 0,-1.333591 z m -1.333591,1.333591 a 0.666796,0.666796 0 1 0 0,1.333592 0.666796,0.666796 0 0 0 0,-1.333592 z m 2.667182,0 a 0.666796,0.666796 0 1 0 0,1.333592 0.666796,0.666796 0 0 0 0,-1.333592 z m -1.333591,1.333592 a 0.6667957,0.6667957 0 1 0 0,1.333591 0.6667957,0.6667957 0 0 0 0,-1.333591 z"
+     style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:1;marker:none"
+     color="#000000"
+     font-weight="400"
+     font-family="sans-serif"
+     white-space="normal"
+     overflow="visible"
+     fill="#808080"
+     id="path2" />
 </svg>

@@ -1,3 +1,40 @@
-<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-    <path d="M5 1l1 1v4L4 8h7L9 6V2l1-1zm2 8v4.75a16.197 16.197 0 0 0 .5 1.5 18.757 18.757 0 0 0 .5-1.5V9z" color="#000" fill="gray"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="pin.svg"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:snap-page="true"
+     inkscape:zoom="9.8994949"
+     inkscape:cx="8.4347737"
+     inkscape:cy="20.556604"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     d="m 8.875,3.25 1.25,1.25 v 5 l -2.5,2.5 h 8.75 l -2.5,-2.5 v -5 l 1.25,-1.25 z m 2.5,10 v 5.9375 a 20.24625,20.24625 0 0 0 0.625,1.875 23.44625,23.44625 0 0 0 0.625,-1.875 v -5.9375 z"
+     color="#000000"
+     fill="#808080"
+     id="path2"
+     style="stroke-width:0.999996" />
 </svg>
