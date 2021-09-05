@@ -1,3 +1,7 @@
+# 0.0.4
+
+* Pixel fit all 286 icons.
+
 # 0.0.3
 
 * Make all icons 24x24 with 2px padding.
