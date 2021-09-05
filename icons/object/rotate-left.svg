@@ -20,49 +20,35 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
+     showgrid="true"
      inkscape:snap-page="true"
      inkscape:zoom="28"
-     inkscape:cx="14.660714"
-     inkscape:cy="12.107143"
+     inkscape:cx="9.1607143"
+     inkscape:cy="12.035714"
      inkscape:window-width="1920"
      inkscape:window-height="1043"
      inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg12" />
+     inkscape:current-layer="svg12"
+     inkscape:snap-center="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid825" />
+  </sodipodi:namedview>
   <g
      fill="#808080"
      id="g10"
      transform="matrix(1.25,0,0,1.25,2,2)"
      style="stroke-width:0.8">
     <path
-       d="m 2.091,1.307 3.304,3.307 c -0.732,0.273 -1.5,0.527 -2.306,0.764 -0.8,0.231 -1.592,0.436 -2.375,0.612 0.183,-0.776 0.39,-1.565 0.621,-2.366 0.237,-0.805 0.49,-1.577 0.756,-2.316 z"
-       style="stroke-width:0.64;marker:none"
-       color="#000000"
-       overflow="visible"
-       id="path2" />
-    <path
-       d="m 3.244,11.656 0.072,0.084 -0.75,0.66 -0.091,-0.103 -0.04,-0.05 -0.48,-0.72 0.832,-0.554 z m 1.11,1.108 0.34,0.226 -0.555,0.832 -0.367,-0.244 -0.051,-0.039 -0.422,-0.37 0.658,-0.751 z m 1.353,0.779 0.676,0.23 -0.322,0.948 -0.717,-0.246 -0.06,-0.024 -0.218,-0.11 0.442,-0.896 z m 2.326,0.459 -0.066,0.996 -0.801,-0.053 0.066,-0.998 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
-       color="#000000"
-       font-weight="400"
-       font-family="sans-serif"
-       white-space="normal"
-       overflow="visible"
-       id="path4" />
-    <path
-       d="m 8,6 a 2,2 0 0 0 -2,2 2,2 0 0 0 2,2 2,2 0 0 0 2,-2 2,2 0 0 0 -2,-2 z m 0,1 a 1,1 0 0 1 1,1 1,1 0 0 1 -1,1 1,1 0 0 1 -1,-1 1,1 0 0 1 1,-1 z"
-       id="path6"
-       style="stroke-width:0.8" />
-    <path
-       d="m 8.426,1.014 c 0.791,0.047 1.586,0.23 2.347,0.558 a 7.005,7.005 0 0 1 4.083,7.844 7.005,7.005 0 0 1 -6.856,5.584 h -0.5 v -1 h 0.5 c 2.85,0 5.3,-1.997 5.877,-4.787 a 5.995,5.995 0 0 0 -3.5,-6.723 5.995,5.995 0 0 0 -7.291,2.07 l -0.287,0.41 -0.82,-0.574 0.287,-0.41 a 7.006,7.006 0 0 1 6.16,-2.971 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
-       color="#000000"
-       font-weight="400"
-       font-family="sans-serif"
-       white-space="normal"
-       overflow="visible"
-       id="path8" />
+       id="path2"
+       style="stroke-width:0.8;marker:none"
+       d="M 12 3 A 9 9 0 0 0 6.1601562 5.1816406 L 4.6132812 3.6347656 C 4.2807812 4.5585156 3.9642188 5.5230469 3.6679688 6.5292969 C 3.3792187 7.5305469 3.1213281 8.5182813 2.8925781 9.4882812 C 3.8713281 9.2682813 4.8613281 9.0114064 5.8613281 8.7226562 C 6.8688281 8.4264064 7.8291406 8.1088281 8.7441406 7.7675781 L 6.8671875 5.8886719 A 8 8 0 0 1 12 4 A 8 8 0 0 1 20 12 A 8 8 0 0 1 12 20 A 8.0000001 8.0000001 0 0 1 10.611328 19.878906 L 10.4375 20.863281 A 8.9999997 8.9999997 0 0 0 12 21 A 9 9 0 0 0 21 12 A 9 9 0 0 0 12 3 z M 5.4472656 16.589844 L 4.6269531 17.162109 A 8.9999997 8.9999997 0 0 0 5.6367188 18.363281 L 6.34375 17.65625 A 8.0000001 8.0000001 0 0 1 5.4472656 16.589844 z M 6.8574219 18.128906 L 6.2148438 18.894531 A 8.9999997 8.9999997 0 0 0 7.5 19.794922 L 8 18.927734 A 8.0000001 8.0000001 0 0 1 6.8574219 18.128906 z M 8.6191406 19.251953 L 8.1972656 20.15625 A 8.9999997 8.9999997 0 0 0 9.6699219 20.693359 L 9.9296875 19.726562 A 8.0000001 8.0000001 0 0 1 8.6191406 19.251953 z "
+       transform="matrix(0.8,0,0,0.8,-1.6,-1.6)" />
   </g>
+  <path
+     id="path849"
+     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;fill-opacity:1"
+     d="M 12 10 A 2 2 0 0 0 10 12 A 2 2 0 0 0 12 14 A 2 2 0 0 0 14 12 A 2 2 0 0 0 12 10 z M 12 11 A 1 1 0 0 1 13 12 A 1 1 0 0 1 12 13 A 1 1 0 0 1 11 12 A 1 1 0 0 1 12 11 z " />
 </svg>

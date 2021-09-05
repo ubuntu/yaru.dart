@@ -22,28 +22,18 @@
      inkscape:pagecheckerboard="0"
      showgrid="false"
      inkscape:snap-page="true"
-     inkscape:zoom="39.59798"
-     inkscape:cx="7.0331871"
-     inkscape:cy="7.7402939"
+     inkscape:zoom="19.79899"
+     inkscape:cx="5.8841385"
+     inkscape:cy="5.9093923"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg6" />
-  <g
-     color="#000000"
-     transform="matrix(1.25,0,0,1.25,-1214.25,335.75)"
-     id="g4"
-     style="stroke-width:0.8">
-    <path
-       d="m 981.003,-265 c -2.61,0 -5.22,0.838 -7.4,2.518 l -0.266,0.205 0.205,0.263 7.457,9.672 7.668,-9.931 -0.264,-0.206 a 12.105,12.105 0 0 0 -7.4,-2.521 z"
-       fill="#808080"
-       font-family="sans-serif"
-       font-weight="400"
-       overflow="visible"
-       style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64;marker:none"
-       white-space="normal"
-       id="path2" />
-  </g>
+  <path
+     style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none"
+     d="m 12,5 c -6.1944385,0 -9.3789064,3.6738281 -9.3789064,3.6738281 l -0.2734375,0.3183594 9.6523439,11.7968745 0.386719,-0.472656 9.265625,-11.3242185 -0.273438,-0.3183594 c 0,0 -3.184468,-3.6738281 -9.378906,-3.6738281 z"
+     id="path1857"
+     sodipodi:nodetypes="sccccccs" />
 </svg>

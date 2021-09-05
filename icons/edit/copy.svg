@@ -21,9 +21,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      showgrid="true"
-     inkscape:zoom="14"
-     inkscape:cx="-3.1785714"
-     inkscape:cy="8.25"
+     inkscape:zoom="28"
+     inkscape:cx="8.2678571"
+     inkscape:cy="12.196429"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
@@ -35,10 +35,7 @@
        id="grid825" />
   </sodipodi:namedview>
   <path
-     d="m 4.475,4.475 v 13.775 h 1.275 v -12.5 h 10 v 1.25 h -8.745 v 13.75 h 12.495 v -13.75 h -2.5 v -1.25 h 0.015 v -1.275 h -10.6625 z m 3.7825,3.775 h 9.9925 v 11.25 h -9.9925 z m 1.2425,1.25 v 1.25 h 7.525 v -1.25 z m 0,2.5 v 1.25 h 7.525 v -1.25 z m -0.01,2.5 v 1.25 h 3.76 v -1.25 z"
-     fill="#808080"
-     overflow="visible"
-     style="stroke-width:1;marker:none"
-     color="#000000"
-     id="path2" />
+     id="rect844"
+     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;fill-opacity:1"
+     d="M 5 4 L 5 18 L 6 18 L 6 17 L 6 6 L 6 5 L 16 5 L 16 6 L 7 6 L 7 20 L 19 20 L 19 6 L 17 6 L 17 4 L 5 4 z M 8 7 L 18 7 L 18 19 L 8 19 L 8 7 z M 10 9 L 10 10 L 16 10 L 16 9 L 10 9 z M 10 11 L 10 12 L 16 12 L 16 11 L 10 11 z M 10 13 L 10 14 L 13 14 L 13 13 L 10 13 z " />
 </svg>

@@ -20,41 +20,30 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
+     showgrid="true"
      inkscape:snap-page="true"
-     inkscape:zoom="39.59798"
-     inkscape:cx="7.9170706"
-     inkscape:cy="7.4877557"
+     inkscape:zoom="14"
+     inkscape:cx="24.178571"
+     inkscape:cy="4.4642857"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg10" />
-  <g
-     color="#000000"
-     font-weight="400"
-     font-family="sans-serif"
-     white-space="normal"
-     fill="#808080"
-     id="g8"
-     transform="matrix(1.25,0,0,1.25,3.25,1.375)"
-     style="stroke-width:0.8">
-    <path
-       d="m 4.5,1 c -0.542,0 -0.984,0.064 -1.36,0.23 a 1.72,1.72 0 0 0 -0.837,0.797 c -0.34,0.68 -0.303,1.473 -0.303,2.473 v 8 c 0,1 -0.037,1.794 0.303,2.473 0.17,0.34 0.462,0.63 0.838,0.797 0.375,0.166 0.817,0.23 1.359,0.23 h 5 c 0.542,0 0.984,-0.064 1.36,-0.23 a 1.72,1.72 0 0 0 0.837,-0.797 c 0.34,-0.68 0.303,-1.473 0.303,-2.473 v -8 c 0,-1 0.037,-1.794 -0.303,-2.473 a 1.72,1.72 0 0 0 -0.838,-0.796 c -0.375,-0.167 -0.817,-0.231 -1.359,-0.231 z m 0,1 h 5 c 0.458,0 0.766,0.061 0.953,0.145 0.187,0.083 0.27,0.167 0.35,0.328 0.16,0.32 0.197,1.027 0.197,2.027 v 8 c 0,1 -0.037,1.706 -0.197,2.027 a 0.615,0.615 0 0 1 -0.35,0.329 c -0.187,0.083 -0.495,0.144 -0.953,0.144 h -5 c -0.458,0 -0.766,-0.061 -0.953,-0.144 a 0.615,0.615 0 0 1 -0.35,-0.329 c -0.16,-0.32 -0.197,-1.027 -0.197,-2.027 v -8 c 0,-1 0.037,-1.706 0.197,-2.027 a 0.615,0.615 0 0 1 0.35,-0.328 c 0.187,-0.085 0.495,-0.145 0.953,-0.145 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64;marker:none"
-       overflow="visible"
-       id="path2" />
-    <path
-       d="m 4,3 v 4 h 6 v -4 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
-       overflow="visible"
-       fill-rule="evenodd"
-       id="path4" />
-    <path
-       d="m 7,8 c -1.65,0 -3,1.35 -3,3 0,1.651 1.35,3 3,3 1.651,0 3,-1.349 3,-3 0,-1.65 -1.349,-3 -3,-3 z m 0,1 c 1.11,0 2,0.89 2,2 0,1.11 -0.89,2 -2,2 -1.11,0 -2,-0.89 -2,-2 0,-1.11 0.89,-2 2,-2 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
-       overflow="visible"
-       id="path6" />
-  </g>
+     inkscape:current-layer="svg10">
+    <inkscape:grid
+       type="xygrid"
+       id="grid9" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid1109"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <path
+     id="rect1000"
+     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:2;stroke-linecap:square;stroke-linejoin:round"
+     d="M 8.7871094 3 C 8.1101636 3.0055872 7.5365074 3.0481526 7.0273438 3.3027344 C 6.6879015 3.4724556 6.3973384 3.765168 6.2304688 4.140625 C 6.063599 4.516082 6 4.9583339 6 5.5 L 6 18.5 C 6 19.041666 6.0635989 19.483918 6.2304688 19.859375 C 6.3973385 20.234832 6.6879015 20.527544 7.0273438 20.697266 C 7.7062285 21.036708 8.500001 21 9.5 21 L 14.5 21 C 15.499999 21 16.293771 21.03671 16.972656 20.697266 C 17.312099 20.527544 17.602661 20.234832 17.769531 19.859375 C 17.936401 19.483918 18 19.041666 18 18.5 L 18 5.5 C 18 4.9583339 17.9364 4.516082 17.769531 4.140625 C 17.602661 3.765168 17.312099 3.4724556 16.972656 3.3027344 C 16.293771 2.963292 15.499999 3 14.5 3 L 9.5 3 C 9.2500002 3 9.012758 2.9981376 8.7871094 3 z M 9.5 4 L 14.5 4 C 15.499999 4 16.20623 4.036708 16.527344 4.1972656 C 16.687901 4.2775446 16.772339 4.3598326 16.855469 4.546875 C 16.938599 4.7339174 17 5.0416671 17 5.5 L 17 18.5 C 17 18.958333 16.9386 19.266083 16.855469 19.453125 C 16.772339 19.640167 16.687901 19.722456 16.527344 19.802734 C 16.20623 19.963291 15.499999 20 14.5 20 L 9.5 20 C 8.500001 20 7.7937706 19.96329 7.4726562 19.802734 C 7.3120991 19.722454 7.2276613 19.640167 7.1445312 19.453125 C 7.0614013 19.266083 7 18.958333 7 18.5 L 7 5.5 C 7 5.0416671 7.0614011 4.7339174 7.1445312 4.546875 C 7.2276612 4.3598326 7.3120991 4.2775442 7.4726562 4.1972656 C 7.7937705 4.0367085 8.500001 4 9.5 4 z M 9 6 L 9 10 L 15 10 L 15 6 L 9 6 z M 12 12 A 3 3 0 0 0 9 15 A 3 3 0 0 0 12 18 A 3 3 0 0 0 15 15 A 3 3 0 0 0 12 12 z M 12 13 A 2 2 0 0 1 14 15 A 2 2 0 0 1 12 17 A 2 2 0 0 1 10 15 A 2 2 0 0 1 12 13 z " />
 </svg>

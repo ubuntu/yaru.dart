@@ -99,9 +99,16 @@
      style="display:inline;opacity:1"
      transform="translate(-401.00015,-339)">
     <path
-       id="path2"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;fill-opacity:1;stroke-width:1;marker:none"
-       d="m 407.37507,342.25 a 3.1325,3.1325 0 0 0 -3.125,3.125 v 11.25 c 0,1.72 1.405,3.125 3.125,3.125 h 11.25 c 1.72,0 3.125,-1.405 3.125,-3.125 v -11.25 c 0,-1.72 -1.405,-3.125 -3.125,-3.125 z m 0,1.25 h 11.25 c 1.05,0 1.875,0.825 1.875,1.875 v 11.25 c 0,1.05 -0.825,1.875 -1.875,1.875 h -11.25 c -1.05,0 -1.875,-0.825 -1.875,-1.875 v -11.25 c 0,-1.05 0.825,-1.875 1.875,-1.875 z m 0.625,6.25 v 2.5 h 10 v -2.5 z" />
+       id="rect857"
+       style="display:inline;fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
+       d="m 407.00015,342 c -1.662,0 -3,1.338 -3,3 v 12 c 0,1.662 1.338,3 3,3 h 12 c 1.662,0 3,-1.338 3,-3 v -12 c 0,-1.662 -1.338,-3 -3,-3 z m 0.25,1 h 11.5 c 1.2465,0 2.25,1.0035 2.25,2.25 v 11.5 c 0,1.2465 -1.0035,2.25 -2.25,2.25 h -11.5 c -1.2465,0 -2.25,-1.0035 -2.25,-2.25 v -11.5 c 0,-1.2465 1.0035,-2.25 2.25,-2.25 z" />
+    <rect
+       style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
+       id="rect945"
+       width="10.000013"
+       height="2"
+       x="408.00021"
+       y="350" />
   </g>
   <g
      inkscape:groupmode="layer"

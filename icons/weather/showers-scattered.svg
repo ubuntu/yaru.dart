@@ -10,6 +10,10 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <path
+     id="path845"
+     style="fill:#808080;fill-rule:evenodd;fill-opacity:1"
+     d="M 5 6 C 5 6 3 9 3 11 A 2 2 0 0 0 5 13 A 2 2 0 0 0 7 11 A 2 2 0 0 0 6.9960938 10.880859 C 6.9205406 8.8831465 5 6 5 6 z M 19 6 C 19 6 17 9 17 11 A 2 2 0 0 0 19 13 A 2 2 0 0 0 21 11 A 2 2 0 0 0 20.996094 10.880859 C 20.920541 8.8831465 19 6 19 6 z M 12 8 C 12 8 9 14 9 17 A 3 3 0 0 0 12 20 A 3 3 0 0 0 15 17 C 15 16.952492 14.997575 16.902493 14.996094 16.853516 A 3 3 0 0 1 14.996094 16.851562 C 14.902877 13.807247 12 8 12 8 z " />
   <defs
      id="defs8" />
   <sodipodi:namedview
@@ -20,22 +24,19 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
+     showgrid="true"
      inkscape:snap-page="true"
      inkscape:zoom="39.59798"
-     inkscape:cx="7.0079333"
-     inkscape:cy="7.4119943"
+     inkscape:cx="10.139406"
+     inkscape:cy="11.086424"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4" />
-  <path
-     d="m 12.00625,19.5 a 3.1275,3.1275 0 0 1 -2.96875,-4.1075 c 0,-0.03125 0.02125,-0.06375 0.02875,-0.095 0.07875,-0.2625 1.2475,-4.09375 2.9425,-7.52875 v 0.00625 c 1.81,3.75 2.96,7.6175 2.96,7.6175 a 3.1275,3.1275 0 0 1 -2.96875,4.1075 z m 6.86875,-6.25 a 1.875,1.875 0 0 1 -1.78,-2.4625 c 0,-0.02 0.01875,-0.03875 0.01875,-0.0575 0.0475,-0.15875 0.74875,-2.45625 1.765,-4.51625 v 0.0025 c 1.085,2.25 1.775,4.57 1.775,4.57 a 1.875,1.875 0 0 1 -1.78125,2.4625 z m -13.75,0 a 1.875,1.875 0 0 1 -1.78,-2.4625 c 0,-0.02 0.01875,-0.04 0.01875,-0.0575 0.0475,-0.15875 0.74875,-2.45625 1.765,-4.51625 v 0.0025 c 1.085,2.25 1.775,4.57 1.775,4.57 a 1.875,1.875 0 0 1 -1.78125,2.4625 z"
-     fill="#808080"
-     overflow="visible"
-     style="stroke-width:1;marker:none"
-     color="#000000"
-     id="path2" />
+     inkscape:current-layer="svg4">
+    <inkscape:grid
+       type="xygrid"
+       id="grid821" />
+  </sodipodi:namedview>
 </svg>

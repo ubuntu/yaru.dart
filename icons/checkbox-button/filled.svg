@@ -99,15 +99,9 @@
      style="display:inline;opacity:1"
      transform="translate(-401.00015,-339)">
     <path
-       d="m 407.37508,342.25 c -1.72418,0.004 -3.12088,1.40082 -3.125,3.125 v 11.25 c 0,1.72 1.405,3.125 3.125,3.125 h 11.25 c 1.72,0 3.125,-1.405 3.125,-3.125 v -11.25 c 0,-1.72 -1.405,-3.125 -3.125,-3.125 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;fill-opacity:1;stroke-width:1;marker:none"
-       color="#000000"
-       font-weight="400"
-       font-family="sans-serif"
-       overflow="visible"
-       fill="#474747"
-       id="path2"
-       sodipodi:nodetypes="ccssssssc" />
+       style="display:inline;fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
+       d="m 407.00015,342 c -1.662,0 -3,1.338 -3,3 v 12 c 0,1.662 1.338,3 3,3 h 12 c 1.662,0 3,-1.338 3,-3 v -12 c 0,-1.662 -1.338,-3 -3,-3 z"
+       id="rect857" />
   </g>
   <g
      inkscape:groupmode="layer"

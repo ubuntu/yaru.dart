@@ -21,10 +21,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      showgrid="true"
-     inkscape:snap-grids="false"
+     inkscape:snap-grids="true"
      inkscape:zoom="19.79899"
-     inkscape:cx="14.722973"
-     inkscape:cy="4.8234784"
+     inkscape:cx="0.47982246"
+     inkscape:cy="15.379572"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
@@ -40,8 +40,8 @@
      fill="#808080"
      id="g6">
     <path
-       id="path4"
-       d="m 12,2 c -5.5228475,0 -10,4.4771525 -10,10 0,5.522848 4.4771525,10 10,10 5.522848,0 10,-4.477152 10,-10 0,-1.101038 -0.181558,-2.1586864 -0.510254,-3.149414 l -8.862305,8.852539 -5.0390621,-5.039062 1.3256836,-1.328126 3.7109375,3.710938 8.03711,-8.0419923 c -1.72861,-2.9907027 -4.959429,-5.0048827 -8.66211,-5.0048827 z"
-       style="stroke-width:1" />
+       id="path86"
+       style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:2;stroke-linecap:square;stroke-linejoin:round"
+       d="M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 21.419922 8.6425781 L 12.5 17.560547 L 7.46875 12.53125 L 8.53125 11.46875 L 12.5 15.4375 L 20.757812 7.1796875 A 10 10 0 0 0 12 2 z " />
   </g>
 </svg>

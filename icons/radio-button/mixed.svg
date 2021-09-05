@@ -34,8 +34,8 @@
      bordercolor="#666666"
      borderopacity="1"
      inkscape:current-layer="layer9"
-     inkscape:cx="11.390625"
-     inkscape:cy="6.546875"
+     inkscape:cx="14.606174"
+     inkscape:cy="8.639961"
      gridtolerance="10"
      inkscape:guide-bbox="true"
      guidetolerance="10"
@@ -61,7 +61,7 @@
      inkscape:window-width="1920"
      inkscape:window-x="0"
      inkscape:window-y="27"
-     inkscape:zoom="32"
+     inkscape:zoom="22.627417"
      inkscape:showpageshadow="false"
      inkscape:document-rotation="0"
      inkscape:pagecheckerboard="0">
@@ -99,14 +99,16 @@
      style="display:inline;opacity:1"
      transform="translate(-401.00015,-339)">
     <path
-       id="path2"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;fill-opacity:1;stroke-width:1;marker:none"
-       d="m 408.00007,349.75 v 2.5 h 10 v -2.5 z"
-       sodipodi:nodetypes="ccccc" />
-    <path
-       id="path2002"
-       style="display:inline;fill:#808080;fill-rule:evenodd;stroke-width:1;stroke-linejoin:round"
-       d="m 412.88289,342.2501 a 8.75,8.75 0 0 0 -8.63281,8.75 8.75,8.75 0 0 0 8.75,8.75 8.75,8.75 0 0 0 8.75,-8.75 8.75,8.75 0 0 0 -8.75,-8.75 8.75,8.75 0 0 0 -0.11713,0 z m 0.11713,1.25 a 7.5,7.5 0 0 1 7.5,7.5 7.5,7.5 0 0 1 -7.5,7.5 7.5,7.5 0 0 1 -7.5,-7.5 7.5,7.5 0 0 1 7.5,-7.5 z" />
+       id="path857"
+       style="display:inline;fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round"
+       d="m 413.00015,342 a 9,9 0 0 0 -9,9 9,9 0 0 0 9,9 9,9 0 0 0 9,-9 9,9 0 0 0 -9,-9 z m 0,1 a 8,8 0 0 1 8,8 8,8 0 0 1 -8,8 8,8 0 0 1 -8,-8 8,8 0 0 1 8,-8 z" />
+    <rect
+       style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;fill-opacity:1"
+       id="rect964"
+       width="10"
+       height="2"
+       x="408.00021"
+       y="350" />
   </g>
   <g
      inkscape:groupmode="layer"

@@ -22,9 +22,9 @@
      inkscape:pagecheckerboard="0"
      showgrid="true"
      inkscape:snap-page="true"
-     inkscape:zoom="19.79899"
-     inkscape:cx="7.045814"
-     inkscape:cy="13.157237"
+     inkscape:zoom="28"
+     inkscape:cx="4.1964285"
+     inkscape:cy="7.9107142"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
@@ -34,13 +34,14 @@
     <inkscape:grid
        type="xygrid"
        id="grid1011" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid872"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
   </sodipodi:namedview>
-  <path
-     d="m 9.5,2 v 6.25 h -2.695 c 0,0 2.5975,6.64 5.195,10.195 2.5975,-3.555 5.195,-10.195 5.195,-10.195 h -2.695 v -6.25 z m 1.25,1.25 h 2.5 v 6.25 h 1.985 c -0.5875,1.2475 -1.485,4.01625 -3.235,6.65 -1.75,-2.63375 -2.725,-5.4025 -3.3125,-6.65 h 2.0625 z"
-     overflow="visible"
-     style="color:#000000;fill:#808080;stroke-width:0.8;marker:none"
-     id="path2"
-     sodipodi:nodetypes="cccccccccccccccc" />
   <rect
      style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
      id="rect1055"
@@ -48,4 +49,8 @@
      height="1"
      x="5"
      y="20" />
+  <path
+     id="rect867"
+     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;fill-opacity:1"
+     d="M 10 2 L 10 8 L 6.7714844 8 L 7.0332031 8.6796875 C 7.0332031 8.6796875 7.6635195 10.315901 8.5449219 12.267578 C 9.4263242 14.219255 10.540812 16.476796 11.609375 17.8125 L 12 18.300781 L 12.390625 17.8125 C 13.459188 16.476796 14.573676 14.219255 15.455078 12.267578 C 16.33648 10.315901 16.966797 8.6796875 16.966797 8.6796875 L 17.228516 8 L 14 8 L 14 2 L 10 2 z M 11 3 L 13 3 L 13 8 L 13 9 L 13.5 9 L 15.748047 9 C 15.566587 9.4617576 15.246682 10.303524 14.544922 11.857422 C 13.791873 13.524887 12.847216 15.241677 12 16.478516 C 11.152784 15.241677 10.208127 13.524887 9.4550781 11.857422 C 8.7533179 10.303524 8.4334129 9.4617576 8.2519531 9 L 10.5 9 L 11 9 L 11 8 L 11 3 z " />
 </svg>

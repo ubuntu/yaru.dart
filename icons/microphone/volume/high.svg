@@ -22,45 +22,30 @@
      inkscape:pagecheckerboard="0"
      showgrid="true"
      width="24px"
-     inkscape:zoom="9.8994949"
-     inkscape:cx="-7.3236059"
-     inkscape:cy="15.202796"
+     inkscape:zoom="22.627417"
+     inkscape:cx="19.997864"
+     inkscape:cy="17.346213"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg10">
+     inkscape:current-layer="svg10"
+     inkscape:snap-grids="true">
     <inkscape:grid
        type="xygrid"
        id="grid831" />
   </sodipodi:namedview>
-  <g
-     color="#000000"
-     fill="#808080"
-     id="g8"
-     transform="matrix(1.25,0,0,1.25,1.96875,2)"
-     style="stroke-width:0.8">
-    <path
-       d="m 15.343,4.926 0.707,0.707 -0.354,0.354 a 2.999,2.999 0 0 0 0,4.242 l 0.354,0.353 -0.707,0.707 -0.354,-0.353 a 4,4 0 0 1 0,-5.656 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
-       font-weight="400"
-       font-family="sans-serif"
-       white-space="normal"
-       overflow="visible"
-       id="path2" />
-    <path
-       d="m 13.221,2.805 0.707,0.707 -0.353,0.353 a 5.999,5.999 0 0 0 0,8.485 l 0.353,0.353 -0.707,0.707 -0.353,-0.353 a 7,7 0 0 1 0,-9.899 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
-       font-weight="400"
-       font-family="sans-serif"
-       white-space="normal"
-       overflow="visible"
-       id="path4" />
-    <path
-       d="m 4.496,0 c -1.409,0 -2.496,0.842 -2.496,2.537 v 5.924 c 0,1.695 1.087,2.539 2.496,2.539 1.41,0 2.494,-0.846 2.494,-2.54 v -5.922 c 0,-1.693 -1.085,-2.538 -2.494,-2.538 z m 0,0.998 c 0.505,0 0.856,0.142 1.088,0.361 0.232,0.22 0.408,0.545 0.408,1.178 v 5.924 c 0,0.633 -0.176,0.958 -0.408,1.178 -0.232,0.219 -0.583,0.363 -1.088,0.363 -0.505,0 -0.858,-0.143 -1.09,-0.361 -0.231,-0.22 -0.408,-0.546 -0.408,-1.18 v -5.924 c 0,-0.634 0.177,-0.959 0.408,-1.178 0.232,-0.218 0.585,-0.36 1.09,-0.36 z m -4.496,6.002 v 1.5 c 0,2.321 1.748,4.199 4,4.45 v 2.073 a 7.576,7.576 0 0 0 -2,0.436 v 0.541 h 5 v -0.541 a 7.856,7.856 0 0 0 -2,-0.434 v -2.075 c 2.252,-0.25 4,-2.128 4,-4.449 v -1.501 h -1 v 1.5 a 3.482,3.482 0 0 1 -3,3.451 v -0.451 h -1 v 0.451 a 3.482,3.482 0 0 1 -3,-3.451 v -1.5 z"
-       style="stroke-width:0.64;marker:none"
-       overflow="visible"
-       id="path6" />
-  </g>
+  <path
+     id="rect864"
+     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round"
+     d="m 7.5,2 c -1.939,0 -3.5,1.561 -3.5,3.5 v 7 c 0,1.939 1.561,3.5 3.5,3.5 1.939,0 3.5,-1.561 3.5,-3.5 v -7 c 0,-1.939 -1.561,-3.5 -3.5,-3.5 z m 0,1 a 2.5,2.5 0 0 1 2.5,2.5 v 7 a 2.5,2.5 0 0 1 -2.5,2.5 2.5,2.5 0 0 1 -2.5,-2.5 v -7 a 2.5,2.5 0 0 1 2.5,-2.5 z m -5.5,8 v 1.5 a 5.5,5.5 0 0 0 5,5.466797 v 3.044922 c -1.744098,0.07151 -3,0.488281 -3,0.488281 v 0.5 h 7 v -0.5 c 0,0 -1.255902,-0.416771 -3,-0.488281 v -3.044922 a 5.5,5.5 0 0 0 5,-5.466797 v -1.5 h -1 v 1.5 a 4.5,4.5 0 0 1 -4,4.464844 v -0.464844 h -1 v 0.464844 a 4.5,4.5 0 0 1 -4,-4.464844 v -1.5 z" />
+  <path
+     id="path966"
+     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round"
+     d="M 18.646484 5.6582031 A 9 9 0 0 0 16 12 A 9 9 0 0 0 18.783203 18.474609 L 19.492188 17.767578 A 8 8 0 0 1 17 12 A 8 8 0 0 1 19.337891 6.3496094 L 18.646484 5.6582031 z " />
+  <path
+     id="path2102"
+     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round"
+     d="M 21.011719 8.0117188 A 5 5 0 0 0 19 12 A 5 5 0 0 0 21.011719 15.988281 L 21.720703 15.279297 A 4 4 0 0 1 20 12 A 4 4 0 0 1 21.720703 8.7207031 L 21.011719 8.0117188 z " />
 </svg>

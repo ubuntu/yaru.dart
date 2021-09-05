@@ -74,7 +74,40 @@
     </linearGradient>
   </defs>
   <path
-     id="path1817-9-1-63"
-     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-     d="M 6.9941406 2 C 5.4215708 2.018874 4.2689995 1.9654891 3.328125 2.484375 C 2.8576878 2.7438305 2.4870944 3.180268 2.28125 3.7285156 C 2.0753681 4.2767633 2 4.9280098 2 5.75 L 2 10.75 L 2.0136719 10.75 C 1.9790479 11.164901 2.0519363 11.597598 2.2382812 12.007812 C 2.4919369 12.566534 2.9182979 13.103932 3.5273438 13.712891 L 10.287109 20.474609 C 10.896155 21.083567 11.435619 21.509678 11.994141 21.763672 C 12.552901 22.01734 13.154415 22.068343 13.695312 21.912109 C 14.777133 21.599668 15.586944 20.704441 16.765625 19.552734 L 16.769531 19.548828 L 19.554688 16.765625 L 19.554688 16.763672 C 20.705893 15.584654 21.597502 14.772877 21.910156 13.691406 C 22.066464 13.150658 22.01739 12.550847 21.763672 11.992188 C 21.510004 11.433478 21.083654 10.894114 20.474609 10.285156 L 13.714844 3.5253906 C 13.105798 2.9164321 12.566584 2.4900587 12.007812 2.2363281 C 11.728433 2.1095315 11.438021 2.03464 11.150391 2.0097656 C 11.016395 1.9985156 10.882047 1.9997656 10.75 2.0097656 L 10.75 2 L 6.9960938 2 L 6.9941406 2 z M 5.6875 4.5019531 A 1.2499661 1.2499661 0 0 1 6.9980469 5.6875 A 1.2499661 1.2499661 0 0 1 5.8144531 6.9980469 A 1.2499661 1.2499661 0 0 1 4.5039062 5.8144531 A 1.2499661 1.2499661 0 0 1 5.6875 4.5019531 z " />
+     id="path874"
+     style="color:#000000;fill:#808080;stroke-linejoin:round;-inkscape-stroke:none"
+     d="M 5.5 2 C 4.416668 2 3.5143344 2.2786339 2.8964844 2.8964844 C 2.2786334 3.5143349 2 4.4166677 2 5.5 L 2 9.5 C 2 10.499999 1.9931098 11.1034 2.3027344 11.722656 C 2.6123624 12.341913 3.1464854 12.853517 4.1464844 13.853516 L 10.146484 19.853516 C 10.935767 20.642799 11.675001 21.125 12.5 21.125 C 13.324999 21.125 14.064233 20.642799 14.853516 19.853516 L 19.853516 14.853516 C 20.642799 14.064233 21.125 13.324999 21.125 12.5 C 21.125 11.675001 20.642799 10.935767 19.853516 10.146484 L 13.853516 4.1464844 C 12.853517 3.1464854 12.341913 2.6123625 11.722656 2.3027344 C 11.1034 1.9931062 10.499999 2 9.5 2 L 5.5 2 z M 6.5 5 A 1.5 1.5 0 0 1 8 6.5 A 1.5 1.5 0 0 1 6.5 8 A 1.5 1.5 0 0 1 5 6.5 A 1.5 1.5 0 0 1 6.5 5 z " />
+  <g
+     id="layer9"
+     label="status"
+     style="display:inline;stroke-width:0.800022"
+     transform="matrix(1.2499661,0,0,1.2499661,-739.217,-139.24596)" />
+  <g
+     id="layer2"
+     style="display:inline;stroke-width:0.800022"
+     transform="matrix(1.2499661,0,0,1.2499661,-437.97493,-597.98351)" />
+  <g
+     id="layer4"
+     style="display:inline;stroke-width:0.800022"
+     transform="matrix(1.2499661,0,0,1.2499661,-437.97493,-597.98351)" />
+  <g
+     id="g1812"
+     style="display:inline;stroke-width:0.800022"
+     transform="matrix(1.2499661,0,0,1.2499661,-437.97493,-597.98351)" />
+  <g
+     id="g6217"
+     style="display:inline;stroke-width:0.800022"
+     transform="matrix(1.2499661,0,0,1.2499661,-437.97493,-597.98351)" />
+  <g
+     id="layer3"
+     style="display:inline;stroke-width:0.800022"
+     transform="matrix(1.2499661,0,0,1.2499661,-437.97493,-597.98351)" />
+  <g
+     id="g1833"
+     style="display:inline;stroke-width:0.800022"
+     transform="matrix(1.2499661,0,0,1.2499661,-437.97493,-597.98351)" />
+  <g
+     id="layer1"
+     style="display:inline;stroke-width:0.800022"
+     transform="matrix(1.2499661,0,0,1.2499661,-437.97493,-597.98351)" />
 </svg>

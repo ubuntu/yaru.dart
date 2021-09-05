@@ -20,35 +20,23 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
+     showgrid="true"
      inkscape:snap-page="true"
      inkscape:zoom="14"
-     inkscape:cx="12.178571"
-     inkscape:cy="3.1785714"
+     inkscape:cx="6.1785714"
+     inkscape:cy="11.25"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg8" />
-  <g
-     color="#000000"
-     fill="#808080"
-     id="g6"
-     transform="matrix(1.25,0,0,1.25,2,1.1)"
-     style="stroke-width:0.8">
-    <path
-       d="m 16,8.5 c 0,1.5 -0.64,2.493 -1.558,2.974 -0.917,0.482 -2.019,0.526 -3.071,0.526 h -8.54 v -1 h 8.54 c 1.012,0 1.976,-0.08 2.606,-0.411 0.631,-0.331 1.023,-0.839 1.023,-2.089 v -4.5 h 1 z"
-       style="line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64;marker:none"
-       font-weight="400"
-       font-family="sans-serif"
-       white-space="normal"
-       overflow="visible"
-       id="path2" />
-    <path
-       d="m 5,9 -0.002,5 a 36.975,36.975 0 0 1 -2.323,-1.166 c -0.78,-0.431 -1.534,-0.876 -2.259,-1.334 0.725,-0.449 1.478,-0.889 2.26,-1.32 0.788,-0.43 1.562,-0.823 2.323,-1.18 z"
-       style="stroke-width:0.64;marker:none"
-       overflow="visible"
-       id="path4" />
-  </g>
+     inkscape:current-layer="svg8">
+    <inkscape:grid
+       type="xygrid"
+       id="grid911" />
+  </sodipodi:namedview>
+  <path
+     id="path4"
+     style="color:#000000;fill:#808080;stroke-width:0.8;marker:none"
+     d="m 22,6 v 5.5 c 0,1.61111 -0.577029,2.811996 -1.583984,3.53125 -1.006956,0.719254 -2.360462,0.96875 -3.916016,0.96875 h -8.5 v -1 h 8.5 c 1.444443,0 2.590942,-0.250505 3.333984,-0.78125 0.743043,-0.530745 1.166016,-1.329863 1.166016,-2.71875 v -5.5 z m -14,9 -0.002,3.599609 c -0.95,-0.435 -1.919297,-0.920781 -2.904297,-1.457031 -0.97625,-0.53875 -1.916719,-1.095469 -2.824219,-1.667969 0.9075,-0.56125 1.847969,-1.11164 2.824219,-1.65039 a 53.855,53.855 0 0 1 2.904297,-1.47461 h 0.002 z" />
 </svg>

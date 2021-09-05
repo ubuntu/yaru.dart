@@ -20,41 +20,23 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
+     showgrid="true"
      inkscape:snap-page="true"
      inkscape:zoom="28"
-     inkscape:cx="7.625"
-     inkscape:cy="10.839286"
+     inkscape:cx="12.232143"
+     inkscape:cy="10.142857"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg10" />
-  <g
-     color="#000000"
-     font-weight="400"
-     font-family="sans-serif"
-     white-space="normal"
-     fill="#808080"
-     id="g8"
-     transform="matrix(1.25,0,0,1.25,2,2)"
-     style="stroke-width:0.8">
-    <path
-       d="m 7.5,1 a 6.508,6.508 0 0 0 -6.5,6.5 c 0,3.584 2.916,6.5 6.5,6.5 3.584,0 6.5,-2.916 6.5,-6.5 0,-3.584 -2.916,-6.5 -6.5,-6.5 z m 0,1.04 c 3.022,0 5.46,2.438 5.46,5.46 0,3.022 -2.438,5.46 -5.46,5.46 a 5.454,5.454 0 0 1 -5.461,-5.46 c 0,-3.022 2.44,-5.46 5.461,-5.46 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
-       overflow="visible"
-       id="path2" />
-    <path
-       d="m 11.853,11.146 -0.707,0.708 3.5,3.5 0.707,-0.708 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:0.64"
-       overflow="visible"
-       fill-rule="evenodd"
-       id="path4" />
-    <path
-       d="m 7,5 v 2 h -2 v 1 h 2 v 2 h 1 v -2 h 2 v -1 h -2 v -2 z"
-       style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;isolation:auto;mix-blend-mode:normal;stroke-width:0.64;marker:none"
-       overflow="visible"
-       id="path6" />
-  </g>
+     inkscape:current-layer="svg10">
+    <inkscape:grid
+       type="xygrid"
+       id="grid912" />
+  </sodipodi:namedview>
+  <path
+     id="path998"
+     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-linecap:round"
+     d="M 10.5 3 A 7.5 7.5 0 0 0 3 10.5 A 7.5 7.5 0 0 0 10.5 18 A 7.5 7.5 0 0 0 15.4375 16.144531 L 20.646484 21.353516 L 21.353516 20.646484 L 16.144531 15.4375 A 7.5 7.5 0 0 0 18 10.5 A 7.5 7.5 0 0 0 10.5 3 z M 10.5 4 A 6.5 6.5 0 0 1 17 10.5 A 6.5 6.5 0 0 1 10.5 17 A 6.5 6.5 0 0 1 4 10.5 A 6.5 6.5 0 0 1 10.5 4 z M 10 7 L 10 10 L 7 10 L 7 11 L 10 11 L 10 14 L 11 14 L 11 11 L 14 11 L 14 10 L 11 10 L 11 7 L 10 7 z " />
 </svg>

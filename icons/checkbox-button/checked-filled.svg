@@ -99,9 +99,9 @@
      style="display:inline;opacity:1"
      transform="translate(-401.00015,-339)">
     <path
-       id="path2"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;fill-opacity:1;stroke-width:1;marker:none"
-       d="M 6.375 3.25 C 4.65082 3.254 3.25412 4.65082 3.25 6.375 L 3.25 17.625 C 3.25 19.345 4.655 20.75 6.375 20.75 L 17.625 20.75 C 19.345 20.75 20.75 19.345 20.75 17.625 L 20.75 6.375 C 20.75 4.655 19.345 3.25 17.625 3.25 L 6.375 3.25 z M 18.050781 6.8417969 L 19.148438 8.0800781 L 10.521484 17.158203 L 4.8515625 11.191406 L 6.1679688 9.703125 L 10.521484 13.4375 L 17.947266 6.9335938 L 18.050781 6.8417969 z "
+       id="rect857"
+       style="display:inline;fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
+       d="M 6 3 C 4.338 3 3 4.338 3 6 L 3 18 C 3 19.662 4.338 21 6 21 L 18 21 C 19.662 21 21 19.662 21 18 L 21 6 C 21 4.338 19.662 3 18 3 L 6 3 z M 17.925781 6.9492188 L 19 8.1621094 L 10.552734 17.050781 L 5 11.208984 L 6.2890625 9.75 L 10.552734 13.408203 L 17.824219 7.0371094 L 17.925781 6.9492188 z "
        transform="translate(401.00015,339)" />
   </g>
   <g

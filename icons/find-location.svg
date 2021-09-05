@@ -22,12 +22,12 @@
      inkscape:pagecheckerboard="0"
      showgrid="true"
      inkscape:zoom="28"
-     inkscape:cx="3.8035714"
-     inkscape:cy="6.7321429"
+     inkscape:cx="4.9107143"
+     inkscape:cy="10.607143"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg4"
      inkscape:snap-page="true">
@@ -36,9 +36,7 @@
        id="grid825" />
   </sodipodi:namedview>
   <path
-     d="m 12.625,2.625 h -1.25 v 1.28125 c -3.9908911,0.3087113 -7.162368,3.4780664 -7.47375,7.46875 h -1.27625 v 1.25 h 1.28125 c 0.3087112,3.990891 3.4780664,7.162367 7.46875,7.47375 v 1.27625 h 1.25 v -1.28125 c 3.990891,-0.308711 7.162367,-3.478066 7.47375,-7.46875 h 1.27625 v -1.25 h -1.28125 c -0.308711,-3.9908911 -3.478066,-7.162368 -7.46875,-7.47375 z m -0.625,2.5 c 3.796958,0 6.875,3.0780424 6.875,6.875 0,3.796958 -3.078042,6.875 -6.875,6.875 -3.7969576,0 -6.875,-3.078042 -6.875,-6.875 0,-3.7969576 3.0780424,-6.875 6.875,-6.875 z m 0,3.75 c -1.72589,0 -3.125,1.39911 -3.125,3.125 0,1.72589 1.39911,3.125 3.125,3.125 1.72589,0 3.125,-1.39911 3.125,-3.125 0,-1.72589 -1.39911,-3.125 -3.125,-3.125 z"
-     fill="#808080"
-     id="path2"
-     sodipodi:nodetypes="cccccccccccccccccssssssssss"
-     style="stroke-width:1" />
+     id="path80"
+     style="fill:#808080;fill-rule:evenodd;stroke-linecap:square;stroke-linejoin:round;fill-opacity:1"
+     d="M 11 2 L 11 3.0351562 A 8.5 8.5 0 0 0 3.0351562 11 L 2 11 L 2 12 L 3.0351562 12 A 8.5 8.5 0 0 0 11 19.964844 L 11 21 L 12 21 L 12 19.964844 A 8.5 8.5 0 0 0 19.964844 12 L 21 12 L 21 11 L 19.984375 11 A 8.5 8.5 0 0 0 12 3.015625 L 12 2 L 11 2 z M 11.5 4 A 7.5 7.5 0 0 1 19 11.5 A 7.5 7.5 0 0 1 11.5 19 A 7.5 7.5 0 0 1 4 11.5 A 7.5 7.5 0 0 1 11.5 4 z M 11.5 9 A 2.5 2.5 0 0 0 9 11.5 A 2.5 2.5 0 0 0 11.5 14 A 2.5 2.5 0 0 0 14 11.5 A 2.5 2.5 0 0 0 11.5 9 z " />
 </svg>

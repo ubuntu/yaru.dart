@@ -23,11 +23,11 @@
      showgrid="true"
      inkscape:zoom="28"
      inkscape:cx="9.5178571"
-     inkscape:cy="9.5892857"
+     inkscape:cy="9.5714286"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg8"
      inkscape:snap-page="true">
@@ -38,5 +38,5 @@
   <path
      id="path2"
      style="color:#000000;line-height:normal;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;stroke-width:1;marker:none"
-     d="m 8.2475586,8.25 a 53.5125,53.5125 0 0 0 -2.9028321,1.4746094 64.44375,64.44375 0 0 0 -2.824707,1.6503906 56,56 0 0 0 2.824707,1.667481 46.21875,46.21875 0 0 0 2.9028321,1.457519 v -2.5 h 7.5048824 v 2.5 c 0.95,-0.435 1.917833,-0.921269 2.902833,-1.457519 a 56,56 0 0 0 2.824706,-1.667481 64.44375,64.44375 0 0 0 -2.824706,-1.6503906 53.855,53.855 0 0 0 -2.902833,-1.4746094 h -0.0025 v 2.5 h -7.4999998 v -2.5 z" />
+     d="M 8 8.375 A 53.5125 53.5125 0 0 0 5.0976562 9.8496094 A 64.44375 64.44375 0 0 0 2.2714844 11.5 A 56 56 0 0 0 5.0976562 13.167969 A 46.21875 46.21875 0 0 0 8 14.625 L 8 12.125 L 8 12 L 16 12 L 16 12.125 L 16 14.625 A 46.21875 46.21875 0 0 0 18.902344 13.167969 A 56 56 0 0 0 21.728516 11.5 A 64.44375 64.44375 0 0 0 18.902344 9.8496094 A 53.5125 53.5125 0 0 0 16 8.375 L 16 11 L 8 11 L 8 8.375 z " />
 </svg>

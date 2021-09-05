@@ -20,22 +20,29 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
+     showgrid="true"
      inkscape:snap-page="true"
      inkscape:zoom="28"
-     inkscape:cx="14.339286"
-     inkscape:cy="14.339286"
+     inkscape:cx="8.8392857"
+     inkscape:cy="11.964286"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4" />
+     inkscape:current-layer="svg4">
+    <inkscape:grid
+       type="xygrid"
+       id="grid821" />
+  </sodipodi:namedview>
   <path
-     d="m 12,3.8743844 a 12.9775,12.9775 0 0 0 -9.20625,3.80875 l 0.92,0.9225 a 11.70875,11.70875 0 0 1 16.5725,0 l 0.92,-0.9225 a 12.9775,12.9775 0 0 0 -9.20625,-3.80875 z m 0,3.72875 c -2.4,0 -4.8,0.9125 -6.62875,2.7412496 l 0.92,0.92 a 8.0625,8.0625 0 0 1 11.41625,0 l 0.92125,-0.92 a 9.34375,9.34375 0 0 0 -6.62875,-2.7412496 z m 0,3.7474996 a 5.7075,5.7075 0 0 0 -4.05,1.6725 l 0.92,0.9225 a 4.41625,4.41625 0 0 1 6.26,0 l 0.92,-0.9225 a 5.7075,5.7075 0 0 0 -4.05,-1.6725 z m 0,3.775 a 2.5,2.5 0 0 0 -2.5,2.5 2.5,2.5 0 0 0 2.5,2.5 2.5,2.5 0 0 0 2.5,-2.5 2.5,2.5 0 0 0 -2.5,-2.5 z"
-     style="stroke-width:1;marker:none"
-     color="#000000"
-     overflow="visible"
-     fill="#808080"
-     id="path2" />
+     id="path917"
+     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;fill-opacity:1"
+     d="m 12,4.0000001 a 15,15 0 0 0 -10.078125,3.921875 l 0.703125,0.703125 a 14,14 0 0 1 9.375,-3.625 14,14 0 0 1 9.384766,3.6152344 l 0.710937,-0.7109375 a 15,15 0 0 0 -10.095703,-3.9042969 z m 0,3 a 12,12 0 0 0 -7.9453125,3.0546879 l 0.6972656,0.697265 a 11,11 0 0 1 7.2480469,-2.7519529 11,11 0 0 1 7.259766,2.7402349 l 0.708984,-0.708985 a 12,12 0 0 0 -7.96875,-3.0312499 z m 0,2.9999999 a 9,9 0 0 0 -5.8398438,2.160156 l 0.7324219,0.732422 a 8,8 0 0 1 5.1074219,-1.892578 8,8 0 0 1 5.132812,1.867188 l 0.708985,-0.708985 a 9,9 0 0 0 -5.841797,-2.158203 z m 0,3 a 6,6 0 0 0 -3.7109375,1.289062 l 0.7226563,0.722657 a 5,5 0 0 1 2.9882812,-1.011719 5,5 0 0 1 2.998047,1.001953 l 0.710937,-0.710937 a 6,6 0 0 0 -3.708984,-1.291016 z" />
+  <circle
+     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;fill-opacity:1"
+     id="path1260"
+     cx="12"
+     cy="19"
+     r="2" />
 </svg>

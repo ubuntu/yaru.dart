@@ -49,9 +49,9 @@
      inkscape:snap-intersection-paths="true"
      inkscape:snap-smooth-nodes="true"
      inkscape:snap-midpoints="true"
-     inkscape:zoom="13.75"
-     inkscape:cx="-5.3454547"
-     inkscape:cy="6.1454547"
+     inkscape:zoom="19.445436"
+     inkscape:cx="-5.0654559"
+     inkscape:cy="14.219275"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -63,22 +63,23 @@
        id="grid835" />
   </sodipodi:namedview>
   <path
-     d="m 9.5,2 a 2.5,2.5 0 1 1 0,5 2.5,2.5 0 0 1 0,-5 z m -7.5,6.25 h 15 v 1.2525 h -1.50875 c -0.55875,0 -1.205,0.09375 -1.66,0.2925 a 2.55875,2.55875 0 0 0 -1.08375,0.81875 3.00875,3.00875 0 0 0 -0.57625,1.235 6.985,6.985 0 0 0 -0.15875,1.53125 l -0.03,6.12 h -1.25 l 0.0175,-3.75 a 1.2475,1.2475 0 0 0 -1.25,-1.25 c -0.69,0 -1.245,0.56 -1.25,1.25 l -0.0175,3.75 h -1.2325 l 0.03,-6.1275 v -0.01 c -0.03375,-0.53375 -0.05,-1.0375 -0.15875,-1.51375 -0.10875,-0.475 -0.3,-0.88875 -0.57625,-1.23375 a 2.5575,2.5575 0 0 0 -1.08375,-0.82 c -0.45625,-0.2 -1.00875,-0.2925 -1.66,-0.2925 h -1.55125 z"
-     fill="#808080"
-     font-family="sans-serif"
-     font-weight="400"
-     overflow="visible"
-     style="font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:1"
-     white-space="normal"
-     id="path2" />
-  <circle
-     style="fill:#808080;fill-rule:evenodd;stroke-width:1;stroke-linecap:square"
-     id="path837"
-     cx="17.625"
-     cy="12.625"
-     r="1.875" />
+     id="rect1208"
+     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:round"
+     d="M 13 16 L 13 17 L 14 17 C 15.108 17 16 17.892 16 19 L 16 22 L 17 22 L 17 19.5 C 17 19.223 17.223 19 17.5 19 C 17.777 19 18 19.223 18 19.5 L 18 22 L 19 22 L 19 19 C 19 17.892 19.892 17 21 17 L 22 17 L 22 16 L 13 16 z " />
   <path
-     id="rect839"
-     style="fill:#808080;fill-rule:evenodd;stroke-width:1;stroke-linecap:square"
-     d="m 13.25,15.75 v 1.25 c 1.385,0 2.5,1.115 2.5,2.5 v 2.5 h 1.25 v -1.875 c 0,-0.34625 0.27875,-0.625 0.625,-0.625 0.34625,0 0.625,0.27875 0.625,0.625 v 1.875 h 1.25 v -2.5 c 0,-1.385 1.115,-2.5 2.5,-2.5 v -1.25 z" />
+     id="rect1025"
+     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:round"
+     d="M 2 8 L 2 9 L 3.1308594 9 C 5.2741949 9 7 10.725805 7 12.869141 L 7 20 L 8 20 L 8 15.5 C 8 14.669 8.669 14 9.5 14 C 10.331 14 11 14.669 11 15.5 L 11 20 L 12 20 L 12 12.869141 C 12 10.725805 13.725805 9 15.869141 9 L 17 9 L 17 8 L 2 8 z " />
+  <circle
+     style="fill:#808080;fill-rule:evenodd;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:round;fill-opacity:1"
+     id="path891"
+     cx="9.5"
+     cy="4.5"
+     r="2.5" />
+  <circle
+     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:round"
+     id="path1184"
+     cx="17.5"
+     cy="13.5"
+     r="1.5" />
 </svg>

@@ -21,16 +21,20 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
-     inkscape:zoom="27.998942"
-     inkscape:cx="5.2323406"
-     inkscape:cy="8.7681885"
+     showgrid="true"
+     inkscape:zoom="9.8991209"
+     inkscape:cx="29.851136"
+     inkscape:cy="-6.1621634"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg7384" />
+     inkscape:current-layer="svg7384">
+    <inkscape:grid
+       type="xygrid"
+       id="grid25" />
+  </sodipodi:namedview>
   <metadata
      id="metadata20854">
     <rdf:RDF>
@@ -73,59 +77,8 @@
          style="stop-color:#dbdbdb;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <g
-     id="layer9"
-     label="status"
-     style="display:inline;stroke-width:0.800033"
-     transform="matrix(1.2499489,0,0,1.2499489,-413.60778,-214.24116)" />
-  <g
-     id="layer2"
-     style="display:inline;stroke-width:0.800033"
-     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
-  <g
-     id="layer4"
-     style="display:inline;stroke-width:0.800033"
-     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
-  <g
-     id="g1812"
-     style="display:inline;stroke-width:0.800033"
-     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
-  <g
-     id="g6217"
-     style="display:inline;stroke-width:0.800033"
-     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
-  <g
-     id="layer3"
-     style="display:inline;stroke-width:0.800033"
-     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
-  <g
-     id="g1833"
-     style="display:inline;stroke-width:0.800033"
-     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)" />
-  <g
-     id="layer1"
-     style="display:inline;stroke-width:0.800033"
-     transform="matrix(1.2499489,0,0,1.2499489,-112.36985,-672.97241)">
-    <rect
-       height="2"
-       id="rect5109"
-       rx="0.80003268"
-       ry="0.80003268"
-       style="opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.60007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       width="5"
-       x="97"
-       y="540" />
-    <path
-       d="m 103.5293,543 a 1.5,1.5 0 0 0 -0.10547,0.002 1.5,1.5 0 0 0 -1.14258,0.62696 6.5,6.5 0 0 0 -3.113281,-0.6211 6.5,6.5 0 0 0 -6.160157,6.82227 6.5,6.5 0 0 0 6.822266,6.16211 6.5,6.5 0 0 0 6.162112,-6.82031 v -0.004 a 6.5,6.5 0 0 0 -1.37696,-3.66602 1.5,1.5 0 0 0 0.38282,-1.07812 1.5,1.5 0 0 0 -1.46875,-1.42379 z m -3.759769,1.00586 a 5.5,5.5 0 0 1 5.222659,5.21289 v 0.004 a 5.5,5.5 0 0 1 -5.212893,5.76953 5.5,5.5 0 0 1 -5.771485,-5.21289 5.5,5.5 0 0 1 5.210938,-5.77149 5.5,5.5 0 0 1 0.550781,-0.002 z"
-       id="path5143"
-       style="opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.60007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <path
-       d="m 99.3,545 h 0.5 l 0.2,5 h -1 z"
-       id="rect5159"
-       style="opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.60007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <path
-       d="m 100.49872,549.44942 a 1,1 0 0 1 -0.947983,1.04929 1,1 0 0 1 -1.049441,-0.94781 1,1 0 0 1 0.947645,-1.0496 1,1 0 0 1 1.049749,0.94748"
-       id="path5161"
-       style="opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.60007;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-  </g>
+  <path
+     id="path697"
+     style="color:#000000;fill:#808080;fill-rule:evenodd;stroke-linecap:square;-inkscape-stroke:none"
+     d="M 9.75 2 C 9.3345 2 9 2.3345 9 2.75 L 9 3.25 C 9 3.6655 9.3345 4 9.75 4 L 13.25 4 C 13.6655 4 14 3.6655 14 3.25 L 14 2.75 C 14 2.3345 13.6655 2 13.25 2 L 9.75 2 z M 11.5 5 A 8.5 8.5 0 0 0 3 13.5 A 8.5 8.5 0 0 0 11.5 22 A 8.5 8.5 0 0 0 20 13.5 A 8.5 8.5 0 0 0 18.226562 8.3085938 C 18.340211 8.0541181 18.39942 7.7786988 18.400391 7.5 C 18.400391 6.3954305 17.50496 5.5 16.400391 5.5 C 15.986283 5.50185 15.58296 5.6321947 15.246094 5.8730469 A 8.5 8.5 0 0 0 11.5 5 z M 11.5 6 A 7.5 7.5 0 0 1 19 13.5 A 7.5 7.5 0 0 1 11.5 21 A 7.5 7.5 0 0 1 4 13.5 A 7.5 7.5 0 0 1 11.5 6 z M 11.199219 8 L 11.037109 12.076172 A 1.5 1.5 0 0 0 10 13.5 A 1.5 1.5 0 0 0 11.5 15 A 1.5 1.5 0 0 0 13 13.5 A 1.5 1.5 0 0 0 11.962891 12.074219 L 11.800781 8 L 11.199219 8 z " />
 </svg>

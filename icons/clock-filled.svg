@@ -22,13 +22,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      showgrid="false"
-     inkscape:zoom="13.999972"
-     inkscape:cx="-0.32142921"
-     inkscape:cy="5.4642966"
+     inkscape:zoom="45.263158"
+     inkscape:cx="11.499419"
+     inkscape:cy="11.510465"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg7384" />
   <metadata
@@ -74,9 +74,9 @@
     </linearGradient>
   </defs>
   <path
-     id="path3375"
-     style="display:inline;fill:#808080;fill-opacity:1;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     d="M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 z M 11.375 5.75 L 12.625 5.75 L 12.625 11.742188 L 16.191406 15.308594 L 15.308594 16.191406 L 11.375 12.257812 L 11.375 5.75 z " />
+     id="path47"
+     style="fill:#808080;fill-rule:evenodd;stroke-linecap:square;stroke-linejoin:round"
+     d="M 11.5 2 A 9.5 9.5 0 0 0 2 11.5 A 9.5 9.5 0 0 0 11.5 21 A 9.5 9.5 0 0 0 21 11.5 A 9.5 9.5 0 0 0 11.5 2 z M 11 6 L 12 6 L 12 11.8125 L 15.376953 15.669922 L 14.623047 16.330078 L 11 12.1875 L 11 6 z " />
   <g
      id="layer9"
      label="status"

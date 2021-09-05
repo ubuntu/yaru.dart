@@ -34,8 +34,8 @@
      bordercolor="#666666"
      borderopacity="1"
      inkscape:current-layer="layer9"
-     inkscape:cx="11.546875"
-     inkscape:cy="8.828125"
+     inkscape:cx="10.171875"
+     inkscape:cy="11.09375"
      gridtolerance="10"
      inkscape:guide-bbox="true"
      guidetolerance="10"
@@ -56,11 +56,11 @@
      inkscape:snap-nodes="true"
      inkscape:snap-others="true"
      inkscape:snap-to-guides="true"
-     inkscape:window-height="1016"
+     inkscape:window-height="1043"
      inkscape:window-maximized="1"
      inkscape:window-width="1920"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:zoom="32"
      inkscape:showpageshadow="false"
      inkscape:document-rotation="0"
@@ -99,9 +99,9 @@
      style="display:inline;opacity:1"
      transform="translate(-401.00015,-339)">
     <path
-       id="path2002"
-       style="display:inline;fill:#808080;fill-rule:evenodd;stroke-width:1;stroke-linejoin:round"
-       d="M 11.882812 3.25 A 8.75 8.75 0 0 0 3.25 12 A 8.75 8.75 0 0 0 12 20.75 A 8.75 8.75 0 0 0 20.75 12 A 8.75 8.75 0 0 0 12 3.25 A 8.75 8.75 0 0 0 11.882812 3.25 z M 7 10.75 L 17 10.75 L 17 13.25 L 7 13.25 L 7 10.75 z "
+       id="path857"
+       style="display:inline;fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round"
+       d="M 12 3 C 7.02944 3 3 7.02944 3 12 C 3 16.97056 7.02944 21 12 21 C 16.97056 21 21 16.97056 21 12 C 21 7.02944 16.97056 3 12 3 z M 7 11 L 17 11 L 17 13 L 7 13 L 7 11 z "
        transform="translate(401.00015,339)" />
   </g>
   <g

@@ -34,8 +34,8 @@
      bordercolor="#666666"
      borderopacity="1"
      inkscape:current-layer="layer9"
-     inkscape:cx="8.546875"
-     inkscape:cy="10.421875"
+     inkscape:cx="-4.34375"
+     inkscape:cy="12.28125"
      gridtolerance="10"
      inkscape:guide-bbox="true"
      guidetolerance="10"
@@ -61,7 +61,7 @@
      inkscape:window-width="1920"
      inkscape:window-x="0"
      inkscape:window-y="27"
-     inkscape:zoom="32"
+     inkscape:zoom="16"
      inkscape:showpageshadow="false"
      inkscape:document-rotation="0"
      inkscape:pagecheckerboard="0">
@@ -99,19 +99,14 @@
      style="display:inline;opacity:1"
      transform="translate(-401.00015,-339)">
     <polygon
-       transform="matrix(1.5684133,0,0,1.5684133,401.71924,339.29691)"
+       transform="matrix(1.5359314,0,0,1.5359314,401.95294,339.53929)"
        id="path6712"
-       points="3.4740786,5.9974286 2.6350186,6.9463086 6.2503386,10.750019 11.750009,4.9627786 11.050299,4.1734886 11.050299,4.1734486 10.984399,4.2311486 6.2496486,8.3783686 "
-       style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.8" />
+       points="11.050299,4.1734886 11.050299,4.1734486 10.984399,4.2311486 6.2496486,8.3783686 3.4740786,5.9974286 2.6350186,6.9463086 6.2503386,10.750019 11.750009,4.9627786 "
+       style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.816918" />
     <path
-       d="m 407.37508,342.25 a 3.1325,3.1325 0 0 0 -3.125,3.125 v 11.25 c 0,1.72 1.405,3.125 3.125,3.125 h 11.25 c 1.72,0 3.125,-1.405 3.125,-3.125 v -11.25 c 0,-1.72 -1.405,-3.125 -3.125,-3.125 z m 0,1.25 h 11.25 c 1.05,0 1.875,0.825 1.875,1.875 v 11.25 c 0,1.05 -0.825,1.875 -1.875,1.875 h -11.25 c -1.05,0 -1.875,-0.825 -1.875,-1.875 v -11.25 c 0,-1.05 0.825,-1.875 1.875,-1.875 z"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;fill-opacity:1;stroke-width:1;marker:none"
-       color="#000000"
-       font-weight="400"
-       font-family="sans-serif"
-       overflow="visible"
-       fill="#474747"
-       id="path2" />
+       id="rect857"
+       style="display:inline;fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
+       d="m 407.00015,342 c -1.662,0 -3,1.338 -3,3 v 12 c 0,1.662 1.338,3 3,3 h 12 c 1.662,0 3,-1.338 3,-3 v -12 c 0,-1.662 -1.338,-3 -3,-3 z m 0.25,1 h 11.5 c 1.2465,0 2.25,1.0035 2.25,2.25 v 11.5 c 0,1.2465 -1.0035,2.25 -2.25,2.25 h -11.5 c -1.2465,0 -2.25,-1.0035 -2.25,-2.25 v -11.5 c 0,-1.2465 1.0035,-2.25 2.25,-2.25 z" />
   </g>
   <g
      inkscape:groupmode="layer"

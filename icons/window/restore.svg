@@ -24,20 +24,24 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="31.678384"
-     inkscape:cx="11.790374"
-     inkscape:cy="11.72724"
+     inkscape:cx="14.347323"
+     inkscape:cy="11.869292"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
-     showgrid="false"
+     showgrid="true"
      units="px"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:pagecheckerboard="0"
-     inkscape:snap-page="true" />
+     inkscape:snap-page="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid825" />
+  </sodipodi:namedview>
   <metadata
      id="metadata846">
     <rdf:RDF>
@@ -53,26 +57,16 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <g
-       color="#000000"
-       font-weight="400"
-       font-family="sans-serif"
-       white-space="normal"
-       fill="gray"
-       id="g6"
-       style="fill:#808080;fill-opacity:1;stroke-width:0.8"
-       transform="matrix(0.33072918,0,0,0.33072918,0.52916651,0.52916651)">
-      <path
-         d="m 4,6 v 6 h 6 v -6 z m 1,1 h 4 v 4 h -4 z"
-         style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;fill-opacity:1;stroke-width:0.64"
-         overflow="visible"
-         id="path2" />
-      <path
-         d="m 6,4 v 1 h 5 v 5 h 1 v -6 z"
-         style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;fill-opacity:1;stroke-width:0.64"
-         overflow="visible"
-         opacity="0.5"
-         id="path4" />
-    </g>
+    <path
+       id="rect871"
+       style="fill:#808080;fill-rule:evenodd;stroke-width:0.999999;stroke-linecap:round;fill-opacity:1"
+       d="M 7 9 L 7 17 L 15 17 L 15 9 L 7 9 z M 8 10 L 14 10 L 14 16 L 8 16 L 8 10 z "
+       transform="scale(0.26458333)" />
+    <path
+       id="rect876"
+       style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.999999;stroke-linecap:round"
+       d="m 10,7 v 1 h 6 v 6 h 1 v -7 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="ccccccc" />
   </g>
 </svg>

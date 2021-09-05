@@ -20,21 +20,35 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
+     showgrid="true"
      inkscape:snap-page="true"
      inkscape:zoom="9.8994949"
-     inkscape:cx="8.4347737"
-     inkscape:cy="20.556604"
+     inkscape:cx="-18.233253"
+     inkscape:cy="5.5053314"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4" />
+     inkscape:current-layer="svg4">
+    <inkscape:grid
+       type="xygrid"
+       id="grid821" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid823"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
   <path
-     d="m 8.875,3.25 1.25,1.25 v 5 l -2.5,2.5 h 8.75 l -2.5,-2.5 v -5 l 1.25,-1.25 z m 2.5,10 v 5.9375 a 20.24625,20.24625 0 0 0 0.625,1.875 23.44625,23.44625 0 0 0 0.625,-1.875 v -5.9375 z"
-     color="#000000"
-     fill="#808080"
-     id="path2"
-     style="stroke-width:0.999996" />
+     style="fill:#808080;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1"
+     d="m 11,13 v 6 l 0.5,2 0.5,-2 v -6 z"
+     id="path858" />
+  <path
+     style="fill:#808080;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1"
+     d="m 7.5,12 h 8 l -2.5,-2 v -6 l 1,-1 h -5 l 1,1 v 6 z"
+     id="path926"
+     sodipodi:nodetypes="ccccccccc" />
 </svg>

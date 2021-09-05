@@ -39,9 +39,9 @@
      inkscape:window-height="1016"
      id="namedview6"
      showgrid="true"
-     inkscape:zoom="15.25"
-     inkscape:cx="2"
-     inkscape:cy="14.262295"
+     inkscape:zoom="21.566757"
+     inkscape:cx="1.5996842"
+     inkscape:cy="11.058686"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -54,10 +54,17 @@
        id="grid886" />
   </sodipodi:namedview>
   <path
-     id="path113-3-6-7-5"
-     font-weight="700"
-     font-size="13.59"
-     d="m 3.3624725,18.829076 c 0,-0.53893 0.1850375,-0.991865 0.5587512,-1.355572 a 1.851502,1.851502 0 0 1 1.3588826,-0.55544 c 0.5256718,0 0.9687162,0.18523 1.3324036,0.55544 0.3702875,0.363707 0.5554602,0.816642 0.5554602,1.355572 a 1.8316645,1.8316645 0 0 1 -0.5554602,1.342334 1.811827,1.811827 0 0 1 -1.3324036,0.545531 1.8680331,1.8680331 0 0 1 -1.3588825,-0.545531 1.811827,1.811827 0 0 1 -0.5587513,-1.342334 m -0.1091625,-8.629338 v 3.180628 c 4.0600782,0 7.356433,3.302936 7.356433,7.369634 h 3.18719 c 0,-5.825618 -4.7279161,-10.546933 -10.546933,-10.546933 z m 0.00388,-6.949738 v 3.5145475 a 13.982148,13.982148 0 0 1 13.965608,13.9854525 h 3.524476 a 17.503305,17.503305 0 0 0 -17.4901865,-17.5 z"
-     style="font-weight:700;font-size:13.59px;display:inline;fill:#808080;fill-opacity:1;stroke-width:2.645;enable-background:new"
-     inkscape:connector-curvature="0" />
+     id="path155"
+     style="fill:#808080;fill-rule:evenodd;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:round;fill-opacity:1"
+     d="M 3 3 L 3 6 A 15 15 0 0 1 18 21 L 21 21 A 18 18 0 0 0 3 3 z " />
+  <path
+     id="path54"
+     style="fill:#808080;fill-rule:evenodd;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:round;fill-opacity:1"
+     d="M 3 10 L 3 13 A 8 8 0 0 1 11 21 L 14 21 A 11 11 0 0 0 3 10 z " />
+  <circle
+     style="fill:#808080;fill-rule:evenodd;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:round;fill-opacity:1"
+     id="path30"
+     cx="5"
+     cy="19"
+     r="2" />
 </svg>

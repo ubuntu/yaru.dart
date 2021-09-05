@@ -24,8 +24,8 @@
      showgrid="true"
      inkscape:snap-page="true"
      inkscape:zoom="28"
-     inkscape:cx="11.196429"
-     inkscape:cy="10.660714"
+     inkscape:cx="18.696429"
+     inkscape:cy="5.1607143"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
@@ -110,18 +110,32 @@
   <g
      id="layer1"
      style="display:inline;stroke-width:0.8"
-     transform="matrix(1.25,0,0,1.25,-62.999809,-348)">
-    <path
-       d="m 59.80469,283 c -0.53643,0 -0.80469,1.5e-4 -0.80469,0.625 v 0.75 c 0,0.62485 0.26826,0.625 0.80469,0.625 h 0.39062 c 0.53643,0 0.80469,-1.5e-4 0.80469,-0.625 v -0.75 c 0,-0.60253 -0.26826,-0.625 -0.80469,-0.625 z"
-       id="path4773"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8;marker:none;enable-background:accumulate" />
-    <path
-       d="m 59.80469,287 c -0.53643,0 -0.80469,1.5e-4 -0.80469,0.625 v 0.75 c 0,0.62485 0.26826,0.625 0.80469,0.625 h 0.39062 c 0.53643,0 0.80469,-1.5e-4 0.80469,-0.625 v -0.75 c 0,-0.60253 -0.26826,-0.625 -0.80469,-0.625 z"
-       id="path4767"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8;marker:none;enable-background:accumulate" />
-    <path
-       d="m 59.80469,291 c -0.53643,0 -0.80469,1.5e-4 -0.80469,0.625 v 0.75 c 0,0.62485 0.26826,0.625 0.80469,0.625 h 0.39062 c 0.53643,0 0.80469,-1.5e-4 0.80469,-0.625 v -0.75 c 0,-0.60253 -0.26826,-0.625 -0.80469,-0.625 z"
-       id="path4761"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8;marker:none;enable-background:accumulate" />
-  </g>
+     transform="matrix(1.25,0,0,1.25,-62.999809,-348)" />
+  <rect
+     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square;stroke-linejoin:round"
+     id="rect862"
+     width="2"
+     height="2"
+     x="11"
+     y="11"
+     ry="0.5"
+     rx="0.5" />
+  <rect
+     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square;stroke-linejoin:round"
+     id="rect908"
+     width="2"
+     height="2"
+     x="11"
+     y="16"
+     ry="0.5"
+     rx="0.5" />
+  <rect
+     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square;stroke-linejoin:round"
+     id="rect910"
+     width="2"
+     height="2"
+     x="11"
+     y="6"
+     ry="0.5"
+     rx="0.5" />
 </svg>

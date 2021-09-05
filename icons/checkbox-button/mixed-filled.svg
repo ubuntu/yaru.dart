@@ -99,9 +99,9 @@
      style="display:inline;opacity:1"
      transform="translate(-401.00015,-339)">
     <path
-       id="path2"
-       style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#808080;fill-opacity:1;stroke-width:1;marker:none"
-       d="M 6.375 3.25 A 3.1325 3.1325 0 0 0 3.25 6.375 L 3.25 17.625 C 3.25 19.345 4.655 20.75 6.375 20.75 L 17.625 20.75 C 19.345 20.75 20.75 19.345 20.75 17.625 L 20.75 6.375 C 20.75 4.655 19.345 3.25 17.625 3.25 L 6.375 3.25 z M 7 10.75 L 17 10.75 L 17 13.25 L 7 13.25 L 7 10.75 z "
+       id="rect857"
+       style="display:inline;fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
+       d="M 6 3 C 4.338 3 3 4.338 3 6 L 3 18 C 3 19.662 4.338 21 6 21 L 18 21 C 19.662 21 21 19.662 21 18 L 21 6 C 21 4.338 19.662 3 18 3 L 6 3 z M 7 11 L 17 11 L 17 13 L 7 13 L 7 11 z "
        transform="translate(401.00015,339)" />
   </g>
   <g

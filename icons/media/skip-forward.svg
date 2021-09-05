@@ -21,13 +21,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      showgrid="true"
-     inkscape:zoom="39.59798"
-     inkscape:cx="7.0331871"
-     inkscape:cy="7.3488598"
+     inkscape:zoom="16"
+     inkscape:cx="1.90625"
+     inkscape:cy="2.46875"
      inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg8">
     <inkscape:grid
@@ -35,8 +35,7 @@
        id="grid889" />
   </sodipodi:namedview>
   <path
-     id="path2"
-     style="color:#000000;fill:#808080;stroke-width:1;marker:none"
-     d="m 3.2353516,6.5263672 v 10.9448238 c 1.7025,-0.7625 4.8713085,-2.308456 8.7475584,-4.699707 v 4.699707 c 1.710628,-0.767067 4.862098,-2.277206 8.76709,-4.689941 v 4.21875 h 1.25 v -5.004883 -4.995117 h -1.25 v 4.21875 c -4.012581,-2.4602211 -7.08421,-3.938262 -8.76709,-4.6923828 v 4.6997068 c -3.9824999,-2.4387498 -7.0738085,-3.9497069 -8.7475584,-4.6997068 z"
-     sodipodi:nodetypes="cccccccccccccc" />
+     id="path2-1"
+     style="fill:#808080;fill-opacity:1;stroke-width:1;marker:none"
+     d="m 11.748047,6.527344 c 1.749677,0.784053 5.003227,2.353928 9.251953,4.99414 v -4.521484 h 1 v 10 h -1 v -4.517578 c -4.128285,2.589964 -7.469724,4.191588 -9.251953,4.990234 v -4.699218 c -3.87625,2.391249 -7.045547,3.936718 -8.748047,4.699218 v -10.945312 c 1.675,0.75 4.766797,2.260469 8.748047,4.699218 z" />
 </svg>

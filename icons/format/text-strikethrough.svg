@@ -40,8 +40,9 @@
      transform="matrix(1.6363636,0,0,1.6363636,-1.0909088,-1.9090906)"
      style="stroke-width:0.611111">
     <path
-       d="m 2,9 v 1 h 12 v -1 z m 1,-6 v 2 h 4 v 3 h 2 v -3 h 4 v -2 z m 4,8 v 3 h 2 v -3 z"
+       d="m 1.8888888,9.1111111 v 0.6111111 h 12.2222222 v -0.6111111 z m 1.2222222,-6.1111111 v 1.8333333 h 4.2777779 v 3.0555556 h 1.2222222 v -3.0555556 l 4.2777779,0 v -1.8333333 z m 4.2777779,7.944444 v 3.055556 h 1.2222222 v -3.055556 z"
        id="path2"
-       style="stroke-width:0.611111" />
+       style="stroke-width:0.611111"
+       sodipodi:nodetypes="ccccccccccccccccccc" />
   </g>
 </svg>

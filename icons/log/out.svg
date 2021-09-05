@@ -23,13 +23,13 @@
      inkscape:pagecheckerboard="0"
      showgrid="true"
      inkscape:snap-page="true"
-     inkscape:zoom="19.79899"
-     inkscape:cx="3.0557114"
-     inkscape:cy="12.677414"
+     inkscape:zoom="7.0000001"
+     inkscape:cx="-38.071428"
+     inkscape:cy="22.357143"
      inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg7384">
     <inkscape:grid
@@ -107,17 +107,8 @@
      id="g1833"
      style="display:inline;stroke-width:0.8"
      transform="matrix(1.25,0,0,1.25,-112.99996,-398)" />
-  <g
-     id="layer1"
-     style="display:inline;stroke-width:0.8"
-     transform="matrix(1.25,0,0,1.25,-112,-398)">
-    <path
-       d="m 92,321 v 14 h 11 v -5 h -1 v 4 h -9 v -12 h 9 v 5 h 1 v -6 z"
-       id="rect3104"
-       style="opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <path
-       d="m 107.08398,328 h -8.00195 v -2 c -0.76042,0.34766 -1.53409,0.73627 -2.32227,1.16602 -0.78078,0.43079 -1.53476,0.8757 -2.25976,1.33398 0.725,0.44911 1.47898,0.88953 2.25976,1.32031 0.78862,0.42999 1.56338,0.82276 2.32422,1.17969 v -2 h 8 z"
-       id="path2614-6"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
-  </g>
+  <path
+     id="path2614-6"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:none;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     d="M 3 3 L 3 21 L 17 21 L 17 14 L 16 14 L 16 20 L 4 20 L 4 4 L 16 4 L 16 11 L 17 11 L 17 3 L 3 3 z M 12 9.5 C 11.049475 9.934575 10.082881 10.419844 9.0976562 10.957031 C 8.1216813 11.495519 7.1796875 12.05215 6.2734375 12.625 C 7.1796875 13.186388 8.1216813 13.736916 9.0976562 14.275391 C 10.082885 14.81258 11.049457 15.304035 12 15.75 L 12 13 L 21 13 L 21 12 L 12 12 L 12 9.5 z " />
 </svg>

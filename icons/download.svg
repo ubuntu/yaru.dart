@@ -23,18 +23,25 @@
      inkscape:pagecheckerboard="0"
      showgrid="true"
      inkscape:snap-page="true"
-     inkscape:zoom="27.99999"
-     inkscape:cx="12.446433"
-     inkscape:cy="11.83929"
+     inkscape:zoom="13.999995"
+     inkscape:cx="7.178574"
+     inkscape:cy="8.3571458"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg7384">
     <inkscape:grid
        type="xygrid"
        id="grid1022" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid838"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
   </sodipodi:namedview>
   <metadata
      id="metadata20854">
@@ -81,39 +88,38 @@
   <g
      id="layer9"
      label="status"
-     style="display:inline;stroke-width:0.8"
+     style="display:inline;stroke-width:0.8;fill:#808080;fill-opacity:1"
      transform="matrix(1.25,0,0,1.25,-739.24984,409.75001)" />
   <g
-     id="layer2"
-     style="display:inline;stroke-width:0.8"
-     transform="matrix(1.25,0,0,1.25,-437.99959,-49)">
-    <path
-       d="m 358,41 v 6.000024 h -2.27628 c 0,-3e-6 1.63358,2.964726 4.77628,7.330054 3.14222,-4.365009 4.77431,-7.328101 4.77431,-7.328101 h -2.2743 v -6.001977 z m 1,1 h 3.00001 v 6.001977 h 1.53568 l -3.03569,4.517554 -3.03572,-4.519507 h 1.53572 z m -3,13 v 1 h 9 v -1 z"
-       id="path4218-9"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.799842;marker:none;enable-background:accumulate" />
-  </g>
-  <g
      id="layer4"
-     style="display:inline;stroke-width:0.8"
+     style="display:inline;stroke-width:0.8;fill:#808080;fill-opacity:1"
      transform="matrix(1.25,0,0,1.25,-437.99959,-49)" />
   <g
      id="g1812"
-     style="display:inline;stroke-width:0.8"
+     style="display:inline;stroke-width:0.8;fill:#808080;fill-opacity:1"
      transform="matrix(1.25,0,0,1.25,-437.99959,-49)" />
   <g
      id="g6217"
-     style="display:inline;stroke-width:0.8"
+     style="display:inline;stroke-width:0.8;fill:#808080;fill-opacity:1"
      transform="matrix(1.25,0,0,1.25,-437.99959,-49)" />
   <g
      id="layer3"
-     style="display:inline;stroke-width:0.8"
+     style="display:inline;stroke-width:0.8;fill:#808080;fill-opacity:1"
      transform="matrix(1.25,0,0,1.25,-437.99959,-49)" />
   <g
      id="g1833"
-     style="display:inline;stroke-width:0.8"
+     style="display:inline;stroke-width:0.8;fill:#808080;fill-opacity:1"
      transform="matrix(1.25,0,0,1.25,-437.99959,-49)" />
   <g
      id="layer1"
-     style="display:inline;stroke-width:0.8"
+     style="display:inline;stroke-width:0.8;fill:#808080;fill-opacity:1"
      transform="matrix(1.25,0,0,1.25,-437.99959,-49)" />
+  <path
+     style="color:#000000;fill:#808080;-inkscape-stroke:none;fill-opacity:1"
+     d="m 10,2 v 0.5 7.5 h -3.4023438 l 5.9023438,9.443359 5.902344,-9.443359 h -3.402344 v -8 z m 1,1 h 3 v 8 h 2.597656 l -4.097656,6.556641 -4.0976562,-6.556641 h 2.5976562 z"
+     id="path873" />
+  <path
+     style="color:#000000;fill:#808080;fill-rule:evenodd;stroke-linecap:square;stroke-linejoin:round;-inkscape-stroke:none;fill-opacity:1"
+     d="m 7,20 h 11 v 1 h -11 z"
+     id="rect897" />
 </svg>

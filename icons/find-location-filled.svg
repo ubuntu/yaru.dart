@@ -23,11 +23,11 @@
      showgrid="true"
      inkscape:zoom="9.8994949"
      inkscape:cx="-5.4043161"
-     inkscape:cy="8.3337585"
+     inkscape:cy="8.2832509"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg4"
      inkscape:snap-page="true">
@@ -36,7 +36,7 @@
        id="grid825" />
   </sodipodi:namedview>
   <path
-     id="path2"
-     style="stroke-width:1;fill:#808080;fill-opacity:1"
-     d="M 11.375 2.625 L 11.375 3.90625 C 7.3841089 4.2149613 4.2117726 7.3843164 3.9003906 11.375 L 2.625 11.375 L 2.625 12.625 L 3.90625 12.625 C 4.2149612 16.615891 7.3843164 19.788226 11.375 20.099609 L 11.375 21.375 L 12.625 21.375 L 12.625 20.09375 C 16.615891 19.785039 19.788226 16.615684 20.099609 12.625 L 21.375 12.625 L 21.375 11.375 L 20.09375 11.375 C 19.785039 7.3841089 16.615684 4.2117726 12.625 3.9003906 L 12.625 2.625 L 11.375 2.625 z M 12 8.875 C 13.72589 8.875 15.125 10.27411 15.125 12 C 15.125 13.72589 13.72589 15.125 12 15.125 C 10.27411 15.125 8.875 13.72589 8.875 12 C 8.875 10.27411 10.27411 8.875 12 8.875 z " />
+     id="path80"
+     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-linecap:square;stroke-linejoin:round"
+     d="M 11 2 L 11 3.0351562 A 8.5 8.5 0 0 0 3.0351562 11 L 2 11 L 2 12 L 3.0351562 12 A 8.5 8.5 0 0 0 11 19.964844 L 11 21 L 12 21 L 12 19.964844 A 8.5 8.5 0 0 0 19.964844 12 L 21 12 L 21 11 L 19.984375 11 A 8.5 8.5 0 0 0 12 3.015625 L 12 2 L 11 2 z M 11.5 9 A 2.5 2.5 0 0 1 14 11.5 A 2.5 2.5 0 0 1 11.5 14 A 2.5 2.5 0 0 1 9 11.5 A 2.5 2.5 0 0 1 11.5 9 z " />
 </svg>

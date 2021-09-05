@@ -13,6 +13,10 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <path
+     id="path1472"
+     style="color:#000000;fill:#808080;stroke-linecap:square;-inkscape-stroke:none;fill-opacity:1"
+     d="M 6 3 L 6 4 L 6.5 4 L 13.5 4 C 14.499999 4 15.20623 4.036708 15.527344 4.1972656 C 15.687901 4.2775446 15.772339 4.3598326 15.855469 4.546875 C 15.938599 4.7339174 16 5.0416671 16 5.5 L 16 18.5 C 16 18.958333 15.9386 19.266083 15.855469 19.453125 C 15.772339 19.640167 15.687901 19.722456 15.527344 19.802734 C 15.20623 19.963291 14.499999 20 13.5 20 L 6.5 20 L 6 20 L 6 21 L 6.5 21 L 13.5 21 C 14.499999 21 15.293771 21.03671 15.972656 20.697266 C 16.312099 20.527544 16.602661 20.234832 16.769531 19.859375 C 16.936401 19.483918 17 19.041666 17 18.5 L 17 5.5 C 17 4.9583339 16.9364 4.516082 16.769531 4.140625 C 16.602661 3.765168 16.312099 3.4724556 15.972656 3.3027344 C 15.293771 2.963292 14.499999 3 13.5 3 L 6.5 3 L 6 3 z M 11.5 7.7929688 L 11.146484 8.1464844 L 7.2929688 12 L 11.146484 15.853516 L 11.5 16.207031 L 12.207031 15.5 L 11.853516 15.146484 L 8.7070312 12 L 11.853516 8.8535156 L 12.207031 8.5 L 11.5 7.7929688 z " />
   <metadata
      id="metadata14">
     <rdf:RDF>
@@ -40,8 +44,8 @@
      id="namedview10"
      showgrid="true"
      inkscape:zoom="27.5"
-     inkscape:cx="2.1272727"
-     inkscape:cy="7.4363636"
+     inkscape:cx="19.909091"
+     inkscape:cy="6.1636364"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -59,12 +63,4 @@
        spacingy="0.5"
        empspacing="10" />
   </sodipodi:namedview>
-  <path
-     id="rect1416"
-     style="fill:#808080;fill-rule:evenodd;stroke-width:1;stroke-linecap:square"
-     d="m 5.75,3.25 v 1.25 h 10 v 15 h -10 v 1.25 h 10 c 0.6925,0 1.25,-0.5575 1.25,-1.25 v -15 c 0,-0.6925 -0.5575,-1.25 -1.25,-1.25 z" />
-  <path
-     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
-     d="m 11.375,7.991211 -0.441894,0.4418945 -3.566895,3.5668945 3.566895,3.566895 0.441894,0.441894 0.883789,-0.883789 -0.441894,-0.441895 -2.683106,-2.683105 2.683106,-2.6831055 0.441894,-0.4418945 z"
-     id="path1430" />
 </svg>

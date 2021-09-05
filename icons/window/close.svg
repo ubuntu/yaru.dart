@@ -20,26 +20,23 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
+     showgrid="true"
      inkscape:snap-page="true"
      inkscape:zoom="28"
-     inkscape:cx="7.1964286"
-     inkscape:cy="7.4464286"
+     inkscape:cx="12.160714"
+     inkscape:cy="11.392857"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4" />
+     inkscape:current-layer="svg4">
+    <inkscape:grid
+       type="xygrid"
+       id="grid6" />
+  </sodipodi:namedview>
   <path
-     d="m 7.99375,6.89 -1.10375,1.10375 0.18375,0.1825 3.8225,3.82375 -3.82125,3.82375 -0.18375,0.1825 1.10375,1.10375 0.1825,-0.18375 3.8225,-3.8225 3.82375,3.8225 0.1825,0.18375 1.10375,-1.10375 -0.18375,-0.1825 -3.8225,-3.82375 3.8225,-3.82375 0.18375,-0.1825 -1.10375,-1.10375 -0.1825,0.18375 -3.82375,3.8225 -3.82375,-3.82125 z"
-     style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal;stroke-width:1"
-     color="#000000"
-     font-weight="400"
-     font-family="sans-serif"
-     white-space="normal"
-     overflow="visible"
-     fill="#808080"
-     fill-rule="evenodd"
-     id="path2" />
+     id="path41"
+     style="color:#000000;fill:#808080;-inkscape-stroke:none"
+     d="M 7.3535156 6.6464844 L 6.6464844 7.3535156 L 11.292969 12 L 6.6464844 16.646484 L 7.3535156 17.353516 L 12 12.707031 L 16.646484 17.353516 L 17.353516 16.646484 L 12.707031 12 L 17.353516 7.3535156 L 16.646484 6.6464844 L 12 11.292969 L 7.3535156 6.6464844 z " />
 </svg>

@@ -40,8 +40,8 @@
      id="namedview24"
      showgrid="true"
      inkscape:zoom="19.445436"
-     inkscape:cx="3.8826591"
-     inkscape:cy="4.962604"
+     inkscape:cx="24.915872"
+     inkscape:cy="7.019642"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -50,14 +50,22 @@
     <inkscape:grid
        type="xygrid"
        id="grid1448" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid824"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
   </sodipodi:namedview>
   <g
      color="#000000"
      fill="#808080"
      id="g6">
     <path
-       id="path5525-3"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.00079;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       d="m 6.936511,2.625 c -1.5552077,0.018212 -2.6925969,-0.038193 -3.623047,0.480957 -0.4652184,0.2595625 -0.8316137,0.6992374 -1.0351562,1.2475586 -0.2035962,0.5483263 -0.2783203,1.1994719 -0.2783203,2.0214844 v 5 6.25 c 0,0.822012 0.074777,1.473141 0.2783203,2.021485 0.20353,0.548319 0.5699378,0.987982 1.0351562,1.247557 0.93045,0.519208 2.067827,0.462833 3.623047,0.480958 h 0.00489 2.475586 1.333008 2.500001 1.333007 2.475586 0.0049 c 1.555219,-0.01813 2.692596,0.03825 3.623046,-0.480958 0.46522,-0.259575 0.831626,-0.69924 1.035157,-1.247557 0.203544,-0.548344 0.27832,-1.199473 0.27832,-2.021485 v -6.25 -5 c 0,-0.8220125 -0.07473,-1.4731581 -0.27832,-2.0214844 -0.203542,-0.5483212 -0.569937,-0.9879961 -1.035157,-1.2475586 -0.93045,-0.5191498 -2.06784,-0.4627445 -3.623046,-0.480957 h -0.0049 -2.475587 -1.333007 -2.5 -1.333008 -2.475586 z m -3.544922,3.75 h 6.0253908 0.083007 v 13.75 h -0.083007 c -2.4721338,0 -4.3072119,0.01953 -5.2246095,-0.280761 -1.2156472,-0.559013 -0.9570312,-2.219239 -0.9570312,-3.469239 0.00105,-2.653965 0.046488,-7.0962013 0.1562499,-10 z m 7.358399,0 h 2.5 1.333007 6.025391 c 0.109762,2.9037987 0.155198,7.346035 0.15625,10 0,1.25 0.258616,2.910226 -0.957032,3.469239 -0.917397,0.300286 -2.752476,0.280761 -5.224609,0.280761 h -1.333008 -2.5 z" />
+       id="path859"
+       style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none"
+       d="m 5.4550781,3 c -0.9685809,0.00898 -1.717819,0.073269 -2.3378906,0.4453125 -0.4133811,0.2480287 -0.7199379,0.6559075 -0.8886719,1.1621094 -0.1687339,0.5062019 -0.2285156,1.1148011 -0.2285156,1.8925781 v 11 c 0,0.777777 0.059782,1.386376 0.2285156,1.892578 0.168734,0.506202 0.4752908,0.914081 0.8886719,1.16211 0.8267622,0.496058 1.882814,0.445312 3.3828125,0.445312 h 11 c 1.499998,0 2.55605,0.05074 3.382812,-0.445312 0.413382,-0.248029 0.719938,-0.655908 0.888672,-1.16211 0.168734,-0.506202 0.228516,-1.114801 0.228516,-1.892578 v -11 c 0,-0.777777 -0.05978,-1.3863762 -0.228516,-1.8925781 -0.168734,-0.5062019 -0.47529,-0.9140807 -0.888672,-1.1621094 -0.826761,-0.4960573 -1.882814,-0.4453125 -3.382812,-0.4453125 h -11 c -0.3749996,0 -0.7220616,-0.00299 -1.0449219,0 z m -2.4550781,4 h 5 v 13 h -1.5 c -1.4999985,0 -2.443951,-0.05075 -2.8671875,-0.304688 -0.2116183,-0.12697 -0.3425624,-0.281593 -0.4550781,-0.61914 -0.1125158,-0.337547 -0.1777344,-0.853951 -0.1777344,-1.576172 z m 6,0 h 12 v 10.5 c 0,0.722221 -0.06522,1.238625 -0.177734,1.576172 -0.112516,0.337547 -0.243459,0.49217 -0.455078,0.61914 -0.423236,0.253942 -1.367189,0.304688 -2.867188,0.304688 h -8.5 z"
+       sodipodi:nodetypes="sssssssssssssssssscccsssscccsssscc" />
   </g>
 </svg>

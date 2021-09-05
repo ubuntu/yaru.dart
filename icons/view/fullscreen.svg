@@ -13,10 +13,6 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <path
-     id="path930"
-     style="color:#000000;fill:#808080;fill-opacity:1;stroke-width:1;-inkscape-stroke:none"
-     d="m 14.5,3.25 v 0.625 0.625 h 0.625 3.491211 l -5.808106,5.808106 0.883789,0.883789 5.808106,-5.808106 v 3.491211 0.625 h 0.625 0.625 v -0.625 -5 -0.625 h -0.625 -5 z m -4.191894,9.558106 -5.808106,5.808105 v -4.116211 h -1.25 v 0.625 5 0.625 h 6.25 v -1.25 h -0.625 -3.491211 l 5.808106,-5.808105 z" />
   <metadata
      id="metadata14">
     <rdf:RDF>
@@ -43,9 +39,9 @@
      inkscape:window-height="1016"
      id="namedview10"
      showgrid="true"
-     inkscape:zoom="22.627417"
-     inkscape:cx="4.7508737"
-     inkscape:cy="6.5186406"
+     inkscape:zoom="16"
+     inkscape:cx="26.09375"
+     inkscape:cy="10.90625"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -64,4 +60,8 @@
        spacingy="0.5"
        empspacing="10" />
   </sodipodi:namedview>
+  <path
+     id="path42"
+     style="color:#000000;fill:#808080;stroke-linecap:square;-inkscape-stroke:none;fill-opacity:1"
+     d="M 15 3 L 15 4 L 15.5 4 L 19.292969 4 L 13.146484 10.146484 L 13.853516 10.853516 L 20 4.7070312 L 20 8.5 L 20 9 L 21 9 L 21 8.5 L 21 3 L 15.5 3 L 15 3 z M 10.146484 13.146484 L 4 19.292969 L 4 15.5 L 4 15 L 3 15 L 3 15.5 L 3 21 L 8.5 21 L 9 21 L 9 20 L 8.5 20 L 4.7070312 20 L 10.853516 13.853516 L 10.146484 13.146484 z " />
 </svg>
