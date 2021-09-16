@@ -29,7 +29,7 @@ class _YaruIconsGridState extends State<YaruIconsGrid> with SingleTickerProvider
   late AnimationController _controller;
 
   static const _from = 0xf101;
-  static const _to = 0xf26c;
+  static const _to = 0xf26d;
 
   double _iconsSize = 24;
   bool _isMinIconsSize() => _iconsSize <= 16 ? true : false;
