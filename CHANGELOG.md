@@ -1,3 +1,8 @@
+# 0.0.5
+
+* Add new _executable_ icon.
+* Better _chip_ and *chip_filled* icon.
+
 # 0.0.4
 
 * Pixel fit all 286 icons.
