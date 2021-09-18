@@ -26,9 +26,9 @@
      inkscape:window-height="1016"
      id="namedview7724"
      showgrid="true"
-     inkscape:zoom="10.429761"
-     inkscape:cx="42.618428"
-     inkscape:cy="10.882321"
+     inkscape:zoom="32"
+     inkscape:cx="12.921875"
+     inkscape:cy="12.609375"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -117,11 +117,6 @@
      id="layer1"
      style="display:inline;stroke-width:0.8;opacity:1"
      transform="matrix(1.25,0,0,1.25,-788.00002,-223.00006)" />
-  <path
-     inkscape:connector-curvature="0"
-     style="opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke:none;stroke-width:1.88976;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     d="m 12,15.999563 c -2.77,0 -5,2.229999 -5,4.999999 h 1.25 c 0,-2.0775 1.6725,-3.75 3.75,-3.75 h 5 c 2.0775,0 3.75,1.6725 3.75,3.75 h 1.25 c 0,-2.77 -2.23,-4.999999 -5,-4.999999 z"
-     id="rect5341" />
   <path
      id="path874"
      style="color:#000000;fill:#808080;-inkscape-stroke:none"
