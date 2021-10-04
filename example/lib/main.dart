@@ -19,17 +19,18 @@ class MyApp extends StatelessWidget {
 }
 
 class YaruIconsGrid extends StatefulWidget {
-  const YaruIconsGrid({ Key? key }) : super(key: key);
+  const YaruIconsGrid({Key? key}) : super(key: key);
 
   @override
   _YaruIconsGridState createState() => _YaruIconsGridState();
 }
 
-class _YaruIconsGridState extends State<YaruIconsGrid> with SingleTickerProviderStateMixin {
+class _YaruIconsGridState extends State<YaruIconsGrid>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   static const _from = 0xf101;
-  static const _to = 0xf26d;
+  static const _to = 0xf271;
 
   double _iconsSize = 24;
   bool _isMinIconsSize() => _iconsSize <= 16 ? true : false;
@@ -54,13 +55,9 @@ class _YaruIconsGridState extends State<YaruIconsGrid> with SingleTickerProvider
         title: Text('Flutter Yaru Icons Demo (${_iconsSize.truncate()}px)'),
         actions: [
           TextButton(
-            onPressed: _isMinIconsSize() ? null : _decreaseIconsSize,
-            child: Icon(YaruIcons.minus)
-          ),
-          TextButton(
-            onPressed: _increaseIconsSize,
-            child: Icon(YaruIcons.plus)
-          )
+              onPressed: _isMinIconsSize() ? null : _decreaseIconsSize,
+              child: Icon(YaruIcons.minus)),
+          TextButton(onPressed: _increaseIconsSize, child: Icon(YaruIcons.plus))
         ],
       ),
       body: GridView.extent(
@@ -72,12 +69,8 @@ class _YaruIconsGridState extends State<YaruIconsGrid> with SingleTickerProvider
             children: [
               Icon(YaruIconsData(code), size: _iconsSize),
               const SizedBox(height: 8),
-              Text(
-                'ex' + code.toRadixString(16),
-                style: TextStyle(
-                  color: Colors.grey[600]
-                )
-              ),
+              Text('ex' + code.toRadixString(16),
+                  style: TextStyle(color: Colors.grey[600])),
             ],
           );
         }),
