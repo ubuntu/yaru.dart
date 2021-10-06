@@ -1,3 +1,7 @@
+# 0.0.6
+
+* Add new _pan-*_ icons.
+
 # 0.0.5
 
 * Add new _executable_ icon.
