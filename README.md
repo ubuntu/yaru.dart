@@ -3,6 +3,7 @@
 ![Pub](https://img.shields.io/pub/v/yaru_icons.png)
 
 A set of [Yaru](https://github.com/ubuntu/yaru) icons for your Flutter application.
+
 For an overview of all availables icons, please look at [icon_list.md](doc/icon_list.md)
 
 ![example](./.github/screenshots/example.png)
