@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/yaru_row.dart';
 import 'package:yaru_widgets/src/yaru_slider_value_marker.dart';
 
-class YaruSliderSettingsRow extends StatelessWidget {
-  const YaruSliderSettingsRow({
+class YaruSliderRow extends StatelessWidget {
+  const YaruSliderRow({
     Key? key,
     required this.actionLabel,
     this.actionDescription,
