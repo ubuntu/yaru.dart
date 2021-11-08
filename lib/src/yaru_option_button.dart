@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OptionButton extends StatelessWidget {
-  const OptionButton({
+class YaruOptionButton extends StatelessWidget {
+  const YaruOptionButton({
     Key? key,
     required this.onPressed,
     required this.iconData,

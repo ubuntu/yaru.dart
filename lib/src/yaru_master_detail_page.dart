@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/widgets/landscape_layout.dart';
-import 'package:yaru_widgets/widgets/page_item.dart';
-import 'package:yaru_widgets/widgets/portrait_layout.dart';
+import 'package:yaru_widgets/src/yaru_landscape_layout.dart';
+import 'package:yaru_widgets/src/yaru_page_item.dart';
+import 'package:yaru_widgets/src/yaru_portrait_layout.dart';
 
-class MasterDetailPage extends StatefulWidget {
-  const MasterDetailPage({
+class YaruMasterDetailPage extends StatefulWidget {
+  const YaruMasterDetailPage({
     Key? key,
     required this.appBarHeight,
     required this.pageItems,
@@ -14,7 +14,7 @@ class MasterDetailPage extends StatefulWidget {
     required this.searchHint,
   }) : super(key: key);
 
-  final List<PageItem> pageItems;
+  final List<YaruPageItem> pageItems;
   final double appBarHeight;
   final double leftPaneWidth;
   final IconData previousIconData;
@@ -22,10 +22,10 @@ class MasterDetailPage extends StatefulWidget {
   final String searchHint;
 
   @override
-  _MasterDetailPageState createState() => _MasterDetailPageState();
+  _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
 }
 
-class _MasterDetailPageState extends State<MasterDetailPage> {
+class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   var _index = -1;
   var _previousIndex = 0;
 
@@ -39,7 +39,7 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth < 620) {
-          return PortraitLayout(
+          return YaruPortraitLayout(
             selectedIndex: _index,
             pages: widget.pageItems,
             onSelected: _setIndex,
@@ -49,7 +49,7 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
             searchHint: widget.searchHint,
           );
         } else {
-          return LandscapeLayout(
+          return YaruLandscapeLayout(
             selectedIndex: _index == -1 ? _previousIndex : _index,
             pages: widget.pageItems,
             onSelected: _setIndex,

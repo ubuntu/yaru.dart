@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class PageItem {
-  const PageItem(
+class YaruPageItem {
+  const YaruPageItem(
       {required this.title, required this.builder, required this.iconData});
   final String title;
   final WidgetBuilder builder;

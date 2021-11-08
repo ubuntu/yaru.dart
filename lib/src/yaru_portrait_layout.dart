@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/widgets/page_item_list_view.dart';
-import 'package:yaru_widgets/widgets/search_app_bar.dart';
+import 'package:yaru_widgets/src/yaru_page_item_list_view.dart';
+import 'package:yaru_widgets/src/yaru_search_app_bar.dart';
 
-import 'page_item.dart';
+import 'yaru_page_item.dart';
 
-class PortraitLayout extends StatefulWidget {
-  const PortraitLayout(
+class YaruPortraitLayout extends StatefulWidget {
+  const YaruPortraitLayout(
       {Key? key,
       required this.selectedIndex,
       required this.pages,
@@ -17,7 +17,7 @@ class PortraitLayout extends StatefulWidget {
       : super(key: key);
 
   final int selectedIndex;
-  final List<PageItem> pages;
+  final List<YaruPageItem> pages;
   final ValueChanged<int> onSelected;
   final IconData previousIconData;
   final double appBarHeight;
@@ -25,13 +25,13 @@ class PortraitLayout extends StatefulWidget {
   final String searchHint;
 
   @override
-  _PortraitLayoutState createState() => _PortraitLayoutState();
+  _YaruPortraitLayoutState createState() => _YaruPortraitLayoutState();
 }
 
-class _PortraitLayoutState extends State<PortraitLayout> {
+class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   late int _selectedIndex;
   late TextEditingController _searchController;
-  final _filteredItems = <PageItem>[];
+  final _filteredItems = <YaruPageItem>[];
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
@@ -97,7 +97,7 @@ class _PortraitLayoutState extends State<PortraitLayout> {
               builder: (context) {
                 return Scaffold(
                   appBar: addSearchBar(),
-                  body: PageItemListView(
+                  body: YaruPageItemListView(
                     selectedIndex: _selectedIndex,
                     onTap: onTap,
                     pages:
@@ -113,14 +113,14 @@ class _PortraitLayoutState extends State<PortraitLayout> {
     );
   }
 
-  SearchAppBar addSearchBar() {
-    return SearchAppBar(
+  YaruSearchAppBar addSearchBar() {
+    return YaruSearchAppBar(
       searchHint: widget.searchHint,
       searchController: _searchController,
       onChanged: (value) {
         setState(() {
           _filteredItems.clear();
-          for (PageItem pageItem in widget.pages) {
+          for (YaruPageItem pageItem in widget.pages) {
             if (pageItem.title
                 .toLowerCase()
                 .contains(_searchController.value.text.toLowerCase())) {

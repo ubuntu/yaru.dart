@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'yaru_row.dart';
 
-class SingleInfoRow extends StatelessWidget {
+class YaruSingleInfoRow extends StatelessWidget {
   final String infoLabel;
   final String infoValue;
 
-  const SingleInfoRow(
+  const YaruSingleInfoRow(
       {Key? key, required this.infoLabel, required this.infoValue})
       : super(key: key);
 

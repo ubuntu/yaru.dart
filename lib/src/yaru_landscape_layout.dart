@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/widgets/page_item_list_view.dart';
-import 'package:yaru_widgets/widgets/search_app_bar.dart';
-import 'page_item.dart';
+import 'package:yaru_widgets/src/yaru_page_item_list_view.dart';
+import 'package:yaru_widgets/src/yaru_search_app_bar.dart';
+import 'yaru_page_item.dart';
 
-class LandscapeLayout extends StatefulWidget {
-  const LandscapeLayout({
+class YaruLandscapeLayout extends StatefulWidget {
+  const YaruLandscapeLayout({
     Key? key,
     required this.selectedIndex,
     required this.pages,
@@ -16,7 +16,7 @@ class LandscapeLayout extends StatefulWidget {
   }) : super(key: key);
 
   final int selectedIndex;
-  final List<PageItem> pages;
+  final List<YaruPageItem> pages;
   final ValueChanged<int> onSelected;
   final double appBarHeight;
   final double leftPaneWidth;
@@ -24,14 +24,14 @@ class LandscapeLayout extends StatefulWidget {
   final String searchHint;
 
   @override
-  State<LandscapeLayout> createState() => _LandscapeLayoutState();
+  State<YaruLandscapeLayout> createState() => _YaruLandscapeLayoutState();
 }
 
-class _LandscapeLayoutState extends State<LandscapeLayout> {
+class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
   late ScrollController _contentScrollController;
   late TextEditingController _searchController;
-  final _filteredItems = <PageItem>[];
+  final _filteredItems = <YaruPageItem>[];
 
   @override
   void initState() {
@@ -66,8 +66,7 @@ class _LandscapeLayoutState extends State<LandscapeLayout> {
                 ),
                 Expanded(
                   child: AppBar(
-                    title: Text(widget.pages[_selectedIndex].title,
-                        style: const TextStyle(fontWeight: FontWeight.normal)),
+                    title: Text(widget.pages[_selectedIndex].title),
                   ),
                 )
               ],
@@ -89,7 +88,7 @@ class _LandscapeLayoutState extends State<LandscapeLayout> {
                         ),
                       ),
                     ),
-                    child: PageItemListView(
+                    child: YaruPageItemListView(
                       selectedIndex: _selectedIndex,
                       onTap: onTap,
                       pages: _filteredItems.isEmpty
@@ -116,14 +115,14 @@ class _LandscapeLayoutState extends State<LandscapeLayout> {
     );
   }
 
-  SearchAppBar addSearchBar() {
-    return SearchAppBar(
+  YaruSearchAppBar addSearchBar() {
+    return YaruSearchAppBar(
       searchHint: widget.searchHint,
       searchController: _searchController,
       onChanged: (value) {
         setState(() {
           _filteredItems.clear();
-          for (PageItem pageItem in widget.pages) {
+          for (YaruPageItem pageItem in widget.pages) {
             if (pageItem.title
                 .toLowerCase()
                 .contains(_searchController.value.text.toLowerCase())) {

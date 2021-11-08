@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  yaru: ^0.1.8
+  yaru_icons: ^0.0.6
   yaru_widgets:
     path: ../
 

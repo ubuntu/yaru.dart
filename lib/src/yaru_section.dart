@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/widgets/page_container.dart';
+import 'package:yaru_widgets/src/yaru_page_container.dart';
 
 class YaruSection extends StatelessWidget {
   const YaruSection({
@@ -15,7 +15,7 @@ class YaruSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageContainer(
+    return YaruPageContainer(
         width: width ?? 500,
         child: Container(
           padding: const EdgeInsets.all(8.0),

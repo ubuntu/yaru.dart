@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/widgets/yaru_row.dart';
+import 'package:yaru_widgets/src/yaru_row.dart';
 
-class ToggleButtonsRow extends StatelessWidget {
-  const ToggleButtonsRow({
+class YaruToggleButtonsRow extends StatelessWidget {
+  const YaruToggleButtonsRow({
     Key? key,
     required this.actionLabel,
     this.actionDescription,

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/widgets/page_item.dart';
+import 'package:yaru_widgets/src/yaru_page_item.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
 
-class PageItemListView extends StatelessWidget {
-  const PageItemListView(
+class YaruPageItemListView extends StatelessWidget {
+  const YaruPageItemListView(
       {Key? key,
       required this.pages,
       required this.selectedIndex,
       required this.onTap})
       : super(key: key);
 
-  final List<PageItem> pages;
+  final List<YaruPageItem> pages;
   final int selectedIndex;
   final Function(int index) onTap;
 

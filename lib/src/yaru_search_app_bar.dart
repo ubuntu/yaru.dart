@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const SearchAppBar({
+class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const YaruSearchAppBar({
     Key? key,
     required this.searchController,
     required this.onChanged,

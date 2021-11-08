@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CheckboxRow extends StatelessWidget {
-  const CheckboxRow({
+class YaruCheckboxRow extends StatelessWidget {
+  const YaruCheckboxRow({
     Key? key,
     required this.enabled,
     required this.value,

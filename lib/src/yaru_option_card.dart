@@ -23,9 +23,9 @@ import 'package:flutter/material.dart';
 ///   ],
 /// )
 /// ```
-class OptionCard extends StatefulWidget {
+class YaruOptionCard extends StatefulWidget {
   /// Creates an option card with the given properties.
-  const OptionCard({
+  const YaruOptionCard({
     Key? key,
     this.imageAsset,
     this.titleText,
@@ -53,12 +53,12 @@ class OptionCard extends StatefulWidget {
   final IconData okIconData;
 
   @override
-  OptionCardState createState() => OptionCardState();
+  YaruOptionCardState createState() => YaruOptionCardState();
 }
 
 @visibleForTesting
 // ignore: public_member_api_docs
-class OptionCardState extends State<OptionCard> {
+class YaruOptionCardState extends State<YaruOptionCard> {
   bool _hovered = false;
 
   bool get hovered => _hovered; // ignore: public_member_api_docs

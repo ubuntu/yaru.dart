@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/widgets/option_button.dart';
-import 'package:yaru_widgets/widgets/yaru_row.dart';
+import 'package:yaru_widgets/src/yaru_option_button.dart';
+import 'package:yaru_widgets/src/yaru_row.dart';
 
-class ExtraOptionRow extends StatelessWidget {
-  const ExtraOptionRow({
+class YaruExtraOptionRow extends StatelessWidget {
+  const YaruExtraOptionRow({
     Key? key,
     required this.actionLabel,
     this.actionDescription,
@@ -38,7 +38,7 @@ class ExtraOptionRow extends StatelessWidget {
             onChanged: onChanged,
           ),
           const SizedBox(width: 8.0),
-          OptionButton(
+          YaruOptionButton(
             onPressed: onPressed,
             iconData: iconData,
           ),

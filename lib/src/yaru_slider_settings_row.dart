@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/widgets/yaru_row.dart';
-import 'package:yaru_widgets/widgets/slider_value_marker.dart';
+import 'package:yaru_widgets/src/yaru_row.dart';
+import 'package:yaru_widgets/src/yaru_slider_value_marker.dart';
 
-class SliderSettingsRow extends StatelessWidget {
-  const SliderSettingsRow({
+class YaruSliderSettingsRow extends StatelessWidget {
+  const YaruSliderSettingsRow({
     Key? key,
     required this.actionLabel,
     this.actionDescription,
@@ -78,7 +78,7 @@ class SliderSettingsRow extends StatelessWidget {
                             (constraints.maxWidth - thumbRadius * 2) *
                                 (defaultValue! - min) /
                                 (max - min),
-                        child: const SliderValueMarker(),
+                        child: const YaruSliderValueMarker(),
                       ),
                     Slider(
                       label: value.toStringAsFixed(0),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PageContainer extends StatelessWidget {
-  const PageContainer({
+class YaruPageContainer extends StatelessWidget {
+  const YaruPageContainer({
     Key? key,
     required this.child,
     this.width,

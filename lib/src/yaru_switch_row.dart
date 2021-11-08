@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/widgets/yaru_row.dart';
+import 'package:yaru_widgets/src/yaru_row.dart';
 
-class SwitchRow extends StatelessWidget {
-  const SwitchRow({
+class YaruSwitchRow extends StatelessWidget {
+  const YaruSwitchRow({
     Key? key,
     required this.trailingWidget,
     this.actionDescription,

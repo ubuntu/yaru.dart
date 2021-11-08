@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SliderValueMarker extends StatelessWidget {
-  const SliderValueMarker({Key? key}) : super(key: key);
+class YaruSliderValueMarker extends StatelessWidget {
+  const YaruSliderValueMarker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
