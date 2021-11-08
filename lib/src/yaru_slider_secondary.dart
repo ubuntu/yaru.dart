@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/yaru_slider_value_marker.dart';
 
-class YaruSliderSettingsSecondary extends StatelessWidget {
-  const YaruSliderSettingsSecondary({
+class YaruSliderSecondary extends StatelessWidget {
+  const YaruSliderSecondary({
     Key? key,
     required this.label,
     required this.enabled,
