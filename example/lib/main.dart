@@ -22,7 +22,17 @@ final pageItems = <YaruPageItem>[
   YaruPageItem(
     title: 'Calendar',
     iconData: YaruIcons.calendar,
-    builder: (_) => const Text('Calendar'),
+    builder: (_) => Column(
+      children: const [
+        YaruSection(headline: 'headline', children: [
+          YaruRow(
+            trailingWidget: Text('trailingWidget'),
+            actionWidget: Text('actionWidget'),
+            description: 'description',
+          )
+        ])
+      ],
+    ),
   ),
   YaruPageItem(
     title: 'Addons',
