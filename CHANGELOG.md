@@ -1,3 +1,8 @@
+# 0.0.7
+
+* Library overview inside `/doc`
+* Add *network_cellular* icons
+
 # 0.0.6
 
 * Add new _pan-*_ icons.
