@@ -232,24 +232,48 @@ Icon preview | Icon name | Usage
 ![minus](../icons/minus.svg) | minus | `YaruIcons.minus`
 ![multimedia_player_filled](../icons/multimedia-player-filled.svg) | multimedia player filled | `YaruIcons.multimedia_player_filled`
 ![multimedia_player](../icons/multimedia-player.svg) | multimedia player | `YaruIcons.multimedia_player`
+![network_cellular_2g](../icons/network/cellular/2g.svg) | network cellular 2g | `YaruIcons.network_cellular_2g`
+![network_cellular_3g](../icons/network/cellular/3g.svg) | network cellular 3g | `YaruIcons.network_cellular_3g`
+![network_cellular_4g](../icons/network/cellular/4g.svg) | network cellular 4g | `YaruIcons.network_cellular_4g`
+![network_cellular_5g](../icons/network/cellular/5g.svg) | network cellular 5g | `YaruIcons.network_cellular_5g`
+![network_cellular_acquiring](../icons/network/cellular/acquiring.svg) | network cellular acquiring | `YaruIcons.network_cellular_acquiring`
+![network_cellular_connected](../icons/network/cellular/connected.svg) | network cellular connected | `YaruIcons.network_cellular_connected`
+![network_cellular_disabled](../icons/network/cellular/disabled.svg) | network cellular disabled | `YaruIcons.network_cellular_disabled`
+![network_cellular_edge](../icons/network/cellular/edge.svg) | network cellular edge | `YaruIcons.network_cellular_edge`
+![network_cellular_gprs](../icons/network/cellular/gprs.svg) | network cellular gprs | `YaruIcons.network_cellular_gprs`
+![network_cellular_hardware_disabled](../icons/network/cellular/hardware-disabled.svg) | network cellular hardware disabled | `YaruIcons.network_cellular_hardware_disabled`
+![network_cellular_hspa](../icons/network/cellular/hspa.svg) | network cellular hspa | `YaruIcons.network_cellular_hspa`
+![network_cellular_no_route](../icons/network/cellular/no-route.svg) | network cellular no route | `YaruIcons.network_cellular_no_route`
+![network_cellular_offline](../icons/network/cellular/offline.svg) | network cellular offline | `YaruIcons.network_cellular_offline`
+![network_cellular_signal_excellent_secure](../icons/network/cellular/signal-excellent-secure.svg) | network cellular signal excellent secure | `YaruIcons.network_cellular_signal_excellent_secure`
+![network_cellular_signal_excellent](../icons/network/cellular/signal-excellent.svg) | network cellular signal excellent | `YaruIcons.network_cellular_signal_excellent`
+![network_cellular_signal_good_secure](../icons/network/cellular/signal-good-secure.svg) | network cellular signal good secure | `YaruIcons.network_cellular_signal_good_secure`
+![network_cellular_signal_good](../icons/network/cellular/signal-good.svg) | network cellular signal good | `YaruIcons.network_cellular_signal_good`
+![network_cellular_signal_none_secure](../icons/network/cellular/signal-none-secure.svg) | network cellular signal none secure | `YaruIcons.network_cellular_signal_none_secure`
+![network_cellular_signal_none](../icons/network/cellular/signal-none.svg) | network cellular signal none | `YaruIcons.network_cellular_signal_none`
+![network_cellular_signal_ok_secure](../icons/network/cellular/signal-ok-secure.svg) | network cellular signal ok secure | `YaruIcons.network_cellular_signal_ok_secure`
+![network_cellular_signal_ok](../icons/network/cellular/signal-ok.svg) | network cellular signal ok | `YaruIcons.network_cellular_signal_ok`
+![network_cellular_signal_weak_secure](../icons/network/cellular/signal-weak-secure.svg) | network cellular signal weak secure | `YaruIcons.network_cellular_signal_weak_secure`
+![network_cellular_signal_weak](../icons/network/cellular/signal-weak.svg) | network cellular signal weak | `YaruIcons.network_cellular_signal_weak`
+![network_cellular](../icons/network/cellular/_.svg) | network cellular | `YaruIcons.network_cellular`
 ![network_filled](../icons/network-filled.svg) | network filled | `YaruIcons.network_filled`
 ![network_hotspot](../icons/network/hotspot.svg) | network hotspot | `YaruIcons.network_hotspot`
 ![network](../icons/network.svg) | network | `YaruIcons.network`
 ![network_wired](../icons/network/wired.svg) | network wired | `YaruIcons.network_wired`
-![network_wireless_acquiring](../icons/network/wireless-acquiring.svg) | network wireless acquiring | `YaruIcons.network_wireless_acquiring`
-![network_wireless_disabled](../icons/network/wireless-disabled.svg) | network wireless disabled | `YaruIcons.network_wireless_disabled`
-![network_wireless_no_route](../icons/network/wireless-no-route.svg) | network wireless no route | `YaruIcons.network_wireless_no_route`
-![network_wireless_signal_excellent_secure](../icons/network/wireless-signal-excellent-secure.svg) | network wireless signal excellent secure | `YaruIcons.network_wireless_signal_excellent_secure`
-![network_wireless_signal_excellent](../icons/network/wireless-signal-excellent.svg) | network wireless signal excellent | `YaruIcons.network_wireless_signal_excellent`
-![network_wireless_signal_good_secure](../icons/network/wireless-signal-good-secure.svg) | network wireless signal good secure | `YaruIcons.network_wireless_signal_good_secure`
-![network_wireless_signal_good](../icons/network/wireless-signal-good.svg) | network wireless signal good | `YaruIcons.network_wireless_signal_good`
-![network_wireless_signal_none_secure](../icons/network/wireless-signal-none-secure.svg) | network wireless signal none secure | `YaruIcons.network_wireless_signal_none_secure`
-![network_wireless_signal_none](../icons/network/wireless-signal-none.svg) | network wireless signal none | `YaruIcons.network_wireless_signal_none`
-![network_wireless_signal_ok_secure](../icons/network/wireless-signal-ok-secure.svg) | network wireless signal ok secure | `YaruIcons.network_wireless_signal_ok_secure`
-![network_wireless_signal_ok](../icons/network/wireless-signal-ok.svg) | network wireless signal ok | `YaruIcons.network_wireless_signal_ok`
-![network_wireless_signal_weak_secure](../icons/network/wireless-signal-weak-secure.svg) | network wireless signal weak secure | `YaruIcons.network_wireless_signal_weak_secure`
-![network_wireless_signal_weak](../icons/network/wireless-signal-weak.svg) | network wireless signal weak | `YaruIcons.network_wireless_signal_weak`
-![network_wireless](../icons/network/wireless.svg) | network wireless | `YaruIcons.network_wireless`
+![network_wireless_acquiring](../icons/network/wireless/acquiring.svg) | network wireless acquiring | `YaruIcons.network_wireless_acquiring`
+![network_wireless_disabled](../icons/network/wireless/disabled.svg) | network wireless disabled | `YaruIcons.network_wireless_disabled`
+![network_wireless_no_route](../icons/network/wireless/no-route.svg) | network wireless no route | `YaruIcons.network_wireless_no_route`
+![network_wireless_signal_excellent_secure](../icons/network/wireless/signal-excellent-secure.svg) | network wireless signal excellent secure | `YaruIcons.network_wireless_signal_excellent_secure`
+![network_wireless_signal_excellent](../icons/network/wireless/signal-excellent.svg) | network wireless signal excellent | `YaruIcons.network_wireless_signal_excellent`
+![network_wireless_signal_good_secure](../icons/network/wireless/signal-good-secure.svg) | network wireless signal good secure | `YaruIcons.network_wireless_signal_good_secure`
+![network_wireless_signal_good](../icons/network/wireless/signal-good.svg) | network wireless signal good | `YaruIcons.network_wireless_signal_good`
+![network_wireless_signal_none_secure](../icons/network/wireless/signal-none-secure.svg) | network wireless signal none secure | `YaruIcons.network_wireless_signal_none_secure`
+![network_wireless_signal_none](../icons/network/wireless/signal-none.svg) | network wireless signal none | `YaruIcons.network_wireless_signal_none`
+![network_wireless_signal_ok_secure](../icons/network/wireless/signal-ok-secure.svg) | network wireless signal ok secure | `YaruIcons.network_wireless_signal_ok_secure`
+![network_wireless_signal_ok](../icons/network/wireless/signal-ok.svg) | network wireless signal ok | `YaruIcons.network_wireless_signal_ok`
+![network_wireless_signal_weak_secure](../icons/network/wireless/signal-weak-secure.svg) | network wireless signal weak secure | `YaruIcons.network_wireless_signal_weak_secure`
+![network_wireless_signal_weak](../icons/network/wireless/signal-weak.svg) | network wireless signal weak | `YaruIcons.network_wireless_signal_weak`
+![network_wireless](../icons/network/wireless/_.svg) | network wireless | `YaruIcons.network_wireless`
 ![notification_filled](../icons/notification-filled.svg) | notification filled | `YaruIcons.notification_filled`
 ![notification](../icons/notification.svg) | notification | `YaruIcons.notification`
 ![object_flip_horizontal](../icons/object/flip-horizontal.svg) | object flip horizontal | `YaruIcons.object_flip_horizontal`
