@@ -281,6 +281,7 @@ Icon preview | Icon name | Usage
 ![object_rotate_left](../icons/object/rotate-left.svg) | object rotate left | `YaruIcons.object_rotate_left`
 ![object_rotate_right](../icons/object/rotate-right.svg) | object rotate right | `YaruIcons.object_rotate_right`
 ![ok_filled](../icons/ok-filled.svg) | ok filled | `YaruIcons.ok_filled`
+![ok_simple](../icons/ok-simple.svg) | ok simple | `YaruIcons.ok_simple`
 ![ok](../icons/ok.svg) | ok | `YaruIcons.ok`
 ![package_filled](../icons/package-filled.svg) | package filled | `YaruIcons.package_filled`
 ![package](../icons/package.svg) | package | `YaruIcons.package`
