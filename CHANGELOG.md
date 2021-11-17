@@ -1,3 +1,7 @@
+# 0.0.8
+
+* Add *ok_simple* icon.
+
 # 0.0.7
 
 * Library overview inside `/doc`
