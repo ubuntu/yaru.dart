@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/src/yaru_image_tile.dart';
-import 'package:yaru_widgets/src/yaru_option_button.dart';
 
 void main() {
   testWidgets('- ImageTile Test', (WidgetTester tester) async {
