@@ -15,4 +15,4 @@ flutter:
   fonts:
     - family: YaruIcons
       fonts:
-        - asset: lib/icon_font/ui_icons.ttf
+        - asset: assets/ui_icons.ttf
