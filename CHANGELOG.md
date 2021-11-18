@@ -1,3 +1,7 @@
+# 0.1.0
+
+* Rework project hierarchy.
+
 # 0.0.8
 
 * Add *ok_simple* icon.
