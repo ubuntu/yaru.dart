@@ -1,3 +1,7 @@
+# 0.1.1
+
+* Add *checkmark* icon.
+
 # 0.1.0
 
 * Rework project hierarchy.
