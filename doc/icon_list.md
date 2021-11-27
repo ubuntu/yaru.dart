@@ -50,6 +50,7 @@ Icon preview | Icon name | Usage
 ![checkbox_button_mixed_filled](../icons/checkbox-button/mixed-filled.svg) | checkbox button mixed filled | `YaruIcons.checkbox_button_mixed_filled`
 ![checkbox_button_mixed](../icons/checkbox-button/mixed.svg) | checkbox button mixed | `YaruIcons.checkbox_button_mixed`
 ![checkbox_button](../icons/checkbox-button/_.svg) | checkbox button | `YaruIcons.checkbox_button`
+![checkmark](../icons/checkmark.svg) | checkmark | `YaruIcons.checkmark`
 ![check_spelling](../icons/check-spelling.svg) | check spelling | `YaruIcons.check_spelling`
 ![chip_filled](../icons/chip-filled.svg) | chip filled | `YaruIcons.chip_filled`
 ![chip](../icons/chip.svg) | chip | `YaruIcons.chip`
