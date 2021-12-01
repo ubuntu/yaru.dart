@@ -15,6 +15,7 @@ class YaruHome extends StatefulWidget {
 class _YaruHomeState extends State<YaruHome> {
   bool _extraOptionValue = false;
   bool _isImageSelected = false;
+  TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +94,18 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.checkbox_button_filled,
         builder: (_) => const YaruRowList(),
       ),
+      YaruPageItem(
+        title: 'YaruSearchAppBar',
+        iconData: YaruIcons.checkbox_button_filled,
+        builder: (_) => YaruSearchAppBar(
+          searchController: _textEditingController,
+          onChanged: (v){},
+          onEscape: (){},
+          searchIconData: YaruIcons.search,
+          appBarHeight: 10.0,
+          searchHint: "Search...",
+        ),
+      ),
     ];
 
     return YaruMasterDetailPage(
@@ -102,6 +115,7 @@ class _YaruHomeState extends State<YaruHome> {
       searchHint: 'Search...',
       searchIconData: YaruIcons.search,
       pageItems: pageItems,
+
     );
   }
 }
