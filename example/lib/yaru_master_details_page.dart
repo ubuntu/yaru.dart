@@ -16,6 +16,7 @@ class _YaruHomeState extends State<YaruHome> {
   bool _extraOptionValue = false;
   bool _isImageSelected = false;
   TextEditingController _textEditingController = TextEditingController();
+  double _sliderValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +130,21 @@ class _YaruHomeState extends State<YaruHome> {
             infoValue: "Info Value",
           )
         ]),
+      ),
+      YaruPageItem(
+        title: 'YaruSliderRow',
+        iconData: YaruIcons.checkbox_button_filled,
+        builder: (_) => YaruSliderRow(
+          actionLabel: "actionLabel",
+          value: _sliderValue,
+          min: 0,
+          max: 100,
+          onChanged: (v) {
+            setState(() {
+              _sliderValue = v;
+            });
+          },
+        ),
       ),
     ];
 
