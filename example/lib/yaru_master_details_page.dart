@@ -17,7 +17,7 @@ class _YaruHomeState extends State<YaruHome> {
   bool _isImageSelected = false;
   TextEditingController _textEditingController = TextEditingController();
   double _sliderValue = 0;
-
+  bool _yaruSwitchEnabled = false;
   @override
   Widget build(BuildContext context) {
     final pageItems = <YaruPageItem>[
@@ -160,6 +160,19 @@ class _YaruHomeState extends State<YaruHome> {
             });
           },
           enabled: true,
+        ),
+      ),
+      YaruPageItem(
+        title: 'YaruSwitchRow',
+        iconData: YaruIcons.checkbox_button_filled,
+        builder: (_) => YaruSwitchRow(
+          value: _yaruSwitchEnabled,
+          onChanged: (v) {
+            setState(() {
+              _yaruSwitchEnabled = v;
+            });
+          },
+          trailingWidget: Text("Trailing Widget"),
         ),
       ),
     ];
