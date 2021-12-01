@@ -79,6 +79,14 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.checkbox_button_filled,
         builder: (_) => const YaruOptionCardList(),
       ),
+      YaruPageItem(
+        title: 'YaruPageContainer',
+        iconData: YaruIcons.checkbox_button_filled,
+        builder: (_) => const YaruPageContainer(
+          child: Text("Just a Container 🤷‍♂️"),
+          width: 200,
+        ),
+      ),
     ];
 
     return YaruMasterDetailPage(
