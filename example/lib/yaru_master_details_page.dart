@@ -3,6 +3,7 @@ import 'package:yaru_icons/widgets/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_widgets_example/widgets/list_yaru_options.dart';
 import 'package:yaru_widgets_example/widgets/yaru_option_card_list.dart';
+import 'package:yaru_widgets_example/widgets/yaru_row_list.dart';
 
 class YaruHome extends StatefulWidget {
   const YaruHome({Key? key}) : super(key: key);
@@ -86,6 +87,11 @@ class _YaruHomeState extends State<YaruHome> {
           child: Text("Just a Container 🤷‍♂️"),
           width: 200,
         ),
+      ),
+      YaruPageItem(
+        title: 'YaruRow',
+        iconData: YaruIcons.checkbox_button_filled,
+        builder: (_) => const YaruRowList(),
       ),
     ];
 
