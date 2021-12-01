@@ -146,6 +146,22 @@ class _YaruHomeState extends State<YaruHome> {
           },
         ),
       ),
+      YaruPageItem(
+        title: 'YaruSliderSecondary',
+        iconData: YaruIcons.checkbox_button_filled,
+        builder: (_) => YaruSliderSecondary(
+          label: "Label",
+          value: _sliderValue,
+          min: 0,
+          max: 100,
+          onChanged: (v) {
+            setState(() {
+              _sliderValue = v;
+            });
+          },
+          enabled: true,
+        ),
+      ),
     ];
 
     return YaruMasterDetailPage(
