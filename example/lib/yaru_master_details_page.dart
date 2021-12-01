@@ -18,6 +18,8 @@ class _YaruHomeState extends State<YaruHome> {
   TextEditingController _textEditingController = TextEditingController();
   double _sliderValue = 0;
   bool _yaruSwitchEnabled = false;
+  final List<bool> _selectedValues = [false, false];
+
   @override
   Widget build(BuildContext context) {
     final pageItems = <YaruPageItem>[
@@ -173,6 +175,21 @@ class _YaruHomeState extends State<YaruHome> {
             });
           },
           trailingWidget: Text("Trailing Widget"),
+        ),
+      ),
+      YaruPageItem(
+        title: 'YaruToggleButtonsRow',
+        iconData: YaruIcons.checkbox_button_filled,
+        builder: (_) => YaruToggleButtonsRow(
+          actionLabel: "Action Label",
+          labels: ["label1", "label2"],
+          onPressed: (v) {
+            setState(() {
+              _selectedValues[v] = !_selectedValues[v];
+            });
+          },
+          selectedValues: _selectedValues,
+          actionDescription: "Action Description",
         ),
       ),
     ];
