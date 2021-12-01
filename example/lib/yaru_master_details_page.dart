@@ -25,15 +25,10 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.checkbox_button_filled,
         builder: (_) => Column(
           children: const [
-            YaruSection(
-              headline: 'YaruRow',
-              children: [
-                YaruRow(
-                  trailingWidget: Text('trailingWidget'),
-                  actionWidget: Text('actionWidget'),
-                  description: 'description',
-                )
-              ],
+            YaruRow(
+              trailingWidget: Text('trailingWidget'),
+              actionWidget: Text('actionWidget'),
+              description: 'description',
             )
           ],
         ),
@@ -99,11 +94,26 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.checkbox_button_filled,
         builder: (_) => YaruSearchAppBar(
           searchController: _textEditingController,
-          onChanged: (v){},
-          onEscape: (){},
+          onChanged: (v) {},
+          onEscape: () {},
           searchIconData: YaruIcons.search,
           appBarHeight: 10.0,
           searchHint: "Search...",
+        ),
+      ),
+      YaruPageItem(
+        title: 'YaruSection',
+        iconData: YaruIcons.checkbox_button_filled,
+        builder: (_) => const YaruSection(
+          headline: 'Headline',
+          children: [
+            YaruRow(
+              trailingWidget: Text("Trailing Widget"),
+              actionWidget: Text("Action Widget"),
+              description: "Description",
+            ),
+          ],
+          width: 300,
         ),
       ),
     ];
@@ -115,7 +125,6 @@ class _YaruHomeState extends State<YaruHome> {
       searchHint: 'Search...',
       searchIconData: YaruIcons.search,
       pageItems: pageItems,
-
     );
   }
 }
