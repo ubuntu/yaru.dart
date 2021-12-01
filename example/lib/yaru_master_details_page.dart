@@ -69,17 +69,17 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
         title: 'YaruOptionButton',
         iconData: YaruIcons.checkbox_button_filled,
-        builder: (_) => const YaruOptionsButtonsList(),
+        builder: (_) => YaruOptionsButtonsList(),
       ),
       YaruPageItem(
         title: 'YaruOptionCard',
         iconData: YaruIcons.checkbox_button_filled,
-        builder: (_) => const YaruOptionCardList(),
+        builder: (_) => YaruOptionCardList(),
       ),
       YaruPageItem(
         title: 'YaruPageContainer',
         iconData: YaruIcons.checkbox_button_filled,
-        builder: (_) => const YaruPageContainer(
+        builder: (_) => YaruPageContainer(
           child: Text("Just a Container 🤷‍♂️"),
           width: 200,
         ),
@@ -87,7 +87,7 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
         title: 'YaruRow',
         iconData: YaruIcons.checkbox_button_filled,
-        builder: (_) => const YaruRowList(),
+        builder: (_) => YaruRowList(),
       ),
       YaruPageItem(
         title: 'YaruSearchAppBar',
@@ -104,7 +104,7 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
         title: 'YaruSection',
         iconData: YaruIcons.checkbox_button_filled,
-        builder: (_) => const YaruSection(
+        builder: (_) => YaruSection(
           headline: 'Headline',
           children: [
             YaruRow(
@@ -115,6 +115,20 @@ class _YaruHomeState extends State<YaruHome> {
           ],
           width: 300,
         ),
+      ),
+      YaruPageItem(
+        title: 'YaruSingleInfoRow',
+        iconData: YaruIcons.checkbox_button_filled,
+        builder: (_) => YaruSection(headline: "YaruSingleInfoRow", children: [
+          YaruSingleInfoRow(
+            infoLabel: "Info Label",
+            infoValue: "Info Value",
+          ),
+          YaruSingleInfoRow(
+            infoLabel: "Info Label",
+            infoValue: "Info Value",
+          )
+        ]),
       ),
     ];
 
