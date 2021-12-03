@@ -25,7 +25,7 @@ class _YaruHomeState extends State<YaruHome> {
     final pageItems = <YaruPageItem>[
       YaruPageItem(
         title: 'YaruRow',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_wink,
         builder: (_) => Column(
           children: const [
             YaruRow(
@@ -38,7 +38,7 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'YaruExtraOptionRow',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_angry,
         builder: (_) => YaruExtraOptionRow(
           actionLabel: "ActionLabel",
           iconData: YaruIcons.addon,
@@ -54,7 +54,7 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'ImageTile',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_devilish,
         builder: (_) => ImageTile(
           currentlySelected: _isImageSelected,
           onTap: () {
@@ -71,17 +71,17 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'YaruOptionButton',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_plain,
         builder: (_) => YaruOptionsButtonsList(),
       ),
       YaruPageItem(
         title: 'YaruOptionCard',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_worried,
         builder: (_) => YaruOptionCardList(),
       ),
       YaruPageItem(
         title: 'YaruPageContainer',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_laugh,
         builder: (_) => YaruPageContainer(
           child: Text("Just a Container 🤷‍♂️"),
           width: 200,
@@ -89,12 +89,12 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'YaruRow',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_cool,
         builder: (_) => YaruRowList(),
       ),
       YaruPageItem(
         title: 'YaruSearchAppBar',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_angel,
         builder: (_) => YaruSearchAppBar(
           searchController: _textEditingController,
           onChanged: (v) {},
@@ -106,7 +106,7 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'YaruSection',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_glasses,
         builder: (_) => YaruSection(
           headline: 'Headline',
           children: [
@@ -121,7 +121,7 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'YaruSingleInfoRow',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_embarrassed,
         builder: (_) => YaruSection(headline: "YaruSingleInfoRow", children: [
           YaruSingleInfoRow(
             infoLabel: "Info Label",
@@ -135,7 +135,7 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'YaruSliderRow',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_uncertain,
         builder: (_) => YaruSliderRow(
           actionLabel: "actionLabel",
           value: _sliderValue,
@@ -150,7 +150,7 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'YaruSliderSecondary',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_tired,
         builder: (_) => YaruSliderSecondary(
           label: "Label",
           value: _sliderValue,
@@ -166,7 +166,7 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'YaruSwitchRow',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_raspberry,
         builder: (_) => YaruSwitchRow(
           value: _yaruSwitchEnabled,
           onChanged: (v) {
@@ -179,7 +179,7 @@ class _YaruHomeState extends State<YaruHome> {
       ),
       YaruPageItem(
         title: 'YaruToggleButtonsRow',
-        iconData: YaruIcons.checkbox_button_filled,
+        iconData: YaruIcons.emote_shutmouth,
         builder: (_) => YaruToggleButtonsRow(
           actionLabel: "Action Label",
           labels: ["label1", "label2"],
