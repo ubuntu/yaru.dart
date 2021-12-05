@@ -35,7 +35,7 @@ class YaruCheckboxRow extends StatelessWidget {
   /// ```
   final Function(bool?) onChanged;
 
-  /// [text] is the name of checkBox
+  /// Specifies the  name of checkBox
   final String text;
 
   @override
