@@ -7,11 +7,13 @@ class YaruSection extends StatelessWidget {
     required this.headline,
     required this.children,
     this.width,
+    this.headerWidget,
   }) : super(key: key);
 
   final String headline;
   final List<Widget> children;
   final double? width;
+  final Widget? headerWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +33,16 @@ class YaruSection extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child: Text(
-                    headline,
-                    style: Theme.of(context).textTheme.headline6,
-                    textAlign: TextAlign.left,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        headline,
+                        style: Theme.of(context).textTheme.headline6,
+                        textAlign: TextAlign.left,
+                      ),
+                      headerWidget ?? const SizedBox()
+                    ],
                   ),
                 ),
               ),
