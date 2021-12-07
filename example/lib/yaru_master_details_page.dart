@@ -109,6 +109,11 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.emote_glasses,
         builder: (_) => YaruSection(
           headline: 'Headline',
+          headerWidget: SizedBox(
+            child: CircularProgressIndicator(),
+            height: 20,
+            width: 20,
+          ),
           children: [
             YaruRow(
               trailingWidget: Text("Trailing Widget"),
