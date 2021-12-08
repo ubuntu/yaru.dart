@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class ImageTile extends StatelessWidget {
-  /// Create a Image Tile from the image path given in the path property.
+  /// Creates a Image Tile from the image path given in the path property.
   const ImageTile(
       {Key? key,
       required this.path,
