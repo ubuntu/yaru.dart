@@ -9,7 +9,7 @@ class YaruOptionCardList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
+        SizedBox(
           width: 300,
           height: 300,
           child: YaruOptionCard(
@@ -20,7 +20,7 @@ class YaruOptionCardList extends StatelessWidget {
             okIconData: YaruIcons.camera_photo,
           ),
         ),
-        Container(
+        SizedBox(
           width: 300,
           height: 300,
           child: YaruOptionCard(

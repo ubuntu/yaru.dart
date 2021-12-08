@@ -9,7 +9,7 @@ void main() {
         body: YaruToggleButtonsRow(
           actionLabel: "Foo Label",
           onPressed: (int x) {},
-          selectedValues: [false],
+          selectedValues: const [false],
           actionDescription: "Foo Description",
           labels: const ["Label"],
         ),
