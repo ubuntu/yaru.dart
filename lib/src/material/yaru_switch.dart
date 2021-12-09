@@ -17,7 +17,7 @@ const double _kSwitchWidth = _kTrackWidth - 2 * _kTrackRadius + _kSwitchMinSize;
 const double _kSwitchHeight = _kSwitchMinSize + 8.0;
 const double _kSwitchHeightCollapsed = _kSwitchMinSize;
 
-enum _SwitchType { material, adaptive }
+// enum _SwitchType { material, adaptive } // Yaru change: bypass CupertinoSwitch
 
 /// A Yaru design switch, fully compatible with material one.
 ///
@@ -78,8 +78,8 @@ class YaruSwitch extends StatelessWidget {
     this.splashRadius,
     this.focusNode,
     this.autofocus = false,
-  })  : _switchType = _SwitchType.material,
-        assert(dragStartBehavior != null),
+  })  : // _switchType = _SwitchType.material, // Yaru change: unused_field
+        // assert(dragStartBehavior != null), // Yaru change: unnecessary_null_comparison
         assert(activeThumbImage != null || onActiveThumbImageError == null),
         assert(inactiveThumbImage != null || onInactiveThumbImageError == null),
         super(key: key);
@@ -270,7 +270,7 @@ class YaruSwitch extends StatelessWidget {
   ///  * [MaterialTapTargetSize], for a description of how this affects tap targets.
   final MaterialTapTargetSize? materialTapTargetSize;
 
-  final _SwitchType _switchType;
+  // final _SwitchType _switchType; // Yaru change: unused_field
 
   /// {@macro flutter.cupertino.CupertinoSwitch.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
@@ -471,7 +471,7 @@ class _MaterialSwitch extends StatefulWidget {
     this.splashRadius,
     this.focusNode,
     this.autofocus = false,
-  })  : assert(dragStartBehavior != null),
+  })  : // assert(dragStartBehavior != null), // Yaru change: unnecessary_null_comparison
         assert(activeThumbImage != null || onActiveThumbImageError == null),
         assert(inactiveThumbImage != null || onInactiveThumbImageError == null),
         super(key: key);
@@ -805,7 +805,7 @@ class _SwitchPainter extends ToggleablePainter {
   Color get activeTrackColor => _activeTrackColor!;
   Color? _activeTrackColor;
   set activeTrackColor(Color value) {
-    assert(value != null);
+    // assert(value != null); // Yaru change: unnecessary_null_comparison
     if (value == _activeTrackColor) return;
     _activeTrackColor = value;
     notifyListeners();
@@ -814,7 +814,7 @@ class _SwitchPainter extends ToggleablePainter {
   Color get inactiveTrackColor => _inactiveTrackColor!;
   Color? _inactiveTrackColor;
   set inactiveTrackColor(Color value) {
-    assert(value != null);
+    // assert(value != null); // Yaru change: unnecessary_null_comparison
     if (value == _inactiveTrackColor) return;
     _inactiveTrackColor = value;
     notifyListeners();
@@ -823,7 +823,7 @@ class _SwitchPainter extends ToggleablePainter {
   ImageConfiguration get configuration => _configuration!;
   ImageConfiguration? _configuration;
   set configuration(ImageConfiguration value) {
-    assert(value != null);
+    // assert(value != null); // Yaru change: unnecessary_null_comparison
     if (value == _configuration) return;
     _configuration = value;
     notifyListeners();
@@ -832,7 +832,7 @@ class _SwitchPainter extends ToggleablePainter {
   TextDirection get textDirection => _textDirection!;
   TextDirection? _textDirection;
   set textDirection(TextDirection value) {
-    assert(value != null);
+    // assert(value != null); // Yaru change: unnecessary_null_comparison
     if (_textDirection == value) return;
     _textDirection = value;
     notifyListeners();
@@ -841,7 +841,7 @@ class _SwitchPainter extends ToggleablePainter {
   Color get surfaceColor => _surfaceColor!;
   Color? _surfaceColor;
   set surfaceColor(Color value) {
-    assert(value != null);
+    // assert(value != null); // Yaru change: unnecessary_null_comparison
     if (value == _surfaceColor) return;
     _surfaceColor = value;
     notifyListeners();
