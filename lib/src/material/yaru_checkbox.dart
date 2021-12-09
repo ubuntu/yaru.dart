@@ -32,7 +32,7 @@ import 'package:flutter/material.dart';
 ///
 ///  * [CheckboxListTile], which combines this widget with a [ListTile] so that
 ///    you can give the checkbox a label.
-///  * [Switch], a widget with semantics similar to [YaruCheckbox].
+///  * [YaruSwitch], a widget with semantics similar to [YaruCheckbox].
 ///  * [Radio], for selecting among a set of explicit values.
 ///  * [Slider], for selecting a value in a range.
 ///  * <https://material.io/design/components/selection-controls.html#checkboxes>
