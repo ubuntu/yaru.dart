@@ -14,6 +14,7 @@ class YaruHome extends StatefulWidget {
 
 class _YaruHomeState extends State<YaruHome> {
   bool? _checkValue = false;
+  bool _switchValue = false;
   bool _extraOptionValue = false;
   bool _isImageSelected = false;
   final TextEditingController _textEditingController = TextEditingController();
@@ -53,6 +54,40 @@ class _YaruHomeState extends State<YaruHome> {
                 onChanged: (bool? newValue) {
                   setState(() {
                     _checkValue = newValue;
+                  });
+                },
+              )
+            ],
+          )
+        ]),
+      ),
+      YaruPageItem(
+        title: 'YaruSwitch',
+        iconData: YaruIcons.emote_smile_big,
+        builder: (_) => Column(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Yaru checkbox:'),
+              YaruSwitch(
+                value: _switchValue,
+                onChanged: (bool newValue) {
+                  setState(() {
+                    _switchValue = newValue;
+                  });
+                },
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Material checkbox:'),
+              Switch(
+                value: _switchValue,
+                onChanged: (bool newValue) {
+                  setState(() {
+                    _switchValue = newValue;
                   });
                 },
               )

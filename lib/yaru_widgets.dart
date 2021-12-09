@@ -1,6 +1,7 @@
 library yaru_widgets;
 
 export 'src/material/yaru_checkbox.dart';
+export 'src/material/yaru_switch.dart';
 export 'src/yaru_checkbox_row.dart';
 export 'src/yaru_extra_option_row.dart';
 export 'src/yaru_image_tile.dart';
