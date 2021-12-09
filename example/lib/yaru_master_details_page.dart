@@ -68,7 +68,7 @@ class _YaruHomeState extends State<YaruHome> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Yaru checkbox:'),
+              Text('Yaru switch:'),
               YaruSwitch(
                 value: _switchValue,
                 onChanged: (bool newValue) {
@@ -82,7 +82,7 @@ class _YaruHomeState extends State<YaruHome> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Material checkbox:'),
+              Text('Material switch:'),
               Switch(
                 value: _switchValue,
                 onChanged: (bool newValue) {
