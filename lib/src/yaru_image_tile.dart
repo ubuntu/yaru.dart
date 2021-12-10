@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class ImageTile extends StatelessWidget {
+  /// Creates a Image Tile from the image path given in the path property.
   const ImageTile(
       {Key? key,
       required this.path,
@@ -10,9 +11,16 @@ class ImageTile extends StatelessWidget {
       required this.currentlySelected})
       : super(key: key);
 
+  // Specifies the path of the asset
   final String path;
+
+  /// Current Value of the imageTile.
+  /// Based on the this value selection of the image can be managed.
+  /// If this value is `true` [Container] border will have color from [Theme.of(context).primaryColor]
+  /// else if the value is `false` the border color will be [Colors.transparent].
   final bool currentlySelected;
 
+  /// Callback triggered when the [ImageTile] is clicked.
   final VoidCallback? onTap;
 
   @override
