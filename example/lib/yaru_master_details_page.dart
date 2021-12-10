@@ -13,7 +13,6 @@ class YaruHome extends StatefulWidget {
 }
 
 class _YaruHomeState extends State<YaruHome> {
-  bool? _checkValue = false;
   bool _extraOptionValue = false;
   bool _isImageSelected = false;
   final TextEditingController _textEditingController = TextEditingController();
