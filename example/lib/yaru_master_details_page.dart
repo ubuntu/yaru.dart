@@ -19,7 +19,7 @@ class _YaruHomeState extends State<YaruHome> {
   double _sliderValue = 0;
   bool _yaruSwitchEnabled = false;
   final List<bool> _selectedValues = [false, false];
-
+  bool _isCheckBoxSelected = false;
   @override
   Widget build(BuildContext context) {
     final pageItems = <YaruPageItem>[
@@ -195,6 +195,20 @@ class _YaruHomeState extends State<YaruHome> {
           },
           selectedValues: _selectedValues,
           actionDescription: "Action Description",
+        ),
+      ),
+      YaruPageItem(
+        title: 'YaruCheckboxRow',
+        iconData: YaruIcons.emote_plain,
+        builder: (_) => YaruCheckboxRow(
+          value: _isCheckBoxSelected,
+          text: "Text",
+          enabled: true,
+          onChanged: (v) {
+            setState(() {
+              _isCheckBoxSelected = v!;
+            });
+          },
         ),
       ),
     ];
