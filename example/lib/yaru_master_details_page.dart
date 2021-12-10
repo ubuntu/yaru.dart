@@ -25,42 +25,6 @@ class _YaruHomeState extends State<YaruHome> {
   Widget build(BuildContext context) {
     final pageItems = <YaruPageItem>[
       YaruPageItem(
-        title: 'YaruCheckbox',
-        iconData: YaruIcons.emote_smile,
-        builder: (_) => Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Yaru checkbox:'),
-              YaruCheckbox(
-                value: _checkValue,
-                tristate: true,
-                onChanged: (bool? newValue) {
-                  setState(() {
-                    _checkValue = newValue;
-                  });
-                },
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Material checkbox:'),
-              Checkbox(
-                value: _checkValue,
-                tristate: true,
-                onChanged: (bool? newValue) {
-                  setState(() {
-                    _checkValue = newValue;
-                  });
-                },
-              )
-            ],
-          )
-        ]),
-      ),
-      YaruPageItem(
         title: 'YaruRow',
         iconData: YaruIcons.emote_wink,
         builder: (_) => Column(
