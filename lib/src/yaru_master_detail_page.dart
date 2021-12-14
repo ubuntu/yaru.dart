@@ -21,7 +21,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   ///      pageItems: pageItems,
   ///     );
   /// ```
-  const   YaruMasterDetailPage({
+  const YaruMasterDetailPage({
     Key? key,
     required this.appBarHeight,
     required this.pageItems,
@@ -30,7 +30,6 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.leftPaneWidth,
     required this.searchHint,
   }) : super(key: key);
-
 
   /// Creates horizontal array of pages.
   /// All the `children` will be of type [YaruPageItem].
