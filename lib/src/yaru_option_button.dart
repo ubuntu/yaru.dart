@@ -3,6 +3,14 @@ import 'package:flutter/material.dart';
 class YaruOptionButton extends StatelessWidget {
   /// Creates an [OutlinedButton] with Yaru theme.
   /// The button have `height` and `width` of 40.
+  ///
+  /// for example:
+  /// ```dart
+  ///  YaruOptionButton(
+  ///           iconData: YaruIcons.search,
+  ///           onPressed: () {},
+  ///         ),
+  /// ```
   const YaruOptionButton({
     Key? key,
     required this.onPressed,
