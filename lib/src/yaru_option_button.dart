@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
 class YaruOptionButton extends StatelessWidget {
+  /// Creates an [OutlinedButton] with Yaru theme.
+  /// The button have `height` and `width` of 40.
   const YaruOptionButton({
     Key? key,
     required this.onPressed,
     required this.iconData,
   }) : super(key: key);
 
+  /// Callback that gets invoked when the button is clicked.
   final VoidCallback onPressed;
+
+  /// The [IconData] is place as a child of [OutlinedButton].
   final IconData iconData;
 
   @override
