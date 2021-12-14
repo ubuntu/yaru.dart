@@ -4,6 +4,7 @@ import 'package:yaru_widgets/src/yaru_search_app_bar.dart';
 import 'yaru_page_item.dart';
 
 class YaruLandscapeLayout extends StatefulWidget {
+  /// Creates a landscape layout
   const YaruLandscapeLayout({
     Key? key,
     required this.selectedIndex,
@@ -15,12 +16,26 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.searchHint,
   }) : super(key: key);
 
+  /// Current index of the selected page.
   final int selectedIndex;
+
+  /// Creates horizontal array of pages.
+  /// All the `children` will be of type [YaruPageItem]
   final List<YaruPageItem> pages;
+
+  /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
+
+  /// Specifies the [AppBar] height.
   final double appBarHeight;
+
+  /// Specifies the width of left pane.
   final double leftPaneWidth;
+
+  /// The icon that is given to the search widget.
   final IconData searchIconData;
+
+  /// The hint text given to the search widget.
   final String searchHint;
 
   @override
