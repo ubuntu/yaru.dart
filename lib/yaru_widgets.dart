@@ -3,6 +3,7 @@ library yaru_widgets;
 export 'src/yaru_checkbox_row.dart';
 export 'src/yaru_extra_option_row.dart';
 export 'src/yaru_image_tile.dart';
+export 'src/yaru_linear_progress_indicator.dart';
 export 'src/yaru_master_detail_page.dart';
 export 'src/yaru_option_button.dart';
 export 'src/yaru_option_card.dart';

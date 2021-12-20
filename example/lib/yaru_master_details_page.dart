@@ -53,6 +53,13 @@ class _YaruHomeState extends State<YaruHome> {
         ),
       ),
       YaruPageItem(
+        title: 'YaruLinearProgressIndicator',
+        iconData: YaruIcons.emote_monkey,
+        builder: (_) => YaruLinearProgressIndicator(
+          value: 50 / 100,
+        ),
+      ),
+      YaruPageItem(
         title: 'ImageTile',
         iconData: YaruIcons.emote_devilish,
         builder: (_) => ImageTile(
