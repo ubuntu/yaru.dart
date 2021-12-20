@@ -42,13 +42,16 @@ class YaruSimpleDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      titlePadding: const EdgeInsets.fromLTRB(12, 12, 12, 6),
+      titlePadding: const EdgeInsets.all(0),
       title: Stack(
-        alignment: Alignment.centerRight,
+        alignment: Alignment.topRight,
         children: [
           Padding(
             padding: const EdgeInsets.only(
-                left: 48, right: 48), // Avoid title overflow on close button
+                left: 30, // Avoid title overflow on close button
+                right: 30, // Avoid title overflow on close button
+                top: 20,
+                bottom: 15),
             child: Center(
               child: Text(
                 title,
@@ -63,7 +66,7 @@ class YaruSimpleDialog extends StatelessWidget {
               icon: Icon(closeIconData))
         ],
       ),
-      contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+      contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
       children: children,
       semanticLabel: semanticLabel,
       alignment: alignment,
