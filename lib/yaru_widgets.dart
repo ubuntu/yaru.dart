@@ -12,6 +12,7 @@ export 'src/yaru_page_item.dart';
 export 'src/yaru_row.dart';
 export 'src/yaru_search_app_bar.dart';
 export 'src/yaru_section.dart';
+export 'src/yaru_simple_dialog.dart';
 export 'src/yaru_single_info_row.dart';
 export 'src/yaru_slider_row.dart';
 export 'src/yaru_slider_secondary.dart';

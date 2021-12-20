@@ -47,7 +47,18 @@ class _YaruHomeState extends State<YaruHome> {
               _extraOptionValue = c;
             });
           },
-          onPressed: () {},
+          onPressed: () => showDialog(
+              context: context,
+              builder: (_) => YaruSimpleDialog(
+                    title: 'Test',
+                    closeIconData: YaruIcons.window_close,
+                    children: [
+                      Text(
+                        'Hello YaruSimpleDialog',
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  )),
           value: _extraOptionValue,
           actionDescription: "Action Description",
         ),
