@@ -229,6 +229,16 @@ class _YaruHomeState extends State<YaruHome> {
           },
         ),
       ),
+      YaruPageItem(
+          title: 'YaruTabbedPage',
+          builder: (_) => Center(
+                child: YaruTabbedPage(
+                    width: 516,
+                    views: [Text('Addon'), Text('accessibility')],
+                    tabIcons: [YaruIcons.addon, YaruIcons.accessibility],
+                    tabTitles: ['Addons', 'Accessability']),
+              ),
+          iconData: YaruIcons.tab_new)
     ];
 
     return YaruMasterDetailPage(
