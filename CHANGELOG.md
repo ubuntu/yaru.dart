@@ -1,3 +1,7 @@
+# 0.1.2
+
+* Add *keyboard-shortcuts* and *keyboard-shortcuts-filled* icons.
+
 # 0.1.1
 
 * Add *checkmark* icon.
