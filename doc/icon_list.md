@@ -177,6 +177,8 @@ Icon preview | Icon name | Usage
 ![insert_link](../icons/insert/link.svg) | insert link | `YaruIcons.insert_link`
 ![insert_object](../icons/insert/object.svg) | insert object | `YaruIcons.insert_object`
 ![insert_text](../icons/insert/text.svg) | insert text | `YaruIcons.insert_text`
+![keyboard_shortcuts_filled](../icons/keyboard-shortcuts-filled.svg) | keyboard shortcuts filled | `YaruIcons.keyboard_shortcuts_filled`
+![keyboard_shortcuts](../icons/keyboard-shortcuts.svg) | keyboard shortcuts | `YaruIcons.keyboard_shortcuts`
 ![key_filled](../icons/key-filled.svg) | key filled | `YaruIcons.key_filled`
 ![key](../icons/key.svg) | key | `YaruIcons.key`
 ![localization](../icons/localization.svg) | localization | `YaruIcons.localization`
