@@ -30,12 +30,21 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    var oneTitleTooLong = false;
+    for (var title in widget.tabTitles) {
+      if (title.length > 6) {
+        oneTitleTooLong = true;
+      }
+    }
     return Column(
       children: [
         Container(
           width: widget.width,
           height: 60,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+          decoration: BoxDecoration(
+              color: Theme.of(context).backgroundColor,
+              borderRadius: BorderRadius.circular(4)),
           child: TabBar(
             controller: tabController,
             indicator: BoxDecoration(
@@ -45,7 +54,11 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
             tabs: [
               for (var i = 0; i < widget.views.length; i++)
                 Tab(
-                    text: widget.tabTitles[i],
+                    text: widget.tabTitles.length > 3 &&
+                            oneTitleTooLong &&
+                            size.width < 750
+                        ? null
+                        : widget.tabTitles[i],
                     icon: Icon(
                       widget.tabIcons[i],
                     ))
