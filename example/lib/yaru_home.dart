@@ -233,20 +233,20 @@ class _YaruHomeState extends State<YaruHome> {
           title: 'YaruTabbedPage',
           builder: (_) => Center(
                 child: YaruTabbedPage(width: 1000, views: [
-                  // Text('Addon'),
-                  // Text('accessibility'),
+                  Text('Addon'),
+                  Text('accessibility'),
                   Text('Audio'),
                   Text('AddressBook'),
                   Text('Television')
                 ], tabIcons: [
-                  // YaruIcons.addon,
-                  // YaruIcons.accessibility,
+                  YaruIcons.addon,
+                  YaruIcons.accessibility,
                   YaruIcons.audio,
                   YaruIcons.address_book,
                   YaruIcons.television
                 ], tabTitles: [
-                  // 'Addons',
-                  // 'Accessability',
+                  'Addons',
+                  'Accessability',
                   'Audio',
                   'Address Book',
                   'Television'
