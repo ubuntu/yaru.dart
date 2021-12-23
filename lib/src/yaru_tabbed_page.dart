@@ -30,39 +30,50 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    var oneTitleTooLong = false;
-    for (var title in widget.tabTitles) {
-      if (title.length > 6) {
-        oneTitleTooLong = true;
+    bool titlesDoNotFit() {
+      final size = MediaQuery.of(context).size;
+      var oneTitleTooLong = false;
+      var twoTitlesTooLong = false;
+      for (var title in widget.tabTitles) {
+        if (title.length > 6) {
+          oneTitleTooLong = true;
+          if (oneTitleTooLong && title.length > 6) {
+            twoTitlesTooLong = true;
+          }
+        }
       }
+      return ((widget.tabTitles.length > 3 || oneTitleTooLong) ||
+              twoTitlesTooLong) &&
+          size.width < 750;
     }
+
     return Column(
       children: [
         Container(
           width: widget.width,
           height: 60,
-          decoration: BoxDecoration(
-              color: Theme.of(context).backgroundColor,
-              borderRadius: BorderRadius.circular(4)),
-          child: TabBar(
-            controller: tabController,
-            indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color:
-                    Theme.of(context).colorScheme.onSurface.withOpacity(0.1)),
-            tabs: [
-              for (var i = 0; i < widget.views.length; i++)
-                Tab(
-                    text: widget.tabTitles.length > 3 &&
-                            oneTitleTooLong &&
-                            size.width < 750
-                        ? null
-                        : widget.tabTitles[i],
-                    icon: Icon(
-                      widget.tabIcons[i],
-                    ))
-            ],
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+          child: Theme(
+            data: ThemeData().copyWith(
+              splashColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+            ),
+            child: TabBar(
+              controller: tabController,
+              indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.1)),
+              tabs: [
+                for (var i = 0; i < widget.views.length; i++)
+                  Tab(
+                      text: titlesDoNotFit() ? null : widget.tabTitles[i],
+                      icon: Icon(
+                        widget.tabIcons[i],
+                      ))
+              ],
+            ),
           ),
         ),
         Padding(
