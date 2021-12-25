@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class YaruPageContainer extends StatelessWidget {
-
   /// Creates a [Container] with specified `width` and `child`.
   /// Total `width` of the [Container] will be `16 + width`.
   /// If the given width is null default value will be 500.
