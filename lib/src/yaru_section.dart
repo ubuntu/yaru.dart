@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/yaru_page_container.dart';
 
 class YaruSection extends StatelessWidget {
+
+  /// Creates a yaru style section widget with multiple
+  /// [Widgets] as children.
   const YaruSection({
     Key? key,
     required this.headline,
@@ -10,9 +13,21 @@ class YaruSection extends StatelessWidget {
     this.headerWidget,
   }) : super(key: key);
 
+  /// Text that is placed above the list of `children`.
   final String headline;
+
+  ///  Creates a vertical list of widgets.
+  ///  All children will be of type [Widget],
   final List<Widget> children;
+
+  /// Specifies the [width] of the [Container].
+  /// By default the width will be 500.
   final double? width;
+
+  /// Aligns the widget horizontally along with headline.
+  ///
+  /// Both `headline` and `headerWidget` will be aligned horizontally
+  /// with [mainAxisAlignment] as [MainAxisAlignment.spaceBetween].
   final Widget? headerWidget;
 
   @override
