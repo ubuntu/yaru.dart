@@ -29,10 +29,10 @@ class YaruRow extends StatelessWidget {
   /// The [Widget] placed at trailing position.
   final Widget trailingWidget;
 
-  /// The Description placed below [trailingWidget]
+  /// The Description placed below [trailingWidget].
   final String? description;
 
-  /// The [Widget] placed after the [trailingWidget]
+  /// The [Widget] placed after the [trailingWidget].
   final Widget actionWidget;
 
   /// The `width` of the [Widget], by default it will be 500.
