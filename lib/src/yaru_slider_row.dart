@@ -2,7 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/yaru_row.dart';
 import 'package:yaru_widgets/src/yaru_slider_value_marker.dart';
 
+
 class YaruSliderRow extends StatelessWidget {
+  /// Creates a yaru style slider.
+  /// If the `value` property is null the [Widget] will return [SizedBox].
+  /// Slider is passed as an `actionWidget   inside [YaruRow].
+  /// `actionLabel` and `actionDescription` is placed in a row along with the slider.
+  ///
+  /// For example:
+  /// ```dart
+  ///   YaruSliderRow(
+  ///           actionLabel: "actionLabel",
+  ///           value: _sliderValue,
+  ///           min: 0,
+  ///           max: 100,
+  ///           onChanged: (v) {
+  ///             setState(() {
+  ///               _sliderValue = v;
+  ///             });
+  ///           },
+  ///         ),
+  ///
+  /// ```
   const YaruSliderRow({
     Key? key,
     required this.actionLabel,
