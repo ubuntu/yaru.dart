@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
-  /// Creates a search bar inside an [AppBar]
+  /// Creates a search bar inside an [AppBar].
+  ///
+  /// By default the text style will be,
+  /// ```dart
+  ///   const TextStyle(fontSize: 18, fontWeight: FontWeight.w200)
+  /// ```
+  ///
+  /// Vertical alignment of the [TextField] will be center.
   const YaruSearchAppBar({
     Key? key,
     required this.searchController,
