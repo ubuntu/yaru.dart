@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
+  /// Creates a search bar inside an [AppBar].
+  ///
+  /// By default the text style will be,
+  /// ```dart
+  ///   const TextStyle(fontSize: 18, fontWeight: FontWeight.w200)
+  /// ```
+  ///
+  /// Vertical alignment of the [TextField] will be center.
   const YaruSearchAppBar({
     Key? key,
     required this.searchController,
@@ -12,11 +20,22 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.searchHint,
   }) : super(key: key);
 
+  /// Pass a new [TextEditingController] instance.
   final TextEditingController searchController;
+
+  /// The callback that gets invoked when the value changes in the text field.
   final Function(String value) onChanged;
+
+  /// The callback that gets invoked when `escape` key is pressed.
   final Function() onEscape;
+
+  /// Search icon for search bar.
   final IconData searchIconData;
+
+  /// The height of the [AppBar].
   final double appBarHeight;
+
+  /// Specifies the search hint.
   final String searchHint;
 
   @override
