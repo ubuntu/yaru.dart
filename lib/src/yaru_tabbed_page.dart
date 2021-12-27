@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// A width responsive widget combining a [TabBar] and a [TabBarView].
+///
+/// [tabIcons], [views] and [tabTitles] must have the same amount of children. The [width] and [height] must be provided.
+/// If there is not enough space only the [tabIcons] are shown.
 class YaruTabbedPage extends StatefulWidget {
   const YaruTabbedPage(
       {Key? key,
@@ -10,10 +14,19 @@ class YaruTabbedPage extends StatefulWidget {
       required this.height})
       : super(key: key);
 
+  /// A list of [IconData] used inside the tabs - must have the same length as [tabTitles] and [views].
   final List<IconData> tabIcons;
+
+  /// The list of titles as [String]s - must have the same length as [tabIcons] and [views].
   final List<String> tabTitles;
+
+  /// The list of [Widget]-views  - must have the same length as [tabTitles] and [tabIcons].
   final List<Widget> views;
+
+  /// The width used for the [TabBarView]
   final double width;
+
+  /// The height  used for the [TabBarView]
   final double height;
 
   @override
