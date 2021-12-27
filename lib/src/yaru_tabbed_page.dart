@@ -6,13 +6,15 @@ class YaruTabbedPage extends StatefulWidget {
       required this.tabIcons,
       required this.tabTitles,
       required this.views,
-      required this.width})
+      required this.width,
+      required this.height})
       : super(key: key);
 
   final List<IconData> tabIcons;
   final List<String> tabTitles;
   final List<Widget> views;
   final double width;
+  final double height;
 
   @override
   State<YaruTabbedPage> createState() => _YaruTabbedPageState();
@@ -79,7 +81,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
         Padding(
           padding: const EdgeInsets.only(top: 30),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height / 1.8,
+            height: widget.height,
             child: TabBarView(
               controller: tabController,
               children: widget.views,

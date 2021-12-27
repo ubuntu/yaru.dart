@@ -232,7 +232,7 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
           title: 'YaruTabbedPage',
           builder: (_) => Center(
-                child: YaruTabbedPage(width: 1000, views: [
+                child: YaruTabbedPage(width: 1000, height: 500, views: [
                   Text('Addon'),
                   Text('accessibility'),
                   Text('Audio'),
