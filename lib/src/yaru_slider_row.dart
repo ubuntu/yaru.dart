@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/yaru_row.dart';
 import 'package:yaru_widgets/src/yaru_slider_value_marker.dart';
 
-
 class YaruSliderRow extends StatelessWidget {
   /// Creates a yaru style slider.
   /// If the `value` property is null the [Widget] will return [SizedBox].
