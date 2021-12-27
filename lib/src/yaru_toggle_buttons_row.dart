@@ -4,7 +4,7 @@ import 'package:yaru_widgets/src/yaru_row.dart';
 class YaruToggleButtonsRow extends StatelessWidget {
   /// Creates a set of Yaru style toggle buttons.
   ///
-  /// It displays its widgets provided in a [List] of [labels] along [direction].
+  /// It displays its strings provided in a [List] of [labels] along [direction].
   /// The state of each button is controlled by [selectedValues], which is a list
   /// of bools that determine if a button is in an active, disabled, or
   /// selected state. They are both correlated by their index in the list.
