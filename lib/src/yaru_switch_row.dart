@@ -5,9 +5,8 @@ class YaruSwitchRow extends StatelessWidget {
   /// Creates yaru style switch. The [Switch] will be aligned horizontally along with the  `trailingWidget`.
   ///
   /// for example:
-  ///
+  ///```dart
   /// bool _yaruSwitchEnabled = false;
-  ///
   /// YaruSwitchRow(
   ///          value: _yaruSwitchEnabled,
   ///          onChanged: (v) {
@@ -17,6 +16,7 @@ class YaruSwitchRow extends StatelessWidget {
   ///           },
   ///           trailingWidget: Text("Trailing Widget"),
   ///         ),
+  ///```
   const YaruSwitchRow({
     Key? key,
     required this.trailingWidget,
