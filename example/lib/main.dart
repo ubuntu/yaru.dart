@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart' as yaru_theme;
-import 'package:yaru_widgets_example/yaru_master_details_page.dart';
+import 'package:yaru_widgets_example/yaru_home.dart';
 
 void main() {
   runApp(Home());
