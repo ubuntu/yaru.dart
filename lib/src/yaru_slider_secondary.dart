@@ -3,7 +3,7 @@ import 'package:yaru_widgets/src/yaru_slider_value_marker.dart';
 
 class YaruSliderSecondary extends StatelessWidget {
   /// Creates a yaru style slider.
-  /// If the `value` or `enabled` property is null the [Widget] will return [SizedBox].
+  /// If the `value` or `enabled`property is null the [Widget] will return [SizedBox].
   ///
   /// For example:
   /// ```dart
