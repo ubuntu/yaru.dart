@@ -13,6 +13,22 @@ class YaruToggleButtonsRow extends StatelessWidget {
   ///
   /// Both [labels] and [selectedValues] properties arguments are required.
   /// If the [selectedValues] is null the widget will return [SizedBox].
+  ///
+  /// For example:
+  /// ```dart
+  ///  final List<bool> _selectedValues = [false, false];
+  ///  YaruToggleButtonsRow(
+  ///           actionLabel: "Action Label",
+  ///           labels: ["label1", "label2"],
+  ///           onPressed: (v) {
+  ///             setState(() {
+  ///               _selectedValues[v] = !_selectedValues[v];
+  ///             });
+  ///           },
+  ///           selectedValues: _selectedValues,
+  ///           actionDescription: "Action Description",
+  ///         ),
+  ///```
   const YaruToggleButtonsRow({
     Key? key,
     required this.actionLabel,
