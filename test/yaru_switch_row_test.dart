@@ -26,7 +26,8 @@ void main() {
     expect(findValue, true);
   });
 
-  testWidgets('- Returns SizedBox when value = null', (WidgetTester tester) async {
+  testWidgets('- Returns SizedBox when value = null',
+      (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: YaruSwitchRow(
