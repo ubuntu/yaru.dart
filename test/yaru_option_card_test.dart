@@ -10,7 +10,7 @@ void main() {
       home: Scaffold(
         body: YaruOptionCard(
           selected: true,
-          onSelected: (){},
+          onSelected: () {},
           okIconData: Icons.analytics,
           bodyText: "Foo Body",
           titleText: "Foo Title",
@@ -24,4 +24,3 @@ void main() {
     expect(find.text("Foo Title"), findsOneWidget);
   });
 }
-
