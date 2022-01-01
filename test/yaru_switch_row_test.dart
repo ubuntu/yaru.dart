@@ -38,7 +38,6 @@ void main() {
       ),
     ));
 
-
     expect(find.text("Description"), findsNothing);
     expect(find.text("Trailing Widget"), findsNothing);
     expect(find.byType(SizedBox), findsOneWidget);
