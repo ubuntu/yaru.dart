@@ -47,9 +47,27 @@ class _YaruHomeState extends State<YaruHome> {
               _extraOptionValue = c;
             });
           },
-          onPressed: () {},
+          onPressed: () => showDialog(
+              context: context,
+              builder: (_) => YaruSimpleDialog(
+                    title: 'Test',
+                    closeIconData: YaruIcons.window_close,
+                    children: [
+                      Text(
+                        'Hello YaruSimpleDialog',
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  )),
           value: _extraOptionValue,
           actionDescription: "Action Description",
+        ),
+      ),
+      YaruPageItem(
+        title: 'YaruLinearProgressIndicator',
+        iconData: YaruIcons.emote_monkey,
+        builder: (_) => YaruLinearProgressIndicator(
+          value: 50 / 100,
         ),
       ),
       YaruPageItem(
@@ -211,6 +229,30 @@ class _YaruHomeState extends State<YaruHome> {
           },
         ),
       ),
+      YaruPageItem(
+          title: 'YaruTabbedPage',
+          builder: (_) => Center(
+                child: YaruTabbedPage(width: 1000, height: 500, views: [
+                  Text('Addon'),
+                  Text('accessibility'),
+                  Text('Audio'),
+                  Text('AddressBook'),
+                  Text('Television')
+                ], tabIcons: [
+                  YaruIcons.addon,
+                  YaruIcons.accessibility,
+                  YaruIcons.audio,
+                  YaruIcons.address_book,
+                  YaruIcons.television
+                ], tabTitles: [
+                  'Addons',
+                  'Accessability',
+                  'Audio',
+                  'Address Book',
+                  'Television'
+                ]),
+              ),
+          iconData: YaruIcons.tab_new)
     ];
 
     return YaruMasterDetailPage(
