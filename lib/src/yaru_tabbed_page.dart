@@ -76,6 +76,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
             ),
             child: TabBar(
               controller: tabController,
+              labelColor: Theme.of(context).colorScheme.onSurface,
               indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                   color:
@@ -93,11 +94,13 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
         ),
         Padding(
           padding: const EdgeInsets.only(top: 30),
-          child: SizedBox(
-            height: widget.height,
-            child: TabBarView(
-              controller: tabController,
-              children: widget.views,
+          child: SingleChildScrollView(
+            child: SizedBox(
+              height: widget.height,
+              child: TabBarView(
+                controller: tabController,
+                children: widget.views,
+              ),
             ),
           ),
         ),

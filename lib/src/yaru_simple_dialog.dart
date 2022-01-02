@@ -62,7 +62,7 @@ class YaruSimpleDialog extends StatelessWidget {
           IconButton(
               visualDensity: VisualDensity.compact,
               onPressed: () => Navigator.pop(context),
-              splashRadius: 24,
+              splashRadius: 16,
               icon: Icon(closeIconData))
         ],
       ),
