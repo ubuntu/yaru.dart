@@ -94,11 +94,13 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
         ),
         Padding(
           padding: const EdgeInsets.only(top: 30),
-          child: SizedBox(
-            height: widget.height,
-            child: TabBarView(
-              controller: tabController,
-              children: widget.views,
+          child: SingleChildScrollView(
+            child: SizedBox(
+              height: widget.height,
+              child: TabBarView(
+                controller: tabController,
+                children: widget.views,
+              ),
             ),
           ),
         ),
