@@ -76,6 +76,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
             ),
             child: TabBar(
               controller: tabController,
+              labelColor: Theme.of(context).colorScheme.onSurface,
               indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                   color:
