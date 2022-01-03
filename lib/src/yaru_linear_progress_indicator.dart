@@ -65,6 +65,13 @@ class YaruLinearProgressIndicator extends StatelessWidget {
   /// become '10%'.
   final String? semanticsValue;
 
+  Color _getCurrentColor(BuildContext context) {
+    return valueColor?.value ??
+        color ??
+        ProgressIndicatorTheme.of(context).color ??
+        Theme.of(context).colorScheme.primary;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -74,7 +81,7 @@ class YaruLinearProgressIndicator extends StatelessWidget {
         value: value,
         color: color,
         valueColor: valueColor,
-        backgroundColor: Theme.of(context).colorScheme.onSurface.withAlpha(20),
+        backgroundColor: _getCurrentColor(context).withAlpha(50),
         minHeight: 6,
         semanticsLabel: semanticsLabel,
         semanticsValue: semanticsValue,
