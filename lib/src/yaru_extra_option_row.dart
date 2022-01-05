@@ -6,6 +6,7 @@ class YaruExtraOptionRow extends StatelessWidget {
   /// Creates a row having switch, label, description and YaruOptionButton.
   const YaruExtraOptionRow({
     Key? key,
+    required this.enabled,
     required this.actionLabel,
     this.actionDescription,
     required this.value,
@@ -13,6 +14,9 @@ class YaruExtraOptionRow extends StatelessWidget {
     required this.onPressed,
     required this.iconData,
   }) : super(key: key);
+
+  /// Whether or not we can interact with the widget
+  final bool enabled;
 
   /// Specifies the label for the row.
   final String actionLabel;
@@ -62,24 +66,23 @@ class YaruExtraOptionRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final value = this.value;
-
-    if (value == null) {
-      return const SizedBox();
-    }
-
     return YaruRow(
-      trailingWidget: Text(actionLabel),
+      enabled: enabled,
+      trailingWidget: Text(
+        actionLabel,
+        style:
+            enabled ? null : TextStyle(color: Theme.of(context).disabledColor),
+      ),
       description: actionDescription,
       actionWidget: Row(
         children: [
           Switch(
-            value: value,
-            onChanged: onChanged,
+            value: value ?? false,
+            onChanged: enabled ? onChanged : null,
           ),
           const SizedBox(width: 8.0),
           YaruOptionButton(
-            onPressed: onPressed,
+            onPressed: () => enabled ? onPressed : null,
             iconData: iconData,
           ),
         ],
