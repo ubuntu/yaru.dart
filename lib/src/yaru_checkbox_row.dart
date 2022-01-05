@@ -11,7 +11,7 @@ class YaruCheckboxRow extends StatelessWidget {
   }) : super(key: key);
 
   /// Whether or not we can interact with the checkbox
-  final bool? enabled;
+  final bool enabled;
 
   /// The current value of the checkbox
   final bool? value;
@@ -40,13 +40,6 @@ class YaruCheckboxRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final enabled = this.enabled;
-    final value = this.value;
-
-    if (enabled == null || value == null) {
-      return const SizedBox();
-    }
-
     return Row(
       children: [
         Checkbox(
