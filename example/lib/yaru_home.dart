@@ -29,6 +29,7 @@ class _YaruHomeState extends State<YaruHome> {
         builder: (_) => Column(
           children: const [
             YaruRow(
+              enabled: true,
               trailingWidget: Text('trailingWidget'),
               actionWidget: Text('actionWidget'),
               description: 'description',
@@ -40,6 +41,7 @@ class _YaruHomeState extends State<YaruHome> {
         title: 'YaruExtraOptionRow',
         iconData: YaruIcons.emote_angry,
         builder: (_) => YaruExtraOptionRow(
+          enabled: true,
           actionLabel: "ActionLabel",
           iconData: YaruIcons.addon,
           onChanged: (c) {
@@ -134,6 +136,7 @@ class _YaruHomeState extends State<YaruHome> {
           ),
           children: [
             YaruRow(
+              enabled: true,
               trailingWidget: Text("Trailing Widget"),
               actionWidget: Text("Action Widget"),
               description: "Description",
@@ -160,6 +163,7 @@ class _YaruHomeState extends State<YaruHome> {
         title: 'YaruSliderRow',
         iconData: YaruIcons.emote_uncertain,
         builder: (_) => YaruSliderRow(
+          enabled: true,
           actionLabel: "actionLabel",
           value: _sliderValue,
           min: 0,
@@ -191,6 +195,7 @@ class _YaruHomeState extends State<YaruHome> {
         title: 'YaruSwitchRow',
         iconData: YaruIcons.emote_raspberry,
         builder: (_) => YaruSwitchRow(
+          enabled: true,
           value: _yaruSwitchEnabled,
           onChanged: (v) {
             setState(() {
@@ -204,6 +209,7 @@ class _YaruHomeState extends State<YaruHome> {
         title: 'YaruToggleButtonsRow',
         iconData: YaruIcons.emote_shutmouth,
         builder: (_) => YaruToggleButtonsRow(
+          enabled: true,
           actionLabel: "Action Label",
           labels: ["label1", "label2"],
           onPressed: (v) {
