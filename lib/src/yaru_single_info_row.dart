@@ -33,6 +33,7 @@ class YaruSingleInfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruRow(
+      enabled: true,
       trailingWidget: Text(infoLabel),
       actionWidget: Expanded(
         flex: 2,
