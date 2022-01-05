@@ -19,11 +19,15 @@ class YaruSwitchRow extends StatelessWidget {
   ///```
   const YaruSwitchRow({
     Key? key,
+    required this.enabled,
     required this.trailingWidget,
     this.actionDescription,
     required this.value,
     required this.onChanged,
   }) : super(key: key);
+
+  /// Whether or not we can interact with the widget
+  final bool enabled;
 
   /// The [Widget] placed at the trailing position.
   final Widget trailingWidget;
@@ -39,18 +43,13 @@ class YaruSwitchRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final value = this.value;
-
-    if (value == null) {
-      return const SizedBox();
-    }
-
     return YaruRow(
+      enabled: enabled,
       trailingWidget: trailingWidget,
       description: actionDescription,
       actionWidget: Switch(
-        value: value,
-        onChanged: onChanged,
+        value: value ?? false,
+        onChanged: enabled ? onChanged : null,
       ),
     );
   }
