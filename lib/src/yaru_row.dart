@@ -17,6 +17,7 @@ class YaruRow extends StatelessWidget {
     required this.trailingWidget,
     this.description,
     required this.actionWidget,
+    required this.enabled,
     this.width,
   }) : super(key: key);
 
@@ -34,6 +35,9 @@ class YaruRow extends StatelessWidget {
 
   /// The [Widget] placed after the [trailingWidget].
   final Widget actionWidget;
+
+  /// Whether or not we can interact with the widget
+  final bool enabled;
 
   /// The `width` of the [Widget], by default it will be 500.
   final double? width;
