@@ -66,7 +66,11 @@ class YaruRow extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Text(
                         description!,
-                        style: Theme.of(context).textTheme.caption,
+                        style: enabled
+                            ? Theme.of(context).textTheme.caption
+                            : TextStyle(
+                                color: Theme.of(context).disabledColor,
+                              ),
                       ),
                     ),
                 ],
