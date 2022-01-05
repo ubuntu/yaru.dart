@@ -31,7 +31,7 @@ class YaruToggleButtonsRow extends StatelessWidget {
   ///```
   const YaruToggleButtonsRow({
     Key? key,
-    required this.enabled,
+    this.enabled = true,
     required this.actionLabel,
     this.actionDescription,
     required this.labels,
@@ -75,11 +75,7 @@ class YaruToggleButtonsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedValues = this.selectedValues;
-
-    if (selectedValues == null) {
-      return const SizedBox();
-    }
+    final enabled = this.enabled && selectedValues != null;
 
     return YaruRow(
       enabled: enabled,
@@ -87,7 +83,8 @@ class YaruToggleButtonsRow extends StatelessWidget {
       description: actionDescription,
       actionWidget: ToggleButtons(
         constraints: const BoxConstraints(minHeight: 40.0),
-        isSelected: selectedValues,
+        isSelected:
+            selectedValues ?? List.generate(labels.length, (_) => false),
         children: labels
             .map(
               (label) => Padding(

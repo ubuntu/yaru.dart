@@ -4,7 +4,7 @@ class YaruCheckboxRow extends StatelessWidget {
   /// Creates a check box in a row along with a text
   const YaruCheckboxRow({
     Key? key,
-    required this.enabled,
+    this.enabled = true,
     required this.value,
     required this.onChanged,
     required this.text,

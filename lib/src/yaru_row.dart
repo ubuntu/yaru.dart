@@ -44,40 +44,46 @@ class YaruRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width ?? 500,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (leadingWidget != null) ...[
-              leadingWidget!,
-              const SizedBox(width: 8)
-            ],
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  trailingWidget,
-                  if (description != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: Text(
-                        description!,
-                        style: enabled
-                            ? Theme.of(context).textTheme.caption
-                            : TextStyle(
-                                color: Theme.of(context).disabledColor,
-                              ),
+    return DefaultTextStyle(
+      style: TextStyle(
+        color: enabled
+            ? Theme.of(context).textTheme.bodyText1!.color
+            : Theme.of(context).disabledColor,
+      ),
+      child: SizedBox(
+        width: width ?? 500,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (leadingWidget != null) ...[
+                leadingWidget!,
+                const SizedBox(width: 8)
+              ],
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    trailingWidget,
+                    if (description != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: Text(
+                          description!,
+                          style: enabled
+                              ? Theme.of(context).textTheme.caption
+                              : Theme.of(context).textTheme.caption?.copyWith(
+                                  color: Theme.of(context).disabledColor),
+                        ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            actionWidget,
-          ],
+              actionWidget,
+            ],
+          ),
         ),
       ),
     );

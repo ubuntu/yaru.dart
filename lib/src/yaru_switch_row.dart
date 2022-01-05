@@ -19,7 +19,7 @@ class YaruSwitchRow extends StatelessWidget {
   ///```
   const YaruSwitchRow({
     Key? key,
-    required this.enabled,
+    this.enabled = true,
     required this.trailingWidget,
     this.actionDescription,
     required this.value,
@@ -43,6 +43,8 @@ class YaruSwitchRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final enabled = this.enabled && value != null;
+
     return YaruRow(
       enabled: enabled,
       trailingWidget: trailingWidget,

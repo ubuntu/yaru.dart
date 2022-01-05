@@ -25,7 +25,7 @@ class YaruSliderRow extends StatelessWidget {
   /// ```
   const YaruSliderRow({
     Key? key,
-    required this.enabled,
+    this.enabled = true,
     required this.actionLabel,
     this.actionDescription,
     required this.value,
@@ -75,16 +75,11 @@ class YaruSliderRow extends StatelessWidget {
   Widget build(BuildContext context) {
     const thumbRadius = 24.0;
 
+    final enabled = this.enabled && value != null;
+
     return YaruRow(
       enabled: enabled,
-      trailingWidget: Text(
-        actionLabel,
-        style: enabled
-            ? null
-            : TextStyle(
-                color: Theme.of(context).disabledColor,
-              ),
-      ),
+      trailingWidget: Text(actionLabel),
       description: actionDescription,
       actionWidget: Expanded(
         flex: 2,
@@ -93,9 +88,6 @@ class YaruSliderRow extends StatelessWidget {
             if (showValue)
               Text(
                 value?.toStringAsFixed(fractionDigits) ?? '',
-                style: enabled
-                    ? null
-                    : TextStyle(color: Theme.of(context).disabledColor),
               ),
             Expanded(
               child: LayoutBuilder(
