@@ -25,6 +25,7 @@ class YaruSliderRow extends StatelessWidget {
   /// ```
   const YaruSliderRow({
     Key? key,
+    required this.enabled,
     required this.actionLabel,
     this.actionDescription,
     required this.value,
@@ -35,6 +36,9 @@ class YaruSliderRow extends StatelessWidget {
     this.fractionDigits = 0,
     required this.onChanged,
   }) : super(key: key);
+
+  /// Whether or not we can interact with the widget
+  final bool enabled;
 
   /// Name of the setting
   final String actionLabel;
@@ -70,14 +74,17 @@ class YaruSliderRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const thumbRadius = 24.0;
-    final value = this.value;
-
-    if (value == null) {
-      return const SizedBox();
-    }
 
     return YaruRow(
-      trailingWidget: Text(actionLabel),
+      enabled: enabled,
+      trailingWidget: Text(
+        actionLabel,
+        style: enabled
+            ? null
+            : TextStyle(
+                color: Theme.of(context).disabledColor,
+              ),
+      ),
       description: actionDescription,
       actionWidget: Expanded(
         flex: 2,
@@ -85,7 +92,10 @@ class YaruSliderRow extends StatelessWidget {
           children: [
             if (showValue)
               Text(
-                value.toStringAsFixed(fractionDigits),
+                value?.toStringAsFixed(fractionDigits) ?? '',
+                style: enabled
+                    ? null
+                    : TextStyle(color: Theme.of(context).disabledColor),
               ),
             Expanded(
               child: LayoutBuilder(
@@ -101,11 +111,11 @@ class YaruSliderRow extends StatelessWidget {
                         child: const YaruSliderValueMarker(),
                       ),
                     Slider(
-                      label: value.toStringAsFixed(0),
+                      label: value?.toStringAsFixed(0),
                       min: min,
                       max: max,
-                      value: value,
-                      onChanged: onChanged,
+                      value: value ?? min,
+                      onChanged: enabled ? onChanged : null,
                     ),
                   ],
                 ),
