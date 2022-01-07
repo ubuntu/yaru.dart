@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:yaru_icons/widgets/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
@@ -14,6 +14,7 @@ class YaruRowList extends StatelessWidget {
         actionWidget: Text("Action Widget"),
         leadingWidget: Icon(YaruIcons.audio),
         description: "Description",
+        enabled: true,
       ),
       itemCount: 20,
     );

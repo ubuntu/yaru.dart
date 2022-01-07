@@ -18,7 +18,7 @@ class YaruOptionButton extends StatelessWidget {
   }) : super(key: key);
 
   /// Callback that gets invoked when the button is clicked.
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   /// The [IconData] is place as a child of [OutlinedButton].
   final IconData iconData;

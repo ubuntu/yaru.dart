@@ -25,6 +25,7 @@ class YaruSliderRow extends StatelessWidget {
   /// ```
   const YaruSliderRow({
     Key? key,
+    this.enabled = true,
     required this.actionLabel,
     this.actionDescription,
     required this.value,
@@ -35,6 +36,9 @@ class YaruSliderRow extends StatelessWidget {
     this.fractionDigits = 0,
     required this.onChanged,
   }) : super(key: key);
+
+  /// Whether or not we can interact with the widget
+  final bool enabled;
 
   /// Name of the setting
   final String actionLabel;
@@ -70,13 +74,11 @@ class YaruSliderRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const thumbRadius = 24.0;
-    final value = this.value;
 
-    if (value == null) {
-      return const SizedBox();
-    }
+    final enabled = this.enabled && value != null;
 
     return YaruRow(
+      enabled: enabled,
       trailingWidget: Text(actionLabel),
       description: actionDescription,
       actionWidget: Expanded(
@@ -85,7 +87,7 @@ class YaruSliderRow extends StatelessWidget {
           children: [
             if (showValue)
               Text(
-                value.toStringAsFixed(fractionDigits),
+                value?.toStringAsFixed(fractionDigits) ?? '',
               ),
             Expanded(
               child: LayoutBuilder(
@@ -101,11 +103,11 @@ class YaruSliderRow extends StatelessWidget {
                         child: const YaruSliderValueMarker(),
                       ),
                     Slider(
-                      label: value.toStringAsFixed(0),
+                      label: value?.toStringAsFixed(0),
                       min: min,
                       max: max,
-                      value: value,
-                      onChanged: onChanged,
+                      value: value ?? min,
+                      onChanged: enabled ? onChanged : null,
                     ),
                   ],
                 ),

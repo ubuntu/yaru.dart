@@ -34,31 +34,4 @@ void main() {
       expect(finder, findsOneWidget);
     },
   );
-
-  testWidgets(
-    'when value=null returns SizedBox',
-    (WidgetTester tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: YaruExtraOptionRow(
-              actionLabel: 'Repeat Keys',
-              actionDescription: 'Key presses repeat when key is held down',
-              value: null,
-              onChanged: (_) {},
-              onPressed: () {},
-              iconData: const IconData(0),
-            ),
-          ),
-        ),
-      );
-
-      expect(find.text('Repeat Keys'), findsNothing);
-      expect(find.byType(Switch), findsNothing);
-      expect(find.byType(YaruOptionButton), findsNothing);
-
-      /// returns [SizedBox] when value=null
-      expect(find.byType(SizedBox), findsOneWidget);
-    },
-  );
 }

@@ -25,22 +25,4 @@ void main() {
     expect(find.byType(YaruRow), findsOneWidget);
     expect(findValue, true);
   });
-
-  testWidgets('- Returns SizedBox when value = null',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: YaruSwitchRow(
-          onChanged: (v) {},
-          trailingWidget: const Text("Trailing Widget"),
-          value: null,
-          actionDescription: "Description",
-        ),
-      ),
-    ));
-
-    expect(find.text("Description"), findsNothing);
-    expect(find.text("Trailing Widget"), findsNothing);
-    expect(find.byType(SizedBox), findsOneWidget);
-  });
 }

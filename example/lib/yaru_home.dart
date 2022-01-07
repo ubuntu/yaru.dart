@@ -29,6 +29,7 @@ class _YaruHomeState extends State<YaruHome> {
         builder: (_) => Column(
           children: const [
             YaruRow(
+              enabled: true,
               trailingWidget: Text('trailingWidget'),
               actionWidget: Text('actionWidget'),
               description: 'description',
@@ -134,6 +135,7 @@ class _YaruHomeState extends State<YaruHome> {
           ),
           children: [
             YaruRow(
+              enabled: true,
               trailingWidget: Text("Trailing Widget"),
               actionWidget: Text("Action Widget"),
               description: "Description",
@@ -221,7 +223,6 @@ class _YaruHomeState extends State<YaruHome> {
         builder: (_) => YaruCheckboxRow(
           value: _isCheckBoxSelected,
           text: "Text",
-          enabled: true,
           onChanged: (v) {
             setState(() {
               _isCheckBoxSelected = v!;
