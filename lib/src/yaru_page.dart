@@ -14,6 +14,7 @@ class YaruPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: ScrollController(),
       child: Padding(
         padding: padding ?? const EdgeInsets.all(kDefaultPagePadding),
         child: child,
