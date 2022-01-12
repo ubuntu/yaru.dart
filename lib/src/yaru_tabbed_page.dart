@@ -62,7 +62,10 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(kDefaultPagePadding),
+          padding: const EdgeInsets.only(
+              top: kDefaultPagePadding,
+              right: kDefaultPagePadding,
+              left: kDefaultPagePadding),
           child: Container(
             width: widget.width,
             height: 60,
