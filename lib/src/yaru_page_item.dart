@@ -6,11 +6,9 @@ class YaruPageItem {
     required this.builder,
     required this.iconData,
     this.wrapInScrollView,
-    this.padding,
   });
   final String title;
   final WidgetBuilder builder;
   final IconData iconData;
   final bool? wrapInScrollView;
-  final double? padding;
 }
