@@ -6,8 +6,8 @@ class YaruColorPickerButton extends StatelessWidget {
     Key? key,
     required this.color,
     required this.onPressed,
-  })  : size = 40.0,
-        super(key: key);
+    this.size = 40.0,
+  }) : super(key: key);
 
   /// Is executed when pressing the button.
   final VoidCallback onPressed;
