@@ -44,14 +44,12 @@ class YaruLandscapeLayout extends StatefulWidget {
 
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
-  late ScrollController _contentScrollController;
   late TextEditingController _searchController;
   final _filteredItems = <YaruPageItem>[];
 
   @override
   void initState() {
     _selectedIndex = widget.selectedIndex;
-    _contentScrollController = ScrollController();
     _searchController = TextEditingController();
     super.initState();
   }
