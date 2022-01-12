@@ -9,26 +9,30 @@ class YaruOptionCardList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-          width: 300,
-          height: 300,
-          child: YaruOptionCard(
-            titleText: 'YaruOptionCard 1',
-            bodyText: 'Description...',
-            selected: true,
-            onSelected: () {},
-            okIconData: YaruIcons.camera_photo,
+        Expanded(
+          child: SizedBox(
+            width: 300,
+            height: 300,
+            child: YaruOptionCard(
+              titleText: 'YaruOptionCard 1',
+              bodyText: 'Description...',
+              selected: true,
+              onSelected: () {},
+              okIconData: YaruIcons.camera_photo,
+            ),
           ),
         ),
-        SizedBox(
-          width: 300,
-          height: 300,
-          child: YaruOptionCard(
-            titleText: 'YaruOptionCard 2',
-            bodyText: 'Description...',
-            selected: true,
-            onSelected: () {},
-            okIconData: YaruIcons.camera_photo,
+        Expanded(
+          child: SizedBox(
+            width: 300,
+            height: 300,
+            child: YaruOptionCard(
+              titleText: 'YaruOptionCard 2',
+              bodyText: 'Description...',
+              selected: true,
+              onSelected: () {},
+              okIconData: YaruIcons.camera_photo,
+            ),
           ),
         ),
       ],

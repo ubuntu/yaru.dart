@@ -8,6 +8,7 @@ export 'src/yaru_master_detail_page.dart';
 export 'src/yaru_option_button.dart';
 export 'src/yaru_option_card.dart';
 export 'src/yaru_page_container.dart';
+export 'src/yaru_page.dart';
 export 'src/yaru_page_item.dart';
 export 'src/yaru_row.dart';
 export 'src/yaru_search_app_bar.dart';
