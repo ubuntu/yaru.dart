@@ -297,7 +297,16 @@ class _YaruHomeState extends State<YaruHome> {
                   'Television'
                 ]),
               ),
-          iconData: YaruIcons.tab_new)
+          iconData: YaruIcons.tab_new),
+      YaruPageItem(
+          title: 'Color picker button',
+          builder: (_) => YaruPage(
+                child: Center(
+                  child: YaruColorPickerButton(
+                      color: Theme.of(context).primaryColor, onPressed: () {}),
+                ),
+              ),
+          iconData: YaruIcons.color_select)
     ];
 
     return YaruMasterDetailPage(
