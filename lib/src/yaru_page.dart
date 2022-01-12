@@ -9,13 +9,13 @@ class YaruPage extends StatelessWidget {
       : super(key: key);
 
   final Widget child;
-  final double? padding;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(padding ?? kDefaultPagePadding),
+        padding: padding ?? const EdgeInsets.all(kDefaultPagePadding),
         child: child,
       ),
     );
