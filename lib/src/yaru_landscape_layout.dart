@@ -112,10 +112,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                     ),
                   ),
                 ),
-                Expanded(
-                    child: Center(
-                  child: widget.pages[_selectedIndex].builder(context),
-                )),
+                Expanded(child: widget.pages[_selectedIndex].builder(context)),
               ],
             ),
           ),

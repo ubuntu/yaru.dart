@@ -126,22 +126,62 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
         title: 'YaruSection',
         iconData: YaruIcons.emote_glasses,
-        builder: (_) => YaruSection(
-          headline: 'Headline',
-          headerWidget: SizedBox(
-            child: CircularProgressIndicator(),
-            height: 20,
-            width: 20,
+        builder: (_) => YaruPage(
+          child: Column(
+            children: [
+              YaruSection(
+                headline: 'Headline',
+                headerWidget: SizedBox(
+                  child: CircularProgressIndicator(),
+                  height: 20,
+                  width: 20,
+                ),
+                children: [
+                  YaruRow(
+                    enabled: true,
+                    trailingWidget: Text("Trailing Widget"),
+                    actionWidget: Text("Action Widget"),
+                    description: "Description",
+                  ),
+                ],
+                width: 300,
+              ),
+              YaruSection(
+                headline: 'Headline',
+                headerWidget: SizedBox(
+                  child: CircularProgressIndicator(),
+                  height: 20,
+                  width: 20,
+                ),
+                children: [
+                  YaruRow(
+                    enabled: true,
+                    trailingWidget: Text("Trailing Widget"),
+                    actionWidget: Text("Action Widget"),
+                    description: "Description",
+                  ),
+                ],
+                width: 300,
+              ),
+              YaruSection(
+                headline: 'Headline',
+                headerWidget: SizedBox(
+                  child: CircularProgressIndicator(),
+                  height: 20,
+                  width: 20,
+                ),
+                children: [
+                  YaruRow(
+                    enabled: true,
+                    trailingWidget: Text("Trailing Widget"),
+                    actionWidget: Text("Action Widget"),
+                    description: "Description",
+                  ),
+                ],
+                width: 300,
+              )
+            ],
           ),
-          children: [
-            YaruRow(
-              enabled: true,
-              trailingWidget: Text("Trailing Widget"),
-              actionWidget: Text("Action Widget"),
-              description: "Description",
-            ),
-          ],
-          width: 300,
         ),
       ),
       YaruPageItem(
