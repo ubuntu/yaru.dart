@@ -113,18 +113,9 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                   ),
                 ),
                 Expanded(
-                    child: widget.pages[_selectedIndex].wrapInScrollView != null
-                        ? SingleChildScrollView(
-                            controller: _contentScrollController,
-                            child: Center(
-                              child:
-                                  widget.pages[_selectedIndex].builder(context),
-                            ),
-                          )
-                        : Center(
-                            child:
-                                widget.pages[_selectedIndex].builder(context),
-                          )),
+                    child: Center(
+                  child: widget.pages[_selectedIndex].builder(context),
+                )),
               ],
             ),
           ),

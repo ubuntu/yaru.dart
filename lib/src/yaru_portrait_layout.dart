@@ -72,15 +72,9 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
               },
             ),
           ),
-          body: page.wrapInScrollView != null
-              ? SingleChildScrollView(
-                  child: Center(
-                    child: page.builder(context),
-                  ),
-                )
-              : Center(
-                  child: page.builder(context),
-                ),
+          body: Center(
+            child: page.builder(context),
+          ),
         );
       },
     );

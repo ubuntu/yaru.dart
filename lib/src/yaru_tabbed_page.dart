@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/src/constants.dart';
 
 /// A width responsive widget combining a [TabBar] and a [TabBarView].
 ///
@@ -61,7 +62,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(kDefaultPagePadding),
           child: Container(
             width: widget.width,
             height: 60,
