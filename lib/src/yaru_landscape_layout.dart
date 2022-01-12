@@ -113,15 +113,27 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                   ),
                 ),
                 Expanded(
-                    child: SingleChildScrollView(
-                  controller: _contentScrollController,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: widget.pages[_selectedIndex].builder(context),
-                    ),
-                  ),
-                )),
+                    child: widget.pages[_selectedIndex].wrapInScrollView != null
+                        ? SingleChildScrollView(
+                            controller: _contentScrollController,
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(
+                                    widget.pages[_selectedIndex].padding ??
+                                        0.0),
+                                child: widget.pages[_selectedIndex]
+                                    .builder(context),
+                              ),
+                            ),
+                          )
+                        : Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(
+                                  widget.pages[_selectedIndex].padding ?? 0.0),
+                              child:
+                                  widget.pages[_selectedIndex].builder(context),
+                            ),
+                          )),
               ],
             ),
           ),

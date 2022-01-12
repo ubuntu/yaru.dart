@@ -107,6 +107,7 @@ class _YaruHomeState extends State<YaruHome> {
         ),
       ),
       YaruPageItem(
+        wrapInScrollView: true,
         title: 'YaruRow',
         iconData: YaruIcons.emote_cool,
         builder: (_) => YaruRowList(),
@@ -233,8 +234,13 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
           title: 'YaruTabbedPage',
           builder: (_) => Center(
-                child: YaruTabbedPage(width: 1000, height: 500, views: [
-                  Text('Addon'),
+                child: YaruTabbedPage(views: [
+                  SingleChildScrollView(
+                    child: TextField(
+                      maxLines: 100,
+                      // expands: true,
+                    ),
+                  ),
                   Text('accessibility'),
                   Text('Audio'),
                   Text('AddressBook'),
