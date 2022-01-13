@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 class YaruColorPickerButton extends StatelessWidget {
   const YaruColorPickerButton({
     Key? key,
+    this.enabled = true,
     required this.color,
     required this.onPressed,
     this.size = 40.0,
   }) : super(key: key);
+
+  /// Whether or not we can interact with the button
+  final bool enabled;
 
   /// Is executed when pressing the button.
   final VoidCallback onPressed;
@@ -25,7 +29,7 @@ class YaruColorPickerButton extends StatelessWidget {
       height: size,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(padding: const EdgeInsets.all(0)),
-        onPressed: onPressed,
+        onPressed: enabled ? onPressed : null,
         child: SizedBox(
           width: size / 2,
           height: size / 2,
