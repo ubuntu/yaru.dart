@@ -21,25 +21,4 @@ void main() {
     expect(find.byType(ToggleButtons), findsOneWidget);
     expect(find.text("Label"), findsOneWidget);
   });
-
-  testWidgets('- selectedValues == null returns SizedBox',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: YaruToggleButtonsRow(
-          actionLabel: "Foo Label",
-          onPressed: (int x) {},
-          selectedValues: null,
-          actionDescription: "Foo Description",
-          labels: const ["Label"],
-        ),
-      ),
-    ));
-
-    expect(find.byType(SizedBox), findsOneWidget);
-    expect(find.text("Foo Label"), findsNothing);
-    expect(find.text("Foo Description"), findsNothing);
-    expect(find.byType(ToggleButtons), findsNothing);
-    expect(find.text("Label"), findsNothing);
-  });
 }

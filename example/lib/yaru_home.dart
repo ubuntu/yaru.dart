@@ -29,6 +29,7 @@ class _YaruHomeState extends State<YaruHome> {
         builder: (_) => Column(
           children: const [
             YaruRow(
+              enabled: true,
               trailingWidget: Text('trailingWidget'),
               actionWidget: Text('actionWidget'),
               description: 'description',
@@ -125,21 +126,62 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
         title: 'YaruSection',
         iconData: YaruIcons.emote_glasses,
-        builder: (_) => YaruSection(
-          headline: 'Headline',
-          headerWidget: SizedBox(
-            child: CircularProgressIndicator(),
-            height: 20,
-            width: 20,
+        builder: (_) => YaruPage(
+          child: Column(
+            children: [
+              YaruSection(
+                headline: 'Headline',
+                headerWidget: SizedBox(
+                  child: CircularProgressIndicator(),
+                  height: 20,
+                  width: 20,
+                ),
+                children: [
+                  YaruRow(
+                    enabled: true,
+                    trailingWidget: Text("Trailing Widget"),
+                    actionWidget: Text("Action Widget"),
+                    description: "Description",
+                  ),
+                ],
+                width: 300,
+              ),
+              YaruSection(
+                headline: 'Headline',
+                headerWidget: SizedBox(
+                  child: CircularProgressIndicator(),
+                  height: 20,
+                  width: 20,
+                ),
+                children: [
+                  YaruRow(
+                    enabled: true,
+                    trailingWidget: Text("Trailing Widget"),
+                    actionWidget: Text("Action Widget"),
+                    description: "Description",
+                  ),
+                ],
+                width: 300,
+              ),
+              YaruSection(
+                headline: 'Headline',
+                headerWidget: SizedBox(
+                  child: CircularProgressIndicator(),
+                  height: 20,
+                  width: 20,
+                ),
+                children: [
+                  YaruRow(
+                    enabled: true,
+                    trailingWidget: Text("Trailing Widget"),
+                    actionWidget: Text("Action Widget"),
+                    description: "Description",
+                  ),
+                ],
+                width: 300,
+              )
+            ],
           ),
-          children: [
-            YaruRow(
-              trailingWidget: Text("Trailing Widget"),
-              actionWidget: Text("Action Widget"),
-              description: "Description",
-            ),
-          ],
-          width: 300,
         ),
       ),
       YaruPageItem(
@@ -221,7 +263,6 @@ class _YaruHomeState extends State<YaruHome> {
         builder: (_) => YaruCheckboxRow(
           value: _isCheckBoxSelected,
           text: "Text",
-          enabled: true,
           onChanged: (v) {
             setState(() {
               _isCheckBoxSelected = v!;
@@ -232,8 +273,12 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
           title: 'YaruTabbedPage',
           builder: (_) => Center(
-                child: YaruTabbedPage(width: 1000, height: 500, views: [
-                  Text('Addon'),
+                child: YaruTabbedPage(views: [
+                  YaruPage(
+                    child: TextField(
+                      maxLines: 100,
+                    ),
+                  ),
                   Text('accessibility'),
                   Text('Audio'),
                   Text('AddressBook'),
@@ -252,7 +297,16 @@ class _YaruHomeState extends State<YaruHome> {
                   'Television'
                 ]),
               ),
-          iconData: YaruIcons.tab_new)
+          iconData: YaruIcons.tab_new),
+      YaruPageItem(
+          title: 'Color picker button',
+          builder: (_) => YaruPage(
+                child: Center(
+                  child: YaruColorPickerButton(
+                      color: Theme.of(context).primaryColor, onPressed: () {}),
+                ),
+              ),
+          iconData: YaruIcons.color_select)
     ];
 
     return YaruMasterDetailPage(

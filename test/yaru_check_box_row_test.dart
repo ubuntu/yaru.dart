@@ -31,22 +31,4 @@ void main() {
     expect(finder, findsOneWidget);
     expect(sizedBoxFinder, findsNothing);
   });
-  testWidgets('when enabled == null || value == null returns SizedBox',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: YaruCheckboxRow(
-          onChanged: (valeu) {},
-          enabled: null,
-          text: "Check Box",
-          value: null,
-        ),
-      ),
-    ));
-    final sizedBoxFinder = find.byWidgetPredicate(
-      (widget) => widget is SizedBox && widget.width == null,
-      description: "Sized box having width as null",
-    );
-    expect(sizedBoxFinder, findsOneWidget);
-  });
 }

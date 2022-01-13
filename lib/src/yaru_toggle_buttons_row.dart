@@ -31,12 +31,16 @@ class YaruToggleButtonsRow extends StatelessWidget {
   ///```
   const YaruToggleButtonsRow({
     Key? key,
+    this.enabled = true,
     required this.actionLabel,
     this.actionDescription,
     required this.labels,
     required this.selectedValues,
     required this.onPressed,
   }) : super(key: key);
+
+  /// Whether or not we can interact with the widget
+  final bool enabled;
 
   /// The label placed at trailing Position.
   final String actionLabel;
@@ -71,27 +75,30 @@ class YaruToggleButtonsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedValues = this.selectedValues;
-
-    if (selectedValues == null) {
-      return const SizedBox();
-    }
+    final enabled = this.enabled && selectedValues != null;
 
     return YaruRow(
+      enabled: enabled,
       trailingWidget: Text(actionLabel),
       description: actionDescription,
       actionWidget: ToggleButtons(
         constraints: const BoxConstraints(minHeight: 40.0),
-        isSelected: selectedValues,
+        isSelected:
+            selectedValues ?? List.generate(labels.length, (_) => false),
         children: labels
             .map(
               (label) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                child: Text(label),
+                child: Text(
+                  label,
+                  style: enabled
+                      ? null
+                      : TextStyle(color: Theme.of(context).disabledColor),
+                ),
               ),
             )
             .toList(),
-        onPressed: onPressed,
+        onPressed: enabled ? onPressed : null,
       ),
     );
   }

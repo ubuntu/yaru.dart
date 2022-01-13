@@ -17,6 +17,7 @@ class YaruRow extends StatelessWidget {
     required this.trailingWidget,
     this.description,
     required this.actionWidget,
+    required this.enabled,
     this.width,
   }) : super(key: key);
 
@@ -35,41 +36,54 @@ class YaruRow extends StatelessWidget {
   /// The [Widget] placed after the [trailingWidget].
   final Widget actionWidget;
 
+  /// Whether or not we can interact with the widget
+  final bool enabled;
+
   /// The `width` of the [Widget], by default it will be 500.
   final double? width;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width ?? 500,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (leadingWidget != null) ...[
-              leadingWidget!,
-              const SizedBox(width: 8)
-            ],
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  trailingWidget,
-                  if (description != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: Text(
-                        description!,
-                        style: Theme.of(context).textTheme.caption,
+    return DefaultTextStyle(
+      style: TextStyle(
+        color: enabled
+            ? Theme.of(context).textTheme.bodyText1!.color
+            : Theme.of(context).disabledColor,
+      ),
+      child: SizedBox(
+        width: width ?? 500,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (leadingWidget != null) ...[
+                leadingWidget!,
+                const SizedBox(width: 8)
+              ],
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    trailingWidget,
+                    if (description != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: Text(
+                          description!,
+                          style: enabled
+                              ? Theme.of(context).textTheme.caption
+                              : Theme.of(context).textTheme.caption?.copyWith(
+                                  color: Theme.of(context).disabledColor),
+                        ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            actionWidget,
-          ],
+              actionWidget,
+            ],
+          ),
         ),
       ),
     );

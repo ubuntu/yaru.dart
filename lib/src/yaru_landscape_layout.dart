@@ -44,14 +44,12 @@ class YaruLandscapeLayout extends StatefulWidget {
 
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
-  late ScrollController _contentScrollController;
   late TextEditingController _searchController;
   final _filteredItems = <YaruPageItem>[];
 
   @override
   void initState() {
     _selectedIndex = widget.selectedIndex;
-    _contentScrollController = ScrollController();
     _searchController = TextEditingController();
     super.initState();
   }
@@ -112,16 +110,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                     ),
                   ),
                 ),
-                Expanded(
-                    child: SingleChildScrollView(
-                  controller: _contentScrollController,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: widget.pages[_selectedIndex].builder(context),
-                    ),
-                  ),
-                )),
+                Expanded(child: widget.pages[_selectedIndex].builder(context)),
               ],
             ),
           ),
