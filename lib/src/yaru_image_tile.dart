@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 
 class ImageTile extends StatelessWidget {
   /// Creates a Image Tile from the image path given in the path property.
-  const ImageTile({Key? key, required this.path, this.onTap, required this.currentlySelected, this.filterQuality})
+  const ImageTile(
+      {Key? key,
+      required this.path,
+      this.onTap,
+      required this.currentlySelected,
+      this.filterQuality})
       : super(key: key);
 
   // Specifies the path of the asset
@@ -46,12 +51,16 @@ class ImageTile extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
-            color: currentlySelected ? Theme.of(context).primaryColor.withOpacity(0.3) : Colors.transparent),
+            color: currentlySelected
+                ? Theme.of(context).primaryColor.withOpacity(0.3)
+                : Colors.transparent),
         child: Padding(
           padding: const EdgeInsets.all(6.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4),
-            child: Image.file(File(path), filterQuality: filterQuality ?? FilterQuality.low, fit: BoxFit.fill),
+            child: Image.file(File(path),
+                filterQuality: filterQuality ?? FilterQuality.low,
+                fit: BoxFit.fill),
           ),
         ),
       ),
