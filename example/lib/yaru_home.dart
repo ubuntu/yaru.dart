@@ -20,6 +20,7 @@ class _YaruHomeState extends State<YaruHome> {
   bool _yaruSwitchEnabled = false;
   final List<bool> _selectedValues = [false, false];
   bool _isCheckBoxSelected = false;
+
   @override
   Widget build(BuildContext context) {
     final pageItems = <YaruPageItem>[
@@ -211,22 +212,6 @@ class _YaruHomeState extends State<YaruHome> {
               _sliderValue = v;
             });
           },
-        ),
-      ),
-      YaruPageItem(
-        title: 'YaruSliderSecondary',
-        iconData: YaruIcons.emote_tired,
-        builder: (_) => YaruSliderSecondary(
-          label: "Label",
-          value: _sliderValue,
-          min: 0,
-          max: 100,
-          onChanged: (v) {
-            setState(() {
-              _sliderValue = v;
-            });
-          },
-          enabled: true,
         ),
       ),
       YaruPageItem(
