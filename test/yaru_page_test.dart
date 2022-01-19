@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/src/constants.dart';
-import 'package:yaru_widgets/src/yaru_option_button.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 void main() {
@@ -35,7 +34,8 @@ void main() {
 
     final paddingFinder = find.byWidgetPredicate(
       (widget) =>
-          widget is Padding && widget.padding == const EdgeInsets.all(kDefaultPagePadding),
+          widget is Padding &&
+          widget.padding == const EdgeInsets.all(kDefaultPagePadding),
     );
     expect(paddingFinder, findsOneWidget);
     expect(find.byType(Container), findsOneWidget);
