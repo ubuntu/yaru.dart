@@ -24,6 +24,7 @@ class YaruSwitchRow extends StatelessWidget {
     this.actionDescription,
     required this.value,
     required this.onChanged,
+    this.width,
   }) : super(key: key);
 
   /// Whether or not we can interact with the widget
@@ -41,11 +42,15 @@ class YaruSwitchRow extends StatelessWidget {
   /// The callback that  gets invoked when the [Switch] value changes.
   final Function(bool) onChanged;
 
+  /// Optional width passed to [YaruRow]
+  final double? width;
+
   @override
   Widget build(BuildContext context) {
     final enabled = this.enabled && value != null;
 
     return YaruRow(
+      width: width,
       enabled: enabled,
       trailingWidget: trailingWidget,
       description: actionDescription,

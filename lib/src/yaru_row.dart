@@ -51,7 +51,7 @@ class YaruRow extends StatelessWidget {
             : Theme.of(context).disabledColor,
       ),
       child: SizedBox(
-        width: width ?? 500,
+        width: width,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

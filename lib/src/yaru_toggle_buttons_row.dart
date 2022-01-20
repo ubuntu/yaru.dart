@@ -37,6 +37,7 @@ class YaruToggleButtonsRow extends StatelessWidget {
     required this.labels,
     required this.selectedValues,
     required this.onPressed,
+    this.width,
   }) : super(key: key);
 
   /// Whether or not we can interact with the widget
@@ -73,11 +74,15 @@ class YaruToggleButtonsRow extends StatelessWidget {
   /// When the callback is null, all toggle buttons will be disabled.
   final Function(int) onPressed;
 
+  /// Optional width passed to [YaruRow]
+  final double? width;
+
   @override
   Widget build(BuildContext context) {
     final enabled = this.enabled && selectedValues != null;
 
     return YaruRow(
+      width: width,
       enabled: enabled,
       trailingWidget: Text(actionLabel),
       description: actionDescription,

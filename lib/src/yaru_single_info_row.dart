@@ -18,6 +18,7 @@ class YaruSingleInfoRow extends StatelessWidget {
     Key? key,
     required this.infoLabel,
     required this.infoValue,
+    this.width,
   }) : super(key: key);
 
   /// Specifies the label for the information and is placed at the trailing position.
@@ -30,9 +31,13 @@ class YaruSingleInfoRow extends StatelessWidget {
   /// Default color of the text will be [Theme.of(context).colorScheme.onSurface.withAlpha(150)].
   final String infoValue;
 
+  /// Optional width passed to [YaruRow]
+  final double? width;
+
   @override
   Widget build(BuildContext context) {
     return YaruRow(
+      width: width,
       enabled: true,
       trailingWidget: Text(infoLabel),
       actionWidget: Expanded(

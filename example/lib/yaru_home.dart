@@ -5,6 +5,8 @@ import 'package:yaru_widgets_example/widgets/list_yaru_options.dart';
 import 'package:yaru_widgets_example/widgets/yaru_option_card_list.dart';
 import 'package:yaru_widgets_example/widgets/yaru_row_list.dart';
 
+const kMinSectionWidth = 400.0;
+
 class YaruHome extends StatefulWidget {
   const YaruHome({Key? key}) : super(key: key);
 
@@ -15,8 +17,10 @@ class YaruHome extends StatefulWidget {
 class _YaruHomeState extends State<YaruHome> {
   bool _extraOptionValue = false;
   bool _isImageSelected = false;
-  final TextEditingController _textEditingController = TextEditingController();
+  final _textEditingController = TextEditingController();
   double _sliderValue = 0;
+
+  double sectionWidth = kMinSectionWidth;
   bool _yaruSwitchEnabled = false;
   final List<bool> _selectedValues = [false, false];
   bool _isCheckBoxSelected = false;
@@ -108,16 +112,6 @@ class _YaruHomeState extends State<YaruHome> {
         builder: (_) => YaruPage(child: YaruOptionCardList()),
       ),
       YaruPageItem(
-        title: 'YaruPageContainer',
-        iconData: YaruIcons.emote_laugh,
-        builder: (_) => YaruPage(
-          child: YaruPageContainer(
-            child: Text("Just a Container 🤷‍♂️"),
-            width: 200,
-          ),
-        ),
-      ),
-      YaruPageItem(
         title: 'YaruRow',
         iconData: YaruIcons.emote_cool,
         builder: (_) => YaruPage(child: YaruRowList()),
@@ -157,7 +151,7 @@ class _YaruHomeState extends State<YaruHome> {
                     description: "Description",
                   ),
                 ],
-                width: 300,
+                width: 400,
               ),
               YaruSection(
                 headline: 'Headline',
@@ -177,6 +171,7 @@ class _YaruHomeState extends State<YaruHome> {
                 width: 300,
               ),
               YaruSection(
+                width: sectionWidth,
                 headline: 'Headline',
                 headerWidget: SizedBox(
                   child: CircularProgressIndicator(),
@@ -190,8 +185,66 @@ class _YaruHomeState extends State<YaruHome> {
                     actionWidget: Text("Action Widget"),
                     description: "Description",
                   ),
+                  YaruSliderRow(
+                    actionLabel: "YaruSection width",
+                    value: sectionWidth,
+                    min: kMinSectionWidth,
+                    max: 1000,
+                    onChanged: (v) {
+                      setState(() {
+                        sectionWidth = v;
+                      });
+                    },
+                  ),
+                  YaruSwitchRow(
+                    value: _yaruSwitchEnabled,
+                    onChanged: (v) {
+                      setState(() {
+                        _yaruSwitchEnabled = v;
+                      });
+                    },
+                    trailingWidget: Text("Trailing Widget"),
+                  ),
+                  YaruSingleInfoRow(
+                    infoLabel: "Info Label",
+                    infoValue: "Info Value",
+                  ),
+                  YaruToggleButtonsRow(
+                    actionLabel: "Action Label",
+                    labels: ["label1", "label2"],
+                    onPressed: (v) {
+                      setState(() {
+                        _selectedValues[v] = !_selectedValues[v];
+                      });
+                    },
+                    selectedValues: _selectedValues,
+                    actionDescription: "Action Description",
+                  ),
+                  YaruExtraOptionRow(
+                    actionLabel: "ActionLabel",
+                    iconData: YaruIcons.addon,
+                    onChanged: (c) {
+                      setState(() {
+                        _extraOptionValue = c;
+                      });
+                    },
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (_) => YaruSimpleDialog(
+                              title: 'Test',
+                              closeIconData: YaruIcons.window_close,
+                              children: [
+                                Text(
+                                  'Hello YaruSimpleDialog',
+                                  textAlign: TextAlign.center,
+                                )
+                              ],
+                            )),
+                    value: _extraOptionValue,
+                    actionDescription: "Action Description",
+                  ),
                 ],
-                width: 300,
+                // width: 800,
               )
             ],
           ),
@@ -283,7 +336,11 @@ class _YaruHomeState extends State<YaruHome> {
                 YaruPage(
                   child: YaruRowList(),
                 ),
-                YaruPage(child: Text('accessibility')),
+                YaruPage(
+                    child: YaruSection(
+                  headline: 'Accessibility',
+                  children: [Text('accessibility')],
+                )),
                 YaruPage(child: Text('Audio')),
                 YaruPage(child: Text('AddressBook')),
                 YaruPage(child: Text('Television'))

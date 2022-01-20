@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/yaru_page_container.dart';
 
 class YaruSection extends StatelessWidget {
   /// Creates a yaru style section widget with multiple
@@ -31,38 +30,42 @@ class YaruSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YaruPageContainer(
-        width: width ?? 500,
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: SizedBox(
+          width: width,
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color:
+                    Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
+              ),
+              borderRadius: BorderRadius.circular(6.0),
             ),
-            borderRadius: BorderRadius.circular(6.0),
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        headline,
-                        style: Theme.of(context).textTheme.headline6,
-                        textAlign: TextAlign.left,
-                      ),
-                      headerWidget ?? const SizedBox()
-                    ],
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          headline,
+                          style: Theme.of(context).textTheme.headline6,
+                          textAlign: TextAlign.left,
+                        ),
+                        headerWidget ?? const SizedBox()
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Column(children: children)
-            ],
-          ),
-        ));
+                Column(children: children)
+              ],
+            ),
+          )),
+    );
   }
 }
