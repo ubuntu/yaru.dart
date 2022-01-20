@@ -313,7 +313,7 @@ class _YaruHomeState extends State<YaruHome> {
     ];
 
     return YaruMasterDetailPage(
-      appBarHeight: 90,
+      // appBarHeight: 48,
       leftPaneWidth: 280,
       previousIconData: YaruIcons.go_previous,
       searchHint: 'Search...',
