@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:yaru_widgets/src/yaru_page_item_list_view.dart';
 import 'package:yaru_widgets/src/yaru_search_app_bar.dart';
 
