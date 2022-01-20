@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/constants.dart';
 
-/// Wraps a child widget in a [ScrollView] and [Padding].
+/// Wraps a list of children widget in a [Column], [SingleChildScrollView] and [Padding].
 /// The padding defaults to [kDefaultPagePadding]
 /// but can be set if wanted.
 class YaruPage extends StatelessWidget {
