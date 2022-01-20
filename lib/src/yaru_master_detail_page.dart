@@ -23,12 +23,12 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// ```
   const YaruMasterDetailPage({
     Key? key,
-    required this.appBarHeight,
+    this.appBarHeight,
     required this.pageItems,
-    required this.previousIconData,
-    required this.searchIconData,
+    this.previousIconData,
+    this.searchIconData,
     required this.leftPaneWidth,
-    required this.searchHint,
+    this.searchHint,
   }) : super(key: key);
 
   /// Creates horizontal array of pages.
@@ -38,19 +38,19 @@ class YaruMasterDetailPage extends StatefulWidget {
   final List<YaruPageItem> pageItems;
 
   /// Specifies the [AppBar] height.
-  final double appBarHeight;
+  final double? appBarHeight;
 
   /// Specifies the width of left pane.
   final double leftPaneWidth;
 
   /// Property to specify the previous icon data
-  final IconData previousIconData;
+  final IconData? previousIconData;
 
   /// The icon that is given to the search widget.
-  final IconData searchIconData;
+  final IconData? searchIconData;
 
   /// The hint text given to the search widget.
-  final String searchHint;
+  final String? searchHint;
 
   @override
   _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();

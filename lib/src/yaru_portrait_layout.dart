@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:yaru_widgets/src/yaru_page_item_list_view.dart';
 import 'package:yaru_widgets/src/yaru_search_app_bar.dart';
 
@@ -10,19 +11,19 @@ class YaruPortraitLayout extends StatefulWidget {
       required this.selectedIndex,
       required this.pages,
       required this.onSelected,
-      required this.previousIconData,
-      required this.appBarHeight,
-      required this.searchIconData,
-      required this.searchHint})
+      this.previousIconData,
+      this.appBarHeight,
+      this.searchIconData,
+      this.searchHint})
       : super(key: key);
 
   final int selectedIndex;
   final List<YaruPageItem> pages;
   final ValueChanged<int> onSelected;
-  final IconData previousIconData;
-  final double appBarHeight;
-  final IconData searchIconData;
-  final String searchHint;
+  final IconData? previousIconData;
+  final double? appBarHeight;
+  final IconData? searchIconData;
+  final String? searchHint;
 
   @override
   _YaruPortraitLayoutState createState() => _YaruPortraitLayoutState();
@@ -63,10 +64,10 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
         final page = widget.pages[_selectedIndex];
         return Scaffold(
           appBar: AppBar(
-            toolbarHeight: widget.appBarHeight,
+            toolbarHeight: widget.appBarHeight ?? kToolbarHeight,
             title: Text(page.title),
             leading: InkWell(
-              child: Icon(widget.previousIconData),
+              child: Icon(widget.previousIconData ?? Icons.navigate_before),
               onTap: () {
                 widget.onSelected(-1);
                 _navigator.pop(context);
@@ -129,6 +130,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
       }),
       appBarHeight: widget.appBarHeight,
       searchIconData: widget.searchIconData,
+      automaticallyImplyLeading: false,
     );
   }
 }
