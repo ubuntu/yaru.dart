@@ -15,9 +15,11 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.searchController,
     required this.onChanged,
     required this.onEscape,
-    required this.searchIconData,
-    required this.appBarHeight,
-    required this.searchHint,
+    required this.automaticallyImplyLeading,
+    this.searchIconData,
+    this.appBarHeight = kToolbarHeight,
+    this.textStyle,
+    this.searchHint,
   }) : super(key: key);
 
   /// Pass a new [TextEditingController] instance.
@@ -30,17 +32,26 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function() onEscape;
 
   /// Search icon for search bar.
-  final IconData searchIconData;
+  final IconData? searchIconData;
 
   /// The height of the [AppBar].
-  final double appBarHeight;
+  final double? appBarHeight;
 
   /// Specifies the search hint.
-  final String searchHint;
+  final String? searchHint;
+
+  /// Specifies the [TextStyle]
+  final TextStyle? textStyle;
+
+  /// If false, hides the search icon in the [AppBar]
+  final bool automaticallyImplyLeading;
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Theme.of(context).appBarTheme.foregroundColor;
     return AppBar(
+      toolbarHeight: appBarHeight ?? kToolbarHeight,
+      automaticallyImplyLeading: automaticallyImplyLeading,
       flexibleSpace: RawKeyboardListener(
         onKey: (event) {
           if (event.logicalKey == LogicalKeyboardKey.escape) {
@@ -49,27 +60,46 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
           }
         },
         focusNode: FocusNode(),
-        child: TextField(
-          textAlignVertical: TextAlignVertical.center,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w200),
-          decoration: InputDecoration(
-            prefixIcon: Padding(
-              padding: const EdgeInsets.only(left: 28, right: 25),
-              child: Icon(searchIconData),
+        child: SizedBox(
+          height: appBarHeight ?? kToolbarHeight,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: TextField(
+              expands: true,
+              maxLines: null,
+              minLines: null,
+              cursorColor: textColor,
+              textAlignVertical: TextAlignVertical.center,
+              style: textStyle ??
+                  Theme.of(context)
+                      .appBarTheme
+                      .titleTextStyle
+                      ?.copyWith(fontWeight: FontWeight.w200, fontSize: 18),
+              decoration: InputDecoration(
+                prefixIcon: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 28, right: 25, bottom: 7),
+                  child: Icon(
+                    searchIconData ?? Icons.search,
+                    color: textColor,
+                  ),
+                ),
+                hintText: searchHint,
+                enabledBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.black.withOpacity(0.01))),
+                border: const UnderlineInputBorder(),
+              ),
+              controller: searchController,
+              autofocus: true,
+              onChanged: (value) => onChanged(value),
             ),
-            hintText: searchHint,
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black.withOpacity(0.01))),
-            border: const UnderlineInputBorder(),
           ),
-          controller: searchController,
-          autofocus: true,
-          onChanged: (value) => onChanged(value),
         ),
       ),
     );
   }
 
   @override
-  Size get preferredSize => Size(0, appBarHeight);
+  Size get preferredSize => Size(0, appBarHeight ?? kToolbarHeight);
 }

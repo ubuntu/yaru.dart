@@ -127,11 +127,11 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.emote_angel,
         builder: (_) => YaruPage(
           child: YaruSearchAppBar(
+            automaticallyImplyLeading: false,
             searchController: _textEditingController,
             onChanged: (v) {},
             onEscape: () {},
             searchIconData: YaruIcons.search,
-            appBarHeight: 10.0,
             searchHint: "Search...",
           ),
         ),
