@@ -29,11 +29,13 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.emote_wink,
         builder: (_) => Column(
           children: const [
-            YaruRow(
-              enabled: true,
-              trailingWidget: Text('trailingWidget'),
-              actionWidget: Text('actionWidget'),
-              description: 'description',
+            YaruPage(
+              child: YaruRow(
+                enabled: true,
+                trailingWidget: Text('trailingWidget'),
+                actionWidget: Text('actionWidget'),
+                description: 'description',
+              ),
             )
           ],
         ),
@@ -41,87 +43,97 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
         title: 'YaruExtraOptionRow',
         iconData: YaruIcons.emote_angry,
-        builder: (_) => YaruExtraOptionRow(
-          actionLabel: "ActionLabel",
-          iconData: YaruIcons.addon,
-          onChanged: (c) {
-            setState(() {
-              _extraOptionValue = c;
-            });
-          },
-          onPressed: () => showDialog(
-              context: context,
-              builder: (_) => YaruSimpleDialog(
-                    title: 'Test',
-                    closeIconData: YaruIcons.window_close,
-                    children: [
-                      Text(
-                        'Hello YaruSimpleDialog',
-                        textAlign: TextAlign.center,
-                      )
-                    ],
-                  )),
-          value: _extraOptionValue,
-          actionDescription: "Action Description",
+        builder: (_) => YaruPage(
+          child: YaruExtraOptionRow(
+            actionLabel: "ActionLabel",
+            iconData: YaruIcons.addon,
+            onChanged: (c) {
+              setState(() {
+                _extraOptionValue = c;
+              });
+            },
+            onPressed: () => showDialog(
+                context: context,
+                builder: (_) => YaruSimpleDialog(
+                      title: 'Test',
+                      closeIconData: YaruIcons.window_close,
+                      children: [
+                        Text(
+                          'Hello YaruSimpleDialog',
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    )),
+            value: _extraOptionValue,
+            actionDescription: "Action Description",
+          ),
         ),
       ),
       YaruPageItem(
         title: 'YaruLinearProgressIndicator',
         iconData: YaruIcons.emote_monkey,
-        builder: (_) => YaruLinearProgressIndicator(
-          value: 50 / 100,
+        builder: (_) => YaruPage(
+          child: YaruLinearProgressIndicator(
+            value: 50 / 100,
+          ),
         ),
       ),
       YaruPageItem(
         title: 'ImageTile',
         iconData: YaruIcons.emote_devilish,
-        builder: (_) => ImageTile(
-          currentlySelected: _isImageSelected,
-          onTap: () {
-            setState(() {
-              if (_isImageSelected) {
-                _isImageSelected = false;
-              } else {
-                _isImageSelected = true;
-              }
-            });
-          },
-          path: "assets/ubuntuhero.jpg",
+        builder: (_) => YaruPage(
+          child: ImageTile(
+            currentlySelected: _isImageSelected,
+            onTap: () {
+              setState(() {
+                if (_isImageSelected) {
+                  _isImageSelected = false;
+                } else {
+                  _isImageSelected = true;
+                }
+              });
+            },
+            path: "assets/ubuntuhero.jpg",
+          ),
         ),
       ),
       YaruPageItem(
         title: 'YaruOptionButton',
         iconData: YaruIcons.emote_plain,
-        builder: (_) => YaruOptionsButtonsList(),
+        builder: (_) => YaruPage(child: YaruOptionsButtonsList()),
       ),
       YaruPageItem(
         title: 'YaruOptionCard',
         iconData: YaruIcons.emote_worried,
-        builder: (_) => YaruOptionCardList(),
+        builder: (_) => YaruPage(child: YaruOptionCardList()),
       ),
       YaruPageItem(
         title: 'YaruPageContainer',
         iconData: YaruIcons.emote_laugh,
-        builder: (_) => YaruPageContainer(
-          child: Text("Just a Container 🤷‍♂️"),
-          width: 200,
+        builder: (_) => YaruPage(
+          child: YaruPageContainer(
+            child: Text("Just a Container 🤷‍♂️"),
+            width: 200,
+          ),
         ),
       ),
       YaruPageItem(
         title: 'YaruRow',
         iconData: YaruIcons.emote_cool,
-        builder: (_) => YaruRowList(),
+        builder: (_) => YaruPage(child: YaruRowList()),
       ),
       YaruPageItem(
         title: 'YaruSearchAppBar',
         iconData: YaruIcons.emote_angel,
-        builder: (_) => YaruSearchAppBar(
-          searchController: _textEditingController,
-          onChanged: (v) {},
-          onEscape: () {},
-          searchIconData: YaruIcons.search,
-          appBarHeight: 10.0,
-          searchHint: "Search...",
+        builder: (_) => YaruPage(
+          child: YaruSearchAppBar(
+            searchController: _textEditingController,
+            onChanged: (v) {},
+            onEscape: () {},
+            searchIconData: YaruIcons.search,
+            appBarHeight: 10.0,
+            searchHint: "Search...",
+          ),
         ),
       ),
       YaruPageItem(
@@ -188,100 +200,106 @@ class _YaruHomeState extends State<YaruHome> {
       YaruPageItem(
         title: 'YaruSingleInfoRow',
         iconData: YaruIcons.emote_embarrassed,
-        builder: (_) => YaruSection(headline: "YaruSingleInfoRow", children: [
-          YaruSingleInfoRow(
-            infoLabel: "Info Label",
-            infoValue: "Info Value",
-          ),
-          YaruSingleInfoRow(
-            infoLabel: "Info Label",
-            infoValue: "Info Value",
-          )
-        ]),
+        builder: (_) => YaruPage(
+          child: YaruSection(headline: "YaruSingleInfoRow", children: [
+            YaruSingleInfoRow(
+              infoLabel: "Info Label",
+              infoValue: "Info Value",
+            ),
+            YaruSingleInfoRow(
+              infoLabel: "Info Label",
+              infoValue: "Info Value",
+            )
+          ]),
+        ),
       ),
       YaruPageItem(
         title: 'YaruSliderRow',
         iconData: YaruIcons.emote_uncertain,
-        builder: (_) => YaruSliderRow(
-          actionLabel: "actionLabel",
-          value: _sliderValue,
-          min: 0,
-          max: 100,
-          onChanged: (v) {
-            setState(() {
-              _sliderValue = v;
-            });
-          },
+        builder: (_) => YaruPage(
+          child: YaruSliderRow(
+            actionLabel: "actionLabel",
+            value: _sliderValue,
+            min: 0,
+            max: 100,
+            onChanged: (v) {
+              setState(() {
+                _sliderValue = v;
+              });
+            },
+          ),
         ),
       ),
       YaruPageItem(
         title: 'YaruSwitchRow',
         iconData: YaruIcons.emote_raspberry,
-        builder: (_) => YaruSwitchRow(
-          value: _yaruSwitchEnabled,
-          onChanged: (v) {
-            setState(() {
-              _yaruSwitchEnabled = v;
-            });
-          },
-          trailingWidget: Text("Trailing Widget"),
+        builder: (_) => YaruPage(
+          child: YaruSwitchRow(
+            value: _yaruSwitchEnabled,
+            onChanged: (v) {
+              setState(() {
+                _yaruSwitchEnabled = v;
+              });
+            },
+            trailingWidget: Text("Trailing Widget"),
+          ),
         ),
       ),
       YaruPageItem(
         title: 'YaruToggleButtonsRow',
         iconData: YaruIcons.emote_shutmouth,
-        builder: (_) => YaruToggleButtonsRow(
-          actionLabel: "Action Label",
-          labels: ["label1", "label2"],
-          onPressed: (v) {
-            setState(() {
-              _selectedValues[v] = !_selectedValues[v];
-            });
-          },
-          selectedValues: _selectedValues,
-          actionDescription: "Action Description",
+        builder: (_) => YaruPage(
+          child: YaruToggleButtonsRow(
+            actionLabel: "Action Label",
+            labels: ["label1", "label2"],
+            onPressed: (v) {
+              setState(() {
+                _selectedValues[v] = !_selectedValues[v];
+              });
+            },
+            selectedValues: _selectedValues,
+            actionDescription: "Action Description",
+          ),
         ),
       ),
       YaruPageItem(
         title: 'YaruCheckboxRow',
         iconData: YaruIcons.emote_plain,
-        builder: (_) => YaruCheckboxRow(
-          value: _isCheckBoxSelected,
-          text: "Text",
-          onChanged: (v) {
-            setState(() {
-              _isCheckBoxSelected = v!;
-            });
-          },
+        builder: (_) => YaruPage(
+          child: YaruCheckboxRow(
+            value: _isCheckBoxSelected,
+            text: "Text",
+            onChanged: (v) {
+              setState(() {
+                _isCheckBoxSelected = v!;
+              });
+            },
+          ),
         ),
       ),
       YaruPageItem(
           title: 'YaruTabbedPage',
-          builder: (_) => Center(
-                child: YaruTabbedPage(views: [
-                  YaruPage(
-                    child: TextField(
-                      maxLines: 100,
-                    ),
-                  ),
-                  Text('accessibility'),
-                  Text('Audio'),
-                  Text('AddressBook'),
-                  Text('Television')
-                ], tabIcons: [
-                  YaruIcons.addon,
-                  YaruIcons.accessibility,
-                  YaruIcons.audio,
-                  YaruIcons.address_book,
-                  YaruIcons.television
-                ], tabTitles: [
-                  'Addons',
-                  'Accessability',
-                  'Audio',
-                  'Address Book',
-                  'Television'
-                ]),
-              ),
+          builder: (_) => YaruTabbedPage(views: [
+                YaruPage(
+                  child: YaruRowList(),
+                ),
+                YaruPage(child: Text('accessibility')),
+                YaruPage(child: Text('Audio')),
+                YaruPage(child: Text('AddressBook')),
+                YaruPage(child: Text('Television'))
+              ], tabIcons: [
+                YaruIcons.addon,
+                YaruIcons.accessibility,
+                YaruIcons.audio,
+                YaruIcons.address_book,
+                YaruIcons.television
+              ], tabTitles: [
+                'Addons',
+                'Accessability',
+                'Audio',
+                'Address Book',
+                'Television'
+              ]),
           iconData: YaruIcons.tab_new),
       YaruPageItem(
           title: 'Color picker button',
