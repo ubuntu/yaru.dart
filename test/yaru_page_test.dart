@@ -8,7 +8,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: YaruPage(
-          child: Container(),
+          children: [Container()],
           padding: const EdgeInsets.all(8),
         ),
       ),
@@ -27,7 +27,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: YaruPage(
-          child: Container(),
+          children: [Container()],
         ),
       ),
     ));

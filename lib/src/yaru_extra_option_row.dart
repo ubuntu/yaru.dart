@@ -13,6 +13,7 @@ class YaruExtraOptionRow extends StatelessWidget {
     required this.onChanged,
     required this.onPressed,
     required this.iconData,
+    this.width,
   }) : super(key: key);
 
   /// Whether or not we can interact with the widget
@@ -64,10 +65,14 @@ class YaruExtraOptionRow extends StatelessWidget {
   /// IconData for the [YaruOptionButton].
   final IconData iconData;
 
+  /// Optional width passed to [YaruRow]
+  final double? width;
+
   @override
   Widget build(BuildContext context) {
     final enabled = this.enabled && value != null;
     return YaruRow(
+      width: width,
       enabled: enabled,
       trailingWidget: Text(actionLabel),
       description: actionDescription,

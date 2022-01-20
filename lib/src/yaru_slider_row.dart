@@ -35,6 +35,7 @@ class YaruSliderRow extends StatelessWidget {
     this.showValue = true,
     this.fractionDigits = 0,
     required this.onChanged,
+    this.width,
   }) : super(key: key);
 
   /// Whether or not we can interact with the widget
@@ -71,6 +72,9 @@ class YaruSliderRow extends StatelessWidget {
   /// Function run when the slider changes its value
   final Function(double) onChanged;
 
+  /// Optional width passed to [YaruRow]
+  final double? width;
+
   @override
   Widget build(BuildContext context) {
     const thumbRadius = 24.0;
@@ -78,6 +82,7 @@ class YaruSliderRow extends StatelessWidget {
     final enabled = this.enabled && value != null;
 
     return YaruRow(
+      width: width,
       enabled: enabled,
       trailingWidget: Text(actionLabel),
       description: actionDescription,
