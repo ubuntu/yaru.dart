@@ -8,7 +8,8 @@ class YaruSimpleDialog extends StatelessWidget {
       required this.closeIconData,
       required this.children,
       this.semanticLabel,
-      this.alignment})
+      this.alignment,
+      required this.width})
       : super(key: key);
 
   /// The title of the dialog, displayed in a large font at the top of the dialog.
@@ -39,37 +40,46 @@ class YaruSimpleDialog extends StatelessWidget {
   /// default is [Alignment.center].
   final AlignmentGeometry? alignment;
 
+  /// The width of the dialog which must be provided and constraints all children with the same width.
+  ///
+  final double width;
+
   @override
   Widget build(BuildContext context) {
-    return SimpleDialog(
-      titlePadding: const EdgeInsets.all(0),
-      title: Stack(
-        alignment: Alignment.topRight,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 30, // Avoid title overflow on close button
-                right: 30, // Avoid title overflow on close button
-                top: 20,
-                bottom: 15),
-            child: Center(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
+    return SizedBox(
+      width: width,
+      child: SimpleDialog(
+        titlePadding: const EdgeInsets.all(0),
+        title: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 30, // Avoid title overflow on close button
+                  right: 30, // Avoid title overflow on close button
+                  top: 20,
+                  bottom: 15),
+              child: Center(
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-          IconButton(
-              visualDensity: VisualDensity.compact,
-              onPressed: () => Navigator.pop(context),
-              splashRadius: 16,
-              icon: Icon(closeIconData))
+            IconButton(
+                visualDensity: VisualDensity.compact,
+                onPressed: () => Navigator.pop(context),
+                splashRadius: 16,
+                icon: Icon(closeIconData))
+          ],
+        ),
+        contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
+        children: [
+          for (var child in children) SizedBox(child: child, width: width)
         ],
+        semanticLabel: semanticLabel,
+        alignment: alignment,
       ),
-      contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
-      children: children,
-      semanticLabel: semanticLabel,
-      alignment: alignment,
     );
   }
 }

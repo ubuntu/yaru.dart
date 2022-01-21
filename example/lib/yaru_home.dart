@@ -62,12 +62,23 @@ class _YaruHomeState extends State<YaruHome> {
               onPressed: () => showDialog(
                   context: context,
                   builder: (_) => YaruSimpleDialog(
+                        width: 500,
                         title: 'Test',
                         closeIconData: YaruIcons.window_close,
                         children: [
                           Text(
-                            'Hello YaruSimpleDialog',
+                            'Hello YaruSimpleDialog22',
                             textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            width: 100,
+                            child: YaruSliderRow(
+                                // width: 500,
+                                actionLabel: 'actionLabel',
+                                value: 0,
+                                min: 0,
+                                max: 10,
+                                onChanged: (v) {}),
                           )
                         ],
                       )),
@@ -240,13 +251,20 @@ class _YaruHomeState extends State<YaruHome> {
                   onPressed: () => showDialog(
                       context: context,
                       builder: (_) => YaruSimpleDialog(
+                            width: 200,
                             title: 'Test',
                             closeIconData: YaruIcons.window_close,
                             children: [
                               Text(
                                 'Hello YaruSimpleDialog',
                                 textAlign: TextAlign.center,
-                              )
+                              ),
+                              YaruSliderRow(
+                                  actionLabel: 'actionLabel',
+                                  value: 0,
+                                  min: 0,
+                                  max: 10,
+                                  onChanged: (v) {})
                             ],
                           )),
                   value: _extraOptionValue,
