@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ImageTile extends StatelessWidget {
@@ -58,9 +59,13 @@ class ImageTile extends StatelessWidget {
           padding: const EdgeInsets.all(6.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4),
-            child: Image.file(File(path),
-                filterQuality: filterQuality ?? FilterQuality.low,
-                fit: BoxFit.fill),
+            child: kIsWeb
+                ? Image.network(path,
+                    filterQuality: filterQuality ?? FilterQuality.low,
+                    fit: BoxFit.fill)
+                : Image.file(File(path),
+                    filterQuality: filterQuality ?? FilterQuality.low,
+                    fit: BoxFit.fill),
           ),
         ),
       ),
