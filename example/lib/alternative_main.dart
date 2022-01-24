@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart' as yaru;
+import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
+
+void main() {
+  runApp(const App());
+}
+
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Yaru Demo',
+      theme: yaru.lightTheme,
+      darkTheme: yaru.darkTheme,
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: YaruSearchAppBar(
+            searchIconData: YaruIcons.search,
+            searchController: TextEditingController(),
+            onChanged: (value) {},
+            onEscape: () {},
+            automaticallyImplyLeading: true),
+        body: LayoutBuilder(
+            builder: (context, constraints) => constraints.maxWidth > 600
+                ? YaruWideLayout(pageItems: pageItems)
+                : YaruNarrowLayout(pageItems: pageItems)),
+      ),
+    );
+  }
+}
+
+final pageItems = [
+  YaruPageItem(
+      title: 'Home',
+      builder: (_) => const Text('Home'),
+      iconData: YaruIcons.home,
+      selectedIconData: YaruIcons.home_filled),
+  YaruPageItem(
+      title: 'View',
+      builder: (_) => const YaruTabbedPage(tabIcons: [
+            YaruIcons.lock_filled,
+            YaruIcons.globe_filled,
+            YaruIcons.power_filled
+          ], tabTitles: [
+            'Lock',
+            'Globe',
+            'Power'
+          ], views: [
+            Center(child: Text('Lock')),
+            Center(child: Text('Globe')),
+            Center(child: Text('Power'))
+          ]),
+      iconData: YaruIcons.view,
+      selectedIconData: YaruIcons.view_filled),
+  YaruPageItem(
+      title: 'Time',
+      builder: (_) => const Text('Time'),
+      iconData: YaruIcons.clock,
+      selectedIconData: YaruIcons.clock_filled),
+  YaruPageItem(
+      title: 'Favorites',
+      builder: (_) => const Text('Favorites'),
+      iconData: YaruIcons.star,
+      selectedIconData: YaruIcons.star_filled),
+  YaruPageItem(
+      title: 'Electronics',
+      builder: (_) => const Text('Electronics'),
+      iconData: YaruIcons.chip,
+      selectedIconData: YaruIcons.chip_filled),
+  YaruPageItem(
+      title: 'Gallery',
+      builder: (_) => const Text('Gallery'),
+      iconData: YaruIcons.image,
+      selectedIconData: YaruIcons.image_filled),
+];
