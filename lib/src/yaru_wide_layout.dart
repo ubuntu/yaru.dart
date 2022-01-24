@@ -11,9 +11,16 @@ class YaruWideLayout extends StatefulWidget {
   /// The index of the item that should be selected when the [State] of [YaruNarrowLayout] is initialized.
   final int initialIndex;
 
-  const YaruWideLayout(
-      {Key? key, required this.pageItems, required this.initialIndex})
-      : super(key: key);
+  /// An optional [ScrollController] - if not provided the [YaruWideLayout] will create a new one for
+  /// the [NavigationRail]
+  final ScrollController? scrollController;
+
+  const YaruWideLayout({
+    Key? key,
+    required this.pageItems,
+    required this.initialIndex,
+    this.scrollController,
+  }) : super(key: key);
 
   @override
   _YaruWideLayoutState createState() => _YaruWideLayoutState();
@@ -38,6 +45,7 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
               SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: SingleChildScrollView(
+                  controller: widget.scrollController ?? ScrollController(),
                   child: ConstrainedBox(
                       constraints:
                           BoxConstraints(minHeight: constraint.maxHeight),
