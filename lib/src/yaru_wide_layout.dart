@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
+/// Creates a [NavigationRail] wrapped inside [Row]
+/// together with a [Widget] created by the [WidgetBuilder] of the selected [YaruPageItem].
+///
 class YaruWideLayout extends StatefulWidget {
+  /// The list of [YaruPageItem] which is used to create the views.
   final List<YaruPageItem> pageItems;
 
-  const YaruWideLayout({Key? key, required this.pageItems}) : super(key: key);
+  /// The index of the item that should be selected when the [State] of [YaruNarrowLayout] is initialized.
+  final int initialIndex;
+
+  /// An optional [ScrollController] - if not provided the [YaruWideLayout] will create a new one for
+  /// the [NavigationRail]
+  final ScrollController? scrollController;
+
+  const YaruWideLayout({
+    Key? key,
+    required this.pageItems,
+    required this.initialIndex,
+    this.scrollController,
+  }) : super(key: key);
 
   @override
   _YaruWideLayoutState createState() => _YaruWideLayoutState();
@@ -15,7 +31,7 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
 
   @override
   void initState() {
-    _selectedIndex = 0;
+    _selectedIndex = widget.initialIndex;
     super.initState();
   }
 
@@ -29,6 +45,7 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
               SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: SingleChildScrollView(
+                  controller: widget.scrollController ?? ScrollController(),
                   child: ConstrainedBox(
                       constraints:
                           BoxConstraints(minHeight: constraint.maxHeight),
