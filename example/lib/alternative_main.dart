@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart' as yaru;
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru_widgets_example/widgets/yaru_row_list.dart';
 
 void main() {
   runApp(const App());
@@ -35,8 +36,11 @@ class HomePage extends StatelessWidget {
             automaticallyImplyLeading: true),
         body: LayoutBuilder(
             builder: (context, constraints) => constraints.maxWidth > 600
-                ? YaruWideLayout(pageItems: pageItems)
-                : YaruNarrowLayout(pageItems: pageItems)),
+                ? YaruWideLayout(
+                    pageItems: pageItems,
+                    initialIndex: 0,
+                  )
+                : YaruNarrowLayout(pageItems: pageItems, initialIndex: 0)),
       ),
     );
   }
@@ -50,7 +54,7 @@ final pageItems = [
       selectedIconData: YaruIcons.home_filled),
   YaruPageItem(
       title: 'View',
-      builder: (_) => const YaruTabbedPage(tabIcons: [
+      builder: (_) => YaruTabbedPage(tabIcons: [
             YaruIcons.lock_filled,
             YaruIcons.globe_filled,
             YaruIcons.power_filled
@@ -59,7 +63,7 @@ final pageItems = [
             'Globe',
             'Power'
           ], views: [
-            Center(child: Text('Lock')),
+            YaruPage(children: [YaruRowList()]),
             Center(child: Text('Globe')),
             Center(child: Text('Power'))
           ]),
