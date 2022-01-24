@@ -19,3 +19,5 @@ export 'src/yaru_slider_row.dart';
 export 'src/yaru_switch_row.dart';
 export 'src/yaru_toggle_buttons_row.dart';
 export 'src/yaru_tabbed_page.dart';
+export 'src/yaru_wide_layout.dart';
+export 'src/yaru_narrow_layout.dart';
