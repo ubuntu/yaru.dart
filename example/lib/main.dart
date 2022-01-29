@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart' as yaru_theme;
+import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets_example/yaru_home.dart';
 
 void main() {
@@ -12,8 +12,8 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: yaru_theme.lightTheme,
-      darkTheme: yaru_theme.darkTheme,
+      theme: yaruLight,
+      darkTheme: yaruDark,
       home: const YaruHome(),
     );
   }
