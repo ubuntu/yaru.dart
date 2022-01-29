@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart' as yaru;
+import 'package:yaru/yaru.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_widgets_example/widgets/yaru_row_list.dart';
@@ -14,8 +14,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Yaru Demo',
-      theme: yaru.lightTheme,
-      darkTheme: yaru.darkTheme,
+      theme: yaruLight,
+      darkTheme: yaruDark,
       home: const HomePage(),
     );
   }
