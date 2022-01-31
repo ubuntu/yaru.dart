@@ -42,7 +42,7 @@ class YaruExpansionPanelList extends StatelessWidget {
           !_isChildExpanded(index - 1)) {
         items.add(Divider(
           key: _SaltedKey<BuildContext, int>(context, index * 2 - 1),
-          height: 15.0,
+          height: 10.0,
           color: Colors.transparent,
         ));
       }
@@ -95,36 +95,39 @@ class YaruExpansionPanelList extends StatelessWidget {
           child: Material(
             elevation: elevation ?? 2,
             borderRadius: borderRadius,
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: header,
-                ),
-                AnimatedCrossFade(
-                  firstChild: Container(height: 0.0),
-                  secondChild: children[index].body,
-                  firstCurve:
-                      const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
-                  secondCurve:
-                      const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
-                  sizeCurve: Curves.fastOutSlowIn,
-                  crossFadeState: _isChildExpanded(index)
-                      ? CrossFadeState.showSecond
-                      : CrossFadeState.showFirst,
-                  duration: animationDuration,
-                ),
-              ],
+            child: InkWell(
+              borderRadius: borderRadius,
+              onTap: () => expansionCallback(index, _isChildExpanded(index)),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: header,
+                  ),
+                  AnimatedCrossFade(
+                    firstChild: Container(height: 0.0),
+                    secondChild: children[index].body,
+                    firstCurve:
+                        const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
+                    secondCurve:
+                        const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
+                    sizeCurve: Curves.fastOutSlowIn,
+                    crossFadeState: _isChildExpanded(index)
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
+                    duration: animationDuration,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       );
 
-      if (_isChildExpanded(index) && index != children.length - 1) {
-        items.add(Divider(
-          thickness: 0.5,
+      if (index != children.length - 1 && _isChildExpanded(index)) {
+        items.add(SizedBox(
+          height: 10,
           key: _SaltedKey<BuildContext, int>(context, index * 2 + 1),
-          // height: 15.0,
         ));
       }
     }
