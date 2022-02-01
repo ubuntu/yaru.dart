@@ -20,13 +20,13 @@
 
 # Build icon font
 
-if ! command -v fantasticon_flutter >/dev/null
+if ! command -v icon_font_generator >/dev/null
 then
-    echo  -e "\nPlease install fantasticon_flutter (see README.md)\n"
+    echo  -e "\nPlease install icon_font_generator (see README.md)\n"
     exit 1
 fi
 
-fantasticon_flutter --from=icons --class-name=YaruIcons --out-font=assets/ui_icons.ttf --out-flutter=lib/src/yaru_icons.dart --package=yaru_icons --naming-strategy=snake
+icon_font_generator --from=icons --class-name=YaruIcons --out-font=assets/ui_icons.ttf --out-flutter=lib/src/yaru_icons.dart --package=yaru_icons --naming-strategy=snake --normalize
 
 # Build icon library overview
 
