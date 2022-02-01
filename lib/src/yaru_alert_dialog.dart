@@ -9,7 +9,7 @@ class YaruAlertDialog extends StatelessWidget {
     this.closeIconData,
     required this.children,
     this.alignment,
-    required this.width,
+    this.width,
     this.height,
     this.titleTextAlign,
     this.actions,
@@ -30,21 +30,25 @@ class YaruAlertDialog extends StatelessWidget {
   /// default is [Alignment.center].
   final AlignmentGeometry? alignment;
 
-  /// The width of the dialog which must be provided and constraints all children with the same width.
+  /// The width of the dialog which can be provided and constraints all children with the same width.
   ///
-  final double width;
+  /// Default is [kDefaultPageWidth]
+  final double? width;
 
+  /// The optional height of the dialog which can be provided to limit the height
+  /// of the [SingleChildScrollView] where the [children] are placed.
   final double? height;
 
   /// Optional [TextAlign] used for the [YaruDialogTitle]
   final TextAlign? titleTextAlign;
 
+  /// A [List] of [Widget] - typically [OutlinedButton], [ElevatedButton] or [TextButton]
   final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width,
+      width: width ?? kDefaultPageWidth,
       child: AlertDialog(
         actionsPadding: const EdgeInsets.all(kDefaultPagePadding / 2),
         contentPadding: const EdgeInsets.fromLTRB(kDefaultPagePadding,
@@ -61,7 +65,8 @@ class YaruAlertDialog extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                for (var child in children) SizedBox(child: child, width: width)
+                for (var child in children)
+                  SizedBox(child: child, width: width ?? kDefaultPageWidth)
               ],
             ),
           ),

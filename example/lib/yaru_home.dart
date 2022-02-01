@@ -53,7 +53,7 @@ class _YaruHomeState extends State<YaruHome> {
           children: [
             YaruExtraOptionRow(
               actionLabel: "YaruSimpleDialog",
-              iconData: YaruIcons.addon,
+              iconData: YaruIcons.information,
               onChanged: (c) {
                 setState(() {
                   _extraOptionValue = c;
@@ -100,7 +100,7 @@ class _YaruHomeState extends State<YaruHome> {
                   closeIconData: YaruIcons.window_close,
                   title: 'YaruAlertDialog Title',
                   children: [
-                    for (var i = 0; i < 50; i++)
+                    for (var i = 0; i < 20; i++)
                       YaruSingleInfoRow(
                           infoLabel: 'infoLabel', infoValue: 'infoValue')
                   ],
@@ -117,7 +117,7 @@ class _YaruHomeState extends State<YaruHome> {
                         child: Text('OK'))
                   ],
                   width: 500,
-                  height: 500,
+                  height: 400,
                 ),
               ),
               value: _extraOptionValue,
