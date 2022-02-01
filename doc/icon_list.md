@@ -293,6 +293,7 @@ Icon preview | Icon name | Usage
 ![pan_start](../icons/pan/start.svg) | pan start | `YaruIcons.pan_start`
 ![pan_up](../icons/pan/up.svg) | pan up | `YaruIcons.pan_up`
 ![parental_controls](../icons/parental-controls.svg) | parental controls | `YaruIcons.parental_controls`
+![pen](../icons/pen.svg) | pen | `YaruIcons.pen`
 ![phone_old_filled](../icons/phone-old-filled.svg) | phone old filled | `YaruIcons.phone_old_filled`
 ![phone_old](../icons/phone-old.svg) | phone old | `YaruIcons.phone_old`
 ![pin](../icons/pin.svg) | pin | `YaruIcons.pin`
