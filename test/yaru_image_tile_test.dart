@@ -3,11 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/src/yaru_image_tile.dart';
 
 void main() {
-  testWidgets('- ImageTile Test', (WidgetTester tester) async {
+  testWidgets('- YaruImageTile Test', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
       theme: ThemeData(primarySwatch: Colors.red),
       home: Scaffold(
-        body: ImageTile(
+        body: YaruImageTile(
           currentlySelected: true,
           path: "images/filename",
           onTap: () {},

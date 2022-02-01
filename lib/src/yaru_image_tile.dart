@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class ImageTile extends StatelessWidget {
+class YaruImageTile extends StatelessWidget {
   /// Creates a Image Tile from the image path given in the path property.
-  const ImageTile(
+  const YaruImageTile(
       {Key? key,
       required this.path,
       this.onTap,
@@ -22,7 +22,7 @@ class ImageTile extends StatelessWidget {
   /// else if the value is `false` the border color will be [Colors.transparent].
   final bool currentlySelected;
 
-  /// Callback triggered when the [ImageTile] is clicked.
+  /// Callback triggered when the [YaruImageTile] is clicked.
   final VoidCallback? onTap;
 
   /// The rendering quality of the image.

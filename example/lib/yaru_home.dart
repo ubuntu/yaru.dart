@@ -142,7 +142,7 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.emote_devilish,
         builder: (_) => YaruPage(
           children: [
-            ImageTile(
+            YaruImageTile(
               currentlySelected: _isImageSelected,
               onTap: () {
                 setState(() {
