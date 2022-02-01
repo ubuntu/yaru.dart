@@ -52,8 +52,8 @@ class _YaruHomeState extends State<YaruHome> {
         builder: (_) => YaruPage(
           children: [
             YaruExtraOptionRow(
-              actionLabel: "ActionLabel",
-              iconData: YaruIcons.addon,
+              actionLabel: "YaruSimpleDialog",
+              iconData: YaruIcons.information,
               onChanged: (c) {
                 setState(() {
                   _extraOptionValue = c;
@@ -62,6 +62,7 @@ class _YaruHomeState extends State<YaruHome> {
               onPressed: () => showDialog(
                   context: context,
                   builder: (_) => YaruSimpleDialog(
+                        titleTextAlign: TextAlign.center,
                         width: 500,
                         title: 'Test',
                         closeIconData: YaruIcons.window_close,
@@ -82,6 +83,43 @@ class _YaruHomeState extends State<YaruHome> {
                           )
                         ],
                       )),
+              value: _extraOptionValue,
+              actionDescription: "Action Description",
+            ),
+            YaruExtraOptionRow(
+              actionLabel: "YaruDialogTitle",
+              iconData: YaruIcons.warning,
+              onChanged: (c) {
+                setState(() {
+                  _extraOptionValue = c;
+                });
+              },
+              onPressed: () => showDialog(
+                context: context,
+                builder: (_) => YaruAlertDialog(
+                  closeIconData: YaruIcons.window_close,
+                  title: 'YaruAlertDialog Title',
+                  children: [
+                    for (var i = 0; i < 20; i++)
+                      YaruSingleInfoRow(
+                          infoLabel: 'infoLabel', infoValue: 'infoValue')
+                  ],
+                  actions: [
+                    OutlinedButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('Cancel')),
+                    ElevatedButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text('OK!')));
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('OK'))
+                  ],
+                  width: 500,
+                  height: 400,
+                ),
+              ),
               value: _extraOptionValue,
               actionDescription: "Action Description",
             )
