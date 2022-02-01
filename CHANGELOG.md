@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.0.1
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - Rename ImageTile to YaruImageTile
+
 # 1.0.0
 
 - this is the initial release of yaru_widgets.dart 🎉, it adds:
