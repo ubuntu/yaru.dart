@@ -53,7 +53,7 @@ class ImageTile extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             color: currentlySelected
-                ? Theme.of(context).primaryColor.withOpacity(0.3)
+                ? Theme.of(context).primaryColor.withOpacity(0.8)
                 : Colors.transparent),
         child: Padding(
           padding: const EdgeInsets.all(6.0),
