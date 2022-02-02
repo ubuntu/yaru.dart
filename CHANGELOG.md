@@ -1,5 +1,11 @@
 # Changelog
 
+# 1.0.2
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - Rename YaruImageTile to YaruSelectableContainer
+    which takes Widgets as its Child rather than Images (#69)
+
 # 1.0.1
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
