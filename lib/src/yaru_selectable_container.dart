@@ -53,8 +53,7 @@ class YaruSelectableContainer extends StatelessWidget {
         child: Padding(
           padding: padding ?? const EdgeInsets.all(6.0),
           child: ClipRRect(
-            borderRadius: borderRadius ??
-                BorderRadius.circular(radius - radius * 1.333333),
+            borderRadius: borderRadius ?? BorderRadius.circular(radius - 2),
             child: child,
           ),
         ),
