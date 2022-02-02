@@ -148,7 +148,7 @@ class _YaruHomeState extends State<YaruHome> {
         builder: (_) => YaruPage(
           children: [
             YaruSelectableContainer(
-              currentlySelected: _isImageSelected,
+              selected: _isImageSelected,
               onTap: () => setState(() => _isImageSelected = !_isImageSelected),
               child: kIsWeb
                   ? Image.network('assets/ubuntuhero.jpg',
@@ -160,7 +160,7 @@ class _YaruHomeState extends State<YaruHome> {
               height: 20,
             ),
             YaruSelectableContainer(
-              currentlySelected: _isTextSelected,
+              selected: _isTextSelected,
               onTap: () => setState(() => _isTextSelected = !_isTextSelected),
               child: Padding(
                 padding: const EdgeInsets.all(18.0),
@@ -172,7 +172,7 @@ class _YaruHomeState extends State<YaruHome> {
             ),
             YaruSelectableContainer(
               borderRadius: BorderRadius.circular(100.0),
-              currentlySelected: _isOvalSelected,
+              selected: _isOvalSelected,
               onTap: () => setState(() => _isOvalSelected = !_isOvalSelected),
               child: ClipOval(
                 child: Material(

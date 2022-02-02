@@ -13,7 +13,7 @@ void main() {
       theme: ThemeData(primarySwatch: Colors.red),
       home: Scaffold(
         body: YaruSelectableContainer(
-          currentlySelected: true,
+          selected: true,
           child: kIsWeb
               ? Image.network('assets/ubuntuhero.jpg',
                   filterQuality: FilterQuality.low, fit: BoxFit.fill)

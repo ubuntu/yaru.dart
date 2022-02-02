@@ -6,7 +6,7 @@ class YaruSelectableContainer extends StatelessWidget {
     Key? key,
     required this.child,
     this.onTap,
-    required this.currentlySelected,
+    required this.selected,
     this.borderRadius,
     this.padding,
     this.selectionColor,
@@ -19,7 +19,7 @@ class YaruSelectableContainer extends StatelessWidget {
   /// Based on the this value selection of the image can be managed.
   /// If this value is `true` [Container] border will have color from [Theme.of(context).primaryColor]
   /// else if the value is `false` the border color will be [Colors.transparent].
-  final bool currentlySelected;
+  final bool selected;
 
   /// Callback triggered when the [YaruSelectableContainer] is clicked.
   final VoidCallback? onTap;
@@ -41,7 +41,7 @@ class YaruSelectableContainer extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: borderRadius ?? BorderRadius.circular(6.0),
-            color: currentlySelected
+            color: selected
                 ? selectionColor ??
                     Theme.of(context).primaryColor.withOpacity(0.8)
                 : Colors.transparent),
