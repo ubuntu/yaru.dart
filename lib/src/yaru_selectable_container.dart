@@ -7,7 +7,7 @@ class YaruSelectableContainer extends StatelessWidget {
     required this.child,
     this.onTap,
     required this.currentlySelected,
-    this.borderRadius = 6.0,
+    this.borderRadius,
     this.padding,
     this.selectionColor,
   }) : super(key: key);
@@ -24,8 +24,8 @@ class YaruSelectableContainer extends StatelessWidget {
   /// Callback triggered when the [YaruSelectableContainer] is clicked.
   final VoidCallback? onTap;
 
-  /// Optional custom radius for the corners which defaults to 6.0
-  final double? borderRadius;
+  /// Optional custom radius for the corners which defaults to a circular 6.0 [BorderRadius]
+  final BorderRadius? borderRadius;
 
   /// Optional custom padding for the child which defaults to 6.0 on all sides.
   final EdgeInsets? padding;
@@ -35,14 +35,12 @@ class YaruSelectableContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = borderRadius ?? 0.0;
-
     return InkWell(
-      borderRadius: radius > 0 ? BorderRadius.circular(radius + 2) : null,
+      borderRadius: borderRadius ?? BorderRadius.circular(6.0),
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: radius > 0 ? BorderRadius.circular(radius) : null,
+            borderRadius: borderRadius ?? BorderRadius.circular(6.0),
             color: currentlySelected
                 ? selectionColor ??
                     Theme.of(context).primaryColor.withOpacity(0.8)
@@ -50,8 +48,7 @@ class YaruSelectableContainer extends StatelessWidget {
         child: Padding(
           padding: padding ?? const EdgeInsets.all(6.0),
           child: ClipRRect(
-            borderRadius:
-                radius > 0 ? BorderRadius.circular(radius) : BorderRadius.zero,
+            borderRadius: borderRadius ?? BorderRadius.circular(6.0),
             child: child,
           ),
         ),

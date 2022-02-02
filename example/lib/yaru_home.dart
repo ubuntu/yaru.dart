@@ -171,6 +171,7 @@ class _YaruHomeState extends State<YaruHome> {
               height: 20,
             ),
             YaruSelectableContainer(
+              borderRadius: BorderRadius.circular(100.0),
               currentlySelected: _isOvalSelected,
               onTap: () => setState(() => _isOvalSelected = !_isOvalSelected),
               child: ClipOval(
