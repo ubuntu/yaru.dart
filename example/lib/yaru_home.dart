@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
@@ -142,7 +145,7 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.emote_devilish,
         builder: (_) => YaruPage(
           children: [
-            YaruImageTile(
+            YaruSelectableContainer(
               currentlySelected: _isImageSelected,
               onTap: () {
                 setState(() {
@@ -153,7 +156,11 @@ class _YaruHomeState extends State<YaruHome> {
                   }
                 });
               },
-              path: "assets/ubuntuhero.jpg",
+              child: kIsWeb
+                  ? Image.network('assets/ubuntuhero.jpg',
+                      filterQuality: FilterQuality.low, fit: BoxFit.fill)
+                  : Image.file(File('assets/ubuntuhero.jpg'),
+                      filterQuality: FilterQuality.low, fit: BoxFit.fill),
             )
           ],
         ),
