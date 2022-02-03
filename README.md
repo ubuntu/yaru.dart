@@ -1,5 +1,7 @@
 # Flutter Yaru Widgets
 
+[![Pub Package](https://img.shields.io/pub/v/yaru_widgets.svg)](https://pub.dev/packages/yaru_widgets)
+
 Common flutter widgets useful for building desktop and web applications.
 
 ![screenshot_dark](.github/images/screenshot_dark.png)
