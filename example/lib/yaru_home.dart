@@ -69,7 +69,7 @@ class _YaruHomeState extends State<YaruHome> {
                   builder: (_) => YaruSimpleDialog(
                         titleTextAlign: TextAlign.center,
                         width: 500,
-                        title: 'Test',
+                        title: 'YaruDialogTitle',
                         closeIconData: YaruIcons.window_close,
                         children: [
                           Text(
@@ -92,7 +92,7 @@ class _YaruHomeState extends State<YaruHome> {
               actionDescription: "Action Description",
             ),
             YaruExtraOptionRow(
-              actionLabel: "YaruDialogTitle",
+              actionLabel: "YaruAlertDialog",
               iconData: YaruIcons.warning,
               onChanged: (c) {
                 setState(() {
@@ -103,12 +103,13 @@ class _YaruHomeState extends State<YaruHome> {
                 context: context,
                 builder: (_) => YaruAlertDialog(
                   closeIconData: YaruIcons.window_close,
-                  title: 'YaruAlertDialog Title',
-                  children: [
-                    for (var i = 0; i < 20; i++)
-                      YaruSingleInfoRow(
-                          infoLabel: 'infoLabel', infoValue: 'infoValue')
-                  ],
+                  title: 'YaruDialogTitle',
+                  child: YaruPage(
+                      padding: EdgeInsets.only(top: 0, right: 20, left: 20),
+                      children: [
+                        for (var i = 0; i < 5; i++)
+                          generateDummySection(width: null)
+                      ]),
                   actions: [
                     OutlinedButton(
                         onPressed: () => Navigator.of(context).pop(),
@@ -122,7 +123,7 @@ class _YaruHomeState extends State<YaruHome> {
                         child: Text('OK'))
                   ],
                   width: 500,
-                  height: 400,
+                  height: 300,
                 ),
               ),
               value: _extraOptionValue,
@@ -221,40 +222,8 @@ class _YaruHomeState extends State<YaruHome> {
         iconData: YaruIcons.emote_glasses,
         builder: (_) => YaruPage(
           children: [
-            YaruSection(
-              headline: 'Headline',
-              headerWidget: SizedBox(
-                child: CircularProgressIndicator(),
-                height: 20,
-                width: 20,
-              ),
-              children: [
-                YaruRow(
-                  enabled: true,
-                  trailingWidget: Text("Trailing Widget"),
-                  actionWidget: Text("Action Widget"),
-                  description: "Description",
-                ),
-              ],
-              // width: 400,
-            ),
-            YaruSection(
-              headline: 'Headline',
-              headerWidget: SizedBox(
-                child: CircularProgressIndicator(),
-                height: 20,
-                width: 20,
-              ),
-              children: [
-                YaruRow(
-                  enabled: true,
-                  trailingWidget: Text("Trailing Widget"),
-                  actionWidget: Text("Action Widget"),
-                  description: "Description",
-                ),
-              ],
-              width: 300,
-            ),
+            generateDummySection(),
+            generateDummySection(width: 300),
             YaruSection(
               width: sectionWidth,
               headline: 'Headline',
@@ -481,6 +450,26 @@ class _YaruHomeState extends State<YaruHome> {
       searchHint: 'Search...',
       searchIconData: YaruIcons.search,
       pageItems: pageItems,
+    );
+  }
+
+  YaruSection generateDummySection({double? width}) {
+    return YaruSection(
+      headline: 'Headline',
+      headerWidget: SizedBox(
+        child: CircularProgressIndicator(),
+        height: 20,
+        width: 20,
+      ),
+      children: [
+        YaruRow(
+          enabled: true,
+          trailingWidget: Text("Trailing Widget"),
+          actionWidget: Text("Action Widget"),
+          description: "Description",
+        ),
+      ],
+      width: width,
     );
   }
 }

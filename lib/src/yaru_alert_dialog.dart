@@ -6,13 +6,14 @@ class YaruAlertDialog extends StatelessWidget {
   const YaruAlertDialog({
     Key? key,
     required this.title,
+    required this.child,
     this.closeIconData,
-    required this.children,
     this.alignment,
     this.width,
     this.height,
     this.titleTextAlign,
     this.actions,
+    this.scrollable = false,
   }) : super(key: key);
 
   /// The title of the dialog, displayed in a large font at the top of the [YaruDialogTitle].
@@ -21,8 +22,9 @@ class YaruAlertDialog extends StatelessWidget {
   /// The icon used inside the close button
   final IconData? closeIconData;
 
-  /// The content of the dialog, displayed underneath the title.
-  final List<Widget> children;
+  /// The child displayed underneath the title. It comes without any padding
+  /// or [ScrollView] so one has the full freedom to put anything inside.
+  final Widget child;
 
   /// How to align the [Dialog] on the Screen.
   ///
@@ -45,32 +47,29 @@ class YaruAlertDialog extends StatelessWidget {
   /// A [List] of [Widget] - typically [OutlinedButton], [ElevatedButton] or [TextButton]
   final List<Widget>? actions;
 
+  /// Forwards the [scrollable] flag to the [AlertDialog]
+  final bool? scrollable;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? kDefaultPageWidth,
       child: AlertDialog(
         actionsPadding: const EdgeInsets.all(kDefaultPagePadding / 2),
-        contentPadding: const EdgeInsets.fromLTRB(kDefaultPagePadding,
-            kDefaultPagePadding / 2, kDefaultPagePadding, kDefaultPagePadding),
-        titlePadding: const EdgeInsets.all(kDefaultDialogTitlePadding),
+        contentPadding: EdgeInsets.zero,
+        scrollable: scrollable ?? false,
+        titlePadding: const EdgeInsets.only(
+            top: kDefaultDialogTitlePadding,
+            left: kDefaultDialogTitlePadding,
+            right: kDefaultDialogTitlePadding,
+            bottom: 0),
         title: YaruDialogTitle(
           mainAxisAlignment: MainAxisAlignment.start,
           textAlign: titleTextAlign,
           title: title,
           closeIconData: closeIconData ?? Icons.close,
         ),
-        content: SizedBox(
-          height: height,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                for (var child in children)
-                  SizedBox(child: child, width: width ?? kDefaultPageWidth)
-              ],
-            ),
-          ),
-        ),
+        content: SizedBox(height: height, width: width, child: child),
         actions: actions,
         alignment: alignment,
       ),
