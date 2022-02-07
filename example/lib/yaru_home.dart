@@ -15,8 +15,6 @@ class YaruHome extends StatefulWidget {
 class _YaruHomeState extends State<YaruHome> {
   @override
   Widget build(BuildContext context) {
-    ;
-
     return YaruMasterDetailPage(
       appBarHeight: 48,
       leftPaneWidth: 280,
