@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
-import 'package:yaru_widgets_example/widgets/yaru_row_list.dart';
+import 'package:yaru_widgets_example/widgets/row_list.dart';
 
 class TabbedPagePage extends StatelessWidget {
   const TabbedPagePage({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class TabbedPagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return YaruTabbedPage(views: [
       YaruPage(
-        children: [YaruRowList()],
+        children: [RowList()],
       ),
       YaruPage(children: [
         YaruSection(

@@ -10,9 +10,9 @@ import 'package:yaru_widgets_example/pages/slider_page.dart';
 import 'package:yaru_widgets_example/pages/switch_row_page.dart';
 import 'package:yaru_widgets_example/pages/tabbed_page_page.dart';
 import 'package:yaru_widgets_example/pages/toggle_buttons_row_page.dart';
-import 'package:yaru_widgets_example/widgets/list_yaru_options.dart';
-import 'package:yaru_widgets_example/widgets/yaru_option_card_list.dart';
-import 'package:yaru_widgets_example/widgets/yaru_row_list.dart';
+import 'package:yaru_widgets_example/widgets/option_button_list.dart';
+import 'package:yaru_widgets_example/widgets/card_list.dart';
+import 'package:yaru_widgets_example/widgets/row_list.dart';
 
 final examplePageItems = <YaruPageItem>[
   YaruPageItem(
@@ -57,17 +57,17 @@ final examplePageItems = <YaruPageItem>[
   YaruPageItem(
     title: 'YaruOptionButton',
     iconData: YaruIcons.emote_plain,
-    builder: (_) => YaruPage(children: [YaruOptionsButtonsList()]),
+    builder: (_) => YaruPage(children: [OptionButtonList()]),
   ),
   YaruPageItem(
     title: 'YaruOptionCard',
     iconData: YaruIcons.emote_worried,
-    builder: (_) => YaruPage(children: [YaruOptionCardList()]),
+    builder: (_) => YaruPage(children: [CardList()]),
   ),
   YaruPageItem(
     title: 'YaruRow',
     iconData: YaruIcons.emote_cool,
-    builder: (_) => YaruPage(children: [YaruRowList()]),
+    builder: (_) => YaruPage(children: [RowList()]),
   ),
   YaruPageItem(
     title: 'YaruSearchAppBar',

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
-import 'package:yaru_widgets_example/widgets/yaru_row_list.dart';
+import 'package:yaru_widgets_example/widgets/row_list.dart';
 
 void main() {
   runApp(const App());
@@ -63,7 +63,7 @@ final pageItems = [
             'Globe',
             'Power'
           ], views: [
-            YaruPage(children: [YaruRowList()]),
+            YaruPage(children: [RowList()]),
             Center(child: Text('Globe')),
             Center(child: Text('Power'))
           ]),

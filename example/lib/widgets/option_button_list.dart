@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
-class YaruOptionsButtonsList extends StatelessWidget {
-  const YaruOptionsButtonsList({Key? key}) : super(key: key);
+class OptionButtonList extends StatelessWidget {
+  const OptionButtonList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
