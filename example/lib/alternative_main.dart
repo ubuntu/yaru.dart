@@ -13,16 +13,16 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Yaru Demo',
+      title: 'Yaru Wide- / NarrowLayout Example',
       theme: yaruLight,
       darkTheme: yaruDark,
-      home: const HomePage(),
+      home: const WideNarrowHomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class WideNarrowHomePage extends StatelessWidget {
+  const WideNarrowHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

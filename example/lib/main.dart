@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_widgets_example/home_page.dart';
+import 'package:yaru_widgets_example/master_detail_home_page.dart';
 
 void main() {
   runApp(Home());
@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
     return MaterialApp(
       theme: yaruLight,
       darkTheme: yaruDark,
-      home: const HomePage(),
+      home: const MasterDetailHomePage(),
     );
   }
 }

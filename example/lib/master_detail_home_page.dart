@@ -3,16 +3,14 @@ import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_widgets_example/example_page_items.dart';
 
-const kMinSectionWidth = 400.0;
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MasterDetailHomePage extends StatefulWidget {
+  const MasterDetailHomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MasterDetailHomePage> createState() => _MasterDetailHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MasterDetailHomePageState extends State<MasterDetailHomePage> {
   @override
   Widget build(BuildContext context) {
     return YaruMasterDetailPage(

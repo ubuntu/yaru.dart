@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets_example/widgets/dummy_section.dart';
-import 'package:yaru_widgets_example/home_page.dart';
+
+const kMinSectionWidth = 400.0;
 
 class SectionPage extends StatefulWidget {
   const SectionPage({Key? key}) : super(key: key);
