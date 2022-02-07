@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
-class YaruRowList extends StatelessWidget {
-  const YaruRowList({Key? key}) : super(key: key);
+class RowList extends StatelessWidget {
+  const RowList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

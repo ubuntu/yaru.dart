@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
-import 'package:yaru_widgets_example/widgets/yaru_row_list.dart';
+import 'package:yaru_widgets_example/widgets/row_list.dart';
 
 void main() {
   runApp(const App());
@@ -13,16 +13,16 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Yaru Demo',
+      title: 'Yaru Wide- / NarrowLayout Example',
       theme: yaruLight,
       darkTheme: yaruDark,
-      home: const HomePage(),
+      home: const WideNarrowHomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class WideNarrowHomePage extends StatelessWidget {
+  const WideNarrowHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ final pageItems = [
             'Globe',
             'Power'
           ], views: [
-            YaruPage(children: [YaruRowList()]),
+            YaruPage(children: [RowList()]),
             Center(child: Text('Globe')),
             Center(child: Text('Power'))
           ]),
