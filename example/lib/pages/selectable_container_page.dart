@@ -26,7 +26,7 @@ class _SelectableContainerPageState extends State<SelectableContainerPage> {
           selected: _isImageSelected,
           onTap: () => setState(() => _isImageSelected = !_isImageSelected),
           child: kIsWeb
-              ? Image.network('assets/ubuntuhero.jpg',
+              ? Image.asset('assets/ubuntuhero.jpg',
                   filterQuality: FilterQuality.low, fit: BoxFit.fill)
               : Image.file(File('assets/ubuntuhero.jpg'),
                   filterQuality: FilterQuality.low, fit: BoxFit.fill),

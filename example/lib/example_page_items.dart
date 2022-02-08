@@ -17,30 +17,17 @@ import 'package:yaru_widgets_example/widgets/row_list.dart';
 final examplePageItems = <YaruPageItem>[
   YaruPageItem(
     title: 'YaruRow',
-    iconData: YaruIcons.emote_wink,
-    builder: (_) => Column(
-      children: const [
-        YaruPage(
-          children: [
-            YaruRow(
-              enabled: true,
-              trailingWidget: Text('trailingWidget'),
-              actionWidget: Text('actionWidget'),
-              description: 'description',
-            )
-          ],
-        )
-      ],
-    ),
+    iconData: YaruIcons.format_unordered_list,
+    builder: (_) => YaruPage(children: [RowList()]),
   ),
   YaruPageItem(
     title: 'YaruExtraOptionRow',
-    iconData: YaruIcons.emote_angry,
+    iconData: YaruIcons.settings_filled,
     builder: (_) => ExtraOptionRowPage(),
   ),
   YaruPageItem(
     title: 'YaruLinearProgressIndicator',
-    iconData: YaruIcons.emote_monkey,
+    iconData: YaruIcons.download,
     builder: (_) => YaruPage(
       children: [
         YaruLinearProgressIndicator(
@@ -51,27 +38,22 @@ final examplePageItems = <YaruPageItem>[
   ),
   YaruPageItem(
     title: 'YaruSelectableContainer',
-    iconData: YaruIcons.emote_devilish,
+    iconData: YaruIcons.selection,
     builder: (_) => SelectableContainerPage(),
   ),
   YaruPageItem(
     title: 'YaruOptionButton',
-    iconData: YaruIcons.emote_plain,
+    iconData: YaruIcons.settings,
     builder: (_) => YaruPage(children: [OptionButtonList()]),
   ),
   YaruPageItem(
     title: 'YaruOptionCard',
-    iconData: YaruIcons.emote_worried,
+    iconData: YaruIcons.image,
     builder: (_) => YaruPage(children: [CardList()]),
   ),
   YaruPageItem(
-    title: 'YaruRow',
-    iconData: YaruIcons.emote_cool,
-    builder: (_) => YaruPage(children: [RowList()]),
-  ),
-  YaruPageItem(
     title: 'YaruSearchAppBar',
-    iconData: YaruIcons.emote_angel,
+    iconData: YaruIcons.folder_search,
     builder: (_) => YaruPage(
       children: [
         YaruSearchAppBar(
@@ -87,12 +69,12 @@ final examplePageItems = <YaruPageItem>[
   ),
   YaruPageItem(
     title: 'YaruSection',
-    iconData: YaruIcons.emote_glasses,
+    iconData: YaruIcons.window,
     builder: (_) => SectionPage(),
   ),
   YaruPageItem(
     title: 'YaruSingleInfoRow',
-    iconData: YaruIcons.emote_embarrassed,
+    iconData: YaruIcons.format_ordered_list,
     builder: (_) => YaruPage(
       children: [
         YaruSection(headline: "YaruSingleInfoRow", children: [
@@ -110,22 +92,22 @@ final examplePageItems = <YaruPageItem>[
   ),
   YaruPageItem(
     title: 'YaruSliderRow',
-    iconData: YaruIcons.emote_uncertain,
+    iconData: YaruIcons.speaker_volume_medium,
     builder: (_) => SliderPage(),
   ),
   YaruPageItem(
     title: 'YaruSwitchRow',
-    iconData: YaruIcons.emote_raspberry,
+    iconData: YaruIcons.radio_button_filled,
     builder: (_) => SwitchRowPage(),
   ),
   YaruPageItem(
     title: 'YaruToggleButtonsRow',
-    iconData: YaruIcons.emote_shutmouth,
+    iconData: YaruIcons.object_flip_horizontal,
     builder: (_) => ToggleButtonsRowPage(),
   ),
   YaruPageItem(
     title: 'YaruCheckboxRow',
-    iconData: YaruIcons.emote_plain,
+    iconData: YaruIcons.checkbox_button_checked,
     builder: (_) => CheckBoxRowPage(),
   ),
   YaruPageItem(
