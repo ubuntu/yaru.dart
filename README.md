@@ -10,6 +10,8 @@ Common flutter widgets useful for building desktop and web applications.
 
 A set of convenient widgets made with `material.dart` to easily build desktop and web applications.
 
+[LIVE DEMO](https://feichtmeier.github.io/)
+
 For example:
 
 - `YaruMasterDetailPage`, for having a UI skeletton that adapts its navigation to the window width, with one layout for a wide/landscape window and one layout for a narrow/portrait window
