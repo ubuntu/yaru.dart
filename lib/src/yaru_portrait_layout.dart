@@ -11,7 +11,6 @@ class YaruPortraitLayout extends StatefulWidget {
       required this.pages,
       required this.onSelected,
       this.previousIconData,
-      this.appBarHeight,
       this.searchIconData,
       this.searchHint})
       : super(key: key);
@@ -20,7 +19,6 @@ class YaruPortraitLayout extends StatefulWidget {
   final List<YaruPageItem> pages;
   final ValueChanged<int> onSelected;
   final IconData? previousIconData;
-  final double? appBarHeight;
   final IconData? searchIconData;
   final String? searchHint;
 

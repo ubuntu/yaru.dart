@@ -23,7 +23,6 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// ```
   const YaruMasterDetailPage({
     Key? key,
-    this.appBarHeight,
     required this.pageItems,
     this.previousIconData,
     this.searchIconData,
@@ -36,9 +35,6 @@ class YaruMasterDetailPage extends StatefulWidget {
   ///
   /// These List of items are passed to [YaruLandscapeLayout] and [YaruPortraitLayout].
   final List<YaruPageItem> pageItems;
-
-  /// Specifies the [AppBar] height.
-  final double? appBarHeight;
 
   /// Specifies the width of left pane.
   final double leftPaneWidth;
@@ -74,7 +70,6 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             selectedIndex: _index,
             pages: widget.pageItems,
             onSelected: _setIndex,
-            appBarHeight: widget.appBarHeight,
             previousIconData: widget.previousIconData,
             searchIconData: widget.searchIconData,
             searchHint: widget.searchHint,
@@ -84,7 +79,6 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             selectedIndex: _index == -1 ? _previousIndex : _index,
             pages: widget.pageItems,
             onSelected: _setIndex,
-            appBarHeight: widget.appBarHeight,
             leftPaneWidth: widget.leftPaneWidth,
             searchIconData: widget.searchIconData,
             searchHint: widget.searchHint,
