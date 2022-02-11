@@ -57,6 +57,7 @@ final examplePageItems = <YaruPageItem>[
     builder: (_) => YaruPage(
       children: [
         YaruSearchAppBar(
+          appBarHeight: kToolbarHeight,
           automaticallyImplyLeading: false,
           searchController: TextEditingController(),
           onChanged: (v) {},

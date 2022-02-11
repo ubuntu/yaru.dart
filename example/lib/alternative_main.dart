@@ -29,6 +29,8 @@ class WideNarrowHomePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: YaruSearchAppBar(
+            appBarHeight:
+                Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
             searchIconData: YaruIcons.search,
             searchController: TextEditingController(),
             onChanged: (value) {},

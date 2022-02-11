@@ -10,7 +10,6 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.selectedIndex,
     required this.pages,
     required this.onSelected,
-    this.appBarHeight,
     required this.leftPaneWidth,
     this.searchIconData,
     this.searchHint,
@@ -25,9 +24,6 @@ class YaruLandscapeLayout extends StatefulWidget {
 
   // Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
-
-  // Specifies the [AppBar] height.
-  final double? appBarHeight;
 
   // Specifies the width of left pane.
   final double leftPaneWidth;
@@ -70,7 +66,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       body: Column(
         children: [
           SizedBox(
-            height: widget.appBarHeight,
+            height:
+                Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
             child: Row(
               children: [
                 SizedBox(
@@ -140,7 +137,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
         _searchController.clear();
         _filteredItems.clear();
       }),
-      appBarHeight: widget.appBarHeight,
+      appBarHeight:
+          Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
       searchIconData: widget.searchIconData,
     );
   }

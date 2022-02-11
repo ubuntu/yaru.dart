@@ -11,7 +11,6 @@ class YaruPortraitLayout extends StatefulWidget {
       required this.pages,
       required this.onSelected,
       this.previousIconData,
-      this.appBarHeight,
       this.searchIconData,
       this.searchHint})
       : super(key: key);
@@ -20,7 +19,6 @@ class YaruPortraitLayout extends StatefulWidget {
   final List<YaruPageItem> pages;
   final ValueChanged<int> onSelected;
   final IconData? previousIconData;
-  final double? appBarHeight;
   final IconData? searchIconData;
   final String? searchHint;
 
@@ -63,7 +61,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
         final page = widget.pages[_selectedIndex];
         return Scaffold(
           appBar: AppBar(
-            toolbarHeight: widget.appBarHeight ?? kToolbarHeight,
+            toolbarHeight: Theme.of(context).appBarTheme.toolbarHeight,
             title: Text(page.title),
             leading: InkWell(
               child: Icon(widget.previousIconData ?? Icons.navigate_before),
@@ -127,7 +125,8 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
         _searchController.clear();
         _filteredItems.clear();
       }),
-      appBarHeight: widget.appBarHeight,
+      appBarHeight:
+          Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
       searchIconData: widget.searchIconData,
       automaticallyImplyLeading: false,
     );
