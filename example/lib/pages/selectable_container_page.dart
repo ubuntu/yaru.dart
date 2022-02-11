@@ -22,14 +22,41 @@ class _SelectableContainerPageState extends State<SelectableContainerPage> {
   Widget build(BuildContext context) {
     return YaruPage(
       children: [
-        YaruSelectableContainer(
-          selected: _isImageSelected,
-          onTap: () => setState(() => _isImageSelected = !_isImageSelected),
-          child: kIsWeb
-              ? Image.asset('assets/ubuntuhero.jpg',
-                  filterQuality: FilterQuality.low, fit: BoxFit.fill)
-              : Image.file(File('assets/ubuntuhero.jpg'),
-                  filterQuality: FilterQuality.low, fit: BoxFit.fill),
+        GridView(
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 300,
+              childAspectRatio: 16 / 12,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10),
+          children: [
+            YaruSelectableContainer(
+              selected: !_isImageSelected,
+              onTap: () => setState(() => _isImageSelected = !_isImageSelected),
+              child: kIsWeb
+                  ? Image.asset(
+                      'assets/ubuntuhero.jpg',
+                      filterQuality: FilterQuality.low,
+                      fit: BoxFit.fill,
+                      height: 300,
+                    )
+                  : Image.file(File('assets/ubuntuhero.jpg'),
+                      filterQuality: FilterQuality.low, fit: BoxFit.fill),
+            ),
+            YaruSelectableContainer(
+              selected: _isImageSelected,
+              onTap: () => setState(() => _isImageSelected = !_isImageSelected),
+              child: kIsWeb
+                  ? Image.asset(
+                      'assets/ubuntuhero.jpg',
+                      filterQuality: FilterQuality.low,
+                      fit: BoxFit.fill,
+                      height: 300,
+                    )
+                  : Image.file(File('assets/ubuntuhero.jpg'),
+                      filterQuality: FilterQuality.low, fit: BoxFit.fill),
+            ),
+          ],
         ),
         SizedBox(
           height: 20,
