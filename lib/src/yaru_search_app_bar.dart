@@ -17,7 +17,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.onEscape,
     required this.automaticallyImplyLeading,
     this.searchIconData,
-    this.appBarHeight,
+    required this.appBarHeight,
     this.textStyle,
     this.searchHint,
   }) : super(key: key);
@@ -35,7 +35,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData? searchIconData;
 
   /// The height of the [AppBar].
-  final double? appBarHeight;
+  final double appBarHeight;
 
   /// Specifies the search hint.
   final String? searchHint;
@@ -50,8 +50,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final textColor = Theme.of(context).appBarTheme.foregroundColor;
     return AppBar(
-      toolbarHeight:
-          appBarHeight ?? Theme.of(context).appBarTheme.toolbarHeight,
+      toolbarHeight: appBarHeight,
       automaticallyImplyLeading: automaticallyImplyLeading,
       flexibleSpace: RawKeyboardListener(
         onKey: (event) {
@@ -62,7 +61,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         focusNode: FocusNode(),
         child: SizedBox(
-          height: appBarHeight ?? Theme.of(context).appBarTheme.toolbarHeight,
+          height: appBarHeight,
           child: Padding(
             padding: const EdgeInsets.only(top: 4),
             child: TextField(
@@ -102,5 +101,5 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(0, appBarHeight ?? kToolbarHeight);
+  Size get preferredSize => Size(0, appBarHeight);
 }

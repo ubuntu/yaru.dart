@@ -140,7 +140,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
         _searchController.clear();
         _filteredItems.clear();
       }),
-      appBarHeight: widget.appBarHeight,
+      appBarHeight: widget.appBarHeight ?? kToolbarHeight,
       searchIconData: widget.searchIconData,
     );
   }

@@ -63,7 +63,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
         final page = widget.pages[_selectedIndex];
         return Scaffold(
           appBar: AppBar(
-            toolbarHeight: widget.appBarHeight ?? kToolbarHeight,
+            toolbarHeight: Theme.of(context).appBarTheme.toolbarHeight,
             title: Text(page.title),
             leading: InkWell(
               child: Icon(widget.previousIconData ?? Icons.navigate_before),
@@ -127,7 +127,8 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
         _searchController.clear();
         _filteredItems.clear();
       }),
-      appBarHeight: widget.appBarHeight,
+      appBarHeight:
+          Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
       searchIconData: widget.searchIconData,
       automaticallyImplyLeading: false,
     );
