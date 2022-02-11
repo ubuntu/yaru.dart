@@ -17,7 +17,6 @@ class Home extends StatelessWidget {
       theme: yaruLight,
       darkTheme: yaruDark,
       home: YaruMasterDetailPage(
-        appBarHeight: 48,
         leftPaneWidth: 280,
         previousIconData: YaruIcons.go_previous,
         searchHint: 'Search...',
