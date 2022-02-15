@@ -44,7 +44,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     super.initState();
   }
 
-  void onTap(int index) {
+  void _onTap(int index) {
     widget.onSelected(index);
     setState(() => _selectedIndex = index);
   }
@@ -93,7 +93,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                     ),
                     child: YaruPageItemListView(
                         selectedIndex: _selectedIndex,
-                        onTap: onTap,
+                        onTap: _onTap,
                         pages: widget.pageItems),
                   ),
                 ),

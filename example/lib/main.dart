@@ -46,16 +46,16 @@ class _HomeState extends State<Home> {
         clearSearchIconData: YaruIcons.window_close,
         pageItems:
             _filteredItems.isNotEmpty ? _filteredItems : examplePageItems,
-        appBar: YaruSearchAppBar(
-          searchHint: 'Search...',
-          clearSearchIconData: YaruIcons.window_close,
-          searchController: _searchController,
-          onChanged: _onSearchChanged,
-          onEscape: _onEscape,
-          appBarHeight: 48,
-          searchIconData: YaruIcons.search,
-          automaticallyImplyLeading: false,
-        ),
+        // appBar: YaruSearchAppBar(
+        //   searchHint: 'Search...',
+        //   clearSearchIconData: YaruIcons.window_close,
+        //   searchController: _searchController,
+        //   onChanged: _onSearchChanged,
+        //   onEscape: _onEscape,
+        //   appBarHeight: 48,
+        //   searchIconData: YaruIcons.search,
+        //   automaticallyImplyLeading: false,
+        // ),
       ),
     );
   }

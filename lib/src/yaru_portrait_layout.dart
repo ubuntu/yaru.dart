@@ -36,10 +36,15 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
     super.initState();
   }
 
-  void onTap(int index) {
+  void _onTap(int index) {
     widget.onSelected(index);
     _navigator.push(pageRoute(index));
     setState(() => _selectedIndex = index);
+  }
+
+  void _goBack() {
+    widget.onSelected(-1);
+    _navigator.pop(context);
   }
 
   MaterialPageRoute pageRoute(int index) {
@@ -48,18 +53,27 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
       builder: (context) {
         final page = widget.pageItems[_selectedIndex];
         return Scaffold(
-          appBar: AppBar(
-            toolbarHeight: Theme.of(context).appBarTheme.toolbarHeight,
-            title: Text(page.title),
-            leading: InkWell(
-              child: Icon(widget.previousIconData ?? Icons.navigate_before),
-              onTap: () {
-                widget.onSelected(-1);
-                _navigator.pop(context);
-              },
-            ),
-          ),
+          appBar: widget.appBar != null
+              ? AppBar(
+                  toolbarHeight: Theme.of(context).appBarTheme.toolbarHeight,
+                  title: Text(page.title),
+                  leading: InkWell(
+                    child:
+                        Icon(widget.previousIconData ?? Icons.navigate_before),
+                    onTap: _goBack,
+                  ),
+                )
+              : null,
           body: SizedBox(width: width, child: page.builder(context)),
+          floatingActionButton: widget.appBar == null
+              ? FloatingActionButton(
+                  child: Icon(widget.previousIconData),
+                  onPressed: _goBack,
+                )
+              : null,
+          floatingActionButtonLocation: widget.appBar == null
+              ? FloatingActionButtonLocation.miniStartFloat
+              : null,
         );
       },
     );
@@ -79,7 +93,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                   appBar: widget.appBar,
                   body: YaruPageItemListView(
                       selectedIndex: _selectedIndex,
-                      onTap: onTap,
+                      onTap: _onTap,
                       pages: widget.pageItems),
                 );
               },
