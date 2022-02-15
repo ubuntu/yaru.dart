@@ -1,38 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/yaru_page_item_list_view.dart';
-import 'package:yaru_widgets/src/yaru_search_app_bar.dart';
+
 import 'yaru_page_item.dart';
 
 class YaruLandscapeLayout extends StatefulWidget {
-  // Creates a landscape layout
+  /// Creates a landscape layout
   const YaruLandscapeLayout({
     Key? key,
     required this.selectedIndex,
-    required this.pages,
+    required this.pageItems,
     required this.onSelected,
     required this.leftPaneWidth,
-    this.searchIconData,
-    this.searchHint,
+    this.appBar,
   }) : super(key: key);
 
-  // Current index of the selected page.
+  /// Current index of the selected page.
   final int selectedIndex;
 
-  // Creates horizontal array of pages.
-  // All the `children` will be of type [YaruPageItem]
-  final List<YaruPageItem> pages;
+  /// Creates horizontal array of pages.
+  /// All the `children` will be of type [YaruPageItem]
+  final List<YaruPageItem> pageItems;
 
-  // Callback that returns an index when the page changes.
+  /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
 
-  // Specifies the width of left pane.
+  /// Specifies the width of left pane.
   final double leftPaneWidth;
-
-  // The icon that is given to the search widget.
-  final IconData? searchIconData;
-
-  // The hint text given to the search widget.
-  final String? searchHint;
+  final PreferredSizeWidget? appBar;
 
   @override
   State<YaruLandscapeLayout> createState() => _YaruLandscapeLayoutState();
@@ -40,22 +34,14 @@ class YaruLandscapeLayout extends StatefulWidget {
 
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
-  late TextEditingController _searchController;
-  final _filteredItems = <YaruPageItem>[];
 
   @override
   void initState() {
     _selectedIndex = widget.selectedIndex;
-    _searchController = TextEditingController();
     super.initState();
   }
 
   void onTap(int index) {
-    if (_filteredItems.isNotEmpty) {
-      index = widget.pages.indexOf(widget.pages.firstWhere(
-          (pageItem) => pageItem.title == _filteredItems[index].title));
-    }
-
     widget.onSelected(index);
     setState(() => _selectedIndex = index);
   }
@@ -72,11 +58,11 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
               children: [
                 SizedBox(
                   width: widget.leftPaneWidth,
-                  child: addSearchBar(),
+                  child: widget.appBar ?? AppBar(),
                 ),
                 Expanded(
                   child: AppBar(
-                    title: Text(widget.pages[_selectedIndex].title),
+                    title: Text(widget.pageItems[_selectedIndex].title),
                   ),
                 )
               ],
@@ -99,47 +85,18 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                       ),
                     ),
                     child: YaruPageItemListView(
-                      selectedIndex: _selectedIndex,
-                      onTap: onTap,
-                      pages: _filteredItems.isEmpty
-                          ? widget.pages
-                          : _filteredItems,
-                    ),
+                        selectedIndex: _selectedIndex,
+                        onTap: onTap,
+                        pages: widget.pageItems),
                   ),
                 ),
-                Expanded(child: widget.pages[_selectedIndex].builder(context)),
+                Expanded(
+                    child: widget.pageItems[_selectedIndex].builder(context)),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  YaruSearchAppBar addSearchBar() {
-    return YaruSearchAppBar(
-      automaticallyImplyLeading: false,
-      searchHint: widget.searchHint,
-      searchController: _searchController,
-      onChanged: (value) {
-        setState(() {
-          _filteredItems.clear();
-          for (YaruPageItem pageItem in widget.pages) {
-            if (pageItem.title
-                .toLowerCase()
-                .contains(_searchController.value.text.toLowerCase())) {
-              _filteredItems.add(pageItem);
-            }
-          }
-        });
-      },
-      onEscape: () => setState(() {
-        _searchController.clear();
-        _filteredItems.clear();
-      }),
-      appBarHeight:
-          Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
-      searchIconData: widget.searchIconData,
     );
   }
 }

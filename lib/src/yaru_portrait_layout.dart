@@ -5,22 +5,21 @@ import 'package:yaru_widgets/src/yaru_search_app_bar.dart';
 import 'yaru_page_item.dart';
 
 class YaruPortraitLayout extends StatefulWidget {
-  const YaruPortraitLayout(
-      {Key? key,
-      required this.selectedIndex,
-      required this.pages,
-      required this.onSelected,
-      this.previousIconData,
-      this.searchIconData,
-      this.searchHint})
-      : super(key: key);
+  const YaruPortraitLayout({
+    Key? key,
+    required this.selectedIndex,
+    required this.pageItems,
+    required this.onSelected,
+    this.previousIconData,
+    this.yaruSearchAppBar,
+  }) : super(key: key);
 
   final int selectedIndex;
-  final List<YaruPageItem> pages;
+  final List<YaruPageItem> pageItems;
   final ValueChanged<int> onSelected;
   final IconData? previousIconData;
-  final IconData? searchIconData;
-  final String? searchHint;
+
+  final YaruSearchAppBar? yaruSearchAppBar;
 
   @override
   _YaruPortraitLayoutState createState() => _YaruPortraitLayoutState();
@@ -28,37 +27,27 @@ class YaruPortraitLayout extends StatefulWidget {
 
 class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   late int _selectedIndex;
-  late TextEditingController _searchController;
-  final _filteredItems = <YaruPageItem>[];
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
 
   @override
   void initState() {
-    _searchController = TextEditingController();
     _selectedIndex = widget.selectedIndex;
     super.initState();
   }
 
   void onTap(int index) {
-    if (_filteredItems.isNotEmpty) {
-      index = widget.pages.indexOf(widget.pages.firstWhere(
-          (pageItem) => pageItem.title == _filteredItems[index].title));
-    }
-
-    _navigator.push(pageRoute(index));
     widget.onSelected(index);
+    _navigator.push(pageRoute(index));
     setState(() => _selectedIndex = index);
-    _searchController.clear();
-    _filteredItems.clear();
   }
 
   MaterialPageRoute pageRoute(int index) {
     final width = MediaQuery.of(context).size.width;
     return MaterialPageRoute(
       builder: (context) {
-        final page = widget.pages[_selectedIndex];
+        final page = widget.pageItems[_selectedIndex];
         return Scaffold(
           appBar: AppBar(
             toolbarHeight: Theme.of(context).appBarTheme.toolbarHeight,
@@ -88,13 +77,11 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
             MaterialPageRoute(
               builder: (context) {
                 return Scaffold(
-                  appBar: addSearchBar(),
+                  appBar: widget.yaruSearchAppBar ?? AppBar(),
                   body: YaruPageItemListView(
-                    selectedIndex: _selectedIndex,
-                    onTap: onTap,
-                    pages:
-                        _filteredItems.isEmpty ? widget.pages : _filteredItems,
-                  ),
+                      selectedIndex: _selectedIndex,
+                      onTap: onTap,
+                      pages: widget.pageItems),
                 );
               },
             ),
@@ -102,33 +89,6 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
           ];
         },
       ),
-    );
-  }
-
-  YaruSearchAppBar addSearchBar() {
-    return YaruSearchAppBar(
-      searchHint: widget.searchHint,
-      searchController: _searchController,
-      onChanged: (value) {
-        setState(() {
-          _filteredItems.clear();
-          for (YaruPageItem pageItem in widget.pages) {
-            if (pageItem.title
-                .toLowerCase()
-                .contains(_searchController.value.text.toLowerCase())) {
-              _filteredItems.add(pageItem);
-            }
-          }
-        });
-      },
-      onEscape: () => setState(() {
-        _searchController.clear();
-        _filteredItems.clear();
-      }),
-      appBarHeight:
-          Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
-      searchIconData: widget.searchIconData,
-      automaticallyImplyLeading: false,
     );
   }
 }

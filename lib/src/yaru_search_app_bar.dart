@@ -20,6 +20,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.appBarHeight,
     this.textStyle,
     this.searchHint,
+    this.clearSearchIconData,
   }) : super(key: key);
 
   /// Pass a new [TextEditingController] instance.
@@ -46,6 +47,8 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// If false, hides the search icon in the [AppBar]
   final bool automaticallyImplyLeading;
 
+  final IconData? clearSearchIconData;
+
   @override
   Widget build(BuildContext context) {
     final textColor = Theme.of(context).appBarTheme.foregroundColor;
@@ -62,38 +65,41 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
         focusNode: FocusNode(),
         child: SizedBox(
           height: appBarHeight,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: TextField(
-              expands: true,
-              maxLines: null,
-              minLines: null,
-              cursorColor: textColor,
-              textAlignVertical: TextAlignVertical.center,
-              style: textStyle ??
-                  Theme.of(context)
-                      .appBarTheme
-                      .titleTextStyle
-                      ?.copyWith(fontWeight: FontWeight.w200, fontSize: 18),
-              decoration: InputDecoration(
-                prefixIcon: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 28, right: 25, bottom: 7),
-                  child: Icon(
-                    searchIconData ?? Icons.search,
-                    color: textColor,
-                  ),
+          child: TextField(
+            expands: true,
+            maxLines: null,
+            minLines: null,
+            cursorColor: textColor,
+            textAlignVertical: TextAlignVertical.center,
+            style: textStyle ??
+                Theme.of(context)
+                    .appBarTheme
+                    .titleTextStyle
+                    ?.copyWith(fontWeight: FontWeight.w200, fontSize: 18),
+            decoration: InputDecoration(
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(left: 28, right: 25, bottom: 7),
+                child: Icon(
+                  searchIconData ?? Icons.search,
+                  color: textColor,
                 ),
-                hintText: searchHint,
-                enabledBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.black.withOpacity(0.01))),
-                border: const UnderlineInputBorder(),
               ),
-              controller: searchController,
-              autofocus: true,
-              onChanged: (value) => onChanged(value),
+              suffixIcon: InkWell(
+                child:
+                    Icon(clearSearchIconData ?? Icons.close, color: textColor),
+                onTap: onEscape,
+              ),
+              suffixIconConstraints: BoxConstraints.expand(
+                  width: appBarHeight, height: appBarHeight),
+              hintText: searchHint,
+              enabledBorder: UnderlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Colors.black.withOpacity(0.01))),
+              border: const UnderlineInputBorder(),
             ),
+            controller: searchController,
+            autofocus: true,
+            onChanged: (value) => onChanged(value),
           ),
         ),
       ),

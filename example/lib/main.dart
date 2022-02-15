@@ -14,6 +14,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: yaruLight,
       darkTheme: yaruDark,
       home: YaruMasterDetailPage(
@@ -21,6 +22,7 @@ class Home extends StatelessWidget {
         previousIconData: YaruIcons.go_previous,
         searchHint: 'Search...',
         searchIconData: YaruIcons.search,
+        clearSearchIconData: YaruIcons.window_close,
         pageItems: examplePageItems,
       ),
     );
