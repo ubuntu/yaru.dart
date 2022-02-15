@@ -8,12 +8,34 @@ void main() {
   runApp(Home());
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final _filteredItems = <YaruPageItem>[];
+  final _searchController = TextEditingController();
+
+  void _onEscape() => setState(() {
+        _filteredItems.clear();
+        _searchController.clear();
+      });
+
+  void _onSearchChanged(String value) {
+    setState(() {
+      _filteredItems.clear();
+      _filteredItems.addAll(examplePageItems.where((element) =>
+          element.title.toLowerCase().contains(value.toLowerCase())));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: yaruLight,
       darkTheme: yaruDark,
       home: YaruMasterDetailPage(
@@ -21,7 +43,19 @@ class Home extends StatelessWidget {
         previousIconData: YaruIcons.go_previous,
         searchHint: 'Search...',
         searchIconData: YaruIcons.search,
-        pageItems: examplePageItems,
+        clearSearchIconData: YaruIcons.window_close,
+        pageItems:
+            _filteredItems.isNotEmpty ? _filteredItems : examplePageItems,
+        appBar: YaruSearchAppBar(
+          searchHint: 'Search...',
+          clearSearchIconData: YaruIcons.window_close,
+          searchController: _searchController,
+          onChanged: _onSearchChanged,
+          onEscape: _onEscape,
+          appBarHeight: 48,
+          searchIconData: YaruIcons.search,
+          automaticallyImplyLeading: false,
+        ),
       ),
     );
   }

@@ -16,8 +16,6 @@ class YaruMasterDetailPage extends StatefulWidget {
   ///       appBarHeight: 48,
   ///       leftPaneWidth: 280,
   ///       previousIconData: YaruIcons.go_previous,
-  ///       searchHint: 'Search...',
-  ///       searchIconData: YaruIcons.search,
   ///      pageItems: pageItems,
   ///     );
   /// ```
@@ -28,6 +26,8 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.searchIconData,
     required this.leftPaneWidth,
     this.searchHint,
+    this.clearSearchIconData,
+    this.appBar,
   }) : super(key: key);
 
   /// Creates horizontal array of pages.
@@ -45,8 +45,14 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// The icon that is given to the search widget.
   final IconData? searchIconData;
 
+  /// Search icon for search bar.
+  final IconData? clearSearchIconData;
+
   /// The hint text given to the search widget.
   final String? searchHint;
+
+  /// An optional custom AppBar for the left pane.
+  final PreferredSizeWidget? appBar;
 
   @override
   _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
@@ -68,20 +74,18 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
         if (constraints.maxWidth < 620) {
           return YaruPortraitLayout(
             selectedIndex: _index,
-            pages: widget.pageItems,
+            pageItems: widget.pageItems,
             onSelected: _setIndex,
             previousIconData: widget.previousIconData,
-            searchIconData: widget.searchIconData,
-            searchHint: widget.searchHint,
+            appBar: widget.appBar,
           );
         } else {
           return YaruLandscapeLayout(
             selectedIndex: _index == -1 ? _previousIndex : _index,
-            pages: widget.pageItems,
+            pageItems: widget.pageItems,
             onSelected: _setIndex,
             leftPaneWidth: widget.leftPaneWidth,
-            searchIconData: widget.searchIconData,
-            searchHint: widget.searchHint,
+            appBar: widget.appBar,
           );
         }
       },
