@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/yaru_landscape_layout.dart';
 import 'package:yaru_widgets/src/yaru_page_item.dart';
 import 'package:yaru_widgets/src/yaru_portrait_layout.dart';
-import 'package:yaru_widgets/src/yaru_search_app_bar.dart';
 
 class YaruMasterDetailPage extends StatefulWidget {
   /// Creates a basic responsive layout with yaru theme,
@@ -28,6 +27,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.leftPaneWidth,
     this.searchHint,
     this.clearSearchIconData,
+    this.appBar,
   }) : super(key: key);
 
   /// Creates horizontal array of pages.
@@ -51,6 +51,9 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// The hint text given to the search widget.
   final String? searchHint;
 
+  /// An optional custom AppBar for the left pane.
+  final PreferredSizeWidget? appBar;
+
   @override
   _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
 }
@@ -58,32 +61,10 @@ class YaruMasterDetailPage extends StatefulWidget {
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   var _index = -1;
   var _previousIndex = 0;
-  late List<YaruPageItem> _filteredItems;
-  late TextEditingController _searchController;
-
-  @override
-  void initState() {
-    _filteredItems = <YaruPageItem>[];
-    _searchController = TextEditingController();
-    super.initState();
-  }
 
   void _setIndex(int index) {
     _previousIndex = _index;
     _index = index;
-  }
-
-  void _onEscape() => setState(() {
-        _filteredItems.clear();
-        _searchController.clear();
-      });
-
-  void _onSearchChanged(String value) {
-    setState(() {
-      _filteredItems.clear();
-      _filteredItems.addAll(widget.pageItems.where((element) =>
-          element.title.toLowerCase().contains(value.toLowerCase())));
-    });
   }
 
   @override
@@ -93,40 +74,18 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
         if (constraints.maxWidth < 620) {
           return YaruPortraitLayout(
             selectedIndex: _index,
-            pageItems:
-                _filteredItems.isEmpty ? widget.pageItems : _filteredItems,
+            pageItems: widget.pageItems,
             onSelected: _setIndex,
             previousIconData: widget.previousIconData,
-            appBar: YaruSearchAppBar(
-              searchHint: widget.searchHint,
-              clearSearchIconData: widget.clearSearchIconData,
-              searchController: _searchController,
-              onChanged: _onSearchChanged,
-              onEscape: _onEscape,
-              appBarHeight:
-                  Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
-              searchIconData: widget.searchIconData,
-              automaticallyImplyLeading: false,
-            ),
+            appBar: widget.appBar,
           );
         } else {
           return YaruLandscapeLayout(
             selectedIndex: _index == -1 ? _previousIndex : _index,
-            pageItems:
-                _filteredItems.isEmpty ? widget.pageItems : _filteredItems,
+            pageItems: widget.pageItems,
             onSelected: _setIndex,
             leftPaneWidth: widget.leftPaneWidth,
-            appBar: YaruSearchAppBar(
-              searchHint: widget.searchHint,
-              clearSearchIconData: widget.clearSearchIconData,
-              searchController: _searchController,
-              onChanged: _onSearchChanged,
-              onEscape: _onEscape,
-              appBarHeight:
-                  Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
-              searchIconData: widget.searchIconData,
-              automaticallyImplyLeading: false,
-            ),
+            appBar: widget.appBar,
           );
         }
       },

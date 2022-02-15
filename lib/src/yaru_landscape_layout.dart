@@ -26,6 +26,9 @@ class YaruLandscapeLayout extends StatefulWidget {
 
   /// Specifies the width of left pane.
   final double leftPaneWidth;
+
+  /// An optional [PreferredSizeWidget] used as the left [AppBar]
+  /// If provided, a second [AppBar] will be created right to it.
   final PreferredSizeWidget? appBar;
 
   @override
@@ -52,21 +55,23 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       body: Column(
         children: [
           SizedBox(
-            height:
-                Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
+            height: widget.appBar != null
+                ? Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight
+                : 0,
             child: Row(
               children: [
                 SizedBox(
                   width: widget.leftPaneWidth,
-                  child: widget.appBar ?? AppBar(),
+                  child: widget.appBar,
                 ),
-                Expanded(
-                  child: AppBar(
-                    title: widget.pageItems.length > _selectedIndex
-                        ? Text(widget.pageItems[_selectedIndex].title)
-                        : Text(widget.pageItems[0].title),
-                  ),
-                )
+                if (widget.appBar != null)
+                  Expanded(
+                    child: AppBar(
+                      title: widget.pageItems.length > _selectedIndex
+                          ? Text(widget.pageItems[_selectedIndex].title)
+                          : Text(widget.pageItems[0].title),
+                    ),
+                  )
               ],
             ),
           ),

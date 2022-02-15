@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/yaru_page_item_list_view.dart';
-import 'package:yaru_widgets/src/yaru_search_app_bar.dart';
 
 import 'yaru_page_item.dart';
 
@@ -77,7 +76,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
             MaterialPageRoute(
               builder: (context) {
                 return Scaffold(
-                  appBar: widget.appBar ?? AppBar(),
+                  appBar: widget.appBar,
                   body: YaruPageItemListView(
                       selectedIndex: _selectedIndex,
                       onTap: onTap,
