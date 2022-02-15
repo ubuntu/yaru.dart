@@ -12,7 +12,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// Vertical alignment of the [TextField] will be center.
   const YaruSearchAppBar({
     Key? key,
-    required this.searchController,
+    this.searchController,
     required this.onChanged,
     required this.onEscape,
     required this.automaticallyImplyLeading,
@@ -24,7 +24,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   }) : super(key: key);
 
   /// Pass a new [TextEditingController] instance.
-  final TextEditingController searchController;
+  final TextEditingController? searchController;
 
   /// The callback that gets invoked when the value changes in the text field.
   final Function(String value) onChanged;
@@ -44,7 +44,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// Specifies the [TextStyle]
   final TextStyle? textStyle;
 
-  /// If false, hides the search icon in the [AppBar]
+  /// If false, hides the back icon in the [AppBar]
   final bool automaticallyImplyLeading;
 
   final IconData? clearSearchIconData;
@@ -77,6 +77,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                     .titleTextStyle
                     ?.copyWith(fontWeight: FontWeight.w200, fontSize: 18),
             decoration: InputDecoration(
+              contentPadding: const EdgeInsets.only(top: 6),
               prefixIcon: Icon(
                 searchIconData ?? Icons.search,
                 color: textColor,
