@@ -63,7 +63,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
   @override
   void initState() {
-    _filteredItems = <YaruPageItem>[...widget.pageItems];
+    _filteredItems = <YaruPageItem>[];
     _searchController = TextEditingController();
     super.initState();
   }

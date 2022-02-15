@@ -8,7 +8,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   const YaruLandscapeLayout({
     Key? key,
     required this.selectedIndex,
-    required this.pageItems,
+    this.pageItems = const [],
     required this.onSelected,
     required this.leftPaneWidth,
     this.appBar,
