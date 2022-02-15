@@ -77,13 +77,12 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                     .titleTextStyle
                     ?.copyWith(fontWeight: FontWeight.w200, fontSize: 18),
             decoration: InputDecoration(
-              prefixIcon: Padding(
-                padding: const EdgeInsets.only(left: 28, right: 25, bottom: 7),
-                child: Icon(
-                  searchIconData ?? Icons.search,
-                  color: textColor,
-                ),
+              prefixIcon: Icon(
+                searchIconData ?? Icons.search,
+                color: textColor,
               ),
+              prefixIconConstraints: BoxConstraints.expand(
+                  width: appBarHeight, height: appBarHeight),
               suffixIcon: InkWell(
                 child:
                     Icon(clearSearchIconData ?? Icons.close, color: textColor),
@@ -99,7 +98,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             controller: searchController,
             autofocus: true,
-            onChanged: (value) => onChanged(value),
+            onChanged: onChanged,
           ),
         ),
       ),

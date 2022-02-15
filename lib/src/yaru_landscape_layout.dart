@@ -8,7 +8,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   const YaruLandscapeLayout({
     Key? key,
     required this.selectedIndex,
-    this.pageItems = const [],
+    required this.pageItems,
     required this.onSelected,
     required this.leftPaneWidth,
     this.appBar,
@@ -62,7 +62,9 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                 ),
                 Expanded(
                   child: AppBar(
-                    title: Text(widget.pageItems[_selectedIndex].title),
+                    title: widget.pageItems.length > _selectedIndex
+                        ? Text(widget.pageItems[_selectedIndex].title)
+                        : Text(widget.pageItems[0].title),
                   ),
                 )
               ],
@@ -91,7 +93,9 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                   ),
                 ),
                 Expanded(
-                    child: widget.pageItems[_selectedIndex].builder(context)),
+                    child: widget.pageItems.length > _selectedIndex
+                        ? widget.pageItems[_selectedIndex].builder(context)
+                        : widget.pageItems[0].builder(context)),
               ],
             ),
           ),

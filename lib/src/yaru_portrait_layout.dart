@@ -11,7 +11,7 @@ class YaruPortraitLayout extends StatefulWidget {
     required this.pageItems,
     required this.onSelected,
     this.previousIconData,
-    this.yaruSearchAppBar,
+    this.appBar,
   }) : super(key: key);
 
   final int selectedIndex;
@@ -19,7 +19,7 @@ class YaruPortraitLayout extends StatefulWidget {
   final ValueChanged<int> onSelected;
   final IconData? previousIconData;
 
-  final YaruSearchAppBar? yaruSearchAppBar;
+  final PreferredSizeWidget? appBar;
 
   @override
   _YaruPortraitLayoutState createState() => _YaruPortraitLayoutState();
@@ -77,7 +77,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
             MaterialPageRoute(
               builder: (context) {
                 return Scaffold(
-                  appBar: widget.yaruSearchAppBar ?? AppBar(),
+                  appBar: widget.appBar ?? AppBar(),
                   body: YaruPageItemListView(
                       selectedIndex: _selectedIndex,
                       onTap: onTap,

@@ -78,12 +78,11 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
         _searchController.clear();
       });
 
-  void _onSearchChanged(value) {
+  void _onSearchChanged(String value) {
     setState(() {
       _filteredItems.clear();
-      _filteredItems.addAll(widget.pageItems.where((element) => element.title
-          .toLowerCase()
-          .contains(_searchController.value.text.toLowerCase())));
+      _filteredItems.addAll(widget.pageItems.where((element) =>
+          element.title.toLowerCase().contains(value.toLowerCase())));
     });
   }
 
@@ -98,7 +97,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
                 _filteredItems.isEmpty ? widget.pageItems : _filteredItems,
             onSelected: _setIndex,
             previousIconData: widget.previousIconData,
-            yaruSearchAppBar: YaruSearchAppBar(
+            appBar: YaruSearchAppBar(
               searchHint: widget.searchHint,
               clearSearchIconData: widget.clearSearchIconData,
               searchController: _searchController,
