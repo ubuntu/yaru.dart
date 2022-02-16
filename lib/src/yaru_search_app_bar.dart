@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Creates a search bar inside an [AppBar].
+///
+/// By default the text style will be,
+/// ```dart
+///   const TextStyle(fontSize: 18, fontWeight: FontWeight.w200)
+/// ```
+///
+/// Example usage:
+///
+/// ```dart
+/// YaruSearchAppBar(
+///   searchHint: 'Search...',
+///   searchController: TextEditingController(),
+///   onChanged: (v) {},
+///   onEscape: () {},
+///   appBarHeight: AppBarTheme.of(context).toolbarHeight,
+/// )
+/// ```
 class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
-  /// Creates a search bar inside an [AppBar].
-  ///
-  /// By default the text style will be,
-  /// ```dart
-  ///   const TextStyle(fontSize: 18, fontWeight: FontWeight.w200)
-  /// ```
-  ///
-  /// Vertical alignment of the [TextField] will be center.
   const YaruSearchAppBar({
     Key? key,
     this.searchController,
@@ -39,18 +49,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// a container without height.
   /// It defaults to [kToolbarHeight].
   ///
-  /// Recommended height is [AppBarTheme.of(context).toolbarHeight]
-  ///
-  /// {@tool snippet}
-  /// ```dart
-  /// YaruSearchAppBar(
-  ///   searchHint: 'Search...',
-  ///   searchController: TextEditingController(),
-  ///   onChanged: (v) {},
-  ///   onEscape: () {},
-  ///   appBarHeight: AppBarTheme.of(context).toolbarHeight,
-  ///   automaticallyImplyLeading: false,
-  /// )```
+  /// Recommended height is ```AppBarTheme.of(context).toolbarHeight```
   final double appBarHeight;
 
   /// Specifies the search hint.
