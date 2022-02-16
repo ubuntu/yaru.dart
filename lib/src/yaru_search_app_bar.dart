@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Creates a search bar inside an [AppBar].
+///
+/// By default the text style will be,
+/// ```dart
+///   const TextStyle(fontSize: 18, fontWeight: FontWeight.w200)
+/// ```
+///
+/// Example usage:
+///
+/// ```dart
+/// YaruSearchAppBar(
+///   searchHint: 'Search...',
+///   searchController: TextEditingController(),
+///   onChanged: (v) {},
+///   onEscape: () {},
+///   appBarHeight: AppBarTheme.of(context).toolbarHeight,
+/// )
+/// ```
 class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
-  /// Creates a search bar inside an [AppBar].
-  ///
-  /// By default the text style will be,
-  /// ```dart
-  ///   const TextStyle(fontSize: 18, fontWeight: FontWeight.w200)
-  /// ```
-  ///
-  /// Vertical alignment of the [TextField] will be center.
   const YaruSearchAppBar({
     Key? key,
     this.searchController,
     required this.onChanged,
     required this.onEscape,
-    required this.automaticallyImplyLeading,
+    this.automaticallyImplyLeading = false,
     this.searchIconData,
-    required this.appBarHeight,
+    this.appBarHeight = kToolbarHeight,
     this.textStyle,
     this.searchHint,
     this.clearSearchIconData,
@@ -35,7 +45,11 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// Search icon for search bar.
   final IconData? searchIconData;
 
-  /// The height of the [AppBar].
+  /// The height of the [YaruSearchAppBar], needed if it is put into
+  /// a container without height.
+  /// It defaults to [kToolbarHeight].
+  ///
+  /// Recommended height is ```AppBarTheme.of(context).toolbarHeight```
   final double appBarHeight;
 
   /// Specifies the search hint.
@@ -54,6 +68,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     final textColor = Theme.of(context).appBarTheme.foregroundColor;
     return AppBar(
       toolbarHeight: appBarHeight,
+      foregroundColor: textColor,
       automaticallyImplyLeading: automaticallyImplyLeading,
       flexibleSpace: RawKeyboardListener(
         onKey: (event) {
@@ -82,23 +97,26 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                 searchIconData ?? Icons.search,
                 color: textColor,
               ),
-              prefixIconConstraints: BoxConstraints.expand(
-                  width: appBarHeight, height: appBarHeight),
-              suffixIcon: InkWell(
-                child:
-                    Icon(clearSearchIconData ?? Icons.close, color: textColor),
-                onTap: onEscape,
+              prefixIconConstraints:
+                  BoxConstraints.expand(width: 48, height: appBarHeight),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.only(right: 6, bottom: 3),
+                child: IconButton(
+                  splashRadius: appBarHeight / 3,
+                  onPressed: onEscape,
+                  icon: Icon(
+                    clearSearchIconData ?? Icons.close,
+                    color: textColor,
+                  ),
+                ),
               ),
-              suffixIconConstraints: BoxConstraints.expand(
-                  width: appBarHeight, height: appBarHeight),
               hintText: searchHint,
-              enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.black.withOpacity(0.01))),
+              enabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent)),
               border: const UnderlineInputBorder(),
             ),
             controller: searchController,
-            autofocus: true,
+            autofocus: false,
             onChanged: onChanged,
           ),
         ),

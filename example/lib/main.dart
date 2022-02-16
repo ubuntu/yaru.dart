@@ -54,7 +54,6 @@ class _HomeState extends State<Home> {
           onEscape: _onEscape,
           appBarHeight: 48,
           searchIconData: YaruIcons.search,
-          automaticallyImplyLeading: false,
         ),
       ),
     );
