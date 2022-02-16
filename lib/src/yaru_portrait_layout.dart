@@ -55,7 +55,6 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
         return Scaffold(
           appBar: widget.appBar != null
               ? AppBar(
-                  toolbarHeight: Theme.of(context).appBarTheme.toolbarHeight,
                   title: Text(page.title),
                   leading: InkWell(
                     child:
