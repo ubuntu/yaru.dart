@@ -1,5 +1,11 @@
 # Changelog
 
+# 1.0.4
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - Add yaru carousel (#89)
+  - Remove hardcoded search (#87)
+
 # 1.0.3
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
@@ -13,6 +19,7 @@
   - YaruAlertDialog: more freedom for the content (#74)
 - [James Leahy](https://github.com/defuncart)
   - Fix url (#75)
+
 # 1.0.2
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
