@@ -74,52 +74,49 @@ class _YaruCarouselState extends State<YaruCarousel> {
               itemCount: widget.images.length,
               pageSnapping: true,
               controller: _pageController,
-              onPageChanged: (index) {
-                setState(() {
-                  _index = index;
-                });
-              },
-              itemBuilder: (context, index) {
-                return InkWell(
-                  borderRadius: BorderRadius.circular(widget.radius),
-                  onTap: widget.onTap,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOutCubic,
-                    margin: EdgeInsets.all(index == _index ? 10 : 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(widget.radius),
-                      border: widget.showBorder
-                          ? Border.all(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurface
-                                  .withOpacity(0.1))
-                          : null,
-                      image: DecorationImage(
-                        fit: widget.fit,
-                        centerSlice: widget.centerSlice,
-                        image: widget.images[index],
+              onPageChanged: (index) => setState(() => _index = index),
+              itemBuilder: (context, index) => InkWell(
+                    borderRadius: BorderRadius.circular(widget.radius),
+                    onTap: widget.onTap,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOutCubic,
+                      margin: EdgeInsets.all(index == _index ? 10 : 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(widget.radius),
+                        border: widget.showBorder
+                            ? Border.all(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurface
+                                    .withOpacity(0.1))
+                            : null,
+                        image: DecorationImage(
+                          fit: widget.fit,
+                          centerSlice: widget.centerSlice,
+                          image: widget.images[index],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              }),
+                  )),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List<Widget>.generate(widget.images.length, (index) {
-            return Container(
-              margin: const EdgeInsets.all(5),
-              width: 12,
-              height: 12,
-              decoration: BoxDecoration(
-                  color: _index == index
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                  shape: BoxShape.circle),
-            );
-          }),
+          children: List<Widget>.generate(
+              widget.images.length,
+              (index) => Container(
+                    margin: const EdgeInsets.all(5),
+                    width: 12,
+                    height: 12,
+                    decoration: BoxDecoration(
+                        color: _index == index
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.3),
+                        shape: BoxShape.circle),
+                  )),
         )
       ],
     );
