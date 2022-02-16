@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
@@ -126,14 +127,17 @@ final examplePageItems = <YaruPageItem>[
       builder: (_) => YaruPage(children: [
             YaruCarousel(
               fit: BoxFit.fitHeight,
-              images: [
-                NetworkImage(
-                    'https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg'),
-                NetworkImage('https://wallpaperaccess.com/full/2637581.jpg'),
-                NetworkImage(
-                    'https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg'),
-                FileImage(File('assets/ubuntuhero.jpg')),
-              ],
+              images: kIsWeb
+                  ? [
+                      AssetImage('assets/ubuntuhero.jpg'),
+                      AssetImage('assets/ubuntuhero.jpg'),
+                      AssetImage('assets/ubuntuhero.jpg'),
+                    ]
+                  : [
+                      FileImage(File('assets/ubuntuhero.jpg')),
+                      FileImage(File('assets/ubuntuhero.jpg')),
+                      FileImage(File('assets/ubuntuhero.jpg')),
+                    ],
               height: 400,
             )
           ]),
