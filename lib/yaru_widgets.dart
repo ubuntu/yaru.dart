@@ -1,6 +1,7 @@
 library yaru_widgets;
 
 export 'src/yaru_alert_dialog.dart';
+export 'src/yaru_carousel.dart';
 export 'src/yaru_checkbox_row.dart';
 export 'src/yaru_color_picker_button.dart';
 export 'src/yaru_dialog_title.dart';
