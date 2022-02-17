@@ -24,7 +24,7 @@ class YaruPageItemListView extends StatelessWidget {
         _calcScrollbarThicknessWithTrack(context);
 
     return ListView.separated(
-        separatorBuilder: (_, __) => const SizedBox(height: 8.0),
+        separatorBuilder: (_, __) => const SizedBox(height: 6.0),
         padding: !materialTiles
             ? EdgeInsets.symmetric(
                 horizontal: scrollbarThicknessWithTrack,
@@ -35,6 +35,8 @@ class YaruPageItemListView extends StatelessWidget {
         itemCount: pages.length,
         itemBuilder: (context, index) => materialTiles
             ? ListTile(
+                visualDensity:
+                    const VisualDensity(horizontal: -4, vertical: -4),
                 selected: index == selectedIndex,
                 title: Text(pages[index].title),
                 leading: Icon(pages[index].iconData),
@@ -87,6 +89,7 @@ class _YaruListTile extends StatelessWidget {
             : null,
       ),
       child: ListTile(
+        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
         ),
