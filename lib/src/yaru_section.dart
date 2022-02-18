@@ -5,14 +5,14 @@ class YaruSection extends StatelessWidget {
   /// [Widgets] as children.
   const YaruSection({
     Key? key,
-    required this.headline,
+    this.headline,
     required this.children,
     this.width,
     this.headerWidget,
   }) : super(key: key);
 
   /// Text that is placed above the list of `children`.
-  final String headline;
+  final String? headline;
 
   ///  Creates a vertical list of widgets.
   ///  All children will be of type [Widget],
@@ -35,37 +35,37 @@ class YaruSection extends StatelessWidget {
       child: SizedBox(
           width: width,
           child: Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color:
-                    Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
+                ),
+                borderRadius: BorderRadius.circular(6.0),
               ),
-              borderRadius: BorderRadius.circular(6.0),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          headline,
-                          style: Theme.of(context).textTheme.headline6,
-                          textAlign: TextAlign.left,
-                        ),
-                        headerWidget ?? const SizedBox()
-                      ],
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(headline != null ? 8.0 : 0),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if (headline != null)
+                            Text(
+                              headline!,
+                              style: Theme.of(context).textTheme.headline6,
+                              textAlign: TextAlign.left,
+                            ),
+                          headerWidget ?? const SizedBox()
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Column(children: children)
-              ],
-            ),
-          )),
+                  Column(children: children)
+                ],
+              ))),
     );
   }
 }

@@ -22,16 +22,13 @@ class _SectionPageState extends State<SectionPage> {
   Widget build(BuildContext context) {
     return YaruPage(
       children: [
+        YaruSection(children: [
+          YaruSingleInfoRow(infoLabel: 'infoLabel', infoValue: 'infoValue')
+        ]),
         DummySection(),
         DummySection(width: 300),
         YaruSection(
           width: sectionWidth,
-          headline: 'Headline',
-          headerWidget: SizedBox(
-            child: CircularProgressIndicator(),
-            height: 20,
-            width: 20,
-          ),
           children: [
             YaruRow(
               enabled: true,
