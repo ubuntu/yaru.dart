@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.0.5
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - ListTiles: reduce visual density (#94)
+
 # 1.0.4
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
