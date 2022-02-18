@@ -26,12 +26,6 @@ class _SectionPageState extends State<SectionPage> {
         DummySection(width: 300),
         YaruSection(
           width: sectionWidth,
-          headline: 'Headline',
-          headerWidget: SizedBox(
-            child: CircularProgressIndicator(),
-            height: 20,
-            width: 20,
-          ),
           children: [
             YaruRow(
               enabled: true,
