@@ -55,7 +55,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
         return Scaffold(
           appBar: widget.appBar != null
               ? AppBar(
-                  title: Text(page.title),
+                  title: page.titleBuilder(context),
                   leading: InkWell(
                     child:
                         Icon(widget.previousIconData ?? Icons.navigate_before),

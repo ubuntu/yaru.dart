@@ -43,7 +43,11 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
                 .map((pageItem) => BottomNavigationBarItem(
                     icon: Icon(pageItem.iconData),
                     activeIcon: Icon(pageItem.selectedIconData),
-                    label: pageItem.title))
+                    label: pageItem
+                        .titleBuilder(context)
+                        .toString()
+                        .replaceAll('Text("', '')
+                        .replaceAll('")', '')))
                 .toList(),
             currentIndex: _selectedIndex,
             onTap: (index) => setState(() => _selectedIndex = index),

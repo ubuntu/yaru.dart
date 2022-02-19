@@ -59,7 +59,7 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                               .map((pageItem) => NavigationRailDestination(
                                   icon: Icon(pageItem.iconData),
                                   selectedIcon: Icon(pageItem.selectedIconData),
-                                  label: Text(pageItem.title)))
+                                  label: pageItem.titleBuilder(context)))
                               .toList(),
                         ),
                       )),

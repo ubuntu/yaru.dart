@@ -28,8 +28,12 @@ class _HomeState extends State<Home> {
   void _onSearchChanged(String value) {
     setState(() {
       _filteredItems.clear();
-      _filteredItems.addAll(examplePageItems.where((element) =>
-          element.title.toLowerCase().contains(value.toLowerCase())));
+      _filteredItems.addAll(examplePageItems.where((pageItem) {
+        if (pageItem.searchMatches != null) {
+          return pageItem.searchMatches!(value);
+        }
+        return false;
+      }));
     });
   }
 
