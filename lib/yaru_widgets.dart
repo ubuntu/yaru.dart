@@ -11,7 +11,6 @@ export 'src/yaru_linear_progress_indicator.dart';
 export 'src/yaru_master_detail_page.dart';
 export 'src/yaru_narrow_layout.dart';
 export 'src/yaru_option_button.dart';
-export 'src/yaru_option_card.dart';
 export 'src/yaru_page.dart';
 export 'src/yaru_page_item.dart';
 export 'src/yaru_row.dart';

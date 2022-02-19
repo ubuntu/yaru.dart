@@ -69,7 +69,8 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
           child: Container(
             width: widget.width,
             height: 60,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(kDefaultContainerRadius)),
             child: Theme(
               data: ThemeData().copyWith(
                 splashColor: Colors.transparent,
@@ -80,7 +81,8 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
                 controller: tabController,
                 labelColor: Theme.of(context).colorScheme.onSurface,
                 indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius:
+                        BorderRadius.circular(kDefaultContainerRadius),
                     color: Theme.of(context)
                         .colorScheme
                         .onSurface

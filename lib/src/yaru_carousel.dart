@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/src/constants.dart';
 
 class YaruCarousel extends StatefulWidget {
   const YaruCarousel({
@@ -8,7 +9,7 @@ class YaruCarousel extends StatefulWidget {
     this.fit,
     this.centerSlice,
     this.showBorder = true,
-    this.radius = 10.0,
+    this.radius = kDefaultContainerRadius,
     required this.images,
     this.initialIndex = 0,
     this.onTap,

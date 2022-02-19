@@ -14,7 +14,6 @@ import 'package:yaru_widgets_example/pages/switch_row_page.dart';
 import 'package:yaru_widgets_example/pages/tabbed_page_page.dart';
 import 'package:yaru_widgets_example/pages/toggle_buttons_row_page.dart';
 import 'package:yaru_widgets_example/widgets/option_button_list.dart';
-import 'package:yaru_widgets_example/widgets/card_list.dart';
 import 'package:yaru_widgets_example/widgets/row_list.dart';
 
 final examplePageItems = <YaruPageItem>[
@@ -48,11 +47,6 @@ final examplePageItems = <YaruPageItem>[
     titleBuilder: (context) => Text('YaruOptionButton'),
     iconData: YaruIcons.settings,
     builder: (_) => YaruPage(children: [OptionButtonList()]),
-  ),
-  YaruPageItem(
-    titleBuilder: (context) => Text('YaruOptionCard'),
-    iconData: YaruIcons.image,
-    builder: (_) => YaruPage(children: [CardList()]),
   ),
   YaruPageItem(
     titleBuilder: (context) => Text('YaruSearchAppBar'),
