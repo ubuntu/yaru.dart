@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  l10n: ^2.0.19
 
 dev_dependencies:
   flutter_test:
