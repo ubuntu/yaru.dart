@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/src/constants.dart';
 
 class YaruSection extends StatelessWidget {
   /// Creates a yaru style section widget with multiple
@@ -41,7 +42,8 @@ class YaruSection extends StatelessWidget {
                   color:
                       Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
                 ),
-                borderRadius: BorderRadius.circular(6.0),
+                borderRadius: const BorderRadius.all(
+                    Radius.circular(kDefaultContainerRadius)),
               ),
               child: Column(
                 children: [

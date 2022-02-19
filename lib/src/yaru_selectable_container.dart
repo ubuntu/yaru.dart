@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/src/constants.dart';
 
 class YaruSelectableContainer extends StatelessWidget {
   /// Creates a Image Tile from the image path given in the path property.
@@ -8,7 +9,7 @@ class YaruSelectableContainer extends StatelessWidget {
     this.onTap,
     required this.selected,
     this.borderRadius,
-    this.radius = 6.0,
+    this.radius = kDefaultContainerRadius,
     this.padding,
     this.selectionColor,
   }) : super(key: key);
@@ -25,7 +26,7 @@ class YaruSelectableContainer extends StatelessWidget {
   /// Callback triggered when the [YaruSelectableContainer] is clicked.
   final VoidCallback? onTap;
 
-  /// Optional custom radius for the corners which defaults to a circular 6.0 [BorderRadius]
+  /// Optional custom radius for the corners which defaults to a 8.0 [BorderRadius]
   final BorderRadius? borderRadius;
 
   /// Optional double value used for a symmetric circular [BorderRadius] if [borderRadius]
@@ -53,8 +54,7 @@ class YaruSelectableContainer extends StatelessWidget {
         child: Padding(
           padding: padding ?? const EdgeInsets.all(6.0),
           child: ClipRRect(
-            borderRadius:
-                borderRadius ?? BorderRadius.circular(radius - radius / 3),
+            borderRadius: borderRadius ?? BorderRadius.circular(radius),
             child: child,
           ),
         ),
