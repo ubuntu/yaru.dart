@@ -12,5 +12,5 @@ class YaruPageItem {
   final WidgetBuilder builder;
   final IconData iconData;
   final IconData? selectedIconData;
-  final bool Function(String value)? searchMatches;
+  final bool Function(String value, BuildContext context)? searchMatches;
 }

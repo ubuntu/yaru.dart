@@ -110,10 +110,10 @@ final examplePageItems = <YaruPageItem>[
     builder: (_) => ToggleButtonsRowPage(),
   ),
   YaruPageItem(
-    titleBuilder: (context) => Text('YaruCheckboxRow'),
-    iconData: YaruIcons.checkbox_button_checked,
-    builder: (_) => CheckBoxRowPage(),
-  ),
+      titleBuilder: (context) => Text('YaruCheckboxRow'),
+      iconData: YaruIcons.checkbox_button_checked,
+      builder: (_) => CheckBoxRowPage(),
+      searchMatches: CheckBoxRowPage.searchMatches),
   YaruPageItem(
       titleBuilder: (context) => Text('YaruTabbedPage'),
       builder: (_) => TabbedPagePage(),

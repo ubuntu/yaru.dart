@@ -43,11 +43,8 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
                 .map((pageItem) => BottomNavigationBarItem(
                     icon: Icon(pageItem.iconData),
                     activeIcon: Icon(pageItem.selectedIconData),
-                    label: pageItem
-                        .titleBuilder(context)
-                        .toString()
-                        .replaceAll('Text("', '')
-                        .replaceAll('")', '')))
+                    label:
+                        convertWidgetToString(pageItem.titleBuilder(context))))
                 .toList(),
             currentIndex: _selectedIndex,
             onTap: (index) => setState(() => _selectedIndex = index),
@@ -55,5 +52,16 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
         ],
       )),
     );
+  }
+
+  String convertWidgetToString(Widget widget) {
+    return widget is Text
+        ? widget
+            .toString()
+            .replaceAll('Text(', '')
+            .replaceAll(')', '')
+            .replaceAll('"', '')
+            .replaceAll("'", '')
+        : '';
   }
 }
