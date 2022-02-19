@@ -50,12 +50,12 @@ class WideNarrowHomePage extends StatelessWidget {
 
 final pageItems = [
   YaruPageItem(
-      title: 'Home',
+      titleBuilder: (context) => Text('Home'),
       builder: (_) => const Text('Home'),
       iconData: YaruIcons.home,
       selectedIconData: YaruIcons.home_filled),
   YaruPageItem(
-      title: 'View',
+      titleBuilder: (context) => Text('View'),
       builder: (_) => YaruTabbedPage(tabIcons: [
             YaruIcons.lock_filled,
             YaruIcons.globe_filled,
@@ -72,22 +72,22 @@ final pageItems = [
       iconData: YaruIcons.view,
       selectedIconData: YaruIcons.view_filled),
   YaruPageItem(
-      title: 'Time',
+      titleBuilder: (context) => Text('Time'),
       builder: (_) => const Text('Time'),
       iconData: YaruIcons.clock,
       selectedIconData: YaruIcons.clock_filled),
   YaruPageItem(
-      title: 'Favorites',
+      titleBuilder: (context) => Text('Favorites'),
       builder: (_) => const Text('Favorites'),
       iconData: YaruIcons.star,
       selectedIconData: YaruIcons.star_filled),
   YaruPageItem(
-      title: 'Electronics',
+      titleBuilder: (context) => Text('Electronics'),
       builder: (_) => const Text('Electronics'),
       iconData: YaruIcons.chip,
       selectedIconData: YaruIcons.chip_filled),
   YaruPageItem(
-      title: 'Gallery',
+      titleBuilder: (context) => Text('Gallery'),
       builder: (_) => const Text('Gallery'),
       iconData: YaruIcons.image,
       selectedIconData: YaruIcons.image_filled),

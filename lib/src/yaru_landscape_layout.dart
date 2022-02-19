@@ -67,9 +67,11 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                 if (widget.appBar != null)
                   Expanded(
                     child: AppBar(
-                      title: widget.pageItems.length > _selectedIndex
-                          ? Text(widget.pageItems[_selectedIndex].title)
-                          : Text(widget.pageItems[0].title),
+                      title: widget.pageItems[
+                              widget.pageItems.length > _selectedIndex
+                                  ? _selectedIndex
+                                  : 0]
+                          .titleBuilder(context),
                     ),
                   )
               ],

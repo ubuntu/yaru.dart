@@ -6,6 +6,10 @@ class CheckBoxRowPage extends StatefulWidget {
 
   @override
   _CheckBoxRowPageState createState() => _CheckBoxRowPageState();
+
+  static bool searchMatches(String value, BuildContext context) =>
+      value.toLowerCase().isNotEmpty &&
+      'CheckBoxRow'.toLowerCase().contains(value.toLowerCase());
 }
 
 class _CheckBoxRowPageState extends State<CheckBoxRowPage> {

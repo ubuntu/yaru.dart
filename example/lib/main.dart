@@ -25,11 +25,12 @@ class _HomeState extends State<Home> {
         _searchController.clear();
       });
 
-  void _onSearchChanged(String value) {
+  void _onSearchChanged(String value, BuildContext context) {
     setState(() {
       _filteredItems.clear();
-      _filteredItems.addAll(examplePageItems.where((element) =>
-          element.title.toLowerCase().contains(value.toLowerCase())));
+      _filteredItems.addAll(examplePageItems.where((pageItem) =>
+          pageItem.searchMatches != null &&
+          pageItem.searchMatches!(value, context)));
     });
   }
 
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
           searchHint: 'Search...',
           clearSearchIconData: YaruIcons.window_close,
           searchController: _searchController,
-          onChanged: _onSearchChanged,
+          onChanged: (v) => _onSearchChanged(v, context),
           onEscape: _onEscape,
           appBarHeight: 48,
           searchIconData: YaruIcons.search,
