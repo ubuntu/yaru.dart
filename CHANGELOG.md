@@ -1,5 +1,12 @@
 # Changelog
 
+# 1.0.6
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - Adapt radii to yaru and remove optioncard (#98)
+  - Titlebuilder (#97)
+  - YaruSection: allow without headline (#96)
+
 # 1.0.5
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
