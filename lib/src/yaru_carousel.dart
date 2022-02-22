@@ -1,8 +1,4 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:yaru_widgets/src/constants.dart';
 
 class YaruCarousel extends StatefulWidget {
