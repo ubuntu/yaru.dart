@@ -101,24 +101,51 @@ class _YaruCarouselState extends State<YaruCarousel> {
                     ),
                   )),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List<Widget>.generate(
-              widget.images.length,
-              (index) => Container(
-                    margin: const EdgeInsets.all(5),
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                        color: _index == index
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.3),
-                        shape: BoxShape.circle),
-                  )),
-        )
+        widget.images.length < 30
+            ? SizedBox(
+                width: widget.images.length < 5
+                    ? widget.width / 3
+                    : widget.images.length < 10
+                        ? widget.width / 2
+                        : widget.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: List<Widget>.generate(
+                    widget.images.length,
+                    (index) => Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.all(5),
+                        width: 12,
+                        height: 12,
+                        decoration: BoxDecoration(
+                            color: _index == index
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.3),
+                            shape: BoxShape.circle),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : SizedBox(
+                width: widget.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        '$_index/${widget.images.length}',
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                    )
+                  ],
+                ),
+              )
       ],
     );
   }

@@ -1,9 +1,7 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru_widgets_example/pages/carousel_page.dart';
 import 'package:yaru_widgets_example/pages/check_box_row_page.dart';
 import 'package:yaru_widgets_example/pages/color_picker_page.dart';
 import 'package:yaru_widgets_example/pages/extra_option_row_page.dart';
@@ -118,22 +116,6 @@ final examplePageItems = <YaruPageItem>[
       iconData: YaruIcons.color_select),
   YaruPageItem(
       titleBuilder: (context) => Text('YaruCarousel'),
-      builder: (_) => YaruPage(children: [
-            YaruCarousel(
-              fit: BoxFit.fitHeight,
-              images: kIsWeb
-                  ? [
-                      AssetImage('assets/ubuntuhero.jpg'),
-                      AssetImage('assets/ubuntuhero.jpg'),
-                      AssetImage('assets/ubuntuhero.jpg'),
-                    ]
-                  : [
-                      FileImage(File('assets/ubuntuhero.jpg')),
-                      FileImage(File('assets/ubuntuhero.jpg')),
-                      FileImage(File('assets/ubuntuhero.jpg')),
-                    ],
-              height: 400,
-            )
-          ]),
+      builder: (_) => CarouselPage(),
       iconData: YaruIcons.refresh)
 ];
