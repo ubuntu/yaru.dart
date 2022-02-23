@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
@@ -20,15 +17,10 @@ class _CarouselPageState extends State<CarouselPage> {
     return YaruPage(children: [
       YaruCarousel(
         fit: BoxFit.fitHeight,
-        images: kIsWeb
-            ? [
-                for (var i = 0; i < length; i++)
-                  AssetImage('assets/ubuntuhero.jpg'),
-              ]
-            : [
-                for (var i = 0; i < length; i++)
-                  FileImage(File('assets/ubuntuhero.jpg')),
-              ],
+        images: List.generate(
+          length,
+          (_) => AssetImage('assets/ubuntuhero.jpg'),
+        ),
         height: 400,
       ),
       YaruRow(
