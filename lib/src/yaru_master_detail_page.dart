@@ -23,10 +23,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     Key? key,
     required this.pageItems,
     this.previousIconData,
-    this.searchIconData,
     required this.leftPaneWidth,
-    this.searchHint,
-    this.clearSearchIconData,
     this.appBar,
   }) : super(key: key);
 
@@ -41,15 +38,6 @@ class YaruMasterDetailPage extends StatefulWidget {
 
   /// Property to specify the previous icon data
   final IconData? previousIconData;
-
-  /// The icon that is given to the search widget.
-  final IconData? searchIconData;
-
-  /// Search icon for search bar.
-  final IconData? clearSearchIconData;
-
-  /// The hint text given to the search widget.
-  final String? searchHint;
 
   /// An optional custom AppBar for the left pane.
   final PreferredSizeWidget? appBar;
