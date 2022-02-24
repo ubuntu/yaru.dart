@@ -1,9 +1,6 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 class SelectableContainerPage extends StatefulWidget {
   const SelectableContainerPage({Key? key}) : super(key: key);
@@ -33,28 +30,22 @@ class _SelectableContainerPageState extends State<SelectableContainerPage> {
             YaruSelectableContainer(
               selected: !_isImageSelected,
               onTap: () => setState(() => _isImageSelected = !_isImageSelected),
-              child: kIsWeb
-                  ? Image.asset(
-                      'assets/ubuntuhero.jpg',
-                      filterQuality: FilterQuality.low,
-                      fit: BoxFit.fill,
-                      height: 300,
-                    )
-                  : Image.file(File('assets/ubuntuhero.jpg'),
-                      filterQuality: FilterQuality.low, fit: BoxFit.fill),
+              child: Image.asset(
+                'assets/ubuntuhero.jpg',
+                filterQuality: FilterQuality.low,
+                fit: BoxFit.fill,
+                height: 300,
+              ),
             ),
             YaruSelectableContainer(
               selected: _isImageSelected,
               onTap: () => setState(() => _isImageSelected = !_isImageSelected),
-              child: kIsWeb
-                  ? Image.asset(
-                      'assets/ubuntuhero.jpg',
-                      filterQuality: FilterQuality.low,
-                      fit: BoxFit.fill,
-                      height: 300,
-                    )
-                  : Image.file(File('assets/ubuntuhero.jpg'),
-                      filterQuality: FilterQuality.low, fit: BoxFit.fill),
+              child: Image.asset(
+                'assets/ubuntuhero.jpg',
+                filterQuality: FilterQuality.low,
+                fit: BoxFit.fill,
+                height: 300,
+              ),
             ),
           ],
         ),
