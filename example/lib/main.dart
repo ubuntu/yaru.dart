@@ -44,9 +44,6 @@ class _HomeState extends State<Home> {
       home: YaruMasterDetailPage(
         leftPaneWidth: 280,
         previousIconData: YaruIcons.go_previous,
-        searchHint: 'Search...',
-        searchIconData: YaruIcons.search,
-        clearSearchIconData: YaruIcons.window_close,
         pageItems:
             _filteredItems.isNotEmpty ? _filteredItems : examplePageItems,
         appBar: YaruSearchAppBar(
