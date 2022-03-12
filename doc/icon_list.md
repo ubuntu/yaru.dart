@@ -222,6 +222,11 @@ Icon preview | Icon name | Usage
 ![media_zip_filled](../icons/media/zip-filled.svg) | media zip filled | `YaruIcons.media_zip_filled`
 ![media_zip](../icons/media/zip.svg) | media zip | `YaruIcons.media_zip`
 ![menu](../icons/menu.svg) | menu | `YaruIcons.menu`
+![meter_1](../icons/meter/1.svg) | meter 1 | `YaruIcons.meter_1`
+![meter_2](../icons/meter/2.svg) | meter 2 | `YaruIcons.meter_2`
+![meter_3](../icons/meter/3.svg) | meter 3 | `YaruIcons.meter_3`
+![meter_4](../icons/meter/4.svg) | meter 4 | `YaruIcons.meter_4`
+![meter_5](../icons/meter/5.svg) | meter 5 | `YaruIcons.meter_5`
 ![microphone_filled](../icons/microphone/filled.svg) | microphone filled | `YaruIcons.microphone_filled`
 ![microphone](../icons/microphone/_.svg) | microphone | `YaruIcons.microphone`
 ![microphone_volume_high_filled](../icons/microphone/volume/high-filled.svg) | microphone volume high filled | `YaruIcons.microphone_volume_high_filled`
