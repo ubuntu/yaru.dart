@@ -1,3 +1,8 @@
+# 0.1.3
+
+* Add *pen* icon.
+* Add *meter* icons.
+
 # 0.1.2
 
 * Add *keyboard-shortcuts* and *keyboard-shortcuts-filled* icons.
