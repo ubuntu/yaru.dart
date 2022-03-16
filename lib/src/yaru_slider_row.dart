@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/yaru_row.dart';
-import 'package:yaru_widgets/src/yaru_slider_value_marker.dart';
 
 class YaruSliderRow extends StatelessWidget {
   /// Creates a yaru style slider.
@@ -105,7 +104,11 @@ class YaruSliderRow extends StatelessWidget {
                             (constraints.maxWidth - thumbRadius * 2) *
                                 (defaultValue! - min) /
                                 (max - min),
-                        child: const YaruSliderValueMarker(),
+                        child: Container(
+                          width: 1,
+                          height: 40,
+                          color: Theme.of(context).dividerColor,
+                        ),
                       ),
                     Slider(
                       label: value?.toStringAsFixed(0),
