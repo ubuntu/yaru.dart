@@ -90,8 +90,15 @@ class YaruSliderRow extends StatelessWidget {
         child: Row(
           children: [
             if (showValue)
-              Text(
-                value?.toStringAsFixed(fractionDigits) ?? '',
+              SizedBox(
+                width: 40,
+                height: 20,
+                child: FittedBox(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    value?.toStringAsFixed(fractionDigits) ?? '',
+                  ),
+                ),
               ),
             Expanded(
               child: LayoutBuilder(
