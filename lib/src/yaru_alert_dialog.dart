@@ -13,6 +13,7 @@ class YaruAlertDialog extends StatelessWidget {
     this.height,
     this.titleTextAlign,
     this.actions,
+    this.contentPadding = EdgeInsets.zero,
     this.scrollable = false,
   }) : super(key: key);
 
@@ -47,6 +48,11 @@ class YaruAlertDialog extends StatelessWidget {
   /// A [List] of [Widget] - typically [OutlinedButton], [ElevatedButton] or [TextButton]
   final List<Widget>? actions;
 
+  /// Padding around the [content]
+  ///
+  /// Defaults to [EdgeInsets.zero]
+  final EdgeInsetsGeometry contentPadding;
+
   /// Forwards the [scrollable] flag to the [AlertDialog]
   final bool? scrollable;
 
@@ -56,13 +62,14 @@ class YaruAlertDialog extends StatelessWidget {
       width: width ?? kDefaultPageWidth,
       child: AlertDialog(
         actionsPadding: const EdgeInsets.all(kDefaultPagePadding / 2),
-        contentPadding: EdgeInsets.zero,
+        contentPadding: contentPadding,
         scrollable: scrollable ?? false,
         titlePadding: const EdgeInsets.only(
-            top: kDefaultDialogTitlePadding,
-            left: kDefaultDialogTitlePadding,
-            right: kDefaultDialogTitlePadding,
-            bottom: 0),
+          top: kDefaultDialogTitlePadding,
+          left: kDefaultDialogTitlePadding,
+          right: kDefaultDialogTitlePadding,
+          bottom: 0,
+        ),
         title: YaruDialogTitle(
           mainAxisAlignment: MainAxisAlignment.start,
           textAlign: titleTextAlign,
