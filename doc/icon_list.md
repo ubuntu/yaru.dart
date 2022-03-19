@@ -368,7 +368,8 @@ Icon preview | Icon name | Usage
 ![thunderbolt](../icons/thunderbolt.svg) | thunderbolt | `YaruIcons.thunderbolt`
 ![trash_full](../icons/trash/full.svg) | trash full | `YaruIcons.trash_full`
 ![trash](../icons/trash/_.svg) | trash | `YaruIcons.trash`
-![ubuntu_logo](../icons/ubuntu-logo.svg) | ubuntu logo | `YaruIcons.ubuntu_logo`
+![ubuntu_logo_large](../icons/ubuntu-logo/large.svg) | ubuntu logo large | `YaruIcons.ubuntu_logo_large`
+![ubuntu_logo](../icons/ubuntu-logo/_.svg) | ubuntu logo | `YaruIcons.ubuntu_logo`
 ![users](../icons/users.svg) | users | `YaruIcons.users`
 ![user](../icons/user.svg) | user | `YaruIcons.user`
 ![video](../icons/video.svg) | video | `YaruIcons.video`
