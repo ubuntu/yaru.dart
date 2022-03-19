@@ -1,3 +1,8 @@
+# 0.2.0
+
+* Update *ubuntu-logo* to new look.
+* Add new *ubuntu-logo-large* icon.
+
 # 0.1.3
 
 * Add *pen* icon.
