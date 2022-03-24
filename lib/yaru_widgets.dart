@@ -1,5 +1,6 @@
 library yaru_widgets;
 
+export 'src/ubuntu_logo.dart';
 export 'src/yaru_alert_dialog.dart';
 export 'src/yaru_carousel.dart';
 export 'src/yaru_checkbox_row.dart';
