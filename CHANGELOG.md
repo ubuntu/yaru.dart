@@ -1,5 +1,18 @@
 # Changelog
 
+# 1.0.7
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - YaruCarousel: allow any widgets in the carousel (#109)
+  - YaruCarousel: put indicator dots in expanded (#100)
+- [Joshua Peisach](https://github.com/ItzSwirlz)
+  - Add ubuntu logo as a widget (#108)
+- [Michał](https://github.com/mivoligo)
+  - Slider (#105)
+- [James Leahy](https://github.com/defuncart)
+  - Remove unused params. (#102)
+  - Bugfix/example carousel page selectable container page image asset path (#101)
+
 # 1.0.6
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
