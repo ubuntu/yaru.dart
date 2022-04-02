@@ -16,14 +16,24 @@ class _CarouselPageState extends State<CarouselPage> {
   Widget build(BuildContext context) {
     return YaruPage(children: [
       YaruCarousel(
-        fit: BoxFit.fitHeight,
-        images: List.generate(
+        children: List.generate(
           length,
-          (_) => AssetImage('assets/ubuntuhero.jpg'),
+          (_) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.1)),
+              image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: AssetImage('assets/ubuntuhero.jpg')),
+            ),
+          ),
         ),
         height: 400,
       ),
       YaruRow(
+          width: 300,
           trailingWidget: Text('length: $length'),
           actionWidget: Row(
             children: [
