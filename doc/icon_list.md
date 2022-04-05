@@ -368,6 +368,10 @@ Icon preview | Icon name | Usage
 ![thunderbolt](../icons/thunderbolt.svg) | thunderbolt | `YaruIcons.thunderbolt`
 ![trash_full](../icons/trash/full.svg) | trash full | `YaruIcons.trash_full`
 ![trash](../icons/trash/_.svg) | trash | `YaruIcons.trash`
+![tree_filled](../icons/tree/filled.svg) | tree filled | `YaruIcons.tree_filled`
+![tree_fir_filled](../icons/tree/fir-filled.svg) | tree fir filled | `YaruIcons.tree_fir_filled`
+![tree_fir](../icons/tree/fir.svg) | tree fir | `YaruIcons.tree_fir`
+![tree](../icons/tree/_.svg) | tree | `YaruIcons.tree`
 ![ubuntu_logo_large](../icons/ubuntu-logo/large.svg) | ubuntu logo large | `YaruIcons.ubuntu_logo_large`
 ![ubuntu_logo](../icons/ubuntu-logo/_.svg) | ubuntu logo | `YaruIcons.ubuntu_logo`
 ![users](../icons/users.svg) | users | `YaruIcons.users`
