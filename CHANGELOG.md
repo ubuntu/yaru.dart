@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.0.8
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - Add YaruColorDisk (#112)
+
 # 1.0.7
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
