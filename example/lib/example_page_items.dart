@@ -3,6 +3,7 @@ import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_widgets_example/pages/carousel_page.dart';
 import 'package:yaru_widgets_example/pages/check_box_row_page.dart';
+import 'package:yaru_widgets_example/pages/color_disk_page.dart';
 import 'package:yaru_widgets_example/pages/color_picker_page.dart';
 import 'package:yaru_widgets_example/pages/extra_option_row_page.dart';
 import 'package:yaru_widgets_example/pages/section_page.dart';
@@ -117,5 +118,10 @@ final examplePageItems = <YaruPageItem>[
   YaruPageItem(
       titleBuilder: (context) => Text('YaruCarousel'),
       builder: (_) => CarouselPage(),
-      iconData: YaruIcons.refresh)
+      iconData: YaruIcons.refresh),
+  YaruPageItem(
+    titleBuilder: (context) => Text('YaruColorDisk'),
+    builder: (context) => ColorDiskPage(),
+    iconData: YaruIcons.color_select,
+  )
 ];
