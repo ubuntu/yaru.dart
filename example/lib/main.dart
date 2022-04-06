@@ -1,12 +1,20 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_widgets_example/example_page_items.dart';
+import 'package:yaru_widgets_example/theme.dart';
 
 void main() {
-  runApp(Home());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => LightTheme(yaruLight)),
+      ChangeNotifierProvider(create: (_) => DarkTheme(yaruDark)),
+    ],
+    child: Home(),
+  ));
 }
 
 class Home extends StatefulWidget {
@@ -39,8 +47,8 @@ class _HomeState extends State<Home> {
     return MaterialApp(
       scrollBehavior: TouchMouseStylusScrollBehavior(),
       debugShowCheckedModeBanner: false,
-      theme: yaruLight,
-      darkTheme: yaruDark,
+      theme: context.watch<LightTheme>().value,
+      darkTheme: context.watch<DarkTheme>().value,
       home: YaruMasterDetailPage(
         leftPaneWidth: 280,
         previousIconData: YaruIcons.go_previous,
