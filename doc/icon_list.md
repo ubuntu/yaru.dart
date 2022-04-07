@@ -9,7 +9,8 @@ Icon preview | Icon name | Usage
 ![addon](../icons/addon.svg) | addon | `YaruIcons.addon`
 ![address_book](../icons/address-book.svg) | address book | `YaruIcons.address_book`
 ![app_grid](../icons/app-grid.svg) | app grid | `YaruIcons.app_grid`
-![audio](../icons/audio.svg) | audio | `YaruIcons.audio`
+![audio_history](../icons/audio/history.svg) | audio history | `YaruIcons.audio_history`
+![audio](../icons/audio/_.svg) | audio | `YaruIcons.audio`
 ![battery_level_0_charging](../icons/battery/level-0-charging.svg) | battery level 0 charging | `YaruIcons.battery_level_0_charging`
 ![battery_level_0](../icons/battery/level-0.svg) | battery level 0 | `YaruIcons.battery_level_0`
 ![battery_level_100_charging](../icons/battery/level-100-charging.svg) | battery level 100 charging | `YaruIcons.battery_level_100_charging`
@@ -66,9 +67,11 @@ Icon preview | Icon name | Usage
 ![desktop_screensaver](../icons/desktop/screensaver.svg) | desktop screensaver | `YaruIcons.desktop_screensaver`
 ![desktop](../icons/desktop/_.svg) | desktop | `YaruIcons.desktop`
 ![desktop_wallpaper](../icons/desktop/wallpaper.svg) | desktop wallpaper | `YaruIcons.desktop_wallpaper`
+![document_history](../icons/document/history.svg) | document history | `YaruIcons.document_history`
 ![document_open](../icons/document/open.svg) | document open | `YaruIcons.document_open`
 ![document](../icons/document/_.svg) | document | `YaruIcons.document`
-![download](../icons/download.svg) | download | `YaruIcons.download`
+![download_history](../icons/download/history.svg) | download history | `YaruIcons.download_history`
+![download](../icons/download/_.svg) | download | `YaruIcons.download`
 ![drag_handle](../icons/drag-handle.svg) | drag handle | `YaruIcons.drag_handle`
 ![drive_harddisk_filled](../icons/drive/harddisk-filled.svg) | drive harddisk filled | `YaruIcons.drive_harddisk_filled`
 ![drive_harddisk](../icons/drive/harddisk.svg) | drive harddisk | `YaruIcons.drive_harddisk`
@@ -159,12 +162,14 @@ Icon preview | Icon name | Usage
 ![heart](../icons/heart.svg) | heart | `YaruIcons.heart`
 ![hide_filled](../icons/hide-filled.svg) | hide filled | `YaruIcons.hide_filled`
 ![hide](../icons/hide.svg) | hide | `YaruIcons.hide`
+![history](../icons/history.svg) | history | `YaruIcons.history`
 ![home_filled](../icons/home-filled.svg) | home filled | `YaruIcons.home_filled`
 ![home](../icons/home.svg) | home | `YaruIcons.home`
 ![hourglass_filled](../icons/hourglass-filled.svg) | hourglass filled | `YaruIcons.hourglass_filled`
 ![hourglass](../icons/hourglass.svg) | hourglass | `YaruIcons.hourglass`
-![image_filled](../icons/image-filled.svg) | image filled | `YaruIcons.image_filled`
-![image](../icons/image.svg) | image | `YaruIcons.image`
+![image_filled](../icons/image/filled.svg) | image filled | `YaruIcons.image_filled`
+![image_history](../icons/image/history.svg) | image history | `YaruIcons.image_history`
+![image](../icons/image/_.svg) | image | `YaruIcons.image`
 ![information_filled](../icons/information-filled.svg) | information filled | `YaruIcons.information_filled`
 ![information](../icons/information.svg) | information | `YaruIcons.information`
 ![input_dialpad](../icons/input/dialpad.svg) | input dialpad | `YaruIcons.input_dialpad`
@@ -325,7 +330,8 @@ Icon preview | Icon name | Usage
 ![rss](../icons/rss.svg) | rss | `YaruIcons.rss`
 ![save_as](../icons/save/as.svg) | save as | `YaruIcons.save_as`
 ![save](../icons/save/_.svg) | save | `YaruIcons.save`
-![search](../icons/search.svg) | search | `YaruIcons.search`
+![search_history](../icons/search/history.svg) | search history | `YaruIcons.search_history`
+![search](../icons/search/_.svg) | search | `YaruIcons.search`
 ![selection](../icons/selection.svg) | selection | `YaruIcons.selection`
 ![server](../icons/server.svg) | server | `YaruIcons.server`
 ![settings_filled](../icons/settings-filled.svg) | settings filled | `YaruIcons.settings_filled`
@@ -376,7 +382,8 @@ Icon preview | Icon name | Usage
 ![ubuntu_logo](../icons/ubuntu-logo/_.svg) | ubuntu logo | `YaruIcons.ubuntu_logo`
 ![users](../icons/users.svg) | users | `YaruIcons.users`
 ![user](../icons/user.svg) | user | `YaruIcons.user`
-![video](../icons/video.svg) | video | `YaruIcons.video`
+![video_history](../icons/video/history.svg) | video history | `YaruIcons.video_history`
+![video](../icons/video/_.svg) | video | `YaruIcons.video`
 ![view_filled](../icons/view-filled.svg) | view filled | `YaruIcons.view_filled`
 ![view_fullscreen](../icons/view/fullscreen.svg) | view fullscreen | `YaruIcons.view_fullscreen`
 ![view_more_horizontal](../icons/view-more/horizontal.svg) | view more horizontal | `YaruIcons.view_more_horizontal`
