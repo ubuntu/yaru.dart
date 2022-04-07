@@ -1,3 +1,7 @@
+# 0.2.1
+
+* Add new *document-history*, *image-history*, *search-history*, *audio-history*, *video-history*, *history*, *download-history* icons.
+
 # 0.2.0
 
 * Update *ubuntu-logo* to new look.
