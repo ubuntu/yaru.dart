@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
+import 'package:yaru_colors/yaru_colors.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_widgets_example/theme.dart';
 
@@ -43,52 +44,52 @@ final List<GlobalTheme> globalThemeList = [
   GlobalTheme(
     lightTheme: yaruLight,
     darkTheme: yaruDark,
-    primaryColor: YaruColors.ubuntuOrange,
+    primaryColor: YaruColors.orange,
   ),
   GlobalTheme(
     lightTheme: yaruSageLight,
     darkTheme: yaruSageDark,
-    primaryColor: sageMaterialColor,
+    primaryColor: YaruColors.sage,
   ),
   GlobalTheme(
     lightTheme: yaruBarkLight,
     darkTheme: yaruBarkDark,
-    primaryColor: barkMaterialColor,
+    primaryColor: YaruColors.bark,
   ),
   GlobalTheme(
     lightTheme: yaruOliveLight,
     darkTheme: yaruOliveDark,
-    primaryColor: oliveMaterialColor,
+    primaryColor: YaruColors.olive,
   ),
   GlobalTheme(
     lightTheme: yaruViridianLight,
     darkTheme: yaruViridianDark,
-    primaryColor: viridianMaterialColor,
+    primaryColor: YaruColors.viridian,
   ),
   GlobalTheme(
     lightTheme: yaruPrussianGreenLight,
     darkTheme: yaruPrussianGreenDark,
-    primaryColor: prussianGreenMaterialColor,
+    primaryColor: YaruColors.prussianGreen,
   ),
   GlobalTheme(
     lightTheme: yaruBlueLight,
     darkTheme: yaruBlueDark,
-    primaryColor: blueMaterialColor,
+    primaryColor: YaruColors.blue,
   ),
   GlobalTheme(
     lightTheme: yaruPurpleLight,
     darkTheme: yaruPurpleDark,
-    primaryColor: purpleMaterialColor,
+    primaryColor: YaruColors.purple,
   ),
   GlobalTheme(
-    lightTheme: yarMagentaLight,
+    lightTheme: yaruMagentaLight,
     darkTheme: yaruMagentaDark,
-    primaryColor: magentaMaterialColor,
+    primaryColor: YaruColors.magenta,
   ),
   GlobalTheme(
     lightTheme: yaruRedLight,
     darkTheme: yaruRedDark,
-    primaryColor: lightRedMaterialColor,
+    primaryColor: YaruColors.red,
   ),
 ];
 

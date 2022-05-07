@@ -12,6 +12,7 @@ dependencies:
   provider: ^6.0.2
   yaru:
     git: http://github.com/ubuntu/yaru.dart
+  yaru_colors: ^0.1.0
   yaru_icons: ^0.2.0
   yaru_widgets:
     path: ../
