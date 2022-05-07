@@ -12,6 +12,7 @@ import 'package:yaru_widgets_example/pages/slider_page.dart';
 import 'package:yaru_widgets_example/pages/switch_row_page.dart';
 import 'package:yaru_widgets_example/pages/tabbed_page_page.dart';
 import 'package:yaru_widgets_example/pages/toggle_buttons_row_page.dart';
+import 'package:yaru_widgets_example/pages/ubuntu_logo.dart';
 import 'package:yaru_widgets_example/widgets/option_button_list.dart';
 import 'package:yaru_widgets_example/widgets/row_list.dart';
 
@@ -123,5 +124,10 @@ final examplePageItems = <YaruPageItem>[
     titleBuilder: (context) => Text('YaruColorDisk'),
     builder: (context) => ColorDiskPage(),
     iconData: YaruIcons.color_select,
+  ),
+  YaruPageItem(
+    titleBuilder: (context) => Text('UbuntuLogo'),
+    builder: (context) => UbuntuLogoPage(),
+    iconData: YaruIcons.ubuntu_logo,
   )
 ];
