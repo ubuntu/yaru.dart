@@ -22,15 +22,14 @@ class _ColorDiskPageState extends State<ColorDiskPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            for (var globalTheme in globalThemeList)
+            for (var theme in themeList)
               YaruColorDisk(
                 onPressed: () {
-                  lightTheme.value = globalTheme.lightTheme;
-                  darkTheme.value = globalTheme.darkTheme;
+                  lightTheme.value = theme.theme;
+                  darkTheme.value = theme.darkTheme;
                 },
-                color: globalTheme.primaryColor,
-                selected:
-                    Theme.of(context).primaryColor == globalTheme.primaryColor,
+                color: theme.color,
+                selected: Theme.of(context).primaryColor == theme.color,
               ),
           ],
         ),
@@ -39,67 +38,15 @@ class _ColorDiskPageState extends State<ColorDiskPage> {
   }
 }
 
-final List<GlobalTheme> globalThemeList = [
-  GlobalTheme(
-    lightTheme: yaruLight,
-    darkTheme: yaruDark,
-    primaryColor: YaruColors.ubuntuOrange,
-  ),
-  GlobalTheme(
-    lightTheme: yaruSageLight,
-    darkTheme: yaruSageDark,
-    primaryColor: sageMaterialColor,
-  ),
-  GlobalTheme(
-    lightTheme: yaruBarkLight,
-    darkTheme: yaruBarkDark,
-    primaryColor: barkMaterialColor,
-  ),
-  GlobalTheme(
-    lightTheme: yaruOliveLight,
-    darkTheme: yaruOliveDark,
-    primaryColor: oliveMaterialColor,
-  ),
-  GlobalTheme(
-    lightTheme: yaruViridianLight,
-    darkTheme: yaruViridianDark,
-    primaryColor: viridianMaterialColor,
-  ),
-  GlobalTheme(
-    lightTheme: yaruPrussianGreenLight,
-    darkTheme: yaruPrussianGreenDark,
-    primaryColor: prussianGreenMaterialColor,
-  ),
-  GlobalTheme(
-    lightTheme: yaruBlueLight,
-    darkTheme: yaruBlueDark,
-    primaryColor: blueMaterialColor,
-  ),
-  GlobalTheme(
-    lightTheme: yaruPurpleLight,
-    darkTheme: yaruPurpleDark,
-    primaryColor: purpleMaterialColor,
-  ),
-  GlobalTheme(
-    lightTheme: yarMagentaLight,
-    darkTheme: yaruMagentaDark,
-    primaryColor: magentaMaterialColor,
-  ),
-  GlobalTheme(
-    lightTheme: yaruRedLight,
-    darkTheme: yaruRedDark,
-    primaryColor: lightRedMaterialColor,
-  ),
+const List<YaruVariant> themeList = [
+  YaruVariant.orange,
+  YaruVariant.sage,
+  YaruVariant.bark,
+  YaruVariant.olive,
+  YaruVariant.viridian,
+  YaruVariant.prussianGreen,
+  YaruVariant.blue,
+  YaruVariant.purple,
+  YaruVariant.magenta,
+  YaruVariant.red,
 ];
-
-class GlobalTheme {
-  final ThemeData lightTheme;
-  final ThemeData darkTheme;
-  final MaterialColor primaryColor;
-
-  GlobalTheme({
-    required this.lightTheme,
-    required this.darkTheme,
-    required this.primaryColor,
-  });
-}
