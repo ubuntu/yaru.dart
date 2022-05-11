@@ -11,7 +11,7 @@ class DummySection extends StatelessWidget {
     return YaruSection(
       headline: 'Headline',
       headerWidget: SizedBox(
-        child: CircularProgressIndicator(),
+        child: YaruCircularProgressIndicator(strokeWidth: 3),
         height: 20,
         width: 20,
       ),
