@@ -16,7 +16,6 @@ abstract class _YaruProgressIndicator extends StatefulWidget {
   const _YaruProgressIndicator({
     Key? key,
     this.value,
-    this.backgroundColor,
     this.color,
     this.valueColor,
     this.semanticsLabel,
@@ -32,12 +31,6 @@ abstract class _YaruProgressIndicator extends StatefulWidget {
   /// indicator displays a predetermined animation that does not indicate how
   /// much actual progress is being made.
   final double? value;
-
-  /// The progress indicator's background color.
-  ///
-  /// It is up to the subclass to implement this in whatever way makes sense
-  /// for the given use case. See the subclass documentation for details.
-  final Color? backgroundColor;
 
   /// {@macro flutter.progress_indicator.ProgressIndicator.color}
   final Color? color;
