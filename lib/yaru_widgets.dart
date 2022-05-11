@@ -9,7 +9,7 @@ export 'src/yaru_color_picker_button.dart';
 export 'src/yaru_dialog_title.dart';
 export 'src/yaru_expansion_panel_list.dart';
 export 'src/yaru_extra_option_row.dart';
-export 'src/yaru_linear_progress_indicator.dart';
+export 'src/yaru_progress_indicator.dart';
 export 'src/yaru_master_detail_page.dart';
 export 'src/yaru_narrow_layout.dart';
 export 'src/yaru_option_button.dart';
