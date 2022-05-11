@@ -307,7 +307,16 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final backgroundHeight = size.height > 2 ? size.height - 2 : size.height;
+    final revisedValue = value >= 0 && value <= 1
+        ? value
+        : value < 0
+            ? 0
+            : 1;
+    final candidateBackgroundHeight = (size.height / 3 * 2).truncate();
+    final backgroundHeight =
+        (candidateBackgroundHeight + (candidateBackgroundHeight.isEven ? 0 : 1))
+            .toDouble();
+
     final backgroundPaint = Paint()
       ..color = color.withOpacity(.25)
       ..strokeWidth = backgroundHeight
@@ -324,14 +333,21 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
       canvas.translate(-size.width, 0);
     }
 
-    canvas.drawLine(
-        Offset(backgroundHeight / 2, size.height / 2),
-        Offset(size.width - backgroundHeight / 2, size.height / 2),
-        backgroundPaint);
-    canvas.drawLine(
-        Offset(size.height / 2, size.height / 2),
-        Offset((size.width - size.height / 2) * value, size.height / 2),
-        strokePaint);
+    final y = size.height / 2;
+
+    canvas.drawLine(Offset(backgroundHeight / 2, y),
+        Offset(size.width - backgroundHeight / 2, y), backgroundPaint);
+
+    if (size.width * revisedValue > size.height) {
+      canvas.drawLine(Offset(y, y), Offset((size.width - y) * revisedValue, y),
+          strokePaint);
+    } else if (revisedValue > 0) {
+      final fillPaint = Paint()
+        ..color = color
+        ..style = PaintingStyle.fill;
+
+      canvas.drawCircle(Offset(y, y), y, fillPaint);
+    }
   }
 
   @override
@@ -539,10 +555,15 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    final revisedValue = value >= 0 && value <= 1
+        ? value
+        : value < 0
+            ? 0
+            : 1;
     final center = Offset(size.width / 2, size.height / 2);
     final radius = math.min(size.width / 2, size.height / 2) - (width / 2);
     const startAngle = -math.pi / 2;
-    final sweepAngle = math.pi * 2 * value;
+    final sweepAngle = math.pi * 2 * revisedValue;
     final rect = Rect.fromCircle(center: center, radius: radius);
 
     if (textDirection == TextDirection.rtl) {
