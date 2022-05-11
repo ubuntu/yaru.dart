@@ -17,16 +17,16 @@ void main() {
     ));
 
     final linearProgressIndicatorFinder = find.byWidgetPredicate(
-      (widget) => widget is LinearProgressIndicator && widget.value == 0.5,
+      (widget) => widget is YaruLinearProgressIndicator && widget.value == 0.5,
     );
     final semanticValueFinder = find.byWidgetPredicate(
       (widget) =>
-          widget is LinearProgressIndicator &&
+          widget is YaruLinearProgressIndicator &&
           widget.semanticsValue == "Semantic Value",
     );
     final semanticLabelFinder = find.byWidgetPredicate(
       (widget) =>
-          widget is LinearProgressIndicator &&
+          widget is YaruLinearProgressIndicator &&
           widget.semanticsLabel == "Semantic Label",
     );
     expect(find.byType(LinearProgressIndicator), findsOneWidget);
