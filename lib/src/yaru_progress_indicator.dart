@@ -79,7 +79,7 @@ abstract class _YaruProgressIndicator extends StatefulWidget {
 }
 
 class YaruLinearProgressIndicator extends _YaruProgressIndicator {
-  /// Creates a Yaru circular progress indicator.
+  /// Creates a Yaru linear progress indicator.
   ///
   /// {@macro flutter.material.ProgressIndicator.ProgressIndicator}
   const YaruLinearProgressIndicator({
