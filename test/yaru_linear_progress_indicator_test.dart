@@ -29,7 +29,7 @@ void main() {
           widget is YaruLinearProgressIndicator &&
           widget.semanticsLabel == "Semantic Label",
     );
-    expect(find.byType(LinearProgressIndicator), findsOneWidget);
+    expect(find.byType(YaruLinearProgressIndicator), findsOneWidget);
     expect(linearProgressIndicatorFinder, findsOneWidget);
     expect(semanticLabelFinder, findsOneWidget);
     expect(semanticValueFinder, findsOneWidget);

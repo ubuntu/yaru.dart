@@ -30,7 +30,7 @@ void main() {
           widget is YaruCircularProgressIndicator &&
           widget.semanticsLabel == "Semantic Label",
     );
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    expect(find.byType(YaruCircularProgressIndicator), findsOneWidget);
     expect(linearProgressIndicatorFinder, findsOneWidget);
     expect(semanticLabelFinder, findsOneWidget);
     expect(semanticValueFinder, findsOneWidget);
