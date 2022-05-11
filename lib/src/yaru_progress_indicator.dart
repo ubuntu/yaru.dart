@@ -12,7 +12,17 @@ const Curve _kIndeterminateAnimationCurve =
 abstract class _YaruProgressIndicator extends StatefulWidget {
   /// Creates a Yaru progress indicator.
   ///
-  /// {@macro flutter.material.ProgressIndicator.ProgressIndicator}
+  /// {@template yaru.widget.YaruProgressIndicator.YaruProgressIndicator}
+  /// The [value] argument can either be null for an indeterminate
+  /// progress indicator, or a non-null value between 0.0 and 1.0 for a
+  /// determinate progress indicator.
+  ///
+  /// ## Accessibility
+  ///
+  /// The [semanticsLabel] can be used to identify the purpose of this progress
+  /// bar for screen reading software. The [semanticsValue] property may be used
+  /// for determinate progress indicators to indicate how much progress has been made.
+  /// {@endtemplate}
   const _YaruProgressIndicator({
     Key? key,
     this.value,
@@ -32,7 +42,13 @@ abstract class _YaruProgressIndicator extends StatefulWidget {
   /// much actual progress is being made.
   final double? value;
 
-  /// {@macro flutter.progress_indicator.ProgressIndicator.color}
+  /// The progress indicator's color.
+  ///
+  /// This is only used if [ProgressIndicator.valueColor] is null.
+  /// If [ProgressIndicator.color] is also null, then the ambient
+  /// [ProgressIndicatorThemeData.color] will be used. If that
+  /// is null then the current theme's [ColorScheme.primary] will
+  /// be used by default.
   final Color? color;
 
   /// The progress indicator's color as an animated value.
@@ -42,10 +58,23 @@ abstract class _YaruProgressIndicator extends StatefulWidget {
   /// is also null then it defaults to the current theme's [ColorScheme.primary].
   final Animation<Color?>? valueColor;
 
-  /// {@macro flutter.progress_indicator.ProgressIndicator.semanticsLabel}
+  /// The [SemanticsProperties.label] for this progress indicator.
+  ///
+  /// This value indicates the purpose of the progress bar, and will be
+  /// read out by screen readers to indicate the purpose of this progress
+  /// indicator.
   final String? semanticsLabel;
 
-  /// {@macro flutter.progress_indicator.ProgressIndicator.semanticsValue}
+  /// The [SemanticsProperties.value] for this progress indicator.
+  ///
+  /// This will be used in conjunction with the [semanticsLabel] by
+  /// screen reading software to identify the widget, and is primarily
+  /// intended for use with determinate progress indicators to announce
+  /// how far along they are.
+  ///
+  /// For determinate progress indicators, this will be defaulted to
+  /// [ProgressIndicator.value] expressed as a percentage, i.e. `0.1` will
+  /// become '10%'.
   final String? semanticsValue;
 
   Color _getValueColor(BuildContext context) {
@@ -81,7 +110,7 @@ abstract class _YaruProgressIndicator extends StatefulWidget {
 class YaruLinearProgressIndicator extends _YaruProgressIndicator {
   /// Creates a Yaru linear progress indicator.
   ///
-  /// {@macro flutter.material.ProgressIndicator.ProgressIndicator}
+  /// {@macro yaru.widget.YaruProgressIndicator.YaruProgressIndicator}
   const YaruLinearProgressIndicator({
     Key? key,
     double? value,
@@ -99,7 +128,7 @@ class YaruLinearProgressIndicator extends _YaruProgressIndicator {
             semanticsLabel: semanticsLabel,
             semanticsValue: semanticsValue);
 
-  /// {@macro flutter.material.LinearProgressIndicator.minHeight}
+  /// The minimum height of the line used to draw the linear indicator (default: 6).
   final double minHeight;
 
   @override
@@ -317,7 +346,7 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
 class YaruCircularProgressIndicator extends _YaruProgressIndicator {
   /// Creates a Yaru circular progress indicator.
   ///
-  /// {@macro flutter.material.ProgressIndicator.ProgressIndicator}
+  /// {@macro yaru.widget.YaruProgressIndicator.YaruProgressIndicator}
   const YaruCircularProgressIndicator({
     Key? key,
     double? value,
