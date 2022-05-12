@@ -59,11 +59,15 @@ class _YaruCarouselState extends State<YaruCarousel> {
                     duration: _kAnimationDuration,
                     curve: _kAnimationCurve,
                     margin: EdgeInsets.all(index == _index ? 10 : 20),
-                    child: GestureDetector(
-                      onTap:
-                          _index == index ? null : () => _animateToPage(index),
-                      child: widget.children[index],
-                    ),
+                    child: _index == index
+                        ? widget.children[index]
+                        : GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () => _animateToPage(index),
+                            child: IgnorePointer(
+                              child: widget.children[index],
+                            ),
+                          ),
                   )),
         ),
         widget.children.length < 30
