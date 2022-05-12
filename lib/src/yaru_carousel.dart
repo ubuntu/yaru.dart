@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+const _kAnimationDuration = Duration(milliseconds: 500);
+const _kAnimationCurve = Curves.easeInOutCubic;
+
 class YaruCarousel extends StatefulWidget {
   const YaruCarousel({
     Key? key,
@@ -53,10 +56,14 @@ class _YaruCarouselState extends State<YaruCarousel> {
               controller: _pageController,
               onPageChanged: (index) => setState(() => _index = index),
               itemBuilder: (context, index) => AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOutCubic,
+                    duration: _kAnimationDuration,
+                    curve: _kAnimationCurve,
                     margin: EdgeInsets.all(index == _index ? 10 : 20),
-                    child: widget.children[index],
+                    child: GestureDetector(
+                      onTap:
+                          _index == index ? null : () => _animateToPage(index),
+                      child: widget.children[index],
+                    ),
                   )),
         ),
         widget.children.length < 30
@@ -72,18 +79,23 @@ class _YaruCarouselState extends State<YaruCarousel> {
                   children: List<Widget>.generate(
                     widget.children.length,
                     (index) => Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.all(5),
-                        width: 12,
-                        height: 12,
-                        decoration: BoxDecoration(
-                            color: _index == index
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.3),
-                            shape: BoxShape.circle),
+                      child: GestureDetector(
+                        onTap: _index == index
+                            ? null
+                            : () => _animateToPage(index),
+                        child: Container(
+                          margin: const EdgeInsets.all(5),
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                              color: _index == index
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .primary
+                                      .withOpacity(0.3),
+                              shape: BoxShape.circle),
+                        ),
                       ),
                     ),
                   ),
@@ -105,6 +117,14 @@ class _YaruCarouselState extends State<YaruCarousel> {
                 ),
               )
       ],
+    );
+  }
+
+  void _animateToPage(int pageIndex) {
+    _pageController.animateToPage(
+      pageIndex,
+      duration: _kAnimationDuration,
+      curve: _kAnimationCurve,
     );
   }
 }
