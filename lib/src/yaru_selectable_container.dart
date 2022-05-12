@@ -41,20 +41,35 @@ class YaruSelectableContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final padding = this.padding ?? const EdgeInsets.all(6);
+    final borderRadius = this.borderRadius ?? BorderRadius.circular(radius);
+    final innerBorderRadius = BorderRadius.only(
+      topLeft: Radius.elliptical(borderRadius.topLeft.x - padding.left / 2,
+          borderRadius.topLeft.y - padding.top / 2),
+      topRight: Radius.elliptical(borderRadius.topRight.x - padding.right / 2,
+          borderRadius.topRight.y - padding.top / 2),
+      bottomRight: Radius.elliptical(
+          borderRadius.bottomRight.x - padding.right / 2,
+          borderRadius.bottomRight.y - padding.bottom / 2),
+      bottomLeft: Radius.elliptical(
+          borderRadius.bottomLeft.x - padding.left / 2,
+          borderRadius.bottomLeft.y - padding.bottom / 2),
+    );
+
     return InkWell(
-      borderRadius: borderRadius ?? BorderRadius.circular(radius),
+      borderRadius: borderRadius,
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: borderRadius ?? BorderRadius.circular(radius),
+            borderRadius: borderRadius,
             color: selected
                 ? selectionColor ??
                     Theme.of(context).primaryColor.withOpacity(0.8)
                 : Colors.transparent),
         child: Padding(
-          padding: padding ?? const EdgeInsets.all(6.0),
+          padding: padding,
           child: ClipRRect(
-            borderRadius: borderRadius ?? BorderRadius.circular(radius),
+            borderRadius: innerBorderRadius,
             child: child,
           ),
         ),
