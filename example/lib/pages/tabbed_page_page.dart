@@ -29,7 +29,7 @@ class TabbedPagePage extends StatelessWidget {
       YaruIcons.television
     ], tabTitles: [
       'Addons',
-      'Accessability',
+      'Accessibility',
       'Audio',
       'Address Book',
       'Television'
