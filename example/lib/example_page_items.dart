@@ -27,13 +27,30 @@ final examplePageItems = <YaruPageItem>[
     builder: (_) => ExtraOptionRowPage(),
   ),
   YaruPageItem(
-    titleBuilder: (context) => Text('YaruLinearProgressIndicator'),
+    titleBuilder: (context) => Text('YaruProgressIndicator'),
     iconData: YaruIcons.download,
     builder: (_) => YaruPage(
       children: [
-        YaruLinearProgressIndicator(
-          value: 50 / 100,
-        )
+        Padding(
+          padding: const EdgeInsets.only(top: 25),
+          child: YaruCircularProgressIndicator(),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 25),
+          child: YaruCircularProgressIndicator(
+            value: .75,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 25),
+          child: YaruLinearProgressIndicator(),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 25),
+          child: YaruLinearProgressIndicator(
+            value: .75,
+          ),
+        ),
       ],
     ),
   ),
