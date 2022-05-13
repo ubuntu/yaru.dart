@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
-import 'package:yaru_widgets_example/widgets/row_list.dart';
+import 'package:yaru_widgets_example/example_page_items.dart';
 
 void main() {
   runApp(const App());
@@ -13,6 +12,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Yaru Wide- / NarrowLayout Example',
       theme: yaruLight,
       darkTheme: yaruDark,
@@ -21,74 +21,41 @@ class App extends StatelessWidget {
   }
 }
 
-class WideNarrowHomePage extends StatelessWidget {
+class WideNarrowHomePage extends StatefulWidget {
   const WideNarrowHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<WideNarrowHomePage> createState() => _WideNarrowHomePageState();
+}
+
+class _WideNarrowHomePageState extends State<WideNarrowHomePage> {
+  var _index = -1;
+  var _previousIndex = 0;
+
+  void _setIndex(int index) {
+    _previousIndex = _index;
+    _index = index;
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: YaruSearchAppBar(
-            appBarHeight:
-                Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
-            searchIconData: YaruIcons.search,
-            searchController: TextEditingController(),
-            onChanged: (value) {},
-            onEscape: () {},
-            automaticallyImplyLeading: true),
         body: LayoutBuilder(
             builder: (context, constraints) => constraints.maxWidth > 600
                 ? YaruWideLayout(
-                    pageItems: pageItems,
-                    initialIndex: 0,
+                    labelType: NavigationRailLabelType.none,
+                    pageItems: examplePageItems.take(15).toList(),
+                    initialIndex: _index == -1 ? _previousIndex : _index,
+                    onSelected: _setIndex,
                   )
-                : YaruNarrowLayout(pageItems: pageItems, initialIndex: 0)),
+                : YaruNarrowLayout(
+                    showSelectedLabels: false,
+                    pageItems: examplePageItems.take(15).toList(),
+                    initialIndex: _index == -1 ? _previousIndex : _index,
+                    onSelected: _setIndex,
+                  )),
       ),
     );
   }
 }
-
-final pageItems = [
-  YaruPageItem(
-      titleBuilder: (context) => Text('Home'),
-      builder: (_) => const Text('Home'),
-      iconData: YaruIcons.home,
-      selectedIconData: YaruIcons.home_filled),
-  YaruPageItem(
-      titleBuilder: (context) => Text('View'),
-      builder: (_) => YaruTabbedPage(tabIcons: [
-            YaruIcons.lock_filled,
-            YaruIcons.globe_filled,
-            YaruIcons.power_filled
-          ], tabTitles: [
-            'Lock',
-            'Globe',
-            'Power'
-          ], views: [
-            YaruPage(children: [RowList()]),
-            Center(child: Text('Globe')),
-            Center(child: Text('Power'))
-          ]),
-      iconData: YaruIcons.view,
-      selectedIconData: YaruIcons.view_filled),
-  YaruPageItem(
-      titleBuilder: (context) => Text('Time'),
-      builder: (_) => const Text('Time'),
-      iconData: YaruIcons.clock,
-      selectedIconData: YaruIcons.clock_filled),
-  YaruPageItem(
-      titleBuilder: (context) => Text('Favorites'),
-      builder: (_) => const Text('Favorites'),
-      iconData: YaruIcons.star,
-      selectedIconData: YaruIcons.star_filled),
-  YaruPageItem(
-      titleBuilder: (context) => Text('Electronics'),
-      builder: (_) => const Text('Electronics'),
-      iconData: YaruIcons.chip,
-      selectedIconData: YaruIcons.chip_filled),
-  YaruPageItem(
-      titleBuilder: (context) => Text('Gallery'),
-      builder: (_) => const Text('Gallery'),
-      iconData: YaruIcons.image,
-      selectedIconData: YaruIcons.image_filled),
-];
