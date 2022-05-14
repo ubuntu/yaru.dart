@@ -15,8 +15,10 @@ class YaruWideLayout extends StatefulWidget {
   /// the [NavigationRail]
   final ScrollController? scrollController;
 
-  final ValueChanged<int> onSelected;
+  /// Optional callback that returns an index when the page changes.
+  final ValueChanged<int>? onSelected;
 
+  /// Optionally control the labels of the [NavigationRail]
   final NavigationRailLabelType? labelType;
 
   const YaruWideLayout({
@@ -61,7 +63,7 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                         child: NavigationRail(
                           selectedIndex: _selectedIndex,
                           onDestinationSelected: (index) {
-                            widget.onSelected(index);
+                            widget.onSelected!(index);
                             setState(() => _selectedIndex = index);
                           },
                           labelType: widget.labelType,

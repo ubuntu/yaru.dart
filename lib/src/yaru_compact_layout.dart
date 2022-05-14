@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
+/// A responsive layout switching between [YaruWideLayout]
+/// and [YaruNarrowLayout] depening on the screen width.
 class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
     Key? key,
@@ -8,7 +10,10 @@ class YaruCompactLayout extends StatefulWidget {
     this.narrowLayoutMaxWidth = 600,
   }) : super(key: key);
 
+  /// The list of [YaruPageItem] has to be provided.
   final List<YaruPageItem> pageItems;
+
+  /// The max width after the layout switches to the [YaruWideLayout], defaults to 600.
   final double narrowLayoutMaxWidth;
 
   @override

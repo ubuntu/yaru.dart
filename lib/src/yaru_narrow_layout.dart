@@ -11,8 +11,10 @@ class YaruNarrowLayout extends StatefulWidget {
   /// The index of the item that should be selected when the [State] of [YaruNarrowLayout] is initialized.
   final int initialIndex;
 
-  final ValueChanged<int> onSelected;
+  /// Optional callback that returns an index when the page changes.
+  final ValueChanged<int>? onSelected;
 
+  /// Optional bool to hide selected labels in the [BottomNavigationBar]
   final bool? showSelectedLabels;
 
   const YaruNarrowLayout({
@@ -59,7 +61,7 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
                 .toList(),
             currentIndex: _selectedIndex,
             onTap: (index) {
-              widget.onSelected(index);
+              widget.onSelected!(index);
               setState(() => _selectedIndex = index);
             },
           ),
