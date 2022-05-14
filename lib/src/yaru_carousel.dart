@@ -1,16 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 const _kAnimationDuration = Duration(milliseconds: 500);
 const _kAnimationCurve = Curves.easeInOutCubic;
 
 class YaruCarousel extends StatefulWidget {
-  const YaruCarousel({
-    Key? key,
-    this.height = 500,
-    this.width = 500,
-    required this.children,
-    this.initialIndex = 0,
-  }) : super(key: key);
+  const YaruCarousel(
+      {Key? key,
+      this.height = 500,
+      this.width = 500,
+      required this.children,
+      this.initialIndex = 0,
+      this.autoScroll = false})
+      : super(key: key);
 
   /// The height of the children, defaults to 500.0.
   final double height;
@@ -24,6 +27,9 @@ class YaruCarousel extends StatefulWidget {
   /// The index of the child that should be shown on first page load.
   final int initialIndex;
 
+  /// Enable the auto scrolling of all children
+  final bool autoScroll;
+
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
 }
@@ -31,16 +37,29 @@ class YaruCarousel extends StatefulWidget {
 class _YaruCarouselState extends State<YaruCarousel> {
   late PageController _pageController;
 
+  late Timer? _timer;
+
   late int _index;
 
   @override
   void initState() {
     super.initState();
+
     _index = widget.initialIndex;
     _pageController = PageController(
       viewportFraction: 0.8,
       initialPage: _index,
     );
+
+    if (widget.autoScroll) {
+      _startTimer();
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _cancelTimer();
   }
 
   @override
@@ -54,6 +73,9 @@ class _YaruCarouselState extends State<YaruCarousel> {
               itemCount: widget.children.length,
               pageSnapping: true,
               controller: _pageController,
+              physics: widget.autoScroll
+                  ? const NeverScrollableScrollPhysics()
+                  : null,
               onPageChanged: (index) => setState(() => _index = index),
               itemBuilder: (context, index) => AnimatedContainer(
                     duration: _kAnimationDuration,
@@ -130,5 +152,20 @@ class _YaruCarouselState extends State<YaruCarousel> {
       duration: _kAnimationDuration,
       curve: _kAnimationCurve,
     );
+
+    if (widget.autoScroll) {
+      _cancelTimer();
+      _startTimer();
+    }
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _animateToPage(widget.children.length == _index ? 0 : _index++);
+    });
+  }
+
+  void _cancelTimer() {
+    _timer?.cancel();
   }
 }
