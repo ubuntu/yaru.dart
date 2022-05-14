@@ -27,6 +27,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final _filteredItems = <YaruPageItem>[];
   final _searchController = TextEditingController();
+  bool compact = true;
 
   void _onEscape() => setState(() {
         _filteredItems.clear();
@@ -44,26 +45,41 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final configItem = YaruPageItem(
+      titleBuilder: (context) => Text('Layout'),
+      builder: (_) => YaruPage(children: [
+        YaruSwitchRow(
+          trailingWidget: Text('Compact mode'),
+          value: compact,
+          onChanged: (v) => setState(() => compact = v),
+        )
+      ]),
+      iconData: YaruIcons.settings,
+    );
+
     return MaterialApp(
       scrollBehavior: TouchMouseStylusScrollBehavior(),
       debugShowCheckedModeBanner: false,
       theme: context.watch<LightTheme>().value,
       darkTheme: context.watch<DarkTheme>().value,
-      home: YaruMasterDetailPage(
-        leftPaneWidth: 280,
-        previousIconData: YaruIcons.go_previous,
-        pageItems:
-            _filteredItems.isNotEmpty ? _filteredItems : examplePageItems,
-        appBar: YaruSearchAppBar(
-          searchHint: 'Search...',
-          clearSearchIconData: YaruIcons.window_close,
-          searchController: _searchController,
-          onChanged: (v) => _onSearchChanged(v, context),
-          onEscape: _onEscape,
-          appBarHeight: 48,
-          searchIconData: YaruIcons.search,
-        ),
-      ),
+      home: compact
+          ? YaruCompactLayout(pageItems: [configItem] + examplePageItems)
+          : YaruMasterDetailPage(
+              leftPaneWidth: 280,
+              previousIconData: YaruIcons.go_previous,
+              pageItems: _filteredItems.isNotEmpty
+                  ? _filteredItems
+                  : [configItem] + examplePageItems,
+              appBar: YaruSearchAppBar(
+                searchHint: 'Search...',
+                clearSearchIconData: YaruIcons.window_close,
+                searchController: _searchController,
+                onChanged: (v) => _onSearchChanged(v, context),
+                onEscape: _onEscape,
+                appBarHeight: 48,
+                searchIconData: YaruIcons.search,
+              ),
+            ),
     );
   }
 }

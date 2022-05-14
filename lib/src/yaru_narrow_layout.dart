@@ -11,9 +11,19 @@ class YaruNarrowLayout extends StatefulWidget {
   /// The index of the item that should be selected when the [State] of [YaruNarrowLayout] is initialized.
   final int initialIndex;
 
-  const YaruNarrowLayout(
-      {Key? key, required this.pageItems, required this.initialIndex})
-      : super(key: key);
+  /// Optional callback that returns an index when the page changes.
+  final ValueChanged<int>? onSelected;
+
+  /// Optional bool to hide selected labels in the [BottomNavigationBar]
+  final bool? showSelectedLabels;
+
+  const YaruNarrowLayout({
+    Key? key,
+    required this.pageItems,
+    required this.initialIndex,
+    required this.onSelected,
+    this.showSelectedLabels = true,
+  }) : super(key: key);
 
   @override
   _YaruNarrowLayoutState createState() => _YaruNarrowLayoutState();
@@ -32,22 +42,28 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
     return SafeArea(
       child: Scaffold(
           body: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-            child: Center(
-              child: widget.pageItems[_selectedIndex].builder(context),
-            ),
+            child: widget.pageItems[_selectedIndex].builder(context),
           ),
           BottomNavigationBar(
+            showSelectedLabels: widget.showSelectedLabels,
             items: widget.pageItems
                 .map((pageItem) => BottomNavigationBarItem(
                     icon: Icon(pageItem.iconData),
-                    activeIcon: Icon(pageItem.selectedIconData),
+                    activeIcon: pageItem.selectedIconData != null
+                        ? Icon(pageItem.selectedIconData)
+                        : Icon(pageItem.iconData),
                     label:
                         convertWidgetToString(pageItem.titleBuilder(context))))
                 .toList(),
             currentIndex: _selectedIndex,
-            onTap: (index) => setState(() => _selectedIndex = index),
+            onTap: (index) {
+              widget.onSelected!(index);
+              setState(() => _selectedIndex = index);
+            },
           ),
         ],
       )),
