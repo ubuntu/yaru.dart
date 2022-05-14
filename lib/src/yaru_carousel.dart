@@ -30,7 +30,7 @@ class YaruCarousel extends StatefulWidget {
   /// Enable an auto scrolling loop of all children
   final bool autoScroll;
 
-  /// If [autoScroll] is enabled, this value determine the time spent on each  carousel child
+  /// If [autoScroll] is enabled, this value determine the time spent on each carousel child
   final Duration autoScrollDuration;
 
   @override
