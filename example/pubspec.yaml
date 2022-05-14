@@ -10,8 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.0.2
-  yaru:
-    git: http://github.com/ubuntu/yaru.dart
+  yaru: ^0.3.0
   yaru_icons: ^0.2.0
   yaru_widgets:
     path: ../
