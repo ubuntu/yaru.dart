@@ -40,11 +40,11 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
     return SafeArea(
       child: Scaffold(
           body: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-            child: Center(
-              child: widget.pageItems[_selectedIndex].builder(context),
-            ),
+            child: widget.pageItems[_selectedIndex].builder(context),
           ),
           BottomNavigationBar(
             showSelectedLabels: widget.showSelectedLabels,

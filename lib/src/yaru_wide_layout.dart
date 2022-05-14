@@ -47,6 +47,8 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
       return SafeArea(
         child: Scaffold(
           body: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height,
@@ -78,9 +80,7 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
               ),
               const VerticalDivider(thickness: 1, width: 1),
               Expanded(
-                child: Center(
-                  child: widget.pageItems[_selectedIndex].builder(context),
-                ),
+                child: widget.pageItems[_selectedIndex].builder(context),
               )
             ],
           ),
