@@ -1,5 +1,21 @@
 # Changelog
 
+# 1.0.9
+
+- [Michał](https://github.com/mivoligo)
+  - Allow custom content padding (#107)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - Improve navigationrail in yaru_wide_layout (#122)
+  - Example: use handy window (#121)
+  - Add YaruCompactLayout (#120)
+- [Paul Kepinski](https://github.com/Jupi007)
+  - Carousel improvements  (#123)
+  - Fix "accessability" typo in example (#119)
+  - YaruSelectableContainer fix border-radius (#118)
+  - YaruCarousel: allow more actions (#117)
+  - Yaru progress indicator (#116)
+  - Fix color_disk_page (#115)
+
 # 1.0.8
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
