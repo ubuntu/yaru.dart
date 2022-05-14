@@ -71,13 +71,16 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                             },
                             labelType: widget.labelType,
                             destinations: widget.pageItems
-                                .map((pageItem) => NavigationRailDestination(
+                                .map(
+                                  (pageItem) => NavigationRailDestination(
                                     icon: Icon(pageItem.iconData),
                                     selectedIcon:
                                         pageItem.selectedIconData != null
                                             ? Icon(pageItem.selectedIconData)
                                             : Icon(pageItem.iconData),
-                                    label: pageItem.titleBuilder(context)))
+                                    label: pageItem.titleBuilder(context),
+                                  ),
+                                )
                                 .toList(),
                           ),
                         ),
