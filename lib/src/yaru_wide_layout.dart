@@ -60,22 +60,29 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                       constraints:
                           BoxConstraints(minHeight: constraint.maxHeight),
                       child: IntrinsicHeight(
-                        child: NavigationRail(
-                          selectedIndex: _selectedIndex,
-                          onDestinationSelected: (index) {
-                            widget.onSelected!(index);
-                            setState(() => _selectedIndex = index);
-                          },
-                          labelType: widget.labelType,
-                          destinations: widget.pageItems
-                              .map((pageItem) => NavigationRailDestination(
-                                  icon: Icon(pageItem.iconData),
-                                  selectedIcon:
-                                      pageItem.selectedIconData != null
-                                          ? Icon(pageItem.selectedIconData)
-                                          : Icon(pageItem.iconData),
-                                  label: pageItem.titleBuilder(context)))
-                              .toList(),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: NavigationRail(
+                            minWidth: 55,
+                            selectedIndex: _selectedIndex,
+                            onDestinationSelected: (index) {
+                              widget.onSelected!(index);
+                              setState(() => _selectedIndex = index);
+                            },
+                            labelType: widget.labelType,
+                            destinations: widget.pageItems
+                                .map(
+                                  (pageItem) => NavigationRailDestination(
+                                    icon: Icon(pageItem.iconData),
+                                    selectedIcon:
+                                        pageItem.selectedIconData != null
+                                            ? Icon(pageItem.selectedIconData)
+                                            : Icon(pageItem.iconData),
+                                    label: pageItem.titleBuilder(context),
+                                  ),
+                                )
+                                .toList(),
+                          ),
                         ),
                       )),
                 ),
