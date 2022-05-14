@@ -15,11 +15,19 @@ class YaruWideLayout extends StatefulWidget {
   /// the [NavigationRail]
   final ScrollController? scrollController;
 
+  /// Optional callback that returns an index when the page changes.
+  final ValueChanged<int>? onSelected;
+
+  /// Optionally control the labels of the [NavigationRail]
+  final NavigationRailLabelType? labelType;
+
   const YaruWideLayout({
     Key? key,
     required this.pageItems,
     required this.initialIndex,
     this.scrollController,
+    this.labelType = NavigationRailLabelType.selected,
+    required this.onSelected,
   }) : super(key: key);
 
   @override
@@ -41,6 +49,8 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
       return SafeArea(
         child: Scaffold(
           body: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height,
@@ -52,13 +62,18 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                       child: IntrinsicHeight(
                         child: NavigationRail(
                           selectedIndex: _selectedIndex,
-                          onDestinationSelected: (index) =>
-                              setState(() => _selectedIndex = index),
-                          labelType: NavigationRailLabelType.selected,
+                          onDestinationSelected: (index) {
+                            widget.onSelected!(index);
+                            setState(() => _selectedIndex = index);
+                          },
+                          labelType: widget.labelType,
                           destinations: widget.pageItems
                               .map((pageItem) => NavigationRailDestination(
                                   icon: Icon(pageItem.iconData),
-                                  selectedIcon: Icon(pageItem.selectedIconData),
+                                  selectedIcon:
+                                      pageItem.selectedIconData != null
+                                          ? Icon(pageItem.selectedIconData)
+                                          : Icon(pageItem.iconData),
                                   label: pageItem.titleBuilder(context)))
                               .toList(),
                         ),
@@ -67,9 +82,7 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
               ),
               const VerticalDivider(thickness: 1, width: 1),
               Expanded(
-                child: Center(
-                  child: widget.pageItems[_selectedIndex].builder(context),
-                ),
+                child: widget.pageItems[_selectedIndex].builder(context),
               )
             ],
           ),
