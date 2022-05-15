@@ -19,10 +19,13 @@ class YaruCompactLayout extends StatefulWidget {
   /// The max width after the layout switches to the [YaruWideLayout], defaults to 600.
   final double narrowLayoutMaxWidth;
 
+  /// Optional bool to hide selected labels in the [BottomNavigationBar]
   final bool showSelectedLabels;
 
+  /// Optional bool to hide unselected labels in the [BottomNavigationBar]
   final bool showUnselectedLabels;
 
+  /// Optionally control the labels of the [NavigationRail]
   final NavigationRailLabelType labelType;
 
   @override

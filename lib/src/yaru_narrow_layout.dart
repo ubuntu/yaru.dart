@@ -17,7 +17,7 @@ class YaruNarrowLayout extends StatefulWidget {
   /// Optional bool to hide selected labels in the [BottomNavigationBar]
   final bool? showSelectedLabels;
 
-  /// Optional bool to hide selected labels in the [BottomNavigationBar]
+  /// Optional bool to hide unselected labels in the [BottomNavigationBar]
   final bool? showUnselectedLabels;
 
   const YaruNarrowLayout({
