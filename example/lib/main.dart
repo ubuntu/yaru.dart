@@ -63,7 +63,11 @@ class _HomeState extends State<Home> {
       theme: context.watch<LightTheme>().value,
       darkTheme: context.watch<DarkTheme>().value,
       home: compact
-          ? YaruCompactLayout(pageItems: [configItem] + examplePageItems)
+          ? YaruCompactLayout(
+              pageItems: [configItem] + examplePageItems,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+            )
           : YaruMasterDetailPage(
               leftPaneWidth: 280,
               previousIconData: YaruIcons.go_previous,
