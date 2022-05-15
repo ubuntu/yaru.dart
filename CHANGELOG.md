@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.0.10
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  -  YaruCompactLayout: make labels showing an option (#125)
+
 # 1.0.9
 
 - [Michał](https://github.com/mivoligo)
