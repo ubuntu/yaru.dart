@@ -12,7 +12,8 @@ class YaruCarousel extends StatefulWidget {
       required this.children,
       this.initialIndex = 0,
       this.autoScroll = false,
-      this.autoScrollDuration = const Duration(seconds: 1)})
+      this.autoScrollDuration = const Duration(seconds: 1),
+      this.placeIndicator = true})
       : super(key: key);
 
   /// The height of the children, defaults to 500.0.
@@ -32,6 +33,12 @@ class YaruCarousel extends StatefulWidget {
 
   /// If [autoScroll] is enabled, this value determine the time spent on each carousel child
   final Duration autoScrollDuration;
+
+  /// Display a place indicator
+  ///
+  /// Show a dot based indicator if children length is lower than 30,
+  /// else use a text based indicator
+  final bool placeIndicator;
 
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
@@ -78,7 +85,10 @@ class _YaruCarouselState extends State<YaruCarousel> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [_buildCarousel(), _buildPlaceIndicator()],
+      children: [
+        _buildCarousel(),
+        ...(widget.placeIndicator ? [_buildPlaceIndicator()] : [])
+      ],
     );
   }
 
