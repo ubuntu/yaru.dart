@@ -8,6 +8,9 @@ class YaruCompactLayout extends StatefulWidget {
     Key? key,
     required this.pageItems,
     this.narrowLayoutMaxWidth = 600,
+    this.showSelectedLabels = true,
+    this.showUnselectedLabels = true,
+    this.labelType = NavigationRailLabelType.none,
   }) : super(key: key);
 
   /// The list of [YaruPageItem] has to be provided.
@@ -15,6 +18,12 @@ class YaruCompactLayout extends StatefulWidget {
 
   /// The max width after the layout switches to the [YaruWideLayout], defaults to 600.
   final double narrowLayoutMaxWidth;
+
+  final bool showSelectedLabels;
+
+  final bool showUnselectedLabels;
+
+  final NavigationRailLabelType labelType;
 
   @override
   State<YaruCompactLayout> createState() => _YaruCompactLayoutState();
@@ -37,13 +46,14 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
             builder: (context, constraints) =>
                 constraints.maxWidth > widget.narrowLayoutMaxWidth
                     ? YaruWideLayout(
-                        labelType: NavigationRailLabelType.none,
+                        labelType: widget.labelType,
                         pageItems: widget.pageItems,
                         initialIndex: _index == -1 ? _previousIndex : _index,
                         onSelected: _setIndex,
                       )
                     : YaruNarrowLayout(
-                        showSelectedLabels: false,
+                        showSelectedLabels: widget.showSelectedLabels,
+                        showUnselectedLabels: widget.showUnselectedLabels,
                         pageItems: widget.pageItems,
                         initialIndex: _index == -1 ? _previousIndex : _index,
                         onSelected: _setIndex,
