@@ -63,6 +63,7 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: NavigationRail(
+                            backgroundColor: Theme.of(context).backgroundColor,
                             minWidth: 55,
                             selectedIndex: _selectedIndex,
                             onDestinationSelected: (index) {
