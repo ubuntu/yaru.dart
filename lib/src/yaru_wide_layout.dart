@@ -60,30 +60,42 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                       constraints:
                           BoxConstraints(minHeight: constraint.maxHeight),
                       child: IntrinsicHeight(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: NavigationRail(
-                            backgroundColor: Theme.of(context).backgroundColor,
-                            minWidth: 55,
-                            selectedIndex: _selectedIndex,
-                            onDestinationSelected: (index) {
-                              widget.onSelected!(index);
-                              setState(() => _selectedIndex = index);
-                            },
-                            labelType: widget.labelType,
-                            destinations: widget.pageItems
-                                .map(
-                                  (pageItem) => NavigationRailDestination(
-                                    icon: Icon(pageItem.iconData),
-                                    selectedIcon:
-                                        pageItem.selectedIconData != null
-                                            ? Icon(pageItem.selectedIconData)
-                                            : Icon(pageItem.iconData),
-                                    label: pageItem.titleBuilder(context),
-                                  ),
-                                )
-                                .toList(),
+                        child: NavigationRail(
+                          selectedIconTheme: IconThemeData(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.9),
                           ),
+                          unselectedIconTheme: IconThemeData(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSurface
+                                .withOpacity(0.6),
+                          ),
+                          indicatorColor: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withOpacity(0.1),
+                          backgroundColor: Theme.of(context).backgroundColor,
+                          selectedIndex: _selectedIndex,
+                          onDestinationSelected: (index) {
+                            widget.onSelected!(index);
+                            setState(() => _selectedIndex = index);
+                          },
+                          labelType: widget.labelType,
+                          destinations: widget.pageItems
+                              .map(
+                                (pageItem) => NavigationRailDestination(
+                                  icon: Icon(pageItem.iconData),
+                                  selectedIcon:
+                                      pageItem.selectedIconData != null
+                                          ? Icon(pageItem.selectedIconData)
+                                          : Icon(pageItem.iconData),
+                                  label: pageItem.titleBuilder(context),
+                                ),
+                              )
+                              .toList(),
                         ),
                       )),
                 ),
