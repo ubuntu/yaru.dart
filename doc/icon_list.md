@@ -9,6 +9,7 @@ Icon preview | Icon name | Usage
 ![addon](../icons/addon.svg) | addon | `YaruIcons.addon`
 ![address_book](../icons/address-book.svg) | address book | `YaruIcons.address_book`
 ![app_grid](../icons/app-grid.svg) | app grid | `YaruIcons.app_grid`
+![appliance](../icons/appliance.svg) | appliance | `YaruIcons.appliance`
 ![audio_history](../icons/audio/history.svg) | audio history | `YaruIcons.audio_history`
 ![audio](../icons/audio/_.svg) | audio | `YaruIcons.audio`
 ![battery_level_0_charging](../icons/battery/level-0-charging.svg) | battery level 0 charging | `YaruIcons.battery_level_0_charging`
@@ -34,8 +35,12 @@ Icon preview | Icon name | Usage
 ![battery_level_90_charging](../icons/battery/level-90-charging.svg) | battery level 90 charging | `YaruIcons.battery_level_90_charging`
 ![battery_level_90](../icons/battery/level-90.svg) | battery level 90 | `YaruIcons.battery_level_90`
 ![battery_missing](../icons/battery/missing.svg) | battery missing | `YaruIcons.battery_missing`
+![beaker_filled](../icons/beaker-filled.svg) | beaker filled | `YaruIcons.beaker_filled`
+![beaker](../icons/beaker.svg) | beaker | `YaruIcons.beaker`
 ![bluetooth](../icons/bluetooth.svg) | bluetooth | `YaruIcons.bluetooth`
 ![bookmarks](../icons/bookmarks.svg) | bookmarks | `YaruIcons.bookmarks`
+![book](../icons/book.svg) | book | `YaruIcons.book`
+![calculator](../icons/calculator.svg) | calculator | `YaruIcons.calculator`
 ![calendar](../icons/calendar.svg) | calendar | `YaruIcons.calendar`
 ![call_incoming](../icons/call/incoming.svg) | call incoming | `YaruIcons.call_incoming`
 ![call_outgoing](../icons/call/outgoing.svg) | call outgoing | `YaruIcons.call_outgoing`
@@ -59,7 +64,11 @@ Icon preview | Icon name | Usage
 ![clock](../icons/clock.svg) | clock | `YaruIcons.clock`
 ![color_select](../icons/color-select.svg) | color select | `YaruIcons.color_select`
 ![colors](../icons/colors.svg) | colors | `YaruIcons.colors`
+![compass_filled](../icons/compass-filled.svg) | compass filled | `YaruIcons.compass_filled`
+![compass](../icons/compass.svg) | compass | `YaruIcons.compass`
 ![computer](../icons/computer.svg) | computer | `YaruIcons.computer`
+![debian](../icons/debian.svg) | debian | `YaruIcons.debian`
+![desktop_appearance](../icons/desktop/appearance.svg) | desktop appearance | `YaruIcons.desktop_appearance`
 ![desktop_display](../icons/desktop/display.svg) | desktop display | `YaruIcons.desktop_display`
 ![desktop_online_accounts](../icons/desktop/online-accounts.svg) | desktop online accounts | `YaruIcons.desktop_online_accounts`
 ![desktop_panel_look](../icons/desktop/panel-look.svg) | desktop panel look | `YaruIcons.desktop_panel_look`
@@ -70,6 +79,7 @@ Icon preview | Icon name | Usage
 ![document_history](../icons/document/history.svg) | document history | `YaruIcons.document_history`
 ![document_open](../icons/document/open.svg) | document open | `YaruIcons.document_open`
 ![document](../icons/document/_.svg) | document | `YaruIcons.document`
+![document_template](../icons/document/template.svg) | document template | `YaruIcons.document_template`
 ![download_history](../icons/download/history.svg) | download history | `YaruIcons.download_history`
 ![download](../icons/download/_.svg) | download | `YaruIcons.download`
 ![drag_handle](../icons/drag-handle.svg) | drag handle | `YaruIcons.drag_handle`
@@ -126,6 +136,7 @@ Icon preview | Icon name | Usage
 ![find_location](../icons/find-location.svg) | find location | `YaruIcons.find_location`
 ![find_replace](../icons/find-replace.svg) | find replace | `YaruIcons.find_replace`
 ![fingerprint](../icons/fingerprint.svg) | fingerprint | `YaruIcons.fingerprint`
+![flatpak](../icons/flatpak.svg) | flatpak | `YaruIcons.flatpak`
 ![folder_remote](../icons/folder/remote.svg) | folder remote | `YaruIcons.folder_remote`
 ![folder_search](../icons/folder/search.svg) | folder search | `YaruIcons.folder_search`
 ![folder](../icons/folder/_.svg) | folder | `YaruIcons.folder`
@@ -145,6 +156,7 @@ Icon preview | Icon name | Usage
 ![format_text_strikethrough](../icons/format/text-strikethrough.svg) | format text strikethrough | `YaruIcons.format_text_strikethrough`
 ![format_text_underline](../icons/format/text-underline.svg) | format text underline | `YaruIcons.format_text_underline`
 ![format_unordered_list](../icons/format/unordered-list.svg) | format unordered list | `YaruIcons.format_unordered_list`
+![games](../icons/games.svg) | games | `YaruIcons.games`
 ![globe_filled](../icons/globe-filled.svg) | globe filled | `YaruIcons.globe_filled`
 ![globe](../icons/globe.svg) | globe | `YaruIcons.globe`
 ![go_bottom](../icons/go/bottom.svg) | go bottom | `YaruIcons.go_bottom`
@@ -158,6 +170,8 @@ Icon preview | Icon name | Usage
 ![go_up](../icons/go/up.svg) | go up | `YaruIcons.go_up`
 ![headphones](../icons/headphones.svg) | headphones | `YaruIcons.headphones`
 ![headset](../icons/headset.svg) | headset | `YaruIcons.headset`
+![health_filled](../icons/health-filled.svg) | health filled | `YaruIcons.health_filled`
+![health](../icons/health.svg) | health | `YaruIcons.health`
 ![heart_filled](../icons/heart-filled.svg) | heart filled | `YaruIcons.heart_filled`
 ![heart](../icons/heart.svg) | heart | `YaruIcons.heart`
 ![hide_filled](../icons/hide-filled.svg) | hide filled | `YaruIcons.hide_filled`
@@ -296,8 +310,14 @@ Icon preview | Icon name | Usage
 ![ok_filled](../icons/ok-filled.svg) | ok filled | `YaruIcons.ok_filled`
 ![ok_simple](../icons/ok-simple.svg) | ok simple | `YaruIcons.ok_simple`
 ![ok](../icons/ok.svg) | ok | `YaruIcons.ok`
-![package_filled](../icons/package-filled.svg) | package filled | `YaruIcons.package_filled`
-![package](../icons/package.svg) | package | `YaruIcons.package`
+![package_deb_filled](../icons/package/deb-filled.svg) | package deb filled | `YaruIcons.package_deb_filled`
+![package_deb](../icons/package/deb.svg) | package deb | `YaruIcons.package_deb`
+![package_filled](../icons/package/filled.svg) | package filled | `YaruIcons.package_filled`
+![package_flatpak_filled](../icons/package/flatpak-filled.svg) | package flatpak filled | `YaruIcons.package_flatpak_filled`
+![package_flatpak](../icons/package/flatpak.svg) | package flatpak | `YaruIcons.package_flatpak`
+![package_snap_filled](../icons/package/snap-filled.svg) | package snap filled | `YaruIcons.package_snap_filled`
+![package_snap](../icons/package/snap.svg) | package snap | `YaruIcons.package_snap`
+![package](../icons/package/_.svg) | package | `YaruIcons.package`
 ![pan_down](../icons/pan/down.svg) | pan down | `YaruIcons.pan_down`
 ![pan_end](../icons/pan/end.svg) | pan end | `YaruIcons.pan_end`
 ![pan_start](../icons/pan/start.svg) | pan start | `YaruIcons.pan_start`
@@ -344,6 +364,7 @@ Icon preview | Icon name | Usage
 ![sidebar_right](../icons/sidebar/right.svg) | sidebar right | `YaruIcons.sidebar_right`
 ![sidebar](../icons/sidebar/_.svg) | sidebar | `YaruIcons.sidebar`
 ![smartphone](../icons/smartphone.svg) | smartphone | `YaruIcons.smartphone`
+![snapcraft](../icons/snapcraft.svg) | snapcraft | `YaruIcons.snapcraft`
 ![speaker_filled](../icons/speaker/filled.svg) | speaker filled | `YaruIcons.speaker_filled`
 ![speaker](../icons/speaker/_.svg) | speaker | `YaruIcons.speaker`
 ![speaker_volume_high_filled](../icons/speaker/volume/high-filled.svg) | speaker volume high filled | `YaruIcons.speaker_volume_high_filled`
@@ -371,6 +392,8 @@ Icon preview | Icon name | Usage
 ![tag](../icons/tag.svg) | tag | `YaruIcons.tag`
 ![television](../icons/television.svg) | television | `YaruIcons.television`
 ![template](../icons/template.svg) | template | `YaruIcons.template`
+![text_editor_filled](../icons/text-editor-filled.svg) | text editor filled | `YaruIcons.text_editor_filled`
+![text_editor](../icons/text-editor.svg) | text editor | `YaruIcons.text_editor`
 ![thunderbolt](../icons/thunderbolt.svg) | thunderbolt | `YaruIcons.thunderbolt`
 ![trash_full](../icons/trash/full.svg) | trash full | `YaruIcons.trash_full`
 ![trash](../icons/trash/_.svg) | trash | `YaruIcons.trash`
@@ -382,6 +405,8 @@ Icon preview | Icon name | Usage
 ![ubuntu_logo](../icons/ubuntu-logo/_.svg) | ubuntu logo | `YaruIcons.ubuntu_logo`
 ![users](../icons/users.svg) | users | `YaruIcons.users`
 ![user](../icons/user.svg) | user | `YaruIcons.user`
+![utilities_filled](../icons/utilities-filled.svg) | utilities filled | `YaruIcons.utilities_filled`
+![utilities](../icons/utilities.svg) | utilities | `YaruIcons.utilities`
 ![video_history](../icons/video/history.svg) | video history | `YaruIcons.video_history`
 ![video](../icons/video/_.svg) | video | `YaruIcons.video`
 ![view_filled](../icons/view-filled.svg) | view filled | `YaruIcons.view_filled`
@@ -415,6 +440,7 @@ Icon preview | Icon name | Usage
 ![windows](../icons/windows.svg) | windows | `YaruIcons.windows`
 ![window](../icons/window/_.svg) | window | `YaruIcons.window`
 ![window_top_bar](../icons/window/top-bar.svg) | window top bar | `YaruIcons.window_top_bar`
+![wrench](../icons/wrench.svg) | wrench | `YaruIcons.wrench`
 ![zoom_fit_best](../icons/zoom/fit-best.svg) | zoom fit best | `YaruIcons.zoom_fit_best`
 ![zoom_in](../icons/zoom/in.svg) | zoom in | `YaruIcons.zoom_in`
 ![zoom_original](../icons/zoom/original.svg) | zoom original | `YaruIcons.zoom_original`

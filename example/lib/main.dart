@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Yaru Icons Demo',
       theme: yaru.lightTheme,
+      darkTheme: yaru.darkTheme,
       debugShowCheckedModeBanner: false,
       home: const YaruIconsGrid(),
     );
@@ -30,7 +31,7 @@ class _YaruIconsGridState extends State<YaruIconsGrid>
   late AnimationController _controller;
 
   static const _from = 0xf101;
-  static const _to = 0xf29f;
+  static const _to = 0xf2b9;
 
   double _iconsSize = 24;
   bool _isMinIconsSize() => _iconsSize <= 16 ? true : false;

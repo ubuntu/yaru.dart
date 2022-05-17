@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24"
+   id="svg7384"
+   version="1.1"
+   width="24"
+   sodipodi:docname="games.svg"
+   inkscape:version="1.1.2 (08b2f3d93c, 2022-04-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview26"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:zoom="17.036854"
+     inkscape:cx="13.881671"
+     inkscape:cy="16.434959"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg7384">
+    <inkscape:grid
+       type="xygrid"
+       id="grid843" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid1165"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata20854">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs7386">
+    <linearGradient
+       id="linearGradient5606"
+       inkscape:swatch="solid">
+      <stop
+         id="stop5608"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4526"
+       inkscape:swatch="solid">
+      <stop
+         id="stop4528"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3600-4"
+       inkscape:swatch="gradient">
+      <stop
+         id="stop3602-7"
+         offset="0"
+         style="stop-color:#f4f4f4;stop-opacity:1" />
+      <stop
+         id="stop3604-6"
+         offset="1"
+         style="stop-color:#dbdbdb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path
+     id="path1200"
+     style="color:#000000;fill:#808080;-inkscape-stroke:none"
+     d="M 7.5 2 C 5.7261923 2 4.5798076 2.088161 3.8339844 2.8339844 C 3.0881611 3.5798076 3 4.7261923 3 6.5 L 3 17.5 C 3 19.027776 3.1011415 20.164246 3.8164062 20.958984 C 4.531671 21.753723 5.7023827 22 7.5 22 L 15.5 22 C 17.273808 22 18.420192 21.91184 19.166016 21.166016 C 19.911839 20.420192 20 19.273808 20 17.5 L 20 6.5 C 20 4.7261923 19.91184 3.5798076 19.166016 2.8339844 C 18.420192 2.0881611 17.273808 2 15.5 2 L 7.5 2 z M 7.5 3 L 15.5 3 C 17.226189 3 18.079809 3.16184 18.458984 3.5410156 C 18.83816 3.9201913 19 4.7738113 19 6.5 L 19 17.5 C 19 19.226189 18.83816 20.079809 18.458984 20.458984 C 18.079809 20.83816 17.226189 21 15.5 21 L 7.5 21 C 5.7976207 21 4.9683279 20.746276 4.5585938 20.291016 C 4.1488597 19.835755 4 18.972221 4 17.5 L 4 6.5 C 4 4.7738112 4.16184 3.9201913 4.5410156 3.5410156 C 4.9201913 3.16184 5.7738113 3 7.5 3 z M 6.5 5 A 0.50005 0.50005 0 0 0 6 5.5 L 6 10.5 A 0.50005 0.50005 0 0 0 6.5 11 L 16.5 11 A 0.50005 0.50005 0 0 0 17 10.5 L 17 5.5 A 0.50005 0.50005 0 0 0 16.5 5 L 6.5 5 z M 7 6 L 16 6 L 16 10 L 7 10 L 7 6 z M 8.5 13 C 8.223 13 8 13.223 8 13.5 L 8 15 L 6.5 15 C 6.223 15 6 15.223 6 15.5 C 6 15.777 6.223 16 6.5 16 L 8 16 L 8 17.5 C 8 17.777 8.223 18 8.5 18 C 8.777 18 9 17.777 9 17.5 L 9 16 L 10.5 16 C 10.777 16 11 15.777 11 15.5 C 11 15.223 10.777 15 10.5 15 L 9 15 L 9 13.5 C 9 13.223 8.777 13 8.5 13 z M 16 13 A 1 1 0 0 0 15 14 A 1 1 0 0 0 16 15 A 1 1 0 0 0 17 14 A 1 1 0 0 0 16 13 z M 13 16 A 1 1 0 0 0 12 17 A 1 1 0 0 0 13 18 A 1 1 0 0 0 14 17 A 1 1 0 0 0 13 16 z " />
+</svg>
