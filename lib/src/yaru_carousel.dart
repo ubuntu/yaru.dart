@@ -87,7 +87,9 @@ class _YaruCarouselState extends State<YaruCarousel> {
     return Column(
       children: [
         _buildCarousel(),
-        ...(widget.placeIndicator ? [_buildPlaceIndicator()] : [])
+        ...(widget.placeIndicator && widget.children.length > 1
+            ? [_buildPlaceIndicator()]
+            : [])
       ],
     );
   }
