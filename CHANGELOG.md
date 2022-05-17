@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.0.11
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - YaruWideLayout: improve navigationrail theme (#129)
+
 # 1.0.10
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
