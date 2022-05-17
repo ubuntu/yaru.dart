@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.0.12
+
+- [Paul Kepinski](https://github.com/Jupi007)
+  - YaruCarousel: auto hide indicator if child length = 1 (#130)
+
 # 1.0.11
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
