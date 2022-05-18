@@ -99,28 +99,32 @@ class _YaruCarouselState extends State<YaruCarousel> {
       height: widget.height,
       width: widget.width,
       child: PageView.builder(
-          itemCount: widget.children.length,
-          pageSnapping: true,
-          controller: _pageController,
-          physics:
-              // Disable physic when auto scroll is enable because we cannot
-              // disable the timer when dragging the view
-              widget.autoScroll ? const NeverScrollableScrollPhysics() : null,
-          onPageChanged: (index) => setState(() => _index = index),
-          itemBuilder: (context, index) => AnimatedContainer(
-                duration: _kAnimationDuration,
-                curve: _kAnimationCurve,
-                margin: EdgeInsets.all(index == _index ? 10 : 20),
-                child: _index == index - 1 || _index == index + 1
-                    ? GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () => _animateToPage(index),
-                        child: IgnorePointer(
-                          child: widget.children[index],
-                        ),
-                      )
-                    : widget.children[index],
-              )),
+        itemCount: widget.children.length,
+        pageSnapping: true,
+        controller: _pageController,
+        physics:
+            // Disable physic when auto scroll is enable because we cannot
+            // disable the timer when dragging the view
+            widget.autoScroll ? const NeverScrollableScrollPhysics() : null,
+        onPageChanged: (index) => setState(() => _index = index),
+        itemBuilder: (context, index) => AnimatedScale(
+          scale: _index == index ? 1.0 : .95,
+          duration: _kAnimationDuration,
+          curve: _kAnimationCurve,
+          child: Container(
+            margin: const EdgeInsets.all(10),
+            child: _index == index - 1 || _index == index + 1
+                ? GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => _animateToPage(index),
+                    child: IgnorePointer(
+                      child: widget.children[index],
+                    ),
+                  )
+                : widget.children[index],
+          ),
+        ),
+      ),
     );
   }
 
