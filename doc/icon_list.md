@@ -385,6 +385,7 @@ Icon preview | Icon name | Usage
 ![stopwatch](../icons/stopwatch.svg) | stopwatch | `YaruIcons.stopwatch`
 ![subtitles_filled](../icons/subtitles-filled.svg) | subtitles filled | `YaruIcons.subtitles_filled`
 ![subtitles](../icons/subtitles.svg) | subtitles | `YaruIcons.subtitles`
+![synchronizing](../icons/synchronizing.svg) | synchronizing | `YaruIcons.synchronizing`
 ![tablet](../icons/tablet.svg) | tablet | `YaruIcons.tablet`
 ![tab_new_filled](../icons/tab-new-filled.svg) | tab new filled | `YaruIcons.tab_new_filled`
 ![tab_new](../icons/tab-new.svg) | tab new | `YaruIcons.tab_new`
