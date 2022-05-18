@@ -108,7 +108,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
             widget.autoScroll ? const NeverScrollableScrollPhysics() : null,
         onPageChanged: (index) => setState(() => _index = index),
         itemBuilder: (context, index) => AnimatedScale(
-          scale: _index == index ? 1.0 : .9,
+          scale: _index == index ? 1.0 : .95,
           duration: _kAnimationDuration,
           curve: _kAnimationCurve,
           child: Container(
