@@ -104,6 +104,8 @@ Icon preview | Icon name | Usage
 ![edit_paste](../icons/edit/paste.svg) | edit paste | `YaruIcons.edit_paste`
 ![edit_redo](../icons/edit/redo.svg) | edit redo | `YaruIcons.edit_redo`
 ![edit_undo](../icons/edit/undo.svg) | edit undo | `YaruIcons.edit_undo`
+![education_filled](../icons/education-filled.svg) | education filled | `YaruIcons.education_filled`
+![education](../icons/education.svg) | education | `YaruIcons.education`
 ![emote_angel](../icons/emote/angel.svg) | emote angel | `YaruIcons.emote_angel`
 ![emote_angry](../icons/emote/angry.svg) | emote angry | `YaruIcons.emote_angry`
 ![emote_confused](../icons/emote/confused.svg) | emote confused | `YaruIcons.emote_confused`
