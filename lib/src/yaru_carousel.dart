@@ -13,7 +13,8 @@ class YaruCarousel extends StatefulWidget {
       this.initialIndex = 0,
       this.autoScroll = false,
       this.autoScrollDuration = const Duration(seconds: 1),
-      this.placeIndicator = true})
+      this.placeIndicator = true,
+      this.viewportFraction = 0.8})
       : super(key: key);
 
   /// The height of the children, defaults to 500.0.
@@ -40,6 +41,9 @@ class YaruCarousel extends StatefulWidget {
   /// else use a text based indicator
   final bool placeIndicator;
 
+  /// The fraction of the viewport that each page should occupy.
+  final double viewportFraction;
+
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
 }
@@ -55,7 +59,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
 
     _index = widget.initialIndex;
     _pageController = PageController(
-      viewportFraction: 0.8,
+      viewportFraction: widget.viewportFraction,
       initialPage: _index,
     );
 
