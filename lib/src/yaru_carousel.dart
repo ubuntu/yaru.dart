@@ -178,7 +178,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              '$_index/${widget.children.length}',
+              '${_index + 1}/${widget.children.length}',
               style: Theme.of(context).textTheme.caption,
             ),
           )
