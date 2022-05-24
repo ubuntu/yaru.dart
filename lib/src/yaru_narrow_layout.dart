@@ -20,6 +20,9 @@ class YaruNarrowLayout extends StatefulWidget {
   /// Optional bool to hide unselected labels in the [BottomNavigationBar]
   final bool? showUnselectedLabels;
 
+  /// Optionally control the click behavior of the [BottomNavigationBar]
+  final BottomNavigationBarType bottomNavigationBarType;
+
   const YaruNarrowLayout({
     Key? key,
     required this.pageItems,
@@ -27,6 +30,7 @@ class YaruNarrowLayout extends StatefulWidget {
     required this.onSelected,
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
+    this.bottomNavigationBarType = BottomNavigationBarType.fixed,
   }) : super(key: key);
 
   @override
@@ -53,16 +57,19 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
             child: widget.pageItems[_selectedIndex].builder(context),
           ),
           BottomNavigationBar(
+            type: widget.bottomNavigationBarType,
             showSelectedLabels: widget.showSelectedLabels,
             showUnselectedLabels: widget.showUnselectedLabels,
             items: widget.pageItems
-                .map((pageItem) => BottomNavigationBarItem(
-                    icon: Icon(pageItem.iconData),
-                    activeIcon: pageItem.selectedIconData != null
-                        ? Icon(pageItem.selectedIconData)
-                        : Icon(pageItem.iconData),
-                    label:
-                        convertWidgetToString(pageItem.titleBuilder(context))))
+                .map(
+                  (pageItem) => BottomNavigationBarItem(
+                      icon: Icon(pageItem.iconData),
+                      activeIcon: pageItem.selectedIconData != null
+                          ? Icon(pageItem.selectedIconData)
+                          : Icon(pageItem.iconData),
+                      label: convertWidgetToString(
+                          pageItem.titleBuilder(context))),
+                )
                 .toList(),
             currentIndex: _selectedIndex,
             onTap: (index) {
@@ -76,13 +83,6 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
   }
 
   String convertWidgetToString(Widget widget) {
-    return widget is Text
-        ? widget
-            .toString()
-            .replaceAll('Text(', '')
-            .replaceAll(')', '')
-            .replaceAll('"', '')
-            .replaceAll("'", '')
-        : '';
+    return widget is Text && widget.data != null ? widget.data! : '';
   }
 }
