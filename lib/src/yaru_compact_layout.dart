@@ -11,6 +11,7 @@ class YaruCompactLayout extends StatefulWidget {
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
     this.labelType = NavigationRailLabelType.none,
+    this.bottomNavigationBarType = BottomNavigationBarType.fixed,
   }) : super(key: key);
 
   /// The list of [YaruPageItem] has to be provided.
@@ -27,6 +28,9 @@ class YaruCompactLayout extends StatefulWidget {
 
   /// Optionally control the labels of the [NavigationRail]
   final NavigationRailLabelType labelType;
+
+  /// Optionally control the click behavior of the [BottomNavigationBar]
+  final BottomNavigationBarType bottomNavigationBarType;
 
   @override
   State<YaruCompactLayout> createState() => _YaruCompactLayoutState();
@@ -57,6 +61,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
                     : YaruNarrowLayout(
                         showSelectedLabels: widget.showSelectedLabels,
                         showUnselectedLabels: widget.showUnselectedLabels,
+                        bottomNavigationBarType: widget.bottomNavigationBarType,
                         pageItems: widget.pageItems,
                         initialIndex: _index == -1 ? _previousIndex : _index,
                         onSelected: _setIndex,
