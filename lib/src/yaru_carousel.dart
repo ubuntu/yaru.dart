@@ -5,17 +5,18 @@ const _kAnimationDuration = Duration(milliseconds: 500);
 const _kAnimationCurve = Curves.easeInOutCubic;
 
 class YaruCarousel extends StatefulWidget {
-  const YaruCarousel(
-      {Key? key,
-      this.height = 500,
-      this.width = 500,
-      required this.children,
-      this.initialIndex = 0,
-      this.autoScroll = false,
-      this.autoScrollDuration = const Duration(seconds: 1),
-      this.placeIndicator = true,
-      this.viewportFraction = 0.8})
-      : super(key: key);
+  const YaruCarousel({
+    Key? key,
+    this.height = 500,
+    this.width = 500,
+    required this.children,
+    this.initialIndex = 0,
+    this.autoScroll = false,
+    this.autoScrollDuration = const Duration(seconds: 1),
+    this.placeIndicator = true,
+    this.viewportFraction = 0.8,
+    this.margin = const EdgeInsets.all(10),
+  }) : super(key: key);
 
   /// The height of the children, defaults to 500.0.
   final double height;
@@ -43,6 +44,9 @@ class YaruCarousel extends StatefulWidget {
 
   /// The fraction of the viewport that each page should occupy.
   final double viewportFraction;
+
+  /// Optionally change the margin around the carousel.
+  final EdgeInsets margin;
 
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
@@ -116,7 +120,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
           duration: _kAnimationDuration,
           curve: _kAnimationCurve,
           child: Container(
-            margin: const EdgeInsets.all(10),
+            margin: widget.margin,
             child: _index == index - 1 || _index == index + 1
                 ? GestureDetector(
                     behavior: HitTestBehavior.opaque,
