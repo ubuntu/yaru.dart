@@ -20,6 +20,9 @@ class YaruNarrowLayout extends StatefulWidget {
   /// Optional bool to hide unselected labels in the [BottomNavigationBar]
   final bool? showUnselectedLabels;
 
+  /// Optionally control the click behavior of the [BottomNavigationBar]
+  final BottomNavigationBarType bottomNavigationBarType;
+
   const YaruNarrowLayout({
     Key? key,
     required this.pageItems,
@@ -27,6 +30,7 @@ class YaruNarrowLayout extends StatefulWidget {
     required this.onSelected,
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
+    this.bottomNavigationBarType = BottomNavigationBarType.fixed,
   }) : super(key: key);
 
   @override
@@ -53,6 +57,7 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
             child: widget.pageItems[_selectedIndex].builder(context),
           ),
           BottomNavigationBar(
+            type: widget.bottomNavigationBarType,
             showSelectedLabels: widget.showSelectedLabels,
             showUnselectedLabels: widget.showUnselectedLabels,
             items: widget.pageItems
