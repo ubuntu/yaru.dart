@@ -5,18 +5,18 @@ const _kAnimationDuration = Duration(milliseconds: 500);
 const _kAnimationCurve = Curves.easeInOutCubic;
 
 class YaruCarousel extends StatefulWidget {
-  const YaruCarousel(
-      {Key? key,
-      this.height = 500,
-      this.width = 500,
-      required this.children,
-      this.initialIndex = 0,
-      this.autoScroll = false,
-      this.autoScrollDuration = const Duration(seconds: 1),
-      this.placeIndicator = true,
-      this.placeIndicatorMarginTop = 12.0,
-      this.viewportFraction = 0.8})
-      : super(key: key);
+  const YaruCarousel({
+    Key? key,
+    this.height = 500,
+    this.width = 500,
+    required this.children,
+    this.initialIndex = 0,
+    this.autoScroll = false,
+    this.autoScrollDuration = const Duration(seconds: 1),
+    this.placeIndicator = true,
+    this.placeIndicatorMarginTop = 12.0,
+    this.viewportFraction = 0.8,
+  }) : super(key: key);
 
   /// The height of the children, defaults to 500.0.
   final double height;
