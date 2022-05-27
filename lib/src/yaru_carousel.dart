@@ -181,7 +181,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
               decoration: BoxDecoration(
                   color: _index == index
                       ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                      : Theme.of(context).colorScheme.onSurface.withOpacity(.3),
                   shape: BoxShape.circle),
             ),
           ),
