@@ -15,6 +15,9 @@ import 'package:yaru_widgets_example/pages/toggle_buttons_row_page.dart';
 import 'package:yaru_widgets_example/widgets/option_button_list.dart';
 import 'package:yaru_widgets_example/widgets/row_list.dart';
 
+const _lorem =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
 final examplePageItems = <YaruPageItem>[
   YaruPageItem(
     titleBuilder: (context) => Text('YaruRow'),
@@ -140,5 +143,34 @@ final examplePageItems = <YaruPageItem>[
     titleBuilder: (context) => Text('YaruColorDisk'),
     builder: (context) => ColorDiskPage(),
     iconData: YaruIcons.color_select,
-  )
+  ),
+  YaruPageItem(
+    titleBuilder: (context) => Text('YaruExpandableText'),
+    iconData: YaruIcons.pan_down,
+    builder: (_) => YaruPage(
+      children: [
+        YaruExpandable(
+          child: Text(_lorem),
+          header: Text(
+            'Lorem ipsum dolor sit amet',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          expandIcon: Icon(YaruIcons.pan_end),
+        ),
+        YaruExpandable(
+          collapsedChild: Text(
+            _lorem,
+            maxLines: 5,
+            overflow: TextOverflow.fade,
+          ),
+          child: Text(_lorem),
+          header: Text(
+            'Lorem ipsum dolor sit amet',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          expandIcon: Icon(YaruIcons.pan_end),
+        )
+      ],
+    ),
+  ),
 ];
