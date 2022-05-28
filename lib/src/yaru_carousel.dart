@@ -16,6 +16,9 @@ class YaruCarousel extends StatefulWidget {
     this.placeIndicator = true,
     this.placeIndicatorMarginTop = 12.0,
     this.viewportFraction = 0.8,
+    this.navigationControls = false,
+    this.previousIcon,
+    this.nextIcon,
   }) : super(key: key);
 
   /// The height of the children, defaults to 500.0.
@@ -48,6 +51,17 @@ class YaruCarousel extends StatefulWidget {
   /// The fraction of the viewport that each page should occupy.
   final double viewportFraction;
 
+  /// Display previous and next navigation buttons
+  final bool navigationControls;
+
+  /// Icon used for the previous button
+  /// Require [navigationControls] to be true
+  final Widget? previousIcon;
+
+  /// Icon used for the next button
+  /// Require [navigationControls] to be true
+  final Widget? nextIcon;
+
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
 }
@@ -67,9 +81,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
       initialPage: _index,
     );
 
-    if (widget.autoScroll) {
-      _startTimer();
-    }
+    _startTimer();
   }
 
   @override
@@ -84,10 +96,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   @override
   void dispose() {
     super.dispose();
-
-    if (widget.autoScroll) {
-      _cancelTimer();
-    }
+    _cancelTimer();
   }
 
   @override
@@ -111,8 +120,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   }
 
   Widget _buildCarousel() {
-    return Expanded(
-        child: PageView.builder(
+    final carousel = PageView.builder(
       itemCount: widget.children.length,
       pageSnapping: true,
       controller: _pageController,
@@ -137,6 +145,39 @@ class _YaruCarouselState extends State<YaruCarousel> {
               : widget.children[index],
         ),
       ),
+    );
+
+    if (widget.navigationControls) {
+      return Expanded(
+          child: Stack(
+        children: [
+          carousel,
+          _buildNavigationButton(
+              Alignment.centerLeft,
+              _isFirstPage() ? null : () => _animateToPreviousPage(),
+              widget.previousIcon ?? const Icon(Icons.arrow_back)),
+          _buildNavigationButton(
+              Alignment.centerRight,
+              _isLastPage() ? null : () => _animateToNextPage(),
+              widget.nextIcon ?? const Icon(Icons.arrow_forward)),
+        ],
+      ));
+    }
+
+    return Expanded(child: carousel);
+  }
+
+  Widget _buildNavigationButton(
+      AlignmentGeometry alignement, VoidCallback? onPressed, Widget icon) {
+    return Positioned.fill(
+        child: Align(
+      alignment: alignement,
+      child: OutlinedButton(
+          style: OutlinedButton.styleFrom(
+              shape: const CircleBorder(),
+              backgroundColor: Theme.of(context).colorScheme.background),
+          onPressed: onPressed,
+          child: icon),
     ));
   }
 
@@ -198,6 +239,14 @@ class _YaruCarouselState extends State<YaruCarousel> {
     );
   }
 
+  bool _isFirstPage() {
+    return _index == 0;
+  }
+
+  bool _isLastPage() {
+    return _index == widget.children.length - 1;
+  }
+
   void _animateToPage(int pageIndex) {
     _pageController.animateToPage(
       pageIndex,
@@ -205,19 +254,43 @@ class _YaruCarouselState extends State<YaruCarousel> {
       curve: _kAnimationCurve,
     );
 
-    if (widget.autoScroll) {
-      _cancelTimer();
-      _startTimer();
-    }
+    _restartTimer();
+  }
+
+  void _animateToPreviousPage() {
+    _pageController.previousPage(
+      duration: _kAnimationDuration,
+      curve: _kAnimationCurve,
+    );
+
+    _restartTimer();
+  }
+
+  void _animateToNextPage() {
+    _pageController.nextPage(
+      duration: _kAnimationDuration,
+      curve: _kAnimationCurve,
+    );
+
+    _restartTimer();
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(widget.autoScrollDuration, (timer) {
-      _animateToPage(_index >= widget.children.length ? 0 : _index++);
-    });
+    if (widget.autoScroll) {
+      _timer = Timer.periodic(widget.autoScrollDuration, (timer) {
+        _animateToPage(_index >= widget.children.length ? 0 : _index++);
+      });
+    }
   }
 
   void _cancelTimer() {
-    _timer.cancel();
+    if (widget.autoScroll) {
+      _timer.cancel();
+    }
+  }
+
+  void _restartTimer() {
+    _cancelTimer();
+    _startTimer();
   }
 }
