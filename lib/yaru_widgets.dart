@@ -8,6 +8,7 @@ export 'src/yaru_color_disk.dart';
 export 'src/yaru_color_picker_button.dart';
 export 'src/yaru_compact_layout.dart';
 export 'src/yaru_dialog_title.dart';
+export 'src/yaru_expandable.dart';
 export 'src/yaru_expansion_panel_list.dart';
 export 'src/yaru_extra_option_row.dart';
 export 'src/yaru_progress_indicator.dart';
