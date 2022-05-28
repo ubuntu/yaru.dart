@@ -19,6 +19,9 @@ class _CarouselPageState extends State<CarouselPage> {
         YaruCarousel(
           children: _getCarouselChildren(),
           height: 400,
+          navigationControls: true,
+          previousIcon: Icon(YaruIcons.go_previous),
+          nextIcon: Icon(YaruIcons.go_next),
         ),
       ]),
       YaruSection(headline: 'Auto scroll: on', width: 700, children: [
