@@ -17,6 +17,7 @@ export 'src/yaru_narrow_layout.dart';
 export 'src/yaru_option_button.dart';
 export 'src/yaru_page.dart';
 export 'src/yaru_page_item.dart';
+export 'src/yaru_round_toggle_button.dart';
 export 'src/yaru_row.dart';
 export 'src/yaru_search_app_bar.dart';
 export 'src/yaru_section.dart';
