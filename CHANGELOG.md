@@ -1,5 +1,21 @@
 # Changelog
 
+# 1.0.13
+
+- [Paul Kepinski](https://github.com/Jupi007)
+  - Add new YaruExpandable widget (#140)
+  - YaruCarousel: add navigation controls (#139)
+  - YaruCarousel: use grey for unselected dots (#138)
+  - YaruCarousel: many improvements (#137)
+  - YaruCarousel: fix text indicator (#133)
+  - Add viewportFraction option to YaruCarousel (#132)
+  - YaruCarousel: use size transform animation (#131)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - Add YaruRoundToggleButton (#141)
+  - NarrowLayout: Use Text.data for item label (#136)
+  - YaruCarousel: option to change margin (#135)
+  - Compact /NarrowLayout: control bottom nav behavior (#134)
+
 # 1.0.12
 
 - [Paul Kepinski](https://github.com/Jupi007)
