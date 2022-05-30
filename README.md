@@ -4,7 +4,7 @@
 
 Common flutter widgets useful for building desktop and web applications.
 
-![screenshot_dark](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/.github/images/screenshot_dark.png)
+![screenshot](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/.github/images/screenshot.png)
 
 ## What is this?
 
