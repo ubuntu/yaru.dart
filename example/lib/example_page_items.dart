@@ -175,7 +175,64 @@ final examplePageItems = <YaruPageItem>[
     ),
   ),
   YaruPageItem(
-      titleBuilder: (context) => Text('YaruRoundToggleButton'),
-      builder: (context) => RoundToggleButtonPage(),
-      iconData: YaruIcons.app_grid)
+    titleBuilder: (context) => Text('YaruRoundToggleButton'),
+    builder: (context) => RoundToggleButtonPage(),
+    iconData: YaruIcons.app_grid,
+  ),
+  YaruPageItem(
+    titleBuilder: (context) => Text('YaruDraggable'),
+    builder: (context) => YaruPage(children: [
+      Container(
+        color: Theme.of(context).colorScheme.onSurface.withOpacity(.1),
+        child: SizedBox(
+          width: 500,
+          height: 250,
+          child: Stack(
+            children: [
+              YaruDraggable(
+                initialPosition: Offset(0, 0),
+                onDragUpdate: (currentPosition, nextPosition) {
+                  double dx = nextPosition.dx;
+                  double dy = nextPosition.dy;
+
+                  if (dx < 0) dx = 0;
+                  if (dy < 0) dy = 0;
+                  if (dx > 500 - 192) dx = 500 - 192;
+                  if (dy > 250 - 108) dy = 250 - 108;
+
+                  return Offset(dx, dy);
+                },
+                childBuilder: (context, position, isDragging, isHovering) =>
+                    SizedBox(
+                  width: 192,
+                  height: 108,
+                  child: AnimatedOpacity(
+                    opacity: isDragging ? 1 : .85,
+                    duration: Duration(milliseconds: 100),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(top: BorderSide(width: 10)),
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          position.toString(),
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                cursor: SystemMouseCursors.grab,
+                dragCursor: SystemMouseCursors.grabbing,
+              ),
+            ],
+          ),
+        ),
+      )
+    ]),
+    iconData: YaruIcons.drag_handle,
+  ),
 ];
