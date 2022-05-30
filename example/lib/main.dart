@@ -27,7 +27,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final _filteredItems = <YaruPageItem>[];
   final _searchController = TextEditingController();
-  bool compact = true;
+  bool _compactMode = false;
 
   void _onEscape() => setState(() {
         _filteredItems.clear();
@@ -50,8 +50,8 @@ class _HomeState extends State<Home> {
       builder: (_) => YaruPage(children: [
         YaruSwitchRow(
           trailingWidget: Text('Compact mode'),
-          value: compact,
-          onChanged: (v) => setState(() => compact = v),
+          value: _compactMode,
+          onChanged: (v) => setState(() => _compactMode = v),
         )
       ]),
       iconData: YaruIcons.settings,
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
       debugShowCheckedModeBanner: false,
       theme: context.watch<LightTheme>().value,
       darkTheme: context.watch<DarkTheme>().value,
-      home: compact
+      home: _compactMode
           ? YaruCompactLayout(
               pageItems: [configItem] + examplePageItems,
               showSelectedLabels: false,
