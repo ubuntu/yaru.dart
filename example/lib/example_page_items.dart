@@ -5,6 +5,7 @@ import 'package:yaru_widgets_example/pages/carousel_page.dart';
 import 'package:yaru_widgets_example/pages/check_box_row_page.dart';
 import 'package:yaru_widgets_example/pages/color_disk_page.dart';
 import 'package:yaru_widgets_example/pages/color_picker_page.dart';
+import 'package:yaru_widgets_example/pages/draggable_page.dart';
 import 'package:yaru_widgets_example/pages/extra_option_row_page.dart';
 import 'package:yaru_widgets_example/pages/round_toggle_button_page.dart';
 import 'package:yaru_widgets_example/pages/section_page.dart';
@@ -175,7 +176,13 @@ final examplePageItems = <YaruPageItem>[
     ),
   ),
   YaruPageItem(
-      titleBuilder: (context) => Text('YaruRoundToggleButton'),
-      builder: (context) => RoundToggleButtonPage(),
-      iconData: YaruIcons.app_grid)
+    titleBuilder: (context) => Text('YaruRoundToggleButton'),
+    builder: (context) => RoundToggleButtonPage(),
+    iconData: YaruIcons.app_grid,
+  ),
+  YaruPageItem(
+    titleBuilder: (context) => Text('YaruDraggable'),
+    builder: (context) => DraggablePage(),
+    iconData: YaruIcons.drag_handle,
+  ),
 ];
