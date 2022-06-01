@@ -19,6 +19,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
+@immutable
+class YaruIconsData extends IconData {
+  const YaruIconsData(int codePoint)
+      : super(
+          codePoint,
+          fontFamily: 'YaruIcons',
+          fontPackage: 'yaru_icons',
+        );
+}
+
 class YaruIconsGrid extends StatefulWidget {
   const YaruIconsGrid({Key? key}) : super(key: key);
 
@@ -31,7 +41,7 @@ class _YaruIconsGridState extends State<YaruIconsGrid>
   late AnimationController _controller;
 
   static const _from = 0xf101;
-  static const _to = 0xf2bc;
+  static const _to = 0xf2bd;
 
   double _iconsSize = 24;
   bool _isMinIconsSize() => _iconsSize <= 16 ? true : false;

@@ -134,6 +134,7 @@ Icon preview | Icon name | Usage
 ![error_filled](../icons/error-filled.svg) | error filled | `YaruIcons.error_filled`
 ![error](../icons/error.svg) | error | `YaruIcons.error`
 ![executable](../icons/executable.svg) | executable | `YaruIcons.executable`
+![external_link](../icons/external-link.svg) | external link | `YaruIcons.external_link`
 ![find_location_filled](../icons/find-location-filled.svg) | find location filled | `YaruIcons.find_location_filled`
 ![find_location](../icons/find-location.svg) | find location | `YaruIcons.find_location`
 ![find_replace](../icons/find-replace.svg) | find replace | `YaruIcons.find_replace`
