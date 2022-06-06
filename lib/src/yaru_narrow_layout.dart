@@ -63,10 +63,14 @@ class _YaruNarrowLayoutState extends State<YaruNarrowLayout> {
             items: widget.pageItems
                 .map(
                   (pageItem) => BottomNavigationBarItem(
-                      icon: Icon(pageItem.iconData),
-                      activeIcon: pageItem.selectedIconData != null
-                          ? Icon(pageItem.selectedIconData)
+                      icon: pageItem.itemWidget != null
+                          ? pageItem.itemWidget!
                           : Icon(pageItem.iconData),
+                      activeIcon: pageItem.selectedItemWidget != null
+                          ? pageItem.selectedItemWidget!
+                          : (pageItem.selectedIconData != null
+                              ? Icon(pageItem.selectedIconData)
+                              : Icon(pageItem.iconData)),
                       label: convertWidgetToString(
                           pageItem.titleBuilder(context))),
                 )
