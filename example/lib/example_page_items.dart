@@ -22,10 +22,13 @@ const _lorem =
 
 final examplePageItems = <YaruPageItem>[
   YaruPageItem(
-    titleBuilder: (context) => Text('YaruRow'),
-    iconData: YaruIcons.format_unordered_list,
-    builder: (_) => YaruPage(children: [RowList()]),
-  ),
+      titleBuilder: (context) => Text('YaruRow'),
+      iconData: YaruIcons.format_unordered_list,
+      builder: (_) => YaruPage(children: [RowList()]),
+      itemWidget: SizedBox(
+        height: 20,
+        child: YaruCircularProgressIndicator(strokeWidth: 2),
+      )),
   YaruPageItem(
     titleBuilder: (context) => Text('YaruExtraOptionRow'),
     iconData: YaruIcons.settings_filled,

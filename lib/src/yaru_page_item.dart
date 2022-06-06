@@ -7,10 +7,14 @@ class YaruPageItem {
     required this.iconData,
     this.selectedIconData,
     this.searchMatches,
+    this.itemWidget,
+    this.selectedItemWidget,
   });
   final WidgetBuilder titleBuilder;
   final WidgetBuilder builder;
   final IconData iconData;
+  final Widget? itemWidget;
+  final Widget? selectedItemWidget;
   final IconData? selectedIconData;
   final bool Function(String value, BuildContext context)? searchMatches;
 }
