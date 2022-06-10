@@ -163,6 +163,7 @@ final examplePageItems = <YaruPageItem>[
           expandIcon: Icon(YaruIcons.pan_end),
         ),
         YaruExpandable(
+          isExpanded: true,
           collapsedChild: Text(
             _lorem,
             maxLines: 5,

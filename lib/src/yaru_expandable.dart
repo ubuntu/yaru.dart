@@ -10,6 +10,7 @@ class YaruExpandable extends StatefulWidget {
     this.expandIcon,
     required this.child,
     this.collapsedChild,
+    this.isExpanded = false,
   }) : super(key: key);
 
   /// Widget placed in the header, against the expand button
@@ -26,12 +27,21 @@ class YaruExpandable extends StatefulWidget {
   /// Widget show when collapsed
   final Widget? collapsedChild;
 
+  /// Optional initial value.
+  final bool isExpanded;
+
   @override
   State<YaruExpandable> createState() => _YaruExpandableState();
 }
 
 class _YaruExpandableState extends State<YaruExpandable> {
-  bool isExpanded = false;
+  late bool _isExpanded;
+
+  @override
+  void initState() {
+    _isExpanded = widget.isExpanded;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +51,13 @@ class _YaruExpandableState extends State<YaruExpandable> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
-                onTap: () => setState(() => isExpanded = !isExpanded),
+                onTap: () => setState(() => _isExpanded = !_isExpanded),
                 child: widget.header),
             IconButton(
                 splashRadius: 20,
-                onPressed: () => setState(() => isExpanded = !isExpanded),
+                onPressed: () => setState(() => _isExpanded = !_isExpanded),
                 icon: AnimatedRotation(
-                    turns: isExpanded ? .25 : 0,
+                    turns: _isExpanded ? .25 : 0,
                     duration: _kAnimationDuration,
                     curve: _kAnimationCurve,
                     child: widget.expandIcon ?? const Icon(Icons.arrow_right))),
@@ -56,7 +66,7 @@ class _YaruExpandableState extends State<YaruExpandable> {
         AnimatedCrossFade(
             firstChild: widget.child,
             secondChild: widget.collapsedChild ?? Container(),
-            crossFadeState: isExpanded
+            crossFadeState: _isExpanded
                 ? CrossFadeState.showFirst
                 : CrossFadeState.showSecond,
             sizeCurve: _kAnimationCurve,
