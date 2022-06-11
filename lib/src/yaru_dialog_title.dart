@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/constants.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 /// A [Stack] of a [Text] with given [title] and an [IconButton]
 /// which pops the top-most route off the navigator
@@ -72,17 +73,10 @@ class YaruDialogTitle extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(5.0),
-          child: SizedBox(
-            height: 30,
-            width: 30,
-            child: Material(
-              borderRadius: BorderRadius.circular(20),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(20),
-                onTap: onPressed ?? () => Navigator.pop(context),
-                child: Icon(closeIconData ?? Icons.close),
-              ),
-            ),
+          child: YaruRoundIconButton(
+            size: 34,
+            onTap: onPressed ?? () => Navigator.pop(context),
+            child: Icon(closeIconData ?? Icons.close),
           ),
         )
       ],
