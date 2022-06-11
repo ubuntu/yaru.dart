@@ -70,11 +70,21 @@ class YaruDialogTitle extends StatelessWidget {
             ],
           ),
         ),
-        IconButton(
-            visualDensity: VisualDensity.compact,
-            onPressed: onPressed ?? () => Navigator.pop(context),
-            splashRadius: 16,
-            icon: Icon(closeIconData ?? Icons.close))
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: SizedBox(
+            height: 30,
+            width: 30,
+            child: Material(
+              borderRadius: BorderRadius.circular(20),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(20),
+                onTap: onPressed ?? () => Navigator.pop(context),
+                child: Icon(closeIconData ?? Icons.close),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
