@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/src/yaru_round_icon_button.dart';
 
 /// A selectable [IconButton], wrapped in a [CircleAvatar]
 class YaruRoundToggleButton extends StatelessWidget {
@@ -11,7 +12,7 @@ class YaruRoundToggleButton extends StatelessWidget {
   /// Optional onPressed callback to select the button
   final Function()? onPressed;
 
-  /// Optional tooltip
+  /// Tooltip
   final String? tooltip;
 
   const YaruRoundToggleButton({
@@ -19,30 +20,21 @@ class YaruRoundToggleButton extends StatelessWidget {
     required this.selected,
     required this.iconData,
     this.onPressed,
-    this.tooltip,
+    required this.tooltip,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      width: 40,
-      child: Material(
-        color: selected
-            ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
-            : null,
-        borderRadius: BorderRadius.circular(20),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: onPressed,
-          child: Icon(
-            iconData,
-            color: selected
-                ? Theme.of(context).primaryColor
-                : Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
-          ),
-        ),
-      ),
+    return YaruRoundIconButton(
+      onTap: onPressed,
+      tooltip: tooltip,
+      iconData: iconData,
+      backgroundColor: selected
+          ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
+          : null,
+      iconColor: selected
+          ? Theme.of(context).primaryColor
+          : Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
     );
   }
 }
