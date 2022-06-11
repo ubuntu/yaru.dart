@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 /// Creates a search bar inside an [AppBar].
 ///
@@ -101,10 +102,9 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                   BoxConstraints.expand(width: 48, height: appBarHeight),
               suffixIcon: Padding(
                 padding: const EdgeInsets.only(right: 6, bottom: 3),
-                child: IconButton(
-                  splashRadius: appBarHeight / 3,
-                  onPressed: onEscape,
-                  icon: Icon(
+                child: YaruRoundIconButton(
+                  onTap: onEscape,
+                  child: Icon(
                     clearSearchIconData ?? Icons.close,
                     color: textColor,
                   ),
