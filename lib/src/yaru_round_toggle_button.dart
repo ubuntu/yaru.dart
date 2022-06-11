@@ -28,13 +28,15 @@ class YaruRoundToggleButton extends StatelessWidget {
     return YaruRoundIconButton(
       onTap: onPressed,
       tooltip: tooltip,
-      iconData: iconData,
+      child: Icon(
+        iconData,
+        color: selected
+            ? Theme.of(context).primaryColor
+            : Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+      ),
       backgroundColor: selected
           ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
           : null,
-      iconColor: selected
-          ? Theme.of(context).primaryColor
-          : Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
     );
   }
 }

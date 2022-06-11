@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 const _kAnimationDuration = Duration(milliseconds: 250);
 const _kAnimationCurve = Curves.easeInOutCubic;
@@ -53,14 +54,16 @@ class _YaruExpandableState extends State<YaruExpandable> {
             GestureDetector(
                 onTap: () => setState(() => _isExpanded = !_isExpanded),
                 child: widget.header),
-            IconButton(
-                splashRadius: 20,
-                onPressed: () => setState(() => _isExpanded = !_isExpanded),
-                icon: AnimatedRotation(
-                    turns: _isExpanded ? .25 : 0,
-                    duration: _kAnimationDuration,
-                    curve: _kAnimationCurve,
-                    child: widget.expandIcon ?? const Icon(Icons.arrow_right))),
+            YaruRoundIconButton(
+              size: 32,
+              onTap: () => setState(() => _isExpanded = !_isExpanded),
+              child: AnimatedRotation(
+                turns: _isExpanded ? .25 : 0,
+                duration: _kAnimationDuration,
+                curve: _kAnimationCurve,
+                child: widget.expandIcon ?? const Icon(Icons.arrow_right),
+              ),
+            ),
           ],
         ),
         AnimatedCrossFade(

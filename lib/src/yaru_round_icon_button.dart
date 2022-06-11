@@ -5,9 +5,9 @@ class YaruRoundIconButton extends StatelessWidget {
     super.key,
     this.backgroundColor,
     this.onTap,
-    required this.iconData,
-    this.iconColor,
-    required this.tooltip,
+    this.tooltip,
+    required this.child,
+    this.size = 40,
   });
 
   /// The [Color] used for the round background.
@@ -16,32 +16,28 @@ class YaruRoundIconButton extends StatelessWidget {
   /// Optional onTap callback to select the button
   final Function()? onTap;
 
-  /// The [IconData] for the [Icon]
-  final IconData iconData;
-
-  /// The [Color] of the [Icon]
-  final Color? iconColor;
-
   /// String shown in the [Tooltip]
   final String? tooltip;
+
+  ///
+  final Widget child;
+
+  final double size;
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
       message: tooltip ?? '',
       child: SizedBox(
-        height: 40,
-        width: 40,
+        height: size,
+        width: size,
         child: Material(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(size / 2),
           child: InkWell(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(size / 2),
             onTap: onTap,
-            child: Icon(
-              iconData,
-              color: iconColor,
-            ),
+            child: child,
           ),
         ),
       ),
