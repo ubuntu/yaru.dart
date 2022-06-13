@@ -12,6 +12,7 @@ class YaruExpandable extends StatefulWidget {
     required this.child,
     this.collapsedChild,
     this.isExpanded = false,
+    this.onChange,
   }) : super(key: key);
 
   /// Widget placed in the header, against the expand button
@@ -30,6 +31,11 @@ class YaruExpandable extends StatefulWidget {
 
   /// Optional initial value.
   final bool isExpanded;
+
+  /// Callback called on expand or collapse
+  final void Function(
+    bool isExpanded,
+  )? onChange;
 
   @override
   State<YaruExpandable> createState() => _YaruExpandableState();
@@ -51,12 +57,10 @@ class _YaruExpandableState extends State<YaruExpandable> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GestureDetector(
-                onTap: () => setState(() => _isExpanded = !_isExpanded),
-                child: widget.header),
+            GestureDetector(onTap: () => _onTap(), child: widget.header),
             YaruRoundIconButton(
               size: 32,
-              onTap: () => setState(() => _isExpanded = !_isExpanded),
+              onTap: () => _onTap(),
               child: AnimatedRotation(
                 turns: _isExpanded ? .25 : 0,
                 duration: _kAnimationDuration,
@@ -76,5 +80,13 @@ class _YaruExpandableState extends State<YaruExpandable> {
             duration: _kAnimationDuration)
       ],
     );
+  }
+
+  void _onTap() {
+    setState(() => _isExpanded = !_isExpanded);
+
+    if (widget.onChange != null) {
+      widget.onChange!(_isExpanded);
+    }
   }
 }
