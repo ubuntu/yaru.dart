@@ -1,5 +1,21 @@
 # Changelog
 
+# 1.1.0
+
+- [Paul Kepinski](https://github.com/Jupi007)
+  - YaruExpandable: add onChange callback (#149)
+  - Introduce YaruDraggable widget (#142)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - NarrowLayout: fix item widget if selected (#153)
+  - YaruExpandable: increase button size (#151)
+  - YaruExpansionPanel: use Object.hash (#150)
+  - WideLayout: fallback to itemWIdget (#148)
+  - YaruDialogTitle: use YaruRoundIconButton (#147)
+  - Add YaruRoundIconButton and get rid of IconButtons (#146)
+  - YaruDialogTitle: fix for material3 (#145)
+  - YaruExpandable: add optional isExpanded parameter (#144)
+  - YaruCompactLayout: Allow optional Widgets as Icons (#143)
+
 # 1.0.13
 
 - [Paul Kepinski](https://github.com/Jupi007)
