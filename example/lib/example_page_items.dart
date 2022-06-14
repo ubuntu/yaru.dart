@@ -150,7 +150,7 @@ final examplePageItems = <YaruPageItem>[
     iconData: YaruIcons.color_select,
   ),
   YaruPageItem(
-    titleBuilder: (context) => Text('YaruExpandableText'),
+    titleBuilder: (context) => Text('YaruExpandable'),
     iconData: YaruIcons.pan_down,
     builder: (_) => YaruPage(
       children: [
