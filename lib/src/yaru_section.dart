@@ -10,6 +10,7 @@ class YaruSection extends StatelessWidget {
     required this.children,
     this.width,
     this.headerWidget,
+    this.padding = const EdgeInsets.only(bottom: 20.0),
   }) : super(key: key);
 
   /// Text that is placed above the list of `children`.
@@ -29,10 +30,13 @@ class YaruSection extends StatelessWidget {
   /// with [mainAxisAlignment] as [MainAxisAlignment.spaceBetween].
   final Widget? headerWidget;
 
+  /// The padding [EdgeInsets] which defaults to `EdgeInsets.only(bottom: 20.0)`.
+  final EdgeInsets padding;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
+      padding: padding,
       child: SizedBox(
           width: width,
           child: Container(

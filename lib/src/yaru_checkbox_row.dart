@@ -8,6 +8,13 @@ class YaruCheckboxRow extends StatelessWidget {
     required this.value,
     required this.onChanged,
     required this.text,
+    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
+    this.mainAxisSize = MainAxisSize.max,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.verticalDirection = VerticalDirection.down,
+    this.textDirection,
+    this.textBaseline,
+    this.spaceSizedBox = const SizedBox(width: 4),
   }) : super(key: key);
 
   /// Whether or not we can interact with the checkbox
@@ -38,15 +45,42 @@ class YaruCheckboxRow extends StatelessWidget {
   /// Specifies the  name of checkBox
   final String text;
 
+  /// The [MainAxisAlignment] which defaults to [MainAxisAlignment.spaceBetween].
+  final MainAxisAlignment mainAxisAlignment;
+
+  /// The [MainAxisSize] which defaults to [MainAxisSize.max].
+  final MainAxisSize mainAxisSize;
+
+  /// The [CrossAxisAlignment] which defaults to [CrossAxisAlignment.center].
+  final CrossAxisAlignment crossAxisAlignment;
+
+  /// The optional [TextDirection].
+  final TextDirection? textDirection;
+
+  /// The [VerticalDirection] which defaults to [VerticalDirection.down].
+  final VerticalDirection verticalDirection;
+
+  /// The optional [TextBaseline].
+  final TextBaseline? textBaseline;
+
+  /// The [SizexBox] between the [CheckBox] and the [Text].
+  final SizedBox spaceSizedBox;
+
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: mainAxisAlignment,
+      mainAxisSize: mainAxisSize,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection,
+      verticalDirection: verticalDirection,
+      textBaseline: textBaseline,
       children: [
         Checkbox(
           value: value,
           onChanged: enabled ? onChanged : null,
         ),
-        const SizedBox(width: 4),
+        spaceSizedBox,
         Expanded(
           child: Text(
             text,
