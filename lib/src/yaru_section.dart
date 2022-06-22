@@ -38,40 +38,42 @@ class YaruSection extends StatelessWidget {
     return Padding(
       padding: padding,
       child: SizedBox(
-          width: width,
-          child: Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color:
-                      Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
-                ),
-                borderRadius: const BorderRadius.all(
-                    Radius.circular(kDefaultContainerRadius)),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(headline != null ? 8.0 : 0),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          if (headline != null)
-                            Text(
-                              headline!,
-                              style: Theme.of(context).textTheme.headline6,
-                              textAlign: TextAlign.left,
-                            ),
-                          headerWidget ?? const SizedBox()
-                        ],
-                      ),
-                    ),
+        width: width,
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
+            ),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(kDefaultContainerRadius),
+            ),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(headline != null ? 8.0 : 0),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (headline != null)
+                        Text(
+                          headline!,
+                          style: Theme.of(context).textTheme.headline6,
+                          textAlign: TextAlign.left,
+                        ),
+                      headerWidget ?? const SizedBox()
+                    ],
                   ),
-                  Column(children: children)
-                ],
-              ))),
+                ),
+              ),
+              Column(children: children)
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

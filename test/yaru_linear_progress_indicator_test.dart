@@ -5,16 +5,18 @@ import 'package:yaru_widgets/src/yaru_progress_indicator.dart';
 void main() {
   testWidgets('- YaruLinearProgressIndicator Test',
       (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: YaruLinearProgressIndicator(
-          value: 0.5,
-          color: Colors.redAccent,
-          semanticsLabel: "Semantic Label",
-          semanticsValue: "Semantic Value",
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: YaruLinearProgressIndicator(
+            value: 0.5,
+            color: Colors.redAccent,
+            semanticsLabel: 'Semantic Label',
+            semanticsValue: 'Semantic Value',
+          ),
         ),
       ),
-    ));
+    );
 
     final linearProgressIndicatorFinder = find.byWidgetPredicate(
       (widget) => widget is YaruLinearProgressIndicator && widget.value == 0.5,
@@ -22,12 +24,12 @@ void main() {
     final semanticValueFinder = find.byWidgetPredicate(
       (widget) =>
           widget is YaruLinearProgressIndicator &&
-          widget.semanticsValue == "Semantic Value",
+          widget.semanticsValue == 'Semantic Value',
     );
     final semanticLabelFinder = find.byWidgetPredicate(
       (widget) =>
           widget is YaruLinearProgressIndicator &&
-          widget.semanticsLabel == "Semantic Label",
+          widget.semanticsLabel == 'Semantic Label',
     );
     expect(find.byType(YaruLinearProgressIndicator), findsOneWidget);
     expect(linearProgressIndicatorFinder, findsOneWidget);

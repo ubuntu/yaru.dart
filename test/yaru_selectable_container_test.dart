@@ -9,20 +9,28 @@ void main() {
   testWidgets('- YaruImageTile Test', (WidgetTester tester) async {
     bool selected = false;
 
-    await tester.pumpWidget(MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.red),
-      home: Scaffold(
-        body: YaruSelectableContainer(
-          selected: true,
-          child: kIsWeb
-              ? Image.network('assets/ubuntuhero.jpg',
-                  filterQuality: FilterQuality.low, fit: BoxFit.fill)
-              : Image.file(File('assets/ubuntuhero.jpg'),
-                  filterQuality: FilterQuality.low, fit: BoxFit.fill),
-          onTap: () => selected = !selected,
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.red),
+        home: Scaffold(
+          body: YaruSelectableContainer(
+            selected: true,
+            child: kIsWeb
+                ? Image.network(
+                    'assets/ubuntuhero.jpg',
+                    filterQuality: FilterQuality.low,
+                    fit: BoxFit.fill,
+                  )
+                : Image.file(
+                    File('assets/ubuntuhero.jpg'),
+                    filterQuality: FilterQuality.low,
+                    fit: BoxFit.fill,
+                  ),
+            onTap: () => selected = !selected,
+          ),
         ),
       ),
-    ));
+    );
 
     expect(find.byType(YaruSelectableContainer), findsOneWidget);
   });

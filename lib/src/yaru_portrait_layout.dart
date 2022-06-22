@@ -91,9 +91,10 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                 return Scaffold(
                   appBar: widget.appBar,
                   body: YaruPageItemListView(
-                      selectedIndex: _selectedIndex,
-                      onTap: _onTap,
-                      pages: widget.pageItems),
+                    selectedIndex: _selectedIndex,
+                    onTap: _onTap,
+                    pages: widget.pageItems,
+                  ),
                 );
               },
             ),

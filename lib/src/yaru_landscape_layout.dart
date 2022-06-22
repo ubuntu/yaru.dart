@@ -94,15 +94,17 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                       ),
                     ),
                     child: YaruPageItemListView(
-                        selectedIndex: _selectedIndex,
-                        onTap: _onTap,
-                        pages: widget.pageItems),
+                      selectedIndex: _selectedIndex,
+                      onTap: _onTap,
+                      pages: widget.pageItems,
+                    ),
                   ),
                 ),
                 Expanded(
-                    child: widget.pageItems.length > _selectedIndex
-                        ? widget.pageItems[_selectedIndex].builder(context)
-                        : widget.pageItems[0].builder(context)),
+                  child: widget.pageItems.length > _selectedIndex
+                      ? widget.pageItems[_selectedIndex].builder(context)
+                      : widget.pageItems[0].builder(context),
+                ),
               ],
             ),
           ),

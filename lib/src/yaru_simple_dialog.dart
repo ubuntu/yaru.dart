@@ -62,8 +62,12 @@ class YaruSimpleDialog extends StatelessWidget {
           textAlign: titleTextAlign,
           mainAxisAlignment: MainAxisAlignment.center,
         ),
-        contentPadding: const EdgeInsets.fromLTRB(kDefaultPagePadding,
-            kDefaultPagePadding, kDefaultPagePadding, kDefaultPagePadding),
+        contentPadding: const EdgeInsets.fromLTRB(
+          kDefaultPagePadding,
+          kDefaultPagePadding,
+          kDefaultPagePadding,
+          kDefaultPagePadding,
+        ),
         children: [
           for (var child in children) SizedBox(child: child, width: width)
         ],

@@ -87,8 +87,14 @@ abstract class _YaruProgressIndicator extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(PercentProperty('value', value,
-        showName: false, ifNull: '<indeterminate>'));
+    properties.add(
+      PercentProperty(
+        'value',
+        value,
+        showName: false,
+        ifNull: '<indeterminate>',
+      ),
+    );
   }
 
   Widget _buildSemanticsWrapper({
@@ -121,12 +127,13 @@ class YaruLinearProgressIndicator extends _YaruProgressIndicator {
     String? semanticsValue,
   })  : assert(minHeight > 0),
         super(
-            key: key,
-            value: value,
-            color: color,
-            valueColor: valueColor,
-            semanticsLabel: semanticsLabel,
-            semanticsValue: semanticsValue);
+          key: key,
+          value: value,
+          color: color,
+          valueColor: valueColor,
+          semanticsLabel: semanticsLabel,
+          semanticsValue: semanticsValue,
+        );
 
   /// The minimum height of the line used to draw the linear indicator (default: 6).
   final double minHeight;
@@ -150,9 +157,9 @@ class _YaruLinearProgressIndicatorState
   void initState() {
     super.initState();
     _controller = AnimationController(
-        duration:
-            const Duration(milliseconds: _kIndeterminateAnimationDuration),
-        vsync: this);
+      duration: const Duration(milliseconds: _kIndeterminateAnimationDuration),
+      vsync: this,
+    );
 
     if (widget.value == null) {
       _controller.repeat();
@@ -179,49 +186,59 @@ class _YaruLinearProgressIndicatorState
   Widget build(BuildContext context) {
     if (widget.value != null) {
       return _buildContainer(
-          context,
-          CustomPaint(
-              painter: _DeterminateYaruLinearProgressIndicatorPainter(
-                  widget.value!,
-                  widget._getValueColor(context),
-                  Directionality.of(context))));
+        context,
+        CustomPaint(
+          painter: _DeterminateYaruLinearProgressIndicatorPainter(
+            widget.value!,
+            widget._getValueColor(context),
+            Directionality.of(context),
+          ),
+        ),
+      );
     }
 
     return AnimatedBuilder(
-        animation: _controller,
-        builder: (BuildContext context, Widget? child) {
-          return _buildContainer(
-            context,
-            ClipRRect(
-                borderRadius:
-                    BorderRadius.all(Radius.circular(widget.minHeight)),
-                child: CustomPaint(
-                  painter: _IndeterminateYaruLinearProgressIndicatorPainter(
-                      widget._getValueColor(context),
-                      _positionTween.evaluate(_controller),
-                      _speedTween.evaluate(_controller).abs(),
-                      Directionality.of(context)),
-                )),
-          );
-        });
+      animation: _controller,
+      builder: (BuildContext context, Widget? child) {
+        return _buildContainer(
+          context,
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(widget.minHeight)),
+            child: CustomPaint(
+              painter: _IndeterminateYaruLinearProgressIndicatorPainter(
+                widget._getValueColor(context),
+                _positionTween.evaluate(_controller),
+                _speedTween.evaluate(_controller).abs(),
+                Directionality.of(context),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildContainer(BuildContext context, Widget child) {
     return widget._buildSemanticsWrapper(
-        context: context,
-        child: Container(
-            constraints: BoxConstraints(
-              minWidth: double.infinity,
-              minHeight: widget.minHeight,
-            ),
-            child: child));
+      context: context,
+      child: Container(
+        constraints: BoxConstraints(
+          minWidth: double.infinity,
+          minHeight: widget.minHeight,
+        ),
+        child: child,
+      ),
+    );
   }
 }
 
 class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   const _IndeterminateYaruLinearProgressIndicatorPainter(
-      this.color, this.position, this.speed, this.textDirection)
-      : super();
+    this.color,
+    this.position,
+    this.speed,
+    this.textDirection,
+  ) : super();
 
   final Color color;
   final double position;
@@ -250,34 +267,50 @@ class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
           strokeWidth +
           (strokeWidth * i / 2 + (strokeWidth * i * speed));
 
-      canvas.drawLine(Offset(x1, y), Offset(x2, y),
-          _getGradientPaint(color, x1, strokeWidth, size.height, speed));
+      canvas.drawLine(
+        Offset(x1, y),
+        Offset(x2, y),
+        _getGradientPaint(color, x1, strokeWidth, size.height, speed),
+      );
       canvas.drawCircle(Offset(x2, y), size.height / 2, fillPaint);
 
       // If a line overflow on the right, redraw it on the left
       if (x2 > size.width) {
         canvas.drawLine(
-            Offset(x1 - size.width, y),
-            Offset(x2 - size.width, y),
-            _getGradientPaint(
-                color, x1 - size.width, strokeWidth, size.height, speed));
+          Offset(x1 - size.width, y),
+          Offset(x2 - size.width, y),
+          _getGradientPaint(
+            color,
+            x1 - size.width,
+            strokeWidth,
+            size.height,
+            speed,
+          ),
+        );
         canvas.drawCircle(
-            Offset(x2 - size.width, y), size.height / 2, fillPaint);
+          Offset(x2 - size.width, y),
+          size.height / 2,
+          fillPaint,
+        );
       }
     }
   }
 
   Paint _getGradientPaint(
-      Color color, double x, double width, double height, double speed) {
-    final gradient = LinearGradient(colors: [
-      color.withAlpha(0),
-      color.withAlpha(20 + (230 * speed).toInt()),
-      color.withAlpha(150 + (100 * speed).toInt())
-    ], stops: const [
-      0.15,
-      0.75,
-      1
-    ]);
+    Color color,
+    double x,
+    double width,
+    double height,
+    double speed,
+  ) {
+    final gradient = LinearGradient(
+      colors: [
+        color.withAlpha(0),
+        color.withAlpha(20 + (230 * speed).toInt()),
+        color.withAlpha(150 + (100 * speed).toInt())
+      ],
+      stops: const [0.15, 0.75, 1],
+    );
 
     return Paint()
       ..shader = gradient.createShader(Rect.fromLTWH(x, 0.0, width, height))
@@ -288,7 +321,8 @@ class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(
-      _IndeterminateYaruLinearProgressIndicatorPainter oldDelegate) {
+    _IndeterminateYaruLinearProgressIndicatorPainter oldDelegate,
+  ) {
     return oldDelegate.color != color ||
         oldDelegate.position != position ||
         oldDelegate.speed != speed ||
@@ -298,8 +332,10 @@ class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
 
 class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   const _DeterminateYaruLinearProgressIndicatorPainter(
-      this.value, this.color, this.textDirection)
-      : super();
+    this.value,
+    this.color,
+    this.textDirection,
+  ) : super();
 
   final double value;
   final Color color;
@@ -335,12 +371,18 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
 
     final y = size.height / 2;
 
-    canvas.drawLine(Offset(backgroundHeight / 2, y),
-        Offset(size.width - backgroundHeight / 2, y), backgroundPaint);
+    canvas.drawLine(
+      Offset(backgroundHeight / 2, y),
+      Offset(size.width - backgroundHeight / 2, y),
+      backgroundPaint,
+    );
 
     if (size.width * revisedValue > size.height) {
-      canvas.drawLine(Offset(y, y), Offset((size.width - y) * revisedValue, y),
-          strokePaint);
+      canvas.drawLine(
+        Offset(y, y),
+        Offset((size.width - y) * revisedValue, y),
+        strokePaint,
+      );
     } else if (revisedValue > 0) {
       final fillPaint = Paint()
         ..color = color
@@ -352,7 +394,8 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(
-      _DeterminateYaruLinearProgressIndicatorPainter oldDelegate) {
+    _DeterminateYaruLinearProgressIndicatorPainter oldDelegate,
+  ) {
     return oldDelegate.value != value ||
         oldDelegate.color != color ||
         oldDelegate.textDirection != textDirection;
@@ -372,12 +415,13 @@ class YaruCircularProgressIndicator extends _YaruProgressIndicator {
     String? semanticsLabel,
     String? semanticsValue,
   }) : super(
-            key: key,
-            value: value,
-            color: color,
-            valueColor: valueColor,
-            semanticsLabel: semanticsLabel,
-            semanticsValue: semanticsValue);
+          key: key,
+          value: value,
+          color: color,
+          valueColor: valueColor,
+          semanticsLabel: semanticsLabel,
+          semanticsValue: semanticsValue,
+        );
 
   /// The width of the line used to draw the circle.
   final double strokeWidth;
@@ -402,9 +446,9 @@ class _YaruCircularProgressIndicatorState
   void initState() {
     super.initState();
     _controller = AnimationController(
-        duration:
-            const Duration(milliseconds: _kIndeterminateAnimationDuration),
-        vsync: this);
+      duration: const Duration(milliseconds: _kIndeterminateAnimationDuration),
+      vsync: this,
+    );
 
     if (widget.value == null) {
       _controller.repeat();
@@ -431,46 +475,58 @@ class _YaruCircularProgressIndicatorState
   Widget build(BuildContext context) {
     if (widget.value != null) {
       return _buildContainer(
-          context,
-          CustomPaint(
-              painter: _DeterminateYaruCircularProgressIndicatorPainter(
-                  widget.value!,
-                  widget._getValueColor(context),
-                  widget.strokeWidth,
-                  Directionality.of(context))));
+        context,
+        CustomPaint(
+          painter: _DeterminateYaruCircularProgressIndicatorPainter(
+            widget.value!,
+            widget._getValueColor(context),
+            widget.strokeWidth,
+            Directionality.of(context),
+          ),
+        ),
+      );
     }
     return AnimatedBuilder(
-        animation: _controller,
-        builder: (BuildContext context, Widget? child) {
-          return _buildContainer(
-              context,
-              CustomPaint(
-                painter: _IndeterminateYaruCircularProgressIndicatorPainter(
-                    widget._getValueColor(context),
-                    widget.strokeWidth,
-                    _rotationTween.evaluate(_controller),
-                    _speedTween.evaluate(_controller).abs(),
-                    Directionality.of(context)),
-              ));
-        });
+      animation: _controller,
+      builder: (BuildContext context, Widget? child) {
+        return _buildContainer(
+          context,
+          CustomPaint(
+            painter: _IndeterminateYaruCircularProgressIndicatorPainter(
+              widget._getValueColor(context),
+              widget.strokeWidth,
+              _rotationTween.evaluate(_controller),
+              _speedTween.evaluate(_controller).abs(),
+              Directionality.of(context),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildContainer(BuildContext context, Widget child) {
     return widget._buildSemanticsWrapper(
-        context: context,
-        child: Container(
-            constraints: const BoxConstraints(
-              minWidth: _kMinCircularProgressIndicatorSize,
-              minHeight: _kMinCircularProgressIndicatorSize,
-            ),
-            child: child));
+      context: context,
+      child: Container(
+        constraints: const BoxConstraints(
+          minWidth: _kMinCircularProgressIndicatorSize,
+          minHeight: _kMinCircularProgressIndicatorSize,
+        ),
+        child: child,
+      ),
+    );
   }
 }
 
 class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
-  const _IndeterminateYaruCircularProgressIndicatorPainter(this.color,
-      this.strokeWidth, this.rotationAngle, this.speed, this.textDirection)
-      : super();
+  const _IndeterminateYaruCircularProgressIndicatorPainter(
+    this.color,
+    this.strokeWidth,
+    this.rotationAngle,
+    this.speed,
+    this.textDirection,
+  ) : super();
 
   final Color color;
   final double strokeWidth;
@@ -483,19 +539,16 @@ class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
     const circleThird = math.pi * 2 / 3;
 
     final gradient = SweepGradient(
-        startAngle: 0.0 + rotationAngle,
-        endAngle: circleThird + rotationAngle,
-        tileMode: TileMode.repeated,
-        colors: [
-          color.withAlpha(0),
-          color.withAlpha(20 + (230 * speed).toInt()),
-          color.withAlpha(250)
-        ],
-        stops: const [
-          0.15,
-          0.75,
-          1
-        ]);
+      startAngle: 0.0 + rotationAngle,
+      endAngle: circleThird + rotationAngle,
+      tileMode: TileMode.repeated,
+      colors: [
+        color.withAlpha(0),
+        color.withAlpha(20 + (230 * speed).toInt()),
+        color.withAlpha(250)
+      ],
+      stops: const [0.15, 0.75, 1],
+    );
 
     final center = Offset(size.width / 2, size.height / 2);
     final radius =
@@ -525,16 +578,20 @@ class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
     for (var i = 0; i < 3; i++) {
       final startAngle = rotationAngle + circleThird * i;
       canvas.drawCircle(
-          Offset(math.cos(startAngle) * radius + center.dx,
-              math.sin(startAngle) * radius + center.dy),
-          strokeWidth / 2,
-          fillPaint);
+        Offset(
+          math.cos(startAngle) * radius + center.dx,
+          math.sin(startAngle) * radius + center.dy,
+        ),
+        strokeWidth / 2,
+        fillPaint,
+      );
     }
   }
 
   @override
   bool shouldRepaint(
-      _IndeterminateYaruCircularProgressIndicatorPainter oldDelegate) {
+    _IndeterminateYaruCircularProgressIndicatorPainter oldDelegate,
+  ) {
     return oldDelegate.color != color ||
         oldDelegate.strokeWidth != strokeWidth ||
         oldDelegate.rotationAngle != rotationAngle ||
@@ -545,8 +602,11 @@ class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
 
 class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
   const _DeterminateYaruCircularProgressIndicatorPainter(
-      this.value, this.color, this.width, this.textDirection)
-      : super();
+    this.value,
+    this.color,
+    this.width,
+    this.textDirection,
+  ) : super();
 
   final double value;
   final Color color;
@@ -586,7 +646,8 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(
-      _DeterminateYaruCircularProgressIndicatorPainter oldDelegate) {
+    _DeterminateYaruCircularProgressIndicatorPainter oldDelegate,
+  ) {
     return oldDelegate.value != value ||
         oldDelegate.color != color ||
         oldDelegate.width != width ||

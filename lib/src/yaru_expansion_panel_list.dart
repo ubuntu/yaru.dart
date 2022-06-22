@@ -35,17 +35,20 @@ class YaruExpansionPanelList extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> items = <Widget>[];
     const EdgeInsets kExpandedEdgeInsets = EdgeInsets.symmetric(
-        vertical: _kPanelHeaderExpandedHeight - _kPanelHeaderCollapsedHeight);
+      vertical: _kPanelHeaderExpandedHeight - _kPanelHeaderCollapsedHeight,
+    );
 
     for (int index = 0; index < children.length; index += 1) {
       if (_isChildExpanded(index) &&
           index != 0 &&
           !_isChildExpanded(index - 1)) {
-        items.add(Divider(
-          key: _SaltedKey<BuildContext, int>(context, index * 2 - 1),
-          height: 10.0,
-          color: Colors.transparent,
-        ));
+        items.add(
+          Divider(
+            key: _SaltedKey<BuildContext, int>(context, index * 2 - 1),
+            height: 10.0,
+            color: Colors.transparent,
+          ),
+        );
       }
 
       final header = Row(
@@ -84,11 +87,13 @@ class YaruExpansionPanelList extends StatelessWidget {
       BorderRadius borderRadius = index == 0
           ? BorderRadius.only(
               topLeft: Radius.circular(_radiusValue),
-              topRight: Radius.circular(_radiusValue))
+              topRight: Radius.circular(_radiusValue),
+            )
           : index == children.length - 1
               ? BorderRadius.only(
                   bottomLeft: Radius.circular(_radiusValue),
-                  bottomRight: Radius.circular(_radiusValue))
+                  bottomRight: Radius.circular(_radiusValue),
+                )
               : const BorderRadius.all(Radius.zero);
       items.add(
         Container(
@@ -126,10 +131,12 @@ class YaruExpansionPanelList extends StatelessWidget {
       );
 
       if (index != children.length - 1 && _isChildExpanded(index)) {
-        items.add(SizedBox(
-          height: 10,
-          key: _SaltedKey<BuildContext, int>(context, index * 2 + 1),
-        ));
+        items.add(
+          SizedBox(
+            height: 10,
+            key: _SaltedKey<BuildContext, int>(context, index * 2 + 1),
+          ),
+        );
       }
     }
 

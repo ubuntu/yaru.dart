@@ -50,22 +50,23 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
     return SafeArea(
       child: Scaffold(
         body: LayoutBuilder(
-            builder: (context, constraints) =>
-                constraints.maxWidth > widget.narrowLayoutMaxWidth
-                    ? YaruWideLayout(
-                        labelType: widget.labelType,
-                        pageItems: widget.pageItems,
-                        initialIndex: _index == -1 ? _previousIndex : _index,
-                        onSelected: _setIndex,
-                      )
-                    : YaruNarrowLayout(
-                        showSelectedLabels: widget.showSelectedLabels,
-                        showUnselectedLabels: widget.showUnselectedLabels,
-                        bottomNavigationBarType: widget.bottomNavigationBarType,
-                        pageItems: widget.pageItems,
-                        initialIndex: _index == -1 ? _previousIndex : _index,
-                        onSelected: _setIndex,
-                      )),
+          builder: (context, constraints) =>
+              constraints.maxWidth > widget.narrowLayoutMaxWidth
+                  ? YaruWideLayout(
+                      labelType: widget.labelType,
+                      pageItems: widget.pageItems,
+                      initialIndex: _index == -1 ? _previousIndex : _index,
+                      onSelected: _setIndex,
+                    )
+                  : YaruNarrowLayout(
+                      showSelectedLabels: widget.showSelectedLabels,
+                      showUnselectedLabels: widget.showUnselectedLabels,
+                      bottomNavigationBarType: widget.bottomNavigationBarType,
+                      pageItems: widget.pageItems,
+                      initialIndex: _index == -1 ? _previousIndex : _index,
+                      onSelected: _setIndex,
+                    ),
+        ),
       ),
     );
   }
