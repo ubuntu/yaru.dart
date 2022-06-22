@@ -12,6 +12,10 @@ class YaruTabbedPage extends StatefulWidget {
     required this.tabTitles,
     required this.views,
     this.width,
+    this.padding = const EdgeInsets.only(
+        top: kDefaultPagePadding,
+        right: kDefaultPagePadding,
+        left: kDefaultPagePadding),
   }) : super(key: key);
 
   /// A list of [IconData] used inside the tabs - must have the same length as [tabTitles] and [views].
@@ -25,6 +29,9 @@ class YaruTabbedPage extends StatefulWidget {
 
   /// The width used for the [TabBarView]
   final double? width;
+
+  /// The padding [EdgeInsets] which defaults to [kDefaultPadding] at top, right and left.
+  final EdgeInsets padding;
 
   @override
   State<YaruTabbedPage> createState() => _YaruTabbedPageState();
@@ -62,10 +69,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(
-              top: kDefaultPagePadding,
-              right: kDefaultPagePadding,
-              left: kDefaultPagePadding),
+          padding: widget.padding,
           child: Container(
             width: widget.width,
             height: 60,

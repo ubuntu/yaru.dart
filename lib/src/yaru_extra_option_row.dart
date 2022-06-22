@@ -14,6 +14,13 @@ class YaruExtraOptionRow extends StatelessWidget {
     required this.onPressed,
     required this.iconData,
     this.width,
+    this.padding = const EdgeInsets.all(8.0),
+    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
+    this.mainAxisSize = MainAxisSize.max,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.verticalDirection = VerticalDirection.down,
+    this.textDirection,
+    this.textBaseline,
   }) : super(key: key);
 
   /// Whether or not we can interact with the widget
@@ -68,6 +75,27 @@ class YaruExtraOptionRow extends StatelessWidget {
   /// Optional width passed to [YaruRow]
   final double? width;
 
+  /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
+  final EdgeInsets padding;
+
+  /// The [MainAxisAlignment] which defaults to [MainAxisAlignment.spaceBetween].
+  final MainAxisAlignment mainAxisAlignment;
+
+  /// The [MainAxisSize] which defaults to [MainAxisSize.max].
+  final MainAxisSize mainAxisSize;
+
+  /// The [CrossAxisAlignment] which defaults to [CrossAxisAlignment.center].
+  final CrossAxisAlignment crossAxisAlignment;
+
+  /// The optional [TextDirection].
+  final TextDirection? textDirection;
+
+  /// The [VerticalDirection] which defaults to [VerticalDirection.down].
+  final VerticalDirection verticalDirection;
+
+  /// The optional [TextBaseline].
+  final TextBaseline? textBaseline;
+
   @override
   Widget build(BuildContext context) {
     final enabled = this.enabled && value != null;
@@ -76,6 +104,12 @@ class YaruExtraOptionRow extends StatelessWidget {
       enabled: enabled,
       trailingWidget: Text(actionLabel),
       description: actionDescription,
+      mainAxisAlignment: mainAxisAlignment,
+      mainAxisSize: mainAxisSize,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection,
+      verticalDirection: verticalDirection,
+      textBaseline: textBaseline,
       actionWidget: Row(
         children: [
           Switch(
