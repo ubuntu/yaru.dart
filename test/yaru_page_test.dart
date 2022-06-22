@@ -5,14 +5,16 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 
 void main() {
   testWidgets('YaruPage Test', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: YaruPage(
-          children: [Container()],
-          padding: const EdgeInsets.all(8),
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruPage(
+            children: [Container()],
+            padding: const EdgeInsets.all(8),
+          ),
         ),
       ),
-    ));
+    );
 
     final paddingFinder = find.byWidgetPredicate(
       (widget) =>
@@ -24,13 +26,15 @@ void main() {
 
   testWidgets('- Default padding will be given if padding is null',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: YaruPage(
-          children: [Container()],
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruPage(
+            children: [Container()],
+          ),
         ),
       ),
-    ));
+    );
 
     final paddingFinder = find.byWidgetPredicate(
       (widget) =>

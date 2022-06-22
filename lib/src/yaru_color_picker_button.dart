@@ -35,7 +35,9 @@ class YaruColorPickerButton extends StatelessWidget {
           height: size / 2,
           child: DecoratedBox(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100), color: color),
+              borderRadius: BorderRadius.circular(100),
+              color: color,
+            ),
           ),
         ),
       ),

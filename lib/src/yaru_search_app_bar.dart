@@ -112,7 +112,8 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               hintText: searchHint,
               enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent)),
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
               border: const UnderlineInputBorder(),
             ),
             controller: searchController,

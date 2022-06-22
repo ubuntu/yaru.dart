@@ -49,12 +49,12 @@ class YaruDialogTitle extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-              left: kDefaultPagePadding +
-                  5, // Avoid title overflow on close button
-              right:
-                  kDefaultPagePadding, // Avoid title overflow on close button
-              top: kDefaultPagePadding,
-              bottom: kDefaultPagePadding),
+            left:
+                kDefaultPagePadding + 5, // Avoid title overflow on close button
+            right: kDefaultPagePadding, // Avoid title overflow on close button
+            top: kDefaultPagePadding,
+            bottom: kDefaultPagePadding,
+          ),
           child: Row(
             mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
             crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,

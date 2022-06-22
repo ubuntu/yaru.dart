@@ -108,7 +108,8 @@ class YaruRow extends StatelessWidget {
                           style: enabled
                               ? Theme.of(context).textTheme.caption
                               : Theme.of(context).textTheme.caption?.copyWith(
-                                  color: Theme.of(context).disabledColor),
+                                    color: Theme.of(context).disabledColor,
+                                  ),
                         ),
                       ),
                   ],

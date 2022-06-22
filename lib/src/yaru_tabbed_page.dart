@@ -13,9 +13,10 @@ class YaruTabbedPage extends StatefulWidget {
     required this.views,
     this.width,
     this.padding = const EdgeInsets.only(
-        top: kDefaultPagePadding,
-        right: kDefaultPagePadding,
-        left: kDefaultPagePadding),
+      top: kDefaultPagePadding,
+      right: kDefaultPagePadding,
+      left: kDefaultPagePadding,
+    ),
   }) : super(key: key);
 
   /// A list of [IconData] used inside the tabs - must have the same length as [tabTitles] and [views].
@@ -74,7 +75,8 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
             width: widget.width,
             height: 60,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(kDefaultContainerRadius)),
+              borderRadius: BorderRadius.circular(kDefaultContainerRadius),
+            ),
             child: Theme(
               data: ThemeData().copyWith(
                 splashColor: Colors.transparent,
@@ -85,19 +87,18 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
                 controller: tabController,
                 labelColor: Theme.of(context).colorScheme.onSurface,
                 indicator: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(kDefaultContainerRadius),
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.1)),
+                  borderRadius: BorderRadius.circular(kDefaultContainerRadius),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+                ),
                 tabs: [
                   for (var i = 0; i < widget.views.length; i++)
                     Tab(
-                        text: titlesDoNotFit() ? null : widget.tabTitles[i],
-                        icon: Icon(
-                          widget.tabIcons[i],
-                        ))
+                      text: titlesDoNotFit() ? null : widget.tabTitles[i],
+                      icon: Icon(
+                        widget.tabIcons[i],
+                      ),
+                    )
                 ],
               ),
             ),

@@ -102,21 +102,22 @@ class _YaruCarouselState extends State<YaruCarousel> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: widget.height,
-        width: widget.width,
-        child: Column(
-          children: [
-            _buildCarousel(),
-            ...(widget.placeIndicator && widget.children.length > 1
-                ? [
-                    SizedBox(
-                      height: widget.placeIndicatorMarginTop,
-                    ),
-                    _buildPlaceIndicator()
-                  ]
-                : [])
-          ],
-        ));
+      height: widget.height,
+      width: widget.width,
+      child: Column(
+        children: [
+          _buildCarousel(),
+          ...(widget.placeIndicator && widget.children.length > 1
+              ? [
+                  SizedBox(
+                    height: widget.placeIndicatorMarginTop,
+                  ),
+                  _buildPlaceIndicator()
+                ]
+              : [])
+        ],
+      ),
+    );
   }
 
   Widget _buildCarousel() {
@@ -149,59 +150,70 @@ class _YaruCarouselState extends State<YaruCarousel> {
 
     if (widget.navigationControls) {
       return Expanded(
-          child: Stack(
-        children: [
-          carousel,
-          _buildNavigationButton(
+        child: Stack(
+          children: [
+            carousel,
+            _buildNavigationButton(
               Alignment.centerLeft,
               _isFirstPage() ? null : () => _animateToPreviousPage(),
-              widget.previousIcon ?? const Icon(Icons.arrow_back)),
-          _buildNavigationButton(
+              widget.previousIcon ?? const Icon(Icons.arrow_back),
+            ),
+            _buildNavigationButton(
               Alignment.centerRight,
               _isLastPage() ? null : () => _animateToNextPage(),
-              widget.nextIcon ?? const Icon(Icons.arrow_forward)),
-        ],
-      ));
+              widget.nextIcon ?? const Icon(Icons.arrow_forward),
+            ),
+          ],
+        ),
+      );
     }
 
     return Expanded(child: carousel);
   }
 
   Widget _buildNavigationButton(
-      AlignmentGeometry alignement, VoidCallback? onPressed, Widget icon) {
+    AlignmentGeometry alignement,
+    VoidCallback? onPressed,
+    Widget icon,
+  ) {
     return Positioned.fill(
-        child: Align(
-      alignment: alignement,
-      child: OutlinedButton(
+      child: Align(
+        alignment: alignement,
+        child: OutlinedButton(
           style: OutlinedButton.styleFrom(
-              shape: const CircleBorder(),
-              backgroundColor: Theme.of(context).colorScheme.background),
+            shape: const CircleBorder(),
+            backgroundColor: Theme.of(context).colorScheme.background,
+          ),
           onPressed: onPressed,
-          child: icon),
-    ));
+          child: icon,
+        ),
+      ),
+    );
   }
 
   Widget _buildPlaceIndicator() {
-    return LayoutBuilder(builder: (context, constraints) {
-      const double dotSize = 12.0;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        const double dotSize = 12.0;
 
-      for (var layout in [
-        [48.0, constraints.maxWidth / 2],
-        [24.0, constraints.maxWidth / 3 * 2],
-        [12.0, constraints.maxWidth / 6 * 5]
-      ]) {
-        final double dotSpacing = layout[0];
-        final double maxWidth = layout[1];
+        for (var layout in [
+          [48.0, constraints.maxWidth / 2],
+          [24.0, constraints.maxWidth / 3 * 2],
+          [12.0, constraints.maxWidth / 6 * 5]
+        ]) {
+          final double dotSpacing = layout[0];
+          final double maxWidth = layout[1];
 
-        if (dotSize * widget.children.length +
-                dotSpacing * (widget.children.length - 1) <
-            maxWidth) {
-          return _buildDotIndicator(dotSize, dotSpacing);
+          if (dotSize * widget.children.length +
+                  dotSpacing * (widget.children.length - 1) <
+              maxWidth) {
+            return _buildDotIndicator(dotSize, dotSpacing);
+          }
         }
-      }
 
-      return _buildTextIndicator();
-    });
+        return _buildTextIndicator();
+      },
+    );
   }
 
   Widget _buildDotIndicator(double dotSize, double dotSpacing) {
@@ -220,10 +232,11 @@ class _YaruCarouselState extends State<YaruCarousel> {
               width: dotSize,
               height: dotSize,
               decoration: BoxDecoration(
-                  color: _index == index
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.onSurface.withOpacity(.3),
-                  shape: BoxShape.circle),
+                color: _index == index
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.onSurface.withOpacity(.3),
+                shape: BoxShape.circle,
+              ),
             ),
           ),
         ),

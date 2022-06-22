@@ -71,13 +71,14 @@ class _YaruExpandableState extends State<YaruExpandable> {
           ],
         ),
         AnimatedCrossFade(
-            firstChild: widget.child,
-            secondChild: widget.collapsedChild ?? Container(),
-            crossFadeState: _isExpanded
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-            sizeCurve: _kAnimationCurve,
-            duration: _kAnimationDuration)
+          firstChild: widget.child,
+          secondChild: widget.collapsedChild ?? Container(),
+          crossFadeState: _isExpanded
+              ? CrossFadeState.showFirst
+              : CrossFadeState.showSecond,
+          sizeCurve: _kAnimationCurve,
+          duration: _kAnimationDuration,
+        )
       ],
     );
   }

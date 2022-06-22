@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class YaruColorDisk extends StatelessWidget {
-  const YaruColorDisk(
-      {Key? key,
-      required this.onPressed,
-      required this.color,
-      required this.selected})
-      : super(key: key);
+  const YaruColorDisk({
+    Key? key,
+    required this.onPressed,
+    required this.color,
+    required this.selected,
+  }) : super(key: key);
 
   final VoidCallback onPressed;
   final Color color;
@@ -22,10 +22,12 @@ class YaruColorDisk extends StatelessWidget {
           style: TextButton.styleFrom(
             padding: const EdgeInsets.all(0),
             shape: CircleBorder(
-                side: BorderSide(
-                    color: selected
-                        ? Theme.of(context).primaryColor
-                        : Colors.transparent)),
+              side: BorderSide(
+                color: selected
+                    ? Theme.of(context).primaryColor
+                    : Colors.transparent,
+              ),
+            ),
           ),
           onPressed: onPressed,
           child: SizedBox(
@@ -33,7 +35,9 @@ class YaruColorDisk extends StatelessWidget {
             width: 20,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100), color: color),
+                borderRadius: BorderRadius.circular(100),
+                color: color,
+              ),
             ),
           ),
         ),

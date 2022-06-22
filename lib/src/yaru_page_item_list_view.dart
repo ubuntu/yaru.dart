@@ -25,30 +25,30 @@ class YaruPageItemListView extends StatelessWidget {
         _calcScrollbarThicknessWithTrack(context);
 
     return ListView.separated(
-        separatorBuilder: (_, __) => const SizedBox(height: 6.0),
-        padding: !materialTiles
-            ? EdgeInsets.symmetric(
-                horizontal: scrollbarThicknessWithTrack,
-                vertical: 8.0,
-              )
-            : null,
-        controller: ScrollController(),
-        itemCount: pages.length,
-        itemBuilder: (context, index) => materialTiles
-            ? ListTile(
-                visualDensity:
-                    const VisualDensity(horizontal: -4, vertical: -4),
-                selected: index == selectedIndex,
-                title: pages[index].titleBuilder(context),
-                leading: Icon(pages[index].iconData),
-                onTap: () => onTap(index),
-              )
-            : _YaruListTile(
-                selected: index == selectedIndex,
-                title: pages[index].titleBuilder(context),
-                iconData: pages[index].iconData,
-                onTap: () => onTap(index),
-              ));
+      separatorBuilder: (_, __) => const SizedBox(height: 6.0),
+      padding: !materialTiles
+          ? EdgeInsets.symmetric(
+              horizontal: scrollbarThicknessWithTrack,
+              vertical: 8.0,
+            )
+          : null,
+      controller: ScrollController(),
+      itemCount: pages.length,
+      itemBuilder: (context, index) => materialTiles
+          ? ListTile(
+              visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+              selected: index == selectedIndex,
+              title: pages[index].titleBuilder(context),
+              leading: Icon(pages[index].iconData),
+              onTap: () => onTap(index),
+            )
+          : _YaruListTile(
+              selected: index == selectedIndex,
+              title: pages[index].titleBuilder(context),
+              iconData: pages[index].iconData,
+              onTap: () => onTap(index),
+            ),
+    );
   }
 
   double _calcScrollbarThicknessWithTrack(final BuildContext context) {
@@ -67,13 +67,13 @@ class YaruPageItemListView extends StatelessWidget {
 }
 
 class _YaruListTile extends StatelessWidget {
-  const _YaruListTile(
-      {Key? key,
-      required this.selected,
-      this.iconData,
-      required this.onTap,
-      required this.title})
-      : super(key: key);
+  const _YaruListTile({
+    Key? key,
+    required this.selected,
+    this.iconData,
+    required this.onTap,
+    required this.title,
+  }) : super(key: key);
 
   final bool selected;
   final IconData? iconData;

@@ -91,10 +91,16 @@ class _YaruDraggableState extends State<YaruDraggable> {
             _moveOffset = const Offset(0, 0);
             if (widget.onDragEnd != null) widget.onDragEnd!();
           }),
-          child: Builder(builder: (context) {
-            return widget.childBuilder(
-                context, _position, _isDragging, _isHovering);
-          }),
+          child: Builder(
+            builder: (context) {
+              return widget.childBuilder(
+                context,
+                _position,
+                _isDragging,
+                _isHovering,
+              );
+            },
+          ),
         ),
       ),
     );

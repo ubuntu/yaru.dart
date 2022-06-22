@@ -45,18 +45,19 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraint) {
-      return SafeArea(
-        child: Scaffold(
-          body: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: SingleChildScrollView(
-                  controller: widget.scrollController ?? ScrollController(),
-                  child: ConstrainedBox(
+    return LayoutBuilder(
+      builder: (context, constraint) {
+        return SafeArea(
+          child: Scaffold(
+            body: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: SingleChildScrollView(
+                    controller: widget.scrollController ?? ScrollController(),
+                    child: ConstrainedBox(
                       constraints:
                           BoxConstraints(minHeight: constraint.maxHeight),
                       child: IntrinsicHeight(
@@ -99,17 +100,19 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                               )
                               .toList(),
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              const VerticalDivider(thickness: 1, width: 1),
-              Expanded(
-                child: widget.pageItems[_selectedIndex].builder(context),
-              )
-            ],
+                const VerticalDivider(thickness: 1, width: 1),
+                Expanded(
+                  child: widget.pageItems[_selectedIndex].builder(context),
+                )
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
