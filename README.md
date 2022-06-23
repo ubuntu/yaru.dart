@@ -10,7 +10,7 @@ Common flutter widgets useful for building desktop and web applications.
 
 A set of convenient widgets made with `material.dart` to easily build desktop and web applications.
 
-[LIVE DEMO](https://feichtmeier.github.io/)
+[LIVE DEMO](https://ubuntu.github.io/yaru_widgets.dart/)
 
 For example:
 
