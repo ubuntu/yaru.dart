@@ -17,6 +17,8 @@ class YaruTabbedPage extends StatefulWidget {
       right: kDefaultPagePadding,
       left: kDefaultPagePadding,
     ),
+    this.initialIndex = 0,
+    this.onTap,
   }) : super(key: key);
 
   /// A list of [IconData] used inside the tabs - must have the same length as [tabTitles] and [views].
@@ -34,6 +36,12 @@ class YaruTabbedPage extends StatefulWidget {
   /// The padding [EdgeInsets] which defaults to [kDefaultPadding] at top, right and left.
   final EdgeInsets padding;
 
+  /// The initialIndex of the [TabController]
+  final int initialIndex;
+
+  /// The [Function] used when one of the [Tab] is tapped.
+  final Function(int index)? onTap;
+
   @override
   State<YaruTabbedPage> createState() => _YaruTabbedPageState();
 }
@@ -44,7 +52,11 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
 
   @override
   void initState() {
-    tabController = TabController(length: widget.views.length, vsync: this);
+    tabController = TabController(
+      initialIndex: widget.initialIndex,
+      length: widget.views.length,
+      vsync: this,
+    );
     super.initState();
   }
 
@@ -91,6 +103,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
                   color:
                       Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
                 ),
+                onTap: widget.onTap,
                 tabs: [
                   for (var i = 0; i < widget.views.length; i++)
                     Tab(
