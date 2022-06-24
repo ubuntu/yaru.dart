@@ -58,6 +58,7 @@ class _HomeState extends State<Home> {
     );
 
     return MaterialApp(
+      title: 'Yaru Widgets Factory',
       scrollBehavior: TouchMouseStylusScrollBehavior(),
       debugShowCheckedModeBanner: false,
       theme: context.watch<LightTheme>().value,
