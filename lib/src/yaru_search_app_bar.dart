@@ -34,7 +34,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.clearSearchIconData,
   }) : super(key: key);
 
-  /// Pass a new [TextEditingController] instance.
+  /// An optional [TextEditingController].
   final TextEditingController? searchController;
 
   /// The callback that gets invoked when the value changes in the text field.
@@ -88,20 +88,20 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
             cursorColor: textColor,
             textAlignVertical: TextAlignVertical.center,
             style: textStyle ??
-                Theme.of(context)
-                    .appBarTheme
-                    .titleTextStyle
-                    ?.copyWith(fontWeight: FontWeight.w200, fontSize: 18),
+                Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
+                      fontWeight: FontWeight.w200,
+                    ),
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.only(top: 6),
+              contentPadding: const EdgeInsets.only(top: 4),
               prefixIcon: Icon(
                 searchIconData ?? Icons.search,
                 color: textColor,
+                size: 20,
               ),
               prefixIconConstraints:
-                  BoxConstraints.expand(width: 48, height: appBarHeight),
+                  BoxConstraints.expand(width: 40, height: appBarHeight),
               suffixIcon: Padding(
-                padding: const EdgeInsets.only(right: 6, bottom: 3),
+                padding: const EdgeInsets.only(right: 8.0),
                 child: YaruRoundIconButton(
                   onTap: onEscape,
                   child: Icon(
