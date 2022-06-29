@@ -4,7 +4,7 @@
 
 A set of [Yaru](https://github.com/ubuntu/yaru) icons for your Flutter application.
 
-For an overview of all availables icons, please look at [icon_list.md](doc/icon_list.md)
+For an overview of all availables icons, please look at the [web Example GitHub Page](https://ubuntu.github.io/yaru_icons.dart/)
 
 ![example](./.github/screenshots/example.png)
 
