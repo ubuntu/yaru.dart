@@ -28,6 +28,7 @@ class _HomeState extends State<Home> {
   final _filteredItems = <YaruPageItem>[];
   final _searchController = TextEditingController();
   bool _compactMode = false;
+  int _amount = 3;
 
   void _onEscape() => setState(() {
         _filteredItems.clear();
@@ -52,7 +53,30 @@ class _HomeState extends State<Home> {
           trailingWidget: Text('Compact mode'),
           value: _compactMode,
           onChanged: (v) => setState(() => _compactMode = v),
-        )
+        ),
+        if (_compactMode)
+          YaruRow(
+            trailingWidget: Text('YaruPageItem amount'),
+            actionWidget: Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    if (_amount >= examplePageItems.length) return;
+                    setState(() => _amount++);
+                  },
+                  child: Icon(YaruIcons.plus),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (_amount <= 2) return;
+                    setState(() => _amount--);
+                  },
+                  child: Icon(YaruIcons.minus),
+                ),
+              ],
+            ),
+            enabled: true,
+          )
       ]),
       iconData: YaruIcons.settings,
     );
@@ -65,9 +89,7 @@ class _HomeState extends State<Home> {
       darkTheme: context.watch<DarkTheme>().value,
       home: _compactMode
           ? YaruCompactLayout(
-              pageItems: [configItem] + examplePageItems,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
+              pageItems: [configItem] + examplePageItems.take(_amount).toList(),
             )
           : YaruMasterDetailPage(
               leftPaneWidth: 280,
