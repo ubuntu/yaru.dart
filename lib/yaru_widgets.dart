@@ -2,6 +2,7 @@ library yaru_widgets;
 
 export 'src/ubuntu_logo.dart';
 export 'src/yaru_alert_dialog.dart';
+export 'src/yaru_banner.dart';
 export 'src/yaru_carousel.dart';
 export 'src/yaru_checkbox_row.dart';
 export 'src/yaru_color_disk.dart';
@@ -21,6 +22,7 @@ export 'src/yaru_page_item.dart';
 export 'src/yaru_round_icon_button.dart';
 export 'src/yaru_round_toggle_button.dart';
 export 'src/yaru_row.dart';
+export 'src/yaru_safe_image.dart';
 export 'src/yaru_search_app_bar.dart';
 export 'src/yaru_section.dart';
 export 'src/yaru_selectable_container.dart';

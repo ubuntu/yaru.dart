@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru_widgets_example/pages/banner_page.dart';
 import 'package:yaru_widgets_example/pages/carousel_page.dart';
 import 'package:yaru_widgets_example/pages/check_box_row_page.dart';
 import 'package:yaru_widgets_example/pages/color_disk_page.dart';
@@ -189,4 +190,9 @@ final examplePageItems = <YaruPageItem>[
     builder: (context) => DraggablePage(),
     iconData: YaruIcons.drag_handle,
   ),
+  YaruPageItem(
+    titleBuilder: (context) => Text('YaruBanner'),
+    builder: (context) => BannerPage(),
+    iconData: YaruIcons.image,
+  )
 ];
