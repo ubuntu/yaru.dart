@@ -1,5 +1,18 @@
 # Changelog
 
+# 1.1.1
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - Add AppBanner from the software app (#170)
+  - Make YaruNarrowLayout build less complicated (#168)
+  - YaruSearchBar: improve sizes and constraints (#166)
+  - Example: update icon and name (#163)
+  - Web build should be used in Pages (#162)
+  - Give YaruTabbedPage index on rebuild (#160)
+  - Activate useful linter rules (#158)
+  - Make row widgets configurable (#156)
+  - YaruPage: add scrollcontroller parameter (#155)
+
 # 1.1.0
 
 - [Paul Kepinski](https://github.com/Jupi007)
