@@ -13,6 +13,8 @@ class YaruBanner extends StatelessWidget {
     this.url,
     this.icon,
     required this.fallbackIconData,
+    this.nameTextOverflow,
+    this.summaryTextOverflow,
   }) : super(key: key);
 
   /// The name of the card
@@ -26,10 +28,24 @@ class YaruBanner extends StatelessWidget {
 
   /// An optional callback
   final Function()? onTap;
+
+  /// The color used for the soft background tint.
+  /// If null [Theme]'s background color is used.
   final Color? surfaceTintColor;
+
+  /// If true the [icon] will be displayed a second time, with small opacity.
   final bool watermark;
+
+  /// The [Widget] used as the trailing icon.
   final Widget? icon;
+
+  /// If the icon is not loaded this fallback icon is displayed.
   final IconData fallbackIconData;
+
+  final TextOverflow? nameTextOverflow;
+
+  /// Optional [TextOverflow]
+  final TextOverflow? summaryTextOverflow;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +70,9 @@ class YaruBanner extends StatelessWidget {
                         url: url,
                         fallBackIconData: fallbackIconData,
                       ),
-                  textOverflow: TextOverflow.fade,
+                  titleTextOverflow: nameTextOverflow ?? TextOverflow.ellipsis,
+                  subTitleTextOverflow:
+                      summaryTextOverflow ?? TextOverflow.fade,
                   mouseCursor: onTap != null ? SystemMouseCursors.click : null,
                 ),
                 if (watermark == true)
@@ -90,7 +108,9 @@ class YaruBanner extends StatelessWidget {
                   ),
               title: name,
               summary: summary,
-              textOverflow: TextOverflow.ellipsis,
+              titleTextOverflow: summaryTextOverflow ?? TextOverflow.ellipsis,
+              subTitleTextOverflow:
+                  summaryTextOverflow ?? TextOverflow.ellipsis,
               mouseCursor: onTap != null ? SystemMouseCursors.click : null,
             ),
     );
@@ -106,8 +126,9 @@ class _Banner extends StatelessWidget {
     required this.elevation,
     required this.icon,
     required this.borderRadius,
-    required this.textOverflow,
+    required this.subTitleTextOverflow,
     this.mouseCursor,
+    required this.titleTextOverflow,
   }) : super(key: key);
 
   final Color color;
@@ -116,7 +137,8 @@ class _Banner extends StatelessWidget {
   final double elevation;
   final Widget icon;
   final BorderRadius borderRadius;
-  final TextOverflow textOverflow;
+  final TextOverflow subTitleTextOverflow;
+  final TextOverflow titleTextOverflow;
   final MouseCursor? mouseCursor;
 
   @override
@@ -136,11 +158,11 @@ class _Banner extends StatelessWidget {
           child: ListTile(
             mouseCursor: mouseCursor,
             subtitle: summary != null && summary!.isNotEmpty
-                ? Text(summary!, overflow: textOverflow)
+                ? Text(summary!, overflow: subTitleTextOverflow)
                 : null,
             title: Text(
               title,
-              style: const TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, overflow: titleTextOverflow),
             ),
             leading: SizedBox(
               width: 60,
