@@ -108,7 +108,7 @@ class YaruBanner extends StatelessWidget {
                   ),
               title: name,
               summary: summary,
-              titleTextOverflow: summaryTextOverflow ?? TextOverflow.ellipsis,
+              titleTextOverflow: nameTextOverflow ?? TextOverflow.ellipsis,
               subTitleTextOverflow:
                   summaryTextOverflow ?? TextOverflow.ellipsis,
               mouseCursor: onTap != null ? SystemMouseCursors.click : null,
