@@ -45,6 +45,9 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final unselectedTextColor =
+        Theme.of(context).colorScheme.onSurface.withOpacity(0.8);
+    final selectedTextColor = Theme.of(context).colorScheme.onSurface;
     return LayoutBuilder(
       builder: (context, constraint) {
         return SafeArea(
@@ -62,22 +65,26 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                           BoxConstraints(minHeight: constraint.maxHeight),
                       child: IntrinsicHeight(
                         child: NavigationRail(
-                          selectedIconTheme: IconThemeData(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.9),
-                          ),
                           unselectedIconTheme: IconThemeData(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurface
-                                .withOpacity(0.6),
+                            color: unselectedTextColor,
                           ),
                           indicatorColor: Theme.of(context)
                               .colorScheme
                               .onSurface
                               .withOpacity(0.1),
+                          selectedIconTheme: IconThemeData(
+                            color: selectedTextColor,
+                          ),
+                          selectedLabelTextStyle: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: selectedTextColor,
+                            fontSize: 16,
+                          ),
+                          unselectedLabelTextStyle: TextStyle(
+                            color: unselectedTextColor,
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 16,
+                          ),
                           backgroundColor: Theme.of(context).backgroundColor,
                           selectedIndex: _selectedIndex,
                           onDestinationSelected: (index) {
