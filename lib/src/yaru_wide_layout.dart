@@ -78,12 +78,14 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                           selectedLabelTextStyle: TextStyle(
                             overflow: TextOverflow.ellipsis,
                             color: selectedTextColor,
-                            fontSize: 16,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
                           ),
                           unselectedLabelTextStyle: TextStyle(
                             color: unselectedTextColor,
                             overflow: TextOverflow.ellipsis,
-                            fontSize: 16,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
                           ),
                           backgroundColor: Theme.of(context).backgroundColor,
                           selectedIndex: _selectedIndex,
