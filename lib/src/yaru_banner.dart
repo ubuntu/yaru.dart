@@ -15,6 +15,7 @@ class YaruBanner extends StatelessWidget {
     required this.fallbackIconData,
     this.nameTextOverflow,
     this.summaryTextOverflow,
+    this.bannerWidth,
   }) : super(key: key);
 
   /// The name of the card
@@ -47,6 +48,9 @@ class YaruBanner extends StatelessWidget {
   /// Optional [TextOverflow]
   final TextOverflow? summaryTextOverflow;
 
+  /// Optional width for the banner - if null it defaults to 370.
+  final double? bannerWidth;
+
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(10);
@@ -60,6 +64,7 @@ class YaruBanner extends StatelessWidget {
           ? Stack(
               children: [
                 _Banner(
+                  width: bannerWidth,
                   borderRadius: borderRadius,
                   color: surfaceTintColor!,
                   title: name,
@@ -95,6 +100,7 @@ class YaruBanner extends StatelessWidget {
               ],
             )
           : _Banner(
+              width: bannerWidth,
               borderRadius: borderRadius,
               color: light
                   ? Theme.of(context).backgroundColor
@@ -129,6 +135,7 @@ class _Banner extends StatelessWidget {
     required this.subTitleTextOverflow,
     this.mouseCursor,
     required this.titleTextOverflow,
+    this.width,
   }) : super(key: key);
 
   final Color color;
@@ -140,6 +147,7 @@ class _Banner extends StatelessWidget {
   final TextOverflow subTitleTextOverflow;
   final TextOverflow titleTextOverflow;
   final MouseCursor? mouseCursor;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +162,7 @@ class _Banner extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: SizedBox(
-          width: 370,
+          width: width ?? 370,
           child: ListTile(
             mouseCursor: mouseCursor,
             subtitle: summary != null && summary!.isNotEmpty
