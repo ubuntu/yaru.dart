@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final configItem = YaruPageItem(
-      titleBuilder: (context) => Text('Layout'),
+      titleBuilder: (context) => YaruPageItemTitle.text('Layout'),
       builder: (_) => YaruPage(children: [
         YaruSwitchRow(
           trailingWidget: Text('Compact mode'),

@@ -10,7 +10,10 @@ class YaruPageItem {
     this.itemWidget,
     this.selectedItemWidget,
   });
+
+  /// We recommend to use [YaruPageItemTitle] here to avoid line wrap
   final WidgetBuilder titleBuilder;
+
   final WidgetBuilder builder;
   final IconData iconData;
   final Widget? itemWidget;
