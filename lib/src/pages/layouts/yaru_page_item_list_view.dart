@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/constants.dart';
-import 'package:yaru_widgets/src/yaru_page_item.dart';
+import 'package:yaru_widgets/src/pages/layouts/yaru_page_item.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;

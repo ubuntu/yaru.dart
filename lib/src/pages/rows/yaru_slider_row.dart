@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/yaru_row.dart';
+import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
 
 class YaruSliderRow extends StatelessWidget {
   /// Creates a yaru style slider.

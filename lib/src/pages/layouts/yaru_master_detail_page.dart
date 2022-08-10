@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/yaru_landscape_layout.dart';
-import 'package:yaru_widgets/src/yaru_page_item.dart';
-import 'package:yaru_widgets/src/yaru_portrait_layout.dart';
+import 'package:yaru_widgets/src/pages/layouts/yaru_landscape_layout.dart';
+import 'package:yaru_widgets/src/pages/layouts/yaru_page_item.dart';
+import 'package:yaru_widgets/src/pages/layouts/yaru_portrait_layout.dart';
 
 class YaruMasterDetailPage extends StatefulWidget {
   /// Creates a basic responsive layout with yaru theme,

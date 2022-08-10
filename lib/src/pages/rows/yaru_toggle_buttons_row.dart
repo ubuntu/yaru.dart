@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/yaru_row.dart';
+import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
 
 class YaruToggleButtonsRow extends StatelessWidget {
   /// Creates a set of Yaru style toggle buttons.

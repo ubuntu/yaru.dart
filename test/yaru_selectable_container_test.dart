@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/src/yaru_selectable_container.dart';
+import 'package:yaru_widgets/src/utilities/yaru_selectable_container.dart';
 
 void main() {
   testWidgets('- YaruImageTile Test', (WidgetTester tester) async {

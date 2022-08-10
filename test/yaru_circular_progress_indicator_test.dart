@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/src/yaru_progress_indicator.dart';
+import 'package:yaru_widgets/src/controls/yaru_progress_indicator.dart';
 
 void main() {
   testWidgets('- YaruCircularProgressIndicator Test',
