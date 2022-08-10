@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/yaru_round_icon_button.dart';
+import 'package:yaru_widgets/src/controls/yaru_round_icon_button.dart';
 
 /// A selectable [IconButton], wrapped in a [CircleAvatar]
 class YaruRoundToggleButton extends StatelessWidget {

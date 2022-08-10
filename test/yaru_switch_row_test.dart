@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/src/yaru_row.dart';
-import 'package:yaru_widgets/src/yaru_switch_row.dart';
+import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
+import 'package:yaru_widgets/src/pages/rows/yaru_switch_row.dart';
 
 void main() {
   testWidgets('- YaruSwitchRow Test', (WidgetTester tester) async {

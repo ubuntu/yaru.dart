@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/constants.dart';
-import 'package:yaru_widgets/src/yaru_dialog_title.dart';
+import 'package:yaru_widgets/src/dialogs/yaru_dialog_title.dart';
 
 class YaruSimpleDialog extends StatelessWidget {
   /// Create a [SimpleDialog] with a close button
