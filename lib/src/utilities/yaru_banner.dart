@@ -16,10 +16,13 @@ class YaruBanner extends StatelessWidget {
     this.nameTextOverflow,
     this.summaryTextOverflow,
     this.bannerWidth,
+    this.subtitleWidget,
   }) : super(key: key);
 
   /// The name of the card
   final String name;
+
+  final Widget? subtitleWidget;
 
   /// A summary string shown in the second line.
   final String? summary;
@@ -64,6 +67,7 @@ class YaruBanner extends StatelessWidget {
           ? Stack(
               children: [
                 _Banner(
+                  subtitleWidget: subtitleWidget,
                   width: bannerWidth,
                   borderRadius: borderRadius,
                   color: surfaceTintColor!,
@@ -100,6 +104,7 @@ class YaruBanner extends StatelessWidget {
               ],
             )
           : _Banner(
+              subtitleWidget: subtitleWidget,
               width: bannerWidth,
               borderRadius: borderRadius,
               color: light
@@ -136,6 +141,7 @@ class _Banner extends StatelessWidget {
     this.mouseCursor,
     required this.titleTextOverflow,
     this.width,
+    this.subtitleWidget,
   }) : super(key: key);
 
   final Color color;
@@ -148,6 +154,7 @@ class _Banner extends StatelessWidget {
   final TextOverflow titleTextOverflow;
   final MouseCursor? mouseCursor;
   final double? width;
+  final Widget? subtitleWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -165,9 +172,10 @@ class _Banner extends StatelessWidget {
           width: width ?? 370,
           child: ListTile(
             mouseCursor: mouseCursor,
-            subtitle: summary != null && summary!.isNotEmpty
-                ? Text(summary!, overflow: subTitleTextOverflow)
-                : null,
+            subtitle: subtitleWidget ??
+                (summary != null
+                    ? Text(summary!, overflow: subTitleTextOverflow)
+                    : null),
             title: Text(
               title,
               style: TextStyle(fontSize: 20, overflow: titleTextOverflow),
