@@ -42,6 +42,10 @@ final examplePageItems = <YaruPageItem>[
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 25),
+          child: YaruAnimatedOkIcon(),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 25),
           child: YaruCircularProgressIndicator(),
         ),
         Padding(
