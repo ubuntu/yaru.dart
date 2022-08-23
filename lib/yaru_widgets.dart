@@ -1,5 +1,6 @@
 library yaru_widgets;
 
+export 'src/animations/yaru_animated_ok_icon.dart';
 export 'src/utilities/ubuntu_logo.dart';
 export 'src/dialogs/yaru_alert_dialog.dart';
 export 'src/utilities/yaru_banner.dart';

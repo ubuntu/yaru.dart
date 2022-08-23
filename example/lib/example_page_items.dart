@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_colors/yaru_colors.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_widgets_example/pages/banner_page.dart';
@@ -34,6 +35,29 @@ final examplePageItems = <YaruPageItem>[
     titleBuilder: (context) => YaruPageItemTitle.text('YaruExtraOptionRow'),
     iconData: YaruIcons.settings_filled,
     builder: (_) => ExtraOptionRowPage(),
+  ),
+  YaruPageItem(
+    titleBuilder: (context) => YaruPageItemTitle.text('YaruAnimatedIcons'),
+    iconData: YaruIcons.ok,
+    builder: (_) => YaruPage(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 25),
+          child: YaruAnimatedOkIcon(
+            size: 96,
+            color: YaruColors.success,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 25),
+          child: YaruAnimatedOkIcon(
+            size: 96,
+            filled: true,
+            color: YaruColors.success,
+          ),
+        ),
+      ],
+    ),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruProgressIndicator'),
