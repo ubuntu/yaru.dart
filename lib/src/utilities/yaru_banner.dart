@@ -164,7 +164,8 @@ class _Banner extends StatelessWidget {
       surfaceTintColor: color,
       elevation: elevation,
       shape: RoundedRectangleBorder(
-        borderRadius: borderRadius.inner(const EdgeInsets.all(4.0)),
+        borderRadius: borderRadius
+            .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
         side: BorderSide(color: Theme.of(context).dividerColor, width: 1),
       ),
       child: Align(
