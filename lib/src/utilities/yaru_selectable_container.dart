@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/constants.dart';
+import 'package:yaru_widgets/src/extensions/inner_border_radius.dart';
 
 class YaruSelectableContainer extends StatelessWidget {
   /// Creates a Image Tile from the image path given in the path property.
@@ -43,24 +44,6 @@ class YaruSelectableContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final padding = this.padding ?? const EdgeInsets.all(6);
     final borderRadius = this.borderRadius ?? BorderRadius.circular(radius);
-    final innerBorderRadius = BorderRadius.only(
-      topLeft: Radius.elliptical(
-        borderRadius.topLeft.x - padding.left / 2,
-        borderRadius.topLeft.y - padding.top / 2,
-      ),
-      topRight: Radius.elliptical(
-        borderRadius.topRight.x - padding.right / 2,
-        borderRadius.topRight.y - padding.top / 2,
-      ),
-      bottomRight: Radius.elliptical(
-        borderRadius.bottomRight.x - padding.right / 2,
-        borderRadius.bottomRight.y - padding.bottom / 2,
-      ),
-      bottomLeft: Radius.elliptical(
-        borderRadius.bottomLeft.x - padding.left / 2,
-        borderRadius.bottomLeft.y - padding.bottom / 2,
-      ),
-    );
 
     return InkWell(
       borderRadius: borderRadius,
@@ -76,7 +59,7 @@ class YaruSelectableContainer extends StatelessWidget {
         child: Padding(
           padding: padding,
           child: ClipRRect(
-            borderRadius: innerBorderRadius,
+            borderRadius: borderRadius.inner(padding),
             child: child,
           ),
         ),

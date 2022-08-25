@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/src/extensions/inner_border_radius.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 /// A colorable [Card] with a border which is tap-able via an [onTap] callback.
@@ -62,7 +63,7 @@ class YaruBanner extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: borderRadius,
-      hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+      hoverColor: Theme.of(context).primaryColor.withOpacity(0.3),
       child: surfaceTintColor != null
           ? Stack(
               children: [
@@ -163,7 +164,7 @@ class _Banner extends StatelessWidget {
       surfaceTintColor: color,
       elevation: elevation,
       shape: RoundedRectangleBorder(
-        borderRadius: borderRadius,
+        borderRadius: borderRadius.inner(const EdgeInsets.all(4.0)),
         side: BorderSide(color: Theme.of(context).dividerColor, width: 1),
       ),
       child: Align(
