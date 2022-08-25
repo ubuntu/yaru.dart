@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/src/extensions/inner_border_radius.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 /// A colorable [Card] with a border which is tap-able via an [onTap] callback.
@@ -163,7 +164,8 @@ class _Banner extends StatelessWidget {
       surfaceTintColor: color,
       elevation: elevation,
       shape: RoundedRectangleBorder(
-        borderRadius: borderRadius,
+        borderRadius: borderRadius
+            .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
         side: BorderSide(color: Theme.of(context).dividerColor, width: 1),
       ),
       child: Align(
