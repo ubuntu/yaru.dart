@@ -62,7 +62,7 @@ class YaruBanner extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: borderRadius,
-      hoverColor: Theme.of(context).primaryColor.withOpacity(0.3),
+      hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
       child: surfaceTintColor != null
           ? Stack(
               children: [
