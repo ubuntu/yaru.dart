@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/extensions/inner_border_radius.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 /// A colorable [Card] with a border which is tap-able via an [onTap] callback.
