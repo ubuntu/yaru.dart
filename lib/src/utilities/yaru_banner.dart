@@ -60,71 +60,76 @@ class YaruBanner extends StatelessWidget {
     final borderRadius = BorderRadius.circular(10);
 
     bool light = Theme.of(context).brightness == Brightness.light;
-    return InkWell(
-      onTap: onTap,
-      borderRadius: borderRadius,
-      hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-      child: surfaceTintColor != null
-          ? Stack(
-              children: [
-                _Banner(
-                  subtitleWidget: subtitleWidget,
-                  width: bannerWidth,
-                  borderRadius: borderRadius,
-                  color: surfaceTintColor!,
-                  title: name,
-                  summary: summary,
-                  elevation: light ? 4 : 6,
-                  icon: icon ??
-                      YaruSafeImage(
-                        url: url,
-                        fallBackIconData: fallbackIconData,
-                      ),
-                  titleTextOverflow: nameTextOverflow ?? TextOverflow.ellipsis,
-                  subTitleTextOverflow:
-                      summaryTextOverflow ?? TextOverflow.fade,
-                  mouseCursor: onTap != null ? SystemMouseCursors.click : null,
-                ),
-                if (watermark == true)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Opacity(
-                        opacity: 0.1,
-                        child: SizedBox(
-                          height: 130,
-                          child: YaruSafeImage(
-                            url: url,
-                            fallBackIconData: fallbackIconData,
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: borderRadius,
+        hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+        child: surfaceTintColor != null
+            ? Stack(
+                children: [
+                  _Banner(
+                    subtitleWidget: subtitleWidget,
+                    width: bannerWidth,
+                    borderRadius: borderRadius,
+                    color: surfaceTintColor!,
+                    title: name,
+                    summary: summary,
+                    elevation: light ? 4 : 6,
+                    icon: icon ??
+                        YaruSafeImage(
+                          url: url,
+                          fallBackIconData: fallbackIconData,
+                        ),
+                    titleTextOverflow:
+                        nameTextOverflow ?? TextOverflow.ellipsis,
+                    subTitleTextOverflow:
+                        summaryTextOverflow ?? TextOverflow.fade,
+                    mouseCursor:
+                        onTap != null ? SystemMouseCursors.click : null,
+                  ),
+                  if (watermark == true)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Opacity(
+                          opacity: 0.1,
+                          child: SizedBox(
+                            height: 130,
+                            child: YaruSafeImage(
+                              url: url,
+                              fallBackIconData: fallbackIconData,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-              ],
-            )
-          : _Banner(
-              subtitleWidget: subtitleWidget,
-              width: bannerWidth,
-              borderRadius: borderRadius,
-              color: light
-                  ? Theme.of(context).backgroundColor
-                  : Theme.of(context).colorScheme.onSurface.withOpacity(0.01),
-              elevation: light ? 2 : 1,
-              icon: icon ??
-                  YaruSafeImage(
-                    url: url,
-                    fallBackIconData: fallbackIconData,
-                    iconSize: 50,
-                  ),
-              title: name,
-              summary: summary,
-              titleTextOverflow: nameTextOverflow ?? TextOverflow.ellipsis,
-              subTitleTextOverflow:
-                  summaryTextOverflow ?? TextOverflow.ellipsis,
-              mouseCursor: onTap != null ? SystemMouseCursors.click : null,
-            ),
+                ],
+              )
+            : _Banner(
+                subtitleWidget: subtitleWidget,
+                width: bannerWidth,
+                borderRadius: borderRadius,
+                color: light
+                    ? Theme.of(context).backgroundColor
+                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.01),
+                elevation: light ? 2 : 1,
+                icon: icon ??
+                    YaruSafeImage(
+                      url: url,
+                      fallBackIconData: fallbackIconData,
+                      iconSize: 50,
+                    ),
+                title: name,
+                summary: summary,
+                titleTextOverflow: nameTextOverflow ?? TextOverflow.ellipsis,
+                subTitleTextOverflow:
+                    summaryTextOverflow ?? TextOverflow.ellipsis,
+                mouseCursor: onTap != null ? SystemMouseCursors.click : null,
+              ),
+      ),
     );
   }
 }
