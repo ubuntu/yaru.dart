@@ -35,4 +35,4 @@ export 'src/pages/rows/yaru_switch_row.dart';
 export 'src/pages/yaru_tabbed_page.dart';
 export 'src/pages/rows/yaru_toggle_buttons_row.dart';
 export 'src/pages/layouts/yaru_wide_layout.dart';
-export 'src/extensions/inner_border_radius.dart';
+export 'src/extensions/border_radius_extension.dart';
