@@ -247,7 +247,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   Widget _buildTextIndicator() {
     return Text(
       '${_index + 1}/${widget.children.length}',
-      style: Theme.of(context).textTheme.caption,
+      style: Theme.of(context).textTheme.bodySmall,
       textAlign: TextAlign.center,
     );
   }

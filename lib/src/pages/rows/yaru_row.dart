@@ -75,7 +75,7 @@ class YaruRow extends StatelessWidget {
     return DefaultTextStyle(
       style: TextStyle(
         color: enabled
-            ? Theme.of(context).textTheme.bodyText1!.color
+            ? Theme.of(context).textTheme.bodyLarge!.color
             : Theme.of(context).disabledColor,
       ),
       child: SizedBox(
@@ -106,8 +106,8 @@ class YaruRow extends StatelessWidget {
                         child: Text(
                           description!,
                           style: enabled
-                              ? Theme.of(context).textTheme.caption
-                              : Theme.of(context).textTheme.caption?.copyWith(
+                              ? Theme.of(context).textTheme.bodySmall
+                              : Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: Theme.of(context).disabledColor,
                                   ),
                         ),
