@@ -37,29 +37,6 @@ final examplePageItems = <YaruPageItem>[
     builder: (_) => ExtraOptionRowPage(),
   ),
   YaruPageItem(
-    titleBuilder: (context) => YaruPageItemTitle.text('YaruAnimatedIcons'),
-    iconData: YaruIcons.ok,
-    builder: (_) => YaruPage(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 25),
-          child: YaruAnimatedOkIcon(
-            size: 96,
-            color: YaruColors.success,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 25),
-          child: YaruAnimatedOkIcon(
-            size: 96,
-            filled: true,
-            color: YaruColors.success,
-          ),
-        ),
-      ],
-    ),
-  ),
-  YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruProgressIndicator'),
     iconData: YaruIcons.download,
     builder: (_) => YaruPage(
