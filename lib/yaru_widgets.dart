@@ -1,8 +1,5 @@
 library yaru_widgets;
 
-// Animations
-export 'src/animations/yaru_animated_ok_icon.dart';
-
 // Controls
 export 'src/controls/yaru_color_disk.dart';
 export 'src/controls/yaru_color_picker_button.dart';
