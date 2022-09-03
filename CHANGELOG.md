@@ -1,3 +1,12 @@
+# 0.2.2
+
+* Add many snap store related icons
+* Add synchronizing icon
+* Add education icons
+* Better text-editor icons
+* Add external-link icon
+* Import animated icons from yaru_widgets.dart
+
 # 0.2.1
 
 * Add new *document-history*, *image-history*, *search-history*, *audio-history*, *video-history*, *history*, *download-history* icons.
