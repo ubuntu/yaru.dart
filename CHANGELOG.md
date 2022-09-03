@@ -1,5 +1,26 @@
 # Changelog
 
+# 1.1.2
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - WideLayout: icon and text color improvements
+  - Fix wide layout text regression
+  - YaruBanner: add optional width parameter
+  - YaruBanner: add more subtitle freedom
+  - YaruBanner: make the hover color gray
+  - YaruBanner: wrap inkwell in material for zindex
+
+- [Paul Kepinski](https://github.com/Jupi007)
+  - Add new YaruPageItemTitle widget
+  - Move widgets to subfolders
+  - Export inner_border_radius.dart
+  - Add correct favicons and change meta title
+  - Add icons for the web PWA
+  - Move tests to subfolders
+  - Flutter 3.1 deprecations
+  - Improve BorderRadius extension
+  - Order yaru_widgets exports
+
 # 1.1.1
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
