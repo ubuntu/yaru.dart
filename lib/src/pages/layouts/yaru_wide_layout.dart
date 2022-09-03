@@ -87,7 +87,8 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                           ),
-                          backgroundColor: Theme.of(context).backgroundColor,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
                           selectedIndex: _selectedIndex,
                           onDestinationSelected: (index) {
                             widget.onSelected!(index);
