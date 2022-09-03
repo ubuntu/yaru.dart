@@ -112,7 +112,7 @@ class YaruBanner extends StatelessWidget {
                 width: bannerWidth,
                 borderRadius: borderRadius,
                 color: light
-                    ? Theme.of(context).backgroundColor
+                    ? Theme.of(context).colorScheme.background
                     : Theme.of(context).colorScheme.onSurface.withOpacity(0.01),
                 elevation: light ? 2 : 1,
                 icon: icon ??
