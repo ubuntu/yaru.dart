@@ -1,6 +1,11 @@
+import 'package:example/src/animated_icons_grid.dart';
+import 'package:example/src/icon_size_provider.dart';
+import 'package:example/src/icons_grid.dart';
+import 'package:provider/provider.dart';
+import 'package:yaru_colors/yaru_colors.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart' as yaru;
+import 'package:yaru/yaru.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,95 +16,54 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Yaru Icons Demo',
-      theme: yaru.lightTheme,
-      darkTheme: yaru.darkTheme,
       debugShowCheckedModeBanner: false,
-      home: const YaruIconsGrid(),
-    );
-  }
-}
+      home: YaruTheme(
+        child: ChangeNotifierProvider(
+          create: (context) => IconSizeProvider(),
+          builder: (context, child) {
+            final iconSizeProvider = Provider.of<IconSizeProvider>(context);
 
-@immutable
-class YaruIconsData extends IconData {
-  const YaruIconsData(int codePoint)
-      : super(
-          codePoint,
-          fontFamily: 'YaruIcons',
-          fontPackage: 'yaru_icons',
-        );
-}
-
-class YaruIconsGrid extends StatefulWidget {
-  const YaruIconsGrid({Key? key}) : super(key: key);
-
-  @override
-  _YaruIconsGridState createState() => _YaruIconsGridState();
-}
-
-class _YaruIconsGridState extends State<YaruIconsGrid>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  static const _from = 0xf101;
-  static const _to = 0xf2bd;
-
-  double _iconsSize = 24;
-  bool _isMinIconsSize() => _iconsSize <= 16 ? true : false;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(YaruIcons.ubuntu_logo, color: yaru.Colors.orange),
-        title: Text('Flutter Yaru Icons Demo (${_iconsSize.truncate()}px)'),
-        actions: [
-          TextButton(
-              onPressed: _isMinIconsSize() ? null : _decreaseIconsSize,
-              child: Icon(YaruIcons.minus)),
-          TextButton(onPressed: _increaseIconsSize, child: Icon(YaruIcons.plus))
-        ],
-      ),
-      body: GridView.extent(
-        padding: const EdgeInsets.all(24),
-        maxCrossAxisExtent: _iconsSize + 48,
-        children: List.generate(_to - _from + 1, (index) {
-          final code = index + _from;
-          return Column(
-            children: [
-              Icon(YaruIconsData(code), size: _iconsSize),
-              const SizedBox(height: 8),
-              Text('ex' + code.toRadixString(16),
-                  style: TextStyle(color: Colors.grey[600])),
-            ],
-          );
-        }),
+            return DefaultTabController(
+              length: 2,
+              child: Scaffold(
+                appBar: AppBar(
+                  leading:
+                      Icon(YaruIcons.ubuntu_logo, color: YaruColors.orange),
+                  title: Consumer<IconSizeProvider>(
+                    builder: (context, iconsSize, _) => Text(
+                      'Flutter Yaru Icons Demo (${iconsSize.size.truncate()}px)',
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: iconSizeProvider.isMinSize()
+                          ? null
+                          : iconSizeProvider.decreaseSize,
+                      child: Icon(YaruIcons.minus),
+                    ),
+                    TextButton(
+                      onPressed: iconSizeProvider.increaseSize,
+                      child: Icon(YaruIcons.plus),
+                    )
+                  ],
+                  bottom: TabBar(
+                    tabs: [
+                      Tab(text: 'Static Icons'),
+                      Tab(text: 'Animated Icons'),
+                    ],
+                  ),
+                ),
+                body: TabBarView(
+                  children: [
+                    YaruIconsGrid(),
+                    YaruAnimatedIconsGrid(),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
-  }
-
-  void _increaseIconsSize() {
-    setState(() {
-      _iconsSize += 8;
-    });
-  }
-
-  void _decreaseIconsSize() {
-    setState(() {
-      if (!_isMinIconsSize()) {
-        _iconsSize -= 8;
-      }
-    });
   }
 }

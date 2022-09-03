@@ -23,7 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  yaru: ^0.1.0
+  provider: ^6.0.3
+  yaru: ^0.3.3
+  yaru_colors: ^0.1.0
   yaru_icons:
     path: ../
 
