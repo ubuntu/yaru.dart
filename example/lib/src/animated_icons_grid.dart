@@ -24,7 +24,11 @@ class YaruAnimatedIconsGrid extends StatelessWidget {
             size: iconSizeProvider.size,
             filled: true,
             color: YaruColors.success,
-          )
+          ),
+          YaruAnimatedNoNetworkIcon(
+            size: iconSizeProvider.size,
+            color: YaruColors.red,
+          ),
         ],
       ),
     );
