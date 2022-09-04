@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 const _kTargetCanvasSize = 24.0;
 const _kTargetIconSize = 20.0;
 const _kAnimationCurve = Curves.easeInCubic;
-const _kAnimationDuration = 400;
+const _kAnimationDuration = 500;
 
 /// An animated Yaru ok icon, similar to the original one
 class YaruAnimatedOkIcon extends StatefulWidget {
@@ -38,8 +38,8 @@ class YaruAnimatedOkIcon extends StatefulWidget {
 
 class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>
     with TickerProviderStateMixin {
-  late Animation<double> _animation;
-  late AnimationController _controller;
+  late final Animation<double> _animation;
+  late final AnimationController _controller;
 
   @override
   void initState() {
@@ -107,33 +107,54 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     if (filled && animationPosition >= 0.5) {
-      canvas.drawPath(
-        Path.combine(
-          PathOperation.difference,
-          _createCirclePath(),
-          _createCheckmarkPath(),
-        ),
-        _createFillPaint(),
+      final clipRect = Rect.fromCenter(
+        center: Offset.zero,
+        width: this.size * 2,
+        height: this.size * 2,
       );
+      final clipPath = Path.combine(
+          PathOperation.difference,
+          Path()..addRect(clipRect),
+          Path.combine(
+            PathOperation.intersect,
+            _createCheckmarkPath(true),
+            _createInnerCirclePath(true),
+          ));
+
+      canvas.save();
+      canvas.clipPath(clipPath);
+      canvas.saveLayer(clipRect, Paint());
+
+      canvas.drawPath(_createOuterCirclePath(), _createStrokePaint());
+      canvas.drawPath(_createInnerCirclePath(false), _createFillPaint());
+      canvas.drawPath(_createCheckmarkPath(false), _createFillPaint());
+
+      canvas.restore();
+      canvas.restore();
     } else {
-      canvas.drawPath(_createCheckmarkPath(), _createFillPaint());
-      canvas.drawPath(_createCirclePath(), _createStrokePaint());
+      canvas.drawPath(_createCheckmarkPath(false), _createFillPaint());
+      canvas.drawPath(_createOuterCirclePath(), _createStrokePaint());
     }
   }
 
-  Path _createCheckmarkPath() {
-    final Path checkmark = Path();
-    final Offset start1 = Offset(size * 0.354, size * 0.477);
-    final Offset start2 = Offset(size * 0.310, size * 0.521);
-    final Offset mid1 = Offset(size * 0.521, size * 0.643);
-    final Offset mid2 = Offset(size * 0.521, size * 0.732);
-    final Offset end1 = Offset(size * 0.865, size * 0.299);
-    final Offset end2 = Offset(size * 0.892, size * 0.360);
+  /// [long] param is used to increase the end path size for canvas clip
+  Path _createCheckmarkPath(bool long) {
+    final checkmark = Path();
+    final start1 = Offset(size * 0.354, size * 0.477);
+    final start2 = Offset(size * 0.310, size * 0.521);
+    final mid1 = Offset(size * 0.521, size * 0.643);
+    final mid2 = Offset(size * 0.521, size * 0.732);
+    final end1 = long
+        ? Offset(size * 0.895, size * 0.270)
+        : Offset(size * 0.865, size * 0.299);
+    final end2 = long
+        ? Offset(size * 0.939, size * 0.314)
+        : Offset(size * 0.892, size * 0.360);
 
     if (animationPosition < 0.5) {
-      final double pathT = animationPosition * 2.0;
-      final Offset drawMid1 = Offset.lerp(start1, mid1, pathT)!;
-      final Offset drawMid2 = Offset.lerp(start2, mid2, pathT)!;
+      final pathT = animationPosition * 2.0;
+      final drawMid1 = Offset.lerp(start1, mid1, pathT)!;
+      final drawMid2 = Offset.lerp(start2, mid2, pathT)!;
 
       checkmark.moveTo(start1.dx, start1.dy);
       checkmark.lineTo(drawMid1.dx, drawMid1.dy);
@@ -141,9 +162,9 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
       checkmark.lineTo(start2.dx, start2.dy);
       checkmark.close();
     } else {
-      final double pathT = (animationPosition - 0.5) * 2.0;
-      final Offset drawEnd1 = Offset.lerp(mid1, end1, pathT)!;
-      final Offset drawEnd2 = Offset.lerp(mid2, end2, pathT)!;
+      final pathT = (animationPosition - 0.5) * 2.0;
+      final drawEnd1 = Offset.lerp(mid1, end1, pathT)!;
+      final drawEnd2 = Offset.lerp(mid2, end2, pathT)!;
 
       checkmark.moveTo(start1.dx, start1.dy);
       checkmark.lineTo(mid1.dx, mid1.dy);
@@ -157,7 +178,7 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
     return checkmark;
   }
 
-  Path _createCirclePath() {
+  Path _createOuterCirclePath() {
     final finalCircleRadius =
         (size / 2 - 1) * _kTargetIconSize / _kTargetCanvasSize;
     // From 1.0 to 0.75 to 1.0
@@ -171,6 +192,26 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
         Rect.fromCircle(
           center: Offset(size / 2, size / 2),
           radius: circleRadius,
+        ),
+      );
+  }
+
+  /// [large] param is used to increase circle radius from half pain stroke for canvas clip
+  Path _createInnerCirclePath(bool large) {
+    final finalCircleRadius =
+        (size / 2 - 1) * _kTargetIconSize / _kTargetCanvasSize;
+    // From 1.0 to 0.75 to 1.0
+    final circleRadius = animationPosition < 0.5
+        ? 0.0
+        : (animationPosition - 0.5) * 2 * finalCircleRadius;
+
+    return Path()
+      ..addOval(
+        Rect.fromCircle(
+          center: Offset(size / 2, size / 2),
+          radius: large
+              ? circleRadius + (1 / (_kTargetCanvasSize / size) / 2)
+              : circleRadius,
         ),
       );
   }
