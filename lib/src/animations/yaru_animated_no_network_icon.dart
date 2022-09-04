@@ -28,7 +28,7 @@ class YaruAnimatedNoNetworkIcon extends StatefulWidget {
   final Function? onCompleted;
 
   @override
-  _YaruAnimatedNoNetworkIconState createState() =>
+  State<YaruAnimatedNoNetworkIcon> createState() =>
       _YaruAnimatedNoNetworkIconState();
 }
 
@@ -192,14 +192,12 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   }
 
   Path _getStripe2Path() {
-    final start1 = Offset(this.size * 0.2108561, this.size * 0.08081055);
-    final start2 = Offset(this.size * 0.1813965, this.size * 0.1102702);
-    final end1 = Offset(this.size * 0.8358561, this.size * 0.7058105);
-    final end2 = Offset(this.size * 0.8063965, this.size * 0.7352702);
+    final start1 = Offset(size * 0.2108561, size * 0.08081055);
+    final start2 = Offset(size * 0.1813965, size * 0.1102702);
+    final end1 = Offset(size * 0.8358561, size * 0.7058105);
+    final end2 = Offset(size * 0.8063965, size * 0.7352702);
 
     final localAnimationPosition = _computeLocalAnimationPosition(.4, .6);
-
-    print(localAnimationPosition);
 
     final drawEnd1 = Offset.lerp(start1, end1, localAnimationPosition)!;
     final drawEnd2 = Offset.lerp(start2, end2, localAnimationPosition)!;
@@ -228,8 +226,8 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
 
   void _drawDot(Canvas canvas) {
     canvas.drawCircle(
-      Offset(this.size * 0.5, this.size * 0.7916667),
-      (this.size * 0.08333333) * _computeLocalAnimationPosition(0, .1),
+      Offset(size * 0.5, size * 0.7916667),
+      (size * 0.08333333) * _computeLocalAnimationPosition(0, .1),
       _getFillPaint(),
     );
   }

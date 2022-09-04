@@ -33,7 +33,7 @@ class YaruAnimatedOkIcon extends StatefulWidget {
   final Function? onCompleted;
 
   @override
-  _YaruAnimatedOkIconState createState() => _YaruAnimatedOkIconState();
+  State<YaruAnimatedOkIcon> createState() => _YaruAnimatedOkIconState();
 }
 
 class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>

@@ -16,3 +16,5 @@ flutter:
     - family: YaruIcons
       fonts:
         - asset: assets/ui_icons.ttf
+dev_dependencies:
+  flutter_lints: ^2.0.1
