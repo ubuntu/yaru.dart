@@ -88,9 +88,7 @@ class _HomeState extends State<Home> {
       theme: context.watch<LightTheme>().value,
       darkTheme: context.watch<DarkTheme>().value,
       home: _compactMode
-          ? YaruCompactLayout(
-              pageItems: [configItem] + examplePageItems.take(_amount).toList(),
-            )
+          ? _CompactPage(configItem: configItem, amount: _amount)
           : YaruMasterDetailPage(
               leftPaneWidth: 280,
               previousIconData: YaruIcons.go_previous,
@@ -107,6 +105,28 @@ class _HomeState extends State<Home> {
                 searchIconData: YaruIcons.search,
               ),
             ),
+    );
+  }
+}
+
+class _CompactPage extends StatelessWidget {
+  const _CompactPage({
+    Key? key,
+    required this.configItem,
+    required int amount,
+  })  : _amount = amount,
+        super(key: key);
+
+  final YaruPageItem configItem;
+  final int _amount;
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
+    return YaruCompactLayout(
+      extendNavigationRail: width > 1000,
+      pageItems: [configItem] + examplePageItems.take(_amount).toList(),
     );
   }
 }
