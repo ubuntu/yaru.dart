@@ -21,12 +21,17 @@ class YaruWideLayout extends StatefulWidget {
   /// Optionally control the labels of the [NavigationRail]
   final NavigationRailLabelType? labelType;
 
+  /// Defines if the labels are shown right to the icon
+  /// of the [NavigationRail]
+  final bool extended;
+
   const YaruWideLayout({
     Key? key,
     required this.pageItems,
     required this.initialIndex,
     this.scrollController,
     this.labelType = NavigationRailLabelType.selected,
+    this.extended = false,
     required this.onSelected,
   }) : super(key: key);
 
@@ -65,6 +70,10 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                           BoxConstraints(minHeight: constraint.maxHeight),
                       child: IntrinsicHeight(
                         child: NavigationRail(
+                          extended:
+                              widget.labelType == NavigationRailLabelType.none
+                                  ? widget.extended
+                                  : false,
                           unselectedIconTheme: IconThemeData(
                             color: unselectedTextColor,
                           ),
