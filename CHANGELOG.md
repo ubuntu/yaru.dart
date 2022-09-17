@@ -1,5 +1,14 @@
 # Changelog
 
+# 1.1.3
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - CompactLayout: expose extended property (#205)
+- [J-P Nurmi](https://github.com/jpnurmi)
+  - Master-detail: use the new page transitions in yaru.dart (#204)
+- [Paul Kepinski](https://github.com/Jupi007)
+  - Fix Flutter 3.3 deprecations (#199)
+
 # 1.1.2
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
