@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/src/pages/layouts/yaru_page_item_list_view.dart';
 
 import 'yaru_page_item.dart';
@@ -101,9 +102,23 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                   ),
                 ),
                 Expanded(
-                  child: widget.pageItems.length > _selectedIndex
-                      ? widget.pageItems[_selectedIndex].builder(context)
-                      : widget.pageItems[0].builder(context),
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+                    ),
+                    child: Navigator(
+                      pages: [
+                        MaterialPage(
+                          key: ValueKey(_selectedIndex),
+                          child: widget.pageItems.length > _selectedIndex
+                              ? widget.pageItems[_selectedIndex]
+                                  .builder(context)
+                              : widget.pageItems[0].builder(context),
+                        ),
+                      ],
+                      onPopPage: (route, result) => route.didPop(result),
+                    ),
+                  ),
                 ),
               ],
             ),

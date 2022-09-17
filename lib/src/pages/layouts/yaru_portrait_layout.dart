@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/src/pages/layouts/yaru_page_item_list_view.dart';
 
 import 'yaru_page_item.dart';
@@ -82,25 +83,30 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => !await _navigator.maybePop(),
-      child: Navigator(
-        key: _navigatorKey,
-        onGenerateInitialRoutes: (navigator, initialRoute) {
-          return [
-            MaterialPageRoute(
-              builder: (context) {
-                return Scaffold(
-                  appBar: widget.appBar,
-                  body: YaruPageItemListView(
-                    selectedIndex: _selectedIndex,
-                    onTap: _onTap,
-                    pages: widget.pageItems,
-                  ),
-                );
-              },
-            ),
-            if (_selectedIndex != -1) pageRoute(_selectedIndex)
-          ];
-        },
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          pageTransitionsTheme: YaruPageTransitionsTheme.horizontal,
+        ),
+        child: Navigator(
+          key: _navigatorKey,
+          onGenerateInitialRoutes: (navigator, initialRoute) {
+            return [
+              MaterialPageRoute(
+                builder: (context) {
+                  return Scaffold(
+                    appBar: widget.appBar,
+                    body: YaruPageItemListView(
+                      selectedIndex: _selectedIndex,
+                      onTap: _onTap,
+                      pages: widget.pageItems,
+                    ),
+                  );
+                },
+              ),
+              if (_selectedIndex != -1) pageRoute(_selectedIndex)
+            ];
+          },
+        ),
       ),
     );
   }
