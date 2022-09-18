@@ -1,3 +1,9 @@
+# 0.2.3
+
+* Add YaruAnimatedNoNetworkIcon
+* YaruAnimatedOkIcon improvements
+* Add linter
+
 # 0.2.2
 
 * Add many snap store related icons
