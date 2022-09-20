@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 /// Creates a [NavigationRail] wrapped inside [Row]
@@ -125,7 +126,23 @@ class _YaruWideLayoutState extends State<YaruWideLayout> {
                 ),
                 const VerticalDivider(thickness: 1, width: 1),
                 Expanded(
-                  child: widget.pageItems[_selectedIndex].builder(context),
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+                    ),
+                    child: Navigator(
+                      pages: [
+                        MaterialPage(
+                          key: ValueKey(_selectedIndex),
+                          child: widget.pageItems.length > _selectedIndex
+                              ? widget.pageItems[_selectedIndex]
+                                  .builder(context)
+                              : widget.pageItems[0].builder(context),
+                        ),
+                      ],
+                      onPopPage: (route, result) => route.didPop(result),
+                    ),
+                  ),
                 )
               ],
             ),
