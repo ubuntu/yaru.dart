@@ -24,10 +24,8 @@ export 'src/pages/yaru_tabbed_page.dart';
 // Pages layouts
 export 'src/pages/layouts/yaru_compact_layout.dart';
 export 'src/pages/layouts/yaru_master_detail_page.dart';
-export 'src/pages/layouts/yaru_narrow_layout.dart';
 export 'src/pages/layouts/yaru_page_item.dart';
 export 'src/pages/layouts/yaru_page_item_title.dart';
-export 'src/pages/layouts/yaru_wide_layout.dart';
 
 // Pages rows
 export 'src/pages/rows/yaru_checkbox_row.dart';
