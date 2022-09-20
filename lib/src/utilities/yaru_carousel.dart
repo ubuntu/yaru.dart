@@ -177,15 +177,20 @@ class _YaruCarouselState extends State<YaruCarousel> {
     Widget icon,
   ) {
     return Positioned.fill(
-      child: Align(
-        alignment: alignement,
-        child: OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            shape: const CircleBorder(),
-            backgroundColor: Theme.of(context).colorScheme.background,
+      child: AnimatedOpacity(
+        opacity: onPressed != null ? 1 : 0,
+        duration: _kAnimationDuration,
+        curve: _kAnimationCurve,
+        child: Align(
+          alignment: alignement,
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              shape: const CircleBorder(),
+              backgroundColor: Theme.of(context).colorScheme.background,
+            ),
+            onPressed: onPressed,
+            child: icon,
           ),
-          onPressed: onPressed,
-          child: icon,
         ),
       ),
     );
