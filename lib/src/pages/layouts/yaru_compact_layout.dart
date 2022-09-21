@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 /// A responsive layout switching between [YaruWideLayout]
@@ -7,19 +8,15 @@ class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
     Key? key,
     required this.pageItems,
-    this.narrowLayoutMaxWidth = 600,
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
     this.labelType = NavigationRailLabelType.none,
-    this.bottomNavigationBarType = BottomNavigationBarType.fixed,
     this.extendNavigationRail = false,
+    this.initialIndex = 0,
   }) : super(key: key);
 
   /// The list of [YaruPageItem] has to be provided.
   final List<YaruPageItem> pageItems;
-
-  /// The max width after the layout switches to the [YaruWideLayout], defaults to 600.
-  final double narrowLayoutMaxWidth;
 
   /// Optional bool to hide selected labels in the [BottomNavigationBar]
   final bool showSelectedLabels;
@@ -30,50 +27,105 @@ class YaruCompactLayout extends StatefulWidget {
   /// Optionally control the labels of the [NavigationRail]
   final NavigationRailLabelType labelType;
 
-  /// Optionally control the click behavior of the [BottomNavigationBar]
-  final BottomNavigationBarType bottomNavigationBarType;
-
   /// Defines if the labels are shown right to the icon
   /// of the [NavigationRail] in the wide layout
   final bool extendNavigationRail;
+
+  /// The index of the [YaruPageItem] that is selected from [pageItems]
+  final int initialIndex;
 
   @override
   State<YaruCompactLayout> createState() => _YaruCompactLayoutState();
 }
 
 class _YaruCompactLayoutState extends State<YaruCompactLayout> {
-  var _index = -1;
-  var _previousIndex = 0;
+  late int _index;
 
-  void _setIndex(int index) {
-    _previousIndex = _index;
-    _index = index;
+  @override
+  void initState() {
+    _index = widget.initialIndex;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final unselectedTextColor =
+        Theme.of(context).colorScheme.onSurface.withOpacity(0.8);
+    final selectedTextColor = Theme.of(context).colorScheme.onSurface;
     return SafeArea(
       child: Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) =>
-              constraints.maxWidth > widget.narrowLayoutMaxWidth
-                  ? YaruWideLayout(
-                      labelType: widget.labelType,
-                      pageItems: widget.pageItems,
-                      initialIndex: _index == -1 ? _previousIndex : _index,
-                      onSelected: _setIndex,
-                      extended: widget.labelType == NavigationRailLabelType.none
-                          ? widget.extendNavigationRail
-                          : false,
-                    )
-                  : YaruNarrowLayout(
-                      showSelectedLabels: widget.showSelectedLabels,
-                      showUnselectedLabels: widget.showUnselectedLabels,
-                      bottomNavigationBarType: widget.bottomNavigationBarType,
-                      pageItems: widget.pageItems,
-                      initialIndex: _index == -1 ? _previousIndex : _index,
-                      onSelected: _setIndex,
+        body: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SingleChildScrollView(
+              child: IntrinsicHeight(
+                child: NavigationRail(
+                  extended: widget.labelType == NavigationRailLabelType.none
+                      ? widget.extendNavigationRail
+                      : false,
+                  unselectedIconTheme: IconThemeData(
+                    color: unselectedTextColor,
+                  ),
+                  indicatorColor:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+                  selectedIconTheme: IconThemeData(
+                    color: selectedTextColor,
+                  ),
+                  selectedLabelTextStyle: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    color: selectedTextColor,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  unselectedLabelTextStyle: TextStyle(
+                    color: unselectedTextColor,
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  selectedIndex: _index,
+                  onDestinationSelected: (index) {
+                    setState(() => _index = index);
+                  },
+                  labelType: widget.labelType,
+                  destinations: widget.pageItems
+                      .map(
+                        (pageItem) => NavigationRailDestination(
+                          icon: pageItem.itemWidget ?? Icon(pageItem.iconData),
+                          selectedIcon: pageItem.selectedItemWidget ??
+                              pageItem.itemWidget ??
+                              (pageItem.selectedIconData != null
+                                  ? Icon(pageItem.selectedIconData)
+                                  : Icon(pageItem.iconData)),
+                          label: pageItem.titleBuilder(context),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ),
+            const VerticalDivider(thickness: 1, width: 1),
+            Expanded(
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+                ),
+                child: Navigator(
+                  pages: [
+                    MaterialPage(
+                      key: ValueKey(_index),
+                      child: widget.pageItems.length > _index
+                          ? widget.pageItems[_index].builder(context)
+                          : widget.pageItems[0].builder(context),
                     ),
+                  ],
+                  onPopPage: (route, result) => route.didPop(result),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
