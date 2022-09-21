@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.1.5
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - Comact layout fixes (#214)
+
 # 1.1.4
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
