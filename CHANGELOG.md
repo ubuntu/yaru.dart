@@ -1,5 +1,15 @@
 # Changelog
 
+# 1.1.4
+
+- [Frederik Feichtmeier](https://github.com/Feichtmeier)
+  - YaruCompactLayout: simplify and remove appbar mode (#212)
+  - WideLayout: add yaru transition (#210)
+- [J-P Nurmi](https://github.com/jpnurmi)
+  - Fix version constraints (#207)
+- [Paul Kepinski](https://github.com/Jupi007)
+  - Hide control buttons when first/last page reached (#209)
+
 # 1.1.3
 
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
