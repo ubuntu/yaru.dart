@@ -111,7 +111,12 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
                               Theme.of(context).colorScheme.background,
                           selectedIndex: _index,
                           onDestinationSelected: (index) {
-                            setState(() => _index = index);
+                            if (widget.pageItems[index].onTap != null) {
+                              widget.pageItems[index].onTap!(context);
+                            }
+                            setState(() {
+                              _index = index;
+                            });
                           },
                           labelType: widget.labelType,
                           destinations: widget.pageItems

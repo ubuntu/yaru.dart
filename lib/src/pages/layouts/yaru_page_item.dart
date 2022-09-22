@@ -9,6 +9,7 @@ class YaruPageItem {
     this.searchMatches,
     this.itemWidget,
     this.selectedItemWidget,
+    this.onTap,
   });
 
   /// We recommend to use [YaruPageItemTitle] here to avoid line wrap
@@ -20,4 +21,5 @@ class YaruPageItem {
   final Widget? selectedItemWidget;
   final IconData? selectedIconData;
   final bool Function(String value, BuildContext context)? searchMatches;
+  final void Function(BuildContext context)? onTap;
 }
