@@ -5,7 +5,7 @@ import 'package:yaru_widgets/src/extensions/border_radius_extension.dart';
 class YaruSelectableContainer extends StatelessWidget {
   /// Creates a Image Tile from the image path given in the path property.
   const YaruSelectableContainer({
-    Key? key,
+    super.key,
     required this.child,
     this.onTap,
     required this.selected,
@@ -13,7 +13,7 @@ class YaruSelectableContainer extends StatelessWidget {
     this.radius = kDefaultContainerRadius,
     this.padding,
     this.selectionColor,
-  }) : super(key: key);
+  });
 
   // The child which will be selected with [onTap]
   final Widget child;

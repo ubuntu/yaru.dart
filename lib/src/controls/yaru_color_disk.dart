@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class YaruColorDisk extends StatelessWidget {
   const YaruColorDisk({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.color,
     required this.selected,
-  }) : super(key: key);
+  });
 
   final VoidCallback onPressed;
   final Color color;

@@ -8,7 +8,7 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 ///
 class YaruDialogTitle extends StatelessWidget {
   const YaruDialogTitle({
-    Key? key,
+    super.key,
     this.title,
     this.closeIconData = Icons.close,
     this.textAlign,
@@ -16,7 +16,7 @@ class YaruDialogTitle extends StatelessWidget {
     this.crossAxisAlignment,
     this.onPressed,
     this.titleWidget,
-  }) : super(key: key);
+  });
 
   /// The [String] used for the title
   final String? title;

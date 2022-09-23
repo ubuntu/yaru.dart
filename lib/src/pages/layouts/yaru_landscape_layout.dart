@@ -7,13 +7,13 @@ import 'yaru_page_item.dart';
 class YaruLandscapeLayout extends StatefulWidget {
   /// Creates a landscape layout
   const YaruLandscapeLayout({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.pageItems,
     required this.onSelected,
     required this.leftPaneWidth,
     this.appBar,
-  }) : super(key: key);
+  });
 
   /// Current index of the selected page.
   final int selectedIndex;

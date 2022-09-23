@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class YaruSafeImage extends StatelessWidget {
   const YaruSafeImage({
-    Key? key,
+    super.key,
     required this.url,
     this.filterQuality = FilterQuality.medium,
     this.fit = BoxFit.fitHeight,
     this.fallBackIconData = Icons.image,
     this.iconSize = 65,
-  }) : super(key: key);
+  });
 
   final String? url;
   final FilterQuality filterQuality;

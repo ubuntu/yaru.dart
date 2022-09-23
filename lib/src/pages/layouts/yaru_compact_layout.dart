@@ -6,7 +6,7 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 /// and [YaruNarrowLayout] depening on the screen width.
 class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
-    Key? key,
+    super.key,
     required this.pageItems,
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
@@ -14,7 +14,7 @@ class YaruCompactLayout extends StatefulWidget {
     this.extendNavigationRail = false,
     this.initialIndex = 0,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   /// The list of [YaruPageItem] has to be provided.
   final List<YaruPageItem> pageItems;

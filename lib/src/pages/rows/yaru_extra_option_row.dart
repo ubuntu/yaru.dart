@@ -5,7 +5,7 @@ import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
 class YaruExtraOptionRow extends StatelessWidget {
   /// Creates a row having switch, label, description and YaruOptionButton.
   const YaruExtraOptionRow({
-    Key? key,
+    super.key,
     this.enabled = true,
     required this.actionLabel,
     this.actionDescription,
@@ -21,7 +21,7 @@ class YaruExtraOptionRow extends StatelessWidget {
     this.verticalDirection = VerticalDirection.down,
     this.textDirection,
     this.textBaseline,
-  }) : super(key: key);
+  });
 
   /// Whether or not we can interact with the widget
   final bool enabled;

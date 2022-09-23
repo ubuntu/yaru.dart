@@ -6,14 +6,14 @@ const _kAnimationCurve = Curves.easeInOutCubic;
 
 class YaruExpandable extends StatefulWidget {
   const YaruExpandable({
-    Key? key,
+    super.key,
     required this.header,
     this.expandIcon,
     required this.child,
     this.collapsedChild,
     this.isExpanded = false,
     this.onChange,
-  }) : super(key: key);
+  });
 
   /// Widget placed in the header, against the expand button
   final Widget header;

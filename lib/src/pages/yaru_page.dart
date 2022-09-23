@@ -6,11 +6,11 @@ import 'package:yaru_widgets/src/constants.dart';
 /// but can be set if wanted.
 class YaruPage extends StatelessWidget {
   const YaruPage({
-    Key? key,
+    super.key,
     required this.children,
     this.padding,
     this.controller,
-  }) : super(key: key);
+  });
 
   final List<Widget> children;
   final EdgeInsets? padding;

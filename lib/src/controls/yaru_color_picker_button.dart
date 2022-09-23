@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 /// A squared [OutlinedButton] with a colorable disk inside and a [VoidCallback] forwarded to [onPressed]
 class YaruColorPickerButton extends StatelessWidget {
   const YaruColorPickerButton({
-    Key? key,
+    super.key,
     this.enabled = true,
     required this.color,
     required this.onPressed,
     this.size = 40.0,
-  }) : super(key: key);
+  });
 
   /// Whether or not we can interact with the button
   final bool enabled;

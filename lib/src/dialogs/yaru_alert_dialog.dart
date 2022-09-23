@@ -4,7 +4,7 @@ import 'package:yaru_widgets/src/dialogs/yaru_dialog_title.dart';
 
 class YaruAlertDialog extends StatelessWidget {
   const YaruAlertDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.child,
     this.closeIconData,
@@ -15,7 +15,7 @@ class YaruAlertDialog extends StatelessWidget {
     this.actions,
     this.contentPadding = EdgeInsets.zero,
     this.scrollable = false,
-  }) : super(key: key);
+  });
 
   /// The title of the dialog, displayed in a large font at the top of the [YaruDialogTitle].
   final String title;

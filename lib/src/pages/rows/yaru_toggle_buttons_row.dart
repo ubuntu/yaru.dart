@@ -30,7 +30,7 @@ class YaruToggleButtonsRow extends StatelessWidget {
   ///         ),
   ///```
   const YaruToggleButtonsRow({
-    Key? key,
+    super.key,
     this.enabled = true,
     required this.actionLabel,
     this.actionDescription,
@@ -45,7 +45,7 @@ class YaruToggleButtonsRow extends StatelessWidget {
     this.verticalDirection = VerticalDirection.down,
     this.textDirection,
     this.textBaseline,
-  }) : super(key: key);
+  });
 
   /// Whether or not we can interact with the widget
   final bool enabled;

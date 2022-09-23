@@ -5,7 +5,7 @@ import 'package:yaru_widgets/src/dialogs/yaru_dialog_title.dart';
 class YaruSimpleDialog extends StatelessWidget {
   /// Create a [SimpleDialog] with a close button
   const YaruSimpleDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.closeIconData,
     required this.children,
@@ -13,7 +13,7 @@ class YaruSimpleDialog extends StatelessWidget {
     this.alignment,
     required this.width,
     this.titleTextAlign = TextAlign.center,
-  }) : super(key: key);
+  });
 
   /// The title of the dialog, displayed in a large font at the top of the [YaruDialogTitle].
   final String title;

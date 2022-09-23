@@ -4,7 +4,7 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 /// A colorable [Card] with a border which is tap-able via an [onTap] callback.
 class YaruBanner extends StatelessWidget {
   const YaruBanner({
-    Key? key,
+    super.key,
     this.onTap,
     this.surfaceTintColor,
     this.watermark = false,
@@ -17,7 +17,7 @@ class YaruBanner extends StatelessWidget {
     this.summaryTextOverflow,
     this.bannerWidth,
     this.subtitleWidget,
-  }) : super(key: key);
+  });
 
   /// The name of the card
   final String name;
@@ -135,7 +135,6 @@ class YaruBanner extends StatelessWidget {
 
 class _Banner extends StatelessWidget {
   const _Banner({
-    Key? key,
     required this.color,
     required this.title,
     this.summary,
@@ -147,7 +146,7 @@ class _Banner extends StatelessWidget {
     required this.titleTextOverflow,
     this.width,
     this.subtitleWidget,
-  }) : super(key: key);
+  });
 
   final Color color;
   final String title;

@@ -7,12 +7,12 @@ const double _kScrollbarMargin = 2.0;
 
 class YaruPageItemListView extends StatelessWidget {
   const YaruPageItemListView({
-    Key? key,
+    super.key,
     required this.pages,
     required this.selectedIndex,
     required this.onTap,
     this.materialTiles = false,
-  }) : super(key: key);
+  });
 
   final List<YaruPageItem> pages;
   final int selectedIndex;
@@ -68,12 +68,11 @@ class YaruPageItemListView extends StatelessWidget {
 
 class _YaruListTile extends StatelessWidget {
   const _YaruListTile({
-    Key? key,
     required this.selected,
     this.iconData,
     required this.onTap,
     required this.title,
-  }) : super(key: key);
+  });
 
   final bool selected;
   final IconData? iconData;

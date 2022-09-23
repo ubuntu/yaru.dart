@@ -6,13 +6,13 @@ import 'yaru_page_item.dart';
 
 class YaruPortraitLayout extends StatefulWidget {
   const YaruPortraitLayout({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.pageItems,
     required this.onSelected,
     this.previousIconData,
     this.appBar,
-  }) : super(key: key);
+  });
 
   final int selectedIndex;
   final List<YaruPageItem> pageItems;
