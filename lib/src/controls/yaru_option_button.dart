@@ -12,10 +12,10 @@ class YaruOptionButton extends StatelessWidget {
   /// ),
   /// ```
   const YaruOptionButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.child,
-  }) : super(key: key);
+  });
 
   /// Callback that gets invoked when the button is clicked.
   final VoidCallback? onPressed;

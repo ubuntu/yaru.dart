@@ -18,7 +18,7 @@ class YaruSwitchRow extends StatelessWidget {
   ///         ),
   ///```
   const YaruSwitchRow({
-    Key? key,
+    super.key,
     this.enabled = true,
     required this.trailingWidget,
     this.actionDescription,
@@ -32,7 +32,7 @@ class YaruSwitchRow extends StatelessWidget {
     this.verticalDirection = VerticalDirection.down,
     this.textDirection,
     this.textBaseline,
-  }) : super(key: key);
+  });
 
   /// Whether or not we can interact with the widget
   final bool enabled;

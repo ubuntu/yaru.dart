@@ -19,13 +19,13 @@ class YaruRoundToggleButton extends StatelessWidget {
   final double? size;
 
   const YaruRoundToggleButton({
-    Key? key,
+    super.key,
     required this.selected,
     required this.iconData,
     this.onPressed,
     this.tooltip,
     this.size = 40,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

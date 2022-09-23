@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// The official Ubuntu Logo
 class UbuntuLogo extends StatelessWidget {
-  const UbuntuLogo({Key? key}) : super(key: key);
+  const UbuntuLogo({super.key});
 
   @override
   Widget build(BuildContext context) {

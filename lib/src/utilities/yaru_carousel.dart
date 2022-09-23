@@ -6,7 +6,7 @@ const _kAnimationCurve = Curves.easeInOutCubic;
 
 class YaruCarousel extends StatefulWidget {
   const YaruCarousel({
-    Key? key,
+    super.key,
     this.height = 500,
     this.width = 500,
     required this.children,
@@ -19,7 +19,7 @@ class YaruCarousel extends StatefulWidget {
     this.navigationControls = false,
     this.previousIcon,
     this.nextIcon,
-  }) : super(key: key);
+  });
 
   /// The height of the children, defaults to 500.0.
   final double height;

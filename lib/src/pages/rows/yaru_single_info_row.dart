@@ -15,7 +15,7 @@ class YaruSingleInfoRow extends StatelessWidget {
   ///      );
   /// ```
   const YaruSingleInfoRow({
-    Key? key,
+    super.key,
     required this.infoLabel,
     required this.infoValue,
     this.width,
@@ -26,7 +26,7 @@ class YaruSingleInfoRow extends StatelessWidget {
     this.verticalDirection = VerticalDirection.down,
     this.textDirection,
     this.textBaseline,
-  }) : super(key: key);
+  });
 
   /// Specifies the label for the information and is placed at the trailing position.
   final String infoLabel;

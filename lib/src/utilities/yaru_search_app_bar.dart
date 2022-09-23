@@ -22,7 +22,7 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 /// ```
 class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   const YaruSearchAppBar({
-    Key? key,
+    super.key,
     this.searchController,
     required this.onChanged,
     required this.onEscape,
@@ -32,7 +32,7 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.textStyle,
     this.searchHint,
     this.clearSearchIconData,
-  }) : super(key: key);
+  });
 
   /// An optional [TextEditingController].
   final TextEditingController? searchController;

@@ -24,13 +24,13 @@ abstract class _YaruProgressIndicator extends StatefulWidget {
   /// for determinate progress indicators to indicate how much progress has been made.
   /// {@endtemplate}
   const _YaruProgressIndicator({
-    Key? key,
+    super.key,
     this.value,
     this.color,
     this.valueColor,
     this.semanticsLabel,
     this.semanticsValue,
-  }) : super(key: key);
+  });
 
   /// If non-null, the value of this progress indicator.
   ///
@@ -118,22 +118,14 @@ class YaruLinearProgressIndicator extends _YaruProgressIndicator {
   ///
   /// {@macro yaru.widget.YaruProgressIndicator.YaruProgressIndicator}
   const YaruLinearProgressIndicator({
-    Key? key,
-    double? value,
+    super.key,
+    super.value,
     this.minHeight = _kDefaultLinearProgressMinHeight,
-    Color? color,
-    Animation<Color?>? valueColor,
-    String? semanticsLabel,
-    String? semanticsValue,
-  })  : assert(minHeight > 0),
-        super(
-          key: key,
-          value: value,
-          color: color,
-          valueColor: valueColor,
-          semanticsLabel: semanticsLabel,
-          semanticsValue: semanticsValue,
-        );
+    super.color,
+    super.valueColor,
+    super.semanticsLabel,
+    super.semanticsValue,
+  })  : assert(minHeight > 0);
 
   /// The minimum height of the line used to draw the linear indicator (default: 6).
   final double minHeight;
@@ -407,21 +399,14 @@ class YaruCircularProgressIndicator extends _YaruProgressIndicator {
   ///
   /// {@macro yaru.widget.YaruProgressIndicator.YaruProgressIndicator}
   const YaruCircularProgressIndicator({
-    Key? key,
-    double? value,
+    super.key,
+    super.value,
     this.strokeWidth = _kDefaultCircularProgressStrokeWidth,
-    Color? color,
-    Animation<Color?>? valueColor,
-    String? semanticsLabel,
-    String? semanticsValue,
-  }) : super(
-          key: key,
-          value: value,
-          color: color,
-          valueColor: valueColor,
-          semanticsLabel: semanticsLabel,
-          semanticsValue: semanticsValue,
-        );
+    super.color,
+    super.valueColor,
+    super.semanticsLabel,
+    super.semanticsValue,
+  });
 
   /// The width of the line used to draw the circle.
   final double strokeWidth;

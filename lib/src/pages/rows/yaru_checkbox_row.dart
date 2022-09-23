@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class YaruCheckboxRow extends StatelessWidget {
   /// Creates a check box in a row along with a text
   const YaruCheckboxRow({
-    Key? key,
+    super.key,
     this.enabled = true,
     required this.value,
     required this.onChanged,
@@ -15,7 +15,7 @@ class YaruCheckboxRow extends StatelessWidget {
     this.textDirection,
     this.textBaseline,
     this.spaceSizedBox = const SizedBox(width: 4),
-  }) : super(key: key);
+  });
 
   /// Whether or not we can interact with the checkbox
   final bool enabled;

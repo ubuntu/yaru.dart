@@ -7,7 +7,7 @@ import 'package:yaru_widgets/src/constants.dart';
 /// If there is not enough space only the [tabIcons] are shown.
 class YaruTabbedPage extends StatefulWidget {
   const YaruTabbedPage({
-    Key? key,
+    super.key,
     required this.tabIcons,
     required this.tabTitles,
     required this.views,
@@ -19,7 +19,7 @@ class YaruTabbedPage extends StatefulWidget {
     ),
     this.initialIndex = 0,
     this.onTap,
-  }) : super(key: key);
+  });
 
   /// A list of [IconData] used inside the tabs - must have the same length as [tabTitles] and [views].
   final List<IconData> tabIcons;

@@ -9,13 +9,13 @@ const double _kPanelHeaderExpandedHeight = 64.0;
 /// A decorated [ExpansionPanelList]
 class YaruExpansionPanelList extends StatelessWidget {
   const YaruExpansionPanelList({
-    Key? key,
+    super.key,
     this.children = const <ExpansionPanel>[],
     required this.expansionCallback,
     this.animationDuration = kThemeAnimationDuration,
     this.elevation,
     this.customExpandIconData,
-  }) : super(key: key);
+  });
 
   final List<ExpansionPanel> children;
 
@@ -176,7 +176,7 @@ class YaruExpandIcon extends StatefulWidget {
   /// Creates an [YaruExpandIcon] with the given padding, and a callback that is
   /// triggered when the icon is pressed.
   const YaruExpandIcon({
-    Key? key,
+    super.key,
     this.isExpanded = false,
     this.size = 24.0,
     required this.onPressed,
@@ -185,7 +185,7 @@ class YaruExpandIcon extends StatefulWidget {
     this.disabledColor,
     this.expandedColor,
     this.customExpandIconData,
-  }) : super(key: key);
+  });
 
   /// Whether the icon is in an expanded state.
   ///

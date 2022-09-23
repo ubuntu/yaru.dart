@@ -12,7 +12,7 @@ class YaruRow extends StatelessWidget {
   ///       );
   /// ```
   const YaruRow({
-    Key? key,
+    super.key,
     this.leadingWidget,
     required this.trailingWidget,
     this.description,
@@ -26,7 +26,7 @@ class YaruRow extends StatelessWidget {
     this.verticalDirection = VerticalDirection.down,
     this.textDirection,
     this.textBaseline,
-  }) : super(key: key);
+  });
 
   /// The [Widget] placed at the leading position.
   /// A widget to display before the [trailingWidget].

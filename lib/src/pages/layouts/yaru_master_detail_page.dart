@@ -20,12 +20,12 @@ class YaruMasterDetailPage extends StatefulWidget {
   ///     );
   /// ```
   const YaruMasterDetailPage({
-    Key? key,
+    super.key,
     required this.pageItems,
     this.previousIconData,
     required this.leftPaneWidth,
     this.appBar,
-  }) : super(key: key);
+  });
 
   /// Creates horizontal array of pages.
   /// All the `children` will be of type [YaruPageItem].

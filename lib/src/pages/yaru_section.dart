@@ -5,13 +5,13 @@ class YaruSection extends StatelessWidget {
   /// Creates a yaru style section widget with multiple
   /// [Widgets] as children.
   const YaruSection({
-    Key? key,
+    super.key,
     this.headline,
     required this.children,
     this.width,
     this.headerWidget,
     this.padding = const EdgeInsets.only(bottom: 20.0),
-  }) : super(key: key);
+  });
 
   /// Text that is placed above the list of `children`.
   final String? headline;
