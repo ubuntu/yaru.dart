@@ -58,10 +58,12 @@ class _YaruExpandableState extends State<YaruExpandable> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(onTap: () => _onTap(), child: widget.header),
-            YaruRoundIconButton(
-              size: 36,
-              onTap: () => _onTap(),
-              child: AnimatedRotation(
+            YaruIconButton(
+              style: IconButton.styleFrom(
+                fixedSize: const Size.square(36),
+              ),
+              onPressed: () => _onTap(),
+              icon: AnimatedRotation(
                 turns: _isExpanded ? .25 : 0,
                 duration: _kAnimationDuration,
                 curve: _kAnimationCurve,

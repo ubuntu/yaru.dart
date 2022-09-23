@@ -73,10 +73,12 @@ class YaruDialogTitle extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(5.0),
-          child: YaruRoundIconButton(
-            size: 34,
-            onTap: onPressed ?? () => Navigator.pop(context),
-            child: Icon(closeIconData ?? Icons.close),
+          child: YaruIconButton(
+            style: IconButton.styleFrom(
+              fixedSize: const Size.square(34),
+            ),
+            onPressed: onPressed ?? () => Navigator.pop(context),
+            icon: Icon(closeIconData ?? Icons.close),
           ),
         )
       ],

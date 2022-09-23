@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/controls/yaru_round_icon_button.dart';
+import 'package:yaru_widgets/src/controls/yaru_icon_button.dart';
 
 /// A selectable [IconButton], wrapped in a [CircleAvatar]
 class YaruRoundToggleButton extends StatelessWidget {
@@ -29,19 +29,25 @@ class YaruRoundToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YaruRoundIconButton(
-      onTap: onPressed,
-      size: size,
+    return YaruIconButton(
+      onPressed: onPressed,
       tooltip: tooltip,
-      child: Icon(
+      icon: Icon(
         iconData,
         color: selected
             ? Theme.of(context).primaryColor
             : Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
       ),
-      backgroundColor: selected
-          ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
-          : null,
+      style: ButtonStyle(
+        fixedSize: ButtonStyleButton.allOrNull(
+          size != null ? Size(size!, size!) : null,
+        ),
+        backgroundColor: ButtonStyleButton.allOrNull(
+          selected
+              ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
+              : null,
+        ),
+      ),
     );
   }
 }
