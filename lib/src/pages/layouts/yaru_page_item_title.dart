@@ -7,8 +7,7 @@ class YaruPageItemTitle extends StatelessWidget {
   const YaruPageItemTitle(this.child, {super.key});
 
   /// Shortcut to directly wrap a string into a [Text] widget
-  YaruPageItemTitle.text(String text, {super.key})
-      : child = Text(text);
+  YaruPageItemTitle.text(String text, {super.key}) : child = Text(text);
 
   final Widget child;
 

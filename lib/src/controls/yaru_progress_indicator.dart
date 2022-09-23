@@ -125,7 +125,7 @@ class YaruLinearProgressIndicator extends _YaruProgressIndicator {
     super.valueColor,
     super.semanticsLabel,
     super.semanticsValue,
-  })  : assert(minHeight > 0);
+  }) : assert(minHeight > 0);
 
   /// The minimum height of the line used to draw the linear indicator (default: 6).
   final double minHeight;
