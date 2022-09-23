@@ -102,9 +102,9 @@ class YaruSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                   BoxConstraints.expand(width: 40, height: appBarHeight),
               suffixIcon: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
-                child: YaruRoundIconButton(
-                  onTap: onEscape,
-                  child: Icon(
+                child: YaruIconButton(
+                  onPressed: onEscape,
+                  icon: Icon(
                     clearSearchIconData ?? Icons.close,
                     color: textColor,
                   ),
