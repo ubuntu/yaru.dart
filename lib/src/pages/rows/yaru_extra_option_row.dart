@@ -119,7 +119,7 @@ class YaruExtraOptionRow extends StatelessWidget {
           const SizedBox(width: 8.0),
           YaruOptionButton(
             onPressed: enabled ? onPressed : null,
-            iconData: iconData,
+            child: Icon(iconData),
           ),
         ],
       ),

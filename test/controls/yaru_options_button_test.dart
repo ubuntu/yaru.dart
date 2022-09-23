@@ -9,7 +9,7 @@ void main() {
         home: Scaffold(
           body: YaruOptionButton(
             onPressed: () {},
-            iconData: const IconData(0),
+            child: const Icon(Icons.flutter_dash),
           ),
         ),
       ),
