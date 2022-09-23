@@ -6,32 +6,37 @@ class YaruOptionButton extends StatelessWidget {
   ///
   /// for example:
   /// ```dart
-  ///  YaruOptionButton(
-  ///           iconData: YaruIcons.search,
-  ///           onPressed: () {},
-  ///         ),
+  /// YaruOptionButton(
+  ///   onPressed: () {},
+  ///   icon: Icon(YaruIcons.search),
+  /// ),
   /// ```
   const YaruOptionButton({
     Key? key,
     required this.onPressed,
-    required this.iconData,
+    required this.child,
   }) : super(key: key);
 
   /// Callback that gets invoked when the button is clicked.
   final VoidCallback? onPressed;
 
-  /// The [IconData] is place as a child of [OutlinedButton].
-  final IconData iconData;
+  /// The [Widget] is placed as a child of [OutlinedButton].
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 40,
-      height: 40,
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(padding: const EdgeInsets.all(0)),
-        onPressed: onPressed,
-        child: Icon(iconData),
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        minimumSize: const Size(40, 40),
+        maximumSize: const Size(40, 40),
+        padding: const EdgeInsets.all(0),
+      ),
+      onPressed: onPressed,
+      child: IconTheme.merge(
+        data: const IconThemeData(
+          size: 24,
+        ),
+        child: child,
       ),
     );
   }

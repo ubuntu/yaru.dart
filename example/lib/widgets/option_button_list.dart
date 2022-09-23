@@ -10,22 +10,22 @@ class OptionButtonList extends StatelessWidget {
     return Row(
       children: [
         YaruOptionButton(
-          iconData: YaruIcons.search,
           onPressed: () {},
+          child: Icon(YaruIcons.search),
         ),
         const SizedBox(
           width: 10.0,
         ),
         YaruOptionButton(
-          iconData: YaruIcons.audio,
           onPressed: () {},
+          child: Icon(YaruIcons.audio),
         ),
         const SizedBox(
           width: 10.0,
         ),
         YaruOptionButton(
-          iconData: YaruIcons.address_book,
           onPressed: () {},
+          child: Icon(YaruIcons.address_book),
         ),
       ],
     );

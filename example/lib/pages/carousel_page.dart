@@ -40,7 +40,7 @@ class _CarouselPageState extends State<CarouselPage> {
                   onPressed: () => setState(() {
                         length++;
                       }),
-                  iconData: YaruIcons.plus),
+                  child: Icon(YaruIcons.plus)),
               SizedBox(
                 width: 10,
               ),
@@ -48,7 +48,7 @@ class _CarouselPageState extends State<CarouselPage> {
                   onPressed: () => setState(() {
                         length >= 2 ? length-- : length = length;
                       }),
-                  iconData: YaruIcons.minus)
+                  child: Icon(YaruIcons.minus))
             ],
           ),
           enabled: true)
