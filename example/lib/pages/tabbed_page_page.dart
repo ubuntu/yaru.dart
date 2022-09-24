@@ -35,7 +35,6 @@ class _TabbedPagePageState extends State<TabbedPagePage> {
                     YaruBanner(
                       name: 'YaruBanner $i',
                       summary: 'Description',
-                      fallbackIconData: YaruIcons.ubuntu_logo_large,
                       icon: Image.asset('assets/ubuntuhero.jpg'),
                       onTap: () => showAboutDialog(context: context),
                     )

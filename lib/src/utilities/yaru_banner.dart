@@ -10,9 +10,7 @@ class YaruBanner extends StatelessWidget {
     this.watermark = false,
     required this.name,
     this.summary,
-    this.url,
-    this.icon,
-    required this.fallbackIconData,
+    required this.icon,
     this.nameTextOverflow,
     this.summaryTextOverflow,
     this.bannerWidth,
@@ -27,9 +25,6 @@ class YaruBanner extends StatelessWidget {
   /// A summary string shown in the second line.
   final String? summary;
 
-  /// The url to include a [YaruSafeImage].
-  final String? url;
-
   /// An optional callback
   final Function()? onTap;
 
@@ -41,10 +36,7 @@ class YaruBanner extends StatelessWidget {
   final bool watermark;
 
   /// The [Widget] used as the trailing icon.
-  final Widget? icon;
-
-  /// If the icon is not loaded this fallback icon is displayed.
-  final IconData fallbackIconData;
+  final Widget icon;
 
   final TextOverflow? nameTextOverflow;
 
@@ -76,11 +68,7 @@ class YaruBanner extends StatelessWidget {
                     title: name,
                     summary: summary,
                     elevation: light ? 4 : 6,
-                    icon: icon ??
-                        YaruSafeImage(
-                          url: url,
-                          fallBackIconData: fallbackIconData,
-                        ),
+                    icon: icon,
                     titleTextOverflow:
                         nameTextOverflow ?? TextOverflow.ellipsis,
                     subTitleTextOverflow:
@@ -97,10 +85,7 @@ class YaruBanner extends StatelessWidget {
                           opacity: 0.1,
                           child: SizedBox(
                             height: 130,
-                            child: YaruSafeImage(
-                              url: url,
-                              fallBackIconData: fallbackIconData,
-                            ),
+                            child: icon,
                           ),
                         ),
                       ),
@@ -115,12 +100,7 @@ class YaruBanner extends StatelessWidget {
                     ? Theme.of(context).colorScheme.background
                     : Theme.of(context).colorScheme.onSurface.withOpacity(0.01),
                 elevation: light ? 2 : 1,
-                icon: icon ??
-                    YaruSafeImage(
-                      url: url,
-                      fallBackIconData: fallbackIconData,
-                      iconSize: 50,
-                    ),
+                icon: icon,
                 title: name,
                 summary: summary,
                 titleTextOverflow: nameTextOverflow ?? TextOverflow.ellipsis,
