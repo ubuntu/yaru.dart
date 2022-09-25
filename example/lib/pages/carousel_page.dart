@@ -31,27 +31,24 @@ class _CarouselPageState extends State<CarouselPage> {
           autoScroll: true,
         ),
       ]),
-      YaruRow(
-          width: 300,
-          trailingWidget: Text('length: $length'),
-          actionWidget: Row(
-            children: [
-              YaruOptionButton(
-                  onPressed: () => setState(() {
-                        length++;
-                      }),
-                  child: Icon(YaruIcons.plus)),
-              SizedBox(
-                width: 10,
-              ),
-              YaruOptionButton(
-                  onPressed: () => setState(() {
-                        length >= 2 ? length-- : length = length;
-                      }),
-                  child: Icon(YaruIcons.minus))
-            ],
+      ButtonBar(
+        buttonPadding: EdgeInsets.zero,
+        children: [
+          YaruOptionButton(
+              onPressed: () => setState(() {
+                    length++;
+                  }),
+              child: Icon(YaruIcons.plus)),
+          SizedBox(
+            width: 10,
           ),
-          enabled: true)
+          YaruOptionButton(
+              onPressed: () => setState(() {
+                    length >= 2 ? length-- : length = length;
+                  }),
+              child: Icon(YaruIcons.minus))
+        ],
+      )
     ]);
   }
 
