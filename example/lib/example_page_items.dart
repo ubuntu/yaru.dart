@@ -5,9 +5,9 @@ import 'package:yaru_widgets_example/pages/banner_page.dart';
 import 'package:yaru_widgets_example/pages/carousel_page.dart';
 import 'package:yaru_widgets_example/pages/check_box_row_page.dart';
 import 'package:yaru_widgets_example/pages/color_disk_page.dart';
-import 'package:yaru_widgets_example/pages/color_picker_page.dart';
 import 'package:yaru_widgets_example/pages/draggable_page.dart';
 import 'package:yaru_widgets_example/pages/extra_option_row_page.dart';
+import 'package:yaru_widgets_example/pages/option_button_page.dart';
 import 'package:yaru_widgets_example/pages/round_toggle_button_page.dart';
 import 'package:yaru_widgets_example/pages/section_page.dart';
 import 'package:yaru_widgets_example/pages/selectable_container_page.dart';
@@ -15,7 +15,6 @@ import 'package:yaru_widgets_example/pages/slider_page.dart';
 import 'package:yaru_widgets_example/pages/switch_row_page.dart';
 import 'package:yaru_widgets_example/pages/tabbed_page_page.dart';
 import 'package:yaru_widgets_example/pages/toggle_buttons_row_page.dart';
-import 'package:yaru_widgets_example/widgets/option_button_list.dart';
 import 'package:yaru_widgets_example/widgets/row_list.dart';
 
 const _lorem =
@@ -72,7 +71,7 @@ final examplePageItems = <YaruPageItem>[
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruOptionButton'),
     iconData: YaruIcons.settings,
-    builder: (_) => YaruPage(children: [OptionButtonList()]),
+    builder: (_) => YaruPage(children: [OptionButtonPage()]),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruSearchAppBar'),
@@ -138,10 +137,6 @@ final examplePageItems = <YaruPageItem>[
       titleBuilder: (context) => YaruPageItemTitle.text('YaruTabbedPage'),
       builder: (_) => TabbedPagePage(),
       iconData: YaruIcons.tab_new),
-  YaruPageItem(
-      titleBuilder: (context) => YaruPageItemTitle.text('Color picker button'),
-      builder: (_) => ColorPickerPage(),
-      iconData: YaruIcons.color_select),
   YaruPageItem(
       titleBuilder: (context) => YaruPageItemTitle.text('YaruCarousel'),
       builder: (_) => CarouselPage(),
