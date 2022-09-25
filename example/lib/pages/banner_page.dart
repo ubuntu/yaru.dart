@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class BannerPage extends StatelessWidget {
@@ -22,7 +21,6 @@ class BannerPage extends StatelessWidget {
               YaruBanner(
                 name: 'YaruBanner $i',
                 summary: 'Description',
-                fallbackIconData: YaruIcons.ubuntu_logo_large,
                 icon: Image.asset('assets/ubuntuhero.jpg'),
                 onTap: () => showAboutDialog(context: context),
               )
