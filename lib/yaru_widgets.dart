@@ -43,6 +43,5 @@ export 'src/utilities/yaru_carousel.dart';
 export 'src/utilities/yaru_draggable.dart';
 export 'src/utilities/yaru_expandable.dart';
 export 'src/utilities/yaru_expansion_panel_list.dart';
-export 'src/utilities/yaru_safe_image.dart';
 export 'src/utilities/yaru_search_app_bar.dart';
 export 'src/utilities/yaru_selectable_container.dart';
