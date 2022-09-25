@@ -1,43 +1,61 @@
 import 'package:flutter/material.dart';
 
-class YaruOptionButton extends StatelessWidget {
-  /// Creates an [OutlinedButton] with Yaru theme.
-  /// The button have `height` and `width` of 40.
-  ///
-  /// for example:
-  /// ```dart
-  /// YaruOptionButton(
-  ///   onPressed: () {},
-  ///   icon: Icon(YaruIcons.search),
-  /// ),
-  /// ```
-  const YaruOptionButton({
+/// An [OutlinedButton] with a default size of 40x40.
+///
+/// For example, an option button with an arbitrary child widget:
+/// ```dart
+/// YaruOptionButton(
+///   onPressed: () {},
+///   child: Icon(YaruIcons.search),
+/// ),
+/// ```
+///
+/// Or with a pre-made color disk:
+/// ```dart
+/// YaruOptionButton.color(
+///   onPressed: () {},
+///   color: Theme.of(context).primaryColor,
+/// ),
+/// ```
+class YaruOptionButton extends OutlinedButton {
+  /// Creates a [YaruOptionButton].
+  YaruOptionButton({
     super.key,
-    required this.onPressed,
-    required this.child,
-  });
+    required super.onPressed,
+    super.focusNode,
+    super.autofocus = false,
+    ButtonStyle? style,
+    required Widget child,
+  }) : super(
+          style: _styleFrom(padding: EdgeInsets.zero).merge(style),
+          child: IconTheme.merge(
+            data: const IconThemeData(size: 24),
+            child: child,
+          ),
+        );
 
-  /// Callback that gets invoked when the button is clicked.
-  final VoidCallback? onPressed;
+  /// Creates a [YaruOptionButton] with a color disk.
+  YaruOptionButton.color({
+    super.key,
+    required super.onPressed,
+    super.focusNode,
+    super.autofocus = false,
+    ButtonStyle? style,
+    required Color color,
+  }) : super(
+          style: _styleFrom(padding: const EdgeInsets.all(10)).merge(style),
+          child: SizedBox.expand(
+            child: DecoratedBox(
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+            ),
+          ),
+        );
 
-  /// The [Widget] is placed as a child of [OutlinedButton].
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        minimumSize: const Size(40, 40),
-        maximumSize: const Size(40, 40),
-        padding: const EdgeInsets.all(0),
-      ),
-      onPressed: onPressed,
-      child: IconTheme.merge(
-        data: const IconThemeData(
-          size: 24,
-        ),
-        child: child,
-      ),
+  static ButtonStyle _styleFrom({EdgeInsets? padding}) {
+    return OutlinedButton.styleFrom(
+      minimumSize: const Size.square(40),
+      maximumSize: const Size.square(40),
+      padding: padding,
     );
   }
 }
