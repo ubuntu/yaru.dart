@@ -9,13 +9,12 @@ class YaruCarousel extends StatefulWidget {
     super.key,
     this.height = 500,
     this.width = 500,
+    required this.controller,
     required this.children,
-    this.initialIndex = 0,
     this.autoScroll = false,
     this.autoScrollDuration = const Duration(seconds: 1),
     this.placeIndicator = true,
     this.placeIndicatorMarginTop = 12.0,
-    this.viewportFraction = 0.8,
     this.navigationControls = false,
     this.previousIcon,
     this.nextIcon,
@@ -27,11 +26,10 @@ class YaruCarousel extends StatefulWidget {
   /// The width of the children, defaults to 500.0.
   final double width;
 
+  final PageController controller;
+
   /// The list of child widgets shown in the carousel.
   final List<Widget> children;
-
-  /// The index of the child that should be shown on first page load.
-  final int initialIndex;
 
   /// Enable an auto scrolling loop of all children
   final bool autoScroll;
@@ -47,9 +45,6 @@ class YaruCarousel extends StatefulWidget {
 
   /// Margin between the carousel and the place indicator
   final double placeIndicatorMarginTop;
-
-  /// The fraction of the viewport that each page should occupy.
-  final double viewportFraction;
 
   /// Display previous and next navigation buttons
   final bool navigationControls;
@@ -67,19 +62,14 @@ class YaruCarousel extends StatefulWidget {
 }
 
 class _YaruCarouselState extends State<YaruCarousel> {
-  late PageController _pageController;
   late Timer _timer;
-  late int _index;
+  late int _page;
 
   @override
   void initState() {
     super.initState();
 
-    _index = widget.initialIndex;
-    _pageController = PageController(
-      viewportFraction: widget.viewportFraction,
-      initialPage: _index,
-    );
+    _page = widget.controller.initialPage;
 
     _startTimer();
   }
@@ -88,7 +78,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   void didUpdateWidget(YaruCarousel oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (_index > widget.children.length - 1) {
+    if (_page > widget.children.length - 1) {
       _animateToPage(widget.children.length - 1);
     }
   }
@@ -124,18 +114,18 @@ class _YaruCarouselState extends State<YaruCarousel> {
     final carousel = PageView.builder(
       itemCount: widget.children.length,
       pageSnapping: true,
-      controller: _pageController,
+      controller: widget.controller,
       physics:
           // Disable physic when auto scroll is enable because we cannot
           // disable the timer when dragging the view
           widget.autoScroll ? const NeverScrollableScrollPhysics() : null,
-      onPageChanged: (index) => setState(() => _index = index),
+      onPageChanged: (index) => setState(() => _page = index),
       itemBuilder: (context, index) => AnimatedScale(
-        scale: _index == index ? 1.0 : .9,
+        scale: _page == index ? 1.0 : .9,
         duration: _kAnimationDuration,
         curve: _kAnimationCurve,
         child: Container(
-          child: _index == index - 1 || _index == index + 1
+          child: _page == index - 1 || _page == index + 1
               ? GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () => _animateToPage(index),
@@ -228,7 +218,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
       children: List<Widget>.generate(
         widget.children.length,
         (index) => GestureDetector(
-          onTap: _index == index ? null : () => _animateToPage(index),
+          onTap: _page == index ? null : () => _animateToPage(index),
           child: Padding(
             padding: EdgeInsets.only(left: index != 0 ? dotSpacing : 0),
             child: AnimatedContainer(
@@ -237,7 +227,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
               width: dotSize,
               height: dotSize,
               decoration: BoxDecoration(
-                color: _index == index
+                color: _page == index
                     ? Theme.of(context).colorScheme.primary
                     : Theme.of(context).colorScheme.onSurface.withOpacity(.3),
                 shape: BoxShape.circle,
@@ -251,22 +241,22 @@ class _YaruCarouselState extends State<YaruCarousel> {
 
   Widget _buildTextIndicator() {
     return Text(
-      '${_index + 1}/${widget.children.length}',
+      '${_page + 1}/${widget.children.length}',
       style: Theme.of(context).textTheme.bodySmall,
       textAlign: TextAlign.center,
     );
   }
 
   bool _isFirstPage() {
-    return _index == 0;
+    return _page == 0;
   }
 
   bool _isLastPage() {
-    return _index == widget.children.length - 1;
+    return _page == widget.children.length - 1;
   }
 
   void _animateToPage(int pageIndex) {
-    _pageController.animateToPage(
+    widget.controller.animateToPage(
       pageIndex,
       duration: _kAnimationDuration,
       curve: _kAnimationCurve,
@@ -276,7 +266,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   }
 
   void _animateToPreviousPage() {
-    _pageController.previousPage(
+    widget.controller.previousPage(
       duration: _kAnimationDuration,
       curve: _kAnimationCurve,
     );
@@ -285,7 +275,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   }
 
   void _animateToNextPage() {
-    _pageController.nextPage(
+    widget.controller.nextPage(
       duration: _kAnimationDuration,
       curve: _kAnimationCurve,
     );
@@ -296,7 +286,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   void _startTimer() {
     if (widget.autoScroll) {
       _timer = Timer.periodic(widget.autoScrollDuration, (timer) {
-        _animateToPage(_index >= widget.children.length ? 0 : _index++);
+        _animateToPage(_page >= widget.children.length ? 0 : _page++);
       });
     }
   }
