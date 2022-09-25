@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/src/controls/yaru_option_button.dart';
 
 void main() {
-  testWidgets('YaruOptionsButton Test', (WidgetTester tester) async {
+  testWidgets('with icon', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -15,7 +15,32 @@ void main() {
       ),
     );
 
-    expect(find.byType(OutlinedButton), findsOneWidget);
-    expect(find.byType(Icon), findsOneWidget);
+    expect(
+      find.widgetWithIcon(YaruOptionButton, Icons.flutter_dash),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('with color disk', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruOptionButton.color(
+            onPressed: () {},
+            color: Colors.red,
+          ),
+        ),
+      ),
+    );
+
+    final box = find.descendant(
+      of: find.byType(YaruOptionButton),
+      matching: find.byType(DecoratedBox),
+    );
+    expect(box, findsOneWidget);
+    expect(
+      tester.widget<DecoratedBox>(box).decoration,
+      isA<BoxDecoration>().having((d) => d.color, 'color', Colors.red),
+    );
   });
 }
