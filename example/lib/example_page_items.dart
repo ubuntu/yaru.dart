@@ -4,8 +4,8 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 import 'package:yaru_widgets_example/pages/banner_page.dart';
 import 'package:yaru_widgets_example/pages/carousel_page.dart';
 import 'package:yaru_widgets_example/pages/check_box_row_page.dart';
+import 'package:yaru_widgets_example/pages/color_button_page.dart';
 import 'package:yaru_widgets_example/pages/color_disk_page.dart';
-import 'package:yaru_widgets_example/pages/color_picker_page.dart';
 import 'package:yaru_widgets_example/pages/draggable_page.dart';
 import 'package:yaru_widgets_example/pages/extra_option_row_page.dart';
 import 'package:yaru_widgets_example/pages/round_toggle_button_page.dart';
@@ -139,8 +139,8 @@ final examplePageItems = <YaruPageItem>[
       builder: (_) => TabbedPagePage(),
       iconData: YaruIcons.tab_new),
   YaruPageItem(
-      titleBuilder: (context) => YaruPageItemTitle.text('Color picker button'),
-      builder: (_) => ColorPickerPage(),
+      titleBuilder: (context) => YaruPageItemTitle.text('YaruColorButton'),
+      builder: (_) => ColorButtonPage(),
       iconData: YaruIcons.color_select),
   YaruPageItem(
       titleBuilder: (context) => YaruPageItemTitle.text('YaruCarousel'),

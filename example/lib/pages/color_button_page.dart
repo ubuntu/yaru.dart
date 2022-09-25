@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
-class ColorPickerPage extends StatefulWidget {
-  const ColorPickerPage({Key? key}) : super(key: key);
+class ColorButtonPage extends StatefulWidget {
+  const ColorButtonPage({Key? key}) : super(key: key);
 
   @override
-  _ColorPickerPageState createState() => _ColorPickerPageState();
+  _ColorButtonPageState createState() => _ColorButtonPageState();
 }
 
-class _ColorPickerPageState extends State<ColorPickerPage> {
+class _ColorButtonPageState extends State<ColorButtonPage> {
   @override
   Widget build(BuildContext context) {
     return YaruPage(
       children: [
         Center(
-          child: YaruColorPickerButton(
+          child: YaruColorButton(
               color: Theme.of(context).primaryColor, onPressed: () {}),
         )
       ],
