@@ -285,7 +285,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
 
   void _startTimer() {
     if (widget.autoScroll) {
-      _timer = Timer.periodic(widget.autoScrollDuration, (timer) {
+      _timer = Timer(widget.autoScrollDuration + _kAnimationDuration, () {
         _animateToPage(_page >= widget.children.length ? 0 : _page++);
       });
     }
@@ -302,3 +302,5 @@ class _YaruCarouselState extends State<YaruCarousel> {
     _startTimer();
   }
 }
+
+class YaruCarouselController extends PageController {}
