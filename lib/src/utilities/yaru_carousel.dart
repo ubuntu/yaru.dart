@@ -1,21 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-const _kAnimationDuration = Duration(milliseconds: 500);
-const _kAnimationCurve = Curves.easeInOutCubic;
-
 class YaruCarousel extends StatefulWidget {
   const YaruCarousel({
     super.key,
     this.height = 500,
     this.width = 500,
+    required this.controller,
     required this.children,
-    this.initialIndex = 0,
-    this.autoScroll = false,
-    this.autoScrollDuration = const Duration(seconds: 1),
     this.placeIndicator = true,
     this.placeIndicatorMarginTop = 12.0,
-    this.viewportFraction = 0.8,
     this.navigationControls = false,
     this.previousIcon,
     this.nextIcon,
@@ -27,17 +21,10 @@ class YaruCarousel extends StatefulWidget {
   /// The width of the children, defaults to 500.0.
   final double width;
 
+  final YaruCarouselController controller;
+
   /// The list of child widgets shown in the carousel.
   final List<Widget> children;
-
-  /// The index of the child that should be shown on first page load.
-  final int initialIndex;
-
-  /// Enable an auto scrolling loop of all children
-  final bool autoScroll;
-
-  /// If [autoScroll] is enabled, this value determine the time spent on each carousel child
-  final Duration autoScrollDuration;
 
   /// Display a place indicator
   ///
@@ -47,9 +34,6 @@ class YaruCarousel extends StatefulWidget {
 
   /// Margin between the carousel and the place indicator
   final double placeIndicatorMarginTop;
-
-  /// The fraction of the viewport that each page should occupy.
-  final double viewportFraction;
 
   /// Display previous and next navigation buttons
   final bool navigationControls;
@@ -67,36 +51,27 @@ class YaruCarousel extends StatefulWidget {
 }
 
 class _YaruCarouselState extends State<YaruCarousel> {
-  late PageController _pageController;
-  late Timer _timer;
-  late int _index;
+  late int _page;
 
   @override
   void initState() {
     super.initState();
-
-    _index = widget.initialIndex;
-    _pageController = PageController(
-      viewportFraction: widget.viewportFraction,
-      initialPage: _index,
-    );
-
-    _startTimer();
+    _page = widget.controller.initialPage;
   }
 
   @override
   void didUpdateWidget(YaruCarousel oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (_index > widget.children.length - 1) {
-      _animateToPage(widget.children.length - 1);
+    if (_page > widget.children.length - 1) {
+      setState(() => _page = widget.children.length - 1);
     }
   }
 
   @override
   void dispose() {
     super.dispose();
-    _cancelTimer();
+    widget.controller.dispose();
   }
 
   @override
@@ -107,14 +82,12 @@ class _YaruCarouselState extends State<YaruCarousel> {
       child: Column(
         children: [
           _buildCarousel(),
-          ...(widget.placeIndicator && widget.children.length > 1
-              ? [
-                  SizedBox(
-                    height: widget.placeIndicatorMarginTop,
-                  ),
-                  _buildPlaceIndicator()
-                ]
-              : [])
+          if (widget.placeIndicator && widget.children.length > 1) ...[
+            SizedBox(
+              height: widget.placeIndicatorMarginTop,
+            ),
+            _buildPlaceIndicator()
+          ]
         ],
       ),
     );
@@ -124,21 +97,23 @@ class _YaruCarouselState extends State<YaruCarousel> {
     final carousel = PageView.builder(
       itemCount: widget.children.length,
       pageSnapping: true,
-      controller: _pageController,
+      controller: widget.controller,
       physics:
           // Disable physic when auto scroll is enable because we cannot
           // disable the timer when dragging the view
-          widget.autoScroll ? const NeverScrollableScrollPhysics() : null,
-      onPageChanged: (index) => setState(() => _index = index),
+          widget.controller.autoScroll
+              ? const NeverScrollableScrollPhysics()
+              : null,
+      onPageChanged: (index) => setState(() => _page = index),
       itemBuilder: (context, index) => AnimatedScale(
-        scale: _index == index ? 1.0 : .9,
-        duration: _kAnimationDuration,
-        curve: _kAnimationCurve,
+        scale: _page == index ? 1.0 : .9,
+        duration: widget.controller.scrollAnimationDuration,
+        curve: widget.controller.scrollAnimationCurve,
         child: Container(
-          child: _index == index - 1 || _index == index + 1
+          child: _page == index - 1 || _page == index + 1
               ? GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => _animateToPage(index),
+                  onTap: () => widget.controller.animateToPage(index),
                   child: IgnorePointer(
                     child: widget.children[index],
                   ),
@@ -155,12 +130,12 @@ class _YaruCarouselState extends State<YaruCarousel> {
             carousel,
             _buildNavigationButton(
               Alignment.centerLeft,
-              _isFirstPage() ? null : () => _animateToPreviousPage(),
+              _isFirstPage() ? null : () => widget.controller.previousPage(),
               widget.previousIcon ?? const Icon(Icons.arrow_back),
             ),
             _buildNavigationButton(
               Alignment.centerRight,
-              _isLastPage() ? null : () => _animateToNextPage(),
+              _isLastPage() ? null : () => widget.controller.nextPage(),
               widget.nextIcon ?? const Icon(Icons.arrow_forward),
             ),
           ],
@@ -179,8 +154,8 @@ class _YaruCarouselState extends State<YaruCarousel> {
     return Positioned.fill(
       child: AnimatedOpacity(
         opacity: onPressed != null ? 1 : 0,
-        duration: _kAnimationDuration,
-        curve: _kAnimationCurve,
+        duration: widget.controller.scrollAnimationDuration,
+        curve: widget.controller.scrollAnimationCurve,
         child: Align(
           alignment: alignement,
           child: OutlinedButton(
@@ -228,16 +203,18 @@ class _YaruCarouselState extends State<YaruCarousel> {
       children: List<Widget>.generate(
         widget.children.length,
         (index) => GestureDetector(
-          onTap: _index == index ? null : () => _animateToPage(index),
+          onTap: _page == index
+              ? null
+              : () => widget.controller.animateToPage(index),
           child: Padding(
             padding: EdgeInsets.only(left: index != 0 ? dotSpacing : 0),
             child: AnimatedContainer(
-              duration: _kAnimationDuration,
-              curve: _kAnimationCurve,
+              duration: widget.controller.scrollAnimationDuration,
+              curve: widget.controller.scrollAnimationCurve,
               width: dotSize,
               height: dotSize,
               decoration: BoxDecoration(
-                color: _index == index
+                color: _page == index
                     ? Theme.of(context).colorScheme.primary
                     : Theme.of(context).colorScheme.onSurface.withOpacity(.3),
                 shape: BoxShape.circle,
@@ -251,64 +228,111 @@ class _YaruCarouselState extends State<YaruCarousel> {
 
   Widget _buildTextIndicator() {
     return Text(
-      '${_index + 1}/${widget.children.length}',
+      '${_page + 1}/${widget.children.length}',
       style: Theme.of(context).textTheme.bodySmall,
       textAlign: TextAlign.center,
     );
   }
 
   bool _isFirstPage() {
-    return _index == 0;
+    return _page == 0;
   }
 
   bool _isLastPage() {
-    return _index == widget.children.length - 1;
+    return _page == widget.children.length - 1;
+  }
+}
+
+class YaruCarouselController extends PageController {
+  YaruCarouselController({
+    super.initialPage,
+    required this.pagesLength,
+    super.keepPage,
+    super.viewportFraction = 0.8,
+    this.scrollAnimationDuration = const Duration(milliseconds: 500),
+    this.scrollAnimationCurve = Curves.easeInOutCubic,
+    this.autoScroll = false,
+    this.autoScrollDuration = const Duration(seconds: 3),
+  });
+
+  final int pagesLength;
+
+  final Duration scrollAnimationDuration;
+
+  final Curve scrollAnimationCurve;
+
+  /// Enable an auto scrolling loop of all children
+  final bool autoScroll;
+
+  /// If [autoScroll] is enabled, this value determine the time spent on each carousel child
+  final Duration autoScrollDuration;
+
+  Timer? _timer;
+
+  @override
+  void attach(ScrollPosition position) {
+    super.attach(position);
+    startTimer();
   }
 
-  void _animateToPage(int pageIndex) {
-    _pageController.animateToPage(
-      pageIndex,
-      duration: _kAnimationDuration,
-      curve: _kAnimationCurve,
+  @override
+  void detach(ScrollPosition position) {
+    super.detach(position);
+    cancelTimer();
+    _timer = null;
+  }
+
+  @override
+  Future<void> animateToPage(
+    int page, {
+    Duration? duration,
+    Curve? curve,
+  }) {
+    cancelTimer();
+
+    return super
+        .animateToPage(
+          page,
+          duration: duration ?? scrollAnimationDuration,
+          curve: scrollAnimationCurve,
+        )
+        .then((value) => startTimer());
+  }
+
+  @override
+  void jumpToPage(int page) {
+    super.jumpToPage(page);
+    cancelTimer();
+    startTimer();
+  }
+
+  @override
+  Future<void> nextPage({Duration? duration, Curve? curve}) {
+    return super.nextPage(
+      duration: duration ?? scrollAnimationDuration,
+      curve: scrollAnimationCurve,
     );
-
-    _restartTimer();
   }
 
-  void _animateToPreviousPage() {
-    _pageController.previousPage(
-      duration: _kAnimationDuration,
-      curve: _kAnimationCurve,
+  @override
+  Future<void> previousPage({Duration? duration, Curve? curve}) {
+    return super.previousPage(
+      duration: duration ?? scrollAnimationDuration,
+      curve: scrollAnimationCurve,
     );
-
-    _restartTimer();
   }
 
-  void _animateToNextPage() {
-    _pageController.nextPage(
-      duration: _kAnimationDuration,
-      curve: _kAnimationCurve,
-    );
-
-    _restartTimer();
-  }
-
-  void _startTimer() {
-    if (widget.autoScroll) {
-      _timer = Timer.periodic(widget.autoScrollDuration, (timer) {
-        _animateToPage(_index >= widget.children.length ? 0 : _index++);
+  void startTimer() {
+    if (autoScroll) {
+      _timer = Timer(autoScrollDuration, () {
+        animateToPage(page!.round() + 1 >= pagesLength ? 0 : page!.round() + 1);
       });
     }
   }
 
-  void _cancelTimer() {
-    if (widget.autoScroll) {
-      _timer.cancel();
+  void cancelTimer() {
+    if (autoScroll) {
+      _timer!.cancel();
     }
-  }
-
-  void _restartTimer() {
-    _cancelTimer();
-    _startTimer();
   }
 }
