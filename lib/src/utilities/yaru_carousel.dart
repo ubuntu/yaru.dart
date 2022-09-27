@@ -79,13 +79,14 @@ class _YaruCarouselState extends State<YaruCarousel> {
     super.didUpdateWidget(oldWidget);
 
     if (_page > widget.children.length - 1) {
-      _animateToPage(widget.children.length - 1);
+      setState(() => _page = widget.children.length - 1);
     }
   }
 
   @override
   void dispose() {
     super.dispose();
+    widget.controller.dispose();
     _cancelTimer();
   }
 
@@ -284,7 +285,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   void _startTimer() {
     if (widget.autoScroll) {
       _timer = Timer(widget.autoScrollDuration + _kAnimationDuration, () {
-        _animateToPage(_page >= widget.children.length ? 0 : _page++);
+        _animateToPage(_page + 1 >= widget.children.length ? 0 : _page + 1);
       });
     }
   }
