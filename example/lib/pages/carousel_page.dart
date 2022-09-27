@@ -17,7 +17,9 @@ class _CarouselPageState extends State<CarouselPage> {
     return YaruPage(children: [
       YaruSection(headline: 'Auto scroll: off', width: 700, children: [
         YaruCarousel(
-          controller: PageController(viewportFraction: 0.8),
+          controller: YaruCarouselController(
+            pagesLength: _getCarouselChildren().length,
+          ),
           children: _getCarouselChildren(),
           height: 400,
           navigationControls: true,
@@ -27,10 +29,13 @@ class _CarouselPageState extends State<CarouselPage> {
       ]),
       YaruSection(headline: 'Auto scroll: on', width: 700, children: [
         YaruCarousel(
-          controller: PageController(viewportFraction: 0.8),
+          controller: YaruCarouselController(
+            autoScroll: true,
+            pagesLength: _getCarouselChildren().length,
+          ),
           children: _getCarouselChildren(),
           height: 400,
-          autoScroll: true,
+          navigationControls: true,
         ),
       ]),
       ButtonBar(

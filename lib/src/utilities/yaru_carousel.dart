@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-const _kAnimationDuration = Duration(milliseconds: 500);
-const _kAnimationCurve = Curves.easeInOutCubic;
-
 class YaruCarousel extends StatefulWidget {
   const YaruCarousel({
     super.key,
@@ -11,8 +8,6 @@ class YaruCarousel extends StatefulWidget {
     this.width = 500,
     required this.controller,
     required this.children,
-    this.autoScroll = false,
-    this.autoScrollDuration = const Duration(seconds: 1),
     this.placeIndicator = true,
     this.placeIndicatorMarginTop = 12.0,
     this.navigationControls = false,
@@ -26,16 +21,10 @@ class YaruCarousel extends StatefulWidget {
   /// The width of the children, defaults to 500.0.
   final double width;
 
-  final PageController controller;
+  final YaruCarouselController controller;
 
   /// The list of child widgets shown in the carousel.
   final List<Widget> children;
-
-  /// Enable an auto scrolling loop of all children
-  final bool autoScroll;
-
-  /// If [autoScroll] is enabled, this value determine the time spent on each carousel child
-  final Duration autoScrollDuration;
 
   /// Display a place indicator
   ///
@@ -62,16 +51,12 @@ class YaruCarousel extends StatefulWidget {
 }
 
 class _YaruCarouselState extends State<YaruCarousel> {
-  late Timer _timer;
   late int _page;
 
   @override
   void initState() {
     super.initState();
-
     _page = widget.controller.initialPage;
-
-    _startTimer();
   }
 
   @override
@@ -87,7 +72,6 @@ class _YaruCarouselState extends State<YaruCarousel> {
   void dispose() {
     super.dispose();
     widget.controller.dispose();
-    _cancelTimer();
   }
 
   @override
@@ -117,17 +101,19 @@ class _YaruCarouselState extends State<YaruCarousel> {
       physics:
           // Disable physic when auto scroll is enable because we cannot
           // disable the timer when dragging the view
-          widget.autoScroll ? const NeverScrollableScrollPhysics() : null,
+          widget.controller.autoScroll
+              ? const NeverScrollableScrollPhysics()
+              : null,
       onPageChanged: (index) => setState(() => _page = index),
       itemBuilder: (context, index) => AnimatedScale(
         scale: _page == index ? 1.0 : .9,
-        duration: _kAnimationDuration,
-        curve: _kAnimationCurve,
+        duration: widget.controller.scrollAnimationDuration,
+        curve: widget.controller.scrollAnimationCurve,
         child: Container(
           child: _page == index - 1 || _page == index + 1
               ? GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => _animateToPage(index),
+                  onTap: () => widget.controller.animateToPage(index),
                   child: IgnorePointer(
                     child: widget.children[index],
                   ),
@@ -144,12 +130,12 @@ class _YaruCarouselState extends State<YaruCarousel> {
             carousel,
             _buildNavigationButton(
               Alignment.centerLeft,
-              _isFirstPage() ? null : () => _animateToPreviousPage(),
+              _isFirstPage() ? null : () => widget.controller.previousPage(),
               widget.previousIcon ?? const Icon(Icons.arrow_back),
             ),
             _buildNavigationButton(
               Alignment.centerRight,
-              _isLastPage() ? null : () => _animateToNextPage(),
+              _isLastPage() ? null : () => widget.controller.nextPage(),
               widget.nextIcon ?? const Icon(Icons.arrow_forward),
             ),
           ],
@@ -168,8 +154,8 @@ class _YaruCarouselState extends State<YaruCarousel> {
     return Positioned.fill(
       child: AnimatedOpacity(
         opacity: onPressed != null ? 1 : 0,
-        duration: _kAnimationDuration,
-        curve: _kAnimationCurve,
+        duration: widget.controller.scrollAnimationDuration,
+        curve: widget.controller.scrollAnimationCurve,
         child: Align(
           alignment: alignement,
           child: OutlinedButton(
@@ -217,12 +203,14 @@ class _YaruCarouselState extends State<YaruCarousel> {
       children: List<Widget>.generate(
         widget.children.length,
         (index) => GestureDetector(
-          onTap: _page == index ? null : () => _animateToPage(index),
+          onTap: _page == index
+              ? null
+              : () => widget.controller.animateToPage(index),
           child: Padding(
             padding: EdgeInsets.only(left: index != 0 ? dotSpacing : 0),
             child: AnimatedContainer(
-              duration: _kAnimationDuration,
-              curve: _kAnimationCurve,
+              duration: widget.controller.scrollAnimationDuration,
+              curve: widget.controller.scrollAnimationCurve,
               width: dotSize,
               height: dotSize,
               decoration: BoxDecoration(
@@ -253,53 +241,98 @@ class _YaruCarouselState extends State<YaruCarousel> {
   bool _isLastPage() {
     return _page == widget.children.length - 1;
   }
+}
 
-  void _animateToPage(int pageIndex) {
-    widget.controller.animateToPage(
-      pageIndex,
-      duration: _kAnimationDuration,
-      curve: _kAnimationCurve,
-    );
+class YaruCarouselController extends PageController {
+  YaruCarouselController({
+    super.initialPage,
+    required this.pagesLength,
+    super.keepPage,
+    super.viewportFraction = 0.8,
+    this.scrollAnimationDuration = const Duration(milliseconds: 500),
+    this.scrollAnimationCurve = Curves.easeInOutCubic,
+    this.autoScroll = false,
+    this.autoScrollDuration = const Duration(seconds: 3),
+  });
 
-    _restartTimer();
+  final int pagesLength;
+
+  final Duration scrollAnimationDuration;
+
+  final Curve scrollAnimationCurve;
+
+  /// Enable an auto scrolling loop of all children
+  final bool autoScroll;
+
+  /// If [autoScroll] is enabled, this value determine the time spent on each carousel child
+  final Duration autoScrollDuration;
+
+  Timer? _timer;
+
+  @override
+  void attach(ScrollPosition position) {
+    super.attach(position);
+    startTimer();
   }
 
-  void _animateToPreviousPage() {
-    widget.controller.previousPage(
-      duration: _kAnimationDuration,
-      curve: _kAnimationCurve,
-    );
-
-    _restartTimer();
+  @override
+  void detach(ScrollPosition position) {
+    super.detach(position);
+    cancelTimer();
+    _timer = null;
   }
 
-  void _animateToNextPage() {
-    widget.controller.nextPage(
-      duration: _kAnimationDuration,
-      curve: _kAnimationCurve,
-    );
+  @override
+  Future<void> animateToPage(
+    int page, {
+    Duration? duration,
+    Curve? curve,
+  }) {
+    cancelTimer();
 
-    _restartTimer();
+    return super
+        .animateToPage(
+          page,
+          duration: duration ?? scrollAnimationDuration,
+          curve: scrollAnimationCurve,
+        )
+        .then((value) => startTimer());
   }
 
-  void _startTimer() {
-    if (widget.autoScroll) {
-      _timer = Timer(widget.autoScrollDuration + _kAnimationDuration, () {
-        _animateToPage(_page + 1 >= widget.children.length ? 0 : _page + 1);
+  @override
+  void jumpToPage(int page) {
+    super.jumpToPage(page);
+    cancelTimer();
+    startTimer();
+  }
+
+  @override
+  Future<void> nextPage({Duration? duration, Curve? curve}) {
+    return super.nextPage(
+      duration: duration ?? scrollAnimationDuration,
+      curve: scrollAnimationCurve,
+    );
+  }
+
+  @override
+  Future<void> previousPage({Duration? duration, Curve? curve}) {
+    return super.previousPage(
+      duration: duration ?? scrollAnimationDuration,
+      curve: scrollAnimationCurve,
+    );
+  }
+
+  void startTimer() {
+    if (autoScroll) {
+      _timer = Timer(autoScrollDuration, () {
+        animateToPage(page!.round() + 1 >= pagesLength ? 0 : page!.round() + 1);
       });
     }
   }
 
-  void _cancelTimer() {
-    if (widget.autoScroll) {
-      _timer.cancel();
+  void cancelTimer() {
+    if (autoScroll) {
+      _timer!.cancel();
     }
   }
-
-  void _restartTimer() {
-    _cancelTimer();
-    _startTimer();
-  }
 }
-
-class YaruCarouselController extends PageController {}
