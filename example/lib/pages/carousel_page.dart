@@ -35,7 +35,6 @@ class _CarouselPageState extends State<CarouselPage> {
           ),
           children: _getCarouselChildren(),
           height: 400,
-          navigationControls: true,
         ),
       ]),
       ButtonBar(
