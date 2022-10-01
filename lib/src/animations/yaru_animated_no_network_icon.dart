@@ -235,14 +235,16 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   Paint _getFillPaint() {
     return Paint()
       ..style = PaintingStyle.fill
-      ..color = color;
+      ..color = color
+      ..blendMode = BlendMode.src;
   }
 
   Paint _getStrokePaint() {
     return Paint()
       ..style = PaintingStyle.stroke
       ..color = color
-      ..strokeWidth = 1 / (_kTargetCanvasSize / size);
+      ..strokeWidth = 1 / (_kTargetCanvasSize / size)
+      ..blendMode = BlendMode.src;
   }
 
   double _computeLocalAnimationPosition(double start, double duration) {

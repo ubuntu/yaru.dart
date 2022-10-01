@@ -219,14 +219,16 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
   Paint _createFillPaint() {
     return Paint()
       ..color = color
-      ..style = PaintingStyle.fill;
+      ..style = PaintingStyle.fill
+      ..blendMode = BlendMode.src;
   }
 
   Paint _createStrokePaint() {
     return Paint()
       ..color = color
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1 / (_kTargetCanvasSize / size);
+      ..strokeWidth = 1 / (_kTargetCanvasSize / size)
+      ..blendMode = BlendMode.src;
   }
 
   @override
