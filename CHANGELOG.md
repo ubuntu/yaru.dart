@@ -1,3 +1,7 @@
+# 0.2.4
+
+* Fix animated icons path overlap when using transparent color
+
 # 0.2.3
 
 * Add YaruAnimatedNoNetworkIcon
