@@ -107,7 +107,8 @@ class _CompactPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return YaruCompactLayout(
-      extendNavigationRail: width > 1000,
+      extended: width > 1000,
+      showLabels: true,
       pageItems: [configItem] + examplePageItems.take(_amount).toList(),
       backgroundColor: Theme.of(context).brightness == Brightness.light
           ? Colors.white

@@ -8,10 +8,8 @@ class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
     super.key,
     required this.pageItems,
-    this.showSelectedLabels = true,
-    this.showUnselectedLabels = true,
-    this.labelType = NavigationRailLabelType.none,
-    this.extendNavigationRail = false,
+    this.showLabels = false,
+    this.extended = false,
     this.initialIndex = 0,
     this.backgroundColor,
   });
@@ -19,18 +17,12 @@ class YaruCompactLayout extends StatefulWidget {
   /// The list of [YaruPageItem] has to be provided.
   final List<YaruPageItem> pageItems;
 
-  /// Optional bool to hide selected labels in the [BottomNavigationBar]
-  final bool showSelectedLabels;
-
-  /// Optional bool to hide unselected labels in the [BottomNavigationBar]
-  final bool showUnselectedLabels;
-
   /// Optionally control the labels of the [NavigationRail]
-  final NavigationRailLabelType labelType;
+  final bool showLabels;
 
   /// Defines if the labels are shown right to the icon
   /// of the [NavigationRail] in the wide layout
-  final bool extendNavigationRail;
+  final bool extended;
 
   /// The index of the [YaruPageItem] that is selected from [pageItems]
   final int initialIndex;
@@ -61,9 +53,6 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final unselectedTextColor =
-        Theme.of(context).colorScheme.onSurface.withOpacity(0.8);
-    final selectedTextColor = Theme.of(context).colorScheme.onSurface;
     return LayoutBuilder(
       builder: (context, constraint) {
         return SafeArea(
@@ -79,61 +68,19 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
                     child: ConstrainedBox(
                       constraints:
                           BoxConstraints(minHeight: constraint.maxHeight),
-                      child: IntrinsicHeight(
-                        child: NavigationRail(
-                          extended:
-                              widget.labelType == NavigationRailLabelType.none
-                                  ? widget.extendNavigationRail
-                                  : false,
-                          unselectedIconTheme: IconThemeData(
-                            color: unselectedTextColor,
-                          ),
-                          indicatorColor: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withOpacity(0.1),
-                          selectedIconTheme: IconThemeData(
-                            color: selectedTextColor,
-                          ),
-                          selectedLabelTextStyle: TextStyle(
-                            overflow: TextOverflow.ellipsis,
-                            color: selectedTextColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          unselectedLabelTextStyle: TextStyle(
-                            color: unselectedTextColor,
-                            overflow: TextOverflow.ellipsis,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          backgroundColor: widget.backgroundColor ??
-                              Theme.of(context).colorScheme.background,
-                          selectedIndex: _index,
-                          onDestinationSelected: (index) {
-                            if (widget.pageItems[index].onTap != null) {
-                              widget.pageItems[index].onTap?.call(context);
-                            }
-                            setState(() {
-                              _index = index;
-                            });
-                          },
-                          labelType: widget.labelType,
-                          destinations: widget.pageItems
-                              .map(
-                                (pageItem) => NavigationRailDestination(
-                                  icon: pageItem.itemWidget ??
-                                      Icon(pageItem.iconData),
-                                  selectedIcon: pageItem.selectedItemWidget ??
-                                      pageItem.itemWidget ??
-                                      (pageItem.selectedIconData != null
-                                          ? Icon(pageItem.selectedIconData)
-                                          : Icon(pageItem.iconData)),
-                                  label: pageItem.titleBuilder(context),
-                                ),
-                              )
-                              .toList(),
-                        ),
+                      child: YaruNavigationRail(
+                        extended: widget.extended,
+                        showLabels: widget.showLabels,
+                        selectedIndex: _index,
+                        onDestinationSelected: (index) {
+                          if (widget.pageItems[index].onTap != null) {
+                            widget.pageItems[index].onTap!.call(context);
+                          }
+                          setState(() {
+                            _index = index;
+                          });
+                        },
+                        destinations: widget.pageItems,
                       ),
                     ),
                   ),

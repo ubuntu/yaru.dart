@@ -1,8 +1,9 @@
 import 'package:flutter/widgets.dart';
+import '../../../yaru_widgets.dart';
 
-/// This is an optional widget, which avoid line wrap in sidebar
-/// It alters the children text style with: maxLines=1 and overflow=TextOverflow.ellipsis
-/// This allow to have the same look as the nautilus sidebar when horizontal space becomes too small
+/// This is an optional widget, which is used to notify the
+/// layout builder to use some default text style
+/// For example, [YaruMasterDetailPage] will have maxLines: 1 and textOverflow: ellipsis
 class YaruPageItemTitle extends StatelessWidget {
   const YaruPageItemTitle(this.child, {super.key});
 
@@ -13,10 +14,6 @@ class YaruPageItemTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTextStyle.merge(
-      child: child,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-    );
+    return child;
   }
 }
