@@ -37,8 +37,8 @@ class YaruRow extends StatelessWidget {
   /// The [Widget] placed at trailing position.
   final Widget trailingWidget;
 
-  /// The Description placed below [trailingWidget].
-  final String? description;
+  /// The [Widget] placed below [trailingWidget].
+  final Widget? description;
 
   /// The [Widget] placed after the [trailingWidget].
   final Widget actionWidget;
@@ -103,13 +103,13 @@ class YaruRow extends StatelessWidget {
                     if (description != null)
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0),
-                        child: Text(
-                          description!,
+                        child: DefaultTextStyle(
                           style: enabled
-                              ? Theme.of(context).textTheme.bodySmall
-                              : Theme.of(context).textTheme.bodySmall?.copyWith(
+                              ? Theme.of(context).textTheme.bodySmall!
+                              : Theme.of(context).textTheme.bodySmall!.copyWith(
                                     color: Theme.of(context).disabledColor,
                                   ),
+                          child: description!,
                         ),
                       ),
                   ],

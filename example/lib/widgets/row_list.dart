@@ -13,7 +13,7 @@ class RowList extends StatelessWidget {
         trailingWidget: Text("Trailing Widget"),
         actionWidget: Text("Action Widget"),
         leadingWidget: Icon(YaruIcons.audio),
-        description: "Description",
+        description: Text("Description"),
       ),
       itemCount: 20,
     );

@@ -33,7 +33,7 @@ class _SectionPageState extends State<SectionPage> {
             YaruRow(
               trailingWidget: Text("Trailing Widget"),
               actionWidget: Text("Action Widget"),
-              description: "Description",
+              description: Text("Description"),
             ),
             YaruSliderRow(
               actionLabel: "YaruSection width",
