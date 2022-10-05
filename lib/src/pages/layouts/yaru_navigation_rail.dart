@@ -67,7 +67,7 @@ class _YaruNavigationRailItem extends StatelessWidget {
           child: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: extended ? 10 : 7,
+                vertical: extended ? 10 : 8,
                 horizontal: extended ? 8 : 5,
               ),
               child: _columnOrRow([
@@ -131,7 +131,7 @@ class _YaruNavigationRailItem extends StatelessWidget {
     if (label is YaruPageItemTitle) {
       label = DefaultTextStyle.merge(
         child: label,
-        style: TextStyle(fontSize: extended ? 13 : 11),
+        style: const TextStyle(fontSize: 13),
         overflow: TextOverflow.ellipsis,
         softWrap: true,
         textAlign: extended ? TextAlign.left : TextAlign.center,
