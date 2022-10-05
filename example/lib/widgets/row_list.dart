@@ -14,7 +14,6 @@ class RowList extends StatelessWidget {
         actionWidget: Text("Action Widget"),
         leadingWidget: Icon(YaruIcons.audio),
         description: "Description",
-        enabled: true,
       ),
       itemCount: 20,
     );

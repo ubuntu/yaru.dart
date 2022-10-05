@@ -31,7 +31,6 @@ class _SectionPageState extends State<SectionPage> {
           width: sectionWidth,
           children: [
             YaruRow(
-              enabled: true,
               trailingWidget: Text("Trailing Widget"),
               actionWidget: Text("Action Widget"),
               description: "Description",
