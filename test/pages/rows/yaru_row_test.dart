@@ -11,10 +11,10 @@ void main() {
         theme: ThemeData(primarySwatch: Colors.red),
         home: const Scaffold(
           body: YaruRow(
-            leadingWidget: Text('Foo Leading'),
-            actionWidget: Text('Foo Text'),
-            trailingWidget: Icon(Icons.add),
-            description: Text('Foo Description'),
+            leading: Text('Foo Leading'),
+            trailing: Text('Foo Text'),
+            title: Icon(Icons.add),
+            subtitle: Text('Foo Description'),
           ),
         ),
       ),
@@ -36,9 +36,9 @@ void main() {
         theme: ThemeData(primarySwatch: Colors.red),
         home: const Scaffold(
           body: YaruRow(
-            leadingWidget: null,
-            actionWidget: Text('Foo Text'),
-            trailingWidget: Icon(Icons.add),
+            leading: null,
+            trailing: Text('Foo Text'),
+            title: Icon(Icons.add),
           ),
         ),
       ),

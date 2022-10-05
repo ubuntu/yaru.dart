@@ -5,18 +5,18 @@ class YaruRow extends StatelessWidget {
   ///
   /// for example:
   /// ```dart
-  ///     YaruRow(
-  ///        trailingWidget: Text('trailingWidget'),
-  ///        actionWidget: Text('actionWidget'),
-  ///        description: 'description',
-  ///       );
+  /// YaruRow(
+  ///   title: Text('title'),
+  ///   subtitle: Text('subtitle'),
+  ///   trailing: Text('trailing'),
+  /// )
   /// ```
   const YaruRow({
     super.key,
-    this.leadingWidget,
-    required this.trailingWidget,
-    this.description,
-    required this.actionWidget,
+    this.leading,
+    required this.title,
+    this.subtitle,
+    this.trailing,
     this.enabled = true,
     this.width,
     this.padding = const EdgeInsets.all(8.0),
@@ -29,19 +29,19 @@ class YaruRow extends StatelessWidget {
   });
 
   /// The [Widget] placed at the leading position.
-  /// A widget to display before the [trailingWidget].
+  /// A widget to display before the [title].
   ///
   /// Typically an [Icon] or a [CircleAvatar] widget.
-  final Widget? leadingWidget;
+  final Widget? leading;
 
-  /// The [Widget] placed at trailing position.
-  final Widget trailingWidget;
+  /// The [Widget] placed at title position.
+  final Widget title;
 
-  /// The [Widget] placed below [trailingWidget].
-  final Widget? description;
+  /// The [Widget] placed below [title].
+  final Widget? subtitle;
 
-  /// The [Widget] placed after the [trailingWidget].
-  final Widget actionWidget;
+  /// The [Widget] placed after the [title].
+  final Widget? trailing;
 
   /// Whether or not we can interact with the widget
   final bool enabled;
@@ -90,17 +90,14 @@ class YaruRow extends StatelessWidget {
             verticalDirection: verticalDirection,
             textBaseline: textBaseline,
             children: [
-              if (leadingWidget != null) ...[
-                leadingWidget!,
-                const SizedBox(width: 8)
-              ],
+              if (leading != null) ...[leading!, const SizedBox(width: 8)],
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    trailingWidget,
-                    if (description != null)
+                    title,
+                    if (subtitle != null)
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0),
                         child: DefaultTextStyle(
@@ -109,13 +106,13 @@ class YaruRow extends StatelessWidget {
                               : Theme.of(context).textTheme.bodySmall!.copyWith(
                                     color: Theme.of(context).disabledColor,
                                   ),
-                          child: description!,
+                          child: subtitle!,
                         ),
                       ),
                   ],
                 ),
               ),
-              actionWidget,
+              if (trailing != null) ...[const SizedBox(width: 8), trailing!],
             ],
           ),
         ),

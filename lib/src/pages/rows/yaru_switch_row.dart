@@ -80,15 +80,15 @@ class YaruSwitchRow extends StatelessWidget {
     return YaruRow(
       width: width,
       enabled: enabled,
-      trailingWidget: trailingWidget,
-      description: actionDescription != null ? Text(actionDescription!) : null,
+      title: trailingWidget,
+      subtitle: actionDescription != null ? Text(actionDescription!) : null,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
-      actionWidget: Switch(
+      trailing: Switch(
         value: value ?? false,
         onChanged: enabled ? onChanged : null,
       ),
