@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_row.dart';
+import '../yaru_tile.dart';
 
 class YaruSingleInfoRow extends StatelessWidget {
   /// Creates an info widget with infoLabel and infoValue.
@@ -36,7 +36,7 @@ class YaruSingleInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YaruRow(
+    return YaruTile(
       enabled: true,
       title: Text(infoLabel),
       trailing: Expanded(

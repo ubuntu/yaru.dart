@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class YaruRow extends StatelessWidget {
+class YaruTile extends StatelessWidget {
   /// Creates a Yaru style [ListTile] similar widget.
   ///
   /// for example:
   /// ```dart
-  /// YaruRow(
+  /// YaruTile(
   ///   title: Text('title'),
   ///   subtitle: Text('subtitle'),
   ///   trailing: Text('trailing'),
   /// )
   /// ```
-  const YaruRow({
+  const YaruTile({
     super.key,
     this.leading,
     required this.title,

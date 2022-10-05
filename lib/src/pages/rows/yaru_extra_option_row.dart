@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/controls/yaru_option_button.dart';
-import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
+import 'package:yaru_widgets/src/pages/yaru_tile.dart';
 
 class YaruExtraOptionRow extends StatelessWidget {
   /// Creates a row having switch, label, description and YaruOptionButton.
@@ -71,7 +71,7 @@ class YaruExtraOptionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final enabled = this.enabled && value != null;
-    return YaruRow(
+    return YaruTile(
       enabled: enabled,
       title: Text(actionLabel),
       subtitle: actionDescription != null ? Text(actionDescription!) : null,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
+import 'package:yaru_widgets/src/pages/yaru_tile.dart';
 
 class YaruSwitchRow extends StatelessWidget {
   /// Creates yaru style switch. The [Switch] will be aligned horizontally along with the  `trailingWidget`.
@@ -49,7 +49,7 @@ class YaruSwitchRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final enabled = this.enabled && value != null;
 
-    return YaruRow(
+    return YaruTile(
       enabled: enabled,
       title: trailingWidget,
       subtitle: actionDescription != null ? Text(actionDescription!) : null,

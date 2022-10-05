@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
           onChanged: (v) => setState(() => _compactMode = v),
         ),
         if (_compactMode)
-          YaruRow(
+          YaruTile(
             title: Text('YaruPageItem amount'),
             trailing: Row(
               children: [

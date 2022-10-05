@@ -30,7 +30,7 @@ class _SectionPageState extends State<SectionPage> {
         YaruSection(
           width: sectionWidth,
           children: [
-            YaruRow(
+            YaruTile(
               title: Text('Title'),
               subtitle: Text('Subtitle'),
               trailing: Text('Trailing'),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
+import 'package:yaru_widgets/src/pages/yaru_tile.dart';
 
 class YaruToggleButtonsRow extends StatelessWidget {
   /// Creates a set of Yaru style toggle buttons.
@@ -81,7 +81,7 @@ class YaruToggleButtonsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final enabled = this.enabled && selectedValues != null;
 
-    return YaruRow(
+    return YaruTile(
       enabled: enabled,
       title: Text(actionLabel),
       subtitle: actionDescription != null ? Text(actionDescription!) : null,

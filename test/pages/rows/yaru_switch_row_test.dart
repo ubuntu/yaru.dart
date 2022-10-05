@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
+import 'package:yaru_widgets/src/pages/yaru_tile.dart';
 import 'package:yaru_widgets/src/pages/rows/yaru_switch_row.dart';
 
 void main() {
@@ -24,7 +24,7 @@ void main() {
 
     expect(find.text('Description'), findsOneWidget);
     expect(find.text('Trailing Widget'), findsOneWidget);
-    expect(find.byType(YaruRow), findsOneWidget);
+    expect(find.byType(YaruTile), findsOneWidget);
     expect(findValue, true);
   });
 }

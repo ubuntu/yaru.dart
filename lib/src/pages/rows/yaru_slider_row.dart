@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
+import 'package:yaru_widgets/src/pages/yaru_tile.dart';
 
 class YaruSliderRow extends StatelessWidget {
   /// Creates a yaru style slider.
   /// If the `value` property is null the [Widget] will return [SizedBox].
-  /// Slider is passed as an `actionWidget   inside [YaruRow].
+  /// Slider is passed as an `actionWidget   inside [YaruTile].
   /// `actionLabel` and `actionDescription` is placed in a row along with the slider.
   ///
   /// For example:
@@ -80,7 +80,7 @@ class YaruSliderRow extends StatelessWidget {
 
     final enabled = this.enabled && value != null;
 
-    return YaruRow(
+    return YaruTile(
       enabled: enabled,
       title: Text(actionLabel),
       subtitle: actionDescription != null ? Text(actionDescription!) : null,

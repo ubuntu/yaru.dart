@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/src/pages/rows/yaru_row.dart';
+import 'package:yaru_widgets/src/pages/yaru_tile.dart';
 
 void main() {
   testWidgets(
-      '- YaruRow Test when actionWidget && trailingWidget && leadingWidget != null',
+      '- YaruTile Test when actionWidget && trailingWidget && leadingWidget != null',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData(primarySwatch: Colors.red),
         home: const Scaffold(
-          body: YaruRow(
+          body: YaruTile(
             leading: Text('Foo Leading'),
             trailing: Text('Foo Text'),
             title: Icon(Icons.add),
@@ -29,13 +29,13 @@ void main() {
     expect(trailingWidgetFinder, findsOneWidget);
   });
 
-  testWidgets('- YaruRow widget when leadingWidget & Description == null',
+  testWidgets('- YaruTile widget when leadingWidget & Description == null',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData(primarySwatch: Colors.red),
         home: const Scaffold(
-          body: YaruRow(
+          body: YaruTile(
             leading: null,
             trailing: Text('Foo Text'),
             title: Icon(Icons.add),
