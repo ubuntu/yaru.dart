@@ -24,7 +24,6 @@ class YaruSwitchRow extends StatelessWidget {
     this.actionDescription,
     required this.value,
     required this.onChanged,
-    this.width,
     this.padding = const EdgeInsets.all(8.0),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.mainAxisSize = MainAxisSize.max,
@@ -48,9 +47,6 @@ class YaruSwitchRow extends StatelessWidget {
 
   /// The callback that  gets invoked when the [Switch] value changes.
   final Function(bool) onChanged;
-
-  /// Optional width passed to [YaruRow]
-  final double? width;
 
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
@@ -78,7 +74,6 @@ class YaruSwitchRow extends StatelessWidget {
     final enabled = this.enabled && value != null;
 
     return YaruRow(
-      width: width,
       enabled: enabled,
       title: trailingWidget,
       subtitle: actionDescription != null ? Text(actionDescription!) : null,

@@ -18,7 +18,6 @@ class YaruSingleInfoRow extends StatelessWidget {
     super.key,
     required this.infoLabel,
     required this.infoValue,
-    this.width,
     this.padding = const EdgeInsets.all(8.0),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.mainAxisSize = MainAxisSize.max,
@@ -37,9 +36,6 @@ class YaruSingleInfoRow extends StatelessWidget {
   ///
   /// Default color of the text will be [Theme.of(context).colorScheme.onSurface.withAlpha(150)].
   final String infoValue;
-
-  /// Optional width passed to [YaruRow]
-  final double? width;
 
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
@@ -65,7 +61,6 @@ class YaruSingleInfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruRow(
-      width: width,
       enabled: true,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,

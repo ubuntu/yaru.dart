@@ -18,7 +18,6 @@ class YaruRow extends StatelessWidget {
     this.subtitle,
     this.trailing,
     this.enabled = true,
-    this.width,
     this.padding = const EdgeInsets.all(8.0),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.mainAxisSize = MainAxisSize.max,
@@ -45,9 +44,6 @@ class YaruRow extends StatelessWidget {
 
   /// Whether or not we can interact with the widget
   final bool enabled;
-
-  /// The `width` of the [Widget], by default it will be 500.
-  final double? width;
 
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
@@ -78,43 +74,40 @@ class YaruRow extends StatelessWidget {
             ? Theme.of(context).textTheme.bodyLarge!.color
             : Theme.of(context).disabledColor,
       ),
-      child: SizedBox(
-        width: width,
-        child: Padding(
-          padding: padding,
-          child: Row(
-            mainAxisAlignment: mainAxisAlignment,
-            mainAxisSize: mainAxisSize,
-            crossAxisAlignment: crossAxisAlignment,
-            textDirection: textDirection,
-            verticalDirection: verticalDirection,
-            textBaseline: textBaseline,
-            children: [
-              if (leading != null) ...[leading!, const SizedBox(width: 8)],
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    title,
-                    if (subtitle != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: DefaultTextStyle(
-                          style: enabled
-                              ? Theme.of(context).textTheme.bodySmall!
-                              : Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: Theme.of(context).disabledColor,
-                                  ),
-                          child: subtitle!,
-                        ),
+      child: Padding(
+        padding: padding,
+        child: Row(
+          mainAxisAlignment: mainAxisAlignment,
+          mainAxisSize: mainAxisSize,
+          crossAxisAlignment: crossAxisAlignment,
+          textDirection: textDirection,
+          verticalDirection: verticalDirection,
+          textBaseline: textBaseline,
+          children: [
+            if (leading != null) ...[leading!, const SizedBox(width: 8)],
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  title,
+                  if (subtitle != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: DefaultTextStyle(
+                        style: enabled
+                            ? Theme.of(context).textTheme.bodySmall!
+                            : Theme.of(context).textTheme.bodySmall!.copyWith(
+                                  color: Theme.of(context).disabledColor,
+                                ),
+                        child: subtitle!,
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
-              if (trailing != null) ...[const SizedBox(width: 8), trailing!],
-            ],
-          ),
+            ),
+            if (trailing != null) ...[const SizedBox(width: 8), trailing!],
+          ],
         ),
       ),
     );

@@ -37,7 +37,6 @@ class YaruToggleButtonsRow extends StatelessWidget {
     required this.labels,
     required this.selectedValues,
     required this.onPressed,
-    this.width,
     this.padding = const EdgeInsets.all(8.0),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.mainAxisSize = MainAxisSize.max,
@@ -81,9 +80,6 @@ class YaruToggleButtonsRow extends StatelessWidget {
   /// When the callback is null, all toggle buttons will be disabled.
   final Function(int) onPressed;
 
-  /// Optional width passed to [YaruRow]
-  final double? width;
-
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
 
@@ -110,7 +106,6 @@ class YaruToggleButtonsRow extends StatelessWidget {
     final enabled = this.enabled && selectedValues != null;
 
     return YaruRow(
-      width: width,
       enabled: enabled,
       title: Text(actionLabel),
       subtitle: actionDescription != null ? Text(actionDescription!) : null,

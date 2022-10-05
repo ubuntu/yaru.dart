@@ -13,7 +13,6 @@ class YaruExtraOptionRow extends StatelessWidget {
     required this.onChanged,
     required this.onPressed,
     required this.iconData,
-    this.width,
     this.padding = const EdgeInsets.all(8.0),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.mainAxisSize = MainAxisSize.max,
@@ -72,9 +71,6 @@ class YaruExtraOptionRow extends StatelessWidget {
   /// IconData for the [YaruOptionButton].
   final IconData iconData;
 
-  /// Optional width passed to [YaruRow]
-  final double? width;
-
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
 
@@ -100,7 +96,6 @@ class YaruExtraOptionRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final enabled = this.enabled && value != null;
     return YaruRow(
-      width: width,
       enabled: enabled,
       title: Text(actionLabel),
       subtitle: actionDescription != null ? Text(actionDescription!) : null,

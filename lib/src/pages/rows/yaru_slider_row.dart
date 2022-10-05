@@ -34,7 +34,6 @@ class YaruSliderRow extends StatelessWidget {
     this.showValue = true,
     this.fractionDigits = 0,
     required this.onChanged,
-    this.width,
     this.padding = const EdgeInsets.all(8.0),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.mainAxisSize = MainAxisSize.max,
@@ -78,9 +77,6 @@ class YaruSliderRow extends StatelessWidget {
   /// Function run when the slider changes its value
   final Function(double) onChanged;
 
-  /// Optional width passed to [YaruRow]
-  final double? width;
-
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
 
@@ -109,7 +105,6 @@ class YaruSliderRow extends StatelessWidget {
     final enabled = this.enabled && value != null;
 
     return YaruRow(
-      width: width,
       enabled: enabled,
       title: Text(actionLabel),
       subtitle: actionDescription != null ? Text(actionDescription!) : null,
