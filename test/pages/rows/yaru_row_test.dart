@@ -14,7 +14,7 @@ void main() {
             leadingWidget: Text('Foo Leading'),
             actionWidget: Text('Foo Text'),
             trailingWidget: Icon(Icons.add),
-            description: 'Foo Description',
+            description: Text('Foo Description'),
           ),
         ),
       ),

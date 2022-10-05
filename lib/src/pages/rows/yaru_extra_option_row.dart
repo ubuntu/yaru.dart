@@ -103,7 +103,7 @@ class YaruExtraOptionRow extends StatelessWidget {
       width: width,
       enabled: enabled,
       trailingWidget: Text(actionLabel),
-      description: actionDescription,
+      description: actionDescription != null ? Text(actionDescription!) : null,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,

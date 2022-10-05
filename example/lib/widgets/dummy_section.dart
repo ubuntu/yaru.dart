@@ -19,7 +19,7 @@ class DummySection extends StatelessWidget {
         YaruRow(
           trailingWidget: Text("Trailing Widget"),
           actionWidget: Text("Action Widget"),
-          description: "Description",
+          description: Text("Description"),
         ),
       ],
       width: width,
