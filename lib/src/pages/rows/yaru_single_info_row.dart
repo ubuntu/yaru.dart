@@ -73,8 +73,8 @@ class YaruSingleInfoRow extends StatelessWidget {
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
-      trailingWidget: Text(infoLabel),
-      actionWidget: Expanded(
+      title: Text(infoLabel),
+      trailing: Expanded(
         flex: 2,
         child: SelectableText(
           infoValue,

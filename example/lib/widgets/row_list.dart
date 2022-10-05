@@ -10,10 +10,10 @@ class RowList extends StatelessWidget {
     return ListView.builder(
       shrinkWrap: true,
       itemBuilder: (context, index) => const YaruRow(
-        trailingWidget: Text("Trailing Widget"),
-        actionWidget: Text("Action Widget"),
-        leadingWidget: Icon(YaruIcons.audio),
-        description: Text("Description"),
+        title: Text("Trailing Widget"),
+        trailing: Text("Action Widget"),
+        leading: Icon(YaruIcons.audio),
+        subtitle: Text("Description"),
       ),
       itemCount: 20,
     );

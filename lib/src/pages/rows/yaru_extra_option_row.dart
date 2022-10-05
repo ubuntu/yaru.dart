@@ -102,15 +102,15 @@ class YaruExtraOptionRow extends StatelessWidget {
     return YaruRow(
       width: width,
       enabled: enabled,
-      trailingWidget: Text(actionLabel),
-      description: actionDescription != null ? Text(actionDescription!) : null,
+      title: Text(actionLabel),
+      subtitle: actionDescription != null ? Text(actionDescription!) : null,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
-      actionWidget: Row(
+      trailing: Row(
         children: [
           Switch(
             value: value ?? false,

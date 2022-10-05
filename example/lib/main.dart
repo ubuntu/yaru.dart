@@ -56,8 +56,8 @@ class _HomeState extends State<Home> {
         ),
         if (_compactMode)
           YaruRow(
-            trailingWidget: Text('YaruPageItem amount'),
-            actionWidget: Row(
+            title: Text('YaruPageItem amount'),
+            trailing: Row(
               children: [
                 TextButton(
                   onPressed: () {
