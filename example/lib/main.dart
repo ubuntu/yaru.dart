@@ -75,7 +75,6 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            enabled: true,
           )
       ]),
       iconData: YaruIcons.settings,

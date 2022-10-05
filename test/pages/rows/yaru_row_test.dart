@@ -11,7 +11,6 @@ void main() {
         theme: ThemeData(primarySwatch: Colors.red),
         home: const Scaffold(
           body: YaruRow(
-            enabled: true,
             leadingWidget: Text('Foo Leading'),
             actionWidget: Text('Foo Text'),
             trailingWidget: Icon(Icons.add),
@@ -37,7 +36,6 @@ void main() {
         theme: ThemeData(primarySwatch: Colors.red),
         home: const Scaffold(
           body: YaruRow(
-            enabled: true,
             leadingWidget: null,
             actionWidget: Text('Foo Text'),
             trailingWidget: Icon(Icons.add),

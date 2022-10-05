@@ -17,7 +17,7 @@ class YaruRow extends StatelessWidget {
     required this.trailingWidget,
     this.description,
     required this.actionWidget,
-    required this.enabled,
+    this.enabled = true,
     this.width,
     this.padding = const EdgeInsets.all(8.0),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
