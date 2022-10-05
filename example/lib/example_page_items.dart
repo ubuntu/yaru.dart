@@ -15,16 +15,16 @@ import 'package:yaru_widgets_example/pages/slider_page.dart';
 import 'package:yaru_widgets_example/pages/switch_row_page.dart';
 import 'package:yaru_widgets_example/pages/tabbed_page_page.dart';
 import 'package:yaru_widgets_example/pages/toggle_buttons_row_page.dart';
-import 'package:yaru_widgets_example/widgets/row_list.dart';
+import 'package:yaru_widgets_example/widgets/tile_list.dart';
 
 const _lorem =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 final examplePageItems = <YaruPageItem>[
   YaruPageItem(
-      titleBuilder: (context) => YaruPageItemTitle.text('YaruRow'),
+      titleBuilder: (context) => YaruPageItemTitle.text('YaruTile'),
       iconData: YaruIcons.format_unordered_list,
-      builder: (_) => YaruPage(children: [RowList()]),
+      builder: (_) => YaruPage(children: [TileList()]),
       itemWidget: SizedBox(
         height: 20,
         child: YaruCircularProgressIndicator(strokeWidth: 2),

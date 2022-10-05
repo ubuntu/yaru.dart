@@ -19,6 +19,7 @@ export 'src/extensions/border_radius_extension.dart';
 export 'src/pages/yaru_page.dart';
 export 'src/pages/yaru_section.dart';
 export 'src/pages/yaru_tabbed_page.dart';
+export 'src/pages/yaru_tile.dart';
 
 // Pages layouts
 export 'src/pages/layouts/yaru_compact_layout.dart';
@@ -29,7 +30,6 @@ export 'src/pages/layouts/yaru_page_item_title.dart';
 // Pages rows
 export 'src/pages/rows/yaru_checkbox_row.dart';
 export 'src/pages/rows/yaru_extra_option_row.dart';
-export 'src/pages/rows/yaru_row.dart';
 export 'src/pages/rows/yaru_single_info_row.dart';
 export 'src/pages/rows/yaru_slider_row.dart';
 export 'src/pages/rows/yaru_switch_row.dart';
