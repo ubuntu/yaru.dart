@@ -19,12 +19,6 @@ class YaruSingleInfoRow extends StatelessWidget {
     required this.infoLabel,
     required this.infoValue,
     this.padding = const EdgeInsets.all(8.0),
-    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
-    this.mainAxisSize = MainAxisSize.max,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
-    this.verticalDirection = VerticalDirection.down,
-    this.textDirection,
-    this.textBaseline,
   });
 
   /// Specifies the label for the information and is placed at the trailing position.
@@ -40,34 +34,10 @@ class YaruSingleInfoRow extends StatelessWidget {
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
 
-  /// The [MainAxisAlignment] which defaults to [MainAxisAlignment.spaceBetween].
-  final MainAxisAlignment mainAxisAlignment;
-
-  /// The [MainAxisSize] which defaults to [MainAxisSize.max].
-  final MainAxisSize mainAxisSize;
-
-  /// The [CrossAxisAlignment] which defaults to [CrossAxisAlignment.center].
-  final CrossAxisAlignment crossAxisAlignment;
-
-  /// The optional [TextDirection].
-  final TextDirection? textDirection;
-
-  /// The [VerticalDirection] which defaults to [VerticalDirection.down].
-  final VerticalDirection verticalDirection;
-
-  /// The optional [TextBaseline].
-  final TextBaseline? textBaseline;
-
   @override
   Widget build(BuildContext context) {
     return YaruRow(
       enabled: true,
-      mainAxisAlignment: mainAxisAlignment,
-      mainAxisSize: mainAxisSize,
-      crossAxisAlignment: crossAxisAlignment,
-      textDirection: textDirection,
-      verticalDirection: verticalDirection,
-      textBaseline: textBaseline,
       title: Text(infoLabel),
       trailing: Expanded(
         flex: 2,

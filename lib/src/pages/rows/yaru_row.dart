@@ -19,12 +19,6 @@ class YaruRow extends StatelessWidget {
     this.trailing,
     this.enabled = true,
     this.padding = const EdgeInsets.all(8.0),
-    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
-    this.mainAxisSize = MainAxisSize.max,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
-    this.verticalDirection = VerticalDirection.down,
-    this.textDirection,
-    this.textBaseline,
   });
 
   /// The [Widget] placed at the leading position.
@@ -48,24 +42,6 @@ class YaruRow extends StatelessWidget {
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
 
-  /// The [MainAxisAlignment] which defaults to [MainAxisAlignment.spaceBetween].
-  final MainAxisAlignment mainAxisAlignment;
-
-  /// The [MainAxisSize] which defaults to [MainAxisSize.max].
-  final MainAxisSize mainAxisSize;
-
-  /// The [CrossAxisAlignment] which defaults to [CrossAxisAlignment.center].
-  final CrossAxisAlignment crossAxisAlignment;
-
-  /// The optional [TextDirection].
-  final TextDirection? textDirection;
-
-  /// The [VerticalDirection] which defaults to [VerticalDirection.down].
-  final VerticalDirection verticalDirection;
-
-  /// The optional [TextBaseline].
-  final TextBaseline? textBaseline;
-
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
@@ -77,12 +53,6 @@ class YaruRow extends StatelessWidget {
       child: Padding(
         padding: padding,
         child: Row(
-          mainAxisAlignment: mainAxisAlignment,
-          mainAxisSize: mainAxisSize,
-          crossAxisAlignment: crossAxisAlignment,
-          textDirection: textDirection,
-          verticalDirection: verticalDirection,
-          textBaseline: textBaseline,
           children: [
             if (leading != null) ...[leading!, const SizedBox(width: 8)],
             Expanded(

@@ -38,12 +38,6 @@ class YaruToggleButtonsRow extends StatelessWidget {
     required this.selectedValues,
     required this.onPressed,
     this.padding = const EdgeInsets.all(8.0),
-    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
-    this.mainAxisSize = MainAxisSize.max,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
-    this.verticalDirection = VerticalDirection.down,
-    this.textDirection,
-    this.textBaseline,
   });
 
   /// Whether or not we can interact with the widget
@@ -83,24 +77,6 @@ class YaruToggleButtonsRow extends StatelessWidget {
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
 
-  /// The [MainAxisAlignment] which defaults to [MainAxisAlignment.spaceBetween].
-  final MainAxisAlignment mainAxisAlignment;
-
-  /// The [MainAxisSize] which defaults to [MainAxisSize.max].
-  final MainAxisSize mainAxisSize;
-
-  /// The [CrossAxisAlignment] which defaults to [CrossAxisAlignment.center].
-  final CrossAxisAlignment crossAxisAlignment;
-
-  /// The optional [TextDirection].
-  final TextDirection? textDirection;
-
-  /// The [VerticalDirection] which defaults to [VerticalDirection.down].
-  final VerticalDirection verticalDirection;
-
-  /// The optional [TextBaseline].
-  final TextBaseline? textBaseline;
-
   @override
   Widget build(BuildContext context) {
     final enabled = this.enabled && selectedValues != null;
@@ -109,12 +85,6 @@ class YaruToggleButtonsRow extends StatelessWidget {
       enabled: enabled,
       title: Text(actionLabel),
       subtitle: actionDescription != null ? Text(actionDescription!) : null,
-      mainAxisAlignment: mainAxisAlignment,
-      mainAxisSize: mainAxisSize,
-      crossAxisAlignment: crossAxisAlignment,
-      textDirection: textDirection,
-      verticalDirection: verticalDirection,
-      textBaseline: textBaseline,
       trailing: ToggleButtons(
         constraints: const BoxConstraints(minHeight: 40.0),
         isSelected:
