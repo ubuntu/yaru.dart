@@ -122,7 +122,7 @@ class _YaruNavigationRailItem extends StatelessWidget {
       return const SizedBox(width: 10);
     }
 
-    return const SizedBox(height: 2);
+    return const SizedBox(height: 5);
   }
 
   Widget _buildLabel(BuildContext context) {
@@ -131,7 +131,10 @@ class _YaruNavigationRailItem extends StatelessWidget {
     if (label is YaruPageItemTitle) {
       label = DefaultTextStyle.merge(
         child: label,
-        style: const TextStyle(fontSize: 13),
+        style: const TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        ),
         overflow: TextOverflow.ellipsis,
         softWrap: true,
         textAlign: extended ? TextAlign.left : TextAlign.center,
