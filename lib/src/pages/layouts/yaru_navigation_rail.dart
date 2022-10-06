@@ -14,6 +14,7 @@ enum YaruNavigationRailStyle {
 }
 
 const _kSizeAnimationDuration = Duration(milliseconds: 200);
+const _kSelectedIconAnimationDuration = Duration(milliseconds: 250);
 
 class YaruNavigationRail extends StatelessWidget {
   const YaruNavigationRail({
@@ -185,7 +186,8 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
   }
 
   Widget _buildIcon(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: _kSelectedIconAnimationDuration,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
         color: widget.selected
