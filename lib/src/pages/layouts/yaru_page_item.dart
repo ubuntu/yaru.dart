@@ -6,7 +6,6 @@ class YaruPageItem {
     required this.builder,
     this.searchMatches,
     required this.icon,
-    this.selectedIcon,
     this.onTap,
   });
 
@@ -14,8 +13,7 @@ class YaruPageItem {
   final WidgetBuilder titleBuilder;
 
   final WidgetBuilder builder;
-  final Widget icon;
-  final Widget? selectedIcon;
+  final Widget Function(BuildContext context, bool selected) icon;
   final bool Function(String value, BuildContext context)? searchMatches;
   final void Function(BuildContext context)? onTap;
 }

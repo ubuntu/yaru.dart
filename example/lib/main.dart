@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      icon: const Icon(YaruIcons.settings),
+      icon: (context, selected) => const Icon(YaruIcons.settings),
     );
 
     return MaterialApp(
