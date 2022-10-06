@@ -26,23 +26,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _filteredItems = <YaruPageItem>[];
-  final _searchController = TextEditingController();
   bool _compactMode = false;
   int _amount = 3;
-
-  void _onEscape() => setState(() {
-        _filteredItems.clear();
-        _searchController.clear();
-      });
-
-  void _onSearchChanged(String value, BuildContext context) {
-    setState(() {
-      _filteredItems.clear();
-      _filteredItems.addAll(examplePageItems.where((pageItem) =>
-          pageItem.searchMatches != null &&
-          pageItem.searchMatches!(value, context)));
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,14 +81,8 @@ class _HomeState extends State<Home> {
               pageItems: _filteredItems.isNotEmpty
                   ? _filteredItems
                   : [configItem] + examplePageItems,
-              appBar: YaruSearchAppBar(
-                searchHint: 'Search...',
-                clearSearchIconData: YaruIcons.window_close,
-                searchController: _searchController,
-                onChanged: (v) => _onSearchChanged(v, context),
-                onEscape: _onEscape,
-                appBarHeight: 48,
-                searchIconData: YaruIcons.search,
+              appBar: AppBar(
+                title: const Text('Example'),
               ),
             ),
     );
