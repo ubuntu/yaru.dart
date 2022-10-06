@@ -4,4 +4,6 @@ linter:
   rules:
     prefer_const_constructors: false
     prefer_const_literals_to_create_immutables:  false
+    require_trailing_commas: true
+    use_super_parameters: true
 

@@ -5,7 +5,7 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 class DummySection extends StatelessWidget {
   final double? width;
 
-  const DummySection({Key? key, this.width}) : super(key: key);
+  const DummySection({super.key, this.width});
 
   @override
   Widget build(BuildContext context) {

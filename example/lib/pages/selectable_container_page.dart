@@ -3,7 +3,7 @@ import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class SelectableContainerPage extends StatefulWidget {
-  const SelectableContainerPage({Key? key}) : super(key: key);
+  const SelectableContainerPage({super.key});
 
   @override
   State<SelectableContainerPage> createState() =>
@@ -22,10 +22,11 @@ class _SelectableContainerPageState extends State<SelectableContainerPage> {
         GridView(
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 300,
-              childAspectRatio: 16 / 12,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10),
+            maxCrossAxisExtent: 300,
+            childAspectRatio: 16 / 12,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
           children: [
             YaruSelectableContainer(
               selected: !_isImageSelected,

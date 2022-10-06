@@ -6,7 +6,7 @@ import 'package:yaru_widgets_example/widgets/tile_list.dart';
 const kMinSectionWidth = 400.0;
 
 class SectionPage extends StatefulWidget {
-  const SectionPage({Key? key}) : super(key: key);
+  const SectionPage({super.key});
 
   @override
   _SectionPageState createState() => _SectionPageState();

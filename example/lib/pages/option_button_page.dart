@@ -3,7 +3,7 @@ import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class OptionButtonPage extends StatefulWidget {
-  const OptionButtonPage({Key? key}) : super(key: key);
+  const OptionButtonPage({super.key});
 
   @override
   _OptionButtonPageState createState() => _OptionButtonPageState();
