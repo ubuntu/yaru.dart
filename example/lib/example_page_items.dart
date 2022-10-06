@@ -18,7 +18,9 @@ final examplePageItems = <YaruPageItem>[
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruBanner'),
     builder: (context) => const BannerPage(),
-    icon: (context, selected) => const Icon(YaruIcons.image),
+    icon: (context, selected) => selected
+        ? const Icon(YaruIcons.image_filled)
+        : const Icon(YaruIcons.image),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruCarousel'),
@@ -73,12 +75,7 @@ final examplePageItems = <YaruPageItem>[
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruTile'),
-    icon: (context, selected) => selected
-        ? const SizedBox(
-            height: 20,
-            child: YaruCircularProgressIndicator(strokeWidth: 2),
-          )
-        : const Icon(YaruIcons.format_unordered_list),
+    icon: (context, selected) => const Icon(YaruIcons.format_unordered_list),
     builder: (_) => const TilePage(),
   ),
 ];
