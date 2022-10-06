@@ -49,10 +49,12 @@ class _HomeState extends State<Home> {
     final configItem = YaruPageItem(
       titleBuilder: (context) => YaruPageItemTitle.text('Layout'),
       builder: (_) => YaruPage(children: [
-        YaruSwitchRow(
-          trailingWidget: Text('Compact mode'),
-          value: _compactMode,
-          onChanged: (v) => setState(() => _compactMode = v),
+        YaruTile(
+          title: Text('Compact mode'),
+          trailing: Switch(
+            value: _compactMode,
+            onChanged: (v) => setState(() => _compactMode = v),
+          ),
         ),
         if (_compactMode)
           YaruTile(
