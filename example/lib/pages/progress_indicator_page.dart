@@ -6,8 +6,9 @@ class ProgressIndicatorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const YaruPage(
-      children: [
+    return ListView(
+      padding: const EdgeInsets.all(kYaruPagePadding),
+      children: const [
         Padding(
           padding: EdgeInsets.only(top: 25),
           child: YaruCircularProgressIndicator(),

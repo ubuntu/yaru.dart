@@ -14,7 +14,8 @@ class _CarouselPageState extends State<CarouselPage> {
 
   @override
   Widget build(BuildContext context) {
-    return YaruPage(
+    return ListView(
+      padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
         YaruSection(
           headline: 'Auto scroll: off',

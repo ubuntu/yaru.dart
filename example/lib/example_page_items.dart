@@ -50,7 +50,7 @@ final examplePageItems = <YaruPageItem>[
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruOptionButton'),
     iconBuilder: (context, selected) => const Icon(YaruIcons.settings),
-    builder: (_) => const YaruPage(children: [OptionButtonPage()]),
+    builder: (_) => const OptionButtonPage(),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruRoundToggleButton'),

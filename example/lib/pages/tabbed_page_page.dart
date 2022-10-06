@@ -20,39 +20,28 @@ class _TabbedPagePageState extends State<TabbedPagePage> {
       onTap: (index) => _initialIndex = index,
       initialIndex: _initialIndex,
       views: [
-        YaruPage(
+        GridView(
+          padding: const EdgeInsets.all(kYaruPagePadding),
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            mainAxisExtent: 110,
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 15,
+            maxCrossAxisExtent: 550,
+          ),
           children: [
-            GridView(
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                mainAxisExtent: 110,
-                mainAxisSpacing: 15,
-                crossAxisSpacing: 15,
-                maxCrossAxisExtent: 550,
-              ),
-              children: [
-                for (int i = 0; i < 20; i++)
-                  YaruBanner(
-                    name: 'YaruBanner $i',
-                    summary: 'Description',
-                    icon: Image.asset('assets/ubuntuhero.jpg'),
-                    onTap: () => showAboutDialog(context: context),
-                  )
-              ],
-            )
+            for (int i = 0; i < 20; i++)
+              YaruBanner(
+                name: 'YaruBanner $i',
+                summary: 'Description',
+                icon: Image.asset('assets/ubuntuhero.jpg'),
+                onTap: () => showAboutDialog(context: context),
+              )
           ],
         ),
-        const YaruPage(
-          children: [
-            YaruSection(
-              headline: 'Accessibility',
-              children: [Text('accessibility')],
-            )
-          ],
-        ),
-        const YaruPage(children: [Text('Audio')]),
-        const YaruPage(children: [Text('AddressBook')]),
-        const YaruPage(children: [Text('Television')])
+        const Center(child: Text('Accessibility')),
+        const Center(child: Text('Audio')),
+        const Center(child: Text('AddressBook')),
+        const Center(child: Text('Television')),
       ],
       tabIcons: const [
         YaruIcons.addon,

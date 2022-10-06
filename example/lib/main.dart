@@ -34,7 +34,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final configItem = YaruPageItem(
       titleBuilder: (context) => YaruPageItemTitle.text('Layout'),
-      builder: (_) => YaruPage(
+      builder: (_) => ListView(
+        padding: const EdgeInsets.all(kYaruPagePadding),
         children: [
           YaruTile(
             title: const Text('Compact mode'),
