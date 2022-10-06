@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../extensions/border_radius_extension.dart';
 
+const _kAnimationDuration = Duration(milliseconds: 250);
+
 class YaruSelectableContainer extends StatelessWidget {
   /// Creates a Image Tile from the image path given in the path property.
   const YaruSelectableContainer({
@@ -48,7 +50,8 @@ class YaruSelectableContainer extends StatelessWidget {
     return InkWell(
       borderRadius: borderRadius,
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: _kAnimationDuration,
         decoration: BoxDecoration(
           borderRadius: borderRadius,
           color: selected
