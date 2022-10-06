@@ -35,7 +35,7 @@ class YaruAlertDialog extends StatelessWidget {
 
   /// The width of the dialog which can be provided and constraints all children with the same width.
   ///
-  /// Default is [kDefaultPageWidth]
+  /// Default is [kYaruPageWidth]
   final double? width;
 
   /// The optional height of the dialog which can be provided to limit the height
@@ -59,9 +59,9 @@ class YaruAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? kDefaultPageWidth,
+      width: width ?? kYaruPageWidth,
       child: AlertDialog(
-        actionsPadding: const EdgeInsets.all(kDefaultPagePadding / 2),
+        actionsPadding: const EdgeInsets.all(kYaruPagePadding / 2),
         contentPadding: contentPadding,
         scrollable: scrollable ?? false,
         titlePadding: EdgeInsets.zero,

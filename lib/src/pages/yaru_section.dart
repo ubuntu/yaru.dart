@@ -46,7 +46,7 @@ class YaruSection extends StatelessWidget {
               color: Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
             ),
             borderRadius: const BorderRadius.all(
-              Radius.circular(kDefaultContainerRadius),
+              Radius.circular(kYaruContainerRadius),
             ),
           ),
           child: Column(

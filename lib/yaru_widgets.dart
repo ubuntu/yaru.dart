@@ -1,5 +1,7 @@
 library yaru_widgets;
 
+// Constants
+export 'src/constants.dart';
 // Controls
 export 'src/controls/yaru_color_disk.dart';
 export 'src/controls/yaru_icon_button.dart';

@@ -10,7 +10,7 @@ class YaruSelectableContainer extends StatelessWidget {
     this.onTap,
     required this.selected,
     this.borderRadius,
-    this.radius = kDefaultContainerRadius,
+    this.radius = kYaruContainerRadius,
     this.padding,
     this.selectionColor,
   });

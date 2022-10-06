@@ -39,7 +39,7 @@ void main() {
     final paddingFinder = find.byWidgetPredicate(
       (widget) =>
           widget is Padding &&
-          widget.padding == const EdgeInsets.all(kDefaultPagePadding),
+          widget.padding == const EdgeInsets.all(kYaruPagePadding),
     );
     expect(paddingFinder, findsOneWidget);
     expect(find.byType(Container), findsOneWidget);
