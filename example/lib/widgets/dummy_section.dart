@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class DummySection extends StatelessWidget {
@@ -18,8 +19,9 @@ class DummySection extends StatelessWidget {
       children: [
         YaruTile(
           title: Text('Title'),
+          trailing: Icon(YaruIcons.information),
+          leading: Icon(YaruIcons.audio),
           subtitle: Text('Subtitle'),
-          trailing: Text('Trailing'),
         ),
       ],
       width: width,
