@@ -18,64 +18,65 @@ final examplePageItems = <YaruPageItem>[
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruBanner'),
     builder: (context) => const BannerPage(),
-    icon: (context, selected) => selected
+    iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.image_filled)
         : const Icon(YaruIcons.image),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruCarousel'),
     builder: (_) => const CarouselPage(),
-    icon: (context, selected) => const Icon(YaruIcons.refresh),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.refresh),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruColorDisk'),
     builder: (context) => const ColorDiskPage(),
-    icon: (context, selected) => const Icon(YaruIcons.color_select),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruDraggable'),
     builder: (context) => const DraggablePage(),
-    icon: (context, selected) => const Icon(YaruIcons.drag_handle),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.drag_handle),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruExpandable'),
-    icon: (context, selected) => const Icon(YaruIcons.pan_down),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.pan_down),
     builder: (_) => const ExpandablePage(),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruProgressIndicator'),
-    icon: (context, selected) => const Icon(YaruIcons.download),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.download),
     builder: (_) => const ProgressIndicatorPage(),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruOptionButton'),
-    icon: (context, selected) => const Icon(YaruIcons.settings),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.settings),
     builder: (_) => const YaruPage(children: [OptionButtonPage()]),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruRoundToggleButton'),
     builder: (context) => const RoundToggleButtonPage(),
-    icon: (context, selected) => const Icon(YaruIcons.app_grid),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.app_grid),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruSection'),
-    icon: (context, selected) => const Icon(YaruIcons.window),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.window),
     builder: (_) => const SectionPage(),
   ),
   YaruPageItem(
     titleBuilder: (context) =>
         YaruPageItemTitle.text('YaruSelectableContainer'),
-    icon: (context, selected) => const Icon(YaruIcons.selection),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.selection),
     builder: (_) => const SelectableContainerPage(),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruTabbedPage'),
     builder: (_) => const TabbedPagePage(),
-    icon: (context, selected) => const Icon(YaruIcons.tab_new),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.tab_new),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruTile'),
-    icon: (context, selected) => const Icon(YaruIcons.format_unordered_list),
+    iconBuilder: (context, selected) =>
+        const Icon(YaruIcons.format_unordered_list),
     builder: (_) => const TilePage(),
   ),
 ];

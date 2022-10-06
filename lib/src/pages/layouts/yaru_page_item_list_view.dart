@@ -39,13 +39,14 @@ class YaruPageItemListView extends StatelessWidget {
               visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
               selected: index == selectedIndex,
               title: pages[index].titleBuilder(context),
-              leading: pages[index].icon(context, index == selectedIndex),
+              leading:
+                  pages[index].iconBuilder(context, index == selectedIndex),
               onTap: () => onTap(index),
             )
           : _YaruListTile(
               selected: index == selectedIndex,
               title: pages[index].titleBuilder(context),
-              icon: pages[index].icon(context, index == selectedIndex),
+              icon: pages[index].iconBuilder(context, index == selectedIndex),
               onTap: () => onTap(index),
             ),
     );

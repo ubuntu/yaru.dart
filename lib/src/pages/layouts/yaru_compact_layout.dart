@@ -122,11 +122,11 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
                           destinations: [
                             for (int i = 0; i < widget.pageItems.length; i++)
                               NavigationRailDestination(
-                                icon: widget.pageItems[i].icon(
+                                icon: widget.pageItems[i].iconBuilder(
                                   context,
                                   i == _index,
                                 ),
-                                selectedIcon: widget.pageItems[i].icon(
+                                selectedIcon: widget.pageItems[i].iconBuilder(
                                   context,
                                   i == _index,
                                 ),
