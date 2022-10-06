@@ -36,20 +36,38 @@ class YaruPageItemListView extends StatelessWidget {
       controller: ScrollController(),
       itemCount: pages.length,
       itemBuilder: (context, index) => materialTiles
-          ? ListTile(
-              visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-              selected: index == selectedIndex,
-              title: pages[index].titleBuilder(context),
-              leading:
-                  pages[index].iconBuilder(context, index == selectedIndex),
-              onTap: () => onTap(index),
+          ? _buildSemanticContainer(
+              label: pages[index].label,
+              child: ListTile(
+                visualDensity:
+                    const VisualDensity(horizontal: -4, vertical: -4),
+                selected: index == selectedIndex,
+                title: pages[index].titleBuilder(context),
+                leading:
+                    pages[index].iconBuilder(context, index == selectedIndex),
+                onTap: () => onTap(index),
+              ),
             )
-          : _YaruListTile(
-              selected: index == selectedIndex,
-              title: pages[index].titleBuilder(context),
-              icon: pages[index].iconBuilder(context, index == selectedIndex),
-              onTap: () => onTap(index),
+          : _buildSemanticContainer(
+              label: pages[index].label,
+              child: _YaruListTile(
+                selected: index == selectedIndex,
+                title: pages[index].titleBuilder(context),
+                icon: pages[index].iconBuilder(context, index == selectedIndex),
+                onTap: () => onTap(index),
+              ),
             ),
+    );
+  }
+
+  Widget _buildSemanticContainer({
+    required String label,
+    required Widget child,
+  }) {
+    return Tooltip(
+      waitDuration: kWaitTooltipDuration,
+      message: label,
+      child: child,
     );
   }
 

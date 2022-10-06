@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../yaru_widgets.dart';
+import '../../constants.dart';
 
 /// Defines the look of a [YaruNavigationRail]
 enum YaruNavigationRailStyle {
@@ -104,32 +105,34 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
   @override
   Widget build(BuildContext context) {
     return _buildSizedContainer(
-      Material(
-        child: InkWell(
-          onTap: () {
-            if (widget.onDestinationSelected != null) {
-              widget.onDestinationSelected!.call(widget.index);
-            }
-          },
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical:
-                    widget.style == YaruNavigationRailStyle.labelledExtended
-                        ? 10
-                        : 5,
-                horizontal:
-                    widget.style == YaruNavigationRailStyle.labelledExtended
-                        ? 8
-                        : 5,
+      _buildSemanticContainer(
+        Material(
+          child: InkWell(
+            onTap: () {
+              if (widget.onDestinationSelected != null) {
+                widget.onDestinationSelected!.call(widget.index);
+              }
+            },
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical:
+                      widget.style == YaruNavigationRailStyle.labelledExtended
+                          ? 10
+                          : 5,
+                  horizontal:
+                      widget.style == YaruNavigationRailStyle.labelledExtended
+                          ? 8
+                          : 5,
+                ),
+                child: _buildColumnOrRow([
+                  _buildIcon(context),
+                  if (widget.style != YaruNavigationRailStyle.compact) ...[
+                    _buildGap(),
+                    _buildLabel(context),
+                  ]
+                ]),
               ),
-              child: _buildColumnOrRow([
-                _buildIcon(context),
-                if (widget.style != YaruNavigationRailStyle.compact) ...[
-                  _buildGap(),
-                  _buildLabel(context),
-                ]
-              ]),
             ),
           ),
         ),
@@ -166,6 +169,14 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
           child: child,
         ),
       ),
+    );
+  }
+
+  Widget _buildSemanticContainer(Widget child) {
+    return Tooltip(
+      waitDuration: kWaitTooltipDuration,
+      message: widget.destination.label,
+      child: child,
     );
   }
 

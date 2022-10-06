@@ -3,3 +3,4 @@ const kDefaultDialogTitlePadding = 0.0;
 const kDefaultPageWidth = 500.0;
 const kDefaultContainerRadius = 8.0;
 const kDefaultButtonRadius = 6.0;
+const kWaitTooltipDuration = Duration(milliseconds: 500);

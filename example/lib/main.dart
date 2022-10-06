@@ -32,8 +32,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final configItem = YaruPageItem(
-      titleBuilder: (context) => YaruPageItemTitle.text('Layout'),
+    final configItem = YaruPageItem.titleFromLabel(
+      label: 'Layout',
       builder: (_) => YaruPage(
         children: [
           YaruTile(
