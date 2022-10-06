@@ -76,7 +76,10 @@ class _SelectableContainerPageState extends State<SelectableContainerPage> {
               child: Material(
                 color: Colors.amber, // Button color
                 child: SizedBox(
-                    width: 56, height: 56, child: Icon(YaruIcons.heart)),
+                  width: 56,
+                  height: 56,
+                  child: Icon(YaruIcons.heart),
+                ),
               ),
             ),
           )
