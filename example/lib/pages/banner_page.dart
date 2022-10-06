@@ -6,26 +6,23 @@ class BannerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YaruPage(
+    return GridView(
+      padding: const EdgeInsets.all(kYaruPagePadding),
+      shrinkWrap: true,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        mainAxisExtent: 110,
+        mainAxisSpacing: 15,
+        crossAxisSpacing: 15,
+        maxCrossAxisExtent: 550,
+      ),
       children: [
-        GridView(
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            mainAxisExtent: 110,
-            mainAxisSpacing: 15,
-            crossAxisSpacing: 15,
-            maxCrossAxisExtent: 550,
-          ),
-          children: [
-            for (int i = 0; i < 20; i++)
-              YaruBanner(
-                name: 'YaruBanner $i',
-                summary: 'Description',
-                icon: Image.asset('assets/ubuntuhero.jpg'),
-                onTap: () => showAboutDialog(context: context),
-              )
-          ],
-        ),
+        for (int i = 0; i < 20; i++)
+          YaruBanner(
+            name: 'YaruBanner $i',
+            summary: 'Description',
+            icon: Image.asset('assets/ubuntuhero.jpg'),
+            onTap: () => showAboutDialog(context: context),
+          )
       ],
     );
   }

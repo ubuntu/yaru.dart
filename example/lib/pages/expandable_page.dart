@@ -10,8 +10,9 @@ class ExpandablePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const YaruPage(
-      children: [
+    return ListView(
+      padding: const EdgeInsets.all(kYaruPagePadding),
+      children: const [
         YaruExpandable(
           child: Text(_lorem),
           header: Text(

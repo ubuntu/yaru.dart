@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../yaru_widgets.dart';
-import '../../constants.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
@@ -86,7 +85,7 @@ class _YaruListTile extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius:
-            const BorderRadius.all(Radius.circular(kDefaultButtonRadius)),
+            const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
         color: selected
             ? Theme.of(context).colorScheme.onSurface.withOpacity(0.07)
             : null,
@@ -97,7 +96,7 @@ class _YaruListTile extends StatelessWidget {
         iconColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
         visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(kDefaultButtonRadius)),
+          borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),
         ),
         leading: icon,
         title: _buildTitle(),

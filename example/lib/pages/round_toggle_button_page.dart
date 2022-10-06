@@ -13,7 +13,8 @@ class _RoundToggleButtonPageState extends State<RoundToggleButtonPage> {
   bool _selected = false;
   @override
   Widget build(BuildContext context) {
-    return YaruPage(
+    return ListView(
+      padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
         YaruRoundToggleButton(
           onPressed: () => setState(

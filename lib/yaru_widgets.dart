@@ -1,5 +1,7 @@
 library yaru_widgets;
 
+// Constants
+export 'src/constants.dart';
 // Controls
 export 'src/controls/yaru_color_disk.dart';
 export 'src/controls/yaru_icon_button.dart';
@@ -18,9 +20,7 @@ export 'src/pages/layouts/yaru_master_detail_page.dart';
 export 'src/pages/layouts/yaru_navigation_rail.dart';
 export 'src/pages/layouts/yaru_page_item.dart';
 export 'src/pages/layouts/yaru_page_item_title.dart';
-export 'src/pages/yaru_page.dart';
 // Pages
-export 'src/pages/yaru_page.dart';
 export 'src/pages/yaru_section.dart';
 export 'src/pages/yaru_tabbed_page.dart';
 export 'src/pages/yaru_tile.dart';

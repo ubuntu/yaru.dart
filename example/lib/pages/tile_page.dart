@@ -8,7 +8,7 @@ class TilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(kYaruPagePadding),
       itemBuilder: (context, index) => const YaruTile(
         title: Text('Title'),
         trailing: Icon(YaruIcons.information),

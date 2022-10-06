@@ -14,7 +14,8 @@ class SectionPage extends StatefulWidget {
 class _SectionPageState extends State<SectionPage> {
   @override
   Widget build(BuildContext context) {
-    return YaruPage(
+    return ListView(
+      padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
         const DummySection(width: kMinSectionWidth),
         YaruSection(

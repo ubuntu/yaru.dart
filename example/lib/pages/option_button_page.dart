@@ -12,7 +12,8 @@ class OptionButtonPage extends StatefulWidget {
 class _OptionButtonPageState extends State<OptionButtonPage> {
   @override
   Widget build(BuildContext context) {
-    return YaruPage(
+    return ListView(
+      padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
         Row(
           children: [

@@ -16,26 +16,24 @@ class _ColorDiskPageState extends State<ColorDiskPage> {
   Widget build(BuildContext context) {
     final lightTheme = context.read<LightTheme>();
     final darkTheme = context.read<DarkTheme>();
-    return YaruPage(
-      children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              for (var theme in themeList)
-                YaruColorDisk(
-                  onPressed: () {
-                    lightTheme.value = theme.theme;
-                    darkTheme.value = theme.darkTheme;
-                  },
-                  color: theme.color,
-                  selected: Theme.of(context).primaryColor == theme.color,
-                ),
-            ],
-          ),
-        )
-      ],
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(kYaruPagePadding),
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          for (var theme in themeList)
+            YaruColorDisk(
+              onPressed: () {
+                lightTheme.value = theme.theme;
+                darkTheme.value = theme.darkTheme;
+              },
+              color: theme.color,
+              selected: Theme.of(context).primaryColor == theme.color,
+            ),
+        ],
+      ),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../yaru_widgets.dart';
-import '../constants.dart';
 
 /// A [Stack] of a [Text] with given [title] and an [IconButton]
 /// which pops the top-most route off the navigator
@@ -50,11 +49,10 @@ class YaruDialogTitle extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-            left:
-                kDefaultPagePadding + 5, // Avoid title overflow on close button
-            right: kDefaultPagePadding, // Avoid title overflow on close button
-            top: kDefaultPagePadding,
-            bottom: kDefaultPagePadding,
+            left: kYaruPagePadding + 5, // Avoid title overflow on close button
+            right: kYaruPagePadding, // Avoid title overflow on close button
+            top: kYaruPagePadding,
+            bottom: kYaruPagePadding,
           ),
           child: Row(
             mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,

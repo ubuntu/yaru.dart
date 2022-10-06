@@ -13,9 +13,9 @@ class YaruTabbedPage extends StatefulWidget {
     required this.views,
     this.width,
     this.padding = const EdgeInsets.only(
-      top: kDefaultPagePadding,
-      right: kDefaultPagePadding,
-      left: kDefaultPagePadding,
+      top: kYaruPagePadding,
+      right: kYaruPagePadding,
+      left: kYaruPagePadding,
     ),
     this.initialIndex = 0,
     this.onTap,
@@ -87,7 +87,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
             width: widget.width,
             height: 60,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(kDefaultContainerRadius),
+              borderRadius: BorderRadius.circular(kYaruContainerRadius),
             ),
             child: Theme(
               data: ThemeData().copyWith(
@@ -99,7 +99,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
                 controller: tabController,
                 labelColor: Theme.of(context).colorScheme.onSurface,
                 indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(kDefaultContainerRadius),
+                  borderRadius: BorderRadius.circular(kYaruContainerRadius),
                   color:
                       Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
                 ),
