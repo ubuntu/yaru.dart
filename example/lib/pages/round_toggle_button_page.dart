@@ -16,9 +16,9 @@ class _RoundToggleButtonPageState extends State<RoundToggleButtonPage> {
     return YaruPage(
       children: [
         YaruRoundToggleButton(
-          onPressed: (() => setState(
-                () => _selected = !_selected,
-              )),
+          onPressed: () => setState(
+            () => _selected = !_selected,
+          ),
           selected: _selected,
           iconData: YaruIcons.view,
           tooltip: 'View',

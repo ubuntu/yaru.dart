@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/constants.dart';
+import '../constants.dart';
 
 const double _kPanelHeaderCollapsedHeight = 48.0;
 const double _kPanelHeaderExpandedHeight = 64.0;
@@ -33,12 +33,12 @@ class YaruExpansionPanelList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> items = <Widget>[];
-    const EdgeInsets kExpandedEdgeInsets = EdgeInsets.symmetric(
+    final items = <Widget>[];
+    const kExpandedEdgeInsets = EdgeInsets.symmetric(
       vertical: _kPanelHeaderExpandedHeight - _kPanelHeaderCollapsedHeight,
     );
 
-    for (int index = 0; index < children.length; index += 1) {
+    for (var index = 0; index < children.length; index += 1) {
       if (_isChildExpanded(index) &&
           index != 0 &&
           !_isChildExpanded(index - 1)) {
@@ -75,7 +75,7 @@ class YaruExpansionPanelList extends StatelessWidget {
               customExpandIconData: customExpandIconData,
               isExpanded: _isChildExpanded(index),
               padding: const EdgeInsets.all(16.0),
-              onPressed: (bool isExpanded) {
+              onPressed: (isExpanded) {
                 expansionCallback(index, isExpanded);
               },
             ),
@@ -83,18 +83,18 @@ class YaruExpansionPanelList extends StatelessWidget {
         ],
       );
 
-      double _radiusValue = kDefaultContainerRadius;
-      BorderRadius borderRadius = index == 0
-          ? BorderRadius.only(
+      const _radiusValue = kDefaultContainerRadius;
+      final borderRadius = index == 0
+          ? const BorderRadius.only(
               topLeft: Radius.circular(_radiusValue),
               topRight: Radius.circular(_radiusValue),
             )
           : index == children.length - 1
-              ? BorderRadius.only(
+              ? const BorderRadius.only(
                   bottomLeft: Radius.circular(_radiusValue),
                   bottomRight: Radius.circular(_radiusValue),
                 )
-              : const BorderRadius.all(Radius.zero);
+              : BorderRadius.zero;
       items.add(
         Container(
           key: _SaltedKey<BuildContext, int>(context, index * 2),
@@ -164,8 +164,8 @@ class _SaltedKey<S, V> extends LocalKey {
 
   @override
   String toString() {
-    final String saltString = S == String ? '<\'$salt\'>' : '<$salt>';
-    final String valueString = V == String ? '<\'$value\'>' : '<$value>';
+    final saltString = S == String ? '<\'$salt\'>' : '<$salt>';
+    final valueString = V == String ? '<\'$value\'>' : '<$value>';
     return '[$saltString $valueString]';
   }
 }
@@ -313,9 +313,8 @@ class _YaruExpandIconState extends State<YaruExpandIcon>
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
     assert(debugCheckHasMaterialLocalizations(context));
-    final MaterialLocalizations localizations =
-        MaterialLocalizations.of(context);
-    final String onTapHint = widget.isExpanded
+    final localizations = MaterialLocalizations.of(context);
+    final onTapHint = widget.isExpanded
         ? localizations.expandedIconTapHint
         : localizations.collapsedIconTapHint;
 

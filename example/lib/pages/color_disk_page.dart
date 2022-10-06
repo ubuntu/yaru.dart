@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
-import 'package:yaru_widgets_example/theme.dart';
+import '../theme.dart';
 
 class ColorDiskPage extends StatefulWidget {
   const ColorDiskPage({super.key});

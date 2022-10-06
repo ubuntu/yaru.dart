@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/src/controls/yaru_option_button.dart';
 
 void main() {
-  testWidgets('with icon', (WidgetTester tester) async {
+  testWidgets('with icon', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -21,7 +21,7 @@ void main() {
     );
   });
 
-  testWidgets('with color disk', (WidgetTester tester) async {
+  testWidgets('with color disk', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(

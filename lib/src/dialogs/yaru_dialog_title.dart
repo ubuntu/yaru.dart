@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/constants.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+
+import '../../yaru_widgets.dart';
+import '../constants.dart';
 
 /// A [Stack] of a [Text] with given [title] and an [IconButton]
 /// which pops the top-most route off the navigator

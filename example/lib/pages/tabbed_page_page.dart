@@ -24,7 +24,7 @@ class _TabbedPagePageState extends State<TabbedPagePage> {
           children: [
             GridView(
               shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 mainAxisExtent: 110,
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 15,
@@ -42,7 +42,7 @@ class _TabbedPagePageState extends State<TabbedPagePage> {
             )
           ],
         ),
-        YaruPage(
+        const YaruPage(
           children: [
             YaruSection(
               headline: 'Accessibility',
@@ -50,18 +50,18 @@ class _TabbedPagePageState extends State<TabbedPagePage> {
             )
           ],
         ),
-        YaruPage(children: [Text('Audio')]),
-        YaruPage(children: [Text('AddressBook')]),
-        YaruPage(children: [Text('Television')])
+        const YaruPage(children: [Text('Audio')]),
+        const YaruPage(children: [Text('AddressBook')]),
+        const YaruPage(children: [Text('Television')])
       ],
-      tabIcons: [
+      tabIcons: const [
         YaruIcons.addon,
         YaruIcons.accessibility,
         YaruIcons.audio,
         YaruIcons.address_book,
         YaruIcons.television
       ],
-      tabTitles: [
+      tabTitles: const [
         'Addons',
         'Accessibility',
         'Audio',

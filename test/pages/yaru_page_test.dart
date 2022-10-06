@@ -4,7 +4,7 @@ import 'package:yaru_widgets/src/constants.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 void main() {
-  testWidgets('YaruPage Test', (WidgetTester tester) async {
+  testWidgets('YaruPage Test', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -25,7 +25,7 @@ void main() {
   });
 
   testWidgets('- Default padding will be given if padding is null',
-      (WidgetTester tester) async {
+      (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(

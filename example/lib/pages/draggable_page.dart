@@ -16,10 +16,10 @@ class DraggablePage extends StatelessWidget {
             child: Stack(
               children: [
                 YaruDraggable(
-                  initialPosition: Offset(0, 0),
+                  initialPosition: Offset.zero,
                   onDragUpdate: (currentPosition, nextPosition) {
-                    double dx = nextPosition.dx;
-                    double dy = nextPosition.dy;
+                    var dx = nextPosition.dx;
+                    var dy = nextPosition.dy;
 
                     if (dx < 0) dx = 0;
                     if (dy < 0) dy = 0;
@@ -34,10 +34,10 @@ class DraggablePage extends StatelessWidget {
                     height: 108,
                     child: AnimatedOpacity(
                       opacity: isDragging ? 1 : .85,
-                      duration: Duration(milliseconds: 100),
+                      duration: const Duration(milliseconds: 100),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border(top: BorderSide(width: 10)),
+                          border: const Border(top: BorderSide(width: 10)),
                           color: Theme.of(context).primaryColor,
                         ),
                         child: Center(

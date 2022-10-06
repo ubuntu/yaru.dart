@@ -18,21 +18,21 @@ class _OptionButtonPageState extends State<OptionButtonPage> {
           children: [
             YaruOptionButton(
               onPressed: () {},
-              child: Icon(YaruIcons.search),
+              child: const Icon(YaruIcons.search),
             ),
             const SizedBox(
               width: 10.0,
             ),
             YaruOptionButton(
               onPressed: () {},
-              child: Icon(YaruIcons.audio),
+              child: const Icon(YaruIcons.audio),
             ),
             const SizedBox(
               width: 10.0,
             ),
             YaruOptionButton(
               onPressed: () {},
-              child: Icon(YaruIcons.address_book),
+              child: const Icon(YaruIcons.address_book),
             ),
             const SizedBox(
               width: 10.0,

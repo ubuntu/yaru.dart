@@ -27,8 +27,8 @@ class _CarouselPageState extends State<CarouselPage> {
               children: _getCarouselChildren(),
               height: 400,
               navigationControls: true,
-              previousIcon: Icon(YaruIcons.go_previous),
-              nextIcon: Icon(YaruIcons.go_next),
+              previousIcon: const Icon(YaruIcons.go_previous),
+              nextIcon: const Icon(YaruIcons.go_next),
             ),
           ],
         ),
@@ -53,16 +53,16 @@ class _CarouselPageState extends State<CarouselPage> {
               onPressed: () => setState(() {
                 length++;
               }),
-              child: Icon(YaruIcons.plus),
+              child: const Icon(YaruIcons.plus),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             YaruOptionButton(
               onPressed: () => setState(() {
                 length >= 2 ? length-- : length = length;
               }),
-              child: Icon(YaruIcons.minus),
+              child: const Icon(YaruIcons.minus),
             )
           ],
         )
@@ -79,7 +79,7 @@ class _CarouselPageState extends State<CarouselPage> {
           border: Border.all(
             color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
           ),
-          image: DecorationImage(
+          image: const DecorationImage(
             fit: BoxFit.contain,
             image: AssetImage('assets/ubuntuhero.jpg'),
           ),

@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/controls/yaru_icon_button.dart';
+import 'yaru_icon_button.dart';
 
 /// A selectable [IconButton], wrapped in a [CircleAvatar]
 class YaruRoundToggleButton extends StatelessWidget {
+  const YaruRoundToggleButton({
+    super.key,
+    required this.selected,
+    required this.iconData,
+    this.onPressed,
+    this.tooltip,
+    this.size = 40,
+  });
+
   /// The [IconData] for the [Icon]
   final IconData iconData;
 
@@ -17,15 +26,6 @@ class YaruRoundToggleButton extends StatelessWidget {
 
   /// Optional size which defaults to 40.
   final double? size;
-
-  const YaruRoundToggleButton({
-    super.key,
-    required this.selected,
-    required this.iconData,
-    this.onPressed,
-    this.tooltip,
-    this.size = 40,
-  });
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ class BannerPage extends StatelessWidget {
       children: [
         GridView(
           shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             mainAxisExtent: 110,
             mainAxisSpacing: 15,
             crossAxisSpacing: 15,

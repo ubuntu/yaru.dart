@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
-import 'package:yaru_widgets_example/example_page_items.dart';
-import 'package:yaru_widgets_example/theme.dart';
+import 'example_page_items.dart';
+import 'theme.dart';
 
 void main() {
   runApp(
@@ -14,7 +14,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => LightTheme(yaruLight)),
         ChangeNotifierProvider(create: (_) => DarkTheme(yaruDark)),
       ],
-      child: Home(),
+      child: const Home(),
     ),
   );
 }
@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
       builder: (_) => YaruPage(
         children: [
           YaruTile(
-            title: Text('Compact mode'),
+            title: const Text('Compact mode'),
             trailing: Switch(
               value: _compactMode,
               onChanged: (v) => setState(() => _compactMode = v),
@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
           ),
           if (_compactMode)
             YaruTile(
-              title: Text('YaruPageItem amount'),
+              title: const Text('YaruPageItem amount'),
               trailing: Row(
                 children: [
                   TextButton(
@@ -54,14 +54,14 @@ class _HomeState extends State<Home> {
                       if (_amount >= examplePageItems.length) return;
                       setState(() => _amount++);
                     },
-                    child: Icon(YaruIcons.plus),
+                    child: const Icon(YaruIcons.plus),
                   ),
                   TextButton(
                     onPressed: () {
                       if (_amount <= 2) return;
                       setState(() => _amount--);
                     },
-                    child: Icon(YaruIcons.minus),
+                    child: const Icon(YaruIcons.minus),
                   ),
                 ],
               ),

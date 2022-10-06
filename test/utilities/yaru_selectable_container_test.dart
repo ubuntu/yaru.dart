@@ -6,8 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/src/utilities/yaru_selectable_container.dart';
 
 void main() {
-  testWidgets('- YaruImageTile Test', (WidgetTester tester) async {
-    bool selected = false;
+  testWidgets('- YaruImageTile Test', (tester) async {
+    var selected = false;
 
     await tester.pumpWidget(
       MaterialApp(

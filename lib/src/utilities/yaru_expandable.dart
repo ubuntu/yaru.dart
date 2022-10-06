@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import '../../yaru_widgets.dart';
 
 const _kAnimationDuration = Duration(milliseconds: 250);
 const _kAnimationCurve = Curves.easeInOutCubic;
@@ -57,12 +57,12 @@ class _YaruExpandableState extends State<YaruExpandable> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GestureDetector(onTap: () => _onTap(), child: widget.header),
+            GestureDetector(onTap: _onTap, child: widget.header),
             YaruIconButton(
               style: IconButton.styleFrom(
                 fixedSize: const Size.square(36),
               ),
-              onPressed: () => _onTap(),
+              onPressed: _onTap,
               icon: AnimatedRotation(
                 turns: _isExpanded ? .25 : 0,
                 duration: _kAnimationDuration,
@@ -88,8 +88,6 @@ class _YaruExpandableState extends State<YaruExpandable> {
   void _onTap() {
     setState(() => _isExpanded = !_isExpanded);
 
-    if (widget.onChange != null) {
-      widget.onChange!(_isExpanded);
-    }
+    widget.onChange?.call(_isExpanded);
   }
 }

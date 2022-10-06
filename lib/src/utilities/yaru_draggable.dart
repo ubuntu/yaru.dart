@@ -51,8 +51,8 @@ class YaruDraggable extends StatefulWidget {
 
 class _YaruDraggableState extends State<YaruDraggable> {
   late Offset _position = widget.initialPosition;
-  Offset _initialPosition = const Offset(0, 0);
-  Offset _moveOffset = const Offset(0, 0);
+  Offset _initialPosition = Offset.zero;
+  Offset _moveOffset = Offset.zero;
 
   bool _isDragging = false;
   bool _isHovering = false;
@@ -74,13 +74,13 @@ class _YaruDraggableState extends State<YaruDraggable> {
           onPanStart: (details) => setState(() {
             _isDragging = true;
             _initialPosition = _position;
-            if (widget.onDragStart != null) widget.onDragStart!();
+            if (widget.onDragStart != null) widget.onDragStart?.call();
           }),
           onPanUpdate: (details) => setState(() {
             _moveOffset += details.delta;
 
-            final double dx = _initialPosition.dx + _moveOffset.dx;
-            final double dy = _initialPosition.dy + _moveOffset.dy;
+            final dx = _initialPosition.dx + _moveOffset.dx;
+            final dy = _initialPosition.dy + _moveOffset.dy;
 
             _position = widget.onDragUpdate != null
                 ? widget.onDragUpdate!(_position, Offset(dx, dy))
@@ -88,8 +88,8 @@ class _YaruDraggableState extends State<YaruDraggable> {
           }),
           onPanEnd: (details) => setState(() {
             _isDragging = false;
-            _moveOffset = const Offset(0, 0);
-            if (widget.onDragEnd != null) widget.onDragEnd!();
+            _moveOffset = Offset.zero;
+            if (widget.onDragEnd != null) widget.onDragEnd?.call();
           }),
           child: Builder(
             builder: (context) {

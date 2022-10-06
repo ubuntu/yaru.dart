@@ -7,7 +7,7 @@ void main() {
     test('With no padding', () {
       testBorderRadiusInner(
         BorderRadius.circular(10),
-        const EdgeInsets.all(0),
+        EdgeInsets.zero,
         BorderRadius.circular(10),
       );
     });
