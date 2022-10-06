@@ -108,7 +108,7 @@ class _CompactPage extends StatelessWidget {
 
     return YaruCompactLayout(
       extended: width > 1000,
-      showLabels: true,
+      showLabels: width > 500,
       pageItems: [configItem] + examplePageItems.take(_amount).toList(),
       backgroundColor: Theme.of(context).brightness == Brightness.light
           ? Colors.white

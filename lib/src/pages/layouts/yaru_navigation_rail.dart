@@ -39,7 +39,7 @@ class YaruNavigationRail extends StatelessWidget {
   }
 }
 
-class _YaruNavigationRailItem extends StatelessWidget {
+class _YaruNavigationRailItem extends StatefulWidget {
   const _YaruNavigationRailItem(
     this.index,
     this.selected,
@@ -57,46 +57,69 @@ class _YaruNavigationRailItem extends StatelessWidget {
   final bool extended;
 
   @override
+  State<StatefulWidget> createState() => _YaruNavigationRailItemState();
+}
+
+class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
+  bool? oldExtended;
+
+  @override
+  void didUpdateWidget(_YaruNavigationRailItem oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.extended != oldWidget.extended ||
+        widget.showLabel != oldWidget.showLabel) {
+      oldExtended = oldWidget.extended;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: extended
-          ? 250
-          : showLabel
-              ? 85
-              : 60,
-      child: Material(
-        child: InkWell(
-          onTap: () => onSelected(index),
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: extended ? 10 : 5,
-                horizontal: extended ? 8 : 5,
-              ),
-              child: _columnOrRow([
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: selected
-                        ? Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withOpacity(.1)
-                        : null,
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 200),
+      alignment: _alignement,
+      child: Align(
+        alignment: _alignement,
+        child: SizedBox(
+          width: widget.extended
+              ? 250
+              : widget.showLabel
+                  ? 100
+                  : 60,
+          child: Material(
+            child: InkWell(
+              onTap: () => widget.onSelected(widget.index),
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: widget.extended ? 10 : 5,
+                    horizontal: widget.extended ? 8 : 5,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 2,
-                      horizontal: 10,
+                  child: _columnOrRow([
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: widget.selected
+                            ? Theme.of(context)
+                                .colorScheme
+                                .onSurface
+                                .withOpacity(.1)
+                            : null,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 2,
+                          horizontal: 10,
+                        ),
+                        child: Icon(widget.destination.iconData),
+                      ),
                     ),
-                    child: Icon(destination.iconData),
-                  ),
+                    if (widget.showLabel) ...[
+                      _gap(),
+                      _buildLabel(context),
+                    ]
+                  ]),
                 ),
-                if (showLabel) ...[
-                  _gap(),
-                  _buildLabel(context),
-                ]
-              ]),
+              ),
             ),
           ),
         ),
@@ -104,10 +127,16 @@ class _YaruNavigationRailItem extends StatelessWidget {
     );
   }
 
+  Alignment get _alignement {
+    return widget.extended || oldExtended == true
+        ? Alignment.centerLeft
+        : Alignment.topCenter;
+  }
+
   Widget _columnOrRow(List<Widget> children) {
     const mainAxisAlignment = MainAxisAlignment.start;
 
-    if (extended) {
+    if (widget.extended) {
       return Row(
         mainAxisAlignment: mainAxisAlignment,
         children: children,
@@ -121,7 +150,7 @@ class _YaruNavigationRailItem extends StatelessWidget {
   }
 
   Widget _gap() {
-    if (extended) {
+    if (widget.extended) {
       return const SizedBox(width: 10);
     }
 
@@ -129,22 +158,22 @@ class _YaruNavigationRailItem extends StatelessWidget {
   }
 
   Widget _buildLabel(BuildContext context) {
-    var label = destination.titleBuilder(context);
+    var label = widget.destination.titleBuilder(context);
 
     if (label is YaruPageItemTitle) {
       label = DefaultTextStyle.merge(
         child: label,
         style: TextStyle(
-          fontSize: extended ? 13 : 12,
+          fontSize: widget.extended ? 13 : 12,
           fontWeight: FontWeight.w500,
         ),
         overflow: TextOverflow.ellipsis,
         softWrap: true,
-        textAlign: extended ? TextAlign.left : TextAlign.center,
-        maxLines: extended ? 1 : 3,
+        textAlign: widget.extended ? TextAlign.left : TextAlign.center,
+        maxLines: 1,
       );
     }
 
-    return extended ? Expanded(child: label) : label;
+    return widget.extended ? Expanded(child: label) : label;
   }
 }
