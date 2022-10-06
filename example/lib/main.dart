@@ -82,11 +82,12 @@ class _CompactPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return YaruCompactLayout(
-      extendNavigationRail: width > 1000,
+      style: width > 1000
+          ? YaruNavigationRailStyle.labelledExtended
+          : width > 500
+              ? YaruNavigationRailStyle.labelled
+              : YaruNavigationRailStyle.compact,
       pageItems: [configItem] + examplePageItems,
-      backgroundColor: Theme.of(context).brightness == Brightness.light
-          ? Colors.white
-          : Theme.of(context).colorScheme.onSurface.withOpacity(0.03),
     );
   }
 }

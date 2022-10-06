@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../../../yaru_widgets.dart';
 import '../../constants.dart';
-import 'yaru_page_item.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
@@ -99,10 +100,26 @@ class _YaruListTile extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(kDefaultButtonRadius)),
         ),
         leading: icon,
-        title: title,
+        title: _buildTitle(),
         selected: selected,
         onTap: onTap,
       ),
     );
+  }
+
+  Widget? _buildTitle() {
+    if (title == null) {
+      return title;
+    }
+
+    if (title is YaruPageItemTitle) {
+      return DefaultTextStyle.merge(
+        child: title!,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      );
+    }
+
+    return title;
   }
 }

@@ -2,40 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 import '../../../yaru_widgets.dart';
 
-/// A responsive layout switching between [YaruWideLayout]
-/// and [YaruNarrowLayout] depening on the screen width.
+/// A page layout which use a [YaruNavigationRail] on left for page navigation
 class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
     super.key,
     required this.pageItems,
-    this.showSelectedLabels = true,
-    this.showUnselectedLabels = true,
-    this.labelType = NavigationRailLabelType.none,
-    this.extendNavigationRail = false,
+    this.style = YaruNavigationRailStyle.compact,
     this.initialIndex = 0,
-    this.backgroundColor,
   });
 
-  /// The list of [YaruPageItem] has to be provided.
+  /// A list of page destinations
   final List<YaruPageItem> pageItems;
 
-  /// Optional bool to hide selected labels in the [BottomNavigationBar]
-  final bool showSelectedLabels;
-
-  /// Optional bool to hide unselected labels in the [BottomNavigationBar]
-  final bool showUnselectedLabels;
-
-  /// Optionally control the labels of the [NavigationRail]
-  final NavigationRailLabelType labelType;
-
-  /// Defines if the labels are shown right to the icon
-  /// of the [NavigationRail] in the wide layout
-  final bool extendNavigationRail;
+  /// Define the navigation rail style, see [YaruNavigationRailStyle]
+  final YaruNavigationRailStyle style;
 
   /// The index of the [YaruPageItem] that is selected from [pageItems]
   final int initialIndex;
-
-  final Color? backgroundColor;
 
   @override
   State<YaruCompactLayout> createState() => _YaruCompactLayoutState();
@@ -61,9 +44,6 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final unselectedTextColor =
-        Theme.of(context).colorScheme.onSurface.withOpacity(0.8);
-    final selectedTextColor = Theme.of(context).colorScheme.onSurface;
     return LayoutBuilder(
       builder: (context, constraint) {
         return SafeArea(
@@ -72,97 +52,64 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: SingleChildScrollView(
-                    controller: _controller,
-                    child: ConstrainedBox(
-                      constraints:
-                          BoxConstraints(minHeight: constraint.maxHeight),
-                      child: IntrinsicHeight(
-                        child: NavigationRail(
-                          extended:
-                              widget.labelType == NavigationRailLabelType.none
-                                  ? widget.extendNavigationRail
-                                  : false,
-                          unselectedIconTheme: IconThemeData(
-                            color: unselectedTextColor,
-                          ),
-                          indicatorColor: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withOpacity(0.1),
-                          selectedIconTheme: IconThemeData(
-                            color: selectedTextColor,
-                          ),
-                          selectedLabelTextStyle: TextStyle(
-                            overflow: TextOverflow.ellipsis,
-                            color: selectedTextColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          unselectedLabelTextStyle: TextStyle(
-                            color: unselectedTextColor,
-                            overflow: TextOverflow.ellipsis,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          backgroundColor: widget.backgroundColor ??
-                              Theme.of(context).colorScheme.background,
-                          selectedIndex: _index,
-                          onDestinationSelected: (index) {
-                            if (widget.pageItems[index].onTap != null) {
-                              widget.pageItems[index].onTap?.call(context);
-                            }
-                            setState(() {
-                              _index = index;
-                            });
-                          },
-                          labelType: widget.labelType,
-                          destinations: [
-                            for (int i = 0; i < widget.pageItems.length; i++)
-                              NavigationRailDestination(
-                                icon: widget.pageItems[i].iconBuilder(
-                                  context,
-                                  i == _index,
-                                ),
-                                selectedIcon: widget.pageItems[i].iconBuilder(
-                                  context,
-                                  i == _index,
-                                ),
-                                label:
-                                    widget.pageItems[i].titleBuilder(context),
-                              )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const VerticalDivider(thickness: 1, width: 1),
-                Expanded(
-                  child: Theme(
-                    data: Theme.of(context).copyWith(
-                      pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
-                    ),
-                    child: Navigator(
-                      pages: [
-                        MaterialPage(
-                          key: ValueKey(_index),
-                          child: widget.pageItems.length > _index
-                              ? widget.pageItems[_index].builder(context)
-                              : widget.pageItems[0].builder(context),
-                        ),
-                      ],
-                      onPopPage: (route, result) => route.didPop(result),
-                    ),
-                  ),
-                )
+                _buildNavigationRail(context, constraint),
+                _buildVerticalSeparator(),
+                _buildPageView(context),
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildNavigationRail(BuildContext context, BoxConstraints constraint) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: SingleChildScrollView(
+        controller: _controller,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: constraint.maxHeight),
+          child: YaruNavigationRail(
+            style: widget.style,
+            selectedIndex: _index,
+            onDestinationSelected: (index) {
+              if (widget.pageItems[index].onTap != null) {
+                widget.pageItems[index].onTap!.call(context);
+              }
+              setState(() {
+                _index = index;
+              });
+            },
+            destinations: widget.pageItems,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVerticalSeparator() {
+    return const VerticalDivider(thickness: 1, width: 1);
+  }
+
+  Widget _buildPageView(BuildContext context) {
+    return Expanded(
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+        ),
+        child: Navigator(
+          pages: [
+            MaterialPage(
+              key: ValueKey(_index),
+              child: widget.pageItems.length > _index
+                  ? widget.pageItems[_index].builder(context)
+                  : widget.pageItems[0].builder(context),
+            ),
+          ],
+          onPopPage: (route, result) => route.didPop(result),
+        ),
+      ),
     );
   }
 }
