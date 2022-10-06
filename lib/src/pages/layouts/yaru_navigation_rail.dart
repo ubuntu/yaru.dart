@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import '../../../yaru_widgets.dart';
 
+/// Defines the look of a [YaruNavigationRail]
 enum YaruNavigationRailStyle {
+  /// Will only show icons
   compact,
+
+  /// Will show both icons and labels vertically
   labelled,
+
+  /// Will show both icons and labels horizontally
   labelledExtended,
 }
+
+const _kSizeAnimationDuration = Duration(milliseconds: 200);
 
 class YaruNavigationRail extends StatelessWidget {
   const YaruNavigationRail({
@@ -14,12 +22,31 @@ class YaruNavigationRail extends StatelessWidget {
     required this.selectedIndex,
     required this.onDestinationSelected,
     this.style = YaruNavigationRailStyle.compact,
-  });
+  })  : assert(destinations.length >= 2),
+        assert(
+          selectedIndex == null ||
+              (0 <= selectedIndex && selectedIndex < destinations.length),
+        );
 
-  // TODO: add comments
+  /// Defines the appearance of the button items that are arrayed within the
+  /// navigation rail.
+  ///
+  /// The value must be a list of two or more [YaruPageItem]
+  /// values.
   final List<YaruPageItem> destinations;
-  final int selectedIndex;
-  final ValueChanged<int> onDestinationSelected;
+
+  /// The index into [destinations] for the current selected
+  /// [YaruPageItem] or null if no destination is selected.
+  final int? selectedIndex;
+
+  /// Called when one of the [destinations] is selected.
+  ///
+  /// The stateful widget that creates the navigation rail needs to keep
+  /// track of the index of the selected [NavigationRailDestination] and call
+  /// `setState` to rebuild the navigation rail with the new [selectedIndex].
+  final ValueChanged<int>? onDestinationSelected;
+
+  /// Define the navigation rail style, see [YaruNavigationRailStyle]
   final YaruNavigationRailStyle style;
 
   @override
@@ -47,18 +74,19 @@ class _YaruNavigationRailItem extends StatefulWidget {
     this.index,
     this.selected,
     this.destination,
-    this.onSelected,
+    this.onDestinationSelected,
     this.style,
   );
 
   final int index;
   final bool selected;
   final YaruPageItem destination;
-  final ValueChanged<int> onSelected;
+  final ValueChanged<int>? onDestinationSelected;
   final YaruNavigationRailStyle style;
 
   @override
-  State<StatefulWidget> createState() => _YaruNavigationRailItemState();
+  State<_YaruNavigationRailItem> createState() =>
+      _YaruNavigationRailItemState();
 }
 
 class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
@@ -74,10 +102,14 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
 
   @override
   Widget build(BuildContext context) {
-    return _sizedContainer(
+    return _buildSizedContainer(
       Material(
         child: InkWell(
-          onTap: () => widget.onSelected(widget.index),
+          onTap: () {
+            if (widget.onDestinationSelected != null) {
+              widget.onDestinationSelected!.call(widget.index);
+            }
+          },
           child: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -90,10 +122,10 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
                         ? 8
                         : 5,
               ),
-              child: _columnOrRow([
+              child: _buildColumnOrRow([
                 _buildIcon(context),
                 if (widget.style != YaruNavigationRailStyle.compact) ...[
-                  _gap(),
+                  _buildGap(),
                   _buildLabel(context),
                 ]
               ]),
@@ -122,9 +154,9 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
     }
   }
 
-  Widget _sizedContainer(Widget child) {
+  Widget _buildSizedContainer(Widget child) {
     return AnimatedSize(
-      duration: const Duration(milliseconds: 200),
+      duration: _kSizeAnimationDuration,
       alignment: _alignement,
       child: Align(
         alignment: _alignement,
@@ -136,7 +168,7 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
     );
   }
 
-  Widget _columnOrRow(List<Widget> children) {
+  Widget _buildColumnOrRow(List<Widget> children) {
     const mainAxisAlignment = MainAxisAlignment.start;
 
     if (widget.style == YaruNavigationRailStyle.labelledExtended) {
@@ -173,7 +205,7 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
     );
   }
 
-  Widget _gap() {
+  Widget _buildGap() {
     if (widget.style == YaruNavigationRailStyle.labelledExtended) {
       return const SizedBox(width: 10);
     }

@@ -88,9 +88,6 @@ class _CompactPage extends StatelessWidget {
               ? YaruNavigationRailStyle.labelled
               : YaruNavigationRailStyle.compact,
       pageItems: [configItem] + examplePageItems,
-      backgroundColor: Theme.of(context).brightness == Brightness.light
-          ? Colors.white
-          : Theme.of(context).colorScheme.onSurface.withOpacity(0.03),
     );
   }
 }

@@ -8,7 +8,7 @@ class YaruPageItem {
     this.onTap,
   });
 
-  /// We recommend to use [YaruPageItemTitle] here to avoid line wrap
+  /// We recommend to use [YaruPageItemTitle] here to have correct styling
   final WidgetBuilder titleBuilder;
 
   final WidgetBuilder builder;
