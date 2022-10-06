@@ -20,18 +20,21 @@ class YaruNavigationRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        for (int i = 0; i < destinations.length; i += 1)
-          _YaruNavigationRailItem(
-            i,
-            i == selectedIndex,
-            destinations[i],
-            onDestinationSelected,
-            showLabels,
-            showLabels && extended,
-          )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Column(
+        children: <Widget>[
+          for (int i = 0; i < destinations.length; i += 1)
+            _YaruNavigationRailItem(
+              i,
+              i == selectedIndex,
+              destinations[i],
+              onDestinationSelected,
+              showLabels,
+              showLabels && extended,
+            )
+        ],
+      ),
     );
   }
 }
@@ -67,7 +70,7 @@ class _YaruNavigationRailItem extends StatelessWidget {
           child: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: extended ? 10 : 8,
+                vertical: extended ? 10 : 5,
                 horizontal: extended ? 8 : 5,
               ),
               child: _columnOrRow([
@@ -131,8 +134,8 @@ class _YaruNavigationRailItem extends StatelessWidget {
     if (label is YaruPageItemTitle) {
       label = DefaultTextStyle.merge(
         child: label,
-        style: const TextStyle(
-          fontSize: 13,
+        style: TextStyle(
+          fontSize: extended ? 13 : 12,
           fontWeight: FontWeight.w500,
         ),
         overflow: TextOverflow.ellipsis,
