@@ -74,57 +74,29 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSize(
-      duration: const Duration(milliseconds: 200),
-      alignment: _alignement,
-      child: Align(
-        alignment: _alignement,
-        child: SizedBox(
-          width: _width,
-          child: Material(
-            child: InkWell(
-              onTap: () => widget.onSelected(widget.index),
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical:
-                        widget.style == YaruNavigationRailStyle.labelledExtended
-                            ? 10
-                            : 5,
-                    horizontal:
-                        widget.style == YaruNavigationRailStyle.labelledExtended
-                            ? 8
-                            : 5,
-                  ),
-                  child: _columnOrRow([
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: widget.selected
-                            ? Theme.of(context)
-                                .colorScheme
-                                .onSurface
-                                .withOpacity(.1)
-                            : null,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 2,
-                          horizontal: 10,
-                        ),
-                        child: widget.destination.iconBuilder(
-                          context,
-                          widget.selected,
-                        ),
-                      ),
-                    ),
-                    if (widget.style != YaruNavigationRailStyle.compact) ...[
-                      _gap(),
-                      _buildLabel(context),
-                    ]
-                  ]),
-                ),
+    return _sizedContainer(
+      Material(
+        child: InkWell(
+          onTap: () => widget.onSelected(widget.index),
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical:
+                    widget.style == YaruNavigationRailStyle.labelledExtended
+                        ? 10
+                        : 5,
+                horizontal:
+                    widget.style == YaruNavigationRailStyle.labelledExtended
+                        ? 8
+                        : 5,
               ),
+              child: _columnOrRow([
+                _buildIcon(context),
+                if (widget.style != YaruNavigationRailStyle.compact) ...[
+                  _gap(),
+                  _buildLabel(context),
+                ]
+              ]),
             ),
           ),
         ),
@@ -150,6 +122,20 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
     }
   }
 
+  Widget _sizedContainer(Widget child) {
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 200),
+      alignment: _alignement,
+      child: Align(
+        alignment: _alignement,
+        child: SizedBox(
+          width: _width,
+          child: child,
+        ),
+      ),
+    );
+  }
+
   Widget _columnOrRow(List<Widget> children) {
     const mainAxisAlignment = MainAxisAlignment.start;
 
@@ -163,6 +149,27 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
     return Column(
       mainAxisAlignment: mainAxisAlignment,
       children: children,
+    );
+  }
+
+  Widget _buildIcon(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        color: widget.selected
+            ? Theme.of(context).colorScheme.onSurface.withOpacity(.1)
+            : null,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 2,
+          horizontal: 10,
+        ),
+        child: widget.destination.iconBuilder(
+          context,
+          widget.selected,
+        ),
+      ),
     );
   }
 
