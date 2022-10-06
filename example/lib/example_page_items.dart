@@ -64,23 +64,6 @@ final examplePageItems = <YaruPageItem>[
     builder: (_) => YaruPage(children: [OptionButtonPage()]),
   ),
   YaruPageItem(
-    titleBuilder: (context) => YaruPageItemTitle.text('YaruSearchAppBar'),
-    iconData: YaruIcons.folder_search,
-    builder: (_) => YaruPage(
-      children: [
-        YaruSearchAppBar(
-          appBarHeight: kToolbarHeight,
-          automaticallyImplyLeading: false,
-          searchController: TextEditingController(),
-          onChanged: (v) {},
-          onEscape: () {},
-          searchIconData: YaruIcons.search,
-          searchHint: "Search...",
-        )
-      ],
-    ),
-  ),
-  YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruSection'),
     iconData: YaruIcons.window,
     builder: (_) => SectionPage(),
