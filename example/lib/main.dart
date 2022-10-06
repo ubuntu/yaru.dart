@@ -29,7 +29,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final _filteredItems = <YaruPageItem>[];
   bool _compactMode = false;
-  int _amount = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -44,31 +43,9 @@ class _HomeState extends State<Home> {
               onChanged: (v) => setState(() => _compactMode = v),
             ),
           ),
-          if (_compactMode)
-            YaruTile(
-              title: const Text('YaruPageItem amount'),
-              trailing: Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      if (_amount >= examplePageItems.length) return;
-                      setState(() => _amount++);
-                    },
-                    child: const Icon(YaruIcons.plus),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      if (_amount <= 2) return;
-                      setState(() => _amount--);
-                    },
-                    child: const Icon(YaruIcons.minus),
-                  ),
-                ],
-              ),
-            )
         ],
       ),
-      iconData: YaruIcons.settings,
+      icon: const Icon(YaruIcons.settings),
     );
 
     return MaterialApp(
@@ -78,7 +55,7 @@ class _HomeState extends State<Home> {
       theme: context.watch<LightTheme>().value,
       darkTheme: context.watch<DarkTheme>().value,
       home: _compactMode
-          ? _CompactPage(configItem: configItem, amount: _amount)
+          ? _CompactPage(configItem: configItem)
           : YaruMasterDetailPage(
               leftPaneWidth: 280,
               previousIconData: YaruIcons.go_previous,
@@ -96,11 +73,9 @@ class _HomeState extends State<Home> {
 class _CompactPage extends StatelessWidget {
   const _CompactPage({
     required this.configItem,
-    required int amount,
-  }) : _amount = amount;
+  });
 
   final YaruPageItem configItem;
-  final int _amount;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +83,7 @@ class _CompactPage extends StatelessWidget {
 
     return YaruCompactLayout(
       extendNavigationRail: width > 1000,
-      pageItems: [configItem] + examplePageItems.take(_amount).toList(),
+      pageItems: [configItem] + examplePageItems,
       backgroundColor: Theme.of(context).brightness == Brightness.light
           ? Colors.white
           : Theme.of(context).colorScheme.onSurface.withOpacity(0.03),

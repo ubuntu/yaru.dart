@@ -122,13 +122,8 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
                           destinations: widget.pageItems
                               .map(
                                 (pageItem) => NavigationRailDestination(
-                                  icon: pageItem.itemWidget ??
-                                      Icon(pageItem.iconData),
-                                  selectedIcon: pageItem.selectedItemWidget ??
-                                      pageItem.itemWidget ??
-                                      (pageItem.selectedIconData != null
-                                          ? Icon(pageItem.selectedIconData)
-                                          : Icon(pageItem.iconData)),
+                                  icon: pageItem.icon,
+                                  selectedIcon: pageItem.selectedIcon,
                                   label: pageItem.titleBuilder(context),
                                 ),
                               )
