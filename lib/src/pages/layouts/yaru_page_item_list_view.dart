@@ -100,7 +100,7 @@ class _YaruListTile extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(kDefaultButtonRadius)),
         ),
         leading: icon,
-        title: title,
+        title: _buildTitle(),
         selected: selected,
         onTap: onTap,
       ),
