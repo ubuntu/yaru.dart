@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import '../../../yaru_widgets.dart';
 
+enum YaruNavigationRailStyle {
+  compact,
+  labelled,
+  labelledExtended,
+}
+
 class YaruNavigationRail extends StatelessWidget {
   const YaruNavigationRail({
     super.key,
     required this.destinations,
     required this.selectedIndex,
     required this.onDestinationSelected,
-    this.showLabels = false,
-    this.extended = false,
+    this.style = YaruNavigationRailStyle.compact,
   });
 
   // TODO: add comments
   final List<YaruPageItem> destinations;
   final int selectedIndex;
   final ValueChanged<int> onDestinationSelected;
-  final bool showLabels;
-  final bool extended;
+  final YaruNavigationRailStyle style;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +34,7 @@ class YaruNavigationRail extends StatelessWidget {
               i == selectedIndex,
               destinations[i],
               onDestinationSelected,
-              showLabels,
-              showLabels && extended,
+              style,
             )
         ],
       ),
@@ -45,30 +48,27 @@ class _YaruNavigationRailItem extends StatefulWidget {
     this.selected,
     this.destination,
     this.onSelected,
-    this.showLabel,
-    this.extended,
+    this.style,
   );
 
   final int index;
   final bool selected;
   final YaruPageItem destination;
   final ValueChanged<int> onSelected;
-  final bool showLabel;
-  final bool extended;
+  final YaruNavigationRailStyle style;
 
   @override
   State<StatefulWidget> createState() => _YaruNavigationRailItemState();
 }
 
 class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
-  bool? oldExtended;
+  YaruNavigationRailStyle? oldStyle;
 
   @override
   void didUpdateWidget(_YaruNavigationRailItem oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.extended != oldWidget.extended ||
-        widget.showLabel != oldWidget.showLabel) {
-      oldExtended = oldWidget.extended;
+    if (widget.style != oldWidget.style) {
+      oldStyle = oldWidget.style;
     }
   }
 
@@ -80,19 +80,21 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
       child: Align(
         alignment: _alignement,
         child: SizedBox(
-          width: widget.extended
-              ? 250
-              : widget.showLabel
-                  ? 100
-                  : 60,
+          width: _width,
           child: Material(
             child: InkWell(
               onTap: () => widget.onSelected(widget.index),
               child: Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: widget.extended ? 10 : 5,
-                    horizontal: widget.extended ? 8 : 5,
+                    vertical:
+                        widget.style == YaruNavigationRailStyle.labelledExtended
+                            ? 10
+                            : 5,
+                    horizontal:
+                        widget.style == YaruNavigationRailStyle.labelledExtended
+                            ? 8
+                            : 5,
                   ),
                   child: _columnOrRow([
                     Container(
@@ -116,7 +118,7 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
                         ),
                       ),
                     ),
-                    if (widget.showLabel) ...[
+                    if (widget.style != YaruNavigationRailStyle.compact) ...[
                       _gap(),
                       _buildLabel(context),
                     ]
@@ -131,15 +133,27 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
   }
 
   Alignment get _alignement {
-    return widget.extended || oldExtended == true
+    return widget.style == YaruNavigationRailStyle.labelledExtended ||
+            oldStyle == YaruNavigationRailStyle.labelledExtended
         ? Alignment.centerLeft
         : Alignment.topCenter;
+  }
+
+  double get _width {
+    switch (widget.style) {
+      case YaruNavigationRailStyle.labelledExtended:
+        return 250;
+      case YaruNavigationRailStyle.labelled:
+        return 100;
+      case YaruNavigationRailStyle.compact:
+        return 60;
+    }
   }
 
   Widget _columnOrRow(List<Widget> children) {
     const mainAxisAlignment = MainAxisAlignment.start;
 
-    if (widget.extended) {
+    if (widget.style == YaruNavigationRailStyle.labelledExtended) {
       return Row(
         mainAxisAlignment: mainAxisAlignment,
         children: children,
@@ -153,7 +167,7 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
   }
 
   Widget _gap() {
-    if (widget.extended) {
+    if (widget.style == YaruNavigationRailStyle.labelledExtended) {
       return const SizedBox(width: 10);
     }
 
@@ -167,16 +181,22 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
       label = DefaultTextStyle.merge(
         child: label,
         style: TextStyle(
-          fontSize: widget.extended ? 13 : 12,
+          fontSize: widget.style == YaruNavigationRailStyle.labelledExtended
+              ? 13
+              : 12,
           fontWeight: FontWeight.w500,
         ),
         overflow: TextOverflow.ellipsis,
         softWrap: true,
-        textAlign: widget.extended ? TextAlign.left : TextAlign.center,
+        textAlign: widget.style == YaruNavigationRailStyle.labelledExtended
+            ? TextAlign.left
+            : TextAlign.center,
         maxLines: 1,
       );
     }
 
-    return widget.extended ? Expanded(child: label) : label;
+    return widget.style == YaruNavigationRailStyle.labelledExtended
+        ? Expanded(child: label)
+        : label;
   }
 }

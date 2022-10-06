@@ -8,8 +8,7 @@ class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
     super.key,
     required this.pageItems,
-    this.showLabels = false,
-    this.extended = false,
+    this.style = YaruNavigationRailStyle.compact,
     this.initialIndex = 0,
     this.backgroundColor,
   });
@@ -18,11 +17,7 @@ class YaruCompactLayout extends StatefulWidget {
   final List<YaruPageItem> pageItems;
 
   /// Optionally control the labels of the [NavigationRail]
-  final bool showLabels;
-
-  /// Defines if the labels are shown right to the icon
-  /// of the [NavigationRail] in the wide layout
-  final bool extended;
+  final YaruNavigationRailStyle style;
 
   /// The index of the [YaruPageItem] that is selected from [pageItems]
   final int initialIndex;
@@ -69,8 +64,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
                       constraints:
                           BoxConstraints(minHeight: constraint.maxHeight),
                       child: YaruNavigationRail(
-                        extended: widget.extended,
-                        showLabels: widget.showLabels,
+                        style: widget.style,
                         selectedIndex: _index,
                         onDestinationSelected: (index) {
                           if (widget.pageItems[index].onTap != null) {
