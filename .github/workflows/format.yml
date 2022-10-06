@@ -2,9 +2,9 @@ name: format
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
 
       - uses: subosito/flutter-action@v1
         with:
-          channel: 'stable'
+          channel: "stable"
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: format
