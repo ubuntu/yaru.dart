@@ -119,20 +119,21 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
                             });
                           },
                           labelType: widget.labelType,
-                          destinations: widget.pageItems
-                              .map(
-                                (pageItem) => NavigationRailDestination(
-                                  icon: pageItem.itemWidget ??
-                                      Icon(pageItem.iconData),
-                                  selectedIcon: pageItem.selectedItemWidget ??
-                                      pageItem.itemWidget ??
-                                      (pageItem.selectedIconData != null
-                                          ? Icon(pageItem.selectedIconData)
-                                          : Icon(pageItem.iconData)),
-                                  label: pageItem.titleBuilder(context),
+                          destinations: [
+                            for (int i = 0; i < widget.pageItems.length; i++)
+                              NavigationRailDestination(
+                                icon: widget.pageItems[i].iconBuilder(
+                                  context,
+                                  i == _index,
                                 ),
+                                selectedIcon: widget.pageItems[i].iconBuilder(
+                                  context,
+                                  i == _index,
+                                ),
+                                label:
+                                    widget.pageItems[i].titleBuilder(context),
                               )
-                              .toList(),
+                          ],
                         ),
                       ),
                     ),

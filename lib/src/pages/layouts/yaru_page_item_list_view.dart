@@ -39,13 +39,14 @@ class YaruPageItemListView extends StatelessWidget {
               visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
               selected: index == selectedIndex,
               title: pages[index].titleBuilder(context),
-              leading: Icon(pages[index].iconData),
+              leading:
+                  pages[index].iconBuilder(context, index == selectedIndex),
               onTap: () => onTap(index),
             )
           : _YaruListTile(
               selected: index == selectedIndex,
               title: pages[index].titleBuilder(context),
-              iconData: pages[index].iconData,
+              icon: pages[index].iconBuilder(context, index == selectedIndex),
               onTap: () => onTap(index),
             ),
     );
@@ -69,13 +70,13 @@ class YaruPageItemListView extends StatelessWidget {
 class _YaruListTile extends StatelessWidget {
   const _YaruListTile({
     required this.selected,
-    this.iconData,
+    this.icon,
     required this.onTap,
     required this.title,
   });
 
   final bool selected;
-  final IconData? iconData;
+  final Widget? icon;
   final Function() onTap;
   final Widget? title;
 
@@ -92,16 +93,12 @@ class _YaruListTile extends StatelessWidget {
       child: ListTile(
         textColor: Theme.of(context).colorScheme.onSurface,
         selectedColor: Theme.of(context).colorScheme.onSurface,
+        iconColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
         visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(kDefaultButtonRadius)),
         ),
-        leading: iconData != null
-            ? Icon(
-                iconData,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
-              )
-            : null,
+        leading: icon,
         title: title,
         selected: selected,
         onTap: onTap,
