@@ -1,6 +1,7 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 const double _kMinCircularProgressIndicatorSize = 36.0;
 const double _kDefaultCircularProgressStrokeWidth = 6;
@@ -101,7 +102,7 @@ abstract class _YaruProgressIndicator extends StatefulWidget {
     required BuildContext context,
     required Widget child,
   }) {
-    String? expandedSemanticsValue = semanticsValue;
+    var expandedSemanticsValue = semanticsValue;
     if (value != null) {
       expandedSemanticsValue ??= '${(value! * 100).round()}%';
     }
@@ -191,7 +192,7 @@ class _YaruLinearProgressIndicatorState
 
     return AnimatedBuilder(
       animation: _controller,
-      builder: (BuildContext context, Widget? child) {
+      builder: (context, child) {
         return _buildContainer(
           context,
           ClipRRect(
@@ -473,7 +474,7 @@ class _YaruCircularProgressIndicatorState
     }
     return AnimatedBuilder(
       animation: _controller,
-      builder: (BuildContext context, Widget? child) {
+      builder: (context, child) {
         return _buildContainer(
           context,
           CustomPaint(

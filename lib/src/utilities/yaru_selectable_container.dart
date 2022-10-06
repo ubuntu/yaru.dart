@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/constants.dart';
-import 'package:yaru_widgets/src/extensions/border_radius_extension.dart';
+import '../constants.dart';
+import '../extensions/border_radius_extension.dart';
 
 class YaruSelectableContainer extends StatelessWidget {
   /// Creates a Image Tile from the image path given in the path property.

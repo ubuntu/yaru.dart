@@ -174,15 +174,15 @@ class _YaruCarouselState extends State<YaruCarousel> {
   Widget _buildPlaceIndicator() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        const double dotSize = 12.0;
+        const dotSize = 12.0;
 
-        for (var layout in [
+        for (final layout in [
           [48.0, constraints.maxWidth / 2],
           [24.0, constraints.maxWidth / 3 * 2],
           [12.0, constraints.maxWidth / 6 * 5]
         ]) {
-          final double dotSpacing = layout[0];
-          final double maxWidth = layout[1];
+          final dotSpacing = layout[0];
+          final maxWidth = layout[1];
 
           if (dotSize * widget.children.length +
                   dotSpacing * (widget.children.length - 1) <

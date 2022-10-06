@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_widgets/src/pages/layouts/yaru_page_item_list_view.dart';
 
 import 'yaru_page_item.dart';
+import 'yaru_page_item_list_view.dart';
 
 class YaruPortraitLayout extends StatefulWidget {
   const YaruPortraitLayout({

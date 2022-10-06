@@ -20,7 +20,7 @@ class YaruColorDisk extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: TextButton(
           style: TextButton.styleFrom(
-            padding: const EdgeInsets.all(0),
+            padding: EdgeInsets.zero,
             shape: CircleBorder(
               side: BorderSide(
                 color: selected

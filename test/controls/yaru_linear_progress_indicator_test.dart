@@ -3,8 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/src/controls/yaru_progress_indicator.dart';
 
 void main() {
-  testWidgets('- YaruLinearProgressIndicator Test',
-      (WidgetTester tester) async {
+  testWidgets('- YaruLinearProgressIndicator Test', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(

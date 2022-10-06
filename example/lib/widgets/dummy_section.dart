@@ -3,20 +3,19 @@ import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class DummySection extends StatelessWidget {
+  const DummySection({super.key, this.width});
   final double? width;
-
-  const DummySection({Key? key, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return YaruSection(
       headline: 'Headline',
-      headerWidget: SizedBox(
+      headerWidget: const SizedBox(
         child: YaruCircularProgressIndicator(strokeWidth: 3),
         height: 20,
         width: 20,
       ),
-      children: [
+      children: const [
         YaruTile(
           title: Text('Title'),
           trailing: Icon(YaruIcons.information),

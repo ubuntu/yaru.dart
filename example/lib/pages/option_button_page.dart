@@ -3,7 +3,7 @@ import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class OptionButtonPage extends StatefulWidget {
-  const OptionButtonPage({Key? key}) : super(key: key);
+  const OptionButtonPage({super.key});
 
   @override
   _OptionButtonPageState createState() => _OptionButtonPageState();
@@ -18,21 +18,21 @@ class _OptionButtonPageState extends State<OptionButtonPage> {
           children: [
             YaruOptionButton(
               onPressed: () {},
-              child: Icon(YaruIcons.search),
+              child: const Icon(YaruIcons.search),
             ),
             const SizedBox(
               width: 10.0,
             ),
             YaruOptionButton(
               onPressed: () {},
-              child: Icon(YaruIcons.audio),
+              child: const Icon(YaruIcons.audio),
             ),
             const SizedBox(
               width: 10.0,
             ),
             YaruOptionButton(
               onPressed: () {},
-              child: Icon(YaruIcons.address_book),
+              child: const Icon(YaruIcons.address_book),
             ),
             const SizedBox(
               width: 10.0,

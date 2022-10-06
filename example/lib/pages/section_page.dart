@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
-import 'package:yaru_widgets_example/widgets/dummy_section.dart';
-import 'package:yaru_widgets_example/widgets/tile_list.dart';
+import '../widgets/dummy_section.dart';
+import '../widgets/tile_list.dart';
 
 const kMinSectionWidth = 400.0;
 
 class SectionPage extends StatefulWidget {
-  const SectionPage({Key? key}) : super(key: key);
+  const SectionPage({super.key});
 
   @override
   _SectionPageState createState() => _SectionPageState();
@@ -15,7 +15,7 @@ class SectionPage extends StatefulWidget {
 class _SectionPageState extends State<SectionPage> {
   @override
   Widget build(BuildContext context) {
-    return YaruPage(
+    return const YaruPage(
       children: [
         DummySection(width: kMinSectionWidth),
         YaruSection(

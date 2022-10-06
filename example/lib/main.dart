@@ -4,21 +4,23 @@ import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
-import 'package:yaru_widgets_example/example_page_items.dart';
-import 'package:yaru_widgets_example/theme.dart';
+import 'example_page_items.dart';
+import 'theme.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => LightTheme(yaruLight)),
-      ChangeNotifierProvider(create: (_) => DarkTheme(yaruDark)),
-    ],
-    child: Home(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LightTheme(yaruLight)),
+        ChangeNotifierProvider(create: (_) => DarkTheme(yaruDark)),
+      ],
+      child: const Home(),
+    ),
+  );
 }
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -33,37 +35,39 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final configItem = YaruPageItem(
       titleBuilder: (context) => YaruPageItemTitle.text('Layout'),
-      builder: (_) => YaruPage(children: [
-        YaruTile(
-          title: Text('Compact mode'),
-          trailing: Switch(
-            value: _compactMode,
-            onChanged: (v) => setState(() => _compactMode = v),
-          ),
-        ),
-        if (_compactMode)
+      builder: (_) => YaruPage(
+        children: [
           YaruTile(
-            title: Text('YaruPageItem amount'),
-            trailing: Row(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    if (_amount >= examplePageItems.length) return;
-                    setState(() => _amount++);
-                  },
-                  child: Icon(YaruIcons.plus),
-                ),
-                TextButton(
-                  onPressed: () {
-                    if (_amount <= 2) return;
-                    setState(() => _amount--);
-                  },
-                  child: Icon(YaruIcons.minus),
-                ),
-              ],
+            title: const Text('Compact mode'),
+            trailing: Switch(
+              value: _compactMode,
+              onChanged: (v) => setState(() => _compactMode = v),
             ),
-          )
-      ]),
+          ),
+          if (_compactMode)
+            YaruTile(
+              title: const Text('YaruPageItem amount'),
+              trailing: Row(
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      if (_amount >= examplePageItems.length) return;
+                      setState(() => _amount++);
+                    },
+                    child: const Icon(YaruIcons.plus),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      if (_amount <= 2) return;
+                      setState(() => _amount--);
+                    },
+                    child: const Icon(YaruIcons.minus),
+                  ),
+                ],
+              ),
+            )
+        ],
+      ),
       iconData: YaruIcons.settings,
     );
 
@@ -91,11 +95,9 @@ class _HomeState extends State<Home> {
 
 class _CompactPage extends StatelessWidget {
   const _CompactPage({
-    Key? key,
     required this.configItem,
     required int amount,
-  })  : _amount = amount,
-        super(key: key);
+  }) : _amount = amount;
 
   final YaruPageItem configItem;
   final int _amount;

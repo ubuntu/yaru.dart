@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/constants.dart';
+import '../constants.dart';
 
 /// A width responsive widget combining a [TabBar] and a [TabBarView].
 ///
@@ -66,7 +66,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
       final size = MediaQuery.of(context).size;
       var oneTitleTooLong = false;
       var twoTitlesTooLong = false;
-      for (var title in widget.tabTitles) {
+      for (final title in widget.tabTitles) {
         if (title.length > 6) {
           oneTitleTooLong = true;
           if (oneTitleTooLong && title.length > 6) {

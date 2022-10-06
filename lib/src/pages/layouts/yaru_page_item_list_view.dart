@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/constants.dart';
-import 'package:yaru_widgets/src/pages/layouts/yaru_page_item.dart';
+import '../../constants.dart';
+import 'yaru_page_item.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
@@ -54,7 +54,7 @@ class YaruPageItemListView extends StatelessWidget {
   double _calcScrollbarThicknessWithTrack(final BuildContext context) {
     final scrollbarTheme = Theme.of(context).scrollbarTheme;
 
-    var doubleMarginWidth = scrollbarTheme.crossAxisMargin != null
+    final doubleMarginWidth = scrollbarTheme.crossAxisMargin != null
         ? scrollbarTheme.crossAxisMargin! * 2
         : _kScrollbarMargin * 2;
 

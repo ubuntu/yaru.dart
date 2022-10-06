@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/constants.dart';
-import 'package:yaru_widgets/src/dialogs/yaru_dialog_title.dart';
+import '../constants.dart';
+import 'yaru_dialog_title.dart';
 
 class YaruAlertDialog extends StatelessWidget {
   const YaruAlertDialog({
@@ -64,12 +64,7 @@ class YaruAlertDialog extends StatelessWidget {
         actionsPadding: const EdgeInsets.all(kDefaultPagePadding / 2),
         contentPadding: contentPadding,
         scrollable: scrollable ?? false,
-        titlePadding: const EdgeInsets.only(
-          top: kDefaultDialogTitlePadding,
-          left: kDefaultDialogTitlePadding,
-          right: kDefaultDialogTitlePadding,
-          bottom: 0,
-        ),
+        titlePadding: EdgeInsets.zero,
         title: YaruDialogTitle(
           mainAxisAlignment: MainAxisAlignment.start,
           textAlign: titleTextAlign,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import '../../yaru_widgets.dart';
 
 /// A colorable [Card] with a border which is tap-able via an [onTap] callback.
 class YaruBanner extends StatelessWidget {
@@ -50,7 +50,7 @@ class YaruBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(10);
 
-    bool light = Theme.of(context).brightness == Brightness.light;
+    final light = Theme.of(context).brightness == Brightness.light;
     return Material(
       color: Colors.transparent,
       child: InkWell(

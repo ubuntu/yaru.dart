@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/constants.dart';
+import '../constants.dart';
 
 class YaruSection extends StatelessWidget {
   /// Creates a yaru style section widget with multiple
