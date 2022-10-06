@@ -4,11 +4,7 @@ class YaruPageItem {
   const YaruPageItem({
     required this.titleBuilder,
     required this.builder,
-    required this.iconData,
-    this.selectedIconData,
-    this.searchMatches,
-    this.itemWidget,
-    this.selectedItemWidget,
+    required this.iconBuilder,
     this.onTap,
   });
 
@@ -16,10 +12,6 @@ class YaruPageItem {
   final WidgetBuilder titleBuilder;
 
   final WidgetBuilder builder;
-  final IconData iconData;
-  final Widget? itemWidget;
-  final Widget? selectedItemWidget;
-  final IconData? selectedIconData;
-  final bool Function(String value, BuildContext context)? searchMatches;
+  final Widget Function(BuildContext context, bool selected) iconBuilder;
   final void Function(BuildContext context)? onTap;
 }

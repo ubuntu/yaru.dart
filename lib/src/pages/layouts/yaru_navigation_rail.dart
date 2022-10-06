@@ -110,7 +110,10 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
                           vertical: 2,
                           horizontal: 10,
                         ),
-                        child: Icon(widget.destination.iconData),
+                        child: widget.destination.iconBuilder(
+                          context,
+                          widget.selected,
+                        ),
                       ),
                     ),
                     if (widget.showLabel) ...[
