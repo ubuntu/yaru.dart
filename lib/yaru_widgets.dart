@@ -18,7 +18,6 @@ export 'src/extensions/border_radius_extension.dart';
 export 'src/pages/layouts/yaru_compact_layout.dart';
 export 'src/pages/layouts/yaru_master_detail_page.dart';
 export 'src/pages/layouts/yaru_navigation_rail.dart';
-export 'src/pages/layouts/yaru_page_item.dart';
 export 'src/pages/layouts/yaru_page_item_title.dart';
 // Pages
 export 'src/pages/yaru_section.dart';
