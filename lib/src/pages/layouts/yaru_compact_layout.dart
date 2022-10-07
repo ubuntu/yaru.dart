@@ -9,6 +9,7 @@ class YaruCompactLayout extends StatefulWidget {
     required this.pageItems,
     this.style = YaruNavigationRailStyle.compact,
     this.initialIndex = 0,
+    this.onSelected,
   });
 
   /// A list of page destinations
@@ -19,6 +20,9 @@ class YaruCompactLayout extends StatefulWidget {
 
   /// The index of the [YaruPageItem] that is selected from [pageItems]
   final int initialIndex;
+
+  /// Called when the user selects a page.
+  final ValueChanged<int>? onSelected;
 
   @override
   State<YaruCompactLayout> createState() => _YaruCompactLayoutState();
@@ -79,6 +83,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
               }
               setState(() {
                 _index = index;
+                widget.onSelected?.call(index);
               });
             },
             destinations: widget.pageItems,
