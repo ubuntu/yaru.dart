@@ -25,6 +25,8 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.previousIconData,
     required this.leftPaneWidth,
     this.appBar,
+    this.initialIndex,
+    this.onSelected,
   });
 
   /// Creates horizontal array of pages.
@@ -42,6 +44,12 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// An optional custom AppBar for the left pane.
   final PreferredSizeWidget? appBar;
 
+  /// An optional index of the initial page to show.
+  final int? initialIndex;
+
+  /// Called when the user selects a page.
+  final ValueChanged<int?>? onSelected;
+
   @override
   _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
 }
@@ -53,6 +61,21 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   void _setIndex(int index) {
     _previousIndex = _index;
     _index = index;
+    widget.onSelected?.call(index == -1 ? null : index);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _index = widget.initialIndex ?? -1;
+  }
+
+  @override
+  void didUpdateWidget(covariant YaruMasterDetailPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialIndex != oldWidget.initialIndex) {
+      _index = widget.initialIndex ?? -1;
+    }
   }
 
   @override
