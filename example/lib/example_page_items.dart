@@ -43,14 +43,14 @@ final examplePageItems = <YaruPageItem>[
     builder: (_) => const ExpandablePage(),
   ),
   YaruPageItem(
-    titleBuilder: (context) => YaruPageItemTitle.text('YaruProgressIndicator'),
-    iconBuilder: (context, selected) => const Icon(YaruIcons.download),
-    builder: (_) => const ProgressIndicatorPage(),
-  ),
-  YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruOptionButton'),
     iconBuilder: (context, selected) => const Icon(YaruIcons.settings),
     builder: (_) => const OptionButtonPage(),
+  ),
+  YaruPageItem(
+    titleBuilder: (context) => YaruPageItemTitle.text('YaruProgressIndicator'),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.download),
+    builder: (_) => const ProgressIndicatorPage(),
   ),
   YaruPageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruRoundToggleButton'),
