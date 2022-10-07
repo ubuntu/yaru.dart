@@ -65,8 +65,10 @@ class _HomeState extends State<Home> {
               leftPaneWidth: 280,
               previousIconData: YaruIcons.go_previous,
               length: pageItems.length,
-              iconBuilder: (context, index, selected) =>
-                  pageItems[index].iconBuilder(context, selected),
+              tileBuilder: (context, index, selected) => YaruMasterTile(
+                leading: pageItems[index].iconBuilder(context, selected),
+                title: pageItems[index].titleBuilder(context),
+              ),
               titleBuilder: (context, index, selected) =>
                   pageItems[index].titleBuilder(context),
               pageBuilder: (context, index) =>

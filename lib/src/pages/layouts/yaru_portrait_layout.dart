@@ -9,7 +9,7 @@ class YaruPortraitLayout extends StatefulWidget {
     super.key,
     required this.length,
     required this.selectedIndex,
-    required this.iconBuilder,
+    required this.tileBuilder,
     required this.titleBuilder,
     required this.pageBuilder,
     required this.onSelected,
@@ -19,7 +19,7 @@ class YaruPortraitLayout extends StatefulWidget {
 
   final int length;
   final int selectedIndex;
-  final YaruMasterDetailBuilder iconBuilder;
+  final YaruMasterDetailBuilder tileBuilder;
   final YaruMasterDetailBuilder titleBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int> onSelected;
@@ -105,8 +105,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                       length: widget.length,
                       selectedIndex: _selectedIndex,
                       onTap: _onTap,
-                      iconBuilder: widget.iconBuilder,
-                      titleBuilder: widget.titleBuilder,
+                      builder: widget.tileBuilder,
                     ),
                   );
                 },

@@ -27,7 +27,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   const YaruMasterDetailPage({
     super.key,
     required this.length,
-    required this.iconBuilder,
+    required this.tileBuilder,
     required this.titleBuilder,
     required this.pageBuilder,
     this.previousIconData,
@@ -40,13 +40,13 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// The total number of pages.
   final int length;
 
-  /// A builder that is called for each page to build its icon.
-  final YaruMasterDetailBuilder iconBuilder;
+  /// A builder that is called for each page to build its master tile.
+  final YaruMasterDetailBuilder tileBuilder;
 
   /// A builder that is called for each page to build its title.
   final YaruMasterDetailBuilder titleBuilder;
 
-  /// A builder that is called for each page to build its content.
+  /// A builder that is called for each page to build its detail page.
   final IndexedWidgetBuilder pageBuilder;
 
   /// Specifies the width of left pane.
@@ -100,7 +100,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
           return YaruPortraitLayout(
             length: widget.length,
             selectedIndex: _index,
-            iconBuilder: widget.iconBuilder,
+            tileBuilder: widget.tileBuilder,
             titleBuilder: widget.titleBuilder,
             pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
@@ -111,7 +111,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
           return YaruLandscapeLayout(
             length: widget.length,
             selectedIndex: _index == -1 ? _previousIndex : _index,
-            iconBuilder: widget.iconBuilder,
+            tileBuilder: widget.tileBuilder,
             titleBuilder: widget.titleBuilder,
             pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
