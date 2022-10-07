@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'yaru_landscape_layout.dart';
-import 'yaru_page_item.dart';
 import 'yaru_portrait_layout.dart';
+
+typedef YaruMasterDetailBuilder = Widget Function(
+  BuildContext context,
+  int index,
+  bool selected,
+);
 
 class YaruMasterDetailPage extends StatefulWidget {
   /// Creates a basic responsive layout with yaru theme,
@@ -21,17 +26,26 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// ```
   const YaruMasterDetailPage({
     super.key,
-    required this.pageItems,
+    required this.length,
+    required this.iconBuilder,
+    required this.titleBuilder,
+    required this.pageBuilder,
     this.previousIconData,
     required this.leftPaneWidth,
     this.appBar,
   });
 
-  /// Creates horizontal array of pages.
-  /// All the `children` will be of type [YaruPageItem].
-  ///
-  /// These List of items are passed to [YaruLandscapeLayout] and [YaruPortraitLayout].
-  final List<YaruPageItem> pageItems;
+  /// The total number of pages.
+  final int length;
+
+  /// A builder that is called for each page to build its icon.
+  final YaruMasterDetailBuilder iconBuilder;
+
+  /// A builder that is called for each page to build its title.
+  final YaruMasterDetailBuilder titleBuilder;
+
+  /// A builder that is called for each page to build its content.
+  final IndexedWidgetBuilder pageBuilder;
 
   /// Specifies the width of left pane.
   final double leftPaneWidth;
@@ -61,16 +75,22 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
       builder: (context, constraints) {
         if (constraints.maxWidth < 620) {
           return YaruPortraitLayout(
+            length: widget.length,
             selectedIndex: _index,
-            pageItems: widget.pageItems,
+            iconBuilder: widget.iconBuilder,
+            titleBuilder: widget.titleBuilder,
+            pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
             previousIconData: widget.previousIconData,
             appBar: widget.appBar,
           );
         } else {
           return YaruLandscapeLayout(
+            length: widget.length,
             selectedIndex: _index == -1 ? _previousIndex : _index,
-            pageItems: widget.pageItems,
+            iconBuilder: widget.iconBuilder,
+            titleBuilder: widget.titleBuilder,
+            pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
             leftPaneWidth: widget.leftPaneWidth,
             appBar: widget.appBar,

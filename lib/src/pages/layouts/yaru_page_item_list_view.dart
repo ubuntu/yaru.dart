@@ -8,13 +8,17 @@ const double _kScrollbarMargin = 2.0;
 class YaruPageItemListView extends StatelessWidget {
   const YaruPageItemListView({
     super.key,
-    required this.pages,
+    required this.length,
     required this.selectedIndex,
+    required this.iconBuilder,
+    required this.titleBuilder,
     required this.onTap,
     this.materialTiles = false,
   });
 
-  final List<YaruPageItem> pages;
+  final int length;
+  final YaruMasterDetailBuilder iconBuilder;
+  final YaruMasterDetailBuilder titleBuilder;
   final int selectedIndex;
   final Function(int index) onTap;
   final bool materialTiles;
@@ -33,20 +37,19 @@ class YaruPageItemListView extends StatelessWidget {
             )
           : null,
       controller: ScrollController(),
-      itemCount: pages.length,
+      itemCount: length,
       itemBuilder: (context, index) => materialTiles
           ? ListTile(
               visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
               selected: index == selectedIndex,
-              title: pages[index].titleBuilder(context),
-              leading:
-                  pages[index].iconBuilder(context, index == selectedIndex),
+              title: titleBuilder(context, index, index == selectedIndex),
+              leading: iconBuilder(context, index, index == selectedIndex),
               onTap: () => onTap(index),
             )
           : _YaruListTile(
               selected: index == selectedIndex,
-              title: pages[index].titleBuilder(context),
-              icon: pages[index].iconBuilder(context, index == selectedIndex),
+              title: titleBuilder(context, index, index == selectedIndex),
+              icon: iconBuilder(context, index, index == selectedIndex),
               onTap: () => onTap(index),
             ),
     );

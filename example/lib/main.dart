@@ -49,6 +49,10 @@ class _HomeState extends State<Home> {
       iconBuilder: (context, selected) => const Icon(YaruIcons.settings),
     );
 
+    final pageItems = _filteredItems.isNotEmpty
+        ? _filteredItems
+        : [configItem] + examplePageItems;
+
     return MaterialApp(
       title: 'Yaru Widgets Factory',
       scrollBehavior: TouchMouseStylusScrollBehavior(),
@@ -60,9 +64,13 @@ class _HomeState extends State<Home> {
           : YaruMasterDetailPage(
               leftPaneWidth: 280,
               previousIconData: YaruIcons.go_previous,
-              pageItems: _filteredItems.isNotEmpty
-                  ? _filteredItems
-                  : [configItem] + examplePageItems,
+              length: pageItems.length,
+              iconBuilder: (context, index, selected) =>
+                  pageItems[index].iconBuilder(context, selected),
+              titleBuilder: (context, index, selected) =>
+                  pageItems[index].titleBuilder(context),
+              pageBuilder: (context, index) =>
+                  pageItems[index].builder(context),
               appBar: AppBar(
                 title: const Text('Example'),
               ),

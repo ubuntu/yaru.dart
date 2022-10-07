@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
-import 'yaru_page_item.dart';
+import 'yaru_master_detail_page.dart';
 import 'yaru_page_item_list_view.dart';
 
 class YaruLandscapeLayout extends StatefulWidget {
   /// Creates a landscape layout
   const YaruLandscapeLayout({
     super.key,
+    required this.length,
     required this.selectedIndex,
-    required this.pageItems,
+    required this.iconBuilder,
+    required this.titleBuilder,
+    required this.pageBuilder,
     required this.onSelected,
     required this.leftPaneWidth,
     this.appBar,
   });
 
+  /// The total number of pages.
+  final int length;
+
   /// Current index of the selected page.
   final int selectedIndex;
 
-  /// Creates horizontal array of pages.
-  /// All the `children` will be of type [YaruPageItem]
-  final List<YaruPageItem> pageItems;
+  /// A builder that is called for each page to build its icon.
+  final YaruMasterDetailBuilder iconBuilder;
+
+  /// A builder that is called for each page to build its title.
+  final YaruMasterDetailBuilder titleBuilder;
+
+  /// A builder that is called for each page to build its content.
+  final IndexedWidgetBuilder pageBuilder;
 
   /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
@@ -68,11 +79,11 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                 if (widget.appBar != null)
                   Expanded(
                     child: AppBar(
-                      title: widget.pageItems[
-                              widget.pageItems.length > _selectedIndex
-                                  ? _selectedIndex
-                                  : 0]
-                          .titleBuilder(context),
+                      title: widget.titleBuilder(
+                        context,
+                        widget.length > _selectedIndex ? _selectedIndex : 0,
+                        false,
+                      ),
                     ),
                   )
               ],
@@ -95,9 +106,11 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                       ),
                     ),
                     child: YaruPageItemListView(
+                      length: widget.length,
                       selectedIndex: _selectedIndex,
                       onTap: _onTap,
-                      pages: widget.pageItems,
+                      iconBuilder: widget.iconBuilder,
+                      titleBuilder: widget.titleBuilder,
                     ),
                   ),
                 ),
@@ -110,10 +123,9 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                       pages: [
                         MaterialPage(
                           key: ValueKey(_selectedIndex),
-                          child: widget.pageItems.length > _selectedIndex
-                              ? widget.pageItems[_selectedIndex]
-                                  .builder(context)
-                              : widget.pageItems[0].builder(context),
+                          child: widget.length > _selectedIndex
+                              ? widget.pageBuilder(context, _selectedIndex)
+                              : widget.pageBuilder(context, 0),
                         ),
                       ],
                       onPopPage: (route, result) => route.didPop(result),

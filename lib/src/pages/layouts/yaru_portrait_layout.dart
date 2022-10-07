@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
-import 'yaru_page_item.dart';
+import 'yaru_master_detail_page.dart';
 import 'yaru_page_item_list_view.dart';
 
 class YaruPortraitLayout extends StatefulWidget {
   const YaruPortraitLayout({
     super.key,
+    required this.length,
     required this.selectedIndex,
-    required this.pageItems,
+    required this.iconBuilder,
+    required this.titleBuilder,
+    required this.pageBuilder,
     required this.onSelected,
     this.previousIconData,
     this.appBar,
   });
 
+  final int length;
   final int selectedIndex;
-  final List<YaruPageItem> pageItems;
+  final YaruMasterDetailBuilder iconBuilder;
+  final YaruMasterDetailBuilder titleBuilder;
+  final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int> onSelected;
   final IconData? previousIconData;
 
@@ -52,11 +58,10 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
     final width = MediaQuery.of(context).size.width;
     return MaterialPageRoute(
       builder: (context) {
-        final page = widget.pageItems[_selectedIndex];
         return Scaffold(
           appBar: widget.appBar != null
               ? AppBar(
-                  title: page.titleBuilder(context),
+                  title: widget.titleBuilder(context, index, false),
                   leading: InkWell(
                     child:
                         Icon(widget.previousIconData ?? Icons.navigate_before),
@@ -64,7 +69,8 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                   ),
                 )
               : null,
-          body: SizedBox(width: width, child: page.builder(context)),
+          body:
+              SizedBox(width: width, child: widget.pageBuilder(context, index)),
           floatingActionButton: widget.appBar == null
               ? FloatingActionButton(
                   child: Icon(widget.previousIconData),
@@ -96,9 +102,11 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                   return Scaffold(
                     appBar: widget.appBar,
                     body: YaruPageItemListView(
+                      length: widget.length,
                       selectedIndex: _selectedIndex,
                       onTap: _onTap,
-                      pages: widget.pageItems,
+                      iconBuilder: widget.iconBuilder,
+                      titleBuilder: widget.titleBuilder,
                     ),
                   );
                 },
