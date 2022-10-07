@@ -19,22 +19,26 @@ const _kSelectedIconAnimationDuration = Duration(milliseconds: 250);
 class YaruNavigationRail extends StatelessWidget {
   const YaruNavigationRail({
     super.key,
-    required this.destinations,
+    required this.length,
+    required this.iconBuilder,
+    required this.titleBuilder,
     required this.selectedIndex,
     required this.onDestinationSelected,
     this.style = YaruNavigationRailStyle.compact,
-  })  : assert(destinations.length >= 2),
+  })  : assert(length >= 2),
         assert(
           selectedIndex == null ||
-              (0 <= selectedIndex && selectedIndex < destinations.length),
+              (0 <= selectedIndex && selectedIndex < length),
         );
 
-  /// Defines the appearance of the button items that are arrayed within the
-  /// navigation rail.
-  ///
-  /// The value must be a list of two or more [YaruPageItem]
-  /// values.
-  final List<YaruPageItem> destinations;
+  /// The total number of pages.
+  final int length;
+
+  /// A builder that is called for each page to build its icon.
+  final YaruCompactLayoutBuilder iconBuilder;
+
+  /// A builder that is called for each page to build its title.
+  final YaruCompactLayoutBuilder titleBuilder;
 
   /// The index into [destinations] for the current selected
   /// [YaruPageItem] or null if no destination is selected.
@@ -56,11 +60,12 @@ class YaruNavigationRail extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
         children: <Widget>[
-          for (int i = 0; i < destinations.length; i += 1)
+          for (int i = 0; i < length; i += 1)
             _YaruNavigationRailItem(
               i,
               i == selectedIndex,
-              destinations[i],
+              iconBuilder,
+              titleBuilder,
               onDestinationSelected,
               style,
             )
@@ -74,14 +79,16 @@ class _YaruNavigationRailItem extends StatefulWidget {
   const _YaruNavigationRailItem(
     this.index,
     this.selected,
-    this.destination,
+    this.iconBuilder,
+    this.titleBuilder,
     this.onDestinationSelected,
     this.style,
   );
 
   final int index;
   final bool selected;
-  final YaruPageItem destination;
+  final YaruCompactLayoutBuilder iconBuilder;
+  final YaruCompactLayoutBuilder titleBuilder;
   final ValueChanged<int>? onDestinationSelected;
   final YaruNavigationRailStyle style;
 
@@ -199,8 +206,9 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
           vertical: 2,
           horizontal: 10,
         ),
-        child: widget.destination.iconBuilder(
+        child: widget.iconBuilder(
           context,
+          widget.index,
           widget.selected,
         ),
       ),
@@ -216,7 +224,7 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
   }
 
   Widget _buildLabel(BuildContext context) {
-    var label = widget.destination.titleBuilder(context);
+    var label = widget.titleBuilder(context, widget.index, widget.selected);
 
     if (label is YaruPageItemTitle) {
       label = DefaultTextStyle.merge(

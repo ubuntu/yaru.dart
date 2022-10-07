@@ -2,18 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 import '../../../yaru_widgets.dart';
 
+typedef YaruCompactLayoutBuilder = Widget Function(
+  BuildContext context,
+  int index,
+  bool selected,
+);
+
 /// A page layout which use a [YaruNavigationRail] on left for page navigation
 class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
     super.key,
-    required this.pageItems,
+    required this.length,
+    required this.iconBuilder,
+    required this.titleBuilder,
+    required this.pageBuilder,
     this.style = YaruNavigationRailStyle.compact,
     this.initialIndex = 0,
     this.onSelected,
   });
 
-  /// A list of page destinations
-  final List<YaruPageItem> pageItems;
+  /// The total number of pages.
+  final int length;
+
+  /// A builder that is called for each page to build its icon.
+  final YaruCompactLayoutBuilder iconBuilder;
+
+  /// A builder that is called for each page to build its title.
+  final YaruCompactLayoutBuilder titleBuilder;
+
+  /// A builder that is called for each page to build its content.
+  final IndexedWidgetBuilder pageBuilder;
 
   /// Define the navigation rail style, see [YaruNavigationRailStyle]
   final YaruNavigationRailStyle style;
@@ -78,15 +96,14 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
             style: widget.style,
             selectedIndex: _index,
             onDestinationSelected: (index) {
-              if (widget.pageItems[index].onTap != null) {
-                widget.pageItems[index].onTap!.call(context);
-              }
               setState(() {
                 _index = index;
                 widget.onSelected?.call(index);
               });
             },
-            destinations: widget.pageItems,
+            length: widget.length,
+            iconBuilder: widget.iconBuilder,
+            titleBuilder: widget.titleBuilder,
           ),
         ),
       ),
@@ -107,9 +124,9 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
           pages: [
             MaterialPage(
               key: ValueKey(_index),
-              child: widget.pageItems.length > _index
-                  ? widget.pageItems[_index].builder(context)
-                  : widget.pageItems[0].builder(context),
+              child: widget.length > _index
+                  ? widget.pageBuilder(context, _index)
+                  : widget.pageBuilder(context, 0),
             ),
           ],
           onPopPage: (route, result) => route.didPop(result),

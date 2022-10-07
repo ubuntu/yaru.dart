@@ -82,13 +82,20 @@ class _CompactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
+    final pageItems = [configItem] + examplePageItems;
+
     return YaruCompactLayout(
       style: width > 1000
           ? YaruNavigationRailStyle.labelledExtended
           : width > 500
               ? YaruNavigationRailStyle.labelled
               : YaruNavigationRailStyle.compact,
-      pageItems: [configItem] + examplePageItems,
+      length: pageItems.length,
+      iconBuilder: (context, index, selected) =>
+          pageItems[index].iconBuilder(context, selected),
+      titleBuilder: (context, index, selected) =>
+          pageItems[index].titleBuilder(context),
+      pageBuilder: (context, index) => pageItems[index].builder(context),
     );
   }
 }
