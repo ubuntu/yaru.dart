@@ -27,14 +27,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final _filteredItems = <YaruPageItem>[];
+  final _filteredItems = <PageItem>[];
   bool _compactMode = false;
 
   @override
   Widget build(BuildContext context) {
-    final configItem = YaruPageItem(
+    final configItem = PageItem(
       titleBuilder: (context) => YaruPageItemTitle.text('Layout'),
-      builder: (_) => ListView(
+      pageBuilder: (_) => ListView(
         padding: const EdgeInsets.all(kYaruPagePadding),
         children: [
           YaruTile(
@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
               titleBuilder: (context, index, selected) =>
                   pageItems[index].titleBuilder(context),
               pageBuilder: (context, index) =>
-                  pageItems[index].builder(context),
+                  pageItems[index].pageBuilder(context),
               appBar: AppBar(
                 title: const Text('Example'),
               ),
@@ -84,7 +84,7 @@ class _CompactPage extends StatelessWidget {
     required this.configItem,
   });
 
-  final YaruPageItem configItem;
+  final PageItem configItem;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class _CompactPage extends StatelessWidget {
           pageItems[index].iconBuilder(context, selected),
       titleBuilder: (context, index, selected) =>
           pageItems[index].titleBuilder(context),
-      pageBuilder: (context, index) => pageItems[index].builder(context),
+      pageBuilder: (context, index) => pageItems[index].pageBuilder(context),
     );
   }
 }
