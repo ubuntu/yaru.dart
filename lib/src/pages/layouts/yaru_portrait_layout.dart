@@ -71,15 +71,6 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
               : null,
           body:
               SizedBox(width: width, child: widget.pageBuilder(context, index)),
-          floatingActionButton: widget.appBar == null
-              ? FloatingActionButton(
-                  child: Icon(widget.previousIconData),
-                  onPressed: _goBack,
-                )
-              : null,
-          floatingActionButtonLocation: widget.appBar == null
-              ? FloatingActionButtonLocation.miniStartFloat
-              : null,
         );
       },
     );
