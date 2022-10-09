@@ -55,7 +55,6 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   }
 
   MaterialPageRoute pageRoute(int index) {
-    final width = MediaQuery.of(context).size.width;
     return MaterialPageRoute(
       builder: (context) {
         return Scaffold(
@@ -69,8 +68,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                   ),
                 )
               : null,
-          body:
-              SizedBox(width: width, child: widget.pageBuilder(context, index)),
+          body: SizedBox.expand(child: widget.pageBuilder(context, index)),
         );
       },
     );
