@@ -16,13 +16,15 @@ class _RoundToggleButtonPageState extends State<RoundToggleButtonPage> {
     return ListView(
       padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
-        YaruRoundToggleButton(
-          onPressed: () => setState(
-            () => _selected = !_selected,
+        Center(
+          child: YaruRoundToggleButton(
+            onPressed: () => setState(
+              () => _selected = !_selected,
+            ),
+            selected: _selected,
+            iconData: YaruIcons.view,
+            tooltip: 'View',
           ),
-          selected: _selected,
-          iconData: YaruIcons.view,
-          tooltip: 'View',
         )
       ],
     );
