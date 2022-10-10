@@ -16,6 +16,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.onSelected,
     required this.leftPaneWidth,
     required this.leftPaneMinWidth,
+    this.onLeftPaneWidthChange,
     this.appBar,
   });
 
@@ -42,6 +43,8 @@ class YaruLandscapeLayout extends StatefulWidget {
 
   /// Specifies the min-width of left pane.
   final double leftPaneMinWidth;
+
+  final Function(double)? onLeftPaneWidthChange;
 
   /// An optional [PreferredSizeWidget] used as the left [AppBar]
   /// If provided, a second [AppBar] will be created right to it.
@@ -168,9 +171,14 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
               _paneWidthMove += details.delta.dx;
               final width = _initialPaneWidth + _paneWidthMove;
 
+              final previousPaneWidth = _leftPaneWidth;
               _leftPaneWidth = width >= widget.leftPaneMinWidth
                   ? width
                   : widget.leftPaneMinWidth;
+
+              if (previousPaneWidth != _leftPaneWidth) {
+                widget.onLeftPaneWidthChange?.call(width);
+              }
             }),
             onPanEnd: (details) => setState(() {
               _isDragging = false;

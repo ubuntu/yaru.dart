@@ -79,6 +79,8 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   var _index = -1;
   var _previousIndex = 0;
 
+  late double _leftPaneWidth;
+
   void _setIndex(int index) {
     _previousIndex = _index;
     _index = index;
@@ -89,6 +91,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   void initState() {
     super.initState();
     _index = widget.initialIndex ?? -1;
+    _leftPaneWidth = widget.leftPaneWidth;
   }
 
   @override
@@ -121,8 +124,9 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             titleBuilder: widget.titleBuilder,
             pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
-            leftPaneWidth: widget.leftPaneWidth,
+            leftPaneWidth: _leftPaneWidth,
             leftPaneMinWidth: widget.leftPaneMinWidth,
+            onLeftPaneWidthChange: (panWidth) => _leftPaneWidth = panWidth,
             appBar: widget.appBar,
           );
         }
