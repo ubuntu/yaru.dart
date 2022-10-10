@@ -63,7 +63,6 @@ class _HomeState extends State<Home> {
           ? _CompactPage(configItem: configItem)
           : YaruMasterDetailPage(
               leftPaneWidth: 280,
-              previousIconData: YaruIcons.go_previous,
               length: pageItems.length,
               tileBuilder: (context, index, selected) => YaruMasterTile(
                 leading: pageItems[index].iconBuilder(context, selected),
