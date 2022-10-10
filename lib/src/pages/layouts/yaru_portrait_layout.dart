@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
+import '../../controls/yaru_back_button.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_page_item_list_view.dart';
 
@@ -61,10 +62,8 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
           appBar: widget.appBar != null
               ? AppBar(
                   title: widget.titleBuilder(context, index, false),
-                  leading: InkWell(
-                    child:
-                        Icon(widget.previousIconData ?? Icons.navigate_before),
-                    onTap: _goBack,
+                  leading: YaruBackButton(
+                    onPressed: _goBack,
                   ),
                 )
               : null,
