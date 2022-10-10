@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../yaru_widgets.dart';
+import 'yaru_master_detail_page.dart';
+import 'yaru_master_tile.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
@@ -10,15 +11,13 @@ class YaruPageItemListView extends StatelessWidget {
     super.key,
     required this.length,
     required this.selectedIndex,
-    required this.iconBuilder,
-    required this.titleBuilder,
+    required this.builder,
     required this.onTap,
     this.materialTiles = false,
   });
 
   final int length;
-  final YaruMasterDetailBuilder iconBuilder;
-  final YaruMasterDetailBuilder titleBuilder;
+  final YaruMasterDetailBuilder builder;
   final int selectedIndex;
   final Function(int index) onTap;
   final bool materialTiles;
@@ -38,20 +37,14 @@ class YaruPageItemListView extends StatelessWidget {
           : null,
       controller: ScrollController(),
       itemCount: length,
-      itemBuilder: (context, index) => materialTiles
-          ? ListTile(
-              visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-              selected: index == selectedIndex,
-              title: titleBuilder(context, index, index == selectedIndex),
-              leading: iconBuilder(context, index, index == selectedIndex),
-              onTap: () => onTap(index),
-            )
-          : _YaruListTile(
-              selected: index == selectedIndex,
-              title: titleBuilder(context, index, index == selectedIndex),
-              icon: iconBuilder(context, index, index == selectedIndex),
-              onTap: () => onTap(index),
-            ),
+      itemBuilder: (context, index) => YaruMasterTileScope(
+        index: index,
+        selected: index == selectedIndex,
+        onTap: () => onTap(index),
+        child: Builder(
+          builder: (context) => builder(context, index, index == selectedIndex),
+        ),
+      ),
     );
   }
 
@@ -67,61 +60,5 @@ class YaruPageItemListView extends StatelessWidget {
             _kScrollbarThickness;
 
     return doubleMarginWidth + scrollBarThumbThikness;
-  }
-}
-
-class _YaruListTile extends StatelessWidget {
-  const _YaruListTile({
-    required this.selected,
-    this.icon,
-    required this.onTap,
-    required this.title,
-  });
-
-  final bool selected;
-  final Widget? icon;
-  final Function() onTap;
-  final Widget? title;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius:
-            const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
-        color: selected
-            ? Theme.of(context).colorScheme.onSurface.withOpacity(0.07)
-            : null,
-      ),
-      child: ListTile(
-        textColor: Theme.of(context).colorScheme.onSurface,
-        selectedColor: Theme.of(context).colorScheme.onSurface,
-        iconColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
-        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),
-        ),
-        leading: icon,
-        title: _buildTitle(),
-        selected: selected,
-        onTap: onTap,
-      ),
-    );
-  }
-
-  Widget? _buildTitle() {
-    if (title == null) {
-      return title;
-    }
-
-    if (title is YaruPageItemTitle) {
-      return DefaultTextStyle.merge(
-        child: title!,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      );
-    }
-
-    return title;
   }
 }

@@ -10,7 +10,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     super.key,
     required this.length,
     required this.selectedIndex,
-    required this.iconBuilder,
+    required this.tileBuilder,
     required this.titleBuilder,
     required this.pageBuilder,
     required this.onSelected,
@@ -24,13 +24,13 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// Current index of the selected page.
   final int selectedIndex;
 
-  /// A builder that is called for each page to build its icon.
-  final YaruMasterDetailBuilder iconBuilder;
+  /// A builder that is called for each page to build its master tile.
+  final YaruMasterDetailBuilder tileBuilder;
 
   /// A builder that is called for each page to build its title.
   final YaruMasterDetailBuilder titleBuilder;
 
-  /// A builder that is called for each page to build its content.
+  /// A builder that is called for each page to build its detail page.
   final IndexedWidgetBuilder pageBuilder;
 
   /// Callback that returns an index when the page changes.
@@ -109,8 +109,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                       length: widget.length,
                       selectedIndex: _selectedIndex,
                       onTap: _onTap,
-                      iconBuilder: widget.iconBuilder,
-                      titleBuilder: widget.titleBuilder,
+                      builder: widget.tileBuilder,
                     ),
                   ),
                 ),
