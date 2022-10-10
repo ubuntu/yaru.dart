@@ -16,6 +16,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.onSelected,
     required this.leftPaneWidth,
     required this.leftPaneMinWidth,
+    required this.pageMinWidth,
     this.onLeftPaneWidthChange,
     this.appBar,
   });
@@ -46,6 +47,9 @@ class YaruLandscapeLayout extends StatefulWidget {
 
   final Function(double)? onLeftPaneWidthChange;
 
+  /// Specifies the min-width of page.
+  final double pageMinWidth;
+
   /// An optional [PreferredSizeWidget] used as the left [AppBar]
   /// If provided, a second [AppBar] will be created right to it.
   final PreferredSizeWidget? appBar;
@@ -69,9 +73,24 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   @override
   void initState() {
+    super.initState();
     _selectedIndex = widget.selectedIndex;
     _leftPaneWidth = widget.leftPaneWidth;
-    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant YaruLandscapeLayout oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    final width = MediaQuery.of(context).size.width;
+
+    // Avoid left pane to overflow when resizing the window
+    if (_leftPaneWidth >= width - widget.pageMinWidth) {
+      setState(() {
+        _leftPaneWidth = width - widget.pageMinWidth;
+        widget.onLeftPaneWidthChange?.call(_leftPaneWidth);
+      });
+    }
   }
 
   void _onTap(int index) {
@@ -172,9 +191,15 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
               final width = _initialPaneWidth + _paneWidthMove;
 
               final previousPaneWidth = _leftPaneWidth;
-              _leftPaneWidth = width >= widget.leftPaneMinWidth
-                  ? width
-                  : widget.leftPaneMinWidth;
+              final contextWidth = MediaQuery.of(context).size.width;
+
+              if (width >= contextWidth - widget.pageMinWidth) {
+                _leftPaneWidth = contextWidth - widget.pageMinWidth;
+              } else if (width < widget.leftPaneMinWidth) {
+                _leftPaneWidth = widget.leftPaneMinWidth;
+              } else {
+                _leftPaneWidth = width;
+              }
 
               if (previousPaneWidth != _leftPaneWidth) {
                 widget.onLeftPaneWidthChange?.call(width);

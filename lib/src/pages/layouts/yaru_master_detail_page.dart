@@ -32,6 +32,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.pageBuilder,
     required this.leftPaneWidth,
     this.leftPaneMinWidth = 175.0,
+    this.pageMinWidth = 310.0,
     this.appBar,
     this.initialIndex,
     this.onSelected,
@@ -61,6 +62,10 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// Specifies the min-width of left pane.
   /// Defaults to 175
   final double leftPaneMinWidth;
+
+  /// Specifies the min-width of page.
+  /// Defaults to 310
+  final double pageMinWidth;
 
   /// An optional custom AppBar for the left pane.
   final PreferredSizeWidget? appBar;
@@ -126,6 +131,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             onSelected: _setIndex,
             leftPaneWidth: _leftPaneWidth,
             leftPaneMinWidth: widget.leftPaneMinWidth,
+            pageMinWidth: widget.pageMinWidth,
             onLeftPaneWidthChange: (panWidth) => _leftPaneWidth = panWidth,
             appBar: widget.appBar,
           );
