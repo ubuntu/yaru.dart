@@ -5,7 +5,7 @@ import 'yaru_icon_button.dart';
 
 /// A Yaru style back button.
 class YaruBackButton extends StatelessWidget {
-  /// Creates a [YaruIconButton].
+  /// Creates a [YaruBackButton].
   const YaruBackButton({super.key, this.onPressed});
 
   /// An optional callback that is called when the button is pressed.
