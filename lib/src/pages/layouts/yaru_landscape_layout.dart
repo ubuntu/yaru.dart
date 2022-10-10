@@ -45,6 +45,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// Specifies the min-width of left pane.
   final double leftPaneMinWidth;
 
+  /// Callback called when the left pane is resizing
   final Function(double)? onLeftPaneWidthChange;
 
   /// Specifies the min-width of page.
