@@ -14,7 +14,6 @@ class YaruPortraitLayout extends StatefulWidget {
     required this.titleBuilder,
     required this.pageBuilder,
     required this.onSelected,
-    this.previousIconData,
     this.appBar,
   });
 
@@ -24,7 +23,6 @@ class YaruPortraitLayout extends StatefulWidget {
   final YaruMasterDetailBuilder titleBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int> onSelected;
-  final IconData? previousIconData;
 
   final PreferredSizeWidget? appBar;
 
