@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'yaru_detail_page.dart';
 import 'yaru_landscape_layout.dart';
+import 'yaru_master_tile.dart';
 import 'yaru_portrait_layout.dart';
 
 typedef YaruMasterDetailBuilder = Widget Function(
@@ -12,7 +14,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// Creates a basic responsive layout with yaru theme,
   /// renders layout based on [width] constrain.
   ///
-  /// * if [constraints.maxWidth] < 620 the widget will render [YaruPotraitLayout]
+  /// * if [constraints.maxWidth] < 620 the widget will render [YaruPortraitLayout]
   /// * if [constraints.maxWidth] > 620 widget will render [YaruLandscapeLayout]
   ///
   /// for example:
@@ -31,6 +33,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.titleBuilder,
     required this.pageBuilder,
     required this.leftPaneWidth,
+    this.leftPaneResizing = true,
     this.leftPaneMinWidth = 175.0,
     this.pageMinWidth = 310.0,
     this.appBar,
@@ -59,11 +62,14 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// Specifies the initial width of left pane.
   final double leftPaneWidth;
 
-  /// Specifies the min-width of left pane.
+  /// If true, allow the left pane to be resized in landscape layout.
+  final bool leftPaneResizing;
+
+  /// If [leftPaneResizing], specifies the min-width of the left pane.
   /// Defaults to 175
   final double leftPaneMinWidth;
 
-  /// Specifies the min-width of page.
+  /// If [leftPaneResizing], specifies the min-width of the page.
   /// Defaults to 310
   final double pageMinWidth;
 
@@ -130,6 +136,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
             leftPaneWidth: _leftPaneWidth,
+            leftPaneResizing: widget.leftPaneResizing,
             leftPaneMinWidth: widget.leftPaneMinWidth,
             pageMinWidth: widget.pageMinWidth,
             onLeftPaneWidthChange: (panWidth) => _leftPaneWidth = panWidth,

@@ -15,6 +15,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.pageBuilder,
     required this.onSelected,
     required this.leftPaneWidth,
+    required this.leftPaneResizing,
     required this.leftPaneMinWidth,
     required this.pageMinWidth,
     this.onLeftPaneWidthChange,
@@ -42,13 +43,16 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// Specifies the initial width of left pane.
   final double leftPaneWidth;
 
-  /// Specifies the min-width of left pane.
+  /// If true, allow the left pane to be resized.
+  final bool leftPaneResizing;
+
+  /// If [leftPaneResizing], specifies the min-width of the left pane.
   final double leftPaneMinWidth;
 
-  /// Callback called when the left pane is resizing
+  /// If [leftPaneResizing], callback called when the left pane is resizing.
   final Function(double)? onLeftPaneWidthChange;
 
-  /// Specifies the min-width of page.
+  /// If [leftPaneResizing], specifies the min-width of the page.
   final double pageMinWidth;
 
   /// An optional [PreferredSizeWidget] used as the left [AppBar]
@@ -86,7 +90,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     final width = MediaQuery.of(context).size.width;
 
     // Avoid left pane to overflow when resizing the window
-    if (_leftPaneWidth >= width - widget.pageMinWidth) {
+    if (widget.leftPaneResizing &&
+        _leftPaneWidth >= width - widget.pageMinWidth) {
       setState(() {
         _leftPaneWidth = width - widget.pageMinWidth;
         widget.onLeftPaneWidthChange?.call(_leftPaneWidth);
@@ -101,22 +106,21 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: _isHovering || _isDragging
-          ? SystemMouseCursors.resizeColumn
-          : MouseCursor.defer,
-      child: Row(
+    return _maybeBuildGlobalMouseRegion(
+      Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildLeftPane(),
           Expanded(
-            child: Stack(
-              children: [
-                _buildPage(context),
-                _buildLeftPaneResizer(context),
-              ],
-            ),
+            child: widget.leftPaneResizing
+                ? Stack(
+                    children: [
+                      _buildPage(context),
+                      _buildLeftPaneResizer(context),
+                    ],
+                  )
+                : _buildPage(context),
           ),
         ],
       ),
@@ -124,6 +128,19 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Color get _separatorColor => Colors.black.withOpacity(0.1);
+
+  Widget _maybeBuildGlobalMouseRegion(Widget child) {
+    if (widget.leftPaneResizing) {
+      return MouseRegion(
+        cursor: _isHovering || _isDragging
+            ? SystemMouseCursors.resizeColumn
+            : MouseCursor.defer,
+        child: child,
+      );
+    }
+
+    return child;
+  }
 
   Widget _buildLeftPane() {
     return Container(
