@@ -9,21 +9,18 @@ class YaruBanner extends StatelessWidget {
     this.surfaceTintColor,
     this.watermark = false,
     required this.name,
-    this.summary,
     required this.icon,
     this.nameTextOverflow,
     this.summaryTextOverflow,
     this.bannerWidth,
-    this.subtitleWidget,
+    this.subtitle,
   });
 
   /// The name of the card
-  final String name;
+  final Widget name;
 
-  final Widget? subtitleWidget;
-
-  /// A summary string shown in the second line.
-  final String? summary;
+  /// The subtitle shown in the second line.
+  final Widget? subtitle;
 
   /// An optional callback
   final Function()? onTap;
@@ -61,12 +58,11 @@ class YaruBanner extends StatelessWidget {
             ? Stack(
                 children: [
                   _Banner(
-                    subtitleWidget: subtitleWidget,
+                    subtitleWidget: subtitle,
                     width: bannerWidth,
                     borderRadius: borderRadius,
                     color: surfaceTintColor!,
                     title: name,
-                    summary: summary,
                     elevation: light ? 4 : 6,
                     icon: icon,
                     titleTextOverflow:
@@ -93,7 +89,7 @@ class YaruBanner extends StatelessWidget {
                 ],
               )
             : _Banner(
-                subtitleWidget: subtitleWidget,
+                subtitleWidget: subtitle,
                 width: bannerWidth,
                 borderRadius: borderRadius,
                 color: light
@@ -102,7 +98,6 @@ class YaruBanner extends StatelessWidget {
                 elevation: light ? 2 : 1,
                 icon: icon,
                 title: name,
-                summary: summary,
                 titleTextOverflow: nameTextOverflow ?? TextOverflow.ellipsis,
                 subTitleTextOverflow:
                     summaryTextOverflow ?? TextOverflow.ellipsis,
@@ -117,7 +112,6 @@ class _Banner extends StatelessWidget {
   const _Banner({
     required this.color,
     required this.title,
-    this.summary,
     required this.elevation,
     required this.icon,
     required this.borderRadius,
@@ -129,8 +123,7 @@ class _Banner extends StatelessWidget {
   });
 
   final Color color;
-  final String title;
-  final String? summary;
+  final Widget title;
   final double elevation;
   final Widget icon;
   final BorderRadius borderRadius;
@@ -157,12 +150,17 @@ class _Banner extends StatelessWidget {
           width: width ?? 370,
           child: ListTile(
             mouseCursor: mouseCursor,
-            subtitle: subtitleWidget ??
-                (summary != null
-                    ? Text(summary!, overflow: subTitleTextOverflow)
-                    : null),
-            title: Text(
-              title,
+            subtitle: subtitleWidget != null
+                ? DefaultTextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).textTheme.bodySmall!.color,
+                          overflow: subTitleTextOverflow,
+                        ),
+                    child: subtitleWidget!,
+                  )
+                : null,
+            title: DefaultTextStyle(
+              child: title,
               style: TextStyle(fontSize: 20, overflow: titleTextOverflow),
             ),
             leading: SizedBox(

@@ -13,8 +13,8 @@ class YaruSection extends StatelessWidget {
     this.padding = const EdgeInsets.only(bottom: 20.0),
   });
 
-  /// Text that is placed above the list of `children`.
-  final String? headline;
+  /// Widget that is placed above the list of `children`.
+  final Widget? headline;
 
   ///  Creates a vertical list of widgets.
   ///  All children will be of type [Widget],
@@ -59,10 +59,10 @@ class YaruSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       if (headline != null)
-                        Text(
-                          headline!,
-                          style: Theme.of(context).textTheme.titleLarge,
+                        DefaultTextStyle(
+                          style: Theme.of(context).textTheme.titleLarge!,
                           textAlign: TextAlign.left,
+                          child: headline!,
                         ),
                       headerWidget ?? const SizedBox()
                     ],

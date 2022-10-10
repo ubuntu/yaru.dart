@@ -31,8 +31,8 @@ class _TabbedPagePageState extends State<TabbedPagePage> {
           children: [
             for (int i = 0; i < 20; i++)
               YaruBanner(
-                name: 'YaruBanner $i',
-                summary: 'Description',
+                name: Text('YaruBanner $i'),
+                subtitle: const Text('Description'),
                 icon: Image.asset('assets/ubuntuhero.jpg'),
                 onTap: () => showAboutDialog(context: context),
               )
@@ -49,7 +49,7 @@ class _TabbedPagePageState extends State<TabbedPagePage> {
         YaruIcons.audio,
         YaruIcons.address_book,
         YaruIcons.television
-      ],
+      ].map(Icon.new).toList(),
       tabTitles: const [
         'Addons',
         'Accessibility',

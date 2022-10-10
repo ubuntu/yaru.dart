@@ -42,7 +42,7 @@ class DummySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruSection(
-      headline: 'Headline',
+      headline: const Text('Headline'),
       headerWidget: const SizedBox(
         child: YaruCircularProgressIndicator(strokeWidth: 3),
         height: 20,
