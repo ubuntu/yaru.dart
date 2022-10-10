@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'yaru_landscape_layout.dart';
+import 'yaru_master_detail_theme.dart';
 import 'yaru_portrait_layout.dart';
 
 typedef YaruMasterDetailBuilder = Widget Function(
@@ -96,9 +97,11 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final breakpoint = YaruMasterDetailTheme.of(context).breakpoint ??
+        YaruMasterDetailThemeData.fallback().breakpoint!;
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (constraints.maxWidth < 620) {
+        if (constraints.maxWidth < breakpoint) {
           return YaruPortraitLayout(
             length: widget.length,
             selectedIndex: _index,
