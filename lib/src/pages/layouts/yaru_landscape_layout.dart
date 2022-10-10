@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
 
 import 'yaru_master_detail_page.dart';
+import 'yaru_master_detail_theme.dart';
 import 'yaru_page_item_list_view.dart';
 
 class YaruLandscapeLayout extends StatefulWidget {
@@ -63,6 +63,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruMasterDetailTheme.of(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -90,7 +91,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
         Expanded(
           child: Theme(
             data: Theme.of(context).copyWith(
-              pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+              pageTransitionsTheme: theme.landscapeTransitions,
             ),
             child: Navigator(
               pages: [

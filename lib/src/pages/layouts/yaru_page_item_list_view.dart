@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'yaru_master_detail_page.dart';
+import 'yaru_master_detail_theme.dart';
 import 'yaru_master_tile.dart';
 
 class YaruPageItemListView extends StatelessWidget {
@@ -21,10 +22,10 @@ class YaruPageItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruMasterDetailTheme.of(context);
     return ListView.separated(
-      separatorBuilder: (_, __) => const SizedBox(height: 6.0),
-      padding:
-          !materialTiles ? const EdgeInsets.symmetric(vertical: 8.0) : null,
+      separatorBuilder: (_, __) => SizedBox(height: theme.tileSpacing ?? 0),
+      padding: theme.listPadding,
       controller: ScrollController(),
       itemCount: length,
       itemBuilder: (context, index) => YaruMasterTileScope(

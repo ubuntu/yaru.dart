@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
-import 'yaru_page_item_title.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
@@ -50,8 +49,8 @@ class YaruMasterTile extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),
           ),
           leading: leading,
-          title: _buildTitle(),
-          subtitle: subtitle,
+          title: _buildChild(title),
+          subtitle: _buildChild(subtitle),
           trailing: trailing,
           selected: isSelected,
           onTap: () {
@@ -64,20 +63,16 @@ class YaruMasterTile extends StatelessWidget {
     );
   }
 
-  Widget? _buildTitle() {
-    if (title == null) {
-      return title;
+  Widget? _buildChild(Widget? child) {
+    if (child == null) {
+      return child;
     }
 
-    if (title is YaruPageItemTitle) {
-      return DefaultTextStyle.merge(
-        child: title!,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      );
-    }
-
-    return title;
+    return DefaultTextStyle.merge(
+      child: child,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+    );
   }
 
   double _calcScrollbarThicknessWithTrack(final BuildContext context) {
