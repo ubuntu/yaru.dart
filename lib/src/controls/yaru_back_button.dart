@@ -15,17 +15,18 @@ class YaruBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: YaruIconButton(
-        icon: const Icon(YaruIcons.go_previous),
-        onPressed: () {
-          if (onPressed != null) {
-            onPressed!();
-          } else {
-            Navigator.maybePop(context);
-          }
-        },
+    return YaruIconButton(
+      icon: const Icon(YaruIcons.go_previous),
+      style: ButtonStyle(
+        shape: ButtonStyleButton.allOrNull(const BeveledRectangleBorder()),
       ),
+      onPressed: () {
+        if (onPressed != null) {
+          onPressed!();
+        } else {
+          Navigator.maybePop(context);
+        }
+      },
     );
   }
 }
