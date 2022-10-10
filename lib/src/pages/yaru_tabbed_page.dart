@@ -21,8 +21,8 @@ class YaruTabbedPage extends StatefulWidget {
     this.onTap,
   });
 
-  /// A list of [Icon]s used inside the tabs - must have the same length as [tabTitles] and [views].
-  final List<Icon> tabIcons;
+  /// A list of [Widget]s used inside the tabs - must have the same length as [tabTitles] and [views].
+  final List<Widget> tabIcons;
 
   /// The list of titles as [String]s - must have the same length as [tabIcons] and [views].
   final List<String> tabTitles;
