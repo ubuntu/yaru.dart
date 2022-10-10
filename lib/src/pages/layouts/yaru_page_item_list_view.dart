@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_master_tile.dart';
 
-const double _kScrollbarThickness = 8.0;
-const double _kScrollbarMargin = 2.0;
-
 class YaruPageItemListView extends StatelessWidget {
   const YaruPageItemListView({
     super.key,
@@ -24,17 +21,10 @@ class YaruPageItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollbarThicknessWithTrack =
-        _calcScrollbarThicknessWithTrack(context);
-
     return ListView.separated(
       separatorBuilder: (_, __) => const SizedBox(height: 6.0),
-      padding: !materialTiles
-          ? EdgeInsets.symmetric(
-              horizontal: scrollbarThicknessWithTrack,
-              vertical: 8.0,
-            )
-          : null,
+      padding:
+          !materialTiles ? const EdgeInsets.symmetric(vertical: 8.0) : null,
       controller: ScrollController(),
       itemCount: length,
       itemBuilder: (context, index) => YaruMasterTileScope(
@@ -46,19 +36,5 @@ class YaruPageItemListView extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  double _calcScrollbarThicknessWithTrack(final BuildContext context) {
-    final scrollbarTheme = Theme.of(context).scrollbarTheme;
-
-    final doubleMarginWidth = scrollbarTheme.crossAxisMargin != null
-        ? scrollbarTheme.crossAxisMargin! * 2
-        : _kScrollbarMargin * 2;
-
-    final scrollBarThumbThikness =
-        scrollbarTheme.thickness?.resolve({MaterialState.hovered}) ??
-            _kScrollbarThickness;
-
-    return doubleMarginWidth + scrollBarThumbThikness;
   }
 }
