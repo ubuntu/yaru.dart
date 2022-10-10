@@ -83,11 +83,13 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildLeftPane(),
-          Stack(
-            children: [
-              _buildPage(context),
-              _buildLeftPaneResizer(context),
-            ],
+          Expanded(
+            child: Stack(
+              children: [
+                _buildPage(context),
+                _buildLeftPaneResizer(context),
+              ],
+            ),
           ),
         ],
       ),
@@ -98,7 +100,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   Widget _buildLeftPane() {
     return Container(
-      width: widget.leftPaneWidth,
+      width: _leftPaneWidth,
       decoration: BoxDecoration(
         border: Border(
           right: BorderSide(
@@ -120,23 +122,21 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Widget _buildPage(BuildContext context) {
-    return Expanded(
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
-        ),
-        child: Navigator(
-          pages: [
-            MaterialPage(
-              key: ValueKey(_selectedIndex),
-              child: widget.length > _selectedIndex
-                  ? widget.pageBuilder(context, _selectedIndex)
-                  : widget.pageBuilder(context, 0),
-            ),
-          ],
-          onPopPage: (route, result) => route.didPop(result),
-          observers: [HeroController()],
-        ),
+    return Theme(
+      data: Theme.of(context).copyWith(
+        pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+      ),
+      child: Navigator(
+        pages: [
+          MaterialPage(
+            key: ValueKey(_selectedIndex),
+            child: widget.length > _selectedIndex
+                ? widget.pageBuilder(context, _selectedIndex)
+                : widget.pageBuilder(context, 0),
+          ),
+        ],
+        onPopPage: (route, result) => route.didPop(result),
+        observers: [HeroController()],
       ),
     );
   }
