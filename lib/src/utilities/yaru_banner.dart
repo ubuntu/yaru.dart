@@ -13,14 +13,14 @@ class YaruBanner extends StatelessWidget {
     this.nameTextOverflow,
     this.summaryTextOverflow,
     this.bannerWidth,
-    this.subtitleWidget,
+    this.subtitle,
   });
 
   /// The name of the card
   final Widget name;
 
   /// The subtitle shown in the second line.
-  final Widget? subtitleWidget;
+  final Widget? subtitle;
 
   /// An optional callback
   final Function()? onTap;
@@ -58,7 +58,7 @@ class YaruBanner extends StatelessWidget {
             ? Stack(
                 children: [
                   _Banner(
-                    subtitleWidget: subtitleWidget,
+                    subtitleWidget: subtitle,
                     width: bannerWidth,
                     borderRadius: borderRadius,
                     color: surfaceTintColor!,
@@ -89,7 +89,7 @@ class YaruBanner extends StatelessWidget {
                 ],
               )
             : _Banner(
-                subtitleWidget: subtitleWidget,
+                subtitleWidget: subtitle,
                 width: bannerWidth,
                 borderRadius: borderRadius,
                 color: light
