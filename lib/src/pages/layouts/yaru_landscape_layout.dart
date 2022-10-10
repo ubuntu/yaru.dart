@@ -47,12 +47,23 @@ class YaruLandscapeLayout extends StatefulWidget {
   State<YaruLandscapeLayout> createState() => _YaruLandscapeLayoutState();
 }
 
+const _kLeftPaneResizingRegionWidth = 4.0;
+const _kLeftPaneResizingRegionAnimationDuration = Duration(milliseconds: 250);
+
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
+  late double _leftPaneWidth;
+
+  double _initialPaneWidth = 0.0;
+  double _paneWidthMove = 0.0;
+
+  bool _isDragging = false;
+  bool _isHovering = false;
 
   @override
   void initState() {
     _selectedIndex = widget.selectedIndex;
+    _leftPaneWidth = widget.leftPaneWidth;
     super.initState();
   }
 
@@ -63,79 +74,140 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return MouseRegion(
+      cursor: _isHovering || _isDragging
+          ? SystemMouseCursors.resizeColumn
+          : MouseCursor.defer,
+      child: Scaffold(
+        body: Column(
+          children: [
+            _buildToolbar(context),
+            Expanded(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildLeftPane(),
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        _buildPage(context),
+                        _buildLeftPaneResizer(context),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Color get _separatorColor => Colors.black.withOpacity(.1);
+
+  Widget _buildToolbar(BuildContext context) {
+    return SizedBox(
+      height: widget.appBar != null
+          ? Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight
+          : 0,
+      child: Row(
         children: [
           SizedBox(
-            height: widget.appBar != null
-                ? Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight
-                : 0,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: widget.leftPaneWidth,
-                  child: widget.appBar,
-                ),
-                if (widget.appBar != null)
-                  Expanded(
-                    child: AppBar(
-                      title: widget.titleBuilder(
-                        context,
-                        widget.length > _selectedIndex ? _selectedIndex : 0,
-                        false,
-                      ),
-                    ),
-                  )
-              ],
-            ),
+            width: _leftPaneWidth,
+            child: widget.appBar,
           ),
-          Expanded(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  width: widget.leftPaneWidth,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                        right: BorderSide(
-                          width: 1,
-                          color: Colors.black.withOpacity(0.1),
-                        ),
-                      ),
-                    ),
-                    child: YaruPageItemListView(
-                      length: widget.length,
-                      selectedIndex: _selectedIndex,
-                      onTap: _onTap,
-                      builder: widget.tileBuilder,
-                    ),
-                  ),
+          if (widget.appBar != null)
+            Expanded(
+              child: AppBar(
+                title: widget.titleBuilder(
+                  context,
+                  widget.length > _selectedIndex ? _selectedIndex : 0,
+                  false,
                 ),
-                Expanded(
-                  child: Theme(
-                    data: Theme.of(context).copyWith(
-                      pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
-                    ),
-                    child: Navigator(
-                      pages: [
-                        MaterialPage(
-                          key: ValueKey(_selectedIndex),
-                          child: widget.length > _selectedIndex
-                              ? widget.pageBuilder(context, _selectedIndex)
-                              : widget.pageBuilder(context, 0),
-                        ),
-                      ],
-                      onPopPage: (route, result) => route.didPop(result),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
+            )
         ],
       ),
+    );
+  }
+
+  Widget _buildLeftPane() {
+    return SizedBox(
+      width: _leftPaneWidth,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            right: BorderSide(
+              width: 1,
+              color: _separatorColor,
+            ),
+          ),
+        ),
+        child: YaruPageItemListView(
+          length: widget.length,
+          selectedIndex: _selectedIndex,
+          onTap: _onTap,
+          builder: widget.tileBuilder,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPage(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+      ),
+      child: Navigator(
+        pages: [
+          MaterialPage(
+            key: ValueKey(_selectedIndex),
+            child: widget.length > _selectedIndex
+                ? widget.pageBuilder(context, _selectedIndex)
+                : widget.pageBuilder(context, 0),
+          ),
+        ],
+        onPopPage: (route, result) => route.didPop(result),
+      ),
+    );
+  }
+
+  Widget _buildLeftPaneResizer(BuildContext context) {
+    return Positioned(
+      child: AnimatedContainer(
+        duration: _kLeftPaneResizingRegionAnimationDuration,
+        color:
+            _isHovering || _isDragging ? _separatorColor : Colors.transparent,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.resizeColumn,
+          onEnter: (event) => setState(() {
+            _isHovering = true;
+          }),
+          onExit: (event) => setState(() {
+            _isHovering = false;
+          }),
+          child: GestureDetector(
+            onPanStart: (details) => setState(() {
+              _isDragging = true;
+              _initialPaneWidth = _leftPaneWidth;
+            }),
+            onPanUpdate: (details) => setState(() {
+              _paneWidthMove += details.delta.dx;
+              _leftPaneWidth = _initialPaneWidth + _paneWidthMove;
+            }),
+            onPanEnd: (details) => setState(() {
+              _isDragging = false;
+              _paneWidthMove = 0.0;
+            }),
+          ),
+        ),
+      ),
+      height: MediaQuery.of(context).size.height,
+      width: _kLeftPaneResizingRegionWidth,
+      top: 0,
+      left: 0,
     );
   }
 }
