@@ -30,7 +30,6 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.tileBuilder,
     required this.titleBuilder,
     required this.pageBuilder,
-    this.previousIconData,
     required this.leftPaneWidth,
     this.appBar,
     this.initialIndex,
@@ -41,19 +40,22 @@ class YaruMasterDetailPage extends StatefulWidget {
   final int length;
 
   /// A builder that is called for each page to build its master tile.
+  ///
+  /// See also:
+  ///  * [YaruMasterTile]
   final YaruMasterDetailBuilder tileBuilder;
 
   /// A builder that is called for each page to build its title.
   final YaruMasterDetailBuilder titleBuilder;
 
   /// A builder that is called for each page to build its detail page.
+  ///
+  /// See also:
+  ///  * [YaruDetailPage]
   final IndexedWidgetBuilder pageBuilder;
 
   /// Specifies the width of left pane.
   final double leftPaneWidth;
-
-  /// Property to specify the previous icon data
-  final IconData? previousIconData;
 
   /// An optional custom AppBar for the left pane.
   final PreferredSizeWidget? appBar;
@@ -104,7 +106,6 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             titleBuilder: widget.titleBuilder,
             pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
-            previousIconData: widget.previousIconData,
             appBar: widget.appBar,
           );
         } else {

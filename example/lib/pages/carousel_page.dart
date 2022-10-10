@@ -18,7 +18,7 @@ class _CarouselPageState extends State<CarouselPage> {
       padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
         YaruSection(
-          headline: 'Auto scroll: off',
+          headline: const Text('Auto scroll: off'),
           width: 700,
           children: [
             YaruCarousel(
@@ -34,7 +34,7 @@ class _CarouselPageState extends State<CarouselPage> {
           ],
         ),
         YaruSection(
-          headline: 'Auto scroll: on',
+          headline: const Text('Auto scroll: on'),
           width: 700,
           children: [
             YaruCarousel(

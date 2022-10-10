@@ -3,6 +3,7 @@ library yaru_widgets;
 // Constants
 export 'src/constants.dart';
 // Controls
+export 'src/controls/yaru_back_button.dart';
 export 'src/controls/yaru_color_disk.dart';
 export 'src/controls/yaru_icon_button.dart';
 export 'src/controls/yaru_option_button.dart';
@@ -16,6 +17,7 @@ export 'src/dialogs/yaru_simple_dialog.dart';
 export 'src/extensions/border_radius_extension.dart';
 // Pages layouts
 export 'src/pages/layouts/yaru_compact_layout.dart';
+export 'src/pages/layouts/yaru_detail_page.dart';
 export 'src/pages/layouts/yaru_master_detail_page.dart';
 export 'src/pages/layouts/yaru_master_tile.dart';
 export 'src/pages/layouts/yaru_navigation_rail.dart';

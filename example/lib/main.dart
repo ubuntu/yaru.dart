@@ -63,7 +63,6 @@ class _HomeState extends State<Home> {
           ? _CompactPage(configItem: configItem)
           : YaruMasterDetailPage(
               leftPaneWidth: 280,
-              previousIconData: YaruIcons.go_previous,
               length: pageItems.length,
               tileBuilder: (context, index, selected) => YaruMasterTile(
                 leading: pageItems[index].iconBuilder(context, selected),
@@ -71,8 +70,15 @@ class _HomeState extends State<Home> {
               ),
               titleBuilder: (context, index, selected) =>
                   pageItems[index].titleBuilder(context),
-              pageBuilder: (context, index) =>
-                  pageItems[index].pageBuilder(context),
+              pageBuilder: (context, index) => YaruDetailPage(
+                appBar: AppBar(
+                  leading: Navigator.of(context).canPop()
+                      ? const YaruBackButton()
+                      : null,
+                  title: pageItems[index].titleBuilder(context),
+                ),
+                body: pageItems[index].pageBuilder(context),
+              ),
               appBar: AppBar(
                 title: const Text('Example'),
               ),

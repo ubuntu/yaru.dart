@@ -78,74 +78,38 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       cursor: _isHovering || _isDragging
           ? SystemMouseCursors.resizeColumn
           : MouseCursor.defer,
-      child: Scaffold(
-        body: Column(
-          children: [
-            _buildToolbar(context),
-            Expanded(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _buildLeftPane(),
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        _buildPage(context),
-                        _buildLeftPaneResizer(context),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Color get _separatorColor => Colors.black.withOpacity(.1);
-
-  Widget _buildToolbar(BuildContext context) {
-    return SizedBox(
-      height: widget.appBar != null
-          ? Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight
-          : 0,
       child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
-            width: _leftPaneWidth,
-            child: widget.appBar,
+          _buildLeftPane(),
+          Stack(
+            children: [
+              _buildPage(context),
+              _buildLeftPaneResizer(context),
+            ],
           ),
-          if (widget.appBar != null)
-            Expanded(
-              child: AppBar(
-                title: widget.titleBuilder(
-                  context,
-                  widget.length > _selectedIndex ? _selectedIndex : 0,
-                  false,
-                ),
-              ),
-            )
         ],
       ),
     );
   }
 
+  Color get _separatorColor => Colors.black.withOpacity(0.1);
+
   Widget _buildLeftPane() {
-    return SizedBox(
-      width: _leftPaneWidth,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            right: BorderSide(
-              width: 1,
-              color: _separatorColor,
-            ),
+    return Container(
+      width: widget.leftPaneWidth,
+      decoration: BoxDecoration(
+        border: Border(
+          right: BorderSide(
+            width: 1,
+            color: _separatorColor,
           ),
         ),
-        child: YaruPageItemListView(
+      ),
+      child: Scaffold(
+        appBar: widget.appBar,
+        body: YaruPageItemListView(
           length: widget.length,
           selectedIndex: _selectedIndex,
           onTap: _onTap,
@@ -156,20 +120,23 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Widget _buildPage(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
-      ),
-      child: Navigator(
-        pages: [
-          MaterialPage(
-            key: ValueKey(_selectedIndex),
-            child: widget.length > _selectedIndex
-                ? widget.pageBuilder(context, _selectedIndex)
-                : widget.pageBuilder(context, 0),
-          ),
-        ],
-        onPopPage: (route, result) => route.didPop(result),
+    return Expanded(
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+        ),
+        child: Navigator(
+          pages: [
+            MaterialPage(
+              key: ValueKey(_selectedIndex),
+              child: widget.length > _selectedIndex
+                  ? widget.pageBuilder(context, _selectedIndex)
+                  : widget.pageBuilder(context, 0),
+            ),
+          ],
+          onPopPage: (route, result) => route.didPop(result),
+          observers: [HeroController()],
+        ),
       ),
     );
   }
