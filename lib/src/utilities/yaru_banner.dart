@@ -161,7 +161,10 @@ class _Banner extends StatelessWidget {
                 : null,
             title: DefaultTextStyle(
               child: title,
-              style: TextStyle(fontSize: 20, overflow: titleTextOverflow),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge!
+                  .copyWith(fontSize: 20, overflow: titleTextOverflow),
             ),
             leading: SizedBox(
               width: 60,

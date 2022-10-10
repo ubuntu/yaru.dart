@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
 
 import 'yaru_master_detail_page.dart';
+import 'yaru_master_detail_theme.dart';
 import 'yaru_page_item_list_view.dart';
 
 class YaruPortraitLayout extends StatefulWidget {
@@ -55,11 +55,12 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruMasterDetailTheme.of(context);
     return WillPopScope(
       onWillPop: () async => !await _navigator.maybePop(),
       child: Theme(
         data: Theme.of(context).copyWith(
-          pageTransitionsTheme: YaruPageTransitionsTheme.horizontal,
+          pageTransitionsTheme: theme.portraitTransitions,
         ),
         child: Navigator(
           key: _navigatorKey,
