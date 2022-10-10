@@ -92,10 +92,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     // Avoid left pane to overflow when resizing the window
     if (widget.leftPaneResizing &&
         _leftPaneWidth >= width - widget.pageMinWidth) {
-      setState(() {
-        _leftPaneWidth = width - widget.pageMinWidth;
-        widget.onLeftPaneWidthChange?.call(_leftPaneWidth);
-      });
+      _leftPaneWidth = width - widget.pageMinWidth;
+      widget.onLeftPaneWidthChange?.call(_leftPaneWidth);
     }
   }
 
