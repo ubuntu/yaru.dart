@@ -15,7 +15,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.pageBuilder,
     required this.onSelected,
     required this.leftPaneWidth,
-    required this.leftPaneResizing,
+    required this.allowLeftPaneResize,
     required this.leftPaneMinWidth,
     required this.pageMinWidth,
     this.onLeftPaneWidthChange,
@@ -44,15 +44,15 @@ class YaruLandscapeLayout extends StatefulWidget {
   final double leftPaneWidth;
 
   /// If true, allow the left pane to be resized.
-  final bool leftPaneResizing;
+  final bool allowLeftPaneResize;
 
-  /// If [leftPaneResizing], specifies the min-width of the left pane.
+  /// If [allowLeftPaneResize], specifies the min-width of the left pane.
   final double leftPaneMinWidth;
 
-  /// If [leftPaneResizing], callback called when the left pane is resizing.
+  /// If [allowLeftPaneResize], callback called when the left pane is resizing.
   final Function(double)? onLeftPaneWidthChange;
 
-  /// If [leftPaneResizing], specifies the min-width of the page.
+  /// If [allowLeftPaneResize], specifies the min-width of the page.
   final double pageMinWidth;
 
   /// An optional [PreferredSizeWidget] used as the left [AppBar]
@@ -90,7 +90,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     final width = MediaQuery.of(context).size.width;
 
     // Avoid left pane to overflow when resizing the window
-    if (widget.leftPaneResizing &&
+    if (widget.allowLeftPaneResize &&
         _leftPaneWidth >= width - widget.pageMinWidth) {
       _leftPaneWidth = width - widget.pageMinWidth;
       widget.onLeftPaneWidthChange?.call(_leftPaneWidth);
@@ -111,7 +111,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
         children: [
           _buildLeftPane(),
           Expanded(
-            child: widget.leftPaneResizing
+            child: widget.allowLeftPaneResize
                 ? Stack(
                     children: [
                       _buildPage(context),
@@ -128,7 +128,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   Color get _separatorColor => Colors.black.withOpacity(0.1);
 
   Widget _maybeBuildGlobalMouseRegion(Widget child) {
-    if (widget.leftPaneResizing) {
+    if (widget.allowLeftPaneResize) {
       return MouseRegion(
         cursor: _isHovering || _isDragging
             ? SystemMouseCursors.resizeColumn

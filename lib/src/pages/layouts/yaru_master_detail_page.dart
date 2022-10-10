@@ -34,7 +34,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.titleBuilder,
     required this.pageBuilder,
     required this.leftPaneWidth,
-    this.leftPaneResizing = true,
+    this.allowLeftPaneResize = true,
     this.leftPaneMinWidth = 175.0,
     this.pageMinWidth = 310.0,
     this.appBar,
@@ -64,13 +64,13 @@ class YaruMasterDetailPage extends StatefulWidget {
   final double leftPaneWidth;
 
   /// If true, allow the left pane to be resized in landscape layout.
-  final bool leftPaneResizing;
+  final bool allowLeftPaneResize;
 
-  /// If [leftPaneResizing], specifies the min-width of the left pane.
+  /// If [allowLeftPaneResize], specifies the min-width of the left pane.
   /// Defaults to 175
   final double leftPaneMinWidth;
 
-  /// If [leftPaneResizing], specifies the min-width of the page.
+  /// If [allowLeftPaneResize], specifies the min-width of the page.
   /// Defaults to 310
   final double pageMinWidth;
 
@@ -139,7 +139,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
             leftPaneWidth: _leftPaneWidth,
-            leftPaneResizing: widget.leftPaneResizing,
+            allowLeftPaneResize: widget.allowLeftPaneResize,
             leftPaneMinWidth: widget.leftPaneMinWidth,
             pageMinWidth: widget.pageMinWidth,
             onLeftPaneWidthChange: (panWidth) => _leftPaneWidth = panWidth,
