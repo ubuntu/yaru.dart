@@ -63,79 +63,50 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: widget.appBar != null
-                ? Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight
-                : 0,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: widget.leftPaneWidth,
-                  child: widget.appBar,
-                ),
-                if (widget.appBar != null)
-                  Expanded(
-                    child: AppBar(
-                      title: widget.titleBuilder(
-                        context,
-                        widget.length > _selectedIndex ? _selectedIndex : 0,
-                        false,
-                      ),
-                    ),
-                  )
-              ],
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          width: widget.leftPaneWidth,
+          decoration: BoxDecoration(
+            border: Border(
+              right: BorderSide(
+                width: 1,
+                color: Colors.black.withOpacity(0.1),
+              ),
             ),
           ),
-          Expanded(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  width: widget.leftPaneWidth,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                        right: BorderSide(
-                          width: 1,
-                          color: Colors.black.withOpacity(0.1),
-                        ),
-                      ),
-                    ),
-                    child: YaruPageItemListView(
-                      length: widget.length,
-                      selectedIndex: _selectedIndex,
-                      onTap: _onTap,
-                      builder: widget.tileBuilder,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Theme(
-                    data: Theme.of(context).copyWith(
-                      pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
-                    ),
-                    child: Navigator(
-                      pages: [
-                        MaterialPage(
-                          key: ValueKey(_selectedIndex),
-                          child: widget.length > _selectedIndex
-                              ? widget.pageBuilder(context, _selectedIndex)
-                              : widget.pageBuilder(context, 0),
-                        ),
-                      ],
-                      onPopPage: (route, result) => route.didPop(result),
-                    ),
-                  ),
-                ),
-              ],
+          child: Scaffold(
+            appBar: widget.appBar,
+            body: YaruPageItemListView(
+              length: widget.length,
+              selectedIndex: _selectedIndex,
+              onTap: _onTap,
+              builder: widget.tileBuilder,
             ),
           ),
-        ],
-      ),
+        ),
+        Expanded(
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+            ),
+            child: Navigator(
+              pages: [
+                MaterialPage(
+                  key: ValueKey(_selectedIndex),
+                  child: widget.length > _selectedIndex
+                      ? widget.pageBuilder(context, _selectedIndex)
+                      : widget.pageBuilder(context, 0),
+                ),
+              ],
+              onPopPage: (route, result) => route.didPop(result),
+              observers: [HeroController()],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

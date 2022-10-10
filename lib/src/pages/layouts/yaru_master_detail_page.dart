@@ -40,12 +40,18 @@ class YaruMasterDetailPage extends StatefulWidget {
   final int length;
 
   /// A builder that is called for each page to build its master tile.
+  ///
+  /// See also:
+  ///  * [YaruMasterTile]
   final YaruMasterDetailBuilder tileBuilder;
 
   /// A builder that is called for each page to build its title.
   final YaruMasterDetailBuilder titleBuilder;
 
   /// A builder that is called for each page to build its detail page.
+  ///
+  /// See also:
+  ///  * [YaruDetailPage]
   final IndexedWidgetBuilder pageBuilder;
 
   /// Specifies the width of left pane.
