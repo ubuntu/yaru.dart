@@ -21,8 +21,8 @@ class YaruTabbedPage extends StatefulWidget {
     this.onTap,
   });
 
-  /// A list of [IconData] used inside the tabs - must have the same length as [tabTitles] and [views].
-  final List<IconData> tabIcons;
+  /// A list of [Icon]s used inside the tabs - must have the same length as [tabTitles] and [views].
+  final List<Icon> tabIcons;
 
   /// The list of titles as [String]s - must have the same length as [tabIcons] and [views].
   final List<String> tabTitles;
@@ -108,9 +108,7 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
                   for (var i = 0; i < widget.views.length; i++)
                     Tab(
                       text: titlesDoNotFit() ? null : widget.tabTitles[i],
-                      icon: Icon(
-                        widget.tabIcons[i],
-                      ),
+                      icon: widget.tabIcons[i],
                     )
                 ],
               ),
