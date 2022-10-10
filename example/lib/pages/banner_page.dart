@@ -18,8 +18,8 @@ class BannerPage extends StatelessWidget {
       children: [
         for (int i = 0; i < 20; i++)
           YaruBanner(
-            name: 'YaruBanner $i',
-            summary: 'Description',
+            name: Text('YaruBanner $i'),
+            subtitleWidget: const Text('Description'),
             icon: Image.asset('assets/ubuntuhero.jpg'),
             onTap: () => showAboutDialog(context: context),
           )
