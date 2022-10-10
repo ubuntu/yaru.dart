@@ -15,6 +15,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.pageBuilder,
     required this.onSelected,
     required this.leftPaneWidth,
+    required this.leftPaneMinWidth,
     this.appBar,
   });
 
@@ -36,8 +37,11 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
 
-  /// Specifies the width of left pane.
+  /// Specifies the initial width of left pane.
   final double leftPaneWidth;
+
+  /// Specifies the min-width of left pane.
+  final double leftPaneMinWidth;
 
   /// An optional [PreferredSizeWidget] used as the left [AppBar]
   /// If provided, a second [AppBar] will be created right to it.
@@ -162,7 +166,11 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             }),
             onPanUpdate: (details) => setState(() {
               _paneWidthMove += details.delta.dx;
-              _leftPaneWidth = _initialPaneWidth + _paneWidthMove;
+              final width = _initialPaneWidth + _paneWidthMove;
+
+              _leftPaneWidth = width >= widget.leftPaneMinWidth
+                  ? width
+                  : widget.leftPaneMinWidth;
             }),
             onPanEnd: (details) => setState(() {
               _isDragging = false;
