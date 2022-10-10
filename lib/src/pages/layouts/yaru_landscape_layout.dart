@@ -105,22 +105,24 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   @override
   Widget build(BuildContext context) {
     return _maybeBuildGlobalMouseRegion(
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _buildLeftPane(),
-          Expanded(
-            child: widget.allowLeftPaneResize
-                ? Stack(
-                    children: [
-                      _buildPage(context),
-                      _buildLeftPaneResizer(context),
-                    ],
-                  )
-                : _buildPage(context),
-          ),
-        ],
+      LayoutBuilder(
+        builder: (context, boxConstraints) => Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _buildLeftPane(),
+            Expanded(
+              child: widget.allowLeftPaneResize
+                  ? Stack(
+                      children: [
+                        _buildPage(context),
+                        _buildLeftPaneResizer(context, boxConstraints),
+                      ],
+                    )
+                  : _buildPage(context),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -185,7 +187,10 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     );
   }
 
-  Widget _buildLeftPaneResizer(BuildContext context) {
+  Widget _buildLeftPaneResizer(
+    BuildContext context,
+    BoxConstraints boxConstraints,
+  ) {
     return Positioned(
       child: AnimatedContainer(
         duration: _kLeftPaneResizingRegionAnimationDuration,
@@ -207,12 +212,12 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             onPanUpdate: (details) => setState(() {
               _paneWidthMove += details.delta.dx;
               final width = _initialPaneWidth + _paneWidthMove;
+              final maxWidth = boxConstraints.maxWidth - widget.pageMinWidth;
 
               final previousPaneWidth = _leftPaneWidth;
-              final contextWidth = MediaQuery.of(context).size.width;
 
-              if (width >= contextWidth - widget.pageMinWidth) {
-                _leftPaneWidth = contextWidth - widget.pageMinWidth;
+              if (width >= maxWidth) {
+                _leftPaneWidth = maxWidth;
               } else if (width < widget.leftPaneMinWidth) {
                 _leftPaneWidth = widget.leftPaneMinWidth;
               } else {
