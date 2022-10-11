@@ -6,9 +6,9 @@ import 'pages/carousel_page.dart';
 import 'pages/color_disk_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
+import 'pages/icon_button_page.dart';
 import 'pages/option_button_page.dart';
 import 'pages/progress_indicator_page.dart';
-import 'pages/round_toggle_button_page.dart';
 import 'pages/section_page.dart';
 import 'pages/selectable_container_page.dart';
 import 'pages/tabbed_page_page.dart';
@@ -55,6 +55,11 @@ final examplePageItems = <PageItem>[
     pageBuilder: (_) => const ExpandablePage(),
   ),
   PageItem(
+    titleBuilder: (context) => YaruPageItemTitle.text('YaruIconButton'),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.app_grid),
+    pageBuilder: (_) => const IconButtonPage(),
+  ),
+  PageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruOptionButton'),
     iconBuilder: (context, selected) => const Icon(YaruIcons.settings),
     pageBuilder: (_) => const OptionButtonPage(),
@@ -63,11 +68,6 @@ final examplePageItems = <PageItem>[
     titleBuilder: (context) => YaruPageItemTitle.text('YaruProgressIndicator'),
     iconBuilder: (context, selected) => const Icon(YaruIcons.download),
     pageBuilder: (_) => const ProgressIndicatorPage(),
-  ),
-  PageItem(
-    titleBuilder: (context) => YaruPageItemTitle.text('YaruRoundToggleButton'),
-    pageBuilder: (context) => const RoundToggleButtonPage(),
-    iconBuilder: (context, selected) => const Icon(YaruIcons.app_grid),
   ),
   PageItem(
     titleBuilder: (context) => YaruPageItemTitle.text('YaruSection'),
