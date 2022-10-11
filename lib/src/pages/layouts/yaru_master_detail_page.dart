@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../constants.dart';
+import 'yaru_detail_page.dart';
 import 'yaru_landscape_layout.dart';
 import 'yaru_master_detail_theme.dart';
+import 'yaru_master_tile.dart';
 import 'yaru_portrait_layout.dart';
 
 typedef YaruMasterDetailBuilder = Widget Function(
@@ -13,7 +16,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// Creates a basic responsive layout with yaru theme,
   /// renders layout based on [width] constrain.
   ///
-  /// * if [constraints.maxWidth] < 620 the widget will render [YaruPotraitLayout]
+  /// * if [constraints.maxWidth] < 620 the widget will render [YaruPortraitLayout]
   /// * if [constraints.maxWidth] > 620 widget will render [YaruLandscapeLayout]
   ///
   /// for example:
@@ -32,6 +35,9 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.titleBuilder,
     required this.pageBuilder,
     required this.leftPaneWidth,
+    this.allowLeftPaneResize = true,
+    this.leftPaneMinWidth = 175.0,
+    this.pageMinWidth = kYaruMasterDetailBreakpoint / 2,
     this.appBar,
     this.initialIndex,
     this.onSelected,
@@ -55,8 +61,19 @@ class YaruMasterDetailPage extends StatefulWidget {
   ///  * [YaruDetailPage]
   final IndexedWidgetBuilder pageBuilder;
 
-  /// Specifies the width of left pane.
+  /// Specifies the initial width of left pane.
   final double leftPaneWidth;
+
+  /// If true, allow the left pane to be resized in landscape layout.
+  final bool allowLeftPaneResize;
+
+  /// If [allowLeftPaneResize], specifies the min-width of the left pane.
+  /// Defaults to 175
+  final double leftPaneMinWidth;
+
+  /// If [allowLeftPaneResize], specifies the min-width of the page.
+  /// Defaults to 310
+  final double pageMinWidth;
 
   /// An optional custom AppBar for the left pane.
   final PreferredSizeWidget? appBar;
@@ -75,6 +92,8 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   var _index = -1;
   var _previousIndex = 0;
 
+  late double _leftPaneWidth;
+
   void _setIndex(int index) {
     _previousIndex = _index;
     _index = index;
@@ -85,6 +104,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   void initState() {
     super.initState();
     _index = widget.initialIndex ?? -1;
+    _leftPaneWidth = widget.leftPaneWidth;
   }
 
   @override
@@ -119,7 +139,11 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             titleBuilder: widget.titleBuilder,
             pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
-            leftPaneWidth: widget.leftPaneWidth,
+            leftPaneWidth: _leftPaneWidth,
+            allowLeftPaneResize: widget.allowLeftPaneResize,
+            leftPaneMinWidth: widget.leftPaneMinWidth,
+            pageMinWidth: widget.pageMinWidth,
+            onLeftPaneWidthChange: (panWidth) => _leftPaneWidth = panWidth,
             appBar: widget.appBar,
           );
         }
