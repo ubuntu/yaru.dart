@@ -83,10 +83,18 @@ Icon preview | Icon name | Usage
 ![download_history](../icons/download/history.svg) | download history | `YaruIcons.download_history`
 ![download](../icons/download/_.svg) | download | `YaruIcons.download`
 ![drag_handle](../icons/drag-handle.svg) | drag handle | `YaruIcons.drag_handle`
+![drive_harddisk_broken_filled](../icons/drive/harddisk-broken-filled.svg) | drive harddisk broken filled | `YaruIcons.drive_harddisk_broken_filled`
+![drive_harddisk_broken](../icons/drive/harddisk-broken.svg) | drive harddisk broken | `YaruIcons.drive_harddisk_broken`
+![drive_harddisk_disabled_filled](../icons/drive/harddisk-disabled-filled.svg) | drive harddisk disabled filled | `YaruIcons.drive_harddisk_disabled_filled`
+![drive_harddisk_disabled](../icons/drive/harddisk-disabled.svg) | drive harddisk disabled | `YaruIcons.drive_harddisk_disabled`
+![drive_harddisk_error_filled](../icons/drive/harddisk-error-filled.svg) | drive harddisk error filled | `YaruIcons.drive_harddisk_error_filled`
+![drive_harddisk_error](../icons/drive/harddisk-error.svg) | drive harddisk error | `YaruIcons.drive_harddisk_error`
 ![drive_harddisk_filled](../icons/drive/harddisk-filled.svg) | drive harddisk filled | `YaruIcons.drive_harddisk_filled`
 ![drive_harddisk](../icons/drive/harddisk.svg) | drive harddisk | `YaruIcons.drive_harddisk`
 ![drive_harddisk_usb_filled](../icons/drive/harddisk-usb-filled.svg) | drive harddisk usb filled | `YaruIcons.drive_harddisk_usb_filled`
 ![drive_harddisk_usb](../icons/drive/harddisk-usb.svg) | drive harddisk usb | `YaruIcons.drive_harddisk_usb`
+![drive_harddisk_warning_filled](../icons/drive/harddisk-warning-filled.svg) | drive harddisk warning filled | `YaruIcons.drive_harddisk_warning_filled`
+![drive_harddisk_warning](../icons/drive/harddisk-warning.svg) | drive harddisk warning | `YaruIcons.drive_harddisk_warning`
 ![drive_ieee1394_filled](../icons/drive/ieee1394-filled.svg) | drive ieee1394 filled | `YaruIcons.drive_ieee1394_filled`
 ![drive_ieee1394](../icons/drive/ieee1394.svg) | drive ieee1394 | `YaruIcons.drive_ieee1394`
 ![drive_multidisk_filled](../icons/drive/multidisk-filled.svg) | drive multidisk filled | `YaruIcons.drive_multidisk_filled`
