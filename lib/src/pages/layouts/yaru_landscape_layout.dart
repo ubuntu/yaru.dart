@@ -105,6 +105,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _buildLeftPane(),
+              _buildVerticalSeparator(),
               Expanded(
                 child: widget.allowLeftPaneResize
                     ? Stack(
@@ -138,16 +139,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Widget _buildLeftPane() {
-    return Container(
+    return SizedBox(
       width: _leftPaneWidth,
-      decoration: BoxDecoration(
-        border: Border(
-          right: BorderSide(
-            width: 1,
-            color: _separatorColor,
-          ),
-        ),
-      ),
       child: Scaffold(
         appBar: widget.appBar,
         body: YaruMasterListView(
@@ -157,6 +150,14 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           builder: widget.tileBuilder,
         ),
       ),
+    );
+  }
+
+  Widget _buildVerticalSeparator() {
+    return VerticalDivider(
+      thickness: 1,
+      width: 1,
+      color: _separatorColor,
     );
   }
 
@@ -186,6 +187,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     BuildContext context,
     BoxConstraints boxConstraints,
   ) {
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
+
     return Positioned(
       child: AnimatedContainer(
         duration: _kLeftPaneResizingRegionAnimationDuration,
@@ -205,7 +208,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
               _initialPaneWidth = _leftPaneWidth;
             }),
             onPanUpdate: (details) => setState(() {
-              _paneWidthMove += details.delta.dx;
+              _paneWidthMove += isRtl ? -details.delta.dx : details.delta.dx;
               final width = _initialPaneWidth + _paneWidthMove;
               final maxWidth = boxConstraints.maxWidth - widget.pageMinWidth;
 
@@ -233,7 +236,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       width: _kLeftPaneResizingRegionWidth,
       top: 0,
       bottom: 0,
-      left: 0,
+      left: isRtl ? null : 0,
+      right: isRtl ? 0 : null,
     );
   }
 }
