@@ -238,7 +238,7 @@ class _YaruNavigationRailItemState extends State<_YaruNavigationRailItem> {
         overflow: TextOverflow.ellipsis,
         softWrap: true,
         textAlign: widget.style == YaruNavigationRailStyle.labelledExtended
-            ? TextAlign.left
+            ? null
             : TextAlign.center,
         maxLines: 1,
       );
