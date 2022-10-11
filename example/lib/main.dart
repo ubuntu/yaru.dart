@@ -68,8 +68,6 @@ class _HomeState extends State<Home> {
                 leading: pageItems[index].iconBuilder(context, selected),
                 title: pageItems[index].titleBuilder(context),
               ),
-              titleBuilder: (context, index, selected) =>
-                  pageItems[index].titleBuilder(context),
               pageBuilder: (context, index) => YaruDetailPage(
                 appBar: AppBar(
                   leading: Navigator.of(context).canPop()
