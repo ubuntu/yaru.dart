@@ -86,25 +86,22 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   }
 
   Widget _buildNavigationRail(BuildContext context, BoxConstraints constraint) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        controller: _controller,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: constraint.maxHeight),
-          child: YaruNavigationRail(
-            style: widget.style,
-            selectedIndex: _index,
-            onDestinationSelected: (index) {
-              setState(() {
-                _index = index;
-                widget.onSelected?.call(index);
-              });
-            },
-            length: widget.length,
-            iconBuilder: widget.iconBuilder,
-            titleBuilder: widget.titleBuilder,
-          ),
+    return SingleChildScrollView(
+      controller: _controller,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: constraint.maxHeight),
+        child: YaruNavigationRail(
+          style: widget.style,
+          selectedIndex: _index,
+          onDestinationSelected: (index) {
+            setState(() {
+              _index = index;
+              widget.onSelected?.call(index);
+            });
+          },
+          length: widget.length,
+          iconBuilder: widget.iconBuilder,
+          titleBuilder: widget.titleBuilder,
         ),
       ),
     );
