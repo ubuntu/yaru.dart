@@ -23,7 +23,6 @@ export 'src/pages/layouts/yaru_master_detail_theme.dart';
 export 'src/pages/layouts/yaru_master_tile.dart';
 export 'src/pages/layouts/yaru_navigation_rail.dart';
 export 'src/pages/layouts/yaru_navigation_rail_item.dart';
-export 'src/pages/layouts/yaru_page_item_title.dart';
 // Pages
 export 'src/pages/yaru_section.dart';
 export 'src/pages/yaru_tabbed_page.dart';

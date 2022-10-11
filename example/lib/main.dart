@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final configItem = PageItem(
-      titleBuilder: (context) => YaruPageItemTitle.text('Layout'),
+      titleBuilder: (context) => const Text('Layout'),
       pageBuilder: (_) => ListView(
         padding: const EdgeInsets.all(kYaruPagePadding),
         children: [
