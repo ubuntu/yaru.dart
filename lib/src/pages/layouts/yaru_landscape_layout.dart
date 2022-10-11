@@ -83,20 +83,6 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     _leftPaneWidth = widget.leftPaneWidth;
   }
 
-  @override
-  void didUpdateWidget(covariant YaruLandscapeLayout oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    final width = MediaQuery.of(context).size.width;
-
-    // Avoid left pane to overflow when resizing the window
-    if (widget.allowLeftPaneResize &&
-        _leftPaneWidth >= width - widget.pageMinWidth) {
-      _leftPaneWidth = width - widget.pageMinWidth;
-      widget.onLeftPaneWidthChange?.call(_leftPaneWidth);
-    }
-  }
-
   void _onTap(int index) {
     widget.onSelected(index);
     setState(() => _selectedIndex = index);
@@ -106,23 +92,32 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   Widget build(BuildContext context) {
     return _maybeBuildGlobalMouseRegion(
       LayoutBuilder(
-        builder: (context, boxConstraints) => Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildLeftPane(),
-            Expanded(
-              child: widget.allowLeftPaneResize
-                  ? Stack(
-                      children: [
-                        _buildPage(context),
-                        _buildLeftPaneResizer(context, boxConstraints),
-                      ],
-                    )
-                  : _buildPage(context),
-            ),
-          ],
-        ),
+        builder: (context, boxConstraints) {
+          // Avoid left pane to overflow when resizing the window
+          if (widget.allowLeftPaneResize &&
+              _leftPaneWidth >= boxConstraints.maxWidth - widget.pageMinWidth) {
+            _leftPaneWidth = boxConstraints.maxWidth - widget.pageMinWidth;
+            widget.onLeftPaneWidthChange?.call(_leftPaneWidth);
+          }
+
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildLeftPane(),
+              Expanded(
+                child: widget.allowLeftPaneResize
+                    ? Stack(
+                        children: [
+                          _buildPage(context),
+                          _buildLeftPaneResizer(context, boxConstraints),
+                        ],
+                      )
+                    : _buildPage(context),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
