@@ -14,10 +14,8 @@ class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
     super.key,
     required this.length,
-    required this.iconBuilder,
-    required this.titleBuilder,
+    required this.itemBuilder,
     required this.pageBuilder,
-    this.style = YaruNavigationRailStyle.compact,
     this.initialIndex = 0,
     this.onSelected,
   });
@@ -25,17 +23,11 @@ class YaruCompactLayout extends StatefulWidget {
   /// The total number of pages.
   final int length;
 
-  /// A builder that is called for each page to build its icon.
-  final YaruCompactLayoutBuilder iconBuilder;
-
   /// A builder that is called for each page to build its title.
-  final YaruCompactLayoutBuilder titleBuilder;
+  final YaruCompactLayoutBuilder itemBuilder;
 
   /// A builder that is called for each page to build its content.
   final IndexedWidgetBuilder pageBuilder;
-
-  /// Define the navigation rail style, see [YaruNavigationRailStyle]
-  final YaruNavigationRailStyle style;
 
   /// The index of the [YaruPageItem] that is selected from [pageItems]
   final int initialIndex;
@@ -92,7 +84,6 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
       child: ConstrainedBox(
         constraints: BoxConstraints(minHeight: constraint.maxHeight),
         child: YaruNavigationRail(
-          style: widget.style,
           selectedIndex: _index,
           onDestinationSelected: (index) {
             setState(() {
@@ -101,8 +92,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
             });
           },
           length: widget.length,
-          iconBuilder: widget.iconBuilder,
-          titleBuilder: widget.titleBuilder,
+          itemBuilder: widget.itemBuilder,
         ),
       ),
     );
