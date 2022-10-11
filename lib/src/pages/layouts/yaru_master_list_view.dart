@@ -4,8 +4,8 @@ import 'yaru_master_detail_page.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_tile.dart';
 
-class YaruPageItemListView extends StatelessWidget {
-  const YaruPageItemListView({
+class YaruMasterListView extends StatelessWidget {
+  const YaruMasterListView({
     super.key,
     required this.length,
     required this.selectedIndex,
