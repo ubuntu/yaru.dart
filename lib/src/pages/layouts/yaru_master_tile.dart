@@ -43,7 +43,6 @@ class YaruMasterTile extends StatelessWidget {
               : null,
         ),
         child: ListTile(
-          textColor: Theme.of(context).colorScheme.onSurface,
           selectedColor: Theme.of(context).colorScheme.onSurface,
           iconColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
           visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
@@ -51,8 +50,8 @@ class YaruMasterTile extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),
           ),
           leading: leading,
-          title: _buildChild(title),
-          subtitle: _buildChild(subtitle),
+          title: _titleStyle(context, title),
+          subtitle: _subTitleStyle(context, subtitle),
           trailing: trailing,
           selected: isSelected,
           onTap: () {
@@ -65,7 +64,7 @@ class YaruMasterTile extends StatelessWidget {
     );
   }
 
-  Widget? _buildChild(Widget? child) {
+  Widget? _titleStyle(BuildContext context, Widget? child) {
     if (child == null) {
       return child;
     }
@@ -74,6 +73,20 @@ class YaruMasterTile extends StatelessWidget {
       child: child,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
+      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+    );
+  }
+
+  Widget? _subTitleStyle(BuildContext context, Widget? child) {
+    if (child == null) {
+      return child;
+    }
+
+    return DefaultTextStyle.merge(
+      child: child,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(color: Theme.of(context).textTheme.caption!.color),
     );
   }
 
