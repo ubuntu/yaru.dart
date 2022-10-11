@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
-import '../../../yaru_widgets.dart';
+
+import 'yaru_compact_layout_theme.dart';
+import 'yaru_navigation_rail.dart';
 
 typedef YaruCompactLayoutBuilder = Widget Function(
   BuildContext context,
@@ -112,10 +113,11 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   }
 
   Widget _buildPageView(BuildContext context) {
+    final theme = YaruCompactLayoutTheme.of(context);
     return Expanded(
       child: Theme(
         data: Theme.of(context).copyWith(
-          pageTransitionsTheme: YaruPageTransitionsTheme.vertical,
+          pageTransitionsTheme: theme.pageTransitions,
         ),
         child: Navigator(
           pages: [
