@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
+import '../../constants.dart';
+
 @immutable
 class YaruMasterDetailThemeData with Diagnosticable {
   /// Creates a theme that can be used with [YaruMasterDetailPage].
@@ -15,7 +17,7 @@ class YaruMasterDetailThemeData with Diagnosticable {
 
   factory YaruMasterDetailThemeData.fallback() {
     return const YaruMasterDetailThemeData(
-      breakpoint: 620,
+      breakpoint: kYaruMasterDetailBreakpoint,
       tileSpacing: 6,
       listPadding: EdgeInsets.symmetric(vertical: 8),
       portraitTransitions: YaruPageTransitionsTheme.horizontal,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../constants.dart';
 import 'yaru_detail_page.dart';
 import 'yaru_landscape_layout.dart';
 import 'yaru_master_detail_theme.dart';
@@ -36,7 +37,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.leftPaneWidth,
     this.allowLeftPaneResize = true,
     this.leftPaneMinWidth = 175.0,
-    this.pageMinWidth = 310.0,
+    this.pageMinWidth = kYaruMasterDetailBreakpoint / 2,
     this.appBar,
     this.initialIndex,
     this.onSelected,
