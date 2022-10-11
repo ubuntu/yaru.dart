@@ -4,6 +4,7 @@ import '../../constants.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
+const Duration _kSelectedTileAnimationDuration = Duration(milliseconds: 250);
 
 class YaruMasterTile extends StatelessWidget {
   const YaruMasterTile({
@@ -32,7 +33,8 @@ class YaruMasterTile extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: scrollbarThicknessWithTrack),
-      child: DecoratedBox(
+      child: AnimatedContainer(
+        duration: _kSelectedTileAnimationDuration,
         decoration: BoxDecoration(
           borderRadius:
               const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
