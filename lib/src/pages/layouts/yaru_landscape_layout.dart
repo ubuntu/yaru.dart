@@ -235,9 +235,9 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           ),
         ),
       ),
-      height: MediaQuery.of(context).size.height,
       width: _kLeftPaneResizingRegionWidth,
       top: 0,
+      bottom: 0,
       left: 0,
     );
   }
