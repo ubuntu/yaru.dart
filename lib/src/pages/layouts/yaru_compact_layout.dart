@@ -23,7 +23,10 @@ class YaruCompactLayout extends StatefulWidget {
   /// The total number of pages.
   final int length;
 
-  /// A builder that is called for each page to build its title.
+  /// A builder that is called for each page to build its navigation rail item.
+  ///
+  /// See also:
+  ///  * [YaruNavigationRailItem]
   final YaruCompactLayoutBuilder itemBuilder;
 
   /// A builder that is called for each page to build its content.
