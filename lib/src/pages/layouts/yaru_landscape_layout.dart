@@ -119,8 +119,6 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     );
   }
 
-  Color get _separatorColor => Colors.black.withOpacity(0.1);
-
   Widget _maybeBuildGlobalMouseRegion(Widget child) {
     if (widget.allowLeftPaneResize) {
       return MouseRegion(
@@ -150,10 +148,9 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Widget _buildVerticalSeparator() {
-    return VerticalDivider(
+    return const VerticalDivider(
       thickness: 1,
       width: 1,
-      color: _separatorColor,
     );
   }
 
@@ -188,8 +185,9 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     return Positioned(
       child: AnimatedContainer(
         duration: _kLeftPaneResizingRegionAnimationDuration,
-        color:
-            _isHovering || _isDragging ? _separatorColor : Colors.transparent,
+        color: _isHovering || _isDragging
+            ? DividerTheme.of(context).color
+            : Colors.transparent,
         child: MouseRegion(
           cursor: SystemMouseCursors.resizeColumn,
           onEnter: (event) => setState(() {
