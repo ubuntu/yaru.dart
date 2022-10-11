@@ -1,3 +1,8 @@
+# 0.2.5
+
+* Add many hard disk icon variants
+* Fix some unconsistent icons
+
 # 0.2.4
 
 * Fix animated icons path overlap when using transparent color
