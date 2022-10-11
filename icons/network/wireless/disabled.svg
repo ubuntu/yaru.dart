@@ -4,8 +4,8 @@
    width="24"
    version="1.1"
    id="svg6"
-   sodipodi:docname="wireless-disabled.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   sodipodi:docname="disabled.svg"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -35,26 +35,35 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
+     inkscape:window-width="1846"
+     inkscape:window-height="1016"
      id="namedview8"
-     showgrid="true"
+     showgrid="false"
      inkscape:zoom="27.5"
-     inkscape:cx="7.3272727"
-     inkscape:cy="12.654545"
-     inkscape:window-x="1920"
+     inkscape:cx="7.3636364"
+     inkscape:cy="12.672727"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg6"
      inkscape:pagecheckerboard="0"
      inkscape:snap-page="true"
-     inkscape:snap-grids="true">
+     inkscape:snap-grids="true"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
     <inkscape:grid
        type="xygrid"
        id="grid837" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid301"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
   </sodipodi:namedview>
   <path
-     id="path1857"
+     id="path1857-3"
      style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none"
-     d="M 2.9609375 4 L 5.1582031 6.7480469 C 3.4806571 7.6956267 2.6210937 8.6738281 2.6210938 8.6738281 L 2.3476562 8.9921875 L 12 20.789062 L 12.386719 20.316406 L 14.21875 18.076172 L 16.558594 21 L 17.839844 21 L 14.867188 17.283203 L 6.0644531 6.2792969 L 4.2421875 4 L 2.9609375 4 z M 12 5 C 10.035355 5 8.375003 5.3703035 7.0214844 5.875 L 15.515625 16.492188 L 21.652344 8.9921875 L 21.378906 8.6738281 C 21.378906 8.6738281 18.194438 5 12 5 z " />
+     d="M 4.1992188 3.8652344 L 3.3945312 4.4609375 L 5.1894531 6.7285156 C 3.4910549 7.6815951 2.6210938 8.6738281 2.6210938 8.6738281 L 2.3476562 8.9921875 L 12 20.789062 L 12.386719 20.316406 L 14.195312 18.105469 L 16.242188 20.691406 L 17.046875 20.095703 L 14.84375 17.3125 L 6.0976562 6.2636719 L 4.1992188 3.8652344 z M 12 5 C 10.05179 5 8.4019976 5.3631115 7.0546875 5.8613281 L 15.492188 16.519531 L 21.652344 8.9921875 L 21.378906 8.6738281 C 21.378906 8.6738281 18.194426 5 12 5 z " />
 </svg>
