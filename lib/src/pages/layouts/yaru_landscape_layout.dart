@@ -11,7 +11,6 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.length,
     required this.selectedIndex,
     required this.tileBuilder,
-    required this.titleBuilder,
     required this.pageBuilder,
     required this.onSelected,
     required this.leftPaneWidth,
@@ -26,9 +25,6 @@ class YaruLandscapeLayout extends StatefulWidget {
 
   /// A builder that is called for each page to build its master tile.
   final YaruMasterDetailBuilder tileBuilder;
-
-  /// A builder that is called for each page to build its title.
-  final YaruMasterDetailBuilder titleBuilder;
 
   /// A builder that is called for each page to build its detail page.
   final IndexedWidgetBuilder pageBuilder;
