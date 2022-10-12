@@ -43,7 +43,8 @@ final examplePageItems = <PageItem>[
   PageItem(
     titleBuilder: (context) => const Text('YaruCheckButton'),
     pageBuilder: (context) => const CheckButtonPage(),
-    iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
+    iconBuilder: (context, selected) =>
+        const Icon(YaruIcons.checkbox_button_checked),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruColorDisk'),
@@ -78,7 +79,8 @@ final examplePageItems = <PageItem>[
   PageItem(
     titleBuilder: (context) => const Text('YaruRadioButton'),
     pageBuilder: (context) => const RadioButtonPage(),
-    iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
+    iconBuilder: (context, selected) =>
+        const Icon(YaruIcons.radio_button_checked),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruSection'),
