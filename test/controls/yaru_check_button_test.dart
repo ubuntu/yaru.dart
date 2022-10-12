@@ -95,14 +95,18 @@ void main() {
     await gesture
         .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'enabled')));
     await tester.pump();
-    expect(RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
-        SystemMouseCursors.click);
+    expect(
+      RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
+      SystemMouseCursors.click,
+    );
 
     await gesture
         .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'disabled')));
     await tester.pump();
-    expect(RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
-        SystemMouseCursors.basic);
+    expect(
+      RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
+      SystemMouseCursors.basic,
+    );
   });
 
   testWidgets('text color changes depending on the state', (tester) async {
@@ -128,11 +132,15 @@ void main() {
     );
 
     final enabled = tester.element(find.text('enabled'));
-    expect(DefaultTextStyle.of(enabled).style.color,
-        isNot(equals(Theme.of(enabled).disabledColor)));
+    expect(
+      DefaultTextStyle.of(enabled).style.color,
+      isNot(equals(Theme.of(enabled).disabledColor)),
+    );
 
     final disabled = tester.element(find.text('disabled'));
-    expect(DefaultTextStyle.of(disabled).style.color,
-        equals(Theme.of(disabled).disabledColor));
+    expect(
+      DefaultTextStyle.of(disabled).style.color,
+      equals(Theme.of(disabled).disabledColor),
+    );
   });
 }

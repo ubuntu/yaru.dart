@@ -74,7 +74,9 @@ class _YaryToggleButtonLayout extends RenderObjectWidget
 
   @override
   void updateRenderObject(
-      BuildContext context, _YaruRenderToggleButton renderObject) {
+    BuildContext context,
+    _YaruRenderToggleButton renderObject,
+  ) {
     renderObject.textDirection = textDirection;
   }
 }
@@ -220,7 +222,9 @@ class _YaruRenderToggleButton extends RenderBox
       case TextDirection.rtl:
         if (leading != null) {
           _positionBox(
-              leading!, Offset(buttonWidth - leadingSize.width, leadingY));
+            leading!,
+            Offset(buttonWidth - leadingSize.width, leadingY),
+          );
         }
         _positionBox(title!, Offset(0, titleY));
         if (subtitle != null) {

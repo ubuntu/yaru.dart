@@ -296,8 +296,10 @@ void main() {
     );
     expect(data, data.copyWith());
     expect(data, isNot(data.copyWith(horizontalSpacing: 3.4)));
-    expect(data.copyWith(verticalSpacing: 3.4),
-        data.copyWith(verticalSpacing: 3.4));
+    expect(
+      data.copyWith(verticalSpacing: 3.4),
+      data.copyWith(verticalSpacing: 3.4),
+    );
   });
 
   testWidgets('ellipsize and wrap', (tester) async {
