@@ -99,16 +99,16 @@ class _CompactPage extends StatelessWidget {
     final pageItems = [configItem] + examplePageItems;
 
     return YaruCompactLayout(
-      style: width > 1000
-          ? YaruNavigationRailStyle.labelledExtended
-          : width > 500
-              ? YaruNavigationRailStyle.labelled
-              : YaruNavigationRailStyle.compact,
       length: pageItems.length,
-      iconBuilder: (context, index, selected) =>
-          pageItems[index].iconBuilder(context, selected),
-      titleBuilder: (context, index, selected) =>
-          pageItems[index].titleBuilder(context),
+      itemBuilder: (context, index, selected) => YaruNavigationRailItem(
+        icon: pageItems[index].iconBuilder(context, selected),
+        label: pageItems[index].titleBuilder(context),
+        style: width > 1000
+            ? YaruNavigationRailStyle.labelledExtended
+            : width > 500
+                ? YaruNavigationRailStyle.labelled
+                : YaruNavigationRailStyle.compact,
+      ),
       pageBuilder: (context, index) => pageItems[index].pageBuilder(context),
     );
   }
