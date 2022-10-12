@@ -89,29 +89,22 @@ class _YaruTabbedPageState extends State<YaruTabbedPage>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(kYaruContainerRadius),
             ),
-            child: Theme(
-              data: ThemeData().copyWith(
-                splashColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
+            child: TabBar(
+              controller: tabController,
+              labelColor: Theme.of(context).colorScheme.onSurface,
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(kYaruContainerRadius),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
               ),
-              child: TabBar(
-                controller: tabController,
-                labelColor: Theme.of(context).colorScheme.onSurface,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(kYaruContainerRadius),
-                  color:
-                      Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-                ),
-                onTap: widget.onTap,
-                tabs: [
-                  for (var i = 0; i < widget.views.length; i++)
-                    Tab(
-                      text: titlesDoNotFit() ? null : widget.tabTitles[i],
-                      icon: widget.tabIcons[i],
-                    )
-                ],
-              ),
+              splashBorderRadius: BorderRadius.circular(kYaruContainerRadius),
+              onTap: widget.onTap,
+              tabs: [
+                for (var i = 0; i < widget.views.length; i++)
+                  Tab(
+                    text: titlesDoNotFit() ? null : widget.tabTitles[i],
+                    icon: widget.tabIcons[i],
+                  )
+              ],
             ),
           ),
         ),
