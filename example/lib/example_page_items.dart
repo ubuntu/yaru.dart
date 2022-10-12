@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
+import 'pages/check_button_page.dart';
 import 'pages/color_disk_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
 import 'pages/icon_button_page.dart';
 import 'pages/option_button_page.dart';
 import 'pages/progress_indicator_page.dart';
+import 'pages/radio_button_page.dart';
 import 'pages/section_page.dart';
 import 'pages/selectable_container_page.dart';
 import 'pages/tabbed_page_page.dart';
@@ -39,6 +41,11 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => const Icon(YaruIcons.refresh),
   ),
   PageItem(
+    titleBuilder: (context) => const Text('YaruCheckButton'),
+    pageBuilder: (context) => const CheckButtonPage(),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
+  ),
+  PageItem(
     titleBuilder: (context) => const Text('YaruColorDisk'),
     pageBuilder: (context) => const ColorDiskPage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
@@ -67,6 +74,11 @@ final examplePageItems = <PageItem>[
     titleBuilder: (context) => const Text('YaruProgressIndicator'),
     iconBuilder: (context, selected) => const Icon(YaruIcons.download),
     pageBuilder: (_) => const ProgressIndicatorPage(),
+  ),
+  PageItem(
+    titleBuilder: (context) => const Text('YaruRadioButton'),
+    pageBuilder: (context) => const RadioButtonPage(),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruSection'),
