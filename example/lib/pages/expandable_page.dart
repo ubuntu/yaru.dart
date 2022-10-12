@@ -19,7 +19,6 @@ class ExpandablePage extends StatelessWidget {
             'Lorem ipsum dolor sit amet',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          expandIcon: Icon(YaruIcons.pan_end),
         ),
         YaruExpandable(
           isExpanded: true,
@@ -33,7 +32,6 @@ class ExpandablePage extends StatelessWidget {
             'Lorem ipsum dolor sit amet',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          expandIcon: Icon(YaruIcons.pan_end),
         )
       ],
     );

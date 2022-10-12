@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 import '../../yaru_widgets.dart';
 
 const _kAnimationDuration = Duration(milliseconds: 250);
@@ -67,7 +68,7 @@ class _YaruExpandableState extends State<YaruExpandable> {
                 turns: _isExpanded ? .25 : 0,
                 duration: _kAnimationDuration,
                 curve: _kAnimationCurve,
-                child: widget.expandIcon ?? const Icon(Icons.arrow_right),
+                child: widget.expandIcon ?? const Icon(YaruIcons.pan_end),
               ),
             ),
           ],

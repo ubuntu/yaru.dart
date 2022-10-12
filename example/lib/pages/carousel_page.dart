@@ -28,8 +28,6 @@ class _CarouselPageState extends State<CarouselPage> {
               children: _getCarouselChildren(),
               height: 400,
               navigationControls: true,
-              previousIcon: const Icon(YaruIcons.go_previous),
-              nextIcon: const Icon(YaruIcons.go_next),
             ),
           ],
         ),
