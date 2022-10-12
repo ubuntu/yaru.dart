@@ -45,7 +45,13 @@ class YaruIconButton extends StatelessWidget {
       fixedSize: MaterialStateProperty.all(Size(iconSize, iconSize)),
       foregroundColor: MaterialStateProperty.resolveWith((states) {
         if (states.contains(MaterialState.selected)) {
+          if (states.contains(MaterialState.disabled)) {
+            return colors.primary.withOpacity(0.38);
+          }
           return colors.primary;
+        }
+        if (states.contains(MaterialState.disabled)) {
+          return colors.onSurface.withOpacity(0.38);
         }
         return colors.onSurface.withOpacity(0.8);
       }),
