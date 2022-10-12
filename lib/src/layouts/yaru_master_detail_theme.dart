@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
-import '../../constants.dart';
+import '../constants.dart';
 
 @immutable
 class YaruMasterDetailThemeData with Diagnosticable {

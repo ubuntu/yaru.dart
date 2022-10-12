@@ -16,15 +16,15 @@ export 'src/controls/yaru_toggle_button_theme.dart';
 export 'src/dialogs/yaru_dialog_title.dart';
 // Extensions
 export 'src/extensions/border_radius_extension.dart';
-// Pages layouts
-export 'src/pages/layouts/yaru_compact_layout.dart';
-export 'src/pages/layouts/yaru_compact_layout_theme.dart';
-export 'src/pages/layouts/yaru_detail_page.dart';
-export 'src/pages/layouts/yaru_master_detail_page.dart';
-export 'src/pages/layouts/yaru_master_detail_theme.dart';
-export 'src/pages/layouts/yaru_master_tile.dart';
-export 'src/pages/layouts/yaru_navigation_rail.dart';
-export 'src/pages/layouts/yaru_navigation_rail_item.dart';
+// Layouts
+export 'src/layouts/yaru_compact_layout.dart';
+export 'src/layouts/yaru_compact_layout_theme.dart';
+export 'src/layouts/yaru_detail_page.dart';
+export 'src/layouts/yaru_master_detail_page.dart';
+export 'src/layouts/yaru_master_detail_theme.dart';
+export 'src/layouts/yaru_master_tile.dart';
+export 'src/layouts/yaru_navigation_rail.dart';
+export 'src/layouts/yaru_navigation_rail_item.dart';
 // Pages
 export 'src/pages/yaru_section.dart';
 export 'src/pages/yaru_tabbed_page.dart';
