@@ -3,7 +3,7 @@ import 'package:yaru_icons/yaru_icons.dart';
 
 import '../../yaru_widgets.dart';
 
-/// A [Stack] of a [Text] with given [title] and an [IconButton]
+/// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
 /// that most tightly encloses the given context.
 ///
@@ -11,8 +11,6 @@ class YaruDialogTitle extends StatelessWidget {
   const YaruDialogTitle({
     super.key,
     this.title,
-    this.mainAxisAlignment,
-    this.crossAxisAlignment,
     required this.isCloseable,
     this.titleAlignment = Alignment.center,
   });
@@ -22,14 +20,6 @@ class YaruDialogTitle extends StatelessWidget {
 
   /// The alignment of the [title]
   final AlignmentGeometry titleAlignment;
-
-  /// The optional [MainAxisAlignment] used for the title [Row],
-  /// which defaults to [MainAxisAlignment.start]
-  final MainAxisAlignment? mainAxisAlignment;
-
-  /// The optional [CrossAxisAlignment] used for the title [Row],
-  /// which defaults to [CrossAxisAlignment.center]
-  final CrossAxisAlignment? crossAxisAlignment;
 
   /// Must provide if this dialog is closeable or not
   final bool isCloseable;
