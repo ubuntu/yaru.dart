@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 
 import '../../yaru_widgets.dart';
 
@@ -10,26 +11,17 @@ class YaruDialogTitle extends StatelessWidget {
   const YaruDialogTitle({
     super.key,
     this.title,
-    this.closeIconData = Icons.close,
-    this.textAlign,
     this.mainAxisAlignment,
     this.crossAxisAlignment,
-    this.onPressed,
-    this.titleWidget,
+    required this.isCloseable,
+    this.titleAlignment = Alignment.center,
   });
 
-  /// The [String] used for the title
-  final String? title;
+  /// The [Widget] used for the title
+  final Widget? title;
 
-  /// An optional [Widget] displayed right to the [title]
-  final Widget? titleWidget;
-
-  /// The optional [IconData] used for the [IconButton]
-  /// which defaults to [Icons.close]
-  final IconData? closeIconData;
-
-  /// The optional [TextAlign], defaults to [TextAlign.center]
-  final TextAlign? textAlign;
+  /// The alignment of the [title]
+  final AlignmentGeometry titleAlignment;
 
   /// The optional [MainAxisAlignment] used for the title [Row],
   /// which defaults to [MainAxisAlignment.start]
@@ -39,8 +31,8 @@ class YaruDialogTitle extends StatelessWidget {
   /// which defaults to [CrossAxisAlignment.center]
   final CrossAxisAlignment? crossAxisAlignment;
 
-  /// The optional callback, defaults to pop the current route
-  final Function()? onPressed;
+  /// Must provide if this dialog is closeable or not
+  final bool isCloseable;
 
   @override
   Widget build(BuildContext context) {
@@ -54,21 +46,7 @@ class YaruDialogTitle extends StatelessWidget {
             top: kYaruPagePadding,
             bottom: kYaruPagePadding,
           ),
-          child: Row(
-            mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
-            crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
-            children: [
-              Text(
-                title ?? '',
-                textAlign: textAlign,
-              ),
-              if (titleWidget != null)
-                const SizedBox(
-                  width: 10,
-                ),
-              if (titleWidget != null) titleWidget!
-            ],
-          ),
+          child: Align(alignment: titleAlignment, child: title),
         ),
         Padding(
           padding: const EdgeInsets.all(5.0),
@@ -76,8 +54,8 @@ class YaruDialogTitle extends StatelessWidget {
             style: IconButton.styleFrom(
               fixedSize: const Size.square(34),
             ),
-            onPressed: onPressed ?? () => Navigator.pop(context),
-            icon: Icon(closeIconData ?? Icons.close),
+            onPressed: isCloseable ? () => Navigator.maybePop(context) : null,
+            icon: const Icon(YaruIcons.window_close),
           ),
         )
       ],
