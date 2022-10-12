@@ -9,9 +9,7 @@ export 'src/controls/yaru_icon_button.dart';
 export 'src/controls/yaru_option_button.dart';
 export 'src/controls/yaru_progress_indicator.dart';
 // Dialogs
-export 'src/dialogs/yaru_alert_dialog.dart';
 export 'src/dialogs/yaru_dialog_title.dart';
-export 'src/dialogs/yaru_simple_dialog.dart';
 // Extensions
 export 'src/extensions/border_radius_extension.dart';
 // Pages layouts
