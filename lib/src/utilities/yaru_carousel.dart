@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 
 class YaruCarousel extends StatefulWidget {
   const YaruCarousel({
@@ -131,12 +132,12 @@ class _YaruCarouselState extends State<YaruCarousel> {
             _buildNavigationButton(
               Alignment.centerLeft,
               _isFirstPage() ? null : () => widget.controller.previousPage(),
-              widget.previousIcon ?? const Icon(Icons.arrow_back),
+              widget.previousIcon ?? const Icon(YaruIcons.go_previous),
             ),
             _buildNavigationButton(
               Alignment.centerRight,
               _isLastPage() ? null : () => widget.controller.nextPage(),
-              widget.nextIcon ?? const Icon(Icons.arrow_forward),
+              widget.nextIcon ?? const Icon(YaruIcons.go_next),
             ),
           ],
         ),

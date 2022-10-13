@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 const _lorem =
@@ -19,7 +18,6 @@ class ExpandablePage extends StatelessWidget {
             'Lorem ipsum dolor sit amet',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          expandIcon: Icon(YaruIcons.pan_end),
         ),
         YaruExpandable(
           isExpanded: true,
@@ -33,7 +31,6 @@ class ExpandablePage extends StatelessWidget {
             'Lorem ipsum dolor sit amet',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          expandIcon: Icon(YaruIcons.pan_end),
         )
       ],
     );
