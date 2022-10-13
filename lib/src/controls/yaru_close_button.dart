@@ -20,7 +20,7 @@ class YaruCloseButton extends StatelessWidget {
         fixedSize: const Size.square(34),
       ),
       onPressed:
-          isCloseable ? onPressed ?? () => Navigator.of(context).pop() : null,
+          enabled ? onPressed ?? Navigator.of(context).maybePop : null,
       icon: const Icon(YaruIcons.window_close),
     );
   }
