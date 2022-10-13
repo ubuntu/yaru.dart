@@ -22,7 +22,7 @@ class YaruNavigationRailItem extends StatefulWidget {
     this.selected,
     required this.icon,
     required this.label,
-    required this.tooltipMessage,
+    this.tooltip,
     this.onTap,
     required this.style,
   });
@@ -30,7 +30,7 @@ class YaruNavigationRailItem extends StatefulWidget {
   final bool? selected;
   final Widget icon;
   final Widget label;
-  final String tooltipMessage;
+  final String? tooltip;
   final VoidCallback? onTap;
   final YaruNavigationRailStyle style;
 
@@ -52,10 +52,8 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
   @override
   Widget build(BuildContext context) {
     return _buildSizedContainer(
-      Tooltip(
-        message: widget.tooltipMessage,
-        waitDuration: _kTooltipWaitDuration,
-        child: Material(
+      _maybeBuildTooltip(
+        Material(
           child: InkWell(
             onTap: () {
               final scope = YaruNavigationRailItemScope.maybeOf(context);
@@ -124,6 +122,18 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
         ),
       ),
     );
+  }
+
+  Widget _maybeBuildTooltip(Widget child) {
+    if (widget.tooltip != null) {
+      return Tooltip(
+        message: widget.tooltip!,
+        waitDuration: _kTooltipWaitDuration,
+        child: child,
+      );
+    }
+
+    return child;
   }
 
   Widget _buildColumnOrRow(List<Widget> children) {

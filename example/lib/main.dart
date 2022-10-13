@@ -104,7 +104,7 @@ class _CompactPage extends StatelessWidget {
       itemBuilder: (context, index, selected) => YaruNavigationRailItem(
         icon: pageItems[index].iconBuilder(context, selected),
         label: pageItems[index].titleBuilder(context),
-        tooltipMessage: pageItems[index].tooltipMessage,
+        tooltip: pageItems[index].tooltipMessage,
         style: width > 1000
             ? YaruNavigationRailStyle.labelledExtended
             : width > 500
