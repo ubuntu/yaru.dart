@@ -6,7 +6,7 @@ import 'yaru_icon_button.dart';
 class YaruCloseButton extends StatelessWidget {
   const YaruCloseButton({
     Key? key,
-    required this.isCloseable,
+    this.enabled = true,
     this.onPressed,
   }) : super(key: key);
 
