@@ -12,6 +12,9 @@ class YaruCheckButton extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.contentPadding,
+    this.tristate = false,
+    this.autofocus = false,
+    this.focusNode,
   });
 
   /// See [Checkbox.value]
@@ -29,6 +32,15 @@ class YaruCheckButton extends StatelessWidget {
   /// See [YaruToggleButton.contentPadding]
   final EdgeInsetsGeometry? contentPadding;
 
+  /// See [Checkbox.tristate].
+  final bool tristate;
+
+  /// See [Checkbox.focusNode].
+  final FocusNode? focusNode;
+
+  /// See [Checkbox.autofocus].
+  final bool autofocus;
+
   @override
   Widget build(BuildContext context) {
     return YaruToggleButton(
@@ -41,6 +53,9 @@ class YaruCheckButton extends StatelessWidget {
           child: Checkbox(
             value: value,
             onChanged: onChanged,
+            tristate: tristate,
+            focusNode: focusNode,
+            autofocus: autofocus,
           ),
         ),
       ),

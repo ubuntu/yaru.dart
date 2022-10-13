@@ -13,6 +13,9 @@ class YaruRadioButton<T> extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.contentPadding,
+    this.toggleable = false,
+    this.autofocus = false,
+    this.focusNode,
   });
 
   /// See [Radio.value]
@@ -33,6 +36,15 @@ class YaruRadioButton<T> extends StatelessWidget {
   /// See [YaruToggleButton.contentPadding]
   final EdgeInsetsGeometry? contentPadding;
 
+  /// See [Radio.toggleable].
+  final bool toggleable;
+
+  /// See [Radio.focusNode].
+  final FocusNode? focusNode;
+
+  /// See [Radio.autofocus].
+  final bool autofocus;
+
   @override
   Widget build(BuildContext context) {
     return YaruToggleButton(
@@ -46,6 +58,9 @@ class YaruRadioButton<T> extends StatelessWidget {
             value: value,
             groupValue: groupValue,
             onChanged: onChanged,
+            toggleable: toggleable,
+            focusNode: focusNode,
+            autofocus: autofocus,
           ),
         ),
       ),
