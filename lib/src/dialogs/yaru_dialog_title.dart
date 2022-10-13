@@ -37,6 +37,7 @@ class YaruDialogTitle extends StatelessWidget {
       centerTitle: centerTitle,
       toolbarHeight: kYaruDialogTitleHeight,
       backgroundColor: Colors.transparent,
+      titleTextStyle: Theme.of(context).dialogTheme.titleTextStyle,
       actions: [
         if (trailing != null)
           Padding(
