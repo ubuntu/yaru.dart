@@ -10,7 +10,7 @@ class YaruCloseButton extends StatelessWidget {
     this.onPressed,
   }) : super(key: key);
 
-  final bool isCloseable;
+  final bool enabled;
   final Function()? onPressed;
 
   @override
