@@ -14,6 +14,7 @@ enum YaruNavigationRailStyle {
 
 const _kSizeAnimationDuration = Duration(milliseconds: 200);
 const _kSelectedIconAnimationDuration = Duration(milliseconds: 250);
+const _kTooltipWaitDuration = Duration(milliseconds: 500);
 
 class YaruNavigationRailItem extends StatefulWidget {
   const YaruNavigationRailItem({
@@ -21,6 +22,7 @@ class YaruNavigationRailItem extends StatefulWidget {
     this.selected,
     required this.icon,
     required this.label,
+    this.tooltip,
     this.onTap,
     required this.style,
   });
@@ -28,6 +30,7 @@ class YaruNavigationRailItem extends StatefulWidget {
   final bool? selected;
   final Widget icon;
   final Widget label;
+  final String? tooltip;
   final VoidCallback? onTap;
   final YaruNavigationRailStyle style;
 
@@ -49,32 +52,34 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
   @override
   Widget build(BuildContext context) {
     return _buildSizedContainer(
-      Material(
-        child: InkWell(
-          onTap: () {
-            final scope = YaruNavigationRailItemScope.maybeOf(context);
-            scope?.onTap();
-            widget.onTap?.call();
-          },
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical:
-                    widget.style == YaruNavigationRailStyle.labelledExtended
-                        ? 10
-                        : 5,
-                horizontal:
-                    widget.style == YaruNavigationRailStyle.labelledExtended
-                        ? 8
-                        : 5,
+      _maybeBuildTooltip(
+        Material(
+          child: InkWell(
+            onTap: () {
+              final scope = YaruNavigationRailItemScope.maybeOf(context);
+              scope?.onTap();
+              widget.onTap?.call();
+            },
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical:
+                      widget.style == YaruNavigationRailStyle.labelledExtended
+                          ? 10
+                          : 5,
+                  horizontal:
+                      widget.style == YaruNavigationRailStyle.labelledExtended
+                          ? 8
+                          : 5,
+                ),
+                child: _buildColumnOrRow([
+                  _buildIcon(context),
+                  if (widget.style != YaruNavigationRailStyle.compact) ...[
+                    _buildGap(),
+                    _buildLabel(context),
+                  ]
+                ]),
               ),
-              child: _buildColumnOrRow([
-                _buildIcon(context),
-                if (widget.style != YaruNavigationRailStyle.compact) ...[
-                  _buildGap(),
-                  _buildLabel(context),
-                ]
-              ]),
             ),
           ),
         ),
@@ -117,6 +122,18 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
         ),
       ),
     );
+  }
+
+  Widget _maybeBuildTooltip(Widget child) {
+    if (widget.tooltip != null) {
+      return Tooltip(
+        message: widget.tooltip!,
+        waitDuration: _kTooltipWaitDuration,
+        child: child,
+      );
+    }
+
+    return child;
   }
 
   Widget _buildColumnOrRow(List<Widget> children) {

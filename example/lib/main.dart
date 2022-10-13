@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final configItem = PageItem(
       titleBuilder: (context) => const Text('Layout'),
+      tooltipMessage: 'Layout',
       pageBuilder: (_) => ListView(
         padding: const EdgeInsets.all(kYaruPagePadding),
         children: [
@@ -103,6 +104,7 @@ class _CompactPage extends StatelessWidget {
       itemBuilder: (context, index, selected) => YaruNavigationRailItem(
         icon: pageItems[index].iconBuilder(context, selected),
         label: pageItems[index].titleBuilder(context),
+        tooltip: pageItems[index].tooltipMessage,
         style: width > 1000
             ? YaruNavigationRailStyle.labelledExtended
             : width > 500
