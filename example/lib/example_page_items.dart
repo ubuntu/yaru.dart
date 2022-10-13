@@ -4,6 +4,7 @@ import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/check_button_page.dart';
 import 'pages/color_disk_page.dart';
+import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
 import 'pages/icon_button_page.dart';
@@ -102,5 +103,12 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) =>
         const Icon(YaruIcons.format_unordered_list),
     pageBuilder: (_) => const TilePage(),
+  ),
+  PageItem(
+    titleBuilder: (context) => const Text('YaruDialogTitle'),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.information_filled)
+        : const Icon(YaruIcons.information),
+    pageBuilder: (_) => const DialogPage(),
   ),
 ];
