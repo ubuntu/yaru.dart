@@ -39,7 +39,7 @@ class YaruDialogTitle extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(5.0),
-          child: YaruCloseButton(isCloseable: isCloseable),
+          child: YaruCloseButton(enabled: isCloseable),
         )
       ],
     );
