@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../yaru_widgets.dart';
+import '../constants.dart';
 
 /// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
@@ -9,38 +9,43 @@ import '../../yaru_widgets.dart';
 class YaruDialogTitle extends StatelessWidget {
   const YaruDialogTitle({
     super.key,
+    this.leading,
     this.title,
-    required this.isCloseable,
-    this.titleAlignment = Alignment.center,
+    this.trailing,
+    this.centerTitle = true,
   });
 
-  /// The [Widget] used for the title
+  /// The primary title widget.
   final Widget? title;
 
-  /// The alignment of the [title]
-  final AlignmentGeometry titleAlignment;
+  /// A widget to display before the [title] widget.
+  final Widget? leading;
 
-  /// Must provide if this dialog is closeable or not
-  final bool isCloseable;
+  /// A widget to display after the [title] widget.
+  final Widget? trailing;
+
+  /// Whether the title should be centered.
+  final bool? centerTitle;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topRight,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: kYaruPagePadding + 5, // Avoid title overflow on close button
-            right: kYaruPagePadding, // Avoid title overflow on close button
-            top: kYaruPagePadding,
-            bottom: kYaruPagePadding,
+    return AppBar(
+      elevation: 0,
+      leading: leading,
+      automaticallyImplyLeading: false,
+      title: title,
+      centerTitle: centerTitle,
+      toolbarHeight: kYaruDialogTitleHeight,
+      backgroundColor: Colors.transparent,
+      actions: [
+        if (trailing != null)
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: trailing!,
+            ),
           ),
-          child: Align(alignment: titleAlignment, child: title),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: YaruCloseButton(enabled: isCloseable),
-        )
       ],
     );
   }
