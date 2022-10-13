@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
 
 import '../../yaru_widgets.dart';
 
@@ -40,13 +39,7 @@ class YaruDialogTitle extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(5.0),
-          child: YaruIconButton(
-            style: IconButton.styleFrom(
-              fixedSize: const Size.square(34),
-            ),
-            onPressed: isCloseable ? () => Navigator.maybePop(context) : null,
-            icon: const Icon(YaruIcons.window_close),
-          ),
+          child: YaruCloseButton(isCloseable: isCloseable),
         )
       ],
     );
