@@ -9,6 +9,8 @@ typedef YaruCompactLayoutBuilder = Widget Function(
   bool selected,
 );
 
+const _kScrollbarThickness = 4.0;
+
 /// A page layout which use a [YaruNavigationRail] on left for page navigation
 class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
@@ -85,7 +87,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
     return Theme(
       data: Theme.of(context).copyWith(
         scrollbarTheme: ScrollbarTheme.of(context).copyWith(
-          thickness: MaterialStateProperty.all(4),
+          thickness: MaterialStateProperty.all(_kScrollbarThickness),
         ),
       ),
       child: SingleChildScrollView(
