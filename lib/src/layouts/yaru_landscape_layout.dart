@@ -186,7 +186,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       child: AnimatedContainer(
         duration: _kLeftPaneResizingRegionAnimationDuration,
         color: _isHovering || _isDragging
-            ? DividerTheme.of(context).color
+            ? Theme.of(context).dividerColor
             : Colors.transparent,
         child: MouseRegion(
           cursor: SystemMouseCursors.resizeColumn,
