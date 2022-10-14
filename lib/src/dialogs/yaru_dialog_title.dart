@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import '../controls/yaru_close_button.dart';
 
 /// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
@@ -39,14 +40,13 @@ class YaruDialogTitle extends StatelessWidget {
       backgroundColor: Colors.transparent,
       titleTextStyle: Theme.of(context).dialogTheme.titleTextStyle,
       actions: [
-        if (trailing != null)
-          Padding(
-            padding: const EdgeInsets.all(5),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: trailing!,
-            ),
+        Padding(
+          padding: const EdgeInsets.all(5),
+          child: Align(
+            alignment: Alignment.topRight,
+            child: trailing ?? const YaruCloseButton(),
           ),
+        ),
       ],
     );
   }
