@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
@@ -56,7 +55,6 @@ class _HomeState extends State<Home> {
 
     return MaterialApp(
       title: 'Yaru Widgets Factory',
-      scrollBehavior: TouchMouseStylusScrollBehavior(),
       debugShowCheckedModeBanner: false,
       theme: context.watch<LightTheme>().value,
       darkTheme: context.watch<DarkTheme>().value,
@@ -114,13 +112,4 @@ class _CompactPage extends StatelessWidget {
       pageBuilder: (context, index) => pageItems[index].pageBuilder(context),
     );
   }
-}
-
-class TouchMouseStylusScrollBehavior extends MaterialScrollBehavior {
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-        PointerDeviceKind.stylus
-      };
 }
