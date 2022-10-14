@@ -57,14 +57,14 @@ class YaruToggleButton extends StatelessWidget {
                 title: _wrapTextStyle(
                   context,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.subtitle1!,
+                  style: Theme.of(context).textTheme.titleMedium!,
                   child: title,
                 ),
                 subtitle: subtitle != null
                     ? _wrapTextStyle(
                         context,
                         softWrap: true,
-                        style: Theme.of(context).textTheme.caption!,
+                        style: Theme.of(context).textTheme.bodySmall!,
                         child: subtitle!,
                       )
                     : null,

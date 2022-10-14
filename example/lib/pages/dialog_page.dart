@@ -33,7 +33,7 @@ class _DialogPageState extends State<DialogPage> {
                             child: Text(
                               'Evil Force-Close',
                               style: TextStyle(
-                                color: Theme.of(context).errorColor,
+                                color: Theme.of(context).colorScheme.error,
                               ),
                             ),
                           )
