@@ -39,7 +39,7 @@ class _DialogPageState extends State<DialogPage> {
                           )
                       ],
                       titlePadding: EdgeInsets.zero,
-                      title: YaruDialogTitle(
+                      title: YaruTitleBar(
                         leading: const Center(
                           child: SizedBox.square(
                             dimension: 25,

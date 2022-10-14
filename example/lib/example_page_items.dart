@@ -121,8 +121,8 @@ final examplePageItems = <PageItem>[
     pageBuilder: (_) => const TilePage(),
   ),
   PageItem(
-    titleBuilder: (context) => const Text('YaruDialogTitle'),
-    tooltipMessage: 'YaruDialogTitle',
+    titleBuilder: (context) => const Text('YaruTitleBar'),
+    tooltipMessage: 'YaruTitleBar',
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.information_filled)
         : const Icon(YaruIcons.information),

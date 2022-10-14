@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
-import '../controls/yaru_close_button.dart';
+import 'yaru_close_button.dart';
 
 /// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
 /// that most tightly encloses the given context.
 ///
-class YaruDialogTitle extends StatelessWidget {
-  const YaruDialogTitle({
+class YaruTitleBar extends StatelessWidget {
+  const YaruTitleBar({
     super.key,
     this.leading,
     this.title,
