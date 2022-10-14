@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
@@ -14,6 +15,7 @@ class YaruCarousel extends StatefulWidget {
     this.navigationControls = false,
     this.previousIcon,
     this.nextIcon,
+    this.scrollBehavior = const _YaruMouseDragScrollBehavior(),
   });
 
   /// The height of the children, defaults to 500.0.
@@ -46,6 +48,11 @@ class YaruCarousel extends StatefulWidget {
   /// Icon used for the next button
   /// Require [navigationControls] to be true
   final Widget? nextIcon;
+
+  /// The scroll behavior used for the carousel
+  ///
+  /// By default, mouse drag is enabled.
+  final ScrollBehavior scrollBehavior;
 
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
@@ -95,31 +102,34 @@ class _YaruCarouselState extends State<YaruCarousel> {
   }
 
   Widget _buildCarousel() {
-    final carousel = PageView.builder(
-      itemCount: widget.children.length,
-      pageSnapping: true,
-      controller: widget.controller,
-      physics:
-          // Disable physic when auto scroll is enable because we cannot
-          // disable the timer when dragging the view
-          widget.controller.autoScroll
-              ? const NeverScrollableScrollPhysics()
-              : null,
-      onPageChanged: (index) => setState(() => _page = index),
-      itemBuilder: (context, index) => AnimatedScale(
-        scale: _page == index ? 1.0 : .9,
-        duration: widget.controller.scrollAnimationDuration,
-        curve: widget.controller.scrollAnimationCurve,
-        child: Container(
-          child: _page == index - 1 || _page == index + 1
-              ? GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () => widget.controller.animateToPage(index),
-                  child: IgnorePointer(
-                    child: widget.children[index],
-                  ),
-                )
-              : widget.children[index],
+    final carousel = ScrollConfiguration(
+      behavior: widget.scrollBehavior,
+      child: PageView.builder(
+        itemCount: widget.children.length,
+        pageSnapping: true,
+        controller: widget.controller,
+        physics:
+            // Disable physic when auto scroll is enable because we cannot
+            // disable the timer when dragging the view
+            widget.controller.autoScroll
+                ? const NeverScrollableScrollPhysics()
+                : null,
+        onPageChanged: (index) => setState(() => _page = index),
+        itemBuilder: (context, index) => AnimatedScale(
+          scale: _page == index ? 1.0 : .9,
+          duration: widget.controller.scrollAnimationDuration,
+          curve: widget.controller.scrollAnimationCurve,
+          child: Container(
+            child: _page == index - 1 || _page == index + 1
+                ? GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => widget.controller.animateToPage(index),
+                    child: IgnorePointer(
+                      child: widget.children[index],
+                    ),
+                  )
+                : widget.children[index],
+          ),
         ),
       ),
     );
@@ -335,5 +345,17 @@ class YaruCarouselController extends PageController {
     if (autoScroll) {
       _timer!.cancel();
     }
+  }
+}
+
+class _YaruMouseDragScrollBehavior extends MaterialScrollBehavior {
+  const _YaruMouseDragScrollBehavior();
+
+  @override
+  Set<PointerDeviceKind> get dragDevices {
+    return {
+      ...super.dragDevices,
+      PointerDeviceKind.mouse,
+    };
   }
 }
