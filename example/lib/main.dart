@@ -118,9 +118,10 @@ class _CompactPage extends StatelessWidget {
 
 class TouchMouseStylusScrollBehavior extends MaterialScrollBehavior {
   @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-        PointerDeviceKind.stylus
-      };
+  Set<PointerDeviceKind> get dragDevices {
+    return {
+      ...super.dragDevices,
+      PointerDeviceKind.mouse,
+    };
+  }
 }
