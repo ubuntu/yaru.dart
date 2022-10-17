@@ -86,7 +86,7 @@ class YaruMasterTile extends StatelessWidget {
       child: child,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(color: Theme.of(context).textTheme.caption!.color),
+      style: TextStyle(color: Theme.of(context).textTheme.bodySmall!.color),
     );
   }
 
