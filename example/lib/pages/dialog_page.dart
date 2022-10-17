@@ -39,23 +39,17 @@ class _DialogPageState extends State<DialogPage> {
                           )
                       ],
                       titlePadding: EdgeInsets.zero,
-                      title: YaruDialogTitle(
-                        title: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Text('The Title'),
-                            SizedBox(
-                              width: 10,
+                      title: YaruTitleBar(
+                        leading: const Center(
+                          child: SizedBox.square(
+                            dimension: 25,
+                            child: YaruCircularProgressIndicator(
+                              strokeWidth: 3,
                             ),
-                            SizedBox(
-                              height: 25,
-                              child: YaruCircularProgressIndicator(
-                                strokeWidth: 3,
-                              ),
-                            )
-                          ],
+                          ),
                         ),
-                        isCloseable: isCloseable,
+                        title: const Text('The Title'),
+                        trailing: YaruCloseButton(enabled: isCloseable),
                       ),
                       content: SizedBox(
                         height: 100,
