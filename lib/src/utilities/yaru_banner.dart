@@ -14,6 +14,7 @@ class YaruBanner extends StatelessWidget {
     this.subtitle,
     this.thirdTitle,
     this.watermarkIcon,
+    this.iconPadding = const EdgeInsets.only(left: 10),
   });
 
   /// The name of the card
@@ -34,6 +35,9 @@ class YaruBanner extends StatelessWidget {
 
   /// The [Widget] used as the leading icon.
   final Widget icon;
+
+  /// Padding for the leading icon. Defaults to `EdgeInsets.only(left: 10)`
+  final EdgeInsets iconPadding;
 
   /// Optional [Widget] placed as the watermark
   final Widget? watermarkIcon;
@@ -64,6 +68,7 @@ class YaruBanner extends StatelessWidget {
                 children: [
                   _Banner(
                     icon: icon,
+                    iconPadding: iconPadding,
                     title: title,
                     subtitle: subtitle,
                     thirdTitle: thirdTitle,
@@ -88,6 +93,7 @@ class YaruBanner extends StatelessWidget {
               )
             : _Banner(
                 icon: icon,
+                iconPadding: iconPadding,
                 title: title,
                 subtitle: subtitle,
                 thirdTitle: thirdTitle,
@@ -111,6 +117,7 @@ class _Banner extends StatelessWidget {
     this.mouseCursor,
     this.subtitle,
     this.thirdTitle,
+    required this.iconPadding,
   });
 
   final Color color;
@@ -121,6 +128,7 @@ class _Banner extends StatelessWidget {
   final MouseCursor? mouseCursor;
   final Widget? subtitle;
   final Widget? thirdTitle;
+  final EdgeInsets iconPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +167,10 @@ class _Banner extends StatelessWidget {
                   fontSize: 20,
                 ),
           ),
-          leading: icon,
+          leading: Padding(
+            padding: iconPadding,
+            child: icon,
+          ),
         ),
       ),
     );
