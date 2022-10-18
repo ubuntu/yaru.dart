@@ -7,12 +7,13 @@ class YaruBanner extends StatelessWidget {
     super.key,
     this.onTap,
     this.surfaceTintColor,
-    this.watermark = false,
+    this.copyIconAsWatermark = false,
     required this.title,
     required this.icon,
     this.bannerWidth,
     this.subtitle,
     this.thirdTitle,
+    this.watermarkIcon,
   });
 
   /// The name of the card
@@ -29,10 +30,13 @@ class YaruBanner extends StatelessWidget {
   final Color? surfaceTintColor;
 
   /// If true the [icon] will be displayed a second time, with small opacity.
-  final bool watermark;
+  final bool copyIconAsWatermark;
 
   /// The [Widget] used as the leading icon.
   final Widget icon;
+
+  /// Optional [Widget] placed as the watermark
+  final Widget? watermarkIcon;
 
   /// The [Widget] used as the third line.
   final Widget? thirdTitle;
@@ -54,7 +58,7 @@ class YaruBanner extends StatelessWidget {
         onTap: onTap,
         borderRadius: borderRadius,
         hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-        child: watermark
+        child: copyIconAsWatermark
             ? Stack(
                 alignment: Alignment.center,
                 children: [
@@ -69,17 +73,14 @@ class YaruBanner extends StatelessWidget {
                     mouseCursor:
                         onTap != null ? SystemMouseCursors.click : null,
                   ),
-                  if (watermark == true)
+                  if (copyIconAsWatermark == true)
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Opacity(
                           opacity: 0.1,
-                          child: SizedBox(
-                            height: 130,
-                            child: icon,
-                          ),
+                          child: watermarkIcon != null ? watermarkIcon! : icon,
                         ),
                       ),
                     ),

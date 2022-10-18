@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class BannerPage extends StatelessWidget {
@@ -22,13 +23,17 @@ class BannerPage extends StatelessWidget {
             subtitle: const Text('Description'),
             thirdTitle: const Text('Third line'),
             icon: Icon(
-              Icons.air_sharp,
+              YaruIcons.weather_clear,
               size: 80,
               color: Theme.of(context).primaryColor,
             ),
-            watermark: true,
+            copyIconAsWatermark: true,
             onTap: () => showAboutDialog(context: context),
-            // surfaceTintColor: Colors.pink,
+            surfaceTintColor: i.isEven ? Colors.pink : null,
+            watermarkIcon: const Icon(
+              Icons.sunny,
+              size: 150,
+            ),
           )
       ],
     );
