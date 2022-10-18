@@ -47,19 +47,10 @@ class YaruCompactLayout extends StatefulWidget {
 class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   late int _index;
 
-  late ScrollController _controller;
-
   @override
   void initState() {
-    _controller = ScrollController();
     _index = widget.initialIndex;
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -91,7 +82,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
         ),
       ),
       child: SingleChildScrollView(
-        controller: _controller,
+        primary: true,
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: constraint.maxHeight),
           child: YaruNavigationRail(

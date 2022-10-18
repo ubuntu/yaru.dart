@@ -25,21 +25,13 @@ class YaruMasterListView extends StatefulWidget {
 }
 
 class _YaruMasterListViewState extends State<YaruMasterListView> {
-  final _controller = ScrollController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
     return ListView.separated(
       separatorBuilder: (_, __) => SizedBox(height: theme.tileSpacing ?? 0),
       padding: theme.listPadding,
-      controller: _controller,
+      primary: true,
       itemCount: widget.length,
       itemBuilder: (context, index) => YaruMasterTileScope(
         index: index,
