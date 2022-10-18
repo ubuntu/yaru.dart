@@ -31,7 +31,7 @@ class BannerPage extends StatelessWidget {
             onTap: () => showAboutDialog(context: context),
             surfaceTintColor: i.isEven ? Colors.pink : null,
             watermarkIcon: const Icon(
-              Icons.sunny,
+              Icons.cloud,
               size: 150,
             ),
           )
