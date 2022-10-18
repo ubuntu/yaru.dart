@@ -146,6 +146,7 @@ class _Banner extends StatelessWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints.expand(),
         child: YaruTile(
+          subTitlePadding: EdgeInsets.zero,
           subtitle: DefaultTextStyle(
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: Theme.of(context).textTheme.bodySmall!.color,

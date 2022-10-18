@@ -32,7 +32,7 @@ class BannerPage extends StatelessWidget {
             surfaceTintColor: i.isEven ? Colors.pink : null,
             watermarkIcon: const Icon(
               Icons.cloud,
-              size: 150,
+              size: 100,
             ),
           )
       ],
