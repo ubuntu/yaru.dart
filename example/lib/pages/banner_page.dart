@@ -21,7 +21,7 @@ class BannerPage extends StatelessWidget {
           YaruBanner(
             title: Text('YaruBanner $i'),
             subtitle: const Text('Description'),
-            thirdTitle: const Text('Third line'),
+            thirdTitle: i.isEven ? const Text('Third line') : null,
             icon: Icon(
               YaruIcons.weather_clear,
               size: 80,
