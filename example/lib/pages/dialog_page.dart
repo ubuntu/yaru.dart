@@ -55,7 +55,7 @@ class _DialogPageState extends State<DialogPage> {
                         height: 100,
                         child: YaruBanner(
                           surfaceTintColor: Colors.pink,
-                          name: Text(
+                          title: Text(
                             isCloseable
                                 ? 'You can close me'
                                 : 'You cannot close me',

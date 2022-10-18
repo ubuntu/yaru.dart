@@ -19,6 +19,7 @@ class YaruTile extends StatelessWidget {
     this.trailing,
     this.enabled = true,
     this.padding = const EdgeInsets.all(8.0),
+    this.subTitlePadding = const EdgeInsets.only(top: 4.0),
   });
 
   /// The [Widget] placed at the leading position.
@@ -42,6 +43,8 @@ class YaruTile extends StatelessWidget {
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
 
+  final EdgeInsets subTitlePadding;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
@@ -63,7 +66,7 @@ class YaruTile extends StatelessWidget {
                   title,
                   if (subtitle != null)
                     Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
+                      padding: subTitlePadding,
                       child: DefaultTextStyle(
                         style: enabled
                             ? Theme.of(context).textTheme.bodySmall!
