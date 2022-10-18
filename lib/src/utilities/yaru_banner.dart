@@ -8,16 +8,15 @@ class YaruBanner extends StatelessWidget {
     this.onTap,
     this.surfaceTintColor,
     this.watermark = false,
-    required this.name,
+    required this.title,
     required this.icon,
-    this.nameTextOverflow,
-    this.summaryTextOverflow,
     this.bannerWidth,
     this.subtitle,
+    this.thirdTitle,
   });
 
   /// The name of the card
-  final Widget name;
+  final Widget title;
 
   /// The subtitle shown in the second line.
   final Widget? subtitle;
@@ -32,13 +31,11 @@ class YaruBanner extends StatelessWidget {
   /// If true the [icon] will be displayed a second time, with small opacity.
   final bool watermark;
 
-  /// The [Widget] used as the trailing icon.
+  /// The [Widget] used as the leading icon.
   final Widget icon;
 
-  final TextOverflow? nameTextOverflow;
-
-  /// Optional [TextOverflow]
-  final TextOverflow? summaryTextOverflow;
+  /// The [Widget] used as the third line.
+  final Widget? thirdTitle;
 
   /// Optional width for the banner - if null it defaults to 370.
   final double? bannerWidth;
@@ -48,27 +45,27 @@ class YaruBanner extends StatelessWidget {
     final borderRadius = BorderRadius.circular(10);
 
     final light = Theme.of(context).brightness == Brightness.light;
+    final defaultCardColor = light
+        ? Theme.of(context).colorScheme.background
+        : Theme.of(context).colorScheme.onSurface.withOpacity(0.01);
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
         borderRadius: borderRadius,
         hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-        child: surfaceTintColor != null
+        child: watermark
             ? Stack(
+                alignment: Alignment.center,
                 children: [
                   _Banner(
-                    subtitleWidget: subtitle,
-                    width: bannerWidth,
-                    borderRadius: borderRadius,
-                    color: surfaceTintColor!,
-                    title: name,
-                    elevation: light ? 4 : 6,
                     icon: icon,
-                    titleTextOverflow:
-                        nameTextOverflow ?? TextOverflow.ellipsis,
-                    subTitleTextOverflow:
-                        summaryTextOverflow ?? TextOverflow.fade,
+                    title: title,
+                    subtitle: subtitle,
+                    thirdTitle: thirdTitle,
+                    borderRadius: borderRadius,
+                    color: surfaceTintColor ?? defaultCardColor,
+                    elevation: light ? 4 : 6,
                     mouseCursor:
                         onTap != null ? SystemMouseCursors.click : null,
                   ),
@@ -89,18 +86,13 @@ class YaruBanner extends StatelessWidget {
                 ],
               )
             : _Banner(
-                subtitleWidget: subtitle,
-                width: bannerWidth,
-                borderRadius: borderRadius,
-                color: light
-                    ? Theme.of(context).colorScheme.background
-                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.01),
-                elevation: light ? 2 : 1,
                 icon: icon,
-                title: name,
-                titleTextOverflow: nameTextOverflow ?? TextOverflow.ellipsis,
-                subTitleTextOverflow:
-                    summaryTextOverflow ?? TextOverflow.ellipsis,
+                title: title,
+                subtitle: subtitle,
+                thirdTitle: thirdTitle,
+                borderRadius: borderRadius,
+                color: defaultCardColor,
+                elevation: light ? 2 : 1,
                 mouseCursor: onTap != null ? SystemMouseCursors.click : null,
               ),
       ),
@@ -115,11 +107,9 @@ class _Banner extends StatelessWidget {
     required this.elevation,
     required this.icon,
     required this.borderRadius,
-    required this.subTitleTextOverflow,
     this.mouseCursor,
-    required this.titleTextOverflow,
-    this.width,
-    this.subtitleWidget,
+    this.subtitle,
+    this.thirdTitle,
   });
 
   final Color color;
@@ -127,14 +117,22 @@ class _Banner extends StatelessWidget {
   final double elevation;
   final Widget icon;
   final BorderRadius borderRadius;
-  final TextOverflow subTitleTextOverflow;
-  final TextOverflow titleTextOverflow;
   final MouseCursor? mouseCursor;
-  final double? width;
-  final Widget? subtitleWidget;
+  final Widget? subtitle;
+  final Widget? thirdTitle;
 
   @override
   Widget build(BuildContext context) {
+    final sub = Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (subtitle != null) subtitle!,
+        if (thirdTitle != null) thirdTitle!,
+      ],
+    );
+
     return Card(
       shadowColor: Colors.transparent,
       surfaceTintColor: color,
@@ -144,33 +142,22 @@ class _Banner extends StatelessWidget {
             .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
         side: BorderSide(color: Theme.of(context).dividerColor, width: 1),
       ),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: SizedBox(
-          width: width ?? 370,
-          child: ListTile(
-            mouseCursor: mouseCursor,
-            subtitle: subtitleWidget != null
-                ? DefaultTextStyle(
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).textTheme.bodySmall!.color,
-                          overflow: subTitleTextOverflow,
-                        ),
-                    child: subtitleWidget!,
-                  )
-                : null,
-            title: DefaultTextStyle(
-              child: title,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .copyWith(fontSize: 20, overflow: titleTextOverflow),
-            ),
-            leading: SizedBox(
-              width: 60,
-              child: icon,
-            ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints.expand(),
+        child: YaruTile(
+          subtitle: DefaultTextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Theme.of(context).textTheme.bodySmall!.color,
+                ),
+            child: sub,
           ),
+          title: DefaultTextStyle(
+            child: title,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontSize: 20,
+                ),
+          ),
+          leading: icon,
         ),
       ),
     );

@@ -10,7 +10,7 @@ class BannerPage extends StatelessWidget {
       padding: const EdgeInsets.all(kYaruPagePadding),
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        mainAxisExtent: 110,
+        mainAxisExtent: 200,
         mainAxisSpacing: 15,
         crossAxisSpacing: 15,
         maxCrossAxisExtent: 550,
@@ -18,10 +18,17 @@ class BannerPage extends StatelessWidget {
       children: [
         for (int i = 0; i < 20; i++)
           YaruBanner(
-            name: Text('YaruBanner $i'),
+            title: Text('YaruBanner $i'),
             subtitle: const Text('Description'),
-            icon: Image.asset('assets/ubuntuhero.jpg'),
+            thirdTitle: const Text('Third line'),
+            icon: Icon(
+              Icons.air_sharp,
+              size: 80,
+              color: Theme.of(context).primaryColor,
+            ),
+            watermark: true,
             onTap: () => showAboutDialog(context: context),
+            // surfaceTintColor: Colors.pink,
           )
       ],
     );
