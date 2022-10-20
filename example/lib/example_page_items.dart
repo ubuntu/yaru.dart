@@ -9,6 +9,7 @@ import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
 import 'pages/icon_button_page.dart';
 import 'pages/option_button_page.dart';
+import 'pages/popup_page.dart';
 import 'pages/progress_indicator_page.dart';
 import 'pages/radio_button_page.dart';
 import 'pages/section_page.dart';
@@ -81,6 +82,13 @@ final examplePageItems = <PageItem>[
     tooltipMessage: 'YaruOptionButton',
     iconBuilder: (context, selected) => const Icon(YaruIcons.settings),
     pageBuilder: (_) => const OptionButtonPage(),
+  ),
+  PageItem(
+    titleBuilder: (context) => const Text('YaruPopupMenuButton'),
+    tooltipMessage: 'YaruPopupMenuButton',
+    iconBuilder: (context, selected) =>
+        const Icon(YaruIcons.media_playback_stop),
+    pageBuilder: (_) => const PopupPage(),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruProgressIndicator'),
