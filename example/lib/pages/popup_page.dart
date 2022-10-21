@@ -55,34 +55,34 @@ class _PopupPageState extends State<PopupPage> {
                   });
                 },
                 itemBuilder: (context) {
-                  // return [
-                  //   for (final value in MyEnum.values)
-                  //     CheckedPopupMenuItem<MyEnum>(
-                  //       padding: EdgeInsets.zero,
-                  //       value: value,
-                  //       checked: enumSet.contains(value),
-                  //       child: Text(value.name),
-                  //     ),
-                  // ];
-
                   return [
                     for (final value in MyEnum.values)
-                      PopupMenuItem(
+                      YaruCheckItem<MyEnum>(
                         padding: EdgeInsets.zero,
-                        child: YaruMultiSelectItem<MyEnum>(
-                          onTap: () {
-                            if (enumSet.contains(value)) {
-                              enumSet.remove(value);
-                            } else {
-                              enumSet.add(value);
-                            }
-                          },
-                          values: enumSet,
-                          value: value,
-                          child: Text(value.name),
-                        ),
-                      )
+                        value: value,
+                        checked: enumSet.contains(value),
+                        child: Text(value.name),
+                      ),
                   ];
+
+                  // return [
+                  //   for (final value in MyEnum.values)
+                  //     PopupMenuItem(
+                  //       padding: EdgeInsets.zero,
+                  //       child: YaruMultiSelectItem<MyEnum>(
+                  //         onTap: () {
+                  //           if (enumSet.contains(value)) {
+                  //             enumSet.remove(value);
+                  //           } else {
+                  //             enumSet.add(value);
+                  //           }
+                  //         },
+                  //         values: enumSet,
+                  //         value: value,
+                  //         child: Text(value.name),
+                  //       ),
+                  //     )
+                  // ];
                 },
               );
             },
