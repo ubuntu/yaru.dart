@@ -42,26 +42,23 @@ class _PopupPageState extends State<PopupPage> {
           ),
           StatefulBuilder(
             builder: (context, setState) {
-              return YaruPopupMenuButton<Set<MyEnum>>(
-                initialValue: enumSet,
+              return YaruPopupMenuButton<MyEnum>(
+                onSelected: (value) {
+                  if (enumSet.contains(value)) {
+                    enumSet.remove(value);
+                  } else {
+                    enumSet.add(value);
+                  }
+                },
                 child: const Text('Multi Select'),
                 itemBuilder: (context) {
                   return [
                     for (final value in MyEnum.values)
-                      PopupMenuItem(
+                      YaruCheckMenuItem<MyEnum>(
                         padding: EdgeInsets.zero,
-                        child: YaruMultiSelectItem<MyEnum>(
-                          onTap: () {
-                            if (enumSet.contains(value)) {
-                              enumSet.remove(value);
-                            } else {
-                              enumSet.add(value);
-                            }
-                          },
-                          values: enumSet,
-                          value: value,
-                          child: Text(value.name),
-                        ),
+                        value: value,
+                        checked: enumSet.contains(value),
+                        child: Text(value.name),
                       )
                   ];
                 },
