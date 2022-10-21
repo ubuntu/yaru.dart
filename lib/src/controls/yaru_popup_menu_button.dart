@@ -108,7 +108,7 @@ class YaruMultiSelectItem<T> extends StatefulWidget {
     super.key,
     required this.values,
     required this.value,
-    this.contentPadding = EdgeInsets.zero,
+    this.contentPadding = const EdgeInsets.only(left: 15),
     required this.child,
     required this.onTap,
     this.enabled = true,
