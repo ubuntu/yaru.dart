@@ -10,6 +10,7 @@ class PopupPage extends StatefulWidget {
 
 class _PopupPageState extends State<PopupPage> {
   MyEnum myEnum = MyEnum.option1;
+  Set<MyEnum> enumSet = {MyEnum.option1, MyEnum.option3};
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,6 +37,33 @@ class _PopupPageState extends State<PopupPage> {
               ];
             },
           ),
+          const SizedBox(
+            width: 10,
+          ),
+          StatefulBuilder(
+            builder: (context, setState) {
+              return YaruPopupMenuButton<Set<MyEnum>>(
+                initialValue: enumSet,
+                child: const Text('Multi Select'),
+                onSelected: (v) => setState(() {
+                  enumSet = v;
+                }),
+                itemBuilder: (context) {
+                  return [
+                    for (final value in MyEnum.values)
+                      PopupMenuItem(
+                        padding: EdgeInsets.zero,
+                        child: YaruMultiSelectItem<MyEnum>(
+                          enumSet: enumSet,
+                          value: value,
+                          child: Text(value.name),
+                        ),
+                      )
+                  ];
+                },
+              );
+            },
+          )
         ],
       ),
     );

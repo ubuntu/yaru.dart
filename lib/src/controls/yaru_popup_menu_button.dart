@@ -102,3 +102,50 @@ class _YaruPopupDecoration extends StatelessWidget {
     );
   }
 }
+
+class YaruMultiSelectItem<T> extends StatefulWidget {
+  const YaruMultiSelectItem({
+    super.key,
+    required this.enumSet,
+    required this.value,
+    this.contentPadding = const EdgeInsets.only(right: 2, left: 10),
+    required this.child,
+  });
+
+  final Set<T> enumSet;
+  final T value;
+  final Widget child;
+  final EdgeInsets contentPadding;
+
+  @override
+  State<YaruMultiSelectItem> createState() => _YaruMultiSelectItemState();
+}
+
+class _YaruMultiSelectItemState extends State<YaruMultiSelectItem> {
+  @override
+  Widget build(BuildContext context) {
+    final iconColor = Theme.of(context).colorScheme.onSurface;
+    return ListTile(
+      contentPadding: widget.contentPadding,
+      onTap: () {
+        setState(() {
+          if (widget.enumSet.contains(widget.value)) {
+            widget.enumSet.remove(widget.value);
+          } else {
+            widget.enumSet.add(widget.value);
+          }
+        });
+      },
+      leading: widget.enumSet.contains(widget.value)
+          ? Icon(
+              YaruIcons.checkbox_button_checked,
+              color: iconColor,
+            )
+          : Icon(
+              YaruIcons.checkbox_button,
+              color: iconColor,
+            ),
+      title: widget.child,
+    );
+  }
+}
