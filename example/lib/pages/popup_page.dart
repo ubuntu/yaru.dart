@@ -45,9 +45,6 @@ class _PopupPageState extends State<PopupPage> {
               return YaruPopupMenuButton<Set<MyEnum>>(
                 initialValue: enumSet,
                 child: const Text('Multi Select'),
-                onSelected: (v) => setState(() {
-                  enumSet = v;
-                }),
                 itemBuilder: (context) {
                   return [
                     for (final value in MyEnum.values)
