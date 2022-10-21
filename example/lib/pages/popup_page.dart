@@ -24,16 +24,18 @@ class _PopupPageState extends State<PopupPage> {
               });
             },
             child: Text(myEnum.name),
-            items: [
-              for (final value in MyEnum.values)
-                PopupMenuItem(
-                  value: value,
-                  child: Text(
-                    value.name,
-                  ),
-                )
-            ],
-          )
+            itemBuilder: (context) {
+              return [
+                for (final value in MyEnum.values)
+                  PopupMenuItem(
+                    value: value,
+                    child: Text(
+                      value.name,
+                    ),
+                  )
+              ];
+            },
+          ),
         ],
       ),
     );
