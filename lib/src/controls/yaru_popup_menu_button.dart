@@ -15,6 +15,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.tooltip,
     this.position = PopupMenuPosition.under,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
+    this.childPadding = const EdgeInsets.symmetric(horizontal: 5),
     this.enabled = true,
   });
 
@@ -26,6 +27,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final PopupMenuPosition position;
   final List<PopupMenuEntry<T>> Function(BuildContext) itemBuilder;
   final EdgeInsets padding;
+  final EdgeInsets childPadding;
   final bool enabled;
 
   @override
@@ -46,6 +48,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
           child: _YaruPopupDecoration(
             child: child,
             padding: padding,
+            childPadding: childPadding,
           ),
         ),
       ),
@@ -59,10 +62,12 @@ class _YaruPopupDecoration extends StatelessWidget {
     super.key,
     required this.child,
     required this.padding,
+    required this.childPadding,
   });
 
   final Widget child;
   final EdgeInsets padding;
+  final EdgeInsets childPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +77,7 @@ class _YaruPopupDecoration extends StatelessWidget {
         fontWeight: FontWeight.w500,
       ),
       child: Container(
-        padding: padding,
+        padding: childPadding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(kYaruButtonRadius),
           border: Border.all(color: Theme.of(context).dividerColor),
