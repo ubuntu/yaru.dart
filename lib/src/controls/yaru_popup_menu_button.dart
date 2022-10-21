@@ -141,18 +141,35 @@ class _YaruMultiSelectItemState extends State<YaruMultiSelectItem> {
         });
       },
       leading: widget.values.contains(widget.value)
-          ? Icon(
-              YaruIcons.checkbox_button_checked,
-              color: iconColor,
-              size: 20,
+          ? AnimatedContainer(
+              height: 18,
+              width: 18,
+              duration: const Duration(
+                milliseconds: 200,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Icon(
+                Icons.check,
+                color: iconColor,
+                size: 18,
+              ),
             )
-          : Icon(
-              YaruIcons.checkbox_button,
-              color: iconColor,
-              size: 20,
+          : AnimatedContainer(
+              height: 18,
+              width: 18,
+              duration: const Duration(
+                milliseconds: 200,
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(color: iconColor, width: 2),
+                borderRadius: BorderRadius.circular(4),
+              ),
             ),
       title: DefaultTextStyle(
-        style: TextStyle(color: iconColor, fontSize: 15),
+        style: TextStyle(color: iconColor, fontSize: 16),
         child: widget.child,
       ),
     );
