@@ -108,9 +108,10 @@ class YaruMultiSelectItem<T> extends StatefulWidget {
     super.key,
     required this.values,
     required this.value,
-    this.contentPadding = const EdgeInsets.only(right: 2, left: 10),
+    this.contentPadding = EdgeInsets.zero,
     required this.child,
     required this.onTap,
+    this.enabled = true,
   });
 
   final Set<T> values;
@@ -118,6 +119,7 @@ class YaruMultiSelectItem<T> extends StatefulWidget {
   final T value;
   final Widget child;
   final EdgeInsets contentPadding;
+  final bool enabled;
 
   @override
   State<YaruMultiSelectItem> createState() => _YaruMultiSelectItemState();
@@ -126,8 +128,12 @@ class YaruMultiSelectItem<T> extends StatefulWidget {
 class _YaruMultiSelectItemState extends State<YaruMultiSelectItem> {
   @override
   Widget build(BuildContext context) {
-    final iconColor = Theme.of(context).colorScheme.onSurface;
+    final iconColor = widget.enabled
+        ? Theme.of(context).colorScheme.onSurface
+        : Theme.of(context).disabledColor;
     return ListTile(
+      visualDensity: VisualDensity.compact,
+      enabled: widget.enabled,
       contentPadding: widget.contentPadding,
       onTap: () {
         setState(() {
@@ -138,12 +144,17 @@ class _YaruMultiSelectItemState extends State<YaruMultiSelectItem> {
           ? Icon(
               YaruIcons.checkbox_button_checked,
               color: iconColor,
+              size: 20,
             )
           : Icon(
               YaruIcons.checkbox_button,
               color: iconColor,
+              size: 20,
             ),
-      title: widget.child,
+      title: DefaultTextStyle(
+        style: TextStyle(color: iconColor, fontSize: 15),
+        child: widget.child,
+      ),
     );
   }
 }
