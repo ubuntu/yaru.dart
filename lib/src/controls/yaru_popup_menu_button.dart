@@ -128,9 +128,12 @@ class YaruMultiSelectItem<T> extends StatefulWidget {
 class _YaruMultiSelectItemState extends State<YaruMultiSelectItem> {
   @override
   Widget build(BuildContext context) {
-    final iconColor = widget.enabled
+    final textColor = widget.enabled
         ? Theme.of(context).colorScheme.onSurface
         : Theme.of(context).disabledColor;
+    final borderColor = Theme.of(context).colorScheme.onSurface.withOpacity(
+          Theme.of(context).brightness == Brightness.light ? 0.4 : 1,
+        );
     return ListTile(
       visualDensity: VisualDensity.compact,
       enabled: widget.enabled,
@@ -151,9 +154,9 @@ class _YaruMultiSelectItemState extends State<YaruMultiSelectItem> {
                 color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.check,
-                color: iconColor,
+                color: Colors.white,
                 size: 18,
               ),
             )
@@ -164,12 +167,15 @@ class _YaruMultiSelectItemState extends State<YaruMultiSelectItem> {
                 milliseconds: 200,
               ),
               decoration: BoxDecoration(
-                border: Border.all(color: iconColor, width: 2),
+                border: Border.all(
+                  color: borderColor,
+                  width: 2,
+                ),
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
       title: DefaultTextStyle(
-        style: TextStyle(color: iconColor, fontSize: 16),
+        style: TextStyle(color: textColor, fontSize: 16),
         child: widget.child,
       ),
     );
