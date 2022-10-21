@@ -42,47 +42,28 @@ class _PopupPageState extends State<PopupPage> {
           ),
           StatefulBuilder(
             builder: (context, setState) {
-              return YaruPopupMenuButton<MyEnum>(
-                initialValue: myEnum,
+              return YaruPopupMenuButton<Set<MyEnum>>(
+                initialValue: enumSet,
                 child: const Text('Multi Select'),
-                onSelected: (value) {
-                  setState(() {
-                    if (enumSet.contains(value)) {
-                      enumSet.remove(value);
-                    } else {
-                      enumSet.add(value);
-                    }
-                  });
-                },
                 itemBuilder: (context) {
                   return [
                     for (final value in MyEnum.values)
-                      YaruCheckItem<MyEnum>(
+                      PopupMenuItem(
                         padding: EdgeInsets.zero,
-                        value: value,
-                        checked: enumSet.contains(value),
-                        child: Text(value.name),
-                      ),
+                        child: YaruMultiSelectItem<MyEnum>(
+                          onTap: () {
+                            if (enumSet.contains(value)) {
+                              enumSet.remove(value);
+                            } else {
+                              enumSet.add(value);
+                            }
+                          },
+                          values: enumSet,
+                          value: value,
+                          child: Text(value.name),
+                        ),
+                      )
                   ];
-
-                  // return [
-                  //   for (final value in MyEnum.values)
-                  //     PopupMenuItem(
-                  //       padding: EdgeInsets.zero,
-                  //       child: YaruMultiSelectItem<MyEnum>(
-                  //         onTap: () {
-                  //           if (enumSet.contains(value)) {
-                  //             enumSet.remove(value);
-                  //           } else {
-                  //             enumSet.add(value);
-                  //           }
-                  //         },
-                  //         values: enumSet,
-                  //         value: value,
-                  //         child: Text(value.name),
-                  //       ),
-                  //     )
-                  // ];
                 },
               );
             },
