@@ -106,13 +106,15 @@ class _YaruPopupDecoration extends StatelessWidget {
 class YaruMultiSelectItem<T> extends StatefulWidget {
   const YaruMultiSelectItem({
     super.key,
-    required this.enumSet,
+    required this.values,
     required this.value,
     this.contentPadding = const EdgeInsets.only(right: 2, left: 10),
     required this.child,
+    required this.onTap,
   });
 
-  final Set<T> enumSet;
+  final Set<T> values;
+  final void Function() onTap;
   final T value;
   final Widget child;
   final EdgeInsets contentPadding;
@@ -129,14 +131,10 @@ class _YaruMultiSelectItemState extends State<YaruMultiSelectItem> {
       contentPadding: widget.contentPadding,
       onTap: () {
         setState(() {
-          if (widget.enumSet.contains(widget.value)) {
-            widget.enumSet.remove(widget.value);
-          } else {
-            widget.enumSet.add(widget.value);
-          }
+          widget.onTap();
         });
       },
-      leading: widget.enumSet.contains(widget.value)
+      leading: widget.values.contains(widget.value)
           ? Icon(
               YaruIcons.checkbox_button_checked,
               color: iconColor,

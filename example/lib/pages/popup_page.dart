@@ -54,7 +54,14 @@ class _PopupPageState extends State<PopupPage> {
                       PopupMenuItem(
                         padding: EdgeInsets.zero,
                         child: YaruMultiSelectItem<MyEnum>(
-                          enumSet: enumSet,
+                          onTap: () {
+                            if (enumSet.contains(value)) {
+                              enumSet.remove(value);
+                            } else {
+                              enumSet.add(value);
+                            }
+                          },
+                          values: enumSet,
                           value: value,
                           child: Text(value.name),
                         ),
