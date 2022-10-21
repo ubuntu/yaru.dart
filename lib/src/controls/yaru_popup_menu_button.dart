@@ -14,7 +14,8 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.onCanceled,
     this.tooltip,
     this.position = PopupMenuPosition.under,
-    this.childPadding = const EdgeInsets.symmetric(horizontal: 5),
+    this.padding = const EdgeInsets.symmetric(horizontal: 5),
+    this.enabled = true,
   });
 
   final T initialValue;
@@ -24,7 +25,8 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final String? tooltip;
   final PopupMenuPosition position;
   final List<PopupMenuEntry<T>> Function(BuildContext) itemBuilder;
-  final EdgeInsets childPadding;
+  final EdgeInsets padding;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,8 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: PopupMenuButton(
+          enabled: enabled,
+          position: position,
           padding: EdgeInsets.zero,
           initialValue: initialValue,
           onSelected: onSelected,
@@ -41,7 +45,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
           itemBuilder: itemBuilder,
           child: _YaruPopupDecoration(
             child: child,
-            childPadding: childPadding,
+            padding: padding,
           ),
         ),
       ),
@@ -54,11 +58,11 @@ class _YaruPopupDecoration extends StatelessWidget {
     // ignore: unused_element
     super.key,
     required this.child,
-    required this.childPadding,
+    required this.padding,
   });
 
   final Widget child;
-  final EdgeInsets childPadding;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -68,28 +72,26 @@ class _YaruPopupDecoration extends StatelessWidget {
         fontWeight: FontWeight.w500,
       ),
       child: Container(
+        padding: padding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(kYaruButtonRadius),
           border: Border.all(color: Theme.of(context).dividerColor),
         ),
-        child: Padding(
-          padding: childPadding,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: childPadding,
-                child: child,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: padding,
+              child: child,
+            ),
+            const SizedBox(
+              height: 40,
+              child: Icon(
+                YaruIcons.pan_down,
+                size: 20,
               ),
-              const SizedBox(
-                height: 40,
-                child: Icon(
-                  YaruIcons.pan_down,
-                  size: 20,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
