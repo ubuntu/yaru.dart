@@ -12,22 +12,38 @@ typedef YaruMasterDetailBuilder = Widget Function(
   bool selected,
 );
 
+/// A responsive master-detail page.
+///
+/// [YaruMasterDetailPage] automatically switches between portrait and landscape
+/// modes using [kYaruMasterDetailBreakpoint] by default as a breakpoint width.
+///
+/// ```dart
+/// YaruMasterDetailPage(
+///   leftPaneWidth: 280,
+///   length: 8,
+///   appBar: AppBar(title: const Text('Master')),
+///   tileBuilder: (context, index, selected) => YaruMasterTile(
+///     leading: const Icon(YaruIcons.menu),
+///     title: Text('Master $index'),
+///   ),
+///   pageBuilder: (context, index) => YaruDetailPage(
+///     appBar: AppBar(
+///       title: Text('Detail $index'),
+///     ),
+///     body: Center(child: Text('Detail $index')),
+///   ),
+/// )
+/// ```
+///
+/// | Portrait | Landscape |
+/// |---|---|
+/// | ![portrait](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_master_detail_page-portrait.png) | ![landscape](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_master_detail_page-landscape.png) |
+///
+/// See also:
+///  * [YaruMasterTile] - provides the recommended layout for [tileBuilder].
+///  * [YaruDetailPage] - provides the recommended layout for [pageBuilder].
+///  * [YaruMasterDetailTheme] - allows customizing the looks of [YaruMasterDetailPage].
 class YaruMasterDetailPage extends StatefulWidget {
-  /// Creates a basic responsive layout with yaru theme,
-  /// renders layout based on [width] constrain.
-  ///
-  /// * if [constraints.maxWidth] < 620 the widget will render [YaruPortraitLayout]
-  /// * if [constraints.maxWidth] > 620 widget will render [YaruLandscapeLayout]
-  ///
-  /// for example:
-  /// ```dart
-  /// YaruMasterDetailPage(
-  ///       appBarHeight: 48,
-  ///       leftPaneWidth: 280,
-  ///       previousIconData: YaruIcons.go_previous,
-  ///      pageItems: pageItems,
-  ///     );
-  /// ```
   const YaruMasterDetailPage({
     super.key,
     required this.length,

@@ -4,9 +4,9 @@ import 'package:yaru/yaru.dart';
 
 import '../constants.dart';
 
+/// Holds theme data for [YaruMasterDetailTheme].
 @immutable
 class YaruMasterDetailThemeData with Diagnosticable {
-  /// Creates a theme that can be used with [YaruMasterDetailPage].
   const YaruMasterDetailThemeData({
     this.breakpoint,
     this.tileSpacing,
@@ -94,6 +94,7 @@ class YaruMasterDetailThemeData with Diagnosticable {
   }
 }
 
+/// Applies theme to a descendant [YaruMasterDetailPage].
 class YaruMasterDetailTheme extends InheritedTheme {
   const YaruMasterDetailTheme({
     super.key,

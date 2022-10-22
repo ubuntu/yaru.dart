@@ -6,6 +6,9 @@ const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
 const Duration _kSelectedTileAnimationDuration = Duration(milliseconds: 250);
 
+/// Provides the recommended layout for [YaruMasterDetailPage.tileBuilder].
+///
+/// This widget is structurally similar to [ListTile].
 class YaruMasterTile extends StatelessWidget {
   const YaruMasterTile({
     super.key,
@@ -17,11 +20,22 @@ class YaruMasterTile extends StatelessWidget {
     this.onTap,
   });
 
+  /// See [ListTile.selected].
   final bool? selected;
+
+  /// See [ListTile.leading].
   final Widget? leading;
+
+  /// See [ListTile.title].
   final Widget? title;
+
+  /// See [ListTile.subtitle].
   final Widget? subtitle;
+
+  /// See [ListTile.trailing].
   final Widget? trailing;
+
+  /// See [ListTile.onTap].
   final Function()? onTap;
 
   @override
