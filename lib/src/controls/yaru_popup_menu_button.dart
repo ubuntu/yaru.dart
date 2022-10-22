@@ -7,7 +7,7 @@ import '../constants.dart';
 class YaruPopupMenuButton<T> extends StatelessWidget {
   const YaruPopupMenuButton({
     super.key,
-    required this.initialValue,
+    this.initialValue,
     required this.child,
     required this.itemBuilder,
     this.onSelected,
@@ -19,7 +19,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.enabled = true,
   });
 
-  final T initialValue;
+  final T? initialValue;
   final Widget child;
   final Function(T)? onSelected;
   final Function()? onCanceled;
