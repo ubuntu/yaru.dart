@@ -102,3 +102,95 @@ class _YaruPopupDecoration extends StatelessWidget {
     );
   }
 }
+
+class YaruCheckedPopupMenuItem<T> extends PopupMenuItem<T> {
+  /// Creates a popup menu item with a checkmark.
+  ///
+  /// By default, the menu item is [enabled] but unchecked. To mark the item as
+  /// checked, set [checked] to true.
+  ///
+  /// The `checked` and `enabled` arguments must not be null.
+  const YaruCheckedPopupMenuItem({
+    super.key,
+    super.value,
+    this.checked = false,
+    super.enabled,
+    super.padding,
+    super.height,
+    super.mouseCursor,
+    super.child,
+  });
+
+  final bool checked;
+
+  @override
+  PopupMenuItemState<T, YaruCheckedPopupMenuItem<T>> createState() =>
+      _YaruCheckedPopupMenuItemState<T>();
+}
+
+class _YaruCheckedPopupMenuItemState<T>
+    extends PopupMenuItemState<T, YaruCheckedPopupMenuItem<T>> {
+  @override
+  Widget buildChild() {
+    return IgnorePointer(
+      child: ListTile(
+        minLeadingWidth: 18,
+        enabled: widget.enabled,
+        leading: _YaruCheckMark(
+          checked: widget.checked,
+        ),
+        title: widget.child,
+      ),
+    );
+  }
+}
+
+class _YaruCheckMark extends StatelessWidget {
+  const _YaruCheckMark({
+    // ignore: unused_element
+    super.key,
+    required this.checked,
+  });
+
+  final bool checked;
+
+  @override
+  Widget build(BuildContext context) {
+    final borderColor = Theme.of(context).colorScheme.onSurface.withOpacity(
+          Theme.of(context).brightness == Brightness.light ? 0.4 : 1,
+        );
+    const size = 18.0;
+    const duration = 200;
+    return checked
+        ? AnimatedContainer(
+            height: size,
+            width: size,
+            duration: const Duration(
+              milliseconds: duration,
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: const Icon(
+              Icons.check,
+              color: Colors.white,
+              size: size,
+            ),
+          )
+        : AnimatedContainer(
+            height: size,
+            width: size,
+            duration: const Duration(
+              milliseconds: duration,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: borderColor,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(4),
+            ),
+          );
+  }
+}
