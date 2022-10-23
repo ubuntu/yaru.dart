@@ -34,7 +34,7 @@ class YaruCompactLayout extends StatefulWidget {
   /// A builder that is called for each page to build its content.
   final IndexedWidgetBuilder pageBuilder;
 
-  /// The index of the [YaruPageItem] that is selected from [pageItems]
+  /// The index of the initial page to show.
   final int initialIndex;
 
   /// Called when the user selects a page.
