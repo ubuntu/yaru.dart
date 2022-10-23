@@ -36,7 +36,7 @@ class YaruTitleBar extends StatelessWidget {
       automaticallyImplyLeading: false,
       title: title,
       centerTitle: centerTitle,
-      toolbarHeight: kYaruDialogTitleHeight,
+      toolbarHeight: kYaruTitleBarHeight,
       backgroundColor: Colors.transparent,
       titleTextStyle: Theme.of(context).dialogTheme.titleTextStyle,
       actions: [
