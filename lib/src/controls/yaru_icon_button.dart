@@ -63,24 +63,24 @@ class YaruIconButton extends StatelessWidget {
       }),
       overlayColor: MaterialStateProperty.resolveWith((states) {
         if (states.contains(MaterialState.selected)) {
+          if (states.contains(MaterialState.pressed)) {
+            return colors.onSurface.withOpacity(0.12);
+          }
           if (states.contains(MaterialState.hovered)) {
             return colors.onSurface.withOpacity(0.08);
           }
           if (states.contains(MaterialState.focused)) {
             return colors.onSurface.withOpacity(0.12);
           }
-          if (states.contains(MaterialState.pressed)) {
-            return colors.onSurface.withOpacity(0.12);
-          }
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return colors.onSurfaceVariant.withOpacity(0.12);
         }
         if (states.contains(MaterialState.hovered)) {
           return colors.onSurfaceVariant.withOpacity(0.08);
         }
         if (states.contains(MaterialState.focused)) {
           return colors.onSurfaceVariant.withOpacity(0.08);
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return colors.onSurfaceVariant.withOpacity(0.12);
         }
         return null;
       }),
