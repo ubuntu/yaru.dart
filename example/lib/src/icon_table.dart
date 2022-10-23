@@ -26,7 +26,7 @@ class YaruIconTable extends StatelessWidget {
           ],
           dataRowHeight: iconSizeProvider.size + 16,
           rows: [
-            for (var i = 0; i < _iconNames.length; i += 2)
+            for (var i = 0; i < _iconNames.length; i += 1)
               DataRow(
                 cells: [
                   DataCell(
