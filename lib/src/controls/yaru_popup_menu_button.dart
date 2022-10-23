@@ -134,6 +134,7 @@ class _YaruCheckedPopupMenuItemState<T>
   Widget buildChild() {
     return IgnorePointer(
       child: ListTile(
+        minLeadingWidth: 18,
         enabled: widget.enabled,
         leading: _YaruCheckMark(
           checked: widget.checked,
