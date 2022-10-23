@@ -64,8 +64,8 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('indeterminate'),
-  ...goldenThemeVariants('empty', {}, 0.0),
-  ...goldenThemeVariants('half', {}, 0.5),
-  ...goldenThemeVariants('full', {}, 1.0),
+  ...goldenThemeVariants('indeterminate', null),
+  ...goldenThemeVariants('empty', 0.0),
+  ...goldenThemeVariants('half', 0.5),
+  ...goldenThemeVariants('full', 1.0),
 });
