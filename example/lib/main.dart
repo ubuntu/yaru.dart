@@ -1,6 +1,6 @@
 import 'package:example/src/animated_icons_grid.dart';
 import 'package:example/src/icon_size_provider.dart';
-import 'package:example/src/icons_grid.dart';
+import 'package:example/src/icon_table.dart';
 import 'package:provider/provider.dart';
 import 'package:yaru_colors/yaru_colors.dart';
 import 'package:yaru_icons/yaru_icons.dart';
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
                 ),
                 body: TabBarView(
                   children: [
-                    YaruIconsGrid(),
+                    YaruIconTable(),
                     YaruAnimatedIconsGrid(),
                   ],
                 ),
