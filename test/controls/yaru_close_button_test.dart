@@ -36,7 +36,7 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('normal'),
-  ...goldenThemeVariants('hovered', {MaterialState.hovered: true}),
-  ...goldenThemeVariants('pressed', {MaterialState.pressed: true}),
+  ...goldenThemeVariants('normal', <MaterialState>{}),
+  ...goldenThemeVariants('hovered', {MaterialState.hovered}),
+  ...goldenThemeVariants('pressed', {MaterialState.pressed}),
 });

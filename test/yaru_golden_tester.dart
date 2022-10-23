@@ -42,59 +42,56 @@ extension YaruGoldenTester on WidgetTester {
 }
 
 @immutable
-class YaruGoldenVariant {
+class YaruGoldenVariant<T> {
   YaruGoldenVariant({
     required String label,
     required this.themeMode,
-    this.states = const {},
     this.value,
   }) : label = '$label-${themeMode.name}';
 
   final String label;
   final ThemeMode themeMode;
-  final Map<MaterialState, bool> states;
-  final dynamic value;
-
-  bool hasState(MaterialState state) => states[state] == true;
+  final T? value;
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    final mapEquals = const MapEquality().equals;
+    final deepEquals = const DeepCollectionEquality().equals;
     return other is YaruGoldenVariant &&
         other.label == label &&
         other.themeMode == themeMode &&
-        mapEquals(other.states, states) &&
-        other.value == value;
+        deepEquals(other.value, value);
   }
 
   @override
   int get hashCode {
-    final mapHash = const MapEquality().hash;
-    return Object.hash(label, themeMode, mapHash(states), value);
+    final deepHash = const DeepCollectionEquality().hash;
+    return Object.hash(label, themeMode, deepHash(value));
   }
 
   @override
-  String toString() =>
-      '$label: themeMode: $themeMode, states: $states, value: $value';
+  String toString() => '$label: themeMode: $themeMode, value: $value';
 }
 
-List<YaruGoldenVariant> goldenThemeVariants(
-  String label, [
-  Map<MaterialState, bool> states = const {},
-  dynamic value,
-]) {
+extension YaruGoldenVariantStateSet on YaruGoldenVariant<Set<MaterialState>> {
+  bool hasState(MaterialState state) => value?.contains(state) == true;
+}
+
+extension YaruGoldenVariantStateMap
+    on YaruGoldenVariant<Map<MaterialState, bool>> {
+  bool hasState(MaterialState state) => value?[state] == true;
+}
+
+List<YaruGoldenVariant<T>> goldenThemeVariants<T>(String label, [T? value]) {
   return [
     YaruGoldenVariant(
       label: label,
       themeMode: ThemeMode.light,
-      states: states,
       value: value,
     ),
     YaruGoldenVariant(
       label: label,
       themeMode: ThemeMode.dark,
-      states: states,
       value: value,
     ),
   ];

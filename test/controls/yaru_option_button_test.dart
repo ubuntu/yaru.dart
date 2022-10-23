@@ -86,9 +86,9 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('normal'),
-  ...goldenThemeVariants('disabled', {MaterialState.disabled: true}),
-  ...goldenThemeVariants('focused', {MaterialState.focused: true}),
-  ...goldenThemeVariants('hovered', {MaterialState.hovered: true}),
-  ...goldenThemeVariants('pressed', {MaterialState.pressed: true}),
+  ...goldenThemeVariants('normal', <MaterialState>{}),
+  ...goldenThemeVariants('disabled', {MaterialState.disabled}),
+  ...goldenThemeVariants('focused', {MaterialState.focused}),
+  ...goldenThemeVariants('hovered', {MaterialState.hovered}),
+  ...goldenThemeVariants('pressed', {MaterialState.pressed}),
 });

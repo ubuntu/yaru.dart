@@ -18,7 +18,7 @@ void main() {
       await tester.pumpScaffold(
         YaruIconButton(
           autofocus: variant.hasState(MaterialState.focused),
-          isSelected: variant.states[MaterialState.selected],
+          isSelected: variant.value?[MaterialState.selected],
           onPressed: variant.hasState(MaterialState.disabled) ? null : () {},
           icon: const Icon(YaruIcons.star_filled),
         ),
@@ -47,7 +47,7 @@ void main() {
 
 final goldenVariant = ValueVariant({
   // normal (non-toggle) button
-  ...goldenThemeVariants('normal'),
+  ...goldenThemeVariants('normal', <MaterialState, bool>{}),
   ...goldenThemeVariants('disabled', {MaterialState.disabled: true}),
   ...goldenThemeVariants('focused', {MaterialState.focused: true}),
   ...goldenThemeVariants('hovered', {MaterialState.hovered: true}),
