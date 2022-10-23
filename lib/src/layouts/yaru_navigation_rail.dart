@@ -23,7 +23,7 @@ class YaruNavigationRail extends StatelessWidget {
   final YaruCompactLayoutBuilder itemBuilder;
 
   /// The index into [destinations] for the current selected
-  /// [YaruPageItem] or null if no destination is selected.
+  /// item or null if no destination is selected.
   final int? selectedIndex;
 
   /// Called when one of the [destinations] is selected.
