@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/src/controls/yaru_progress_indicator.dart';
 
+import '../yaru_golden_tester.dart';
+
 void main() {
   testWidgets('- YaruLinearProgressIndicator Test', (tester) async {
     await tester.pumpWidget(
@@ -35,4 +37,34 @@ void main() {
     expect(semanticLabelFinder, findsOneWidget);
     expect(semanticValueFinder, findsOneWidget);
   });
+
+  testWidgets(
+    'golden images',
+    (tester) async {
+      final variant = goldenVariant.currentValue!;
+
+      await tester.pumpScaffold(
+        YaruLinearProgressIndicator(value: variant.value),
+        themeMode: variant.themeMode,
+        size: const Size(200, 6),
+      );
+      await tester.pump();
+
+      await expectLater(
+        find.byType(YaruLinearProgressIndicator),
+        matchesGoldenFile(
+          'goldens/yaru_linear_progress_indicator-${variant.label}.png',
+        ),
+      );
+    },
+    variant: goldenVariant,
+    tags: 'golden',
+  );
 }
+
+final goldenVariant = ValueVariant({
+  ...goldenThemeVariants('indeterminate'),
+  ...goldenThemeVariants('empty', {}, 0.0),
+  ...goldenThemeVariants('half', {}, 0.5),
+  ...goldenThemeVariants('full', {}, 1.0),
+});
