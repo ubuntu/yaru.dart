@@ -47,11 +47,13 @@ class YaruGoldenVariant {
     required String label,
     required this.themeMode,
     this.states = const {},
+    this.value,
   }) : label = '$label-${themeMode.name}';
 
   final String label;
   final ThemeMode themeMode;
   final Map<MaterialState, bool> states;
+  final dynamic value;
 
   bool hasState(MaterialState state) => states[state] == true;
 
@@ -62,33 +64,38 @@ class YaruGoldenVariant {
     return other is YaruGoldenVariant &&
         other.label == label &&
         other.themeMode == themeMode &&
-        mapEquals(other.states, states);
+        mapEquals(other.states, states) &&
+        other.value == value;
   }
 
   @override
   int get hashCode {
     final mapHash = const MapEquality().hash;
-    return Object.hash(label, themeMode, mapHash(states));
+    return Object.hash(label, themeMode, mapHash(states), value);
   }
 
   @override
-  String toString() => '$label: themeMode: $themeMode, states: $states';
+  String toString() =>
+      '$label: themeMode: $themeMode, states: $states, value: $value';
 }
 
 List<YaruGoldenVariant> goldenThemeVariants(
   String label, [
   Map<MaterialState, bool> states = const {},
+  dynamic value,
 ]) {
   return [
     YaruGoldenVariant(
       label: label,
       themeMode: ThemeMode.light,
       states: states,
+      value: value,
     ),
     YaruGoldenVariant(
       label: label,
       themeMode: ThemeMode.dark,
       states: states,
+      value: value,
     ),
   ];
 }
