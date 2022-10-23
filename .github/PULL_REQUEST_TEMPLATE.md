@@ -1,9 +1,12 @@
 ## Pull request checklist
 
-- [ ] I added a before/after/light/dark table if the changes I made could change the components look
+- [ ] This PR does not introduce visual changes, or
+- [ ] I run `flutter test --update-goldens` and committed the changes if there were any, or
+- [ ] I added before/after/light/dark screenshots if the visual changes I made were not covered by golden tests
 
-<!-- Remove this if your change does not touch components -->
+<!--
 | |Before|After|
 |-|-|-|
 |Light| | |
 |Dark| | |
+-->
