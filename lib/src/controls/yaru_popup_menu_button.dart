@@ -125,10 +125,10 @@ class YaruCheckedPopupMenuItem<T> extends PopupMenuItem<T> {
 
   @override
   PopupMenuItemState<T, YaruCheckedPopupMenuItem<T>> createState() =>
-      _CheckedPopupMenuItemState<T>();
+      _YaruCheckedPopupMenuItemState<T>();
 }
 
-class _CheckedPopupMenuItemState<T>
+class _YaruCheckedPopupMenuItemState<T>
     extends PopupMenuItemState<T, YaruCheckedPopupMenuItem<T>> {
   @override
   Widget buildChild() {
