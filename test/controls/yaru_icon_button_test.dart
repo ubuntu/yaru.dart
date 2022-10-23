@@ -11,6 +11,7 @@ void main() {
     (tester) async {
       final variant = goldenVariant.currentValue!;
 
+      // ensure traditional focus highlight
       FocusManager.instance.highlightStrategy =
           FocusHighlightStrategy.alwaysTraditional;
 
