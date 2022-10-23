@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_icons/yaru_icons.dart';
@@ -16,7 +14,7 @@ void main() {
       FocusManager.instance.highlightStrategy =
           FocusHighlightStrategy.alwaysTraditional;
 
-      await tester.pumpYaruWidget(
+      await tester.pumpScaffold(
         YaruIconButton(
           autofocus: variant.hasState(MaterialState.focused),
           isSelected: variant.states[MaterialState.selected],
@@ -28,18 +26,11 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.hovered) ||
-          variant.hasState(MaterialState.pressed)) {
-        final gesture =
-            await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer();
-        addTearDown(gesture.removePointer);
-
-        final center = tester.getCenter(find.byType(YaruIconButton));
-        await gesture.moveTo(center);
-        if (variant.hasState(MaterialState.pressed)) {
-          await gesture.down(center);
-        }
+      if (variant.hasState(MaterialState.pressed)) {
+        await tester.down(find.byType(YaruIconButton));
+        await tester.pumpAndSettle();
+      } else if (variant.hasState(MaterialState.hovered)) {
+        await tester.hover(find.byType(YaruIconButton));
         await tester.pumpAndSettle();
       }
 
@@ -55,97 +46,45 @@ void main() {
 
 final goldenVariant = ValueVariant({
   // normal (non-toggle) button
-  ...themeVariants('normal'),
-  ...themeVariants('disabled', {MaterialState.disabled: true}),
-  ...themeVariants('focused', {MaterialState.focused: true}),
-  ...themeVariants('hovered', {MaterialState.hovered: true}),
-  ...themeVariants('pressed', {MaterialState.pressed: true}),
+  ...goldenThemeVariants('normal'),
+  ...goldenThemeVariants('disabled', {MaterialState.disabled: true}),
+  ...goldenThemeVariants('focused', {MaterialState.focused: true}),
+  ...goldenThemeVariants('hovered', {MaterialState.hovered: true}),
+  ...goldenThemeVariants('pressed', {MaterialState.pressed: true}),
   // selected toggle button
-  ...themeVariants('selected', {MaterialState.selected: true}),
-  ...themeVariants('selected-disabled', {
+  ...goldenThemeVariants('selected', {MaterialState.selected: true}),
+  ...goldenThemeVariants('selected-disabled', {
     MaterialState.selected: true,
     MaterialState.disabled: true,
   }),
-  ...themeVariants('selected-focused', {
+  ...goldenThemeVariants('selected-focused', {
     MaterialState.selected: true,
     MaterialState.focused: true,
   }),
-  ...themeVariants('selected-hovered', {
+  ...goldenThemeVariants('selected-hovered', {
     MaterialState.selected: true,
     MaterialState.hovered: true,
   }),
-  ...themeVariants('selected-pressed', {
+  ...goldenThemeVariants('selected-pressed', {
     MaterialState.selected: true,
     MaterialState.pressed: true,
   }),
   // unselected toggle button
-  ...themeVariants('unselected', {MaterialState.selected: false}),
-  ...themeVariants('unselected-disabled', {
+  ...goldenThemeVariants('unselected', {MaterialState.selected: false}),
+  ...goldenThemeVariants('unselected-disabled', {
     MaterialState.selected: false,
     MaterialState.disabled: true,
   }),
-  ...themeVariants('unselected-focused', {
+  ...goldenThemeVariants('unselected-focused', {
     MaterialState.selected: false,
     MaterialState.focused: true,
   }),
-  ...themeVariants('unselected-hovered', {
+  ...goldenThemeVariants('unselected-hovered', {
     MaterialState.selected: false,
     MaterialState.hovered: true,
   }),
-  ...themeVariants('unselected-pressed', {
+  ...goldenThemeVariants('unselected-pressed', {
     MaterialState.selected: false,
     MaterialState.pressed: true,
   }),
 });
-
-List<YaruIconButtonVariant> themeVariants(
-  String label, [
-  Map<MaterialState, bool> states = const {},
-]) {
-  return [
-    YaruIconButtonVariant(
-      label: label,
-      themeMode: ThemeMode.light,
-      states: states,
-    ),
-    YaruIconButtonVariant(
-      label: label,
-      themeMode: ThemeMode.dark,
-      states: states,
-    ),
-  ];
-}
-
-@immutable
-class YaruIconButtonVariant {
-  YaruIconButtonVariant({
-    required String label,
-    required this.themeMode,
-    this.states = const {},
-  }) : label = '$label-${themeMode.name}';
-
-  final String label;
-  final ThemeMode themeMode;
-  final Map<MaterialState, bool> states;
-
-  bool hasState(MaterialState state) => states[state] == true;
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    final mapEquals = const MapEquality().equals;
-    return other is YaruIconButtonVariant &&
-        other.label == label &&
-        other.themeMode == themeMode &&
-        mapEquals(other.states, states);
-  }
-
-  @override
-  int get hashCode {
-    final mapHash = const MapEquality().hash;
-    return Object.hash(label, themeMode, mapHash(states));
-  }
-
-  @override
-  String toString() => '$label: themeMode: $themeMode, states: $states';
-}
