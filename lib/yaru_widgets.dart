@@ -31,7 +31,6 @@ export 'src/pages/yaru_section.dart';
 export 'src/pages/yaru_tabbed_page.dart';
 export 'src/pages/yaru_tile.dart';
 // Utilities
-export 'src/utilities/ubuntu_logo.dart';
 export 'src/utilities/yaru_banner.dart';
 export 'src/utilities/yaru_carousel.dart';
 export 'src/utilities/yaru_draggable.dart';
