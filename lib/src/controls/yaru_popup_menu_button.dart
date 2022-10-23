@@ -194,3 +194,59 @@ class _YaruCheckMark extends StatelessWidget {
           );
   }
 }
+
+class YaruMultiSelectPopupMenuItem<T> extends PopupMenuItem<T> {
+  /// Creates a popup menu item with a checkmark that does not close on tap.
+  ///
+  /// By default, the menu item is [enabled] but unchecked. To mark the item as
+  /// checked, set [checked] to true.
+  ///
+  /// The `checked` and `enabled` arguments must not be null.
+  const YaruMultiSelectPopupMenuItem({
+    super.key,
+    super.value,
+    this.checked = false,
+    super.enabled,
+    super.padding,
+    super.height,
+    super.mouseCursor,
+    super.child,
+    this.onChanged,
+  });
+
+  final bool checked;
+  final ValueChanged<bool>? onChanged;
+
+  @override
+  PopupMenuItemState<T, YaruMultiSelectPopupMenuItem<T>> createState() =>
+      _YaruMultiSelectPopupMenuItemState<T>();
+}
+
+class _YaruMultiSelectPopupMenuItemState<T>
+    extends PopupMenuItemState<T, YaruMultiSelectPopupMenuItem<T>> {
+  var _checked = false;
+
+  @override
+  void handleTap() {
+    setState(() => _checked = !_checked);
+    widget.onChanged?.call(_checked);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _checked = widget.checked;
+  }
+
+  @override
+  Widget buildChild() {
+    return IgnorePointer(
+      child: ListTile(
+        minLeadingWidth: 18,
+        enabled: widget.enabled,
+        leading: _YaruCheckMark(checked: _checked),
+        title: widget.child,
+      ),
+    );
+  }
+}
