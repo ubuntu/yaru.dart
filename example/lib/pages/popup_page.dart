@@ -54,7 +54,7 @@ class _PopupPageState extends State<PopupPage> {
                 itemBuilder: (context) {
                   return [
                     for (final value in MyEnum.values)
-                      YaruCheckMenuItem<MyEnum>(
+                      YaruCheckedPopupMenuItem<MyEnum>(
                         padding: EdgeInsets.zero,
                         value: value,
                         checked: enumSet.contains(value),

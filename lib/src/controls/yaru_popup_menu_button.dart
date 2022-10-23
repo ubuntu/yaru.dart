@@ -103,93 +103,14 @@ class _YaruPopupDecoration extends StatelessWidget {
   }
 }
 
-class YaruMultiSelectItem<T> extends StatefulWidget {
-  const YaruMultiSelectItem({
-    super.key,
-    required this.values,
-    required this.value,
-    this.contentPadding = const EdgeInsets.only(left: 15),
-    required this.child,
-    required this.onTap,
-    this.enabled = true,
-  });
-
-  final Set<T> values;
-  final void Function() onTap;
-  final T value;
-  final Widget child;
-  final EdgeInsets contentPadding;
-  final bool enabled;
-
-  @override
-  State<YaruMultiSelectItem> createState() => _YaruMultiSelectItemState();
-}
-
-class _YaruMultiSelectItemState extends State<YaruMultiSelectItem> {
-  @override
-  Widget build(BuildContext context) {
-    final textColor = widget.enabled
-        ? Theme.of(context).colorScheme.onSurface
-        : Theme.of(context).disabledColor;
-    final borderColor = Theme.of(context).colorScheme.onSurface.withOpacity(
-          Theme.of(context).brightness == Brightness.light ? 0.4 : 1,
-        );
-    return ListTile(
-      visualDensity: VisualDensity.compact,
-      enabled: widget.enabled,
-      contentPadding: widget.contentPadding,
-      onTap: () {
-        setState(() {
-          widget.onTap();
-        });
-      },
-      leading: widget.values.contains(widget.value)
-          ? AnimatedContainer(
-              height: 18,
-              width: 18,
-              duration: const Duration(
-                milliseconds: 200,
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: const Icon(
-                Icons.check,
-                color: Colors.white,
-                size: 18,
-              ),
-            )
-          : AnimatedContainer(
-              height: 18,
-              width: 18,
-              duration: const Duration(
-                milliseconds: 200,
-              ),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: borderColor,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-      title: DefaultTextStyle(
-        style: TextStyle(color: textColor, fontSize: 16),
-        child: widget.child,
-      ),
-    );
-  }
-}
-
-class YaruCheckMenuItem<T> extends PopupMenuItem<T> {
+class YaruCheckedPopupMenuItem<T> extends PopupMenuItem<T> {
   /// Creates a popup menu item with a checkmark.
   ///
   /// By default, the menu item is [enabled] but unchecked. To mark the item as
   /// checked, set [checked] to true.
   ///
   /// The `checked` and `enabled` arguments must not be null.
-  const YaruCheckMenuItem({
+  const YaruCheckedPopupMenuItem({
     super.key,
     super.value,
     this.checked = false,
@@ -203,62 +124,72 @@ class YaruCheckMenuItem<T> extends PopupMenuItem<T> {
   final bool checked;
 
   @override
-  Widget? get child => super.child;
-
-  @override
-  PopupMenuItemState<T, YaruCheckMenuItem<T>> createState() =>
+  PopupMenuItemState<T, YaruCheckedPopupMenuItem<T>> createState() =>
       _CheckedPopupMenuItemState<T>();
 }
 
 class _CheckedPopupMenuItemState<T>
-    extends PopupMenuItemState<T, YaruCheckMenuItem<T>>
-    with SingleTickerProviderStateMixin {
-  @override
-  void handleTap() {
-    super.handleTap();
-  }
-
+    extends PopupMenuItemState<T, YaruCheckedPopupMenuItem<T>> {
   @override
   Widget buildChild() {
-    final borderColor = Theme.of(context).colorScheme.onSurface.withOpacity(
-          Theme.of(context).brightness == Brightness.light ? 0.4 : 1,
-        );
     return IgnorePointer(
       child: ListTile(
         enabled: widget.enabled,
-        leading: widget.checked
-            ? AnimatedContainer(
-                height: 18,
-                width: 18,
-                duration: const Duration(
-                  milliseconds: 200,
-                ),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: const Icon(
-                  Icons.check,
-                  color: Colors.white,
-                  size: 18,
-                ),
-              )
-            : AnimatedContainer(
-                height: 18,
-                width: 18,
-                duration: const Duration(
-                  milliseconds: 200,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: borderColor,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
+        leading: _YaruCheckMark(
+          checked: widget.checked,
+        ),
         title: widget.child,
       ),
     );
+  }
+}
+
+class _YaruCheckMark extends StatelessWidget {
+  const _YaruCheckMark({
+    // ignore: unused_element
+    super.key,
+    required this.checked,
+  });
+
+  final bool checked;
+
+  @override
+  Widget build(BuildContext context) {
+    final borderColor = Theme.of(context).colorScheme.onSurface.withOpacity(
+          Theme.of(context).brightness == Brightness.light ? 0.4 : 1,
+        );
+    const size = 18.0;
+    const duration = 200;
+    return checked
+        ? AnimatedContainer(
+            height: size,
+            width: size,
+            duration: const Duration(
+              milliseconds: duration,
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: const Icon(
+              Icons.check,
+              color: Colors.white,
+              size: size,
+            ),
+          )
+        : AnimatedContainer(
+            height: size,
+            width: size,
+            duration: const Duration(
+              milliseconds: duration,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: borderColor,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(4),
+            ),
+          );
   }
 }
