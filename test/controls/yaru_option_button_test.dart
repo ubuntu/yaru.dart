@@ -6,6 +6,47 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 import '../yaru_golden_tester.dart';
 
 void main() {
+  testWidgets('with icon', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruOptionButton(
+            onPressed: () {},
+            child: const Icon(Icons.flutter_dash),
+          ),
+        ),
+      ),
+    );
+
+    expect(
+      find.widgetWithIcon(YaruOptionButton, Icons.flutter_dash),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('with color disk', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruOptionButton.color(
+            onPressed: () {},
+            color: Colors.red,
+          ),
+        ),
+      ),
+    );
+
+    final box = find.descendant(
+      of: find.byType(YaruOptionButton),
+      matching: find.byType(DecoratedBox),
+    );
+    expect(box, findsOneWidget);
+    expect(
+      tester.widget<DecoratedBox>(box).decoration,
+      isA<BoxDecoration>().having((d) => d.color, 'color', Colors.red),
+    );
+  });
+
   testWidgets(
     'golden images',
     (tester) async {
