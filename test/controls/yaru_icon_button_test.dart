@@ -147,6 +147,5 @@ class YaruIconButtonVariant {
   }
 
   @override
-  String toString() =>
-      'YaruIconButtonVariant(label: $label, themeMode: $themeMode, states: $states)';
+  String toString() => '$label: themeMode: $themeMode, states: $states';
 }
