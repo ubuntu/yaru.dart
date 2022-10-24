@@ -411,67 +411,71 @@ class YaruIcons {
   static const stopwatch = _YaruIconsData(0xf286, 'stopwatch');
   static const subtitles_filled = _YaruIconsData(0xf287, 'subtitles_filled');
   static const subtitles = _YaruIconsData(0xf288, 'subtitles');
-  static const synchronizing = _YaruIconsData(0xf289, 'synchronizing');
-  static const tab_new_filled = _YaruIconsData(0xf28a, 'tab_new_filled');
-  static const tab_new = _YaruIconsData(0xf28b, 'tab_new');
-  static const tablet = _YaruIconsData(0xf28c, 'tablet');
-  static const tag_filled = _YaruIconsData(0xf28d, 'tag_filled');
-  static const tag = _YaruIconsData(0xf28e, 'tag');
-  static const television = _YaruIconsData(0xf28f, 'television');
-  static const template = _YaruIconsData(0xf290, 'template');
-  static const text_editor_filled = _YaruIconsData(0xf291, 'text_editor_filled');
-  static const text_editor = _YaruIconsData(0xf292, 'text_editor');
-  static const thunderbolt = _YaruIconsData(0xf293, 'thunderbolt');
-  static const trash = _YaruIconsData(0xf294, 'trash');
-  static const trash_full = _YaruIconsData(0xf295, 'trash_full');
-  static const tree = _YaruIconsData(0xf296, 'tree');
-  static const tree_filled = _YaruIconsData(0xf297, 'tree_filled');
-  static const tree_fir_filled = _YaruIconsData(0xf298, 'tree_fir_filled');
-  static const tree_fir = _YaruIconsData(0xf299, 'tree_fir');
-  static const ubuntu_logo = _YaruIconsData(0xf29a, 'ubuntu_logo');
-  static const ubuntu_logo_large = _YaruIconsData(0xf29b, 'ubuntu_logo_large');
-  static const user = _YaruIconsData(0xf29c, 'user');
-  static const users = _YaruIconsData(0xf29d, 'users');
-  static const utilities_filled = _YaruIconsData(0xf29e, 'utilities_filled');
-  static const utilities = _YaruIconsData(0xf29f, 'utilities');
-  static const video = _YaruIconsData(0xf2a0, 'video');
-  static const video_history = _YaruIconsData(0xf2a1, 'video_history');
-  static const view_filled = _YaruIconsData(0xf2a2, 'view_filled');
-  static const view_more = _YaruIconsData(0xf2a3, 'view_more');
-  static const view_more_horizontal = _YaruIconsData(0xf2a4, 'view_more_horizontal');
-  static const view = _YaruIconsData(0xf2a5, 'view');
-  static const view_fullscreen = _YaruIconsData(0xf2a6, 'view_fullscreen');
-  static const view_restore = _YaruIconsData(0xf2a7, 'view_restore');
-  static const warning_filled = _YaruIconsData(0xf2a8, 'warning_filled');
-  static const warning = _YaruIconsData(0xf2a9, 'warning');
-  static const weather = _YaruIconsData(0xf2aa, 'weather');
-  static const weather_clear_night = _YaruIconsData(0xf2ab, 'weather_clear_night');
-  static const weather_clear = _YaruIconsData(0xf2ac, 'weather_clear');
-  static const weather_cloudy = _YaruIconsData(0xf2ad, 'weather_cloudy');
-  static const weather_few_clouds_night = _YaruIconsData(0xf2ae, 'weather_few_clouds_night');
-  static const weather_few_clouds = _YaruIconsData(0xf2af, 'weather_few_clouds');
-  static const weather_fog = _YaruIconsData(0xf2b0, 'weather_fog');
-  static const weather_overcast = _YaruIconsData(0xf2b1, 'weather_overcast');
-  static const weather_severe_alert = _YaruIconsData(0xf2b2, 'weather_severe_alert');
-  static const weather_showers_scattered = _YaruIconsData(0xf2b3, 'weather_showers_scattered');
-  static const weather_showers = _YaruIconsData(0xf2b4, 'weather_showers');
-  static const weather_snow = _YaruIconsData(0xf2b5, 'weather_snow');
-  static const weather_storm = _YaruIconsData(0xf2b6, 'weather_storm');
-  static const weather_tornado = _YaruIconsData(0xf2b7, 'weather_tornado');
-  static const weather_windy = _YaruIconsData(0xf2b8, 'weather_windy');
-  static const window = _YaruIconsData(0xf2b9, 'window');
-  static const window_close = _YaruIconsData(0xf2ba, 'window_close');
-  static const window_maximize = _YaruIconsData(0xf2bb, 'window_maximize');
-  static const window_minimize = _YaruIconsData(0xf2bc, 'window_minimize');
-  static const window_new = _YaruIconsData(0xf2bd, 'window_new');
-  static const window_restore = _YaruIconsData(0xf2be, 'window_restore');
-  static const window_top_bar = _YaruIconsData(0xf2bf, 'window_top_bar');
-  static const windows = _YaruIconsData(0xf2c0, 'windows');
-  static const wrench = _YaruIconsData(0xf2c1, 'wrench');
-  static const zoom_fit_best = _YaruIconsData(0xf2c2, 'zoom_fit_best');
-  static const zoom_in = _YaruIconsData(0xf2c3, 'zoom_in');
-  static const zoom_original = _YaruIconsData(0xf2c4, 'zoom_original');
-  static const zoom_out = _YaruIconsData(0xf2c5, 'zoom_out');
+  static const switch_button = _YaruIconsData(0xf289, 'switch_button');
+  static const switch_button_checked_filled = _YaruIconsData(0xf28a, 'switch_button_checked_filled');
+  static const switch_button_checked = _YaruIconsData(0xf28b, 'switch_button_checked');
+  static const switch_button_filled = _YaruIconsData(0xf28c, 'switch_button_filled');
+  static const synchronizing = _YaruIconsData(0xf28d, 'synchronizing');
+  static const tab_new_filled = _YaruIconsData(0xf28e, 'tab_new_filled');
+  static const tab_new = _YaruIconsData(0xf28f, 'tab_new');
+  static const tablet = _YaruIconsData(0xf290, 'tablet');
+  static const tag_filled = _YaruIconsData(0xf291, 'tag_filled');
+  static const tag = _YaruIconsData(0xf292, 'tag');
+  static const television = _YaruIconsData(0xf293, 'television');
+  static const template = _YaruIconsData(0xf294, 'template');
+  static const text_editor_filled = _YaruIconsData(0xf295, 'text_editor_filled');
+  static const text_editor = _YaruIconsData(0xf296, 'text_editor');
+  static const thunderbolt = _YaruIconsData(0xf297, 'thunderbolt');
+  static const trash = _YaruIconsData(0xf298, 'trash');
+  static const trash_full = _YaruIconsData(0xf299, 'trash_full');
+  static const tree = _YaruIconsData(0xf29a, 'tree');
+  static const tree_filled = _YaruIconsData(0xf29b, 'tree_filled');
+  static const tree_fir_filled = _YaruIconsData(0xf29c, 'tree_fir_filled');
+  static const tree_fir = _YaruIconsData(0xf29d, 'tree_fir');
+  static const ubuntu_logo = _YaruIconsData(0xf29e, 'ubuntu_logo');
+  static const ubuntu_logo_large = _YaruIconsData(0xf29f, 'ubuntu_logo_large');
+  static const user = _YaruIconsData(0xf2a0, 'user');
+  static const users = _YaruIconsData(0xf2a1, 'users');
+  static const utilities_filled = _YaruIconsData(0xf2a2, 'utilities_filled');
+  static const utilities = _YaruIconsData(0xf2a3, 'utilities');
+  static const video = _YaruIconsData(0xf2a4, 'video');
+  static const video_history = _YaruIconsData(0xf2a5, 'video_history');
+  static const view_filled = _YaruIconsData(0xf2a6, 'view_filled');
+  static const view_more = _YaruIconsData(0xf2a7, 'view_more');
+  static const view_more_horizontal = _YaruIconsData(0xf2a8, 'view_more_horizontal');
+  static const view = _YaruIconsData(0xf2a9, 'view');
+  static const view_fullscreen = _YaruIconsData(0xf2aa, 'view_fullscreen');
+  static const view_restore = _YaruIconsData(0xf2ab, 'view_restore');
+  static const warning_filled = _YaruIconsData(0xf2ac, 'warning_filled');
+  static const warning = _YaruIconsData(0xf2ad, 'warning');
+  static const weather = _YaruIconsData(0xf2ae, 'weather');
+  static const weather_clear_night = _YaruIconsData(0xf2af, 'weather_clear_night');
+  static const weather_clear = _YaruIconsData(0xf2b0, 'weather_clear');
+  static const weather_cloudy = _YaruIconsData(0xf2b1, 'weather_cloudy');
+  static const weather_few_clouds_night = _YaruIconsData(0xf2b2, 'weather_few_clouds_night');
+  static const weather_few_clouds = _YaruIconsData(0xf2b3, 'weather_few_clouds');
+  static const weather_fog = _YaruIconsData(0xf2b4, 'weather_fog');
+  static const weather_overcast = _YaruIconsData(0xf2b5, 'weather_overcast');
+  static const weather_severe_alert = _YaruIconsData(0xf2b6, 'weather_severe_alert');
+  static const weather_showers_scattered = _YaruIconsData(0xf2b7, 'weather_showers_scattered');
+  static const weather_showers = _YaruIconsData(0xf2b8, 'weather_showers');
+  static const weather_snow = _YaruIconsData(0xf2b9, 'weather_snow');
+  static const weather_storm = _YaruIconsData(0xf2ba, 'weather_storm');
+  static const weather_tornado = _YaruIconsData(0xf2bb, 'weather_tornado');
+  static const weather_windy = _YaruIconsData(0xf2bc, 'weather_windy');
+  static const window = _YaruIconsData(0xf2bd, 'window');
+  static const window_close = _YaruIconsData(0xf2be, 'window_close');
+  static const window_maximize = _YaruIconsData(0xf2bf, 'window_maximize');
+  static const window_minimize = _YaruIconsData(0xf2c0, 'window_minimize');
+  static const window_new = _YaruIconsData(0xf2c1, 'window_new');
+  static const window_restore = _YaruIconsData(0xf2c2, 'window_restore');
+  static const window_top_bar = _YaruIconsData(0xf2c3, 'window_top_bar');
+  static const windows = _YaruIconsData(0xf2c4, 'windows');
+  static const wrench = _YaruIconsData(0xf2c5, 'wrench');
+  static const zoom_fit_best = _YaruIconsData(0xf2c6, 'zoom_fit_best');
+  static const zoom_in = _YaruIconsData(0xf2c7, 'zoom_in');
+  static const zoom_original = _YaruIconsData(0xf2c8, 'zoom_original');
+  static const zoom_out = _YaruIconsData(0xf2c9, 'zoom_out');
 
   static const all = <String, _YaruIconsData>{
     'accessibility': accessibility,
@@ -866,6 +870,10 @@ class YaruIcons {
     'stopwatch': stopwatch,
     'subtitles_filled': subtitles_filled,
     'subtitles': subtitles,
+    'switch_button': switch_button,
+    'switch_button_checked_filled': switch_button_checked_filled,
+    'switch_button_checked': switch_button_checked,
+    'switch_button_filled': switch_button_filled,
     'synchronizing': synchronizing,
     'tab_new_filled': tab_new_filled,
     'tab_new': tab_new,

@@ -396,6 +396,10 @@ Icon preview | Icon name | Usage
 ![stopwatch](../icons/stopwatch.svg) | stopwatch | `YaruIcons.stopwatch`
 ![subtitles_filled](../icons/subtitles-filled.svg) | subtitles filled | `YaruIcons.subtitles_filled`
 ![subtitles](../icons/subtitles.svg) | subtitles | `YaruIcons.subtitles`
+![switch_button_checked_filled](../icons/switch-button/checked-filled.svg) | switch button checked filled | `YaruIcons.switch_button_checked_filled`
+![switch_button_checked](../icons/switch-button/checked.svg) | switch button checked | `YaruIcons.switch_button_checked`
+![switch_button_filled](../icons/switch-button/filled.svg) | switch button filled | `YaruIcons.switch_button_filled`
+![switch_button](../icons/switch-button/_.svg) | switch button | `YaruIcons.switch_button`
 ![synchronizing](../icons/synchronizing.svg) | synchronizing | `YaruIcons.synchronizing`
 ![tablet](../icons/tablet.svg) | tablet | `YaruIcons.tablet`
 ![tab_new_filled](../icons/tab-new-filled.svg) | tab new filled | `YaruIcons.tab_new_filled`
