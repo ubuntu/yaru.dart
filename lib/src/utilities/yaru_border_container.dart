@@ -91,9 +91,7 @@ class YaruBorderContainer extends StatelessWidget {
         borderRadius: effectiveBorderRadius,
       ),
       child: Material(
-        clipBehavior: clipBehavior,
         color: Colors.transparent,
-        borderRadius: effectiveBorderRadius,
         child: child,
       ),
     );
