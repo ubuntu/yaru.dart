@@ -19,6 +19,7 @@ extension YaruGoldenTester on WidgetTester {
         themeMode: themeMode,
         theme: theme ?? yaruLight,
         darkTheme: darkTheme ?? yaruDark,
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: Center(child: widget),
         ),
