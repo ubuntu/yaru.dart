@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
+import '../yaru_golden_tester.dart';
+
 void main() {
   testWidgets('contains checkbox and labels', (tester) async {
     Widget builder({required Widget title, required Widget? subtitle}) {
@@ -143,4 +145,68 @@ void main() {
       equals(Theme.of(disabled).disabledColor),
     );
   });
+
+  testWidgets(
+    'golden images',
+    (tester) async {
+      final variant = goldenVariant.currentValue!;
+
+      // ensure traditional focus highlight
+      FocusManager.instance.highlightStrategy =
+          FocusHighlightStrategy.alwaysTraditional;
+
+      await tester.pumpScaffold(
+        YaruCheckButton(
+          autofocus: variant.hasState(MaterialState.focused),
+          value: variant.hasState(MaterialState.selected),
+          onChanged: variant.hasState(MaterialState.disabled) ? null : (_) {},
+          title: const Text('YaruCheckButton'),
+          subtitle: const Text('Lorem ipsum dolor sit amet'),
+        ),
+        themeMode: variant.themeMode,
+        size: const Size(224, 56),
+      );
+      await tester.pumpAndSettle();
+
+      if (variant.hasState(MaterialState.pressed)) {
+        await tester.down(find.byType(Checkbox));
+        await tester.pumpAndSettle();
+      } else if (variant.hasState(MaterialState.hovered)) {
+        await tester.hover(find.byType(Checkbox));
+        await tester.pumpAndSettle();
+      }
+
+      await expectLater(
+        find.byType(YaruCheckButton),
+        matchesGoldenFile('goldens/yaru_check_button-${variant.label}.png'),
+      );
+    },
+    variant: goldenVariant,
+    tags: 'golden',
+  );
 }
+
+final goldenVariant = ValueVariant({
+  ...goldenThemeVariants('unchecked', <MaterialState>{}),
+  ...goldenThemeVariants('unckecked-disabled', {MaterialState.disabled}),
+  ...goldenThemeVariants('unckecked-focused', {MaterialState.focused}),
+  ...goldenThemeVariants('unckecked-hovered', {MaterialState.hovered}),
+  ...goldenThemeVariants('unckecked-pressed', {MaterialState.pressed}),
+  ...goldenThemeVariants('checked', {MaterialState.selected}),
+  ...goldenThemeVariants('checked-disabled', {
+    MaterialState.selected,
+    MaterialState.disabled,
+  }),
+  ...goldenThemeVariants('checked-focused', {
+    MaterialState.selected,
+    MaterialState.focused,
+  }),
+  ...goldenThemeVariants('checked-hovered', {
+    MaterialState.selected,
+    MaterialState.hovered,
+  }),
+  ...goldenThemeVariants('checked-pressed', {
+    MaterialState.selected,
+    MaterialState.pressed,
+  }),
+});
