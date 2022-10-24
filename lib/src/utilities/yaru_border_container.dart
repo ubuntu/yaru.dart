@@ -57,8 +57,7 @@ class YaruBorderContainer extends StatelessWidget {
 
   /// The border.
   ///
-  /// The default border is 1px wide and the color is [DividerThemeData.color]
-  /// or [ThemeData.dividerColor] if the former is null.
+  /// The default border is 1px wide and the color is [ThemeData.dividerColor].
   final BoxBorder? border;
 
   /// The border radius.
@@ -68,9 +67,8 @@ class YaruBorderContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final effectiveBorder = border ??
-        Border.all(color: DividerTheme.of(context).color ?? theme.dividerColor);
+    final effectiveBorder =
+        border ?? Border.all(color: Theme.of(context).dividerColor);
     final effectiveBorderRadius =
         borderRadius ?? BorderRadius.circular(kYaruContainerRadius);
 
