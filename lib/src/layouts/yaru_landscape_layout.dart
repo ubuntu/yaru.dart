@@ -100,8 +100,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildLeftPane(),
               _buildVerticalSeparator(),
+              _buildLeftPane(),
               Expanded(
                 child: widget.allowLeftPaneResize
                     ? Stack(
