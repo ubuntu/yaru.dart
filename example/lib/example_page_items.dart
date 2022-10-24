@@ -14,6 +14,7 @@ import 'pages/progress_indicator_page.dart';
 import 'pages/radio_button_page.dart';
 import 'pages/section_page.dart';
 import 'pages/selectable_container_page.dart';
+import 'pages/switch_button_page.dart';
 import 'pages/tabbed_page_page.dart';
 import 'pages/tile_page.dart';
 
@@ -114,6 +115,27 @@ final examplePageItems = <PageItem>[
     tooltipMessage: 'YaruSelectableContainer',
     iconBuilder: (context, selected) => const Icon(YaruIcons.selection),
     pageBuilder: (_) => const SelectableContainerPage(),
+  ),
+  PageItem(
+    titleBuilder: (context) => const Text('YaruSwitchButton'),
+    tooltipMessage: 'YaruSwitchButton',
+    pageBuilder: (context) => const SwitchButtonPage(),
+    // TODO: YaruIcons.switch/toggle?
+    iconBuilder: (context, selected) => Container(
+      width: 24,
+      height: 12,
+      decoration: BoxDecoration(
+        color: IconTheme.of(context).color,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(14, 2, 2, 2),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+    ),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruTabbedPage'),
