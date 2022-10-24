@@ -12,6 +12,7 @@ export 'src/controls/yaru_option_button.dart';
 export 'src/controls/yaru_popup_menu_button.dart';
 export 'src/controls/yaru_progress_indicator.dart';
 export 'src/controls/yaru_radio_button.dart';
+export 'src/controls/yaru_switch_button.dart';
 export 'src/controls/yaru_title_bar.dart';
 export 'src/controls/yaru_toggle_button.dart';
 export 'src/controls/yaru_toggle_button_theme.dart';
