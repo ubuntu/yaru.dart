@@ -17,6 +17,7 @@ void main() {
         Padding(
           padding: const EdgeInsets.all(10),
           child: YaruBorderContainer(
+            color: variant.value!['color'],
             border: variant.value!['border'],
             borderRadius: variant.value!['borderRadius'],
             margin: variant.value!['margin'] ?? EdgeInsets.zero,
@@ -79,6 +80,7 @@ final goldenVariant = ValueVariant({
     'clipBehavior': Clip.antiAlias,
   }),
   ...goldenThemeVariants('custom', {
+    'color': Colors.blue,
     'border': Border.all(color: Colors.red, width: 2),
     'borderRadius': BorderRadius.circular(20),
     'clipBehavior': Clip.antiAlias,
