@@ -33,6 +33,7 @@ export 'src/pages/yaru_tabbed_page.dart';
 export 'src/pages/yaru_tile.dart';
 // Utilities
 export 'src/utilities/yaru_banner.dart';
+export 'src/utilities/yaru_border_container.dart';
 export 'src/utilities/yaru_carousel.dart';
 export 'src/utilities/yaru_draggable.dart';
 export 'src/utilities/yaru_expandable.dart';
