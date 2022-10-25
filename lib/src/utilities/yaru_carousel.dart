@@ -70,12 +70,6 @@ class _YaruCarouselState extends State<YaruCarousel> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    widget.controller.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: widget.height,
