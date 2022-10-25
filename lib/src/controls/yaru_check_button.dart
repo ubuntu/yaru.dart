@@ -18,7 +18,7 @@ class YaruCheckButton extends StatelessWidget {
   });
 
   /// See [Checkbox.value]
-  final bool value;
+  final bool? value;
 
   /// See [Checkbox.onChanged]
   final ValueChanged<bool?>? onChanged;
@@ -59,7 +59,21 @@ class YaruCheckButton extends StatelessWidget {
           ),
         ),
       ),
-      onToggled: onChanged != null ? () => onChanged!(!value) : null,
+      onToggled: onChanged == null ? null : _onToggled,
     );
+  }
+
+  void _onToggled() {
+    switch (value) {
+      case false:
+        onChanged!(true);
+        break;
+      case true:
+        onChanged!(tristate ? null : false);
+        break;
+      case null:
+        onChanged!(false);
+        break;
+    }
   }
 }

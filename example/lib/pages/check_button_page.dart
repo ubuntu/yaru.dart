@@ -9,7 +9,7 @@ class CheckButtonPage extends StatefulWidget {
 }
 
 class _CheckButtonPageState extends State<CheckButtonPage> {
-  final _values = List.generate(3, (i) => i % 2 == 0);
+  final List<bool?> _values = List.generate(3, (i) => i % 2 == 0);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,8 @@ class _CheckButtonPageState extends State<CheckButtonPage> {
         for (var i = 0; i < _values.length; ++i) ...[
           YaruCheckButton(
             value: _values[i],
-            onChanged: (v) => setState(() => _values[i] = v!),
+            onChanged: (v) => setState(() => _values[i] = v),
+            tristate: true,
             title: const Text('YaruCheckButton'),
           ),
           const SizedBox(height: 10),
