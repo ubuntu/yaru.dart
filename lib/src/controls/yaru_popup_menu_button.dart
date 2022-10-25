@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
-import '../constants.dart';
-
-const _kYaruCheckMarkSize = 18.0;
+import '../../yaru_widgets.dart';
 
 /// A generic wrapper around [PopupMenuButton] that is visually more consistent
 /// to buttons and dialogs than [DropdownButton]
@@ -117,7 +115,7 @@ class YaruCheckedPopupMenuItem<T> extends PopupMenuItem<T> {
     super.value,
     this.checked = false,
     super.enabled,
-    super.padding,
+    super.padding = EdgeInsets.zero,
     super.height,
     super.mouseCursor,
     super.child,
@@ -135,68 +133,14 @@ class _YaruCheckedPopupMenuItemState<T>
   @override
   Widget buildChild() {
     return IgnorePointer(
-      child: ListTile(
-        minLeadingWidth: _kYaruCheckMarkSize,
-        enabled: widget.enabled,
-        leading: _YaruCheckMark(
-          checked: widget.checked,
+      child: Padding(
+        // Same as [ListTile.padding] default
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: YaruCheckButton(
+          value: widget.checked,
+          onChanged: widget.enabled ? (_) {} : null,
+          title: widget.child ?? Container(),
         ),
-        title: widget.child,
-      ),
-    );
-  }
-}
-
-class _YaruCheckMark extends StatelessWidget {
-  const _YaruCheckMark({
-    // ignore: unused_element
-    super.key,
-    required this.checked,
-  });
-
-  final bool checked;
-
-  @override
-  Widget build(BuildContext context) {
-    final borderColor = Theme.of(context).colorScheme.onSurface.withOpacity(
-          Theme.of(context).brightness == Brightness.light ? 0.4 : 1,
-        );
-    const duration = 200;
-    return SizedBox(
-      width: _kYaruCheckMarkSize,
-      height: double.infinity,
-      child: Center(
-        child: checked
-            ? AnimatedContainer(
-                height: _kYaruCheckMarkSize,
-                width: _kYaruCheckMarkSize,
-                duration: const Duration(
-                  milliseconds: duration,
-                ),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: const Icon(
-                  Icons.check,
-                  color: Colors.white,
-                  size: _kYaruCheckMarkSize,
-                ),
-              )
-            : AnimatedContainer(
-                height: _kYaruCheckMarkSize,
-                width: _kYaruCheckMarkSize,
-                duration: const Duration(
-                  milliseconds: duration,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: borderColor,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
       ),
     );
   }
@@ -214,7 +158,7 @@ class YaruMultiSelectPopupMenuItem<T> extends PopupMenuItem<T> {
     super.value,
     this.checked = false,
     super.enabled,
-    super.padding,
+    super.padding = EdgeInsets.zero,
     super.height,
     super.mouseCursor,
     super.child,
@@ -248,11 +192,14 @@ class _YaruMultiSelectPopupMenuItemState<T>
   @override
   Widget buildChild() {
     return IgnorePointer(
-      child: ListTile(
-        minLeadingWidth: _kYaruCheckMarkSize,
-        enabled: widget.enabled,
-        leading: _YaruCheckMark(checked: _checked),
-        title: widget.child,
+      child: Padding(
+        // Same as [ListTile.padding] default
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: YaruCheckButton(
+          value: _checked,
+          onChanged: widget.enabled ? (_) {} : null,
+          title: widget.child ?? Container(),
+        ),
       ),
     );
   }
