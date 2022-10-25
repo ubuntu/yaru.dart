@@ -130,6 +130,20 @@ class YaruCheckedPopupMenuItem<T> extends PopupMenuItem<T> {
 
 class _YaruCheckedPopupMenuItemState<T>
     extends PopupMenuItemState<T, YaruCheckedPopupMenuItem<T>> {
+  var _checked = false;
+
+  @override
+  void handleTap() {
+    super.handleTap();
+    setState(() => _checked = !_checked);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _checked = widget.checked;
+  }
+
   @override
   Widget buildChild() {
     return IgnorePointer(
@@ -137,7 +151,7 @@ class _YaruCheckedPopupMenuItemState<T>
         // Same as [ListTile.padding] default
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: YaruCheckButton(
-          value: widget.checked,
+          value: _checked,
           onChanged: widget.enabled ? (_) {} : null,
           title: widget.child ?? Container(),
         ),
