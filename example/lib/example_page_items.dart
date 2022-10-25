@@ -124,11 +124,9 @@ final examplePageItems = <PageItem>[
     titleBuilder: (context) => const Text('YaruSwitchButton'),
     tooltipMessage: 'YaruSwitchButton',
     pageBuilder: (context) => const SwitchButtonPage(),
-    // TODO: YaruIcons.switch/toggle?
-
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.switch_button_checked_filled)
-        : const Icon(YaruIcons.switch_button_checked),
+        : const Icon(YaruIcons.switch_button),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruTabbedPage'),
