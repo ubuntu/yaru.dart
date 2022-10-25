@@ -51,8 +51,9 @@ final examplePageItems = <PageItem>[
     titleBuilder: (context) => const Text('YaruCheckButton'),
     tooltipMessage: 'YaruCheckButton',
     pageBuilder: (context) => const CheckButtonPage(),
-    iconBuilder: (context, selected) =>
-        const Icon(YaruIcons.checkbox_button_checked),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.checkbox_button_checked_filled)
+        : const Icon(YaruIcons.checkbox_button_checked),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruColorDisk'),
@@ -81,7 +82,9 @@ final examplePageItems = <PageItem>[
   PageItem(
     titleBuilder: (context) => const Text('YaruOptionButton'),
     tooltipMessage: 'YaruOptionButton',
-    iconBuilder: (context, selected) => const Icon(YaruIcons.settings),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.settings_filled)
+        : const Icon(YaruIcons.settings),
     pageBuilder: (_) => const OptionButtonPage(),
   ),
   PageItem(
@@ -101,8 +104,9 @@ final examplePageItems = <PageItem>[
     titleBuilder: (context) => const Text('YaruRadioButton'),
     tooltipMessage: 'YaruRadioButton',
     pageBuilder: (context) => const RadioButtonPage(),
-    iconBuilder: (context, selected) =>
-        const Icon(YaruIcons.radio_button_checked),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.radio_button_checked_filled)
+        : const Icon(YaruIcons.radio_button_checked),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruSection'),
@@ -120,22 +124,9 @@ final examplePageItems = <PageItem>[
     titleBuilder: (context) => const Text('YaruSwitchButton'),
     tooltipMessage: 'YaruSwitchButton',
     pageBuilder: (context) => const SwitchButtonPage(),
-    // TODO: YaruIcons.switch/toggle?
-    iconBuilder: (context, selected) => Container(
-      width: 24,
-      height: 12,
-      decoration: BoxDecoration(
-        color: IconTheme.of(context).color,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(14, 2, 2, 2),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.circular(4),
-        ),
-      ),
-    ),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.switch_button_checked_filled)
+        : const Icon(YaruIcons.switch_button),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruTabbedPage'),
