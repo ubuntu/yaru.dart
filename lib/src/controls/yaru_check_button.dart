@@ -59,15 +59,11 @@ class YaruCheckButton extends StatelessWidget {
           ),
         ),
       ),
-      onToggled: _onToggled,
+      onToggled: onChanged == null ? null : _onToggled,
     );
   }
 
   void _onToggled() {
-    if (onChanged == null) {
-      return;
-    }
-
     switch (value) {
       case false:
         onChanged!(true);
