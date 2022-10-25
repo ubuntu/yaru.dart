@@ -1,3 +1,11 @@
+# 0.2.6
+
+* Add *switch-button* icons
+* Add some desktop environments logos (*gnome*, *kde*, *xfce*)
+* Add some office icons
+* Add new *computer-legacy* icon
+* Add some new communication icons
+
 # 0.2.5
 
 * Add many hard disk icon variants
