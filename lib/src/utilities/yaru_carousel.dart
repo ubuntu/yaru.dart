@@ -7,7 +7,7 @@ class YaruCarousel extends StatefulWidget {
     super.key,
     this.height = 500,
     this.width = 500,
-    required this.controller,
+    this.controller,
     required this.children,
     this.placeIndicator = true,
     this.placeIndicatorMarginTop = 12.0,
@@ -22,7 +22,7 @@ class YaruCarousel extends StatefulWidget {
   /// The width of the children, defaults to 500.0.
   final double width;
 
-  final YaruCarouselController controller;
+  final YaruCarouselController? controller;
 
   /// The list of child widgets shown in the carousel.
   final List<Widget> children;
@@ -53,20 +53,40 @@ class YaruCarousel extends StatefulWidget {
 
 class _YaruCarouselState extends State<YaruCarousel> {
   late int _page;
+  late YaruCarouselController _controller;
 
   @override
   void initState() {
     super.initState();
-    _page = widget.controller.initialPage;
+    _controller = widget.controller ??
+        YaruCarouselController(pagesLength: widget.children.length);
+    _page = _controller.initialPage;
   }
 
   @override
   void didUpdateWidget(YaruCarousel oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (_page > widget.children.length - 1) {
-      setState(() => _page = widget.children.length - 1);
+    if (widget.controller != oldWidget.controller) {
+      if (oldWidget.controller == null) {
+        _controller.dispose();
+      }
+      _controller = widget.controller ??
+          YaruCarouselController(pagesLength: widget.children.length);
+      _page = _controller.initialPage;
     }
+
+    if (_page > widget.children.length - 1) {
+      _page = widget.children.length - 1;
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -92,23 +112,21 @@ class _YaruCarouselState extends State<YaruCarousel> {
     final carousel = PageView.builder(
       itemCount: widget.children.length,
       pageSnapping: true,
-      controller: widget.controller,
+      controller: _controller,
       physics:
           // Disable physic when auto scroll is enable because we cannot
           // disable the timer when dragging the view
-          widget.controller.autoScroll
-              ? const NeverScrollableScrollPhysics()
-              : null,
+          _controller.autoScroll ? const NeverScrollableScrollPhysics() : null,
       onPageChanged: (index) => setState(() => _page = index),
       itemBuilder: (context, index) => AnimatedScale(
         scale: _page == index ? 1.0 : .9,
-        duration: widget.controller.scrollAnimationDuration,
-        curve: widget.controller.scrollAnimationCurve,
+        duration: _controller.scrollAnimationDuration,
+        curve: _controller.scrollAnimationCurve,
         child: Container(
           child: _page == index - 1 || _page == index + 1
               ? GestureDetector(
                   behavior: HitTestBehavior.opaque,
-                  onTap: () => widget.controller.animateToPage(index),
+                  onTap: () => _controller.animateToPage(index),
                   child: IgnorePointer(
                     child: widget.children[index],
                   ),
@@ -125,12 +143,12 @@ class _YaruCarouselState extends State<YaruCarousel> {
             carousel,
             _buildNavigationButton(
               Alignment.centerLeft,
-              _isFirstPage() ? null : () => widget.controller.previousPage(),
+              _isFirstPage() ? null : _controller.previousPage,
               widget.previousIcon ?? const Icon(YaruIcons.go_previous),
             ),
             _buildNavigationButton(
               Alignment.centerRight,
-              _isLastPage() ? null : () => widget.controller.nextPage(),
+              _isLastPage() ? null : _controller.nextPage,
               widget.nextIcon ?? const Icon(YaruIcons.go_next),
             ),
           ],
@@ -149,8 +167,8 @@ class _YaruCarouselState extends State<YaruCarousel> {
     return Positioned.fill(
       child: AnimatedOpacity(
         opacity: onPressed != null ? 1 : 0,
-        duration: widget.controller.scrollAnimationDuration,
-        curve: widget.controller.scrollAnimationCurve,
+        duration: _controller.scrollAnimationDuration,
+        curve: _controller.scrollAnimationCurve,
         child: Align(
           alignment: alignement,
           child: OutlinedButton(
@@ -198,14 +216,12 @@ class _YaruCarouselState extends State<YaruCarousel> {
       children: List<Widget>.generate(
         widget.children.length,
         (index) => GestureDetector(
-          onTap: _page == index
-              ? null
-              : () => widget.controller.animateToPage(index),
+          onTap: _page == index ? null : () => _controller.animateToPage(index),
           child: Padding(
             padding: EdgeInsets.only(left: index != 0 ? dotSpacing : 0),
             child: AnimatedContainer(
-              duration: widget.controller.scrollAnimationDuration,
-              curve: widget.controller.scrollAnimationCurve,
+              duration: _controller.scrollAnimationDuration,
+              curve: _controller.scrollAnimationCurve,
               width: dotSize,
               height: dotSize,
               decoration: BoxDecoration(

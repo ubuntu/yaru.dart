@@ -22,9 +22,6 @@ class _CarouselPageState extends State<CarouselPage> {
           width: 700,
           children: [
             YaruCarousel(
-              controller: YaruCarouselController(
-                pagesLength: _getCarouselChildren().length,
-              ),
               children: _getCarouselChildren(),
               height: 400,
               navigationControls: true,
