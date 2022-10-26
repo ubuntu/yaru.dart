@@ -155,10 +155,13 @@ void main() {
       FocusManager.instance.highlightStrategy =
           FocusHighlightStrategy.alwaysTraditional;
 
+      final tristate = variant.label.startsWith('tristate');
+
       await tester.pumpScaffold(
         YaruCheckButton(
           autofocus: variant.hasState(MaterialState.focused),
-          value: variant.hasState(MaterialState.selected),
+          tristate: tristate,
+          value: tristate ? null : variant.hasState(MaterialState.selected),
           onChanged: variant.hasState(MaterialState.disabled) ? null : (_) {},
           title: const Text('YaruCheckButton'),
           subtitle: const Text('Lorem ipsum dolor sit amet'),
@@ -209,4 +212,9 @@ final goldenVariant = ValueVariant({
     MaterialState.selected,
     MaterialState.pressed,
   }),
+  ...goldenThemeVariants('tristate', {MaterialState.selected}),
+  ...goldenThemeVariants('tristate-disabled', {MaterialState.disabled}),
+  ...goldenThemeVariants('tristate-focused', {MaterialState.focused}),
+  ...goldenThemeVariants('tristate-hovered', {MaterialState.hovered}),
+  ...goldenThemeVariants('tristate-pressed', {MaterialState.pressed}),
 });
