@@ -58,8 +58,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ??
-        YaruCarouselController(pagesLength: widget.children.length);
+    _controller = widget.controller ?? YaruCarouselController();
     _page = _controller.initialPage;
   }
 
@@ -71,8 +70,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
       if (oldWidget.controller == null) {
         _controller.dispose();
       }
-      _controller = widget.controller ??
-          YaruCarouselController(pagesLength: widget.children.length);
+      _controller = widget.controller ?? YaruCarouselController();
       _page = _controller.initialPage;
     }
 
@@ -257,7 +255,6 @@ class _YaruCarouselState extends State<YaruCarousel> {
 class YaruCarouselController extends PageController {
   YaruCarouselController({
     super.initialPage,
-    required this.pagesLength,
     super.keepPage,
     super.viewportFraction = 0.8,
     this.scrollAnimationDuration = const Duration(milliseconds: 500),
@@ -265,8 +262,6 @@ class YaruCarouselController extends PageController {
     this.autoScroll = false,
     this.autoScrollDuration = const Duration(seconds: 3),
   });
-
-  final int pagesLength;
 
   final Duration scrollAnimationDuration;
 
@@ -336,6 +331,9 @@ class YaruCarouselController extends PageController {
   void startTimer() {
     if (autoScroll) {
       _timer = Timer(autoScrollDuration, () {
+        final carousel = position.context.notificationContext
+            ?.findAncestorWidgetOfExactType<YaruCarousel>();
+        final pagesLength = carousel?.children.length ?? 0;
         animateToPage(page!.round() + 1 >= pagesLength ? 0 : page!.round() + 1);
       });
     }

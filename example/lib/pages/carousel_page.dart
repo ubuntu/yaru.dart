@@ -11,16 +11,7 @@ class CarouselPage extends StatefulWidget {
 
 class _CarouselPageState extends State<CarouselPage> {
   int length = 3;
-  late final YaruCarouselController _autoScrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    _autoScrollController = YaruCarouselController(
-      autoScroll: true,
-      pagesLength: length,
-    );
-  }
+  final _autoScrollController = YaruCarouselController(autoScroll: true);
 
   @override
   void dispose() {
