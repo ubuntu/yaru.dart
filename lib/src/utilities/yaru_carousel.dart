@@ -67,11 +67,14 @@ class _YaruCarouselState extends State<YaruCarousel> {
     super.didUpdateWidget(oldWidget);
 
     if (widget.controller != oldWidget.controller) {
+      final oldInitialPage = _controller.initialPage;
       if (oldWidget.controller == null) {
         _controller.dispose();
       }
       _controller = widget.controller ?? YaruCarouselController();
-      _page = _controller.initialPage;
+      if (oldInitialPage != _controller.initialPage) {
+        _page = _controller.initialPage;
+      }
     }
 
     if (_page > widget.children.length - 1) {
