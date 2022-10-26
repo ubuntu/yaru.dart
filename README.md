@@ -9,7 +9,7 @@ Common flutter widgets useful for building desktop and web applications.
 ## What is this?
 
 A set of convenient widgets made with `material.dart` to easily build desktop and web applications.
-Design references are the [Ubuntu yaru gnome themes](https://github.com/ubuntu/yaru) and Canonicals [vanilla framework](https://vanillaframework.io/).
+Design references are the [Ubuntu Yaru theme suite](https://github.com/ubuntu/yaru) and the [Vanilla framework](https://vanillaframework.io/) by Canonical.
 
 [LIVE DEMO](https://ubuntu.github.io/yaru_widgets.dart/)
 
