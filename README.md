@@ -15,10 +15,8 @@ A set of convenient widgets made with `material.dart` to easily build desktop an
 For example:
 
 - `YaruMasterDetailPage`, for having a UI skeletton that adapts its navigation to the window width, with one layout for a wide/landscape window and one layout for a narrow/portrait window
-- `Yaru*Row` widgets, which make it easy to put widgets in a consistent row-container
-- `YaruPage`, for creating a scrollable, always-the-same-size container page
 - `YaruSection` for putting `Yaru*Row` widgets into a container with a rounded border and a headline
-- `YaruTabbedPage`, for creating a tabbed view of `YaruPage`s with sane constraints and looks
+- `YaruTabbedPage`, for creating a tabbed view of pages with sane constraints and looks
 
 ## What it ain't
 
