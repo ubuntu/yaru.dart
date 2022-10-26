@@ -9,14 +9,9 @@ Common flutter widgets useful for building desktop and web applications.
 ## What is this?
 
 A set of convenient widgets made with `material.dart` to easily build desktop and web applications.
+Design references are the [Ubuntu yaru gnome themes](https://github.com/ubuntu/yaru) and Canonicals [vanilla framework](https://vanillaframework.io/).
 
 [LIVE DEMO](https://ubuntu.github.io/yaru_widgets.dart/)
-
-For example:
-
-- `YaruMasterDetailPage`, for having a UI skeletton that adapts its navigation to the window width, with one layout for a wide/landscape window and one layout for a narrow/portrait window
-- `YaruSection` for putting `Yaru*Row` widgets into a container with a rounded border and a headline
-- `YaruTabbedPage`, for creating a tabbed view of pages with sane constraints and looks
 
 ## What it ain't
 
@@ -32,6 +27,6 @@ The answer is that `material.dart` brings functionally everything that one needs
 
 So `yaru_widgets.dart` uses the completeness and the level of polish `material.dart` has and adds a set of widgets to it that are useful (but not necessarily the only way) to build desktop and web applications so they all have a consistent look and use the same design patterns.
 
-## Recommended themes
+## Tested themes
 
-Themes inside [`yaru.dart`](https://github.com/ubuntu/yaru.dart) are recommended but all flutter material themes should work.
+Themes inside [`yaru.dart`](https://github.com/ubuntu/yaru.dart) are the only material themes tested with yaru_widgets and we do not currently recommend to use any other themes.
