@@ -71,7 +71,7 @@ class _YaruCheckboxState extends State<YaruCheckbox> {
 
     // Disabled colors
     final uncheckedDisabledColor = colorScheme.onSurface.withOpacity(.1);
-    final checkedDisabledColor = uncheckedDisabledColor;
+    final checkedDisabledColor = colorScheme.onSurface.withOpacity(.2);
     final checkmarkDisabledColor = colorScheme.onSurface.withOpacity(.5);
 
     // Indicator colors
