@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'yaru_checkbox.dart';
 import 'yaru_toggle_button.dart';
 
 /// A desktop style check button with an interactive label.
@@ -50,7 +51,7 @@ class YaruCheckButton extends StatelessWidget {
       leading: SizedBox.square(
         dimension: kMinInteractiveDimension - 8,
         child: Center(
-          child: Checkbox(
+          child: YaruCheckbox(
             value: value,
             onChanged: onChanged,
             tristate: tristate,
