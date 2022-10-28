@@ -32,19 +32,99 @@ class YaruCheckbox extends StatefulWidget {
   }
 }
 
-class _YaruCheckboxState extends State<YaruCheckbox> {
+class _YaruCheckboxState extends State<YaruCheckbox>
+    with TickerProviderStateMixin {
   bool _hover = false;
   bool _focus = false;
   bool _active = false;
 
-  bool get interactive => widget.onChanged != null;
+  bool get _interactive => widget.onChanged != null;
+
+  late CurvedAnimation _indicatorPosition;
+  late AnimationController _indicatorController;
+
+  late CurvedAnimation _sizePosition;
+  late AnimationController _sizeController;
 
   late final Map<Type, Action<Intent>> _actionMap = <Type, Action<Intent>>{
     ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: _handleTap),
   };
 
+  @override
+  void initState() {
+    super.initState();
+
+    _indicatorController = AnimationController(
+      duration: const Duration(milliseconds: 100),
+      vsync: this,
+    );
+    _indicatorPosition = CurvedAnimation(
+      parent: _indicatorController,
+      curve: Curves.easeOut,
+    );
+
+    _sizeController = AnimationController(
+      duration: const Duration(milliseconds: 100),
+      vsync: this,
+    );
+    _sizePosition = CurvedAnimation(
+      parent: _sizeController,
+      curve: Curves.easeOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _indicatorController.dispose();
+    _sizeController.dispose();
+  }
+
+  void _handleFocusChange(bool focus) {
+    if (focus == _focus) {
+      return;
+    }
+
+    setState(() => _focus = focus);
+
+    if (_focus) {
+      _indicatorController.forward();
+    } else {
+      _indicatorController.reverse();
+    }
+  }
+
+  void _handleHoverChange(bool hover) {
+    if (hover == _hover) {
+      return;
+    }
+
+    setState(() => _hover = hover);
+
+    if (_hover) {
+      _indicatorController.forward();
+    } else {
+      _indicatorController.reverse();
+    }
+  }
+
+  void _handleActiveChange(bool active) {
+    if (active == _active) {
+      return;
+    }
+
+    setState(() => _active = active);
+
+    if (_active) {
+      _sizeController.forward();
+    } else {
+      _sizeController.reverse();
+    }
+  }
+
   void _handleTap([Intent? _]) {
-    if (!interactive) {
+    if (!_interactive) {
       return;
     }
     switch (widget.value) {
@@ -82,22 +162,30 @@ class _YaruCheckboxState extends State<YaruCheckbox> {
       child: _buildEventDetectors(
         child: Padding(
           padding: _kActivableAreaPadding,
-          child: CustomPaint(
-            size: _kCheckboxSize,
-            painter: _YaruCheckboxPainter(
-              interactive: interactive,
-              hover: _hover,
-              focus: _focus,
-              active: _active,
-              value: widget.value,
-              uncheckedColor: uncheckedColor,
-              checkedColor: checkedColor,
-              checkmarkColor: checkmarkColor,
-              uncheckedDisabledColor: uncheckedDisabledColor,
-              checkedDisabledColor: checkedDisabledColor,
-              checkmarkDisabledColor: checkmarkDisabledColor,
-              hoverIndicatorColor: hoverIndicatorColor,
-              focusIndicatorColor: focusIndicatorColor,
+          child: AnimatedBuilder(
+            animation: Listenable.merge([
+              _indicatorController,
+              _sizeController,
+            ]),
+            builder: (context, child) => CustomPaint(
+              size: _kCheckboxSize,
+              painter: _YaruCheckboxPainter(
+                interactive: _interactive,
+                hover: _hover,
+                focus: _focus,
+                active: _active,
+                value: widget.value,
+                indicatorPosition: _indicatorPosition,
+                sizePosition: _sizePosition,
+                uncheckedColor: uncheckedColor,
+                checkedColor: checkedColor,
+                checkmarkColor: checkmarkColor,
+                uncheckedDisabledColor: uncheckedDisabledColor,
+                checkedDisabledColor: checkedDisabledColor,
+                checkmarkDisabledColor: checkmarkDisabledColor,
+                hoverIndicatorColor: hoverIndicatorColor,
+                focusIndicatorColor: focusIndicatorColor,
+              ),
             ),
           ),
         ),
@@ -108,7 +196,7 @@ class _YaruCheckboxState extends State<YaruCheckbox> {
   Widget _buildSemantics({required Widget child}) {
     return Semantics(
       checked: widget.value ?? false,
-      enabled: interactive,
+      enabled: _interactive,
       child: child,
     );
   }
@@ -116,19 +204,19 @@ class _YaruCheckboxState extends State<YaruCheckbox> {
   Widget _buildEventDetectors({required Widget child}) {
     return FocusableActionDetector(
       actions: _actionMap,
-      enabled: interactive,
+      enabled: _interactive,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
-      onShowFocusHighlight: (focus) => setState(() => _focus = focus),
-      onShowHoverHighlight: (hover) => setState(() => _hover = hover),
+      onShowFocusHighlight: _handleFocusChange,
+      onShowHoverHighlight: _handleHoverChange,
       mouseCursor:
-          interactive ? SystemMouseCursors.click : SystemMouseCursors.basic,
+          _interactive ? SystemMouseCursors.click : SystemMouseCursors.basic,
       child: GestureDetector(
-        excludeFromSemantics: !interactive,
-        onTapDown: (_) => setState(() => _active = interactive),
+        excludeFromSemantics: !_interactive,
+        onTapDown: (_) => _handleActiveChange(_interactive),
         onTap: _handleTap,
-        onTapUp: (_) => setState(() => _active = false),
-        onTapCancel: () => setState(() => _active = false),
+        onTapUp: (_) => _handleActiveChange(false),
+        onTapCancel: () => _handleActiveChange(false),
         child: AbsorbPointer(
           child: child,
         ),
@@ -144,6 +232,8 @@ class _YaruCheckboxPainter extends CustomPainter {
     required this.focus,
     required this.active,
     required this.value,
+    required this.indicatorPosition,
+    required this.sizePosition,
     required this.uncheckedColor,
     required this.checkedColor,
     required this.checkmarkColor,
@@ -160,6 +250,9 @@ class _YaruCheckboxPainter extends CustomPainter {
   final bool active;
   final bool? value;
 
+  final CurvedAnimation indicatorPosition;
+  final CurvedAnimation sizePosition;
+
   final Color uncheckedColor;
   final Color checkedColor;
   final Color checkmarkColor;
@@ -172,16 +265,18 @@ class _YaruCheckboxPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size canvasSize) {
     final origin = active
-        ? const Offset(
-            _kCheckboxActiveResizeFactor / 2,
-            _kCheckboxActiveResizeFactor / 2,
+        ? Offset(
+            _kCheckboxActiveResizeFactor / 2 * sizePosition.value,
+            _kCheckboxActiveResizeFactor / 2 * sizePosition.value,
           )
         : Offset.zero;
 
     final size = active
         ? Size(
-            canvasSize.width - _kCheckboxActiveResizeFactor,
-            canvasSize.height - _kCheckboxActiveResizeFactor,
+            canvasSize.width -
+                _kCheckboxActiveResizeFactor * sizePosition.value,
+            canvasSize.height -
+                _kCheckboxActiveResizeFactor * sizePosition.value,
           )
         : canvasSize;
 
@@ -196,12 +291,15 @@ class _YaruCheckboxPainter extends CustomPainter {
   }
 
   void _drawStateIndicator(Canvas canvas, Size canvasSize) {
-    if (hover || focus) {
+    if (interactive) {
+      final color = focus ? focusIndicatorColor : hoverIndicatorColor;
+
       canvas.drawCircle(
         Offset(canvasSize.width / 2, canvasSize.height / 2),
         20,
         Paint()
-          ..color = focus ? focusIndicatorColor : hoverIndicatorColor
+          ..color =
+              Color.lerp(Colors.transparent, color, indicatorPosition.value)!
           ..style = PaintingStyle.fill,
       );
     }
