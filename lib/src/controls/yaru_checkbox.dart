@@ -55,12 +55,12 @@ class _YaruCheckboxState extends State<YaruCheckbox>
     super.initState();
 
     _indicatorController = AnimationController(
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 150),
       vsync: this,
     );
     _indicatorPosition = CurvedAnimation(
       parent: _indicatorController,
-      curve: Curves.easeOut,
+      curve: Curves.fastOutSlowIn,
     );
 
     _sizeController = AnimationController(
@@ -69,8 +69,20 @@ class _YaruCheckboxState extends State<YaruCheckbox>
     );
     _sizePosition = CurvedAnimation(
       parent: _sizeController,
-      curve: Curves.easeOut,
+      curve: Curves.easeIn,
+      reverseCurve: Curves.easeOut,
     );
+  }
+
+  @override
+  void didUpdateWidget(covariant YaruCheckbox oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.value != widget.value) {
+      _sizeController.forward().then((_) {
+        _sizeController.reverse();
+      });
+    }
   }
 
   @override
@@ -264,29 +276,22 @@ class _YaruCheckboxPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size canvasSize) {
-    final origin = active
-        ? Offset(
-            _kCheckboxActiveResizeFactor / 2 * sizePosition.value,
-            _kCheckboxActiveResizeFactor / 2 * sizePosition.value,
-          )
-        : Offset.zero;
-
-    final size = active
-        ? Size(
-            canvasSize.width -
-                _kCheckboxActiveResizeFactor * sizePosition.value,
-            canvasSize.height -
-                _kCheckboxActiveResizeFactor * sizePosition.value,
-          )
-        : canvasSize;
+    final drawingOrigin = Offset(
+      _kCheckboxActiveResizeFactor / 2 * sizePosition.value,
+      _kCheckboxActiveResizeFactor / 2 * sizePosition.value,
+    );
+    final drawingSize = Size(
+      canvasSize.width - _kCheckboxActiveResizeFactor * sizePosition.value,
+      canvasSize.height - _kCheckboxActiveResizeFactor * sizePosition.value,
+    );
 
     _drawStateIndicator(canvas, canvasSize);
-    _drawBox(canvas, size, origin);
+    _drawBox(canvas, drawingSize, drawingOrigin);
 
     if (value == true) {
-      _drawCheckMark(canvas, size, origin);
+      _drawCheckMark(canvas, drawingSize, drawingOrigin);
     } else if (value == null) {
-      _drawDash(canvas, size, origin);
+      _drawDash(canvas, drawingSize, drawingOrigin);
     }
   }
 
