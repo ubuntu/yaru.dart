@@ -4,8 +4,12 @@ const _kActivableAreaPadding = EdgeInsets.all(5);
 const _kCheckboxSize = Size.square(22);
 const _kCheckboxBorderRadius = Radius.circular(4);
 const _kCheckboxDashStroke = 2.0;
-const _kDashSizeFactor = .52;
+const _kDashSizeFactor = 0.52;
 const _kCheckboxActiveResizeFactor = 2; // Need to be an even number
+const _kCheckboxAnimationDuration = Duration(milliseconds: 150);
+const _kCheckboxSizeAnimationDuration = Duration(milliseconds: 100);
+const _kIndicatorAnimationDuration = Duration(milliseconds: 200);
+const _kIndicatorRadius = 20.0;
 
 class YaruCheckbox extends StatefulWidget {
   const YaruCheckbox({
@@ -62,7 +66,7 @@ class _YaruCheckboxState extends State<YaruCheckbox>
     _oldValue = widget.value;
 
     _positionController = AnimationController(
-      duration: const Duration(milliseconds: 150),
+      duration: _kCheckboxAnimationDuration,
       value: widget.value == false ? 0.0 : 1.0,
       vsync: this,
     );
@@ -73,7 +77,7 @@ class _YaruCheckboxState extends State<YaruCheckbox>
     );
 
     _sizeController = AnimationController(
-      duration: const Duration(milliseconds: 100),
+      duration: _kCheckboxSizeAnimationDuration,
       vsync: this,
     );
     _sizePosition = CurvedAnimation(
@@ -83,7 +87,7 @@ class _YaruCheckboxState extends State<YaruCheckbox>
     );
 
     _indicatorController = AnimationController(
-      duration: const Duration(milliseconds: 150),
+      duration: _kIndicatorAnimationDuration,
       vsync: this,
     );
     _indicatorPosition = CurvedAnimation(
@@ -372,7 +376,7 @@ class _YaruCheckboxPainter extends CustomPainter {
 
       canvas.drawCircle(
         Offset(canvasSize.width / 2, canvasSize.height / 2),
-        20,
+        _kIndicatorRadius,
         Paint()
           ..color =
               Color.lerp(Colors.transparent, color, indicatorPosition.value)!
@@ -390,9 +394,7 @@ class _YaruCheckboxPainter extends CustomPainter {
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedColor, checkedColor, t)!
-            : value != false
-                ? checkedDisabledColor
-                : uncheckedDisabledColor
+            : Color.lerp(uncheckedDisabledColor, checkedDisabledColor, t)!
         ..style = PaintingStyle.fill,
     );
   }
