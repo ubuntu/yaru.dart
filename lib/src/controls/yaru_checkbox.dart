@@ -402,40 +402,29 @@ class _YaruCheckboxPainter extends CustomPainter {
   void _drawCheckMark(Canvas canvas, Size size, Offset origin, double t) {
     final path = Path();
 
-    final start1 = Offset(size.width * 0.2198, size.height * 0.3973);
-    final start2 = Offset(size.width * 0.1598, size.height * 0.4615);
-    final mid1 = Offset(size.width * 0.4297, size.height * 0.5684);
-    final mid2 = Offset(size.width * 0.4297, size.height * 0.7455);
-    final end1 = Offset(size.width * 0.7881, size.height * 0.2545);
-    final end2 = Offset(size.width * 0.8402, size.height * 0.3135);
+    final start = Offset(size.width * 0.1818, size.height * 0.4545);
+    final mid = Offset(size.width * 0.4091, size.height * 0.6818);
+    final end = Offset(size.width * 0.8128, size.height * 0.2781);
 
     if (t < 0.5) {
       final strokeT = t * 2.0;
-      final drawMid1 = Offset.lerp(start1, mid1, strokeT)!;
-      final drawMid2 = Offset.lerp(start2, mid2, strokeT)!;
+      final drawMid = Offset.lerp(start, mid, strokeT)!;
 
-      path.moveTo(origin.dx + start1.dx, origin.dy + start1.dy);
-      path.lineTo(origin.dx + drawMid1.dx, origin.dy + drawMid1.dy);
-      path.lineTo(origin.dx + drawMid2.dx, origin.dy + drawMid2.dy);
-      path.lineTo(origin.dx + start2.dx, origin.dy + start2.dy);
-      path.close();
+      path.moveTo(origin.dx + start.dx, origin.dy + start.dy);
+      path.lineTo(origin.dx + drawMid.dx, origin.dy + drawMid.dy);
+      path.lineTo(origin.dx + start.dx, origin.dy + start.dy);
     } else {
       final strokeT = (t - 0.5) * 2.0;
-      final drawEnd1 = Offset.lerp(mid1, end1, strokeT)!;
-      final drawEnd2 = Offset.lerp(mid2, end2, strokeT)!;
+      final drawEnd = Offset.lerp(mid, end, strokeT)!;
 
-      path.moveTo(origin.dx + start1.dx, origin.dy + start1.dy);
-      path.lineTo(origin.dx + mid1.dx, origin.dy + mid1.dy);
-      path.lineTo(origin.dx + drawEnd1.dx, origin.dy + drawEnd1.dy);
-      path.lineTo(origin.dx + drawEnd2.dx, origin.dy + drawEnd2.dy);
-      path.lineTo(origin.dx + mid2.dx, origin.dy + mid2.dy);
-      path.lineTo(origin.dx + start2.dx, origin.dy + start2.dy);
-      path.close();
+      path.moveTo(origin.dx + start.dx, origin.dy + start.dy);
+      path.lineTo(origin.dx + mid.dx, origin.dy + mid.dy);
+      path.lineTo(origin.dx + drawEnd.dx, origin.dy + drawEnd.dy);
     }
 
     canvas.drawPath(
       path,
-      _getCheckmarkPaint(true),
+      _getCheckmarkPaint(),
     );
   }
 
@@ -452,14 +441,14 @@ class _YaruCheckboxPainter extends CustomPainter {
     canvas.drawLine(
       origin + drawStart,
       origin + drawEnd,
-      _getCheckmarkPaint(false),
+      _getCheckmarkPaint(),
     );
   }
 
-  Paint _getCheckmarkPaint(bool fill) {
+  Paint _getCheckmarkPaint() {
     return Paint()
       ..color = interactive ? checkmarkColor : checkmarkDisabledColor
-      ..style = fill ? PaintingStyle.fill : PaintingStyle.stroke
+      ..style = PaintingStyle.stroke
       ..strokeWidth = _kCheckboxDashStroke;
   }
 
