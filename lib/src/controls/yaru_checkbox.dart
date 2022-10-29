@@ -126,6 +126,7 @@ class _YaruCheckboxState extends State<YaruCheckbox>
   void dispose() {
     super.dispose();
 
+    _positionController.dispose();
     _indicatorController.dispose();
     _sizeController.dispose();
   }
