@@ -23,7 +23,7 @@ jobs:
         working-directory: example
 
   with-flutter-snap:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v2
