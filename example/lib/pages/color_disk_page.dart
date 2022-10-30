@@ -23,7 +23,7 @@ class _ColorDiskPageState extends State<ColorDiskPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          for (var theme in themeList)
+          for (var theme in YaruVariant.values)
             YaruColorDisk(
               onPressed: () {
                 lightTheme.value = theme.theme;
@@ -37,16 +37,3 @@ class _ColorDiskPageState extends State<ColorDiskPage> {
     );
   }
 }
-
-const List<YaruVariant> themeList = [
-  YaruVariant.orange,
-  YaruVariant.sage,
-  YaruVariant.bark,
-  YaruVariant.olive,
-  YaruVariant.viridian,
-  YaruVariant.prussianGreen,
-  YaruVariant.blue,
-  YaruVariant.purple,
-  YaruVariant.magenta,
-  YaruVariant.red,
-];
