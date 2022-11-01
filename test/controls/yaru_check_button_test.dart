@@ -25,14 +25,14 @@ void main() {
         .pumpWidget(builder(title: const Text('title'), subtitle: null));
     expect(find.text('title'), findsOneWidget);
     expect(find.text('subtitle'), findsNothing);
-    expect(find.byType(Checkbox), findsOneWidget);
+    expect(find.byType(YaruCheckbox), findsOneWidget);
 
     await tester.pumpWidget(
       builder(title: const Text('title'), subtitle: const Text('subtitle')),
     );
     expect(find.text('title'), findsOneWidget);
     expect(find.text('subtitle'), findsOneWidget);
-    expect(find.byType(Checkbox), findsOneWidget);
+    expect(find.byType(YaruCheckbox), findsOneWidget);
   });
 
   testWidgets('the labels react to taps', (tester) async {
@@ -172,10 +172,10 @@ void main() {
       await tester.pumpAndSettle();
 
       if (variant.hasState(MaterialState.pressed)) {
-        await tester.down(find.byType(Checkbox));
+        await tester.down(find.byType(YaruCheckbox));
         await tester.pumpAndSettle();
       } else if (variant.hasState(MaterialState.hovered)) {
-        await tester.hover(find.byType(Checkbox));
+        await tester.hover(find.byType(YaruCheckbox));
         await tester.pumpAndSettle();
       }
 
