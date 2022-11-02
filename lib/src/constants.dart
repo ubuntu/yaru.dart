@@ -2,7 +2,7 @@
 const kYaruPagePadding = 20.0;
 
 /// The default height of [YaruTitleBar].
-const kYaruTitleBarHeight = 72.0;
+const kYaruTitleBarHeight = 50.0;
 
 /// The default border radius for Yaru-style containers.
 const kYaruContainerRadius = 8.0;
