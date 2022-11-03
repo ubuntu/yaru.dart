@@ -25,19 +25,21 @@ abstract class YaruTogglable<T> extends StatefulWidget {
 
   final ValueChanged<T>? onChanged;
 
+  bool get interactive => onChanged != null;
+
   final FocusNode? focusNode;
 
   final bool autofocus;
 }
 
-abstract class YaruTogglableState<T> extends State<YaruTogglable<T>>
+abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     with TickerProviderStateMixin {
   bool hover = false;
   bool focus = false;
   bool active = false;
   bool? oldChecked;
 
-  bool get interactive => widget.onChanged != null;
+  bool get interactive => widget.interactive;
 
   late CurvedAnimation _position;
   late AnimationController _positionController;
@@ -60,7 +62,7 @@ abstract class YaruTogglableState<T> extends State<YaruTogglable<T>>
 
     _positionController = AnimationController(
       duration: _kTogglableAnimationDuration,
-      value: widget.value == false ? 0.0 : 1.0,
+      value: widget.checked == false ? 0.0 : 1.0,
       vsync: this,
     );
     _position = CurvedAnimation(
@@ -90,7 +92,7 @@ abstract class YaruTogglableState<T> extends State<YaruTogglable<T>>
   }
 
   @override
-  void didUpdateWidget(covariant YaruTogglable<T> oldWidget) {
+  void didUpdateWidget(covariant S oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.checked != widget.checked) {

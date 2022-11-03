@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
 import 'yaru_togglable.dart';
 
 const _kCheckboxBorderRadius = Radius.circular(4);
 const _kCheckboxDashStroke = 2.0;
 const _kDashSizeFactor = 0.52;
-const _kCheckboxActiveResizeFactor = 2; // Need to be an even number
 
 class YaruCheckbox extends YaruTogglable<bool?> {
   const YaruCheckbox({
     super.key,
-    super.value,
+    required super.value,
     super.tristate,
     super.onChanged,
     super.focusNode,
@@ -21,12 +21,15 @@ class YaruCheckbox extends YaruTogglable<bool?> {
   bool? get checked => value;
 
   @override
-  YaruTogglableState<bool?> createState() {
+  YaruTogglableState<YaruCheckbox> createState() {
     return _YaruCheckboxState();
   }
 }
 
-class _YaruCheckboxState extends YaruTogglableState<bool?> {
+class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
+  @override
+  bool get interactive => widget.onChanged != null;
+
   @override
   void handleTap([Intent? _]) {
     if (!interactive) {
@@ -57,12 +60,12 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
     final canvasSize = size;
     final t = position.value;
     final drawingOrigin = Offset(
-      _kCheckboxActiveResizeFactor / 2 * sizePosition.value,
-      _kCheckboxActiveResizeFactor / 2 * sizePosition.value,
+      kCheckRadioActiveResizeFactor / 2 * sizePosition.value,
+      kCheckRadioActiveResizeFactor / 2 * sizePosition.value,
     );
     final drawingSize = Size(
-      canvasSize.width - _kCheckboxActiveResizeFactor * sizePosition.value,
-      canvasSize.height - _kCheckboxActiveResizeFactor * sizePosition.value,
+      canvasSize.width - kCheckRadioActiveResizeFactor * sizePosition.value,
+      canvasSize.height - kCheckRadioActiveResizeFactor * sizePosition.value,
     );
 
     drawStateIndicator(canvas, canvasSize);
