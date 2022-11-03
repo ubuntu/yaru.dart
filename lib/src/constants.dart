@@ -13,3 +13,7 @@ const kYaruButtonRadius = 6.0;
 /// The default breakpoint width [YaruMasterDetailPage] uses for switching
 /// between portrait and landscape modes.
 const kYaruMasterDetailBreakpoint = 620.0;
+
+// Used by tooglable widgets to resize the canvas on active state
+// Need to be an even number
+const kCheckRadioActiveResizeFactor = 2;

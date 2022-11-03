@@ -9,7 +9,7 @@ class RadioButtonPage extends StatefulWidget {
 }
 
 class _RadioButtonPageState extends State<RadioButtonPage> {
-  int _value = 0;
+  int? _value = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,8 @@ class _RadioButtonPageState extends State<RadioButtonPage> {
           YaruRadioButton<int>(
             value: i,
             groupValue: _value,
-            onChanged: (v) => setState(() => _value = v!),
+            onChanged: (v) => setState(() => _value = v),
+            toggleable: true,
             title: const Text('YaruRadioButton'),
           ),
           const SizedBox(height: 10),
