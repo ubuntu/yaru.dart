@@ -9,10 +9,11 @@ import '../yaru_golden_tester.dart';
 void main() {
   testWidgets('radio react to taps', (tester) async {
     int? changedValue;
-    Widget builder(
-        {required int value,
-        required int groupValue,
-        required bool toggleable}) {
+    Widget builder({
+      required int value,
+      required int groupValue,
+      required bool toggleable,
+    }) {
       return MaterialApp(
         home: Scaffold(
           body: YaruRadio<int>(
