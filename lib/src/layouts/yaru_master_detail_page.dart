@@ -56,6 +56,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.appBar,
     this.initialIndex,
     this.onSelected,
+    this.controller,
   });
 
   /// The total number of pages.
@@ -95,6 +96,9 @@ class YaruMasterDetailPage extends StatefulWidget {
 
   /// Called when the user selects a page.
   final ValueChanged<int?>? onSelected;
+
+  /// An optional controller that can be used to navigate to a specific index.
+  final ValueNotifier<int>? controller;
 
   @override
   _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
@@ -141,6 +145,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
             appBar: widget.appBar,
+            controller: widget.controller,
           );
         } else {
           return YaruLandscapeLayout(
@@ -155,6 +160,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             pageMinWidth: widget.pageMinWidth,
             onLeftPaneWidthChange: (panWidth) => _leftPaneWidth = panWidth,
             appBar: widget.appBar,
+            controller: widget.controller,
           );
         }
       },

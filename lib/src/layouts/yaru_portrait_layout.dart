@@ -13,6 +13,7 @@ class YaruPortraitLayout extends StatefulWidget {
     required this.pageBuilder,
     required this.onSelected,
     this.appBar,
+    this.controller,
   });
 
   final int length;
@@ -22,6 +23,9 @@ class YaruPortraitLayout extends StatefulWidget {
   final ValueChanged<int> onSelected;
 
   final PreferredSizeWidget? appBar;
+
+  /// An optional controller that can be used to navigate to a specific index.
+  final ValueNotifier<int>? controller;
 
   @override
   _YaruPortraitLayoutState createState() => _YaruPortraitLayoutState();
@@ -36,7 +40,19 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   @override
   void initState() {
     _selectedIndex = widget.selectedIndex;
+    widget.controller?.addListener(_controllerCallback);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.controller?.removeListener(_controllerCallback);
+    super.dispose();
+  }
+
+  void _controllerCallback() {
+    _navigator.popUntil((route) => route.isFirst);
+    _onTap(widget.controller!.value);
   }
 
   void _onTap(int index) {
