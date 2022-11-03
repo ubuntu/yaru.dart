@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const _kActivableAreaPadding = EdgeInsets.all(5);
-const _kTogglableSize = Size.square(22);
+const _kActivableAreaPadding = EdgeInsets.all(6);
+const _kTogglableSize = Size.square(20);
 const _kTogglableAnimationDuration = Duration(milliseconds: 150);
 const _kTogglableSizeAnimationDuration = Duration(milliseconds: 100);
 const _kIndicatorAnimationDuration = Duration(milliseconds: 200);
