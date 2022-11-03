@@ -23,7 +23,7 @@ abstract class YaruTogglable<T> extends StatefulWidget {
 
   bool? get checked;
 
-  final ValueChanged<T>? onChanged;
+  final ValueChanged<T?>? onChanged;
 
   bool get interactive => onChanged != null;
 

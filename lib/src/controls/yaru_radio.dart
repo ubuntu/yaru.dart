@@ -5,13 +5,13 @@ import 'yaru_togglable.dart';
 
 const _kDotSizeFactor = 0.4;
 
-class YaruRadio<T> extends YaruTogglable<T?> {
+class YaruRadio<T> extends YaruTogglable<T> {
   const YaruRadio({
     super.key,
     required super.value,
     required this.groupValue,
     this.toggleable = false,
-    super.onChanged,
+    required super.onChanged,
     super.focusNode,
     super.autofocus,
   });
@@ -36,7 +36,7 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T>> {
       return;
     }
 
-    if (widget.groupValue != widget.value) {
+    if (widget.groupValue != widget.value || !widget.toggleable) {
       widget.onChanged!(widget.value);
     } else if (widget.toggleable) {
       widget.onChanged!(null);
