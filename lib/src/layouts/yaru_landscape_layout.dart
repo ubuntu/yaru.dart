@@ -19,6 +19,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.pageMinWidth,
     this.onLeftPaneWidthChange,
     this.appBar,
+    this.controller,
   });
 
   /// The total number of pages.
@@ -55,6 +56,9 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// If provided, a second [AppBar] will be created right to it.
   final PreferredSizeWidget? appBar;
 
+  /// An optional controller that can be used to navigate to a specific index.
+  final ValueNotifier<int>? controller;
+
   @override
   State<YaruLandscapeLayout> createState() => _YaruLandscapeLayoutState();
 }
@@ -77,6 +81,17 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     super.initState();
     _selectedIndex = widget.selectedIndex;
     _leftPaneWidth = widget.leftPaneWidth;
+    widget.controller?.addListener(_controllerCallback);
+  }
+
+  @override
+  void dispose() {
+    widget.controller?.removeListener(_controllerCallback);
+    super.dispose();
+  }
+
+  void _controllerCallback() {
+    _onTap(widget.controller!.value);
   }
 
   void _onTap(int index) {
