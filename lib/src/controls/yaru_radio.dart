@@ -14,7 +14,7 @@ class YaruRadio<T> extends YaruTogglable<T> {
     required super.onChanged,
     super.focusNode,
     super.autofocus,
-  });
+  }) : assert(toggleable || value != null);
 
   final bool toggleable;
 
