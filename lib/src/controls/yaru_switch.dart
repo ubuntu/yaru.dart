@@ -7,26 +7,28 @@ const _kCheckboxBorderRadius = Radius.circular(4);
 const _kCheckboxDashStroke = 2.0;
 const _kDashSizeFactor = 0.52;
 
-class YaruCheckbox extends YaruTogglable<bool?> {
-  const YaruCheckbox({
+class YaruSwitch extends YaruTogglable<bool> {
+  const YaruSwitch({
     super.key,
     required super.value,
-    super.tristate,
     required super.onChanged,
     super.focusNode,
     super.autofocus,
-  }) : assert(tristate || value != null);
+  });
 
   @override
-  bool? get checked => value;
+  bool get checked => value;
 
   @override
-  YaruTogglableState<YaruCheckbox> createState() {
-    return _YaruCheckboxState();
+  bool get tristate => false;
+
+  @override
+  YaruTogglableState<YaruSwitch> createState() {
+    return _YaruSwitchState();
   }
 }
 
-class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
+class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
   @override
   bool get interactive => widget.onChanged != null;
 
@@ -35,26 +37,17 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
     if (!interactive) {
       return;
     }
-    switch (widget.value) {
-      case false:
-        widget.onChanged!(true);
-        break;
-      case true:
-        widget.onChanged!(widget.tristate ? null : false);
-        break;
-      case null:
-        widget.onChanged!(false);
-        break;
-    }
+
+    widget.onChanged!(!widget.value);
   }
 
   @override
   Widget build(BuildContext context) {
-    return buildToggleable(_YaruCheckboxPainter());
+    return buildToggleable(_YaruSwitchPainter());
   }
 }
 
-class _YaruCheckboxPainter extends YaruTogglablePainter {
+class _YaruSwitchPainter extends YaruTogglablePainter {
   @override
   void paint(Canvas canvas, Size size) {
     final canvasSize = size;

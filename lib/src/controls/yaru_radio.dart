@@ -5,7 +5,7 @@ import 'yaru_togglable.dart';
 
 const _kDotSizeFactor = 0.4;
 
-class YaruRadio<T> extends YaruTogglable<T> {
+class YaruRadio<T> extends YaruTogglable<T?> {
   const YaruRadio({
     super.key,
     required super.value,
@@ -24,15 +24,15 @@ class YaruRadio<T> extends YaruTogglable<T> {
   final T? groupValue;
 
   @override
-  YaruTogglableState<YaruRadio<T>> createState() {
-    return _YaruRadioState<T>();
+  YaruTogglableState<YaruRadio<T?>> createState() {
+    return _YaruRadioState<T?>();
   }
 }
 
-class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T>> {
+class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
   @override
   void handleTap([Intent? _]) {
-    if (!interactive) {
+    if (!widget.interactive) {
       return;
     }
 

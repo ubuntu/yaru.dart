@@ -12,7 +12,7 @@ abstract class YaruTogglable<T> extends StatefulWidget {
     super.key,
     required this.value,
     this.tristate = false,
-    this.onChanged,
+    required this.onChanged,
     this.focusNode,
     this.autofocus = false,
   });
@@ -23,7 +23,7 @@ abstract class YaruTogglable<T> extends StatefulWidget {
 
   bool? get checked;
 
-  final ValueChanged<T?>? onChanged;
+  final ValueChanged<T>? onChanged;
 
   bool get interactive => onChanged != null;
 
@@ -38,8 +38,6 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   bool focus = false;
   bool active = false;
   bool? oldChecked;
-
-  bool get interactive => widget.interactive;
 
   late CurvedAnimation _position;
   late AnimationController _positionController;
@@ -177,7 +175,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   Widget _buildSemantics({required Widget child}) {
     return Semantics(
       checked: widget.checked ?? false,
-      enabled: interactive,
+      enabled: widget.interactive,
       child: child,
     );
   }
@@ -185,16 +183,17 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   Widget _buildEventDetectors({required Widget child}) {
     return FocusableActionDetector(
       actions: _actionMap,
-      enabled: interactive,
+      enabled: widget.interactive,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
       onShowFocusHighlight: _handleFocusChange,
       onShowHoverHighlight: _handleHoverChange,
-      mouseCursor:
-          interactive ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      mouseCursor: widget.interactive
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
       child: GestureDetector(
-        excludeFromSemantics: !interactive,
-        onTapDown: (_) => _handleActiveChange(interactive),
+        excludeFromSemantics: !widget.interactive,
+        onTapDown: (_) => _handleActiveChange(widget.interactive),
         onTap: handleTap,
         onTapUp: (_) => _handleActiveChange(false),
         onTapCancel: () => _handleActiveChange(false),
@@ -229,7 +228,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
           child: CustomPaint(
             size: _kTogglableSize,
             painter: painter
-              ..interactive = interactive
+              ..interactive = widget.interactive
               ..hover = hover
               ..focus = focus
               ..active = active
