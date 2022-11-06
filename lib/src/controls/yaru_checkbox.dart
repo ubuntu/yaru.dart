@@ -59,32 +59,21 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
 
 class _YaruCheckboxPainter extends YaruTogglablePainter {
   @override
-  void paint(Canvas canvas, Size size) {
-    final canvasSize = size;
-    final t = position.value;
-    final drawingOrigin = Offset(
-      kCheckRadioActiveResizeFactor / 2 * sizePosition.value,
-      kCheckRadioActiveResizeFactor / 2 * sizePosition.value,
-    );
-    final drawingSize = Size(
-      canvasSize.width - kCheckRadioActiveResizeFactor * sizePosition.value,
-      canvasSize.height - kCheckRadioActiveResizeFactor * sizePosition.value,
-    );
-
-    drawStateIndicator(canvas, canvasSize, null);
+  void paintTogglable(Canvas canvas, Size size, Offset origin, double t) {
+    drawStateIndicator(canvas, size, null);
     _drawBox(
       canvas,
-      drawingSize,
-      drawingOrigin,
+      size,
+      origin,
       oldChecked == false || checked == false ? t : 1,
     );
 
     // Four cases: false to null, false to true, null to false, true to false
     if (oldChecked == false || checked == false) {
       if (oldChecked == true || checked == true) {
-        _drawCheckMark(canvas, drawingSize, drawingOrigin, t);
+        _drawCheckMark(canvas, size, origin, t);
       } else if (oldChecked == null || checked == null) {
-        _drawDash(canvas, drawingSize, drawingOrigin, t);
+        _drawDash(canvas, size, origin, t);
       }
     }
     // Two cases: null to true, true to null
@@ -92,16 +81,16 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
       if (t <= 0.5) {
         final tShrink = 1 - t * 2;
         if (oldChecked == true) {
-          _drawCheckMark(canvas, drawingSize, drawingOrigin, tShrink);
+          _drawCheckMark(canvas, size, origin, tShrink);
         } else {
-          _drawDash(canvas, drawingSize, drawingOrigin, tShrink);
+          _drawDash(canvas, size, origin, tShrink);
         }
       } else {
         final tExpand = (t - 0.5) * 2.0;
         if (checked == true) {
-          _drawCheckMark(canvas, drawingSize, drawingOrigin, tExpand);
+          _drawCheckMark(canvas, size, origin, tExpand);
         } else {
-          _drawDash(canvas, drawingSize, drawingOrigin, tExpand);
+          _drawDash(canvas, size, origin, tExpand);
         }
       }
     }

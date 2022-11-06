@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+
 const _kTogglableAnimationDuration = Duration(milliseconds: 150);
 const _kTogglableSizeAnimationDuration = Duration(milliseconds: 100);
 const _kIndicatorAnimationDuration = Duration(milliseconds: 200);
@@ -319,6 +321,24 @@ abstract class YaruTogglablePainter extends ChangeNotifier
       canvas.drawCircle(offset ?? defaultOffset, _kIndicatorRadius, paint);
     }
   }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final canvasSize = size;
+    final t = position.value;
+    final drawingOrigin = Offset(
+      kTogglableActiveResizeFactor / 2 * sizePosition.value,
+      kTogglableActiveResizeFactor / 2 * sizePosition.value,
+    );
+    final drawingSize = Size(
+      canvasSize.width - kTogglableActiveResizeFactor * sizePosition.value,
+      canvasSize.height - kTogglableActiveResizeFactor * sizePosition.value,
+    );
+
+    paintTogglable(canvas, drawingSize, drawingOrigin, t);
+  }
+
+  void paintTogglable(Canvas canvas, Size size, Offset origin, double t);
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;

@@ -57,21 +57,10 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
 
 class _YaruRadioPainter extends YaruTogglablePainter {
   @override
-  void paint(Canvas canvas, Size size) {
-    final canvasSize = size;
-    final t = position.value;
-    final drawingOrigin = Offset(
-      kCheckRadioActiveResizeFactor / 2 * sizePosition.value,
-      kCheckRadioActiveResizeFactor / 2 * sizePosition.value,
-    );
-    final drawingSize = Size(
-      canvasSize.width - kCheckRadioActiveResizeFactor * sizePosition.value,
-      canvasSize.height - kCheckRadioActiveResizeFactor * sizePosition.value,
-    );
-
-    drawStateIndicator(canvas, canvasSize, null);
-    _drawBox(canvas, drawingSize, drawingOrigin, t);
-    _drawDot(canvas, drawingSize, drawingOrigin, t);
+  void paintTogglable(Canvas canvas, Size size, Offset origin, double t) {
+    drawStateIndicator(canvas, size, null);
+    _drawBox(canvas, size, origin, t);
+    _drawDot(canvas, size, origin, t);
   }
 
   void _drawBox(Canvas canvas, Size size, Offset origin, double t) {
