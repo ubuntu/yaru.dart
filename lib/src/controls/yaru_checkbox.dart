@@ -28,11 +28,8 @@ class YaruCheckbox extends YaruTogglable<bool?> {
 
 class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
   @override
-  bool get interactive => widget.onChanged != null;
-
-  @override
   void handleTap([Intent? _]) {
-    if (!interactive) {
+    if (!widget.interactive) {
       return;
     }
     switch (widget.value) {
