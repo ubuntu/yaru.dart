@@ -31,6 +31,12 @@ class YaruRadio<T> extends YaruTogglable<T?> {
 
 class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
   @override
+  EdgeInsets get activableAreaPadding => kCheckradioActivableAreaPadding;
+
+  @override
+  Size get togglableSize => kCheckradioTogglableSize;
+
+  @override
   void handleTap([Intent? _]) {
     if (!widget.interactive) {
       return;
@@ -63,7 +69,7 @@ class _YaruRadioPainter extends YaruTogglablePainter {
       canvasSize.height - kCheckRadioActiveResizeFactor * sizePosition.value,
     );
 
-    drawStateIndicator(canvas, canvasSize);
+    drawStateIndicator(canvas, canvasSize, null);
     _drawBox(canvas, drawingSize, drawingOrigin, t);
     _drawDot(canvas, drawingSize, drawingOrigin, t);
   }

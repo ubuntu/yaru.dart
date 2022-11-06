@@ -77,7 +77,7 @@ class _DialogPageState extends State<DialogPage> {
             ),
             YaruTile(
               title: const Text('isCloseable'),
-              trailing: Switch(
+              trailing: YaruSwitch(
                 value: isCloseable,
                 onChanged: (value) => setState(() => isCloseable = value),
               ),

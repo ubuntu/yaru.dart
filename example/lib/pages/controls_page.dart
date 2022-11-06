@@ -11,6 +11,7 @@ class ControlsPage extends StatefulWidget {
 class _ControlsPageState extends State<ControlsPage> {
   final List<bool?> _checkboxValues = [false, null, true];
   int? _radioValue = 1;
+  final List<bool> _switchValues = List.generate(3, (i) => i % 2 == 0);
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +52,22 @@ class _ControlsPageState extends State<ControlsPage> {
                 onChanged: null,
                 toggleable: true,
               ),
+            ],
+          ),
+          const SizedBox(height: 10),
+        ],
+        for (var i = 0; i < _switchValues.length; ++i) ...[
+          Row(
+            children: [
+              YaruSwitch(
+                value: _switchValues[i],
+                onChanged: (v) => setState(() => _switchValues[i] = v),
+              ),
+              const SizedBox(width: 10),
+              YaruSwitch(
+                value: _switchValues[i],
+                onChanged: null,
+              )
             ],
           ),
           const SizedBox(height: 10),

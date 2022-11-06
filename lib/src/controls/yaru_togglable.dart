@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-const _kActivableAreaPadding = EdgeInsets.all(6);
-const _kTogglableSize = Size.square(20);
 const _kTogglableAnimationDuration = Duration(milliseconds: 150);
 const _kTogglableSizeAnimationDuration = Duration(milliseconds: 100);
 const _kIndicatorAnimationDuration = Duration(milliseconds: 200);
@@ -51,6 +49,9 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   late final Map<Type, Action<Intent>> _actionMap = <Type, Action<Intent>>{
     ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: handleTap),
   };
+
+  EdgeInsets get activableAreaPadding;
+  Size get togglableSize;
 
   @override
   void initState() {
@@ -224,9 +225,9 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     return _buildSemantics(
       child: _buildEventDetectors(
         child: Padding(
-          padding: _kActivableAreaPadding,
+          padding: activableAreaPadding,
           child: CustomPaint(
-            size: _kTogglableSize,
+            size: togglableSize,
             painter: painter
               ..interactive = widget.interactive
               ..hover = hover
@@ -306,18 +307,16 @@ abstract class YaruTogglablePainter extends ChangeNotifier
     notifyListeners();
   }
 
-  void drawStateIndicator(Canvas canvas, Size canvasSize) {
+  void drawStateIndicator(Canvas canvas, Size canvasSize, Offset? offset) {
     if (interactive) {
+      final defaultOffset = Offset(canvasSize.width / 2, canvasSize.height / 2);
       final color = focus ? focusIndicatorColor : hoverIndicatorColor;
+      final paint = Paint()
+        ..color =
+            Color.lerp(Colors.transparent, color, indicatorPosition.value)!
+        ..style = PaintingStyle.fill;
 
-      canvas.drawCircle(
-        Offset(canvasSize.width / 2, canvasSize.height / 2),
-        _kIndicatorRadius,
-        Paint()
-          ..color =
-              Color.lerp(Colors.transparent, color, indicatorPosition.value)!
-          ..style = PaintingStyle.fill,
-      );
+      canvas.drawCircle(offset ?? defaultOffset, _kIndicatorRadius, paint);
     }
   }
 

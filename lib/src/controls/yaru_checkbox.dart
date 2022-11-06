@@ -28,6 +28,12 @@ class YaruCheckbox extends YaruTogglable<bool?> {
 
 class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
   @override
+  EdgeInsets get activableAreaPadding => kCheckradioActivableAreaPadding;
+
+  @override
+  Size get togglableSize => kCheckradioTogglableSize;
+
+  @override
   void handleTap([Intent? _]) {
     if (!widget.interactive) {
       return;
@@ -65,7 +71,7 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
       canvasSize.height - kCheckRadioActiveResizeFactor * sizePosition.value,
     );
 
-    drawStateIndicator(canvas, canvasSize);
+    drawStateIndicator(canvas, canvasSize, null);
     _drawBox(
       canvas,
       drawingSize,
