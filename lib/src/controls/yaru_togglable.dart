@@ -343,7 +343,12 @@ abstract class YaruTogglablePainter extends ChangeNotifier
   }
 
   void paintTogglable(
-      Canvas canvas, Size realSize, Size size, Offset origin, double t);
+    Canvas canvas,
+    Size realSize,
+    Size size,
+    Offset origin,
+    double t,
+  );
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
