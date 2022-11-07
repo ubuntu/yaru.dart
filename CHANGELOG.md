@@ -1,5 +1,11 @@
 # Changelog
 
+2.0.0-beta-1
+
+- [Paul Kepinski](https://github.com/Jupi007)
+  -  Add YaruSwitch (#362) 
+
+
 # 2.0.0-beta
 
 - [Paul Kepinski](https://github.com/Jupi007): Add YaruRadio (#360)
