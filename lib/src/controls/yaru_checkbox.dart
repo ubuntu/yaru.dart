@@ -59,8 +59,14 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
 
 class _YaruCheckboxPainter extends YaruTogglablePainter {
   @override
-  void paintTogglable(Canvas canvas, Size size, Offset origin, double t) {
-    drawStateIndicator(canvas, size, null);
+  void paintTogglable(
+    Canvas canvas,
+    Size realSize,
+    Size size,
+    Offset origin,
+    double t,
+  ) {
+    drawStateIndicator(canvas, realSize, null);
     _drawBox(
       canvas,
       size,

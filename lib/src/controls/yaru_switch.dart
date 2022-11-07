@@ -52,7 +52,13 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 
 class _YaruSwitchPainter extends YaruTogglablePainter {
   @override
-  void paintTogglable(Canvas canvas, Size size, Offset origin, double t) {
+  void paintTogglable(
+    Canvas canvas,
+    Size realSize,
+    Size size,
+    Offset origin,
+    double t,
+  ) {
     _drawBox(canvas, size, origin, t);
     _drawDot(canvas, size, origin, t);
   }
