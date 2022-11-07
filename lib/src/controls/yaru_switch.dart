@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'yaru_togglable.dart';
 
 const _kSwitchActivableAreaPadding =
-    EdgeInsets.symmetric(horizontal: 4, vertical: 5);
+    EdgeInsets.symmetric(horizontal: 2, vertical: 5);
 const _kSwitchSize = Size(55, 30);
 const _kSwitchDotSizeFactor = 0.8;
 

@@ -44,17 +44,11 @@ class YaruSwitchButton extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       contentPadding: contentPadding,
-      leading: SizedBox(
-        width: kMinInteractiveDimension + 8,
-        height: kMinInteractiveDimension - 8,
-        child: Center(
-          child: YaruSwitch(
-            value: value,
-            onChanged: onChanged,
-            focusNode: focusNode,
-            autofocus: autofocus,
-          ),
-        ),
+      leading: YaruSwitch(
+        value: value,
+        onChanged: onChanged,
+        focusNode: focusNode,
+        autofocus: autofocus,
       ),
       onToggled: onChanged != null ? () => onChanged!(!value) : null,
     );

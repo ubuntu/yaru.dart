@@ -64,7 +64,7 @@ class _ControlsPageState extends State<ControlsPage> {
                 onChanged: (v) => setState(() => _switchValues[i] = v),
               ),
               const SizedBox(width: 10),
-              YaruSwitch(
+              Switch(
                 value: _switchValues[i],
                 onChanged: null,
               )
