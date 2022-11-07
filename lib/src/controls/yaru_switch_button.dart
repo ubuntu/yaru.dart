@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'yaru_switch.dart';
 import 'yaru_toggle_button.dart';
 
 /// A desktop style switch button with an interactive label.
@@ -43,17 +44,11 @@ class YaruSwitchButton extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       contentPadding: contentPadding,
-      leading: SizedBox(
-        width: kMinInteractiveDimension + 8,
-        height: kMinInteractiveDimension - 8,
-        child: Center(
-          child: Switch(
-            value: value,
-            onChanged: onChanged,
-            focusNode: focusNode,
-            autofocus: autofocus,
-          ),
-        ),
+      leading: YaruSwitch(
+        value: value,
+        onChanged: onChanged,
+        focusNode: focusNode,
+        autofocus: autofocus,
       ),
       onToggled: onChanged != null ? () => onChanged!(!value) : null,
     );

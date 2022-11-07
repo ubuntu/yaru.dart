@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const _kActivableAreaPadding = EdgeInsets.all(6);
-const _kTogglableSize = Size.square(20);
+import '../constants.dart';
+
 const _kTogglableAnimationDuration = Duration(milliseconds: 150);
 const _kTogglableSizeAnimationDuration = Duration(milliseconds: 100);
 const _kIndicatorAnimationDuration = Duration(milliseconds: 200);
@@ -12,7 +12,7 @@ abstract class YaruTogglable<T> extends StatefulWidget {
     super.key,
     required this.value,
     this.tristate = false,
-    this.onChanged,
+    required this.onChanged,
     this.focusNode,
     this.autofocus = false,
   });
@@ -23,7 +23,7 @@ abstract class YaruTogglable<T> extends StatefulWidget {
 
   bool? get checked;
 
-  final ValueChanged<T?>? onChanged;
+  final ValueChanged<T>? onChanged;
 
   bool get interactive => onChanged != null;
 
@@ -39,8 +39,6 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   bool active = false;
   bool? oldChecked;
 
-  bool get interactive => widget.interactive;
-
   late CurvedAnimation _position;
   late AnimationController _positionController;
 
@@ -53,6 +51,9 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   late final Map<Type, Action<Intent>> _actionMap = <Type, Action<Intent>>{
     ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: handleTap),
   };
+
+  EdgeInsets get activableAreaPadding;
+  Size get togglableSize;
 
   @override
   void initState() {
@@ -177,7 +178,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   Widget _buildSemantics({required Widget child}) {
     return Semantics(
       checked: widget.checked ?? false,
-      enabled: interactive,
+      enabled: widget.interactive,
       child: child,
     );
   }
@@ -185,16 +186,17 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   Widget _buildEventDetectors({required Widget child}) {
     return FocusableActionDetector(
       actions: _actionMap,
-      enabled: interactive,
+      enabled: widget.interactive,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
       onShowFocusHighlight: _handleFocusChange,
       onShowHoverHighlight: _handleHoverChange,
-      mouseCursor:
-          interactive ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      mouseCursor: widget.interactive
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
       child: GestureDetector(
-        excludeFromSemantics: !interactive,
-        onTapDown: (_) => _handleActiveChange(interactive),
+        excludeFromSemantics: !widget.interactive,
+        onTapDown: (_) => _handleActiveChange(widget.interactive),
         onTap: handleTap,
         onTapUp: (_) => _handleActiveChange(false),
         onTapCancel: () => _handleActiveChange(false),
@@ -224,28 +226,32 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
     return _buildSemantics(
       child: _buildEventDetectors(
-        child: Padding(
-          padding: _kActivableAreaPadding,
-          child: CustomPaint(
-            size: _kTogglableSize,
-            painter: painter
-              ..interactive = interactive
-              ..hover = hover
-              ..focus = focus
-              ..active = active
-              ..checked = widget.checked
-              ..oldChecked = oldChecked
-              ..position = _position
-              ..sizePosition = _sizePosition
-              ..indicatorPosition = _indicatorPosition
-              ..uncheckedColor = uncheckedColor
-              ..checkedColor = checkedColor
-              ..checkmarkColor = checkmarkColor
-              ..uncheckedDisabledColor = uncheckedDisabledColor
-              ..checkedDisabledColor = checkedDisabledColor
-              ..checkmarkDisabledColor = checkmarkDisabledColor
-              ..hoverIndicatorColor = hoverIndicatorColor
-              ..focusIndicatorColor = focusIndicatorColor,
+        child: SizedBox(
+          width: togglableSize.width + activableAreaPadding.horizontal,
+          height: togglableSize.height + activableAreaPadding.vertical,
+          child: Padding(
+            padding: activableAreaPadding,
+            child: CustomPaint(
+              size: togglableSize,
+              painter: painter
+                ..interactive = widget.interactive
+                ..hover = hover
+                ..focus = focus
+                ..active = active
+                ..checked = widget.checked
+                ..oldChecked = oldChecked
+                ..position = _position
+                ..sizePosition = _sizePosition
+                ..indicatorPosition = _indicatorPosition
+                ..uncheckedColor = uncheckedColor
+                ..checkedColor = checkedColor
+                ..checkmarkColor = checkmarkColor
+                ..uncheckedDisabledColor = uncheckedDisabledColor
+                ..checkedDisabledColor = checkedDisabledColor
+                ..checkmarkDisabledColor = checkmarkDisabledColor
+                ..hoverIndicatorColor = hoverIndicatorColor
+                ..focusIndicatorColor = focusIndicatorColor,
+            ),
           ),
         ),
       ),
@@ -307,20 +313,42 @@ abstract class YaruTogglablePainter extends ChangeNotifier
     notifyListeners();
   }
 
-  void drawStateIndicator(Canvas canvas, Size canvasSize) {
+  void drawStateIndicator(Canvas canvas, Size canvasSize, Offset? offset) {
     if (interactive) {
+      final defaultOffset = Offset(canvasSize.width / 2, canvasSize.height / 2);
       final color = focus ? focusIndicatorColor : hoverIndicatorColor;
+      final paint = Paint()
+        ..color =
+            Color.lerp(Colors.transparent, color, indicatorPosition.value)!
+        ..style = PaintingStyle.fill;
 
-      canvas.drawCircle(
-        Offset(canvasSize.width / 2, canvasSize.height / 2),
-        _kIndicatorRadius,
-        Paint()
-          ..color =
-              Color.lerp(Colors.transparent, color, indicatorPosition.value)!
-          ..style = PaintingStyle.fill,
-      );
+      canvas.drawCircle(offset ?? defaultOffset, _kIndicatorRadius, paint);
     }
   }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final canvasSize = size;
+    final t = position.value;
+    final drawingOrigin = Offset(
+      kTogglableActiveResizeFactor / 2 * sizePosition.value,
+      kTogglableActiveResizeFactor / 2 * sizePosition.value,
+    );
+    final drawingSize = Size(
+      canvasSize.width - kTogglableActiveResizeFactor * sizePosition.value,
+      canvasSize.height - kTogglableActiveResizeFactor * sizePosition.value,
+    );
+
+    paintTogglable(canvas, size, drawingSize, drawingOrigin, t);
+  }
+
+  void paintTogglable(
+    Canvas canvas,
+    Size realSize,
+    Size size,
+    Offset origin,
+    double t,
+  );
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;

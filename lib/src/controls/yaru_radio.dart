@@ -5,7 +5,7 @@ import 'yaru_togglable.dart';
 
 const _kDotSizeFactor = 0.4;
 
-class YaruRadio<T> extends YaruTogglable<T> {
+class YaruRadio<T> extends YaruTogglable<T?> {
   const YaruRadio({
     super.key,
     required super.value,
@@ -24,15 +24,21 @@ class YaruRadio<T> extends YaruTogglable<T> {
   final T? groupValue;
 
   @override
-  YaruTogglableState<YaruRadio<T>> createState() {
-    return _YaruRadioState<T>();
+  YaruTogglableState<YaruRadio<T?>> createState() {
+    return _YaruRadioState<T?>();
   }
 }
 
-class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T>> {
+class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
+  @override
+  EdgeInsets get activableAreaPadding => kCheckradioActivableAreaPadding;
+
+  @override
+  Size get togglableSize => kCheckradioTogglableSize;
+
   @override
   void handleTap([Intent? _]) {
-    if (!interactive) {
+    if (!widget.interactive) {
       return;
     }
 
@@ -51,21 +57,16 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T>> {
 
 class _YaruRadioPainter extends YaruTogglablePainter {
   @override
-  void paint(Canvas canvas, Size size) {
-    final canvasSize = size;
-    final t = position.value;
-    final drawingOrigin = Offset(
-      kCheckRadioActiveResizeFactor / 2 * sizePosition.value,
-      kCheckRadioActiveResizeFactor / 2 * sizePosition.value,
-    );
-    final drawingSize = Size(
-      canvasSize.width - kCheckRadioActiveResizeFactor * sizePosition.value,
-      canvasSize.height - kCheckRadioActiveResizeFactor * sizePosition.value,
-    );
-
-    drawStateIndicator(canvas, canvasSize);
-    _drawBox(canvas, drawingSize, drawingOrigin, t);
-    _drawDot(canvas, drawingSize, drawingOrigin, t);
+  void paintTogglable(
+    Canvas canvas,
+    Size realSize,
+    Size size,
+    Offset origin,
+    double t,
+  ) {
+    drawStateIndicator(canvas, realSize, null);
+    _drawBox(canvas, size, origin, t);
+    _drawDot(canvas, size, origin, t);
   }
 
   void _drawBox(Canvas canvas, Size size, Offset origin, double t) {

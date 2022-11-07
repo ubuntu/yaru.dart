@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 /// The recommended padding around page content in Yaru applications.
 const kYaruPagePadding = 20.0;
 
@@ -16,4 +18,8 @@ const kYaruMasterDetailBreakpoint = 620.0;
 
 // Used by tooglable widgets to resize the canvas on active state
 // Need to be an even number
-const kCheckRadioActiveResizeFactor = 2;
+const kTogglableActiveResizeFactor = 2;
+
+const kCheckradioActivableAreaPadding = EdgeInsets.all(6);
+
+const kCheckradioTogglableSize = Size.square(20);
