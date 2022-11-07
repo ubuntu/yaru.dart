@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
 import 'yaru_togglable.dart';
 
-const _kSwitchSize = Size(50, 25);
+const _kSwitchActivableAreaPadding =
+    EdgeInsets.symmetric(horizontal: 4, vertical: 5);
+const _kSwitchSize = Size(55, 30);
 const _kSwitchDotSizeFactor = 0.8;
 
 class YaruSwitch extends YaruTogglable<bool> {
@@ -29,7 +30,7 @@ class YaruSwitch extends YaruTogglable<bool> {
 
 class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
   @override
-  EdgeInsets get activableAreaPadding => kCheckradioActivableAreaPadding;
+  EdgeInsets get activableAreaPadding => _kSwitchActivableAreaPadding;
 
   @override
   Size get togglableSize => _kSwitchSize;
