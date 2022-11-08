@@ -5,13 +5,16 @@ export 'src/constants.dart';
 // Controls
 export 'src/controls/yaru_back_button.dart';
 export 'src/controls/yaru_check_button.dart';
+export 'src/controls/yaru_checkbox.dart';
 export 'src/controls/yaru_close_button.dart';
 export 'src/controls/yaru_color_disk.dart';
 export 'src/controls/yaru_icon_button.dart';
 export 'src/controls/yaru_option_button.dart';
 export 'src/controls/yaru_popup_menu_button.dart';
 export 'src/controls/yaru_progress_indicator.dart';
+export 'src/controls/yaru_radio.dart';
 export 'src/controls/yaru_radio_button.dart';
+export 'src/controls/yaru_switch.dart';
 export 'src/controls/yaru_switch_button.dart';
 export 'src/controls/yaru_title_bar.dart';
 export 'src/controls/yaru_toggle_button.dart';

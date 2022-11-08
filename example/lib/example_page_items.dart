@@ -4,6 +4,7 @@ import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/check_button_page.dart';
 import 'pages/color_disk_page.dart';
+import 'pages/controls_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
@@ -33,6 +34,12 @@ class PageItem {
 }
 
 final examplePageItems = <PageItem>[
+  PageItem(
+    titleBuilder: (context) => const Text('Controls'),
+    tooltipMessage: 'Controls',
+    pageBuilder: (context) => const ControlsPage(),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.games),
+  ),
   PageItem(
     titleBuilder: (context) => const Text('YaruBanner'),
     tooltipMessage: 'YaruBanner',

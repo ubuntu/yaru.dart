@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
         children: [
           YaruTile(
             title: const Text('Compact mode'),
-            trailing: Switch(
+            trailing: YaruSwitch(
               value: _compactMode,
               onChanged: (v) => setState(() => _compactMode = v),
             ),

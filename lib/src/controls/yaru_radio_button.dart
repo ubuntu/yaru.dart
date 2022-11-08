@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'yaru_radio.dart';
 import 'yaru_toggle_button.dart';
 
 /// A desktop style radio button with an interactive label.
@@ -54,7 +55,7 @@ class YaruRadioButton<T> extends StatelessWidget {
       leading: SizedBox.square(
         dimension: kMinInteractiveDimension - 8,
         child: Center(
-          child: Radio<T>(
+          child: YaruRadio<T>(
             value: value,
             groupValue: groupValue,
             onChanged: onChanged,

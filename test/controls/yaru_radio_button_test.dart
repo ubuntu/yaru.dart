@@ -26,14 +26,14 @@ void main() {
         .pumpWidget(builder(title: const Text('title'), subtitle: null));
     expect(find.text('title'), findsOneWidget);
     expect(find.text('subtitle'), findsNothing);
-    expect(find.byType(Radio<int>), findsOneWidget);
+    expect(find.byType(YaruRadio<int>), findsOneWidget);
 
     await tester.pumpWidget(
       builder(title: const Text('title'), subtitle: const Text('subtitle')),
     );
     expect(find.text('title'), findsOneWidget);
     expect(find.text('subtitle'), findsOneWidget);
-    expect(find.byType(Radio<int>), findsOneWidget);
+    expect(find.byType(YaruRadio<int>), findsOneWidget);
   });
 
   testWidgets('the labels react to taps', (tester) async {
@@ -168,10 +168,10 @@ void main() {
       await tester.pumpAndSettle();
 
       if (variant.hasState(MaterialState.pressed)) {
-        await tester.down(find.byType(Radio<bool>));
+        await tester.down(find.byType(YaruRadio<bool>));
         await tester.pumpAndSettle();
       } else if (variant.hasState(MaterialState.hovered)) {
-        await tester.hover(find.byType(Radio<bool>));
+        await tester.hover(find.byType(YaruRadio<bool>));
         await tester.pumpAndSettle();
       }
 
