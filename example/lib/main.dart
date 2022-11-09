@@ -80,69 +80,7 @@ class _HomeState extends State<Home> {
                       ? const YaruBackButton()
                       : null,
                   title: pageItems[index].titleBuilder(context),
-                  actions: [
-                    IconButton(
-                      onPressed: () => showDialog(
-                        barrierDismissible: true,
-                        context: context,
-                        builder: (context) {
-                          var snippet = '';
-
-                          return AlertDialog(
-                            titlePadding: EdgeInsets.zero,
-                            title: YaruTitleBar(
-                              title: Text(pageItems[index].tooltipMessage),
-                              trailing: const YaruCloseButton(),
-                              leading: IconButton(
-                                icon: const Icon(YaruIcons.edit_copy),
-                                tooltip: 'Copy',
-                                onPressed: () async {
-                                  await Clipboard.setData(
-                                    ClipboardData(text: snippet),
-                                  );
-                                },
-                              ),
-                            ),
-                            content: FutureBuilder<String>(
-                              future: _getCodeSnippet(
-                                pageItems[index].snippetUrl,
-                              ),
-                              builder: (context, snapshot) {
-                                switch (snapshot.connectionState) {
-                                  case ConnectionState.none:
-                                  case ConnectionState.waiting:
-                                  case ConnectionState.active:
-                                    return const Center(
-                                      child: YaruCircularProgressIndicator(
-                                        strokeWidth: 3,
-                                      ),
-                                    );
-                                  case ConnectionState.done:
-                                    snippet = snapshot.data!;
-                                    return SingleChildScrollView(
-                                      child: HighlightView(
-                                        snippet,
-                                        language: 'dart',
-                                        theme: Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? vs2015Theme
-                                            : vsTheme,
-                                        padding: const EdgeInsets.all(12),
-                                        textStyle: const TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    );
-                                }
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                      icon: const Icon(YaruIcons.desktop_panel_look),
-                      tooltip: 'Example snippet',
-                    )
-                  ],
+                  actions: [_buildSnippetButton(context, pageItems[index])],
                 ),
                 body: pageItems[index].pageBuilder(context),
               ),
@@ -150,6 +88,73 @@ class _HomeState extends State<Home> {
                 title: const Text('Example'),
               ),
             ),
+    );
+  }
+
+  Widget _buildSnippetButton(BuildContext context, PageItem pageItem) {
+    if (pageItem.snippetUrl == null) {
+      return Container();
+    }
+
+    return IconButton(
+      onPressed: () => showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          var snippet = '';
+
+          return AlertDialog(
+            titlePadding: EdgeInsets.zero,
+            title: YaruTitleBar(
+              title: Text(pageItem.tooltipMessage),
+              trailing: const YaruCloseButton(),
+              leading: IconButton(
+                icon: const Icon(YaruIcons.edit_copy),
+                tooltip: 'Copy',
+                onPressed: () async {
+                  await Clipboard.setData(
+                    ClipboardData(text: snippet),
+                  );
+                },
+              ),
+            ),
+            content: FutureBuilder<String>(
+              future: _getCodeSnippet(
+                pageItem.snippetUrl!,
+              ),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                  case ConnectionState.active:
+                    return const Center(
+                      child: YaruCircularProgressIndicator(
+                        strokeWidth: 3,
+                      ),
+                    );
+                  case ConnectionState.done:
+                    snippet = snapshot.data!;
+                    return SingleChildScrollView(
+                      child: HighlightView(
+                        snippet,
+                        language: 'dart',
+                        theme: Theme.of(context).brightness == Brightness.dark
+                            ? vs2015Theme
+                            : vsTheme,
+                        padding: const EdgeInsets.all(12),
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    );
+                }
+              },
+            ),
+          );
+        },
+      ),
+      icon: const Icon(YaruIcons.desktop_panel_look),
+      tooltip: 'Example snippet',
     );
   }
 }

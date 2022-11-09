@@ -25,13 +25,13 @@ class PageItem {
     required this.tooltipMessage,
     required this.pageBuilder,
     required this.iconBuilder,
-    required this.snippetUrl,
+    this.snippetUrl,
   });
 
   final WidgetBuilder titleBuilder;
   final String tooltipMessage;
   final WidgetBuilder pageBuilder;
-  final String snippetUrl;
+  final String? snippetUrl;
   final Widget Function(BuildContext context, bool selected) iconBuilder;
 }
 
