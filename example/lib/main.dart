@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/vs.dart';
+import 'package:flutter_highlight/themes/vs2015.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_icons/yaru_icons.dart';
@@ -34,6 +39,8 @@ class _HomeState extends State<Home> {
     final configItem = PageItem(
       titleBuilder: (context) => const Text('Layout'),
       tooltipMessage: 'Layout',
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/lib/src/layouts/yaru_landscape_layout.dart',
       pageBuilder: (_) => ListView(
         padding: const EdgeInsets.all(kYaruPagePadding),
         children: [
@@ -73,6 +80,69 @@ class _HomeState extends State<Home> {
                       ? const YaruBackButton()
                       : null,
                   title: pageItems[index].titleBuilder(context),
+                  actions: [
+                    IconButton(
+                      onPressed: () => showDialog(
+                        barrierDismissible: true,
+                        context: context,
+                        builder: (context) {
+                          var snippet = '';
+
+                          return AlertDialog(
+                            titlePadding: EdgeInsets.zero,
+                            title: YaruTitleBar(
+                              title: Text(pageItems[index].tooltipMessage),
+                              trailing: const YaruCloseButton(),
+                              leading: IconButton(
+                                icon: const Icon(YaruIcons.edit_copy),
+                                tooltip: 'Copy',
+                                onPressed: () async {
+                                  await Clipboard.setData(
+                                    ClipboardData(text: snippet),
+                                  );
+                                },
+                              ),
+                            ),
+                            content: FutureBuilder<String>(
+                              future: _getCodeSnippet(
+                                pageItems[index].snippetUrl,
+                              ),
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.none:
+                                  case ConnectionState.waiting:
+                                  case ConnectionState.active:
+                                    return const Center(
+                                      child: YaruCircularProgressIndicator(
+                                        strokeWidth: 3,
+                                      ),
+                                    );
+                                  case ConnectionState.done:
+                                    snippet = snapshot.data!;
+                                    return SingleChildScrollView(
+                                      child: HighlightView(
+                                        snippet,
+                                        language: 'dart',
+                                        theme: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? vs2015Theme
+                                            : vsTheme,
+                                        padding: const EdgeInsets.all(12),
+                                        textStyle: const TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    );
+                                }
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                      icon: const Icon(YaruIcons.desktop_panel_look),
+                      tooltip: 'Example snippet',
+                    )
+                  ],
                 ),
                 body: pageItems[index].pageBuilder(context),
               ),
@@ -112,4 +182,11 @@ class _CompactPage extends StatelessWidget {
       pageBuilder: (context, index) => pageItems[index].pageBuilder(context),
     );
   }
+}
+
+Future<String> _getCodeSnippet(String url) async {
+  final uri = Uri.parse(url);
+  final response = await http.get(uri);
+
+  return response.body;
 }
