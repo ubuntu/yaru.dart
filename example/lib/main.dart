@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/vs.dart';
 import 'package:flutter_highlight/themes/vs2015.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -84,11 +86,22 @@ class _HomeState extends State<Home> {
                         barrierDismissible: true,
                         context: context,
                         builder: (context) {
+                          var snippet = '';
+
                           return AlertDialog(
                             titlePadding: EdgeInsets.zero,
                             title: YaruTitleBar(
                               title: Text(pageItems[index].tooltipMessage),
                               trailing: const YaruCloseButton(),
+                              leading: IconButton(
+                                icon: const Icon(YaruIcons.edit_copy),
+                                tooltip: 'Copy',
+                                onPressed: () async {
+                                  await Clipboard.setData(
+                                    ClipboardData(text: snippet),
+                                  );
+                                },
+                              ),
                             ),
                             content: FutureBuilder<String>(
                               future: _getCodeSnippet(
@@ -105,11 +118,15 @@ class _HomeState extends State<Home> {
                                       ),
                                     );
                                   case ConnectionState.done:
+                                    snippet = snapshot.data!;
                                     return SingleChildScrollView(
                                       child: HighlightView(
-                                        snapshot.data!,
+                                        snippet,
                                         language: 'dart',
-                                        theme: vs2015Theme,
+                                        theme: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? vs2015Theme
+                                            : vsTheme,
                                         padding: const EdgeInsets.all(12),
                                         textStyle: const TextStyle(
                                           fontSize: 16,
@@ -122,7 +139,7 @@ class _HomeState extends State<Home> {
                           );
                         },
                       ),
-                      icon: const Icon(Icons.data_object),
+                      icon: const Icon(YaruIcons.desktop_panel_look),
                       tooltip: 'Example snippet',
                     )
                   ],
