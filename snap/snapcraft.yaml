@@ -36,8 +36,6 @@ parts:
     after: [ flutter-git ]
     plugin: nil
     source: .
-    build-packages:
-      - libfreetype-dev
     override-build: |
       set -eux
       cd example
