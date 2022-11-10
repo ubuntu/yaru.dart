@@ -93,6 +93,14 @@ class _CodeDialog extends StatelessWidget {
                 pageItem.snippetUrl ?? '',
               ),
               builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: YaruCircularProgressIndicator(
+                      strokeWidth: 3,
+                    ),
+                  );
+                }
+
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
