@@ -59,19 +59,21 @@ class _CodeDialog extends StatelessWidget {
     return AlertDialog(
       titlePadding: EdgeInsets.zero,
       title: YaruTitleBar(
-        title: Text(pageItem.tooltipMessage),
+        title: Text(!model.appIsOnline ? 'Offline' : pageItem.tooltipMessage),
         trailing: const YaruCloseButton(),
-        leading: Center(
-          child: YaruIconButton(
-            icon: const Icon(YaruIcons.edit_copy),
-            tooltip: 'Copy',
-            onPressed: () async {
-              await Clipboard.setData(
-                ClipboardData(text: snippet),
-              );
-            },
-          ),
-        ),
+        leading: !model.appIsOnline
+            ? null
+            : Center(
+                child: YaruIconButton(
+                  icon: const Icon(YaruIcons.edit_copy),
+                  tooltip: 'Copy',
+                  onPressed: () async {
+                    await Clipboard.setData(
+                      ClipboardData(text: snippet),
+                    );
+                  },
+                ),
+              ),
       ),
       content: !model.appIsOnline
           ? Center(
