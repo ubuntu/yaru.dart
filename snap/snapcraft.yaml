@@ -55,3 +55,4 @@ apps:
     plugs:
       - gsettings
       - network
+      - network-manager-observe
