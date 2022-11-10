@@ -16,15 +16,10 @@ class CodeSnippedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildSnippetButton(context, pageItem);
-  }
-
-  Widget _buildSnippetButton(BuildContext context, PageItem pageItem) {
     final model = context.watch<ExampleModel>();
     if (pageItem.snippetUrl == null) {
       return Container();
     }
-
     return Padding(
       padding: const EdgeInsets.only(right: 8),
       child: Center(
