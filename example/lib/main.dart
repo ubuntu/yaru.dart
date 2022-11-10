@@ -1,11 +1,14 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
 import 'example.dart';
 import 'theme.dart';
 
 void main() {
+  registerService<Connectivity>(Connectivity.new);
   runApp(
     MultiProvider(
       providers: [
