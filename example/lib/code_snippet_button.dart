@@ -81,14 +81,19 @@ class _CodeDialog extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const YaruAnimatedNoNetworkIcon(
+                  YaruAnimatedNoNetworkIcon(
                     size: 200,
-                    color: Colors.red,
+                    color: Theme.of(context).errorColor,
                   ),
-                  Text(
-                    'Sorry, you are offline!\nCould not fetch the source code out GitHub repository.',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: kYaruPagePadding,
+                    ),
+                    child: Text(
+                      'Sorry, you are offline!\nCould not fetch the source code our GitHub repository.',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),
