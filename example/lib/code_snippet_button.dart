@@ -75,6 +75,7 @@ class _CodeDialog extends StatelessWidget {
                 ),
               ),
       ),
+      contentPadding: const EdgeInsets.only(top: 10, bottom: 10),
       content: !model.appIsOnline
           ? Center(
               child: Column(
