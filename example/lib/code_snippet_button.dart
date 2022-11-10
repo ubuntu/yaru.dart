@@ -90,7 +90,7 @@ class _CodeDialog extends StatelessWidget {
             )
           : FutureBuilder<String>(
               future: model.getCodeSnippet(
-                pageItem.snippetUrl!,
+                pageItem.snippetUrl ?? '',
               ),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
