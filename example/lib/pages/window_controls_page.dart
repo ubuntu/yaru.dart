@@ -19,15 +19,22 @@ class _WindowControlsPageState extends State<WindowControlsPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const YaruWindowControl(type: YaruWindowControlType.minimize),
+            YaruWindowControl(
+              type: YaruWindowControlType.minimize,
+              onTap: () {},
+            ),
             const SizedBox(width: 10),
             YaruWindowControl(
               type: _maximized
                   ? YaruWindowControlType.maximize
                   : YaruWindowControlType.restore,
+              onTap: () => setState(() => _maximized = !_maximized),
             ),
             const SizedBox(width: 10),
-            const YaruWindowControl(type: YaruWindowControlType.close),
+            YaruWindowControl(
+              type: YaruWindowControlType.close,
+              onTap: () {},
+            ),
           ],
         ),
         YaruTile(

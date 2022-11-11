@@ -4,8 +4,12 @@ const _kWindowControlSize = 24.0;
 const _kWindowControlIconSize = 8.0;
 const _kWindowControlIconStrokeWidth = 1.0;
 const _kWindowControlIconStrokeAlign = _kWindowControlIconStrokeWidth / 2;
-const _kWindowControlAnimationDuration = Duration(milliseconds: 500);
+const _kWindowControlIconAnimationDuration = Duration(milliseconds: 500);
 const _kWindowControlAnimationCurve = Curves.linear;
+const _kWindowControlBackgroundAnimationDuration = Duration(milliseconds: 200);
+const _kWindowControlBackgroundOpacity = 0.1;
+const _kWindowControlBackgroundOpacityHover = 0.15;
+const _kWindowControlBackgroundOpacityActive = 0.2;
 
 /// Defines the look of a [YaruWindowControl]
 enum YaruWindowControlType {
@@ -16,9 +20,15 @@ enum YaruWindowControlType {
 }
 
 class YaruWindowControl extends StatefulWidget {
-  const YaruWindowControl({super.key, required this.type});
+  const YaruWindowControl({
+    super.key,
+    required this.type,
+    required this.onTap,
+  });
 
   final YaruWindowControlType type;
+
+  final GestureTapCallback? onTap;
 
   @override
   State<YaruWindowControl> createState() {
@@ -28,6 +38,9 @@ class YaruWindowControl extends StatefulWidget {
 
 class _YaruWindowControlState extends State<YaruWindowControl>
     with TickerProviderStateMixin {
+  bool _hover = false;
+  bool _active = false;
+
   late YaruWindowControlType oldType;
 
   late CurvedAnimation _position;
@@ -40,7 +53,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     oldType = widget.type;
 
     _positionController = AnimationController(
-      duration: _kWindowControlAnimationDuration,
+      duration: _kWindowControlIconAnimationDuration,
       value: widget.type == YaruWindowControlType.maximize ? 0.0 : 1.0,
       vsync: this,
     );
@@ -71,18 +84,73 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     }
   }
 
+  void _handleHover(bool hover) {
+    setState(() {
+      _hover = hover;
+
+      if (!hover) {
+        _active = false;
+      }
+    });
+  }
+
+  void _handleActive(bool active) {
+    setState(() {
+      _active = active;
+    });
+  }
+
+  Color _getColor(BuildContext context) {
+    final onSurface = Theme.of(context).colorScheme.onSurface;
+    return _active
+        ? onSurface.withOpacity(_kWindowControlBackgroundOpacityActive)
+        : _hover
+            ? onSurface.withOpacity(_kWindowControlBackgroundOpacityHover)
+            : onSurface.withOpacity(_kWindowControlBackgroundOpacity);
+  }
+
+  Widget _buildEventDetectors(Widget child) {
+    return MouseRegion(
+      onEnter: (_) => _handleHover(true),
+      onExit: (_) => _handleHover(false),
+      cursor: widget.onTap != null
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
+      child: GestureDetector(
+        onTap: widget.onTap,
+        onTapDown: (_) => _handleActive(true),
+        onTapUp: (_) => _handleActive(false),
+        child: child,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _position,
-      builder: (context, child) => RepaintBoundary(
-        child: CustomPaint(
-          size: const Size.square(_kWindowControlSize),
-          painter: _YaruWindowControlPainter(
-            type: widget.type,
-            oldType: oldType,
-            iconColor: Theme.of(context).colorScheme.onSurface,
-            position: _position.value,
+    return _buildEventDetectors(
+      AnimatedContainer(
+        duration: _kWindowControlBackgroundAnimationDuration,
+        decoration: BoxDecoration(
+          color: _getColor(context),
+          shape: BoxShape.circle,
+        ),
+        child: SizedBox.square(
+          dimension: _kWindowControlSize,
+          child: Center(
+            child: RepaintBoundary(
+              child: AnimatedBuilder(
+                animation: _position,
+                builder: (context, child) => CustomPaint(
+                  size: const Size.square(_kWindowControlIconSize),
+                  painter: _YaruWindowControlPainter(
+                    type: widget.type,
+                    oldType: oldType,
+                    iconColor: Theme.of(context).colorScheme.onSurface,
+                    position: _position.value,
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -107,13 +175,9 @@ class _YaruWindowControlPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    _drawCircle(canvas, size);
-
-    final rect = Rect.fromLTWH(
-      (size.width - _kWindowControlIconSize) / 2 +
-          _kWindowControlIconStrokeAlign,
-      (size.height - _kWindowControlIconSize) / 2 +
-          _kWindowControlIconStrokeAlign,
+    const rect = Rect.fromLTWH(
+      _kWindowControlIconStrokeAlign,
+      _kWindowControlIconStrokeAlign,
       _kWindowControlIconSize - _kWindowControlIconStrokeAlign * 2,
       _kWindowControlIconSize - _kWindowControlIconStrokeAlign * 2,
     );
@@ -130,15 +194,6 @@ class _YaruWindowControlPainter extends CustomPainter {
         _drawRestoreMaximize(canvas, size, rect);
         break;
     }
-  }
-
-  void _drawCircle(Canvas canvas, Size size) {
-    canvas.drawOval(
-      Rect.fromLTWH(0, 0, size.width, size.height),
-      Paint()
-        ..color = Colors.white12
-        ..style = PaintingStyle.fill,
-    );
   }
 
   void _drawClose(Canvas canvas, Size size, Rect rect) {
