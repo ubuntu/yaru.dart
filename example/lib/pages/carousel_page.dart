@@ -27,24 +27,20 @@ class _CarouselPageState extends State<CarouselPage> {
         YaruSection(
           headline: const Text('Auto scroll: off'),
           width: 700,
-          children: [
-            YaruCarousel(
-              children: _getCarouselChildren(),
-              height: 400,
-              navigationControls: true,
-            ),
-          ],
+          child: YaruCarousel(
+            children: _getCarouselChildren(),
+            height: 400,
+            navigationControls: true,
+          ),
         ),
         YaruSection(
           headline: const Text('Auto scroll: on'),
           width: 700,
-          children: [
-            YaruCarousel(
-              controller: _autoScrollController,
-              children: _getCarouselChildren(),
-              height: 400,
-            ),
-          ],
+          child: YaruCarousel(
+            controller: _autoScrollController,
+            children: _getCarouselChildren(),
+            height: 400,
+          ),
         ),
         ButtonBar(
           buttonPadding: EdgeInsets.zero,
