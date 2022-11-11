@@ -10,6 +10,7 @@ const _kWindowControlBackgroundAnimationDuration = Duration(milliseconds: 200);
 const _kWindowControlBackgroundOpacity = 0.1;
 const _kWindowControlBackgroundOpacityHover = 0.15;
 const _kWindowControlBackgroundOpacityActive = 0.2;
+const _kWindowControlBackgroundOpacityDisabled = 0.05;
 
 /// Defines the look of a [YaruWindowControl]
 enum YaruWindowControlType {
@@ -40,6 +41,8 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     with TickerProviderStateMixin {
   bool _hover = false;
   bool _active = false;
+
+  bool get interactive => widget.onTap != null;
 
   late YaruWindowControlType oldType;
 
@@ -109,6 +112,11 @@ class _YaruWindowControlState extends State<YaruWindowControl>
 
   Color _getColor(BuildContext context) {
     final onSurface = Theme.of(context).colorScheme.onSurface;
+
+    if (!interactive) {
+      return onSurface.withOpacity(_kWindowControlBackgroundOpacityDisabled);
+    }
+
     return _active
         ? onSurface.withOpacity(_kWindowControlBackgroundOpacityActive)
         : _hover
@@ -151,6 +159,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
                     oldType: oldType,
                     iconColor: Theme.of(context).colorScheme.onSurface,
                     position: _position.value,
+                    interactive: interactive,
                   ),
                 ),
               ),
@@ -168,14 +177,14 @@ class _YaruWindowControlPainter extends CustomPainter {
     required this.oldType,
     required this.iconColor,
     required this.position,
+    required this.interactive,
   });
 
   final YaruWindowControlType type;
   final YaruWindowControlType oldType;
-
   final Color iconColor;
-
   final double position;
+  final bool interactive;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -248,7 +257,7 @@ class _YaruWindowControlPainter extends CustomPainter {
     return Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = _kWindowControlIconStrokeWidth
-      ..color = iconColor
+      ..color = iconColor.withOpacity(interactive ? 1.0 : 0.5)
       ..strokeCap = StrokeCap.square;
   }
 
