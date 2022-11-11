@@ -45,7 +45,7 @@ class DummySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruSection(
-      title: Row(
+      headline: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: const [
           Text('Headline'),

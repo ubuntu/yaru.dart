@@ -6,17 +6,17 @@ class YaruSection extends StatelessWidget {
   /// [Widgets] as children.
   const YaruSection({
     super.key,
-    this.title,
+    this.headline,
     required this.child,
     this.width,
     this.height,
     this.padding = const EdgeInsets.all(8.0),
-    this.titlePadding = const EdgeInsets.all(8.0),
+    this.headlinePadding = const EdgeInsets.all(8.0),
     this.margin,
   });
 
   /// Widget that is placed above the `child`.
-  final Widget? title;
+  final Widget? headline;
 
   /// The child widget inside the section.
   final Widget child;
@@ -31,8 +31,8 @@ class YaruSection extends StatelessWidget {
   /// `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
 
-  /// The padding around the [title] which defaults to `EdgeInsets.all(8.0)`.
-  final EdgeInsets titlePadding;
+  /// The padding around the [headline] which defaults to `EdgeInsets.all(8.0)`.
+  final EdgeInsets headlinePadding;
 
   /// An optional margin around the section border.
   final EdgeInsets? margin;
@@ -47,12 +47,12 @@ class YaruSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (title != null)
+          if (headline != null)
             Padding(
-              padding: titlePadding,
+              padding: headlinePadding,
               child: DefaultTextStyle(
                 style: Theme.of(context).textTheme.titleLarge!,
-                child: title!,
+                child: headline!,
               ),
             ),
           child,
