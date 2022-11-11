@@ -84,6 +84,13 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     }
   }
 
+  @override
+  void dispose() {
+    _positionController.dispose();
+
+    super.dispose();
+  }
+
   void _handleHover(bool hover) {
     setState(() {
       _hover = hover;
