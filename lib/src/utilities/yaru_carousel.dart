@@ -332,7 +332,7 @@ class YaruCarouselController extends PageController {
   }
 
   void startTimer() {
-    if (autoScroll) {
+    if (autoScroll && hasClients) {
       _timer = Timer(autoScrollDuration, () {
         final carousel = position.context.notificationContext
             ?.findAncestorWidgetOfExactType<YaruCarousel>();
