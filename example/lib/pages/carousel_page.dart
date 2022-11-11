@@ -33,6 +33,7 @@ class _CarouselPageState extends State<CarouselPage> {
             navigationControls: true,
           ),
         ),
+        const SizedBox(height: 20),
         YaruSection(
           headline: const Text('Auto scroll: on'),
           width: 700,
