@@ -20,15 +20,17 @@ class _SectionPageState extends State<SectionPage> {
         const DummySection(width: kMinSectionWidth),
         YaruSection(
           width: kMinSectionWidth,
-          children: [
-            for (var i = 0; i < 10; ++i)
-              const YaruTile(
-                title: Text('Title'),
-                trailing: Icon(YaruIcons.information),
-                leading: Icon(YaruIcons.audio),
-                subtitle: Text('Subtitle'),
-              ),
-          ],
+          child: Column(
+            children: [
+              for (var i = 0; i < 10; ++i)
+                const YaruTile(
+                  title: Text('Title'),
+                  trailing: Icon(YaruIcons.information),
+                  leading: Icon(YaruIcons.audio),
+                  subtitle: Text('Subtitle'),
+                ),
+            ],
+          ),
         )
       ],
     );
@@ -48,14 +50,12 @@ class DummySection extends StatelessWidget {
         height: 20,
         width: 20,
       ),
-      children: const [
-        YaruTile(
-          title: Text('Title'),
-          trailing: Icon(YaruIcons.information),
-          leading: Icon(YaruIcons.audio),
-          subtitle: Text('Subtitle'),
-        ),
-      ],
+      child: const YaruTile(
+        title: Text('Title'),
+        trailing: Icon(YaruIcons.information),
+        leading: Icon(YaruIcons.audio),
+        subtitle: Text('Subtitle'),
+      ),
       width: width,
     );
   }

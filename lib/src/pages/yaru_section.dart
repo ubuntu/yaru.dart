@@ -7,7 +7,7 @@ class YaruSection extends StatelessWidget {
   const YaruSection({
     super.key,
     this.headline,
-    required this.children,
+    required this.child,
     this.width,
     this.headerWidget,
     this.padding = const EdgeInsets.only(bottom: 20.0),
@@ -16,9 +16,8 @@ class YaruSection extends StatelessWidget {
   /// Widget that is placed above the list of `children`.
   final Widget? headline;
 
-  ///  Creates a vertical list of widgets.
-  ///  All children will be of type [Widget],
-  final List<Widget> children;
+  /// The child widget inside the section.
+  final Widget child;
 
   /// Specifies the [width] of the [Container].
   /// By default the width will be 500.
@@ -69,7 +68,7 @@ class YaruSection extends StatelessWidget {
                   ),
                 ),
               ),
-              Column(children: children)
+              child,
             ],
           ),
         ),
