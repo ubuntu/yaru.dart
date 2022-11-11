@@ -45,11 +45,16 @@ class DummySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruSection(
-      headline: const Text('Headline'),
-      headerWidget: const SizedBox(
-        child: YaruCircularProgressIndicator(strokeWidth: 3),
-        height: 20,
-        width: 20,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: const [
+          Text('Headline'),
+          SizedBox(
+            child: YaruCircularProgressIndicator(strokeWidth: 3),
+            height: 20,
+            width: 20,
+          )
+        ],
       ),
       child: const YaruTile(
         title: Text('Title'),
