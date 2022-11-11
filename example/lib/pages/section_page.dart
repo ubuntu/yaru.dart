@@ -18,6 +18,7 @@ class _SectionPageState extends State<SectionPage> {
       padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
         const DummySection(width: kMinSectionWidth),
+        const SizedBox(height: 20),
         YaruSection(
           width: kMinSectionWidth,
           child: Column(

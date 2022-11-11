@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import '../utilities/yaru_border_container.dart';
 
 class YaruSection extends StatelessWidget {
   /// Creates a yaru style section widget with multiple
@@ -9,8 +9,10 @@ class YaruSection extends StatelessWidget {
     this.headline,
     required this.child,
     this.width,
+    this.height,
     this.headerWidget,
-    this.padding = const EdgeInsets.only(bottom: 20.0),
+    this.padding = const EdgeInsets.all(8.0),
+    this.margin,
   });
 
   /// Widget that is placed above the list of `children`.
@@ -19,9 +21,11 @@ class YaruSection extends StatelessWidget {
   /// The child widget inside the section.
   final Widget child;
 
-  /// Specifies the [width] of the [Container].
-  /// By default the width will be 500.
+  /// Specifies the [width] of the section.
   final double? width;
+
+  /// Specifies the [height] of the section.
+  final double? height;
 
   /// Aligns the widget horizontally along with headline.
   ///
@@ -29,49 +33,42 @@ class YaruSection extends StatelessWidget {
   /// with [mainAxisAlignment] as [MainAxisAlignment.spaceBetween].
   final Widget? headerWidget;
 
-  /// The padding [EdgeInsets] which defaults to `EdgeInsets.only(bottom: 20.0)`.
+  /// The padding between the section border and its [child] which defaults to
+  /// `EdgeInsets.only(all: 8.0)`.
   final EdgeInsets padding;
+
+  /// An optional margin around the section border.
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return YaruBorderContainer(
+      width: width,
+      height: height,
       padding: padding,
-      child: SizedBox(
-        width: width,
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.15),
-            ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(kYaruContainerRadius),
-            ),
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(headline != null ? 8.0 : 0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      if (headline != null)
-                        DefaultTextStyle(
-                          style: Theme.of(context).textTheme.titleLarge!,
-                          textAlign: TextAlign.left,
-                          child: headline!,
-                        ),
-                      headerWidget ?? const SizedBox()
-                    ],
-                  ),
-                ),
+      margin: margin,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(headline != null ? 8.0 : 0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (headline != null)
+                    DefaultTextStyle(
+                      style: Theme.of(context).textTheme.titleLarge!,
+                      textAlign: TextAlign.left,
+                      child: headline!,
+                    ),
+                  headerWidget ?? const SizedBox()
+                ],
               ),
-              child,
-            ],
+            ),
           ),
-        ),
+          child,
+        ],
       ),
     );
   }
