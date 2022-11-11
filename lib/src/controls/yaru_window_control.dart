@@ -229,10 +229,11 @@ class _YaruWindowControlPainter extends CustomPainter {
         drawRect.bottomRight.dy - (1 + _kWindowControlIconStrokeAlign),
       );
 
-    final color = _getIconPaint().color;
-
     canvas.drawRect(rect, _getIconPaint());
-    canvas.drawPath(path, _getIconPaint()..color = color.withOpacity(position));
+    canvas.drawPath(
+      path,
+      _getIconPaint()..color = iconColor.withOpacity(.5 * position),
+    );
   }
 
   void _drawMinimize(Canvas canvas, Size size, Rect rect) {
