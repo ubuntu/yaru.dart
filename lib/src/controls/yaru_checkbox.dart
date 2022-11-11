@@ -1,24 +1,112 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import 'yaru_check_button.dart';
+import 'yaru_radio.dart';
+import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
 
 const _kCheckboxBorderRadius = Radius.circular(4);
 const _kCheckboxDashStroke = 2.0;
 const _kDashSizeFactor = 0.52;
 
-class YaruCheckbox extends YaruTogglable<bool?> {
+/// A Yaru checkbox.
+///
+/// The checkbox itself does not maintain any state. Instead, when the state of
+/// the checkbox changes, the widget calls the [onChanged] callback. Most
+/// widgets that use a checkbox will listen for the [onChanged] callback and
+/// rebuild the checkbox with a new [value] to update the visual appearance of
+/// the checkbox.
+///
+/// The checkbox can optionally display three values - true, false, and null -
+/// if [tristate] is true. When [value] is null a dash is displayed. By default
+/// [tristate] is false and the checkbox's [value] must be true or false.
+///
+/// See also:
+///
+///  * [YaruCheckButton], a desktop style check button with an interactive label.
+///  * [YaruSwitch], a widget with semantics similar to [Checkbox].
+///  * [YaruRadio], for selecting among a set of explicit values.
+///  * [Slider], for selecting a value in a range.
+class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
+  /// A Yaru checkbox.
+  ///
+  /// The checkbox itself does not maintain any state. Instead, when the state of
+  /// the checkbox changes, the widget calls the [onChanged] callback. Most
+  /// widgets that use a checkbox will listen for the [onChanged] callback and
+  /// rebuild the checkbox with a new [value] to update the visual appearance of
+  /// the checkbox.
   const YaruCheckbox({
     super.key,
-    required super.value,
-    super.tristate,
-    required super.onChanged,
-    super.focusNode,
-    super.autofocus,
+    required this.value,
+    this.tristate = false,
+    required this.onChanged,
+    this.focusNode,
+    this.autofocus = false,
   }) : assert(tristate || value != null);
+
+  /// Whether this checkbox is checked.
+  ///
+  /// This property must not be null.
+  @override
+  final bool? value;
+
+  /// If true the checkbox's [value] can be true, false, or null.
+  ///
+  /// Checkbox displays a dash when its value is null.
+  ///
+  /// When a tri-state checkbox ([tristate] is true) is tapped, its [onChanged]
+  /// callback will be applied to true if the current value is false, to null if
+  /// value is true, and to false if value is null (i.e. it cycles through false
+  /// => true => null => false when tapped).
+  ///
+  /// If tristate is false (the default), [value] must not be null.
+  @override
+  final bool tristate;
 
   @override
   bool? get checked => value;
+
+  /// Called when the value of the checkbox should change.
+  ///
+  /// The checkbox passes the new value to the callback but does not actually
+  /// change state until the parent widget rebuilds the checkbox with the new
+  /// value.
+  ///
+  /// If this callback is null, the checkbox will be displayed as disabled
+  /// and will not respond to input gestures.
+  ///
+  /// When the checkbox is tapped, if [tristate] is false (the default) then
+  /// the [onChanged] callback will be applied to `!value`. If [tristate] is
+  /// true this callback cycle from false to true to null.
+  ///
+  /// The callback provided to [onChanged] should update the state of the parent
+  /// [StatefulWidget] using the [State.setState] method, so that the parent
+  /// gets rebuilt; for example:
+  ///
+  /// ```dart
+  /// YaruCheckbox(
+  ///   value: _throwShotAway,
+  ///   onChanged: (bool? newValue) {
+  ///     setState(() {
+  ///       _throwShotAway = newValue!;
+  ///     });
+  ///   },
+  /// )
+  /// ```
+  @override
+  final ValueChanged<bool?>? onChanged;
+
+  @override
+  bool get interactive => onChanged != null;
+
+  /// {@macro flutter.widgets.Focus.focusNode}
+  @override
+  final FocusNode? focusNode;
+
+  /// {@macro flutter.widgets.Focus.autofocus}
+  @override
+  final bool autofocus;
 
   @override
   YaruTogglableState<YaruCheckbox> createState() {

@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import 'yaru_checkbox.dart';
+import 'yaru_radio.dart';
+import 'yaru_switch.dart';
 
 const _kTogglableAnimationDuration = Duration(milliseconds: 150);
 const _kTogglableSizeAnimationDuration = Duration(milliseconds: 100);
 const _kIndicatorAnimationDuration = Duration(milliseconds: 200);
 const _kIndicatorRadius = 20.0;
 
+/// A generic class to create a togglable widget
+///
+/// See also:
+///
+/// * [YaruCheckbox] and [YaruSwitch], for toggling a particular value on or off.
+/// * [YaruRadio], for selecting among a set of explicit values.
 abstract class YaruTogglable<T> extends StatefulWidget {
   const YaruTogglable({
     super.key,
@@ -17,27 +26,40 @@ abstract class YaruTogglable<T> extends StatefulWidget {
     this.autofocus = false,
   });
 
+  /// Value of this [YaruTogglable].
   final T value;
 
+  /// By default, a [YaruTogglable] widget can only handle two state.
+  /// If true, it will be able to display tree values.
   final bool tristate;
 
+  /// Getter used to link [T] to a [bool] value.
+  /// If true, the [YaruTogglable] will be considered as checked.
   bool? get checked;
 
+  /// The [YaruTogglable] itself does not maintain any state. Instead, when the state of
+  /// the [YaruTogglable] changes, the widget calls the [onChanged] callback.
+  /// The callback provided to [onChanged] should update the state of the parent
+  /// [StatefulWidget] using the [State.setState] method, so that the parent
+  /// gets rebuilt.
   final ValueChanged<T>? onChanged;
 
-  bool get interactive => onChanged != null;
+  /// Determine if this [YaruTogglable] can handle events.
+  bool get interactive;
 
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
+  /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 }
 
 abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     with TickerProviderStateMixin {
-  bool hover = false;
-  bool focus = false;
-  bool active = false;
-  bool? oldChecked;
+  bool _hover = false;
+  bool _focus = false;
+  bool _active = false;
+  bool? _oldChecked;
 
   late CurvedAnimation _position;
   late AnimationController _positionController;
@@ -59,7 +81,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   void initState() {
     super.initState();
 
-    oldChecked = widget.checked;
+    _oldChecked = widget.checked;
 
     _positionController = AnimationController(
       duration: _kTogglableAnimationDuration,
@@ -97,7 +119,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.checked != widget.checked) {
-      oldChecked = oldWidget.checked;
+      _oldChecked = oldWidget.checked;
 
       if (widget.tristate) {
         if (widget.checked == null) {
@@ -132,13 +154,13 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   }
 
   void _handleFocusChange(bool value) {
-    if (focus == value) {
+    if (_focus == value) {
       return;
     }
 
-    setState(() => focus = value);
+    setState(() => _focus = value);
 
-    if (focus) {
+    if (_focus) {
       _indicatorController.forward();
     } else {
       _indicatorController.reverse();
@@ -146,13 +168,13 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   }
 
   void _handleHoverChange(bool value) {
-    if (hover == value) {
+    if (_hover == value) {
       return;
     }
 
-    setState(() => hover = value);
+    setState(() => _hover = value);
 
-    if (hover) {
+    if (_hover) {
       _indicatorController.forward();
     } else {
       _indicatorController.reverse();
@@ -160,13 +182,13 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   }
 
   void _handleActiveChange(bool value) {
-    if (active == value) {
+    if (_active == value) {
       return;
     }
 
-    setState(() => active = value);
+    setState(() => _active = value);
 
-    if (active) {
+    if (_active) {
       _sizeController.forward();
     } else {
       _sizeController.reverse();
@@ -235,11 +257,11 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
               size: togglableSize,
               painter: painter
                 ..interactive = widget.interactive
-                ..hover = hover
-                ..focus = focus
-                ..active = active
+                ..hover = _hover
+                ..focus = _focus
+                ..active = _active
                 ..checked = widget.checked
-                ..oldChecked = oldChecked
+                ..oldChecked = _oldChecked
                 ..position = _position
                 ..sizePosition = _sizePosition
                 ..indicatorPosition = _indicatorPosition
