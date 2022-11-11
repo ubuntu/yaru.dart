@@ -132,16 +132,16 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   @override
   Widget build(BuildContext context) {
     return _buildEventDetectors(
-      AnimatedContainer(
-        duration: _kWindowControlBackgroundAnimationDuration,
-        decoration: BoxDecoration(
-          color: _getColor(context),
-          shape: BoxShape.circle,
-        ),
-        child: SizedBox.square(
-          dimension: _kWindowControlSize,
-          child: Center(
-            child: RepaintBoundary(
+      RepaintBoundary(
+        child: AnimatedContainer(
+          duration: _kWindowControlBackgroundAnimationDuration,
+          decoration: BoxDecoration(
+            color: _getColor(context),
+            shape: BoxShape.circle,
+          ),
+          child: SizedBox.square(
+            dimension: _kWindowControlSize,
+            child: Center(
               child: AnimatedBuilder(
                 animation: _position,
                 builder: (context, child) => CustomPaint(
@@ -217,7 +217,7 @@ class _YaruWindowControlPainter extends CustomPainter {
 
     final path = Path()
       ..moveTo(
-        drawRect.topLeft.dx + gap,
+        drawRect.topLeft.dx + (1 + _kWindowControlIconStrokeAlign),
         drawRect.topLeft.dy,
       )
       ..lineTo(
@@ -226,7 +226,7 @@ class _YaruWindowControlPainter extends CustomPainter {
       )
       ..lineTo(
         drawRect.bottomRight.dx,
-        drawRect.bottomRight.dy - gap,
+        drawRect.bottomRight.dy - (1 + _kWindowControlIconStrokeAlign),
       );
 
     final color = _getIconPaint().color;
