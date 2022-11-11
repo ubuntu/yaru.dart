@@ -113,9 +113,6 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     return MouseRegion(
       onEnter: (_) => _handleHover(true),
       onExit: (_) => _handleHover(false),
-      cursor: widget.onTap != null
-          ? SystemMouseCursors.click
-          : SystemMouseCursors.basic,
       child: GestureDetector(
         onTap: widget.onTap,
         onTapDown: (_) => _handleActive(true),
