@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const _kWindowControlSize = 24.0;
 const _kWindowControlIconSize = 8.0;
 const _kWindowControlIconStrokeWidth = 1.0;
+const _kWindowControlIconStrokeAlign = _kWindowControlIconStrokeWidth / 2;
 const _kWindowControlAnimationDuration = Duration(milliseconds: 500);
 const _kWindowControlAnimationCurve = Curves.linear;
 
@@ -74,13 +75,15 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _position,
-      builder: (context, child) => CustomPaint(
-        size: const Size.square(_kWindowControlSize),
-        painter: _YaruWindowControlPainter(
-          type: widget.type,
-          oldType: oldType,
-          iconColor: Theme.of(context).colorScheme.onSurface,
-          position: _position.value,
+      builder: (context, child) => RepaintBoundary(
+        child: CustomPaint(
+          size: const Size.square(_kWindowControlSize),
+          painter: _YaruWindowControlPainter(
+            type: widget.type,
+            oldType: oldType,
+            iconColor: Theme.of(context).colorScheme.onSurface,
+            position: _position.value,
+          ),
         ),
       ),
     );
@@ -107,10 +110,12 @@ class _YaruWindowControlPainter extends CustomPainter {
     _drawCircle(canvas, size);
 
     final rect = Rect.fromLTWH(
-      (size.width - _kWindowControlIconSize) / 2,
-      (size.height - _kWindowControlIconSize) / 2,
-      _kWindowControlIconSize,
-      _kWindowControlIconSize,
+      (size.width - _kWindowControlIconSize) / 2 +
+          _kWindowControlIconStrokeAlign,
+      (size.height - _kWindowControlIconSize) / 2 +
+          _kWindowControlIconStrokeAlign,
+      _kWindowControlIconSize - _kWindowControlIconStrokeAlign * 2,
+      _kWindowControlIconSize - _kWindowControlIconStrokeAlign * 2,
     );
 
     switch (type) {
@@ -173,8 +178,8 @@ class _YaruWindowControlPainter extends CustomPainter {
 
   void _drawMinimize(Canvas canvas, Size size, Rect rect) {
     canvas.drawLine(
-      Offset(rect.bottomLeft.dx, rect.bottomLeft.dy - 1),
-      Offset(rect.bottomRight.dx, rect.bottomRight.dy - 1),
+      Offset(rect.bottomLeft.dx, rect.bottomLeft.dy - 1.0),
+      Offset(rect.bottomRight.dx, rect.bottomRight.dy - 1.0),
       _getIconPaint(),
     );
   }
@@ -183,7 +188,8 @@ class _YaruWindowControlPainter extends CustomPainter {
     return Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = _kWindowControlIconStrokeWidth
-      ..color = iconColor;
+      ..color = iconColor
+      ..strokeCap = StrokeCap.square;
   }
 
   @override
