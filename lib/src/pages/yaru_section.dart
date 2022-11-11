@@ -10,12 +10,12 @@ class YaruSection extends StatelessWidget {
     required this.child,
     this.width,
     this.height,
-    this.headerWidget,
     this.padding = const EdgeInsets.all(8.0),
+    this.headlinePadding = const EdgeInsets.all(8.0),
     this.margin,
   });
 
-  /// Widget that is placed above the list of `children`.
+  /// Widget that is placed above the `child`.
   final Widget? headline;
 
   /// The child widget inside the section.
@@ -27,15 +27,12 @@ class YaruSection extends StatelessWidget {
   /// Specifies the [height] of the section.
   final double? height;
 
-  /// Aligns the widget horizontally along with headline.
-  ///
-  /// Both `headline` and `headerWidget` will be aligned horizontally
-  /// with [mainAxisAlignment] as [MainAxisAlignment.spaceBetween].
-  final Widget? headerWidget;
-
   /// The padding between the section border and its [child] which defaults to
-  /// `EdgeInsets.only(all: 8.0)`.
+  /// `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
+
+  /// The padding around the [headline] which defaults to `EdgeInsets.all(8.0)`.
+  final EdgeInsets headlinePadding;
 
   /// An optional margin around the section border.
   final EdgeInsets? margin;
@@ -48,25 +45,16 @@ class YaruSection extends StatelessWidget {
       padding: padding,
       margin: margin,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.all(headline != null ? 8.0 : 0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (headline != null)
-                    DefaultTextStyle(
-                      style: Theme.of(context).textTheme.titleLarge!,
-                      textAlign: TextAlign.left,
-                      child: headline!,
-                    ),
-                  headerWidget ?? const SizedBox()
-                ],
+          if (headline != null)
+            Padding(
+              padding: headlinePadding,
+              child: DefaultTextStyle(
+                style: Theme.of(context).textTheme.titleLarge!,
+                child: headline!,
               ),
             ),
-          ),
           child,
         ],
       ),
