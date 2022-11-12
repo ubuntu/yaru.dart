@@ -18,6 +18,7 @@ import 'pages/selectable_container_page.dart';
 import 'pages/switch_button_page.dart';
 import 'pages/tabbed_page_page.dart';
 import 'pages/tile_page.dart';
+import 'pages/window_controls_page.dart';
 
 class PageItem {
   const PageItem({
@@ -193,5 +194,11 @@ final examplePageItems = <PageItem>[
         ? const Icon(YaruIcons.information_filled)
         : const Icon(YaruIcons.information),
     pageBuilder: (_) => const DialogPage(),
+  ),
+  PageItem(
+    titleBuilder: (context) => const Text('YaruWindowControl'),
+    tooltipMessage: 'YaruWindowControl',
+    iconBuilder: (context, selected) => const Icon(YaruIcons.window_top_bar),
+    pageBuilder: (_) => const WindowControlsPage(),
   ),
 ];

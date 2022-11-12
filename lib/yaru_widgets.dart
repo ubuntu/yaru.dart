@@ -19,6 +19,7 @@ export 'src/controls/yaru_switch_button.dart';
 export 'src/controls/yaru_title_bar.dart';
 export 'src/controls/yaru_toggle_button.dart';
 export 'src/controls/yaru_toggle_button_theme.dart';
+export 'src/controls/yaru_window_control.dart';
 // Extensions
 export 'src/extensions/border_radius_extension.dart';
 // Layouts
