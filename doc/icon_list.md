@@ -64,6 +64,7 @@ Icon preview | Icon name | Usage
 ![chip](../icons/chip.svg) | chip | `YaruIcons.chip`
 ![clock_filled](../icons/clock-filled.svg) | clock filled | `YaruIcons.clock_filled`
 ![clock](../icons/clock.svg) | clock | `YaruIcons.clock`
+![code](../icons/code.svg) | code | `YaruIcons.code`
 ![color_select](../icons/color-select.svg) | color select | `YaruIcons.color_select`
 ![colors](../icons/colors.svg) | colors | `YaruIcons.colors`
 ![compass_filled](../icons/compass-filled.svg) | compass filled | `YaruIcons.compass_filled`
