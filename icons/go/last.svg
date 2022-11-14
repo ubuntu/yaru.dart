@@ -5,7 +5,7 @@
    version="1.1"
    id="svg4"
    sodipodi:docname="last.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -20,20 +20,33 @@
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     showgrid="false"
+     showgrid="true"
      inkscape:snap-page="true"
-     inkscape:zoom="39.59798"
-     inkscape:cx="7.0331871"
-     inkscape:cy="7.8665629"
-     inkscape:window-width="1920"
+     inkscape:zoom="32.792077"
+     inkscape:cx="12.868962"
+     inkscape:cy="10.475091"
+     inkscape:window-width="1850"
      inkscape:window-height="1016"
      inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4" />
+     inkscape:current-layer="svg4"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid233" />
+  </sodipodi:namedview>
   <path
-     d="m 9.5,2 v 1.8625 c 0.5,0.65625 1.045,1.32875 1.525,2.03125 0.60875,0.8875 1.18125,1.79625 1.715,2.725 0.54125,0.9425 1.1875,2.24 1.60625,3.1275 l 0.12,0.25375 -0.12,0.25375 a 49.1375,49.1375 0 0 1 -1.60625,3.1275 41.05,41.05 0 0 1 -1.71375,2.725 c -0.48125,0.7025 -1.02625,1.375 -1.52625,2.03125 v 1.8625 c 0.8625,-1.0925 1.74625,-2.19625 2.51,-3.32 0.85,-1.25 1.61,-2.465 2.2825,-3.64 0.62,-1.085 1.0875,-2.2175 1.4575,-3.04 -0.37125,-0.8225 -0.8375,-1.955 -1.4575,-3.04 a 55.995,55.995 0 0 0 -2.2825,-3.64 c -0.7625,-1.125 -1.64625,-2.2275 -2.51,-3.32 z m 10,8.75 a 1.25,1.25 0 0 0 -1.25,1.25 1.25,1.25 0 0 0 1.25,1.25 1.25,1.25 0 0 0 1.25,-1.25 1.25,1.25 0 0 0 -1.25,-1.25 z"
+     d="m 10,2 v 1.8625 c 0.5,0.65625 1.045,1.32875 1.525,2.03125 0.60875,0.8875 1.18125,1.79625 1.715,2.725 0.54125,0.9425 1.1875,2.24 1.60625,3.1275 l 0.12,0.25375 -0.12,0.25375 c -0.497937,1.061327 -1.033697,2.104495 -1.60625,3.1275 -0.535401,0.930391 -1.107091,1.839423 -1.71375,2.725 C 11.045,18.80875 10.5,19.48125 10,20.1375 V 22 c 0.8625,-1.0925 1.74625,-2.19625 2.51,-3.32 0.85,-1.25 1.61,-2.465 2.2825,-3.64 C 15.4125,13.955 15.88,12.8225 16.25,12 15.87875,11.1775 15.4125,10.045 14.7925,8.96 14.078513,7.7179137 13.317119,6.5036868 12.51,5.32 11.7475,4.195 10.86375,3.0925 10,2 Z"
      fill="#808080"
      id="path2"
-     style="stroke-width:1" />
+     style="stroke-width:1"
+     sodipodi:nodetypes="ccccccccccccccccc" />
+  <circle
+     style="fill:#808080;stroke-width:4;stroke-linejoin:round"
+     id="path388"
+     cx="20"
+     cy="12"
+     r="1" />
 </svg>
