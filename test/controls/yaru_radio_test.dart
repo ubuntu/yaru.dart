@@ -118,7 +118,7 @@ void main() {
           onChanged: variant.hasState(MaterialState.disabled) ? null : (_) {},
         ),
         themeMode: variant.themeMode,
-        size: const Size(224, 56),
+        size: const Size(40, 40),
       );
       await tester.pumpAndSettle();
 

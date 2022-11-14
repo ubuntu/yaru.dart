@@ -51,7 +51,7 @@ void main() {
           onTap: variant.hasState(MaterialState.disabled) ? null : () {},
         ),
         themeMode: variant.themeMode,
-        size: const Size(40, 40),
+        size: const Size(24, 24),
       );
       await tester.pumpAndSettle();
 
