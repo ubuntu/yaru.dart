@@ -166,7 +166,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   Widget _buildVerticalSeparator() {
     // Fix for the ultra white divider on flutter web
     final darkAndWeb =
-        Theme.of(context).brightness == Brightness.dark && kIsWeb;
+        kIsWeb && Theme.of(context).brightness == Brightness.dark;
     if (darkAndWeb) {
       return const VerticalDivider(
         thickness: 0,
