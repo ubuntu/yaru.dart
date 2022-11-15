@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'yaru_master_detail_page.dart';
@@ -116,6 +117,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _buildLeftPane(),
+              _buildVerticalSeparator(),
               Expanded(
                 child: widget.allowLeftPaneResize
                     ? Stack(
@@ -147,17 +149,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Widget _buildLeftPane() {
-    final light = Theme.of(context).brightness == Brightness.light;
-    return Container(
+    return SizedBox(
       width: _leftPaneWidth,
-      decoration: BoxDecoration(
-        border: Border(
-          right: BorderSide(
-            width: light ? 1 : 0.3,
-            color: light ? Theme.of(context).dividerColor : Colors.black,
-          ),
-        ),
-      ),
       child: Scaffold(
         appBar: widget.appBar,
         body: YaruMasterListView(
@@ -167,6 +160,22 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           builder: widget.tileBuilder,
         ),
       ),
+    );
+  }
+
+  Widget _buildVerticalSeparator() {
+    // Fix for the ultra white divider on flutter web
+    final darkAndWeb =
+        Theme.of(context).brightness == Brightness.dark && kIsWeb;
+    if (darkAndWeb) {
+      return const VerticalDivider(
+        thickness: 0,
+        width: 0.01,
+      );
+    }
+    return const VerticalDivider(
+      thickness: 1,
+      width: 1,
     );
   }
 
