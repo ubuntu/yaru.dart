@@ -116,7 +116,6 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _buildLeftPane(),
-              _buildVerticalSeparator(),
               Expanded(
                 child: widget.allowLeftPaneResize
                     ? Stack(
@@ -148,8 +147,17 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Widget _buildLeftPane() {
-    return SizedBox(
+    final light = Theme.of(context).brightness == Brightness.light;
+    return Container(
       width: _leftPaneWidth,
+      decoration: BoxDecoration(
+        border: Border(
+          right: BorderSide(
+            width: light ? 1 : 0.3,
+            color: light ? Theme.of(context).dividerColor : Colors.black,
+          ),
+        ),
+      ),
       child: Scaffold(
         appBar: widget.appBar,
         body: YaruMasterListView(
@@ -159,13 +167,6 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           builder: widget.tileBuilder,
         ),
       ),
-    );
-  }
-
-  Widget _buildVerticalSeparator() {
-    return const VerticalDivider(
-      thickness: 1,
-      width: 1,
     );
   }
 
