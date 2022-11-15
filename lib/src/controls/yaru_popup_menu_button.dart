@@ -13,10 +13,14 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.onSelected,
     this.onCanceled,
     this.tooltip,
-    this.position = PopupMenuPosition.under,
+    this.position = PopupMenuPosition.over,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
     this.childPadding = const EdgeInsets.symmetric(horizontal: 5),
     this.enabled = true,
+    this.offset = const Offset(0, 40),
+    this.enableFeedback,
+    this.constraints,
+    this.elevation,
   });
 
   final T? initialValue;
@@ -29,6 +33,10 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final EdgeInsets padding;
   final EdgeInsets childPadding;
   final bool enabled;
+  final Offset offset;
+  final bool? enableFeedback;
+  final BoxConstraints? constraints;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +46,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
         color: Colors.transparent,
         child: PopupMenuButton(
           enabled: enabled,
+          elevation: elevation,
           position: position,
           padding: EdgeInsets.zero,
           initialValue: initialValue,
@@ -45,6 +54,9 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
           onCanceled: onCanceled,
           tooltip: tooltip,
           itemBuilder: itemBuilder,
+          offset: offset,
+          enableFeedback: enableFeedback,
+          constraints: constraints,
           child: _YaruPopupDecoration(
             child: child,
             padding: padding,
