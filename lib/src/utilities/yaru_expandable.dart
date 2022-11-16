@@ -12,6 +12,7 @@ class YaruExpandable extends StatefulWidget {
     this.expandIcon,
     required this.child,
     this.collapsedChild,
+    this.gapHeight = 4.0,
     this.isExpanded = false,
     this.onChange,
   });
@@ -29,6 +30,8 @@ class YaruExpandable extends StatefulWidget {
 
   /// Widget show when collapsed
   final Widget? collapsedChild;
+
+  final double gapHeight;
 
   /// Optional initial value.
   final bool isExpanded;
@@ -59,14 +62,11 @@ class _YaruExpandableState extends State<YaruExpandable> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
-              child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: GestureDetector(onTap: _onTap, child: widget.header)),
+              child: GestureDetector(onTap: _onTap, child: widget.header),
             ),
             YaruIconButton(
-              style: IconButton.styleFrom(
-                fixedSize: const Size.square(36),
-              ),
+              iconSize: 36,
+              padding: EdgeInsets.zero,
               onPressed: _onTap,
               icon: AnimatedRotation(
                 turns: _isExpanded ? .25 : 0,
@@ -78,8 +78,10 @@ class _YaruExpandableState extends State<YaruExpandable> {
           ],
         ),
         AnimatedCrossFade(
-          firstChild: widget.child,
-          secondChild: widget.collapsedChild ?? Container(),
+          firstChild: _buildChild(widget.child),
+          secondChild: widget.collapsedChild != null
+              ? _buildChild(widget.collapsedChild!)
+              : Container(),
           crossFadeState: _isExpanded
               ? CrossFadeState.showFirst
               : CrossFadeState.showSecond,
@@ -94,5 +96,14 @@ class _YaruExpandableState extends State<YaruExpandable> {
     setState(() => _isExpanded = !_isExpanded);
 
     widget.onChange?.call(_isExpanded);
+  }
+
+  Widget _buildChild(Widget child) {
+    return Column(
+      children: [
+        SizedBox(height: widget.gapHeight),
+        child,
+      ],
+    );
   }
 }
