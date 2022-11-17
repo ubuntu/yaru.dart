@@ -36,7 +36,7 @@ class CodeSnippedButton extends StatelessWidget {
               );
             },
           ),
-          icon: const Icon(YaruIcons.desktop_panel_look),
+          icon: const Icon(YaruIcons.code),
           tooltip: 'Example snippet',
         ),
       ),
