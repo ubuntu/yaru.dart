@@ -10,6 +10,8 @@ Icon preview | Icon name | Usage
 ![address_book](../icons/address-book.svg) | address book | `YaruIcons.address_book`
 ![app_grid](../icons/app-grid.svg) | app grid | `YaruIcons.app_grid`
 ![appliance](../icons/appliance.svg) | appliance | `YaruIcons.appliance`
+![audio_card_filled](../icons/audio/card-filled.svg) | audio card filled | `YaruIcons.audio_card_filled`
+![audio_card](../icons/audio/card.svg) | audio card | `YaruIcons.audio_card`
 ![audio_history](../icons/audio/history.svg) | audio history | `YaruIcons.audio_history`
 ![audio](../icons/audio/_.svg) | audio | `YaruIcons.audio`
 ![battery_level_0_charging](../icons/battery/level-0-charging.svg) | battery level 0 charging | `YaruIcons.battery_level_0_charging`
@@ -50,6 +52,8 @@ Icon preview | Icon name | Usage
 ![camera_photo](../icons/camera/photo.svg) | camera photo | `YaruIcons.camera_photo`
 ![camera_video_filed](../icons/camera/video-filed.svg) | camera video filed | `YaruIcons.camera_video_filed`
 ![camera_video](../icons/camera/video.svg) | camera video | `YaruIcons.camera_video`
+![camera_web_filled](../icons/camera/web-filled.svg) | camera web filled | `YaruIcons.camera_web_filled`
+![camera_web](../icons/camera/web.svg) | camera web | `YaruIcons.camera_web`
 ![chat_bubble_filled](../icons/chat-bubble-filled.svg) | chat bubble filled | `YaruIcons.chat_bubble_filled`
 ![chat_bubble](../icons/chat-bubble.svg) | chat bubble | `YaruIcons.chat_bubble`
 ![checkbox_button_checked_filled](../icons/checkbox-button/checked-filled.svg) | checkbox button checked filled | `YaruIcons.checkbox_button_checked_filled`
@@ -274,6 +278,8 @@ Icon preview | Icon name | Usage
 ![microphone_volume_muted_filled](../icons/microphone/volume/muted-filled.svg) | microphone volume muted filled | `YaruIcons.microphone_volume_muted_filled`
 ![microphone_volume_muted](../icons/microphone/volume/muted.svg) | microphone volume muted | `YaruIcons.microphone_volume_muted`
 ![minus](../icons/minus.svg) | minus | `YaruIcons.minus`
+![modem_filled](../icons/modem-filled.svg) | modem filled | `YaruIcons.modem_filled`
+![modem](../icons/modem.svg) | modem | `YaruIcons.modem`
 ![multimedia_player_filled](../icons/multimedia-player-filled.svg) | multimedia player filled | `YaruIcons.multimedia_player_filled`
 ![multimedia_player](../icons/multimedia-player.svg) | multimedia player | `YaruIcons.multimedia_player`
 ![network_cellular_2g](../icons/network/cellular/2g.svg) | network cellular 2g | `YaruIcons.network_cellular_2g`
@@ -373,6 +379,8 @@ Icon preview | Icon name | Usage
 ![rss](../icons/rss.svg) | rss | `YaruIcons.rss`
 ![save_as](../icons/save/as.svg) | save as | `YaruIcons.save_as`
 ![save](../icons/save/_.svg) | save | `YaruIcons.save`
+![scanner_filled](../icons/scanner-filled.svg) | scanner filled | `YaruIcons.scanner_filled`
+![scanner](../icons/scanner.svg) | scanner | `YaruIcons.scanner`
 ![search_history](../icons/search/history.svg) | search history | `YaruIcons.search_history`
 ![search](../icons/search/_.svg) | search | `YaruIcons.search`
 ![selection](../icons/selection.svg) | selection | `YaruIcons.selection`
