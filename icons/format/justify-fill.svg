@@ -1,73 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg14"
-   sodipodi:docname="justify-fill.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg14" sodipodi:docname="justify-fill.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs18" />
-  <sodipodi:namedview
-     id="namedview16"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:snap-page="true"
-     inkscape:zoom="14"
-     inkscape:cx="12.464286"
-     inkscape:cy="8.1428571"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg14">
-    <inkscape:grid
-       type="xygrid"
-       id="grid826" />
-  </sodipodi:namedview>
-  <rect
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect850"
-     width="18"
-     height="1"
-     x="3"
-     y="3" />
-  <rect
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect932"
-     width="18"
-     height="1"
-     x="3"
-     y="7" />
-  <rect
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect1014"
-     width="18"
-     height="1"
-     x="3"
-     y="11" />
-  <rect
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect1016"
-     width="18"
-     height="1"
-     x="3"
-     y="15" />
-  <rect
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect1018"
-     width="18"
-     height="1"
-     x="3"
-     y="19" />
+   <defs id="defs18" />
+   <sodipodi:namedview id="namedview16" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="14" inkscape:cx="12.464286" inkscape:cy="8.1428571" inkscape:window-width="1920" inkscape:window-height="1043" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg14">
+      <inkscape:grid type="xygrid" id="grid826" />
+   </sodipodi:namedview>
+   <rect style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect850" width="18" height="1" x="3" y="3" />
+   <rect style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect932" width="18" height="1" x="3" y="7" />
+   <rect style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect1014" width="18" height="1" x="3" y="11" />
+   <rect style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect1016" width="18" height="1" x="3" y="15" />
+   <rect style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect1018" width="18" height="1" x="3" y="19" />
 </svg>

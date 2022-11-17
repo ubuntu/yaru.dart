@@ -1,57 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg8"
-   sodipodi:docname="mark-important.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg8" sodipodi:docname="mark-important.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs12" />
-  <sodipodi:namedview
-     id="namedview10"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:zoom="9.8994949"
-     inkscape:cx="-3.384011"
-     inkscape:cy="7.5256365"
-     inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg8">
-    <inkscape:grid
-       type="xygrid"
-       id="grid823" />
-  </sodipodi:namedview>
-  <g
-     fill="#808080"
-     id="g6"
-     transform="matrix(1.25,0,0,1.25,2,2)"
-     style="stroke-width:0.8" />
-  <path
-     id="path869"
-     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:2;stroke-linecap:square"
-     d="M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 z M 12 3 A 9 9 0 0 1 21 12 A 9 9 0 0 1 12 21 A 9 9 0 0 1 3 12 A 9 9 0 0 1 12 3 z " />
-  <circle
-     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:2;stroke-linecap:square"
-     id="path1072"
-     cx="12"
-     cy="17"
-     r="1" />
-  <path
-     style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter"
-     d="m 11,6 h 2 v 5 l -0.4,3 h -1.2 l -0.4,-3 z"
-     id="path1217"
-     sodipodi:nodetypes="ccccccc" />
+   <defs id="defs12" />
+   <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="9.8994949" inkscape:cx="-3.384011" inkscape:cy="7.5256365" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg8">
+      <inkscape:grid type="xygrid" id="grid823" />
+   </sodipodi:namedview>
+   <g fill="#808080" id="g6" transform="matrix(1.25,0,0,1.25,2,2)" style="stroke-width:0.8" />
+   <path id="path869" style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:2;stroke-linecap:square" d="M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 z M 12 3 A 9 9 0 0 1 21 12 A 9 9 0 0 1 12 21 A 9 9 0 0 1 3 12 A 9 9 0 0 1 12 3 z " />
+   <circle style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:2;stroke-linecap:square" id="path1072" cx="12" cy="17" r="1" />
+   <path style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter" d="m 11,6 h 2 v 5 l -0.4,3 h -1.2 l -0.4,-3 z" id="path1217" sodipodi:nodetypes="ccccccc" />
 </svg>

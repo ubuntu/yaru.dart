@@ -1,54 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg4"
-   sodipodi:docname="fir.svg"
-   inkscape:version="1.1.2 (76b9e6a115, 2022-02-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg4" sodipodi:docname="fir.svg" inkscape:version="1.1.2 (76b9e6a115, 2022-02-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs8" />
-  <sodipodi:namedview
-     id="namedview6"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:snap-page="true"
-     inkscape:zoom="22.627417"
-     inkscape:cx="9.921592"
-     inkscape:cy="11.866136"
-     inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg4">
-    <inkscape:grid
-       type="xygrid"
-       id="grid821" />
-    <inkscape:grid
-       type="xygrid"
-       id="grid995"
-       dotted="true"
-       spacingx="0.5"
-       spacingy="0.5"
-       empspacing="10" />
-  </sodipodi:namedview>
-  <path
-     id="rect714"
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square;stroke-linejoin:round"
-     d="m 11,15 c 1.5,0 2,0.5 2,2 v 4 c 0,0.5 0,1 1,1 h -4 c 1,0 1,-0.5 1,-1 z"
-     sodipodi:nodetypes="ccccccc" />
-  <path
-     style="color:#000000;fill:#808080;-inkscape-stroke:none"
-     d="m 12,3.2929688 -5.7070313,5.7070312 h 2.5000001 l -4.0000001,4 h 3.0859375 l -4.5019531,5 h 6.6230469 v -1 h -4.3789063 l 4.5019533,-5 h -2.9160158 l 3.9999998,-4 h -2.4999997 l 3.2929687,-3.2929688 3.292969,3.2929688 h -2.5 l 4,4 h -2.916016 l 4.501953,5 h -4.378906 v 1 h 6.623047 l -4.501953,-5 h 3.085937 l -4,-4 h 2.5 z"
-     id="path386" />
+   <defs id="defs8" />
+   <sodipodi:namedview id="namedview6" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="22.627417" inkscape:cx="9.921592" inkscape:cy="11.866136" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg4">
+      <inkscape:grid type="xygrid" id="grid821" />
+      <inkscape:grid type="xygrid" id="grid995" dotted="true" spacingx="0.5" spacingy="0.5" empspacing="10" />
+   </sodipodi:namedview>
+   <path id="rect714" style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square;stroke-linejoin:round" d="m 11,15 c 1.5,0 2,0.5 2,2 v 4 c 0,0.5 0,1 1,1 h -4 c 1,0 1,-0.5 1,-1 z" sodipodi:nodetypes="ccccccc" />
+   <path style="color:#000000;fill:#808080;-inkscape-stroke:none" d="m 12,3.2929688 -5.7070313,5.7070312 h 2.5000001 l -4.0000001,4 h 3.0859375 l -4.5019531,5 h 6.6230469 v -1 h -4.3789063 l 4.5019533,-5 h -2.9160158 l 3.9999998,-4 h -2.4999997 l 3.2929687,-3.2929688 3.292969,3.2929688 h -2.5 l 4,4 h -2.916016 l 4.501953,5 h -4.378906 v 1 h 6.623047 l -4.501953,-5 h 3.085937 l -4,-4 h 2.5 z" id="path386" />
 </svg>

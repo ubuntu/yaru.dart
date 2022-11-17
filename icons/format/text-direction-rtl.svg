@@ -1,43 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg14"
-   sodipodi:docname="text-direction-rtl.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg14" sodipodi:docname="text-direction-rtl.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs18" />
-  <sodipodi:namedview
-     id="namedview16"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:snap-page="true"
-     inkscape:zoom="14"
-     inkscape:cx="-2.0357143"
-     inkscape:cy="0.32142857"
-     inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg14"
-     inkscape:snap-grids="true">
-    <inkscape:grid
-       type="xygrid"
-       id="grid1099" />
-  </sodipodi:namedview>
-  <path
-     id="rect2"
-     style="color:#bebebe;fill:#666666;stroke-width:0.894428;marker:none"
-     d="m 4,2 v 1 h 17 v -1 z m 0,4 v 1 h 17 v -1 z m 0,4 v 1 h 17 v -1 z m 5,4 v 1 h 12 v -1 z m -1.9980469,1.720703 c -1.7202929,0.807591 -3.3900246,1.718769 -5,2.728516 0.8063445,0.509355 1.6276718,0.994596 2.4628907,1.455078 0.8587499,0.46875 1.7051562,0.891484 2.5351562,1.271484 v -2.101562 h 0.00195 v -0.07422 h 10.9980469 v -1 h -10.9980469 v -0.175781 z" />
+   <defs id="defs18" />
+   <sodipodi:namedview id="namedview16" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="14" inkscape:cx="-2.0357143" inkscape:cy="0.32142857" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg14" inkscape:snap-grids="true">
+      <inkscape:grid type="xygrid" id="grid1099" />
+   </sodipodi:namedview>
+   <path id="rect2" style="color:#bebebe;fill:#666666;stroke-width:0.894428;marker:none" d="m 4,2 v 1 h 17 v -1 z m 0,4 v 1 h 17 v -1 z m 0,4 v 1 h 17 v -1 z m 5,4 v 1 h 12 v -1 z m -1.9980469,1.720703 c -1.7202929,0.807591 -3.3900246,1.718769 -5,2.728516 0.8063445,0.509355 1.6276718,0.994596 2.4628907,1.455078 0.8587499,0.46875 1.7051562,0.891484 2.5351562,1.271484 v -2.101562 h 0.00195 v -0.07422 h 10.9980469 v -1 h -10.9980469 v -0.175781 z" />
 </svg>

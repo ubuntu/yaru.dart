@@ -1,84 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg16"
-   sodipodi:docname="indent-less.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg16" sodipodi:docname="indent-less.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs20" />
-  <sodipodi:namedview
-     id="namedview18"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:snap-page="true"
-     inkscape:zoom="19.79899"
-     inkscape:cx="16.743278"
-     inkscape:cy="11.111678"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg16">
-    <inkscape:grid
-       type="xygrid"
-       id="grid1443" />
-  </sodipodi:namedview>
-  <path
-     d="m 21,14.625 v -6.25 c -0.95125,0.435 -1.91875,0.92125 -2.905,1.4575 -0.975,0.53875 -1.9175,1.095 -2.82375,1.6675 0.90625,0.56125 1.84875,1.11125 2.825,1.65 0.985,0.5375 1.95375,1.02875 2.90375,1.475 z"
-     style="fill:#808080;fill-opacity:1;stroke-width:0.8;marker:none"
-     color="#000000"
-     overflow="visible"
-     id="path12" />
-  <rect
-     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect918"
-     width="18"
-     height="1"
-     x="-21"
-     y="3"
-     transform="scale(-1,1)" />
-  <rect
-     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect920"
-     width="10"
-     height="1"
-     x="-13"
-     y="7"
-     transform="scale(-1,1)" />
-  <rect
-     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect922"
-     width="10"
-     height="1"
-     x="-13"
-     y="11"
-     transform="scale(-1,1)" />
-  <rect
-     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect924"
-     width="10"
-     height="1"
-     x="-13"
-     y="15"
-     transform="scale(-1,1)" />
-  <rect
-     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect926"
-     width="18"
-     height="1"
-     x="-21"
-     y="19"
-     transform="scale(-1,1)" />
+   <defs id="defs20" />
+   <sodipodi:namedview id="namedview18" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="19.79899" inkscape:cx="16.743278" inkscape:cy="11.111678" inkscape:window-width="1920" inkscape:window-height="1043" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg16">
+      <inkscape:grid type="xygrid" id="grid1443" />
+   </sodipodi:namedview>
+   <path d="m 21,14.625 v -6.25 c -0.95125,0.435 -1.91875,0.92125 -2.905,1.4575 -0.975,0.53875 -1.9175,1.095 -2.82375,1.6675 0.90625,0.56125 1.84875,1.11125 2.825,1.65 0.985,0.5375 1.95375,1.02875 2.90375,1.475 z" style="fill:#808080;fill-opacity:1;stroke-width:0.8;marker:none" color="#000000" overflow="visible" id="path12" />
+   <rect style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect918" width="18" height="1" x="-21" y="3" transform="scale(-1,1)" />
+   <rect style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect920" width="10" height="1" x="-13" y="7" transform="scale(-1,1)" />
+   <rect style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect922" width="10" height="1" x="-13" y="11" transform="scale(-1,1)" />
+   <rect style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect924" width="10" height="1" x="-13" y="15" transform="scale(-1,1)" />
+   <rect style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect926" width="18" height="1" x="-21" y="19" transform="scale(-1,1)" />
 </svg>

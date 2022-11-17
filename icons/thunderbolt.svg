@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg4"
-   sodipodi:docname="thunderbolt.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg4" sodipodi:docname="thunderbolt.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs8" />
-  <sodipodi:namedview
-     id="namedview6"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:zoom="39.59798"
-     inkscape:cx="8.4726544"
-     inkscape:cy="7.6897862"
-     inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg4">
-    <inkscape:grid
-       type="xygrid"
-       id="grid6" />
-  </sodipodi:namedview>
-  <path
-     d="m 11.809721,9.4272859 h 4.748138 l -5.577423,8.0241371 2.149711,0.223715 -5.3794239,4.600282 2.5251409,-1.332 c 0.408857,0.04886 1.298571,0.08229 1.718999,0.08229 a 9.0064223,9.0064223 0 0 0 9.005137,-9.007709 c -0.02057,-3.1731403 -1.645714,-6.4375665 -5.146711,-8.1385653 l 0.205714,-2.1548557 z m -8.8097088,2.5907131 a 8.9871366,8.9871366 0 0 0 4.6041397,7.860851 l 0.4101425,-4.782853 1.2985706,1.55057 2.320712,-4.647854 h -4.7764246 l 4.0628546,-8.915137 a 8.998708,8.998708 0 0 0 -7.9199948,8.935708"
-     fill="#808080"
-     id="path2"
-     style="stroke-width:1" />
+   <defs id="defs8" />
+   <sodipodi:namedview id="namedview6" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="39.59798" inkscape:cx="8.4726544" inkscape:cy="7.6897862" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg4">
+      <inkscape:grid type="xygrid" id="grid6" />
+   </sodipodi:namedview>
+   <path d="m 11.809721,9.4272859 h 4.748138 l -5.577423,8.0241371 2.149711,0.223715 -5.3794239,4.600282 2.5251409,-1.332 c 0.408857,0.04886 1.298571,0.08229 1.718999,0.08229 a 9.0064223,9.0064223 0 0 0 9.005137,-9.007709 c -0.02057,-3.1731403 -1.645714,-6.4375665 -5.146711,-8.1385653 l 0.205714,-2.1548557 z m -8.8097088,2.5907131 a 8.9871366,8.9871366 0 0 0 4.6041397,7.860851 l 0.4101425,-4.782853 1.2985706,1.55057 2.320712,-4.647854 h -4.7764246 l 4.0628546,-8.915137 a 8.998708,8.998708 0 0 0 -7.9199948,8.935708" fill="#808080" id="path2" style="stroke-width:1" />
 </svg>

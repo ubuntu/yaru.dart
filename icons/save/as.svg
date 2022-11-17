@@ -1,62 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg6"
-   sodipodi:docname="as.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg6" sodipodi:docname="as.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs10" />
-  <sodipodi:namedview
-     id="namedview8"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:zoom="28"
-     inkscape:cx="11.375"
-     inkscape:cy="12.553571"
-     inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg6">
-    <inkscape:grid
-       type="xygrid"
-       id="grid918" />
-  </sodipodi:namedview>
-  <rect
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect1055"
-     width="14"
-     height="1"
-     x="5"
-     y="20" />
-  <rect
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect942"
-     width="4"
-     height="1"
-     x="15"
-     y="18" />
-  <rect
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square"
-     id="rect944"
-     width="2"
-     height="1"
-     x="17"
-     y="16" />
-  <path
-     id="rect867"
-     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round"
-     d="m 10,2 v 6 h -3.2285156 l 0.2617187,0.6796875 c 0,0 0.6303164,1.6362135 1.5117188,3.5878905 0.8814023,1.951677 1.9958901,4.209218 3.0644531,5.544922 l 0.390625,0.488281 0.390625,-0.488281 c 1.068563,-1.335704 2.183051,-3.593245 3.064453,-5.544922 0.881402,-1.951677 1.511719,-3.5878905 1.511719,-3.5878905 l 0.261719,-0.6796875 h -3.228516 v -6 z m 1,1 h 2 v 5 1 h 0.5 2.248047 c -0.18146,0.4617576 -0.501365,1.303524 -1.203125,2.857422 -0.753049,1.667465 -1.697706,3.384255 -2.544922,4.621094 -0.847216,-1.236839 -1.791873,-2.953629 -2.5449219,-4.621094 -0.7017602,-1.553898 -1.0216652,-2.3956644 -1.203125,-2.857422 h 2.2480469 0.5 v -1 z" />
+   <defs id="defs10" />
+   <sodipodi:namedview id="namedview8" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="28" inkscape:cx="11.375" inkscape:cy="12.553571" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg6">
+      <inkscape:grid type="xygrid" id="grid918" />
+   </sodipodi:namedview>
+   <rect style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect1055" width="14" height="1" x="5" y="20" />
+   <rect style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect942" width="4" height="1" x="15" y="18" />
+   <rect style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square" id="rect944" width="2" height="1" x="17" y="16" />
+   <path id="rect867" style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round" d="m 10,2 v 6 h -3.2285156 l 0.2617187,0.6796875 c 0,0 0.6303164,1.6362135 1.5117188,3.5878905 0.8814023,1.951677 1.9958901,4.209218 3.0644531,5.544922 l 0.390625,0.488281 0.390625,-0.488281 c 1.068563,-1.335704 2.183051,-3.593245 3.064453,-5.544922 0.881402,-1.951677 1.511719,-3.5878905 1.511719,-3.5878905 l 0.261719,-0.6796875 h -3.228516 v -6 z m 1,1 h 2 v 5 1 h 0.5 2.248047 c -0.18146,0.4617576 -0.501365,1.303524 -1.203125,2.857422 -0.753049,1.667465 -1.697706,3.384255 -2.544922,4.621094 -0.847216,-1.236839 -1.791873,-2.953629 -2.5449219,-4.621094 -0.7017602,-1.553898 -1.0216652,-2.3956644 -1.203125,-2.857422 h 2.2480469 0.5 v -1 z" />
 </svg>

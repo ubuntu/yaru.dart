@@ -1,49 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg4"
-   sodipodi:docname="mouse.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg4" sodipodi:docname="mouse.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs8" />
-  <sodipodi:namedview
-     id="namedview6"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:snap-page="true"
-     inkscape:zoom="28"
-     inkscape:cx="11.303571"
-     inkscape:cy="10.75"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg4">
-    <inkscape:grid
-       type="xygrid"
-       id="grid821" />
-    <inkscape:grid
-       type="xygrid"
-       id="grid823"
-       dotted="true"
-       spacingx="0.5"
-       spacingy="0.5"
-       empspacing="10" />
-  </sodipodi:namedview>
-  <path
-     id="path847"
-     style="fill:#808080;fill-rule:evenodd;stroke:none;stroke-width:2;fill-opacity:1"
-     d="M 11.5 3 C 9.3333355 3 7.2773439 4.0527344 7.2773438 4.0527344 L 7.0703125 4.15625 L 7.015625 4.3789062 C 6.015626 8.3789023 5.514794 10.377202 5.2597656 11.652344 C 5.0047373 12.927486 5 13.500001 5 14.5 A 6.5 6.5 0 0 0 11.5 21 A 6.5 6.5 0 0 0 18 14.5 C 18 13.500001 17.9953 12.927486 17.740234 11.652344 C 17.485206 10.377202 16.984374 8.3789023 15.984375 4.3789062 L 15.929688 4.15625 L 15.722656 4.0527344 C 15.722656 4.0527344 13.666665 3 11.5 3 z M 11 4.0214844 L 11 8 L 12 8 L 12 4.0214844 C 13.486555 4.1415044 14.815679 4.7464139 15.074219 4.8671875 C 16.00758 8.6010783 16.523131 10.664481 16.759766 11.847656 C 17.004737 13.072512 17 13.500001 17 14.5 A 5.5 5.5 0 0 1 11.5 20 A 5.5 5.5 0 0 1 6 14.5 C 6 13.500001 5.99526 13.072512 6.2402344 11.847656 C 6.4768694 10.664481 6.9924199 8.6010783 7.9257812 4.8671875 C 8.1843208 4.7464139 9.5134443 4.1415044 11 4.0214844 z " />
+   <defs id="defs8" />
+   <sodipodi:namedview id="namedview6" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="28" inkscape:cx="11.303571" inkscape:cy="10.75" inkscape:window-width="1920" inkscape:window-height="1043" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg4">
+      <inkscape:grid type="xygrid" id="grid821" />
+      <inkscape:grid type="xygrid" id="grid823" dotted="true" spacingx="0.5" spacingy="0.5" empspacing="10" />
+   </sodipodi:namedview>
+   <path id="path847" style="fill:#808080;fill-rule:evenodd;stroke:none;stroke-width:2;fill-opacity:1" d="M 11.5 3 C 9.3333355 3 7.2773439 4.0527344 7.2773438 4.0527344 L 7.0703125 4.15625 L 7.015625 4.3789062 C 6.015626 8.3789023 5.514794 10.377202 5.2597656 11.652344 C 5.0047373 12.927486 5 13.500001 5 14.5 A 6.5 6.5 0 0 0 11.5 21 A 6.5 6.5 0 0 0 18 14.5 C 18 13.500001 17.9953 12.927486 17.740234 11.652344 C 17.485206 10.377202 16.984374 8.3789023 15.984375 4.3789062 L 15.929688 4.15625 L 15.722656 4.0527344 C 15.722656 4.0527344 13.666665 3 11.5 3 z M 11 4.0214844 L 11 8 L 12 8 L 12 4.0214844 C 13.486555 4.1415044 14.815679 4.7464139 15.074219 4.8671875 C 16.00758 8.6010783 16.523131 10.664481 16.759766 11.847656 C 17.004737 13.072512 17 13.500001 17 14.5 A 5.5 5.5 0 0 1 11.5 20 A 5.5 5.5 0 0 1 6 14.5 C 6 13.500001 5.99526 13.072512 6.2402344 11.847656 C 6.4768694 10.664481 6.9924199 8.6010783 7.9257812 4.8671875 C 8.1843208 4.7464139 9.5134443 4.1415044 11 4.0214844 z " />
 </svg>

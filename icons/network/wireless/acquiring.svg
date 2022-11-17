@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg8"
-   sodipodi:docname="wireless-acquiring.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg8" sodipodi:docname="wireless-acquiring.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs12" />
-  <sodipodi:namedview
-     id="namedview10"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:snap-page="true"
-     inkscape:zoom="36.916667"
-     inkscape:cx="11.986456"
-     inkscape:cy="12"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg8">
-    <inkscape:grid
-       type="xygrid"
-       id="grid1141" />
-  </sodipodi:namedview>
-  <path
-     id="path1857"
-     style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none"
-     d="M 12 5 C 5.805562 5 2.6210938 8.6738281 2.6210938 8.6738281 L 2.3476562 8.9921875 L 4 11.011719 L 4 9.4335938 L 3.7050781 9.0722656 C 4.1030591 8.6390296 6.637738 6 12 6 C 17.362262 6 19.896941 8.6390286 20.294922 9.0722656 L 19 10.654297 L 19 12.234375 L 21.652344 8.9921875 L 21.378906 8.6738281 C 21.378906 8.6738281 18.194438 5 12 5 z M 6.5 10 A 1.5 1.5 0 0 0 5 11.5 A 1.5 1.5 0 0 0 6.5 13 A 1.5 1.5 0 0 0 8 11.5 A 1.5 1.5 0 0 0 6.5 10 z M 11.5 10 A 1.5 1.5 0 0 0 10 11.5 A 1.5 1.5 0 0 0 11.5 13 A 1.5 1.5 0 0 0 13 11.5 A 1.5 1.5 0 0 0 11.5 10 z M 16.5 10 A 1.5 1.5 0 0 0 15 11.5 A 1.5 1.5 0 0 0 16.5 13 A 1.5 1.5 0 0 0 18 11.5 A 1.5 1.5 0 0 0 16.5 10 z M 6.4453125 14 L 12 20.789062 L 12.386719 20.316406 L 17.554688 14 L 16.263672 14 L 12 19.210938 L 7.7363281 14 L 6.4453125 14 z " />
+   <defs id="defs12" />
+   <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="36.916667" inkscape:cx="11.986456" inkscape:cy="12" inkscape:window-width="1920" inkscape:window-height="1043" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg8">
+      <inkscape:grid type="xygrid" id="grid1141" />
+   </sodipodi:namedview>
+   <path id="path1857" style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none" d="M 12 5 C 5.805562 5 2.6210938 8.6738281 2.6210938 8.6738281 L 2.3476562 8.9921875 L 4 11.011719 L 4 9.4335938 L 3.7050781 9.0722656 C 4.1030591 8.6390296 6.637738 6 12 6 C 17.362262 6 19.896941 8.6390286 20.294922 9.0722656 L 19 10.654297 L 19 12.234375 L 21.652344 8.9921875 L 21.378906 8.6738281 C 21.378906 8.6738281 18.194438 5 12 5 z M 6.5 10 A 1.5 1.5 0 0 0 5 11.5 A 1.5 1.5 0 0 0 6.5 13 A 1.5 1.5 0 0 0 8 11.5 A 1.5 1.5 0 0 0 6.5 10 z M 11.5 10 A 1.5 1.5 0 0 0 10 11.5 A 1.5 1.5 0 0 0 11.5 13 A 1.5 1.5 0 0 0 13 11.5 A 1.5 1.5 0 0 0 11.5 10 z M 16.5 10 A 1.5 1.5 0 0 0 15 11.5 A 1.5 1.5 0 0 0 16.5 13 A 1.5 1.5 0 0 0 18 11.5 A 1.5 1.5 0 0 0 16.5 10 z M 6.4453125 14 L 12 20.789062 L 12.386719 20.316406 L 17.554688 14 L 16.263672 14 L 12 19.210938 L 7.7363281 14 L 6.4453125 14 z " />
 </svg>

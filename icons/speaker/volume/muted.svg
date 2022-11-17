@@ -1,44 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg4"
-   sodipodi:docname="muted.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg4" sodipodi:docname="muted.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs8" />
-  <sodipodi:namedview
-     id="namedview6"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:zoom="9.8994949"
-     inkscape:cx="37.729198"
-     inkscape:cy="9.0408653"
-     inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg4"
-     inkscape:snap-page="false"
-     inkscape:snap-grids="false"
-     inkscape:snap-to-guides="false">
-    <inkscape:grid
-       type="xygrid"
-       id="grid823" />
-  </sodipodi:namedview>
-  <path
-     id="path857"
-     style="color:#000000;fill:#808080;-inkscape-stroke:none"
-     d="M 11.992188 3.2929688 L 7.2851562 8 L 4.2128906 8 L 4.0664062 8.2382812 C 2.6607813 10.528272 2.6507236 13.448901 4.0644531 15.761719 L 4.2109375 16 L 5.8789062 16 L 6.8789062 15 L 4.8515625 15 C 3.8071281 13.120594 3.8142364 10.859648 4.8515625 9 L 7.6992188 9 L 10.992188 5.7070312 L 10.992188 10.886719 L 11.992188 9.8867188 L 11.992188 3.2929688 z M 19.646484 3.6464844 L 17.992188 5.3007812 L 17.287109 6.0058594 L 14.992188 8.3007812 L 14.285156 9.0078125 L 11.992188 11.300781 L 10.992188 12.300781 L 7.9960938 15.296875 L 7.2890625 16.003906 L 3.6464844 19.646484 L 4.3535156 20.353516 L 7.9960938 16.710938 L 11.992188 20.707031 L 11.992188 12.714844 L 14.890625 9.8164062 C 15.910927 11.528031 15.661135 13.624022 14.138672 15.146484 L 13.785156 15.5 L 14.492188 16.207031 L 14.845703 15.853516 C 16.725961 13.973258 16.977707 11.216996 15.609375 9.0976562 L 17.953125 6.7539062 C 19.325707 8.4302571 19.992188 10.220917 19.992188 12 C 19.992188 14.10185 19.065013 16.220143 17.138672 18.146484 L 17.845703 18.853516 C 19.919358 16.779861 20.992188 14.398146 20.992188 12 C 20.992188 9.9411391 20.196763 7.89665 18.660156 6.046875 L 20.353516 4.3535156 L 19.646484 3.6464844 z M 10.992188 13.714844 L 10.992188 18.292969 L 8.703125 16.003906 L 10.992188 13.714844 z " />
+   <defs id="defs8" />
+   <sodipodi:namedview id="namedview6" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="9.8994949" inkscape:cx="37.729198" inkscape:cy="9.0408653" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg4" inkscape:snap-page="false" inkscape:snap-grids="false" inkscape:snap-to-guides="false">
+      <inkscape:grid type="xygrid" id="grid823" />
+   </sodipodi:namedview>
+   <path id="path857" style="color:#000000;fill:#808080;-inkscape-stroke:none" d="M 11.992188 3.2929688 L 7.2851562 8 L 4.2128906 8 L 4.0664062 8.2382812 C 2.6607813 10.528272 2.6507236 13.448901 4.0644531 15.761719 L 4.2109375 16 L 5.8789062 16 L 6.8789062 15 L 4.8515625 15 C 3.8071281 13.120594 3.8142364 10.859648 4.8515625 9 L 7.6992188 9 L 10.992188 5.7070312 L 10.992188 10.886719 L 11.992188 9.8867188 L 11.992188 3.2929688 z M 19.646484 3.6464844 L 17.992188 5.3007812 L 17.287109 6.0058594 L 14.992188 8.3007812 L 14.285156 9.0078125 L 11.992188 11.300781 L 10.992188 12.300781 L 7.9960938 15.296875 L 7.2890625 16.003906 L 3.6464844 19.646484 L 4.3535156 20.353516 L 7.9960938 16.710938 L 11.992188 20.707031 L 11.992188 12.714844 L 14.890625 9.8164062 C 15.910927 11.528031 15.661135 13.624022 14.138672 15.146484 L 13.785156 15.5 L 14.492188 16.207031 L 14.845703 15.853516 C 16.725961 13.973258 16.977707 11.216996 15.609375 9.0976562 L 17.953125 6.7539062 C 19.325707 8.4302571 19.992188 10.220917 19.992188 12 C 19.992188 14.10185 19.065013 16.220143 17.138672 18.146484 L 17.845703 18.853516 C 19.919358 16.779861 20.992188 14.398146 20.992188 12 C 20.992188 9.9411391 20.196763 7.89665 18.660156 6.046875 L 20.353516 4.3535156 L 19.646484 3.6464844 z M 10.992188 13.714844 L 10.992188 18.292969 L 8.703125 16.003906 L 10.992188 13.714844 z " />
 </svg>

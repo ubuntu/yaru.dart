@@ -1,49 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg8"
-   sodipodi:docname="zip.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg8" sodipodi:docname="zip.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs12" />
-  <sodipodi:namedview
-     id="namedview10"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:zoom="14"
-     inkscape:cx="3.0357143"
-     inkscape:cy="15.964286"
-     inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg8"
-     inkscape:snap-page="true">
-    <inkscape:grid
-       type="xygrid"
-       id="grid821" />
-    <inkscape:grid
-       type="xygrid"
-       id="grid823"
-       dotted="true"
-       spacingx="0.5"
-       spacingy="0.5"
-       empspacing="10" />
-  </sodipodi:namedview>
-  <path
-     id="path858"
-     style="color:#000000;fill:#808080;-inkscape-stroke:none;fill-opacity:1"
-     d="M 7.5 3 C 5.944446 3 4.8271668 3.2476415 4.0625 3.859375 C 3.2978332 4.4711085 3 5.4166677 3 6.5 L 3 21 L 3.5 21 L 21 21 L 21 6.5 C 21 5.4166677 20.702167 4.4711085 19.9375 3.859375 C 19.172833 3.2476415 18.055554 3 16.5 3 L 7.5 3 z M 6.984375 4.0117188 C 6.9893216 4.0114868 6.9950379 4.0119439 7 4.0117188 L 7 10 L 17 10 L 17 4.0117188 C 18.151808 4.0639784 18.885997 4.2994227 19.3125 4.640625 C 19.797832 5.0288905 20 5.5833343 20 6.5 L 20 20 L 4 20 L 4 6.5 C 4 5.5833342 4.2021681 5.0288905 4.6875 4.640625 C 5.1121654 4.3008927 5.8411165 4.0653303 6.984375 4.0117188 z " />
+   <defs id="defs12" />
+   <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="14" inkscape:cx="3.0357143" inkscape:cy="15.964286" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg8" inkscape:snap-page="true">
+      <inkscape:grid type="xygrid" id="grid821" />
+      <inkscape:grid type="xygrid" id="grid823" dotted="true" spacingx="0.5" spacingy="0.5" empspacing="10" />
+   </sodipodi:namedview>
+   <path id="path858" style="color:#000000;fill:#808080;-inkscape-stroke:none;fill-opacity:1" d="M 7.5 3 C 5.944446 3 4.8271668 3.2476415 4.0625 3.859375 C 3.2978332 4.4711085 3 5.4166677 3 6.5 L 3 21 L 3.5 21 L 21 21 L 21 6.5 C 21 5.4166677 20.702167 4.4711085 19.9375 3.859375 C 19.172833 3.2476415 18.055554 3 16.5 3 L 7.5 3 z M 6.984375 4.0117188 C 6.9893216 4.0114868 6.9950379 4.0119439 7 4.0117188 L 7 10 L 17 10 L 17 4.0117188 C 18.151808 4.0639784 18.885997 4.2994227 19.3125 4.640625 C 19.797832 5.0288905 20 5.5833343 20 6.5 L 20 20 L 4 20 L 4 6.5 C 4 5.5833342 4.2021681 5.0288905 4.6875 4.640625 C 5.1121654 4.3008927 5.8411165 4.0653303 6.984375 4.0117188 z " />
 </svg>

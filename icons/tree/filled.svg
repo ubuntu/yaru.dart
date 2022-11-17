@@ -1,55 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   width="24"
-   version="1.1"
-   id="svg4"
-   sodipodi:docname="filled.svg"
-   inkscape:version="1.1.2 (76b9e6a115, 2022-02-25)"
+<svg viewBox="0 1 24 24" height="24" width="24" version="1.1" id="svg4" sodipodi:docname="filled.svg" inkscape:version="1.1.2 (76b9e6a115, 2022-02-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs8" />
-  <sodipodi:namedview
-     id="namedview6"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="false"
-     inkscape:snap-page="true"
-     inkscape:zoom="1"
-     inkscape:cx="-310.5"
-     inkscape:cy="-30.5"
-     inkscape:window-width="1920"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg4">
-    <inkscape:grid
-       type="xygrid"
-       id="grid821" />
-    <inkscape:grid
-       type="xygrid"
-       id="grid995"
-       dotted="true"
-       spacingx="0.5"
-       spacingy="0.5"
-       empspacing="10" />
-  </sodipodi:namedview>
-  <path
-     id="rect714"
-     style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square;stroke-linejoin:round"
-     d="m 11,18.5 h 2 v 2.5 c 0,0.5 0,1 1,1 h -4 c 1,0 1,-0.5 1,-1 z"
-     sodipodi:nodetypes="ccccccc" />
-  <path
-     style="color:#000000;fill:#808080;fill-rule:evenodd;-inkscape-stroke:none"
-     d="m 12,3 c -2.4793561,-10e-8 -4.5000001,2.0206439 -4.5,4.5 v 0.00195 0.00195 c 0.001,0.1179822 0.022947,0.2341254 0.033203,0.3515625 -2.0793518,0.7321468 -3.5290506,2.6585425 -3.5332031,4.8945315 0,2.89357 2.3564308,5.25 5.25,5.25 l 6.2500351,10e-7 c 2.479356,0 4.5,-2.020644 4.5,-4.5 0,-2.281475 -1.736464,-4.0990765 -3.941406,-4.3867186 0.208733,-0.5226216 0.438799,-1.0446045 0.441406,-1.6113282 v -0.00195 c 0,-2.479356 -2.020644,-4.5000001 -4.5,-4.5 z"
-     id="path1098"
-     sodipodi:nodetypes="ssccccccsccsss" />
+   <defs id="defs8" />
+   <sodipodi:namedview id="namedview6" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="false" inkscape:snap-page="true" inkscape:zoom="1" inkscape:cx="-310.5" inkscape:cy="-30.5" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg4">
+      <inkscape:grid type="xygrid" id="grid821" />
+      <inkscape:grid type="xygrid" id="grid995" dotted="true" spacingx="0.5" spacingy="0.5" empspacing="10" />
+   </sodipodi:namedview>
+   <path id="rect714" style="fill:#808080;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:square;stroke-linejoin:round" d="m 11,18.5 h 2 v 2.5 c 0,0.5 0,1 1,1 h -4 c 1,0 1,-0.5 1,-1 z" sodipodi:nodetypes="ccccccc" />
+   <path style="color:#000000;fill:#808080;fill-rule:evenodd;-inkscape-stroke:none" d="m 12,3 c -2.4793561,-10e-8 -4.5000001,2.0206439 -4.5,4.5 v 0.00195 0.00195 c 0.001,0.1179822 0.022947,0.2341254 0.033203,0.3515625 -2.0793518,0.7321468 -3.5290506,2.6585425 -3.5332031,4.8945315 0,2.89357 2.3564308,5.25 5.25,5.25 l 6.2500351,10e-7 c 2.479356,0 4.5,-2.020644 4.5,-4.5 0,-2.281475 -1.736464,-4.0990765 -3.941406,-4.3867186 0.208733,-0.5226216 0.438799,-1.0446045 0.441406,-1.6113282 v -0.00195 c 0,-2.479356 -2.020644,-4.5000001 -4.5,-4.5 z" id="path1098" sodipodi:nodetypes="ssccccccsccsss" />
 </svg>

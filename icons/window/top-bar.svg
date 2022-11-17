@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   width="24"
-   height="24"
-   version="1.1"
-   id="svg4"
-   sodipodi:docname="top-bar.svg"
-   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
+<svg viewBox="0 1 24 24" width="24" height="24" version="1.1" id="svg4" sodipodi:docname="top-bar.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,46 +7,17 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <metadata
-     id="metadata10">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs8" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     id="namedview6"
-     showgrid="true"
-     inkscape:zoom="27.5"
-     inkscape:cx="11.363636"
-     inkscape:cy="13.418182"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg4"
-     inkscape:pagecheckerboard="0">
-    <inkscape:grid
-       type="xygrid"
-       id="grid1404" />
-  </sodipodi:namedview>
-  <path
-     id="path859"
-     style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none"
-     d="M 5.4550781 6 C 4.4864972 6.00898 3.7372591 6.073269 3.1171875 6.4453125 C 2.7038064 6.6933412 2.3972496 7.10122 2.2285156 7.6074219 C 2.0597817 8.1136238 2 8.722223 2 9.5 L 2 18 L 3 18 L 3 10 L 21 10 L 21 18 L 22 18 L 22 9.5 C 22 8.722223 21.94022 8.1136238 21.771484 7.6074219 C 21.60275 7.10122 21.296194 6.6933412 20.882812 6.4453125 C 20.056051 5.9492552 18.999998 6 17.5 6 L 6.5 6 C 6.1250004 6 5.7779384 5.99701 5.4550781 6 z M 12 7 L 14 7 L 14 9 L 12 9 L 12 7 z M 15 7 L 17 7 L 17 9 L 15 9 L 15 7 z M 18 7 L 20 7 L 20 9 L 18 9 L 18 7 z " />
+   <metadata id="metadata10">
+      <rdf:RDF>
+         <cc:Work rdf:about="">
+            <dc:format>image/svg+xml</dc:format>
+            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+         </cc:Work>
+      </rdf:RDF>
+   </metadata>
+   <defs id="defs8" />
+   <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1920" inkscape:window-height="1043" id="namedview6" showgrid="true" inkscape:zoom="27.5" inkscape:cx="11.363636" inkscape:cy="13.418182" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg4" inkscape:pagecheckerboard="0">
+      <inkscape:grid type="xygrid" id="grid1404" />
+   </sodipodi:namedview>
+   <path id="path859" style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none" d="M 5.4550781 6 C 4.4864972 6.00898 3.7372591 6.073269 3.1171875 6.4453125 C 2.7038064 6.6933412 2.3972496 7.10122 2.2285156 7.6074219 C 2.0597817 8.1136238 2 8.722223 2 9.5 L 2 18 L 3 18 L 3 10 L 21 10 L 21 18 L 22 18 L 22 9.5 C 22 8.722223 21.94022 8.1136238 21.771484 7.6074219 C 21.60275 7.10122 21.296194 6.6933412 20.882812 6.4453125 C 20.056051 5.9492552 18.999998 6 17.5 6 L 6.5 6 C 6.1250004 6 5.7779384 5.99701 5.4550781 6 z M 12 7 L 14 7 L 14 9 L 12 9 L 12 7 z M 15 7 L 17 7 L 17 9 L 15 9 L 15 7 z M 18 7 L 20 7 L 20 9 L 18 9 L 18 7 z " />
 </svg>
