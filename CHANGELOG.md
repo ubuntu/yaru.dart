@@ -1,3 +1,11 @@
+# 0.2.7
+
+* Add *code* </> icon
+* Sharper *go-** icons 
+* Fix icons misalignement
+* Adjust _checkradio_ icons to `yaru_widgets`
+* Add standard device icons: *audio-card*, *modem*, *scanner*, *camera-web*
+
 # 0.2.6
 
 * Add *switch-button* icons
