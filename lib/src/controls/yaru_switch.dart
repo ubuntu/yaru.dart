@@ -113,20 +113,23 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    final uncheckedDotColor = colorScheme.onSurface.withOpacity(.5);
-    final disabledUncheckedDotColor = colorScheme.onSurface.withOpacity(.3);
+    final uncheckedSwitchColor = colorScheme.onSurface.withOpacity(.25);
+    const uncheckedDotColor = Colors.white;
+    final disabledDotColor = colorScheme.onSurface.withOpacity(.4);
 
     return buildToggleable(
       _YaruSwitchPainter()
+        ..uncheckedSwitchColor = uncheckedSwitchColor
         ..uncheckedDotColor = uncheckedDotColor
-        ..disabledUncheckedDotColor = disabledUncheckedDotColor,
+        ..disabledDotColor = disabledDotColor,
     );
   }
 }
 
 class _YaruSwitchPainter extends YaruTogglablePainter {
+  late Color uncheckedSwitchColor;
   late Color uncheckedDotColor;
-  late Color disabledUncheckedDotColor;
+  late Color disabledDotColor;
 
   @override
   void paintTogglable(
@@ -148,26 +151,9 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
       ),
       Paint()
         ..color = interactive
-            ? Color.lerp(uncheckedColor, checkedColor, t)!
+            ? Color.lerp(uncheckedSwitchColor, checkedColor, t)!
             : Color.lerp(disabledUncheckedColor, disabledCheckedColor, t)!
         ..style = PaintingStyle.fill,
-    );
-
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTWH(
-          origin.dx + 0.5,
-          origin.dy + 0.5,
-          size.width - 1.0,
-          size.height - 1.0,
-        ),
-        Radius.circular(size.height),
-      ),
-      Paint()
-        ..color = interactive
-            ? Color.lerp(uncheckedBorderColor, checkedColor, t)!
-            : Color.lerp(disabledUncheckedBorderColor, Colors.transparent, t)!
-        ..style = PaintingStyle.stroke,
     );
   }
 
@@ -186,7 +172,7 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
     final paint = Paint()
       ..color = interactive
           ? Color.lerp(uncheckedDotColor, checkmarkColor, t)!
-          : Color.lerp(disabledUncheckedDotColor, disabledCheckmarkColor, t)!
+          : disabledDotColor
       ..style = PaintingStyle.fill;
 
     drawStateIndicator(canvas, size, center);

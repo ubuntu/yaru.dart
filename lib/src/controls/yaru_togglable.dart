@@ -231,10 +231,12 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
   Widget buildToggleable(YaruTogglablePainter painter) {
     final colorScheme = Theme.of(context).colorScheme;
+    final isLight = Theme.of(context).brightness == Brightness.light;
 
     // Normal colors
-    final uncheckedColor = colorScheme.onSurface.withOpacity(.07);
-    final uncheckedBorderColor = colorScheme.onSurface.withOpacity(.3);
+    final uncheckedColor = Colors.transparent;
+
+    final uncheckedBorderColor = colorScheme.onSurface.withOpacity(.25);
     final checkedColor = colorScheme.primary;
     final checkmarkColor = colorScheme.onPrimary;
 
