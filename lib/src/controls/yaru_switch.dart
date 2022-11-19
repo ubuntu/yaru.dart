@@ -111,11 +111,23 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return buildToggleable(_YaruSwitchPainter());
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final uncheckedDotColor = colorScheme.onSurface.withOpacity(.5);
+    final disabledUncheckedDotColor = colorScheme.onSurface.withOpacity(.3);
+
+    return buildToggleable(
+      _YaruSwitchPainter()
+        ..uncheckedDotColor = uncheckedDotColor
+        ..disabledUncheckedDotColor = disabledUncheckedDotColor,
+    );
   }
 }
 
 class _YaruSwitchPainter extends YaruTogglablePainter {
+  late Color uncheckedDotColor;
+  late Color disabledUncheckedDotColor;
+
   @override
   void paintTogglable(
     Canvas canvas,
@@ -137,8 +149,25 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedColor, checkedColor, t)!
-            : Color.lerp(uncheckedDisabledColor, checkedDisabledColor, t)!
+            : Color.lerp(disabledUncheckedColor, disabledCheckedColor, t)!
         ..style = PaintingStyle.fill,
+    );
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(
+          origin.dx + 0.5,
+          origin.dy + 0.5,
+          size.width - 1.0,
+          size.height - 1.0,
+        ),
+        Radius.circular(size.height),
+      ),
+      Paint()
+        ..color = interactive
+            ? Color.lerp(uncheckedBorderColor, checkedColor, t)!
+            : Color.lerp(disabledUncheckedBorderColor, Colors.transparent, t)!
+        ..style = PaintingStyle.stroke,
     );
   }
 
@@ -155,7 +184,9 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
     final center = Offset.lerp(start, end, t)! + origin;
 
     final paint = Paint()
-      ..color = interactive ? checkmarkColor : checkmarkDisabledColor
+      ..color = interactive
+          ? Color.lerp(uncheckedDotColor, checkmarkColor, t)!
+          : Color.lerp(disabledUncheckedDotColor, disabledCheckmarkColor, t)!
       ..style = PaintingStyle.fill;
 
     drawStateIndicator(canvas, size, center);
