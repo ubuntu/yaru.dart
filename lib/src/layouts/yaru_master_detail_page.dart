@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'yaru_detail_page.dart';
 import 'yaru_landscape_layout.dart';
+import 'yaru_master_detail_layout_delegate.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_tile.dart';
 import 'yaru_portrait_layout.dart';
@@ -49,10 +50,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.length,
     required this.tileBuilder,
     required this.pageBuilder,
-    required this.leftPaneWidth,
-    this.allowLeftPaneResize = true,
-    this.leftPaneMinWidth = 175.0,
-    this.pageMinWidth = kYaruMasterDetailBreakpoint / 2,
+    required this.layoutDelegate,
     this.appBar,
     this.initialIndex,
     this.onSelected,
@@ -75,18 +73,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   final IndexedWidgetBuilder pageBuilder;
 
   /// Specifies the initial width of left pane.
-  final double leftPaneWidth;
-
-  /// If true, allow the left pane to be resized in landscape layout.
-  final bool allowLeftPaneResize;
-
-  /// If [allowLeftPaneResize], specifies the min-width of the left pane.
-  /// Defaults to 175
-  final double leftPaneMinWidth;
-
-  /// If [allowLeftPaneResize], specifies the min-width of the page.
-  /// Defaults to 310
-  final double pageMinWidth;
+  final YaruMasterDetailLayoutDelegate layoutDelegate;
 
   /// An optional custom AppBar for the left pane.
   final PreferredSizeWidget? appBar;
@@ -108,7 +95,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   var _index = -1;
   var _previousIndex = 0;
 
-  late double _leftPaneWidth;
+  double? _previousPaneWidth;
 
   void _setIndex(int index) {
     _previousIndex = _index;
@@ -120,7 +107,6 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   void initState() {
     super.initState();
     _index = widget.initialIndex ?? -1;
-    _leftPaneWidth = widget.leftPaneWidth;
   }
 
   @override
@@ -154,11 +140,9 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             tileBuilder: widget.tileBuilder,
             pageBuilder: widget.pageBuilder,
             onSelected: _setIndex,
-            leftPaneWidth: _leftPaneWidth,
-            allowLeftPaneResize: widget.allowLeftPaneResize,
-            leftPaneMinWidth: widget.leftPaneMinWidth,
-            pageMinWidth: widget.pageMinWidth,
-            onLeftPaneWidthChange: (panWidth) => _leftPaneWidth = panWidth,
+            layoutDelegate: widget.layoutDelegate,
+            previousPaneWidth: _previousPaneWidth,
+            onLeftPaneWidthChange: (panWidth) => _previousPaneWidth = panWidth,
             appBar: widget.appBar,
             controller: widget.controller,
           );
