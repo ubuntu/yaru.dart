@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utilities/yaru_one_line_text.dart';
+
 /// Defines the look of a [YaruNavigationRailItem]
 enum YaruNavigationRailStyle {
   /// Will only show icons
@@ -27,11 +29,25 @@ class YaruNavigationRailItem extends StatefulWidget {
     required this.style,
   });
 
+  /// Whatever the related page item is selected in the rail.
   final bool? selected;
+
+  /// Icon widget, displayed agaist the [label].
   final Widget icon;
+
+  /// Label widget, displayed agaist the [icon].
+  /// Please prefer to use [YaruOneLineText] to get the correct word break behaviour.
   final Widget label;
+
+  /// Optional string tooltip.
+  /// If not null a tooltip will be displayed on hover.
+  /// It should describe the whole tile if possible.
   final String? tooltip;
+
+  /// Callback called on tap the tile.
   final VoidCallback? onTap;
+
+  /// Style of this tile, see [YaruNavigationRailStyle].
   final YaruNavigationRailStyle style;
 
   @override

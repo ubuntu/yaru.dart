@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../yaru_widgets.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
@@ -27,9 +27,11 @@ class YaruMasterTile extends StatelessWidget {
   final Widget? leading;
 
   /// See [ListTile.title].
+  /// Please prefer to use [YaruOneLineText] to get the correct word break behaviour.
   final Widget? title;
 
   /// See [ListTile.subtitle].
+  /// Please prefer to use [YaruOneLineText] to get the correct word break behaviour.
   final Widget? subtitle;
 
   /// See [ListTile.trailing].

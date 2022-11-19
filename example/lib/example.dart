@@ -35,7 +35,7 @@ class _ExampleState extends State<Example> {
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
     final configItem = PageItem(
-      titleBuilder: (context) => const Text('Layout'),
+      titleBuilder: (context) => YaruOneLineText('Layout'),
       tooltipMessage: 'Layout',
       snippetUrl:
           'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/lib/src/layouts/yaru_landscape_layout.dart',
