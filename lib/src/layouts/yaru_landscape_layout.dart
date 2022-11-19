@@ -37,9 +37,10 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
 
-  /// Specifies the initial width of left pane.
+  /// Controls the pane width with defined parameters
   final YaruMasterDetailLayoutDelegate layoutDelegate;
 
+  /// Previous width of the pane
   final double? previousPaneWidth;
 
   /// Callback called when the left pane is resizing.
@@ -113,6 +114,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     return _maybeBuildGlobalMouseRegion(
       LayoutBuilder(
         builder: (context, boxConstraints) {
+          // Avoid left pane to overflow when resizing the window
           updatePaneWidth(
             availableWidth: boxConstraints.maxWidth,
             candidatePaneWidth: _paneWidth,
