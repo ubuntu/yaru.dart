@@ -38,7 +38,11 @@ void main() {
 
   testWidgets('the labels react to taps', (tester) async {
     int? changedValue;
-    Widget builder({required int value, required int groupValue}) {
+    Widget builder({
+      required int value,
+      required int groupValue,
+      required bool toggleable,
+    }) {
       return MaterialApp(
         home: Scaffold(
           body: YaruRadioButton<int>(
@@ -46,17 +50,28 @@ void main() {
             subtitle: const Text('subtitle'),
             value: value,
             groupValue: groupValue,
+            toggleable: toggleable,
             onChanged: (v) => changedValue = v,
           ),
         ),
       );
     }
 
-    await tester.pumpWidget(builder(value: 1, groupValue: 1));
+    await tester
+        .pumpWidget(builder(value: 1, groupValue: 1, toggleable: false));
     await tester.tap(find.text('title'));
     expect(changedValue, equals(1));
 
-    await tester.pumpWidget(builder(value: 2, groupValue: 3));
+    await tester
+        .pumpWidget(builder(value: 2, groupValue: 3, toggleable: false));
+    await tester.tap(find.text('subtitle'));
+    expect(changedValue, equals(2));
+
+    await tester.pumpWidget(builder(value: 1, groupValue: 1, toggleable: true));
+    await tester.tap(find.text('title'));
+    expect(changedValue, equals(null));
+
+    await tester.pumpWidget(builder(value: 2, groupValue: 3, toggleable: true));
     await tester.tap(find.text('subtitle'));
     expect(changedValue, equals(2));
   });
