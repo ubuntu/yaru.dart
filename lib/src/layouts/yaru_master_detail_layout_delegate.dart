@@ -1,8 +1,8 @@
 import 'yaru_master_detail_page.dart';
 
 /// Layout delegate interface which controls a [YaruMasterDetailPage] pane width
-abstract class YaruMasterDetailLayoutDelegate {
-  const YaruMasterDetailLayoutDelegate();
+abstract class YaruMasterDetailPaneLayoutDelegate {
+  const YaruMasterDetailPaneLayoutDelegate();
 
   bool get allowPaneResizing;
 
@@ -13,7 +13,8 @@ abstract class YaruMasterDetailLayoutDelegate {
 }
 
 /// Controls a [YaruMasterDetailPage] pane with a fixed width
-class YaruMasterFixedPaneDelegate implements YaruMasterDetailLayoutDelegate {
+class YaruMasterFixedPaneDelegate
+    implements YaruMasterDetailPaneLayoutDelegate {
   /// Controls a [YaruMasterDetailPage] pane with a fixed width
   const YaruMasterFixedPaneDelegate({required this.paneWidth});
 
@@ -38,7 +39,7 @@ class YaruMasterFixedPaneDelegate implements YaruMasterDetailLayoutDelegate {
 
 /// Controls a [YaruMasterDetailPage] pane with a resizable width
 class YaruMasterResizablePaneDelegate
-    implements YaruMasterDetailLayoutDelegate {
+    implements YaruMasterDetailPaneLayoutDelegate {
   /// Controls a [YaruMasterDetailPage] pane with a resizable width
   const YaruMasterResizablePaneDelegate({
     required this.initialPaneWidth,

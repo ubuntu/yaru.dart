@@ -73,7 +73,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   final IndexedWidgetBuilder pageBuilder;
 
   /// Specifies the initial width of left pane.
-  final YaruMasterDetailLayoutDelegate layoutDelegate;
+  final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
 
   /// An optional custom AppBar for the left pane.
   final PreferredSizeWidget? appBar;

@@ -38,7 +38,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   final ValueChanged<int> onSelected;
 
   /// Controls the pane width with defined parameters
-  final YaruMasterDetailLayoutDelegate layoutDelegate;
+  final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
 
   /// Previous width of the pane
   final double? previousPaneWidth;
