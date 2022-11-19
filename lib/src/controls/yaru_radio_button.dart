@@ -65,7 +65,15 @@ class YaruRadioButton<T> extends StatelessWidget {
           ),
         ),
       ),
-      onToggled: onChanged != null ? () => onChanged!(value) : null,
+      onToggled: onChanged == null ? null : _onToggled,
     );
+  }
+
+  void _onToggled() {
+    if (groupValue != value || !toggleable) {
+      onChanged!(value);
+    } else if (toggleable) {
+      onChanged!(null);
+    }
   }
 }
