@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-import 'yaru_check_button.dart';
+import '../../constants.dart';
+import '../toggle_button/yaru_check_button.dart';
 import 'yaru_radio.dart';
 import 'yaru_switch.dart';
 import 'yaru_togglable.dart';

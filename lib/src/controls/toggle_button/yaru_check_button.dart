@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_checkbox.dart';
+import '../togglable/yaru_checkbox.dart';
 import 'yaru_toggle_button.dart';
 
 /// A desktop style check button with an interactive label.

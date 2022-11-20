@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_radio.dart';
+import '../togglable/yaru_radio.dart';
 import 'yaru_toggle_button.dart';
 
 /// A desktop style radio button with an interactive label.
