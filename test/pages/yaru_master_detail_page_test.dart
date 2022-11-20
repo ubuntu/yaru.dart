@@ -13,7 +13,9 @@ void main() {
 
       await tester.pumpScaffold(
         YaruMasterDetailPage(
-          leftPaneWidth: kYaruMasterDetailBreakpoint / 3,
+          layoutDelegate: const YaruMasterFixedPaneDelegate(
+            paneWidth: kYaruMasterDetailBreakpoint / 3,
+          ),
           length: 8,
           appBar: AppBar(title: const Text('Master')),
           tileBuilder: (context, index, selected) => YaruMasterTile(
@@ -51,7 +53,9 @@ void main() {
       await tester.pumpScaffold(
         YaruMasterDetailPage(
           controller: controller,
-          leftPaneWidth: kYaruMasterDetailBreakpoint / 3,
+          layoutDelegate: const YaruMasterFixedPaneDelegate(
+            paneWidth: kYaruMasterDetailBreakpoint / 3,
+          ),
           length: 8,
           appBar: AppBar(title: const Text('Master')),
           tileBuilder: (context, index, selected) => YaruMasterTile(

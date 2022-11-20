@@ -26,6 +26,7 @@ export 'src/extensions/border_radius_extension.dart';
 export 'src/layouts/yaru_compact_layout.dart';
 export 'src/layouts/yaru_compact_layout_theme.dart';
 export 'src/layouts/yaru_detail_page.dart';
+export 'src/layouts/yaru_master_detail_layout_delegate.dart';
 export 'src/layouts/yaru_master_detail_page.dart';
 export 'src/layouts/yaru_master_detail_theme.dart';
 export 'src/layouts/yaru_master_tile.dart';
