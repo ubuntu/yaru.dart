@@ -233,8 +233,8 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     final colorScheme = Theme.of(context).colorScheme;
 
     // Normal colors
-    const uncheckedColor = Colors.transparent;
-    final uncheckedBorderColor = colorScheme.onSurface.withOpacity(.25);
+    final uncheckedColor = colorScheme.surface;
+    final uncheckedBorderColor = colorScheme.onSurface.withOpacity(.3);
     final checkedColor = colorScheme.primary;
     final checkmarkColor = colorScheme.onPrimary;
 
