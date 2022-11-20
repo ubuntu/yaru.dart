@@ -1,28 +1,32 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_checkbox.dart';
+import '../togglable/yaru_radio.dart';
 import 'yaru_toggle_button.dart';
 
-/// A desktop style check button with an interactive label.
-class YaruCheckButton extends StatelessWidget {
-  /// Creates a new check button.
-  const YaruCheckButton({
+/// A desktop style radio button with an interactive label.
+class YaruRadioButton<T> extends StatelessWidget {
+  /// Creates a new radio button.
+  const YaruRadioButton({
     super.key,
     required this.value,
+    required this.groupValue,
     required this.onChanged,
     required this.title,
     this.subtitle,
     this.contentPadding,
-    this.tristate = false,
+    this.toggleable = false,
     this.autofocus = false,
     this.focusNode,
   });
 
-  /// See [Checkbox.value]
-  final bool? value;
+  /// See [Radio.value]
+  final T value;
 
-  /// See [Checkbox.onChanged]
-  final ValueChanged<bool?>? onChanged;
+  /// See [Radio.groupValue]
+  final T? groupValue;
+
+  /// See [Radio.onChanged]
+  final ValueChanged<T?>? onChanged;
 
   /// See [YaruToggleButton.title]
   final Widget title;
@@ -33,13 +37,13 @@ class YaruCheckButton extends StatelessWidget {
   /// See [YaruToggleButton.contentPadding]
   final EdgeInsetsGeometry? contentPadding;
 
-  /// See [Checkbox.tristate].
-  final bool tristate;
+  /// See [Radio.toggleable].
+  final bool toggleable;
 
-  /// See [Checkbox.focusNode].
+  /// See [Radio.focusNode].
   final FocusNode? focusNode;
 
-  /// See [Checkbox.autofocus].
+  /// See [Radio.autofocus].
   final bool autofocus;
 
   @override
@@ -51,30 +55,17 @@ class YaruCheckButton extends StatelessWidget {
       leading: SizedBox.square(
         dimension: kMinInteractiveDimension - 8,
         child: Center(
-          child: YaruCheckbox(
+          child: YaruRadio<T>(
             value: value,
+            groupValue: groupValue,
             onChanged: onChanged,
-            tristate: tristate,
+            toggleable: toggleable,
             focusNode: focusNode,
             autofocus: autofocus,
           ),
         ),
       ),
-      onToggled: onChanged == null ? null : _onToggled,
+      onToggled: onChanged != null ? () => onChanged!(value) : null,
     );
-  }
-
-  void _onToggled() {
-    switch (value) {
-      case false:
-        onChanged!(true);
-        break;
-      case true:
-        onChanged!(tristate ? null : false);
-        break;
-      case null:
-        onChanged!(false);
-        break;
-    }
   }
 }

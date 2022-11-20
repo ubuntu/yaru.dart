@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-import 'yaru_check_button.dart';
+import '../../constants.dart';
+import '../toggle_button/yaru_check_button.dart';
 import 'yaru_radio.dart';
 import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
@@ -199,25 +199,8 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedColor, checkedColor, t)!
-            : Color.lerp(disabledUncheckedColor, disabledCheckedColor, t)!
+            : Color.lerp(uncheckedDisabledColor, checkedDisabledColor, t)!
         ..style = PaintingStyle.fill,
-    );
-
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTWH(
-          origin.dx + 0.5,
-          origin.dy + 0.5,
-          size.width - 1.0,
-          size.height - 1.0,
-        ),
-        _kCheckboxBorderRadius,
-      ),
-      Paint()
-        ..color = interactive
-            ? Color.lerp(uncheckedBorderColor, checkedColor, t)!
-            : Color.lerp(disabledUncheckedBorderColor, Colors.transparent, t)!
-        ..style = PaintingStyle.stroke,
     );
   }
 
@@ -269,7 +252,7 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
 
   Paint _getCheckmarkPaint() {
     return Paint()
-      ..color = interactive ? checkmarkColor : disabledCheckmarkColor
+      ..color = interactive ? checkmarkColor : checkmarkDisabledColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = _kCheckboxDashStroke;
   }

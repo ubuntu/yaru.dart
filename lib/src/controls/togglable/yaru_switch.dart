@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../toggle_button/yaru_switch_button.dart';
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
-import 'yaru_switch_button.dart';
 import 'yaru_togglable.dart';
 
 const _kSwitchActivableAreaPadding =
@@ -111,26 +111,11 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    final uncheckedSwitchColor = colorScheme.onSurface.withOpacity(.25);
-    const uncheckedDotColor = Colors.white;
-    final disabledDotColor = colorScheme.onSurface.withOpacity(.4);
-
-    return buildToggleable(
-      _YaruSwitchPainter()
-        ..uncheckedSwitchColor = uncheckedSwitchColor
-        ..uncheckedDotColor = uncheckedDotColor
-        ..disabledDotColor = disabledDotColor,
-    );
+    return buildToggleable(_YaruSwitchPainter());
   }
 }
 
 class _YaruSwitchPainter extends YaruTogglablePainter {
-  late Color uncheckedSwitchColor;
-  late Color uncheckedDotColor;
-  late Color disabledDotColor;
-
   @override
   void paintTogglable(
     Canvas canvas,
@@ -151,8 +136,8 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
       ),
       Paint()
         ..color = interactive
-            ? Color.lerp(uncheckedSwitchColor, checkedColor, t)!
-            : Color.lerp(disabledUncheckedColor, disabledCheckedColor, t)!
+            ? Color.lerp(uncheckedColor, checkedColor, t)!
+            : Color.lerp(uncheckedDisabledColor, checkedDisabledColor, t)!
         ..style = PaintingStyle.fill,
     );
   }
@@ -170,9 +155,7 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
     final center = Offset.lerp(start, end, t)! + origin;
 
     final paint = Paint()
-      ..color = interactive
-          ? Color.lerp(uncheckedDotColor, checkmarkColor, t)!
-          : disabledDotColor
+      ..color = interactive ? checkmarkColor : checkmarkDisabledColor
       ..style = PaintingStyle.fill;
 
     drawStateIndicator(canvas, size, center);

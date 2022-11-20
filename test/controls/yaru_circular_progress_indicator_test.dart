@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/src/controls/yaru_progress_indicator.dart';
+import 'package:yaru_widgets/src/controls/progress_indicator/yaru_circular_progress_indicator.dart';
 
 import '../yaru_golden_tester.dart';
 

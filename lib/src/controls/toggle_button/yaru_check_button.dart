@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_radio.dart';
+import '../togglable/yaru_checkbox.dart';
 import 'yaru_toggle_button.dart';
 
-/// A desktop style radio button with an interactive label.
-class YaruRadioButton<T> extends StatelessWidget {
-  /// Creates a new radio button.
-  const YaruRadioButton({
+/// A desktop style check button with an interactive label.
+class YaruCheckButton extends StatelessWidget {
+  /// Creates a new check button.
+  const YaruCheckButton({
     super.key,
     required this.value,
-    required this.groupValue,
     required this.onChanged,
     required this.title,
     this.subtitle,
     this.contentPadding,
-    this.toggleable = false,
+    this.tristate = false,
     this.autofocus = false,
     this.focusNode,
   });
 
-  /// See [Radio.value]
-  final T value;
+  /// See [Checkbox.value]
+  final bool? value;
 
-  /// See [Radio.groupValue]
-  final T? groupValue;
-
-  /// See [Radio.onChanged]
-  final ValueChanged<T?>? onChanged;
+  /// See [Checkbox.onChanged]
+  final ValueChanged<bool?>? onChanged;
 
   /// See [YaruToggleButton.title]
   final Widget title;
@@ -37,13 +33,13 @@ class YaruRadioButton<T> extends StatelessWidget {
   /// See [YaruToggleButton.contentPadding]
   final EdgeInsetsGeometry? contentPadding;
 
-  /// See [Radio.toggleable].
-  final bool toggleable;
+  /// See [Checkbox.tristate].
+  final bool tristate;
 
-  /// See [Radio.focusNode].
+  /// See [Checkbox.focusNode].
   final FocusNode? focusNode;
 
-  /// See [Radio.autofocus].
+  /// See [Checkbox.autofocus].
   final bool autofocus;
 
   @override
@@ -55,11 +51,10 @@ class YaruRadioButton<T> extends StatelessWidget {
       leading: SizedBox.square(
         dimension: kMinInteractiveDimension - 8,
         child: Center(
-          child: YaruRadio<T>(
+          child: YaruCheckbox(
             value: value,
-            groupValue: groupValue,
             onChanged: onChanged,
-            toggleable: toggleable,
+            tristate: tristate,
             focusNode: focusNode,
             autofocus: autofocus,
           ),
@@ -70,10 +65,16 @@ class YaruRadioButton<T> extends StatelessWidget {
   }
 
   void _onToggled() {
-    if (groupValue != value || !toggleable) {
-      onChanged!(value);
-    } else if (toggleable) {
-      onChanged!(null);
+    switch (value) {
+      case false:
+        onChanged!(true);
+        break;
+      case true:
+        onChanged!(tristate ? null : false);
+        break;
+      case null:
+        onChanged!(false);
+        break;
     }
   }
 }

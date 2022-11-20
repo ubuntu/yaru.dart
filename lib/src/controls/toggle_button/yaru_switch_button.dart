@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_switch.dart';
+import '../togglable/yaru_switch.dart';
 import 'yaru_toggle_button.dart';
 
 /// A desktop style switch button with an interactive label.

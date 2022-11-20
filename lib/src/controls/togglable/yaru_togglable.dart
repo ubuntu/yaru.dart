@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
 import 'yaru_switch.dart';
@@ -233,14 +233,12 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     final colorScheme = Theme.of(context).colorScheme;
 
     // Normal colors
-    const uncheckedColor = Colors.transparent;
-    final uncheckedBorderColor = colorScheme.onSurface.withOpacity(.25);
+    final uncheckedColor = colorScheme.onSurface.withOpacity(.3);
     final checkedColor = colorScheme.primary;
     final checkmarkColor = colorScheme.onPrimary;
 
     // Disabled colors
     final uncheckedDisabledColor = colorScheme.onSurface.withOpacity(.1);
-    final uncheckedDisabledBorderColor = colorScheme.onSurface.withOpacity(.1);
     final checkedDisabledColor = colorScheme.onSurface.withOpacity(.2);
     final checkmarkDisabledColor = colorScheme.onSurface.withOpacity(.5);
 
@@ -268,13 +266,11 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
                 ..sizePosition = _sizePosition
                 ..indicatorPosition = _indicatorPosition
                 ..uncheckedColor = uncheckedColor
-                ..uncheckedBorderColor = uncheckedBorderColor
                 ..checkedColor = checkedColor
                 ..checkmarkColor = checkmarkColor
-                ..disabledUncheckedColor = uncheckedDisabledColor
-                ..disabledUncheckedBorderColor = uncheckedDisabledBorderColor
-                ..disabledCheckedColor = checkedDisabledColor
-                ..disabledCheckmarkColor = checkmarkDisabledColor
+                ..uncheckedDisabledColor = uncheckedDisabledColor
+                ..checkedDisabledColor = checkedDisabledColor
+                ..checkmarkDisabledColor = checkmarkDisabledColor
                 ..hoverIndicatorColor = hoverIndicatorColor
                 ..focusIndicatorColor = focusIndicatorColor,
             ),
@@ -295,15 +291,11 @@ abstract class YaruTogglablePainter extends ChangeNotifier
   late bool? oldChecked;
 
   late Color uncheckedColor;
-  late Color uncheckedBorderColor;
   late Color checkedColor;
   late Color checkmarkColor;
-
-  late Color disabledUncheckedColor;
-  late Color disabledUncheckedBorderColor;
-  late Color disabledCheckedColor;
-  late Color disabledCheckmarkColor;
-
+  late Color uncheckedDisabledColor;
+  late Color checkedDisabledColor;
+  late Color checkmarkDisabledColor;
   late Color hoverIndicatorColor;
   late Color focusIndicatorColor;
 

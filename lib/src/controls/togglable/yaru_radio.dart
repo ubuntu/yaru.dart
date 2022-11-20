@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
+import '../toggle_button/yaru_radio_button.dart';
 import 'yaru_checkbox.dart';
-import 'yaru_radio_button.dart';
 import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
 
@@ -175,22 +175,8 @@ class _YaruRadioPainter extends YaruTogglablePainter {
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedColor, checkedColor, t)!
-            : Color.lerp(disabledUncheckedColor, disabledCheckedColor, t)!
+            : Color.lerp(uncheckedDisabledColor, checkedDisabledColor, t)!
         ..style = PaintingStyle.fill,
-    );
-
-    canvas.drawOval(
-      Rect.fromLTWH(
-        origin.dx + 0.5,
-        origin.dy + 0.5,
-        size.width - 1.0,
-        size.height - 1.0,
-      ),
-      Paint()
-        ..color = interactive
-            ? Color.lerp(uncheckedBorderColor, checkedColor, t)!
-            : Color.lerp(disabledUncheckedBorderColor, Colors.transparent, t)!
-        ..style = PaintingStyle.stroke,
     );
   }
 
@@ -205,7 +191,7 @@ class _YaruRadioPainter extends YaruTogglablePainter {
         height: dotSize.height * t,
       ),
       Paint()
-        ..color = interactive ? checkmarkColor : disabledCheckmarkColor
+        ..color = interactive ? checkmarkColor : checkmarkDisabledColor
         ..style = PaintingStyle.fill,
     );
   }
