@@ -7,6 +7,8 @@ import 'yaru_master_detail_theme.dart';
 import 'yaru_master_tile.dart';
 import 'yaru_portrait_layout.dart';
 
+const _kDefaultPaneWidth = 280.0;
+
 typedef YaruMasterDetailBuilder = Widget Function(
   BuildContext context,
   int index,
@@ -50,7 +52,8 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.length,
     required this.tileBuilder,
     required this.pageBuilder,
-    required this.layoutDelegate,
+    this.layoutDelegate =
+        const YaruMasterFixedPaneDelegate(paneWidth: _kDefaultPaneWidth),
     this.appBar,
     this.initialIndex,
     this.onSelected,
