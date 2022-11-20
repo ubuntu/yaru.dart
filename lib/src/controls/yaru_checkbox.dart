@@ -199,8 +199,25 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedColor, checkedColor, t)!
-            : Color.lerp(uncheckedDisabledColor, checkedDisabledColor, t)!
+            : Color.lerp(disabledUncheckedColor, disabledCheckedColor, t)!
         ..style = PaintingStyle.fill,
+    );
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(
+          origin.dx + 0.5,
+          origin.dy + 0.5,
+          size.width - 1.0,
+          size.height - 1.0,
+        ),
+        _kCheckboxBorderRadius,
+      ),
+      Paint()
+        ..color = interactive
+            ? Color.lerp(uncheckedBorderColor, checkedColor, t)!
+            : Color.lerp(disabledUncheckedBorderColor, Colors.transparent, t)!
+        ..style = PaintingStyle.stroke,
     );
   }
 
@@ -252,7 +269,7 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
 
   Paint _getCheckmarkPaint() {
     return Paint()
-      ..color = interactive ? checkmarkColor : checkmarkDisabledColor
+      ..color = interactive ? checkmarkColor : disabledCheckmarkColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = _kCheckboxDashStroke;
   }
