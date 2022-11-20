@@ -1,6 +1,6 @@
 import 'yaru_master_detail_page.dart';
 
-/// Layout delegate interface which controls a [YaruMasterDetailPage] pane width
+/// Layout delegate interface which controls a [YaruMasterDetailPage] pane width.
 abstract class YaruMasterDetailPaneLayoutDelegate {
   const YaruMasterDetailPaneLayoutDelegate();
 
@@ -12,12 +12,13 @@ abstract class YaruMasterDetailPaneLayoutDelegate {
   });
 }
 
-/// Controls a [YaruMasterDetailPage] pane with a fixed width
+/// Controls a [YaruMasterDetailPage] pane with a fixed width.
 class YaruMasterFixedPaneDelegate
     implements YaruMasterDetailPaneLayoutDelegate {
-  /// Controls a [YaruMasterDetailPage] pane with a fixed width
+  /// Controls a [YaruMasterDetailPage] pane with a fixed width.
   const YaruMasterFixedPaneDelegate({required this.paneWidth});
 
+  /// Fixed width of the pane.
   final double paneWidth;
 
   @override
@@ -28,7 +29,7 @@ class YaruMasterFixedPaneDelegate
     required double availableWidth,
     required double? candidatePaneWidth,
   }) {
-    // Security in case of a very large [paneWidth]
+    // Security in case of a very large [paneWidth].
     if (paneWidth > availableWidth / 2) {
       return availableWidth / 2;
     }
@@ -37,25 +38,25 @@ class YaruMasterFixedPaneDelegate
   }
 }
 
-/// Controls a [YaruMasterDetailPage] pane with a resizable width
+/// Controls a [YaruMasterDetailPage] pane with a resizable width.
 class YaruMasterResizablePaneDelegate
     implements YaruMasterDetailPaneLayoutDelegate {
-  /// Controls a [YaruMasterDetailPage] pane with a resizable width
+  /// Controls a [YaruMasterDetailPage] pane with a resizable width.
   const YaruMasterResizablePaneDelegate({
     required this.initialPaneWidth,
     required this.minPaneWidth,
     required this.minPageWidth,
   });
 
-  /// Initial width of a [YaruMasterDetailPage] pane
+  /// Initial width of a [YaruMasterDetailPage] pane.
   final double initialPaneWidth;
 
-  /// Min width of a [YaruMasterDetailPage] pane
-  /// [minPaneWidth] has priority on this value
+  /// Min width of a [YaruMasterDetailPage] pane.
+  /// [minPaneWidth] has priority on this value.
   final double minPaneWidth;
 
-  /// Min width of a [YaruMasterDetailPage] page
-  /// This value has priority on [minPaneWidth]
+  /// Min width of a [YaruMasterDetailPage] page.
+  /// This value has priority on [minPaneWidth].
   final double minPageWidth;
 
   @override
