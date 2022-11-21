@@ -83,9 +83,6 @@ class YaruRadioListTile<T> extends StatelessWidget {
   /// See [RadioListTile.contentPadding].
   final EdgeInsetsGeometry? contentPadding;
 
-  /// See [RadioListTile.groupValue].
-  bool get checked => value == groupValue;
-
   /// See [RadioListTile.shape].
   final ShapeBorder? shape;
 
@@ -106,12 +103,10 @@ class YaruRadioListTile<T> extends StatelessWidget {
 
   void _handleValueChange() {
     assert(onChanged != null);
-    if (toggleable && checked) {
-      onChanged!(null);
-      return;
-    }
-    if (!checked) {
+    if (groupValue != value || !toggleable) {
       onChanged!(value);
+    } else if (toggleable) {
+      onChanged!(null);
     }
   }
 
