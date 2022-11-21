@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'yaru_master_detail_layout_delegate.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_list_view.dart';
@@ -13,10 +15,8 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.tileBuilder,
     required this.pageBuilder,
     required this.onSelected,
-    required this.leftPaneWidth,
-    required this.allowLeftPaneResize,
-    required this.leftPaneMinWidth,
-    required this.pageMinWidth,
+    required this.layoutDelegate,
+    this.previousPaneWidth,
     this.onLeftPaneWidthChange,
     this.appBar,
     this.controller,
@@ -37,20 +37,14 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
 
-  /// Specifies the initial width of left pane.
-  final double leftPaneWidth;
+  /// Controls the pane width with defined parameters
+  final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
 
-  /// If true, allow the left pane to be resized.
-  final bool allowLeftPaneResize;
+  /// Previous width of the pane
+  final double? previousPaneWidth;
 
-  /// If [allowLeftPaneResize], specifies the min-width of the left pane.
-  final double leftPaneMinWidth;
-
-  /// If [allowLeftPaneResize], callback called when the left pane is resizing.
+  /// Callback called when the left pane is resizing.
   final Function(double)? onLeftPaneWidthChange;
-
-  /// If [allowLeftPaneResize], specifies the min-width of the page.
-  final double pageMinWidth;
 
   /// An optional [PreferredSizeWidget] used as the left [AppBar]
   /// If provided, a second [AppBar] will be created right to it.
@@ -68,9 +62,9 @@ const _kLeftPaneResizingRegionAnimationDuration = Duration(milliseconds: 250);
 
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
-  late double _leftPaneWidth;
 
-  double _initialPaneWidth = 0.0;
+  double? _paneWidth;
+  double? _initialPaneWidth;
   double _paneWidthMove = 0.0;
 
   bool _isDragging = false;
@@ -80,7 +74,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   void initState() {
     super.initState();
     _selectedIndex = widget.selectedIndex;
-    _leftPaneWidth = widget.leftPaneWidth;
+    _paneWidth = widget.previousPaneWidth;
     widget.controller?.addListener(_controllerCallback);
   }
 
@@ -99,17 +93,32 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     setState(() => _selectedIndex = index);
   }
 
+  void updatePaneWidth({
+    required double availableWidth,
+    required double? candidatePaneWidth,
+  }) {
+    final oldPaneWidth = _paneWidth;
+
+    _paneWidth = widget.layoutDelegate.calculatePaneWidth(
+      availableWidth: availableWidth,
+      candidatePaneWidth: candidatePaneWidth,
+    );
+
+    if (_paneWidth != oldPaneWidth) {
+      widget.onLeftPaneWidthChange?.call(_paneWidth!);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return _maybeBuildGlobalMouseRegion(
       LayoutBuilder(
         builder: (context, boxConstraints) {
           // Avoid left pane to overflow when resizing the window
-          if (widget.allowLeftPaneResize &&
-              _leftPaneWidth >= boxConstraints.maxWidth - widget.pageMinWidth) {
-            _leftPaneWidth = boxConstraints.maxWidth - widget.pageMinWidth;
-            widget.onLeftPaneWidthChange?.call(_leftPaneWidth);
-          }
+          updatePaneWidth(
+            availableWidth: boxConstraints.maxWidth,
+            candidatePaneWidth: _paneWidth,
+          );
 
           return Row(
             mainAxisSize: MainAxisSize.min,
@@ -118,7 +127,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
               _buildLeftPane(),
               _buildVerticalSeparator(),
               Expanded(
-                child: widget.allowLeftPaneResize
+                child: widget.layoutDelegate.allowPaneResizing
                     ? Stack(
                         children: [
                           _buildPage(context),
@@ -135,7 +144,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Widget _maybeBuildGlobalMouseRegion(Widget child) {
-    if (widget.allowLeftPaneResize) {
+    if (widget.layoutDelegate.allowPaneResizing) {
       return MouseRegion(
         cursor: _isHovering || _isDragging
             ? SystemMouseCursors.resizeColumn
@@ -149,7 +158,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   Widget _buildLeftPane() {
     return SizedBox(
-      width: _leftPaneWidth,
+      width: _paneWidth,
       child: Scaffold(
         appBar: widget.appBar,
         body: YaruMasterListView(
@@ -163,6 +172,15 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Widget _buildVerticalSeparator() {
+    // Fix for the ultra white divider on flutter web
+    final darkAndWeb =
+        kIsWeb && Theme.of(context).brightness == Brightness.dark;
+    if (darkAndWeb) {
+      return const VerticalDivider(
+        thickness: 0,
+        width: 0.01,
+      );
+    }
     return const VerticalDivider(
       thickness: 1,
       width: 1,
@@ -214,26 +232,14 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           child: GestureDetector(
             onPanStart: (details) => setState(() {
               _isDragging = true;
-              _initialPaneWidth = _leftPaneWidth;
+              _initialPaneWidth = _paneWidth;
             }),
             onPanUpdate: (details) => setState(() {
               _paneWidthMove += isRtl ? -details.delta.dx : details.delta.dx;
-              final width = _initialPaneWidth + _paneWidthMove;
-              final maxWidth = boxConstraints.maxWidth - widget.pageMinWidth;
-
-              final previousPaneWidth = _leftPaneWidth;
-
-              if (width >= maxWidth) {
-                _leftPaneWidth = maxWidth;
-              } else if (width < widget.leftPaneMinWidth) {
-                _leftPaneWidth = widget.leftPaneMinWidth;
-              } else {
-                _leftPaneWidth = width;
-              }
-
-              if (previousPaneWidth != _leftPaneWidth) {
-                widget.onLeftPaneWidthChange?.call(width);
-              }
+              updatePaneWidth(
+                availableWidth: boxConstraints.maxWidth,
+                candidatePaneWidth: _initialPaneWidth! + _paneWidthMove,
+              );
             }),
             onPanEnd: (details) => setState(() {
               _isDragging = false;

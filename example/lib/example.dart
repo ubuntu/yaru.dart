@@ -58,7 +58,11 @@ class _ExampleState extends State<Example> {
     return model.compactMode
         ? _CompactPage(configItem: configItem)
         : YaruMasterDetailPage(
-            leftPaneWidth: 280,
+            layoutDelegate: const YaruMasterResizablePaneDelegate(
+              initialPaneWidth: 280,
+              minPageWidth: kYaruMasterDetailBreakpoint / 2,
+              minPaneWidth: 175,
+            ),
             length: pageItems.length,
             tileBuilder: (context, index, selected) => YaruMasterTile(
               leading: pageItems[index].iconBuilder(context, selected),
