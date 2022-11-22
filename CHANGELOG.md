@@ -1,5 +1,38 @@
 # Changelog
 
+# 2.0.0-beta-2
+
+- [Paul Kepinski](https://github.com/Jupi007): Add control tiles (#409)
+- [Paul Kepinski](https://github.com/Jupi007): Split yaru_progress_indicator in multiple files (#408)
+- [Paul Kepinski](https://github.com/Jupi007): Add YaruMasterDetailPaneLayoutDelegate (#403)
+- [Paul Kepinski](https://github.com/Jupi007): Improve togglable contrast (#404)
+- [Paul Kepinski](https://github.com/Jupi007): Improve togglable widget style (#402)
+- [Paul Kepinski](https://github.com/Jupi007): Add togglable support to YaruRadioButton (#401)
+- [Paul Kepinski](https://github.com/Jupi007): Expose YaruCloseButton alignement property (#398)
+- [Paul Kepinski](https://github.com/Jupi007): Use new yaru code icon in example (#394)
+- [Paul Kepinski](https://github.com/Jupi007): Require yaru_icons 0.2.7 and update goldens (#395)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): GitHub: improve PR template (#392)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Example: delete broken and useless test (#391)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Fix: Desktop Web: separator of MD page is super white in the dark theme (#390)
+- [Paul Kepinski](https://github.com/Jupi007): YaruExpandable improvements (#388)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): YaruPopupMenuButton improvements (#385)
+- [Paul Kepinski](https://github.com/Jupi007): Fix goldens images size (perfect fit) (#383)
+- [Paul Kepinski](https://github.com/Jupi007): Add window controls (#378)
+- [Paul Kepinski](https://github.com/Jupi007): Add comments on new controls widgets (#382)
+- [J-P Nurmi](https://github.com/jpnurmi): YaruSection: simplify headline & remove headerWidget (#381)
+- [J-P Nurmi](https://github.com/jpnurmi): YaruSection: sort out margin vs. padding etc. (#380)
+- [J-P Nurmi](https://github.com/jpnurmi): Fix YaruCarouselController.startTimer() (#379)
+- [J-P Nurmi](https://github.com/jpnurmi): YaruSection: replace internal Column with an arbitrary child Widget (#376)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Example: fix typo and padding (#373)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Example: clean up and check for ConnectionState (#372)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Center the code-snippet button (#371)
+- [Ken VanDine](https://github.com/kenvandine): Drop freetype workaround (#370)
+- [Ken VanDine](https://github.com/kenvandine): Added network plug to allow access to code snippets online (#369)
+- [Paul Kepinski](https://github.com/Jupi007): Example: make snippet button optional (#368)
+- [Ken VanDine](https://github.com/kenvandine): Added snap packaging for yaru-widgets-example (#367)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Added dynamic code snippets from GitHub (#366)
+- [Paul Kepinski](https://github.com/Jupi007): Use YaruSwitch in example (#364)
+
 # 2.0.0-beta-1
 
 - [Paul Kepinski](https://github.com/Jupi007): Add YaruSwitch (#362) 
