@@ -30,3 +30,4 @@ So `yaru_widgets.dart` uses the completeness and the level of polish `material.d
 ## Tested themes
 
 Themes inside [`yaru.dart`](https://github.com/ubuntu/yaru.dart) are the only Material themes tested with yaru_widgets and we do not currently recommend to use any other themes.
+
