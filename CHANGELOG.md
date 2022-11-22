@@ -1,19 +1,50 @@
 # Changelog
 
-2.0.0-beta-1
+# 2.0.0-beta-2
 
-- [Paul Kepinski](https://github.com/Jupi007)
-  -  Add YaruSwitch (#362) 
+- [Paul Kepinski](https://github.com/Jupi007): Add control tiles (#409)
+- [Paul Kepinski](https://github.com/Jupi007): Split yaru_progress_indicator in multiple files (#408)
+- [Paul Kepinski](https://github.com/Jupi007): Add YaruMasterDetailPaneLayoutDelegate (#403)
+- [Paul Kepinski](https://github.com/Jupi007): Improve togglable contrast (#404)
+- [Paul Kepinski](https://github.com/Jupi007): Improve togglable widget style (#402)
+- [Paul Kepinski](https://github.com/Jupi007): Add togglable support to YaruRadioButton (#401)
+- [Paul Kepinski](https://github.com/Jupi007): Expose YaruCloseButton alignement property (#398)
+- [Paul Kepinski](https://github.com/Jupi007): Use new yaru code icon in example (#394)
+- [Paul Kepinski](https://github.com/Jupi007): Require yaru_icons 0.2.7 and update goldens (#395)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): GitHub: improve PR template (#392)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Example: delete broken and useless test (#391)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Fix: Desktop Web: separator of MD page is super white in the dark theme (#390)
+- [Paul Kepinski](https://github.com/Jupi007): YaruExpandable improvements (#388)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): YaruPopupMenuButton improvements (#385)
+- [Paul Kepinski](https://github.com/Jupi007): Fix goldens images size (perfect fit) (#383)
+- [Paul Kepinski](https://github.com/Jupi007): Add window controls (#378)
+- [Paul Kepinski](https://github.com/Jupi007): Add comments on new controls widgets (#382)
+- [J-P Nurmi](https://github.com/jpnurmi): YaruSection: simplify headline & remove headerWidget (#381)
+- [J-P Nurmi](https://github.com/jpnurmi): YaruSection: sort out margin vs. padding etc. (#380)
+- [J-P Nurmi](https://github.com/jpnurmi): Fix YaruCarouselController.startTimer() (#379)
+- [J-P Nurmi](https://github.com/jpnurmi): YaruSection: replace internal Column with an arbitrary child Widget (#376)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Example: fix typo and padding (#373)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Example: clean up and check for ConnectionState (#372)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Center the code-snippet button (#371)
+- [Ken VanDine](https://github.com/kenvandine): Drop freetype workaround (#370)
+- [Ken VanDine](https://github.com/kenvandine): Added network plug to allow access to code snippets online (#369)
+- [Paul Kepinski](https://github.com/Jupi007): Example: make snippet button optional (#368)
+- [Ken VanDine](https://github.com/kenvandine): Added snap packaging for yaru-widgets-example (#367)
+- [Frederik Feichtmeier](https://github.com/Feichtmeier): Added dynamic code snippets from GitHub (#366)
+- [Paul Kepinski](https://github.com/Jupi007): Use YaruSwitch in example (#364)
 
+# 2.0.0-beta-1
+
+- [Paul Kepinski](https://github.com/Jupi007): Add YaruSwitch (#362) 
 
 # 2.0.0-beta
 
 - [Paul Kepinski](https://github.com/Jupi007): Add YaruRadio (#360)
-- [Paul Kepinski](https://github.com/d-loose): Master detail controller (#358)
+- [Dennis Loose](https://github.com/d-loose): Master detail controller (#358)
 - [Paul Kepinski](https://github.com/Jupi007): Decrease YaruTitleBar height (#357)
 - [Paul Kepinski](https://github.com/Jupi007): Add YaruCheckbox (#351)
 - [Paul Kepinski](https://github.com/Jupi007): Use ubuntu 22.04 for build task (#355)
-- [Paul Kepinski](https://github.com/gumbarros): Showcase all YaruValues of the enum instead of the hard-coded list. (#350)
+- [Gustavo Mauricio de Barros](https://github.com/gumbarros): Showcase all YaruValues of the enum instead of the hard-coded list. (#350)
 - [Frederik Feichtmeier](https://github.com/Feichtmeier): Update readme (#349)
 - [J-P Nurmi](https://github.com/jpnurmi): README.md: remove old Yaru*Row and YaruPage references (#347)
 - [J-P Nurmi](https://github.com/jpnurmi): YaruCarousel: allow creating without controller (#345)
@@ -140,7 +171,7 @@
   - WideLayout: add yaru transition (#210)
 - [[J-P Nurmi](https://github.com/jpnurmi)](https://github.com/jpnurmi)
   - Fix version constraints (#207)
-- [[Paul Kepinski](https://github.com/Jupi007)](https://github.com/Jupi007)
+- [Paul Kepinski](https://github.com/Jupi007)
   - Hide control buttons when first/last page reached (#209)
 
 # 1.1.3
@@ -149,7 +180,7 @@
   - CompactLayout: expose extended property (#205)
 - [[J-P Nurmi](https://github.com/jpnurmi)](https://github.com/jpnurmi)
   - Master-detail: use the new page transitions in yaru.dart (#204)
-- [[Paul Kepinski](https://github.com/Jupi007)](https://github.com/Jupi007)
+- [Paul Kepinski](https://github.com/Jupi007)
   - Fix Flutter 3.3 deprecations (#199)
 
 # 1.1.2
@@ -162,7 +193,7 @@
   - YaruBanner: make the hover color gray
   - YaruBanner: wrap inkwell in material for zindex
 
-- [[Paul Kepinski](https://github.com/Jupi007)](https://github.com/Jupi007)
+- [Paul Kepinski](https://github.com/Jupi007)
   - Add new YaruPageItemTitle widget
   - Move widgets to subfolders
   - Export inner_border_radius.dart
@@ -188,7 +219,7 @@
 
 # 1.1.0
 
-- [[Paul Kepinski](https://github.com/Jupi007)](https://github.com/Jupi007)
+- [Paul Kepinski](https://github.com/Jupi007)
   - YaruExpandable: add onChange callback (#149)
   - Introduce YaruDraggable widget (#142)
 - [Frederik Feichtmeier](https://github.com/Feichtmeier)
@@ -204,7 +235,7 @@
 
 # 1.0.13
 
-- [[Paul Kepinski](https://github.com/Jupi007)](https://github.com/Jupi007)
+- [Paul Kepinski](https://github.com/Jupi007)
   - Add new YaruExpandable widget (#140)
   - YaruCarousel: add navigation controls (#139)
   - YaruCarousel: use grey for unselected dots (#138)
@@ -220,7 +251,7 @@
 
 # 1.0.12
 
-- [[Paul Kepinski](https://github.com/Jupi007)](https://github.com/Jupi007)
+- [Paul Kepinski](https://github.com/Jupi007)
   - YaruCarousel: auto hide indicator if child length = 1 (#130)
 
 # 1.0.11
@@ -241,7 +272,7 @@
   - Improve navigationrail in yaru_wide_layout (#122)
   - Example: use handy window (#121)
   - Add YaruCompactLayout (#120)
-- [[Paul Kepinski](https://github.com/Jupi007)](https://github.com/Jupi007)
+- [Paul Kepinski](https://github.com/Jupi007)
   - Carousel improvements  (#123)
   - Fix "accessability" typo in example (#119)
   - YaruSelectableContainer fix border-radius (#118)
@@ -341,4 +372,4 @@
 - Thanks to our contributors
   - [Shan Shaji](https://github.com/shan-shaji)
   - [mivoligo](https://github.com/mivoligo)
-  - [[Paul Kepinski](https://github.com/Jupi007)](https://github.com/Jupi007)
+  - [Paul Kepinski](https://github.com/Jupi007)
