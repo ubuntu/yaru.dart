@@ -10,6 +10,14 @@ Icon preview | Icon name | Usage
 ![address_book](../icons/address-book.svg) | address book | `YaruIcons.address_book`
 ![app_grid](../icons/app-grid.svg) | app grid | `YaruIcons.app_grid`
 ![appliance](../icons/appliance.svg) | appliance | `YaruIcons.appliance`
+![arrow_down](../icons/arrow/down.svg) | arrow down | `YaruIcons.arrow_down`
+![arrow_left](../icons/arrow/left.svg) | arrow left | `YaruIcons.arrow_left`
+![arrow_right](../icons/arrow/right.svg) | arrow right | `YaruIcons.arrow_right`
+![arrow_simple_down](../icons/arrow/simple/down.svg) | arrow simple down | `YaruIcons.arrow_simple_down`
+![arrow_simple_left](../icons/arrow/simple/left.svg) | arrow simple left | `YaruIcons.arrow_simple_left`
+![arrow_simple_right](../icons/arrow/simple/right.svg) | arrow simple right | `YaruIcons.arrow_simple_right`
+![arrow_simple_up](../icons/arrow/simple/up.svg) | arrow simple up | `YaruIcons.arrow_simple_up`
+![arrow_up](../icons/arrow/up.svg) | arrow up | `YaruIcons.arrow_up`
 ![audio_card_filled](../icons/audio/card-filled.svg) | audio card filled | `YaruIcons.audio_card_filled`
 ![audio_card](../icons/audio/card.svg) | audio card | `YaruIcons.audio_card`
 ![audio_history](../icons/audio/history.svg) | audio history | `YaruIcons.audio_history`
@@ -155,6 +163,8 @@ Icon preview | Icon name | Usage
 ![find_location](../icons/find-location.svg) | find location | `YaruIcons.find_location`
 ![find_replace](../icons/find-replace.svg) | find replace | `YaruIcons.find_replace`
 ![fingerprint](../icons/fingerprint.svg) | fingerprint | `YaruIcons.fingerprint`
+![flag_filled](../icons/flag-filled.svg) | flag filled | `YaruIcons.flag_filled`
+![flag](../icons/flag.svg) | flag | `YaruIcons.flag`
 ![flatpak](../icons/flatpak.svg) | flatpak | `YaruIcons.flatpak`
 ![folder_remote](../icons/folder/remote.svg) | folder remote | `YaruIcons.folder_remote`
 ![folder_search](../icons/folder/search.svg) | folder search | `YaruIcons.folder_search`
