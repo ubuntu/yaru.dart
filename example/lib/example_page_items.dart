@@ -4,6 +4,7 @@ import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/check_button_page.dart';
 import 'pages/color_disk_page.dart';
+import 'pages/control_tiles_page.dart';
 import 'pages/controls_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
@@ -80,6 +81,15 @@ final examplePageItems = <PageItem>[
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/color_disk_page.dart',
     pageBuilder: (context) => const ColorDiskPage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
+  ),
+  PageItem(
+    titleBuilder: (context) => const Text('YaruControlListTiles'),
+    tooltipMessage: 'YaruControlListTiles',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/control_tiles_page.dart',
+    pageBuilder: (context) => const ControlListTilesPage(),
+    iconBuilder: (context, selected) =>
+        const Icon(YaruIcons.format_ordered_list),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruDraggable'),
