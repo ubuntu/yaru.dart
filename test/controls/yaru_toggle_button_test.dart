@@ -91,13 +91,13 @@ void main() {
 
     expect(titleRect.left, greaterThan(leadingRect.right));
     expect(titleRect.center.dy, leadingRect.center.dy);
-    expect(titleRect.right, buttonRect.right);
-    expect(titleRect.width, 192);
+    expect(titleRect.right, lessThan(buttonRect.right));
+    expect(titleRect.width, 128);
     expect(titleRect.height, 24);
 
     expect(subtitleRect.left, titleRect.left);
     expect(subtitleRect.top, greaterThan(titleRect.bottom));
-    expect(subtitleRect.right, titleRect.right);
+    expect(subtitleRect.right, greaterThan(titleRect.right));
     expect(subtitleRect.bottom, buttonRect.bottom);
     expect(subtitleRect.width, 192);
     expect(subtitleRect.height, 16);
@@ -195,12 +195,12 @@ void main() {
     expect(titleRect.left, buttonRect.left);
     expect(titleRect.center.dy, leadingRect.center.dy);
     expect(titleRect.right, lessThan(leadingRect.left));
-    expect(titleRect.width, 192);
+    expect(titleRect.width, 128);
     expect(titleRect.height, 24);
 
     expect(subtitleRect.left, titleRect.left);
     expect(subtitleRect.top, greaterThan(titleRect.bottom));
-    expect(subtitleRect.right, titleRect.right);
+    expect(subtitleRect.right, greaterThan(titleRect.right));
     expect(subtitleRect.bottom, buttonRect.bottom);
     expect(subtitleRect.width, 192);
     expect(subtitleRect.height, 16);
@@ -240,8 +240,8 @@ void main() {
 
     expect(titleRect.left, leadingRect.right + 24);
     expect(titleRect.center.dy, leadingRect.center.dy);
-    expect(titleRect.right, buttonRect.right);
-    expect(titleRect.width, 192);
+    expect(titleRect.right, lessThan(subtitleRect.right));
+    expect(titleRect.width, 128);
     expect(titleRect.height, 24);
 
     expect(subtitleRect.left, titleRect.left);
@@ -331,7 +331,7 @@ extension YaruToggleButtonTester on WidgetTester {
         textDirection: textDirection,
         child: Scaffold(
           body: Center(
-            child: IntrinsicWidth(child: widget),
+            child: widget,
           ),
         ),
       ),
