@@ -198,8 +198,9 @@ class _YaruRenderToggleButton extends RenderBox
     );
 
     final titleX = leadingSize.width + horizontalSpacing;
-    final textConstraints = loosened.tighten(width: availableWidth - titleX);
-
+    final textConstraints = constraints
+        .copyWith(maxWidth: constraints.maxWidth - titleX)
+        .normalize();
     final titleSize = _layoutBox(title, textConstraints);
     final subtitleSize = _layoutBox(subtitle, textConstraints);
 
