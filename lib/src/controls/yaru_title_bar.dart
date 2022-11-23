@@ -14,6 +14,7 @@ class YaruTitleBar extends StatelessWidget {
     this.title,
     this.trailing,
     this.centerTitle = true,
+    this.backgroundColor = Colors.transparent,
   });
 
   /// The primary title widget.
@@ -28,6 +29,9 @@ class YaruTitleBar extends StatelessWidget {
   /// Whether the title should be centered.
   final bool? centerTitle;
 
+  /// The background color. Defaults to [Colors.transparent].
+  final Color? backgroundColor;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -37,7 +41,7 @@ class YaruTitleBar extends StatelessWidget {
       title: title,
       centerTitle: centerTitle,
       toolbarHeight: kYaruTitleBarHeight,
-      backgroundColor: Colors.transparent,
+      backgroundColor: backgroundColor,
       titleTextStyle: Theme.of(context).dialogTheme.titleTextStyle,
       actions: [
         Padding(
