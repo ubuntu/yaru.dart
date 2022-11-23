@@ -12,6 +12,8 @@ class YaruToggleButtonThemeData with Diagnosticable {
   const YaruToggleButtonThemeData({
     this.horizontalSpacing,
     this.verticalSpacing,
+    this.titleStyle,
+    this.subtitleStyle,
   });
 
   /// The spacing between the indicator and the title.
@@ -20,19 +22,36 @@ class YaruToggleButtonThemeData with Diagnosticable {
   /// The spacing between the title and the subtitle.
   final double? verticalSpacing;
 
+  /// The style of the title text.
+  final TextStyle? titleStyle;
+
+  /// The style of the subtitle text.
+  final TextStyle? subtitleStyle;
+
   /// Creates a copy with the given fields replaced with new values.
   YaruToggleButtonThemeData copyWith({
     double? horizontalSpacing,
     double? verticalSpacing,
+    TextStyle? titleStyle,
+    TextStyle? subtitleStyle,
   }) {
     return YaruToggleButtonThemeData(
       horizontalSpacing: horizontalSpacing ?? this.horizontalSpacing,
       verticalSpacing: verticalSpacing ?? this.verticalSpacing,
+      titleStyle: titleStyle ?? this.titleStyle,
+      subtitleStyle: subtitleStyle ?? this.subtitleStyle,
     );
   }
 
   @override
-  int get hashCode => Object.hash(horizontalSpacing, verticalSpacing);
+  int get hashCode {
+    return Object.hash(
+      horizontalSpacing,
+      verticalSpacing,
+      titleStyle,
+      subtitleStyle,
+    );
+  }
 
   @override
   bool operator ==(Object other) {
@@ -40,7 +59,9 @@ class YaruToggleButtonThemeData with Diagnosticable {
     if (other.runtimeType != runtimeType) return false;
     return other is YaruToggleButtonThemeData &&
         other.horizontalSpacing == horizontalSpacing &&
-        other.verticalSpacing == verticalSpacing;
+        other.verticalSpacing == verticalSpacing &&
+        other.titleStyle == titleStyle &&
+        other.subtitleStyle == subtitleStyle;
   }
 }
 

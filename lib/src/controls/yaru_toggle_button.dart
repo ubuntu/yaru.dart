@@ -39,6 +39,8 @@ class YaruToggleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = YaruToggleButtonTheme.of(context);
+    final textTheme = Theme.of(context).textTheme;
+
     return MergeSemantics(
       child: Semantics(
         child: GestureDetector(
@@ -57,14 +59,14 @@ class YaruToggleButton extends StatelessWidget {
                 title: _wrapTextStyle(
                   context,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.titleMedium!,
+                  style: theme?.titleStyle ?? textTheme.titleMedium!,
                   child: title,
                 ),
                 subtitle: subtitle != null
                     ? _wrapTextStyle(
                         context,
                         softWrap: true,
-                        style: Theme.of(context).textTheme.bodySmall!,
+                        style: theme?.subtitleStyle ?? textTheme.bodySmall!,
                         child: subtitle!,
                       )
                     : null,
