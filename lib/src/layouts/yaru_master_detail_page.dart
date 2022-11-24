@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'yaru_detail_page.dart';
 import 'yaru_landscape_layout.dart';
-import 'yaru_layout_index_controller.dart';
 import 'yaru_master_detail_layout_delegate.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_tile.dart';
+import 'yaru_page_controller.dart';
 import 'yaru_portrait_layout.dart';
 
 const _kDefaultPaneWidth = 280.0;
@@ -86,7 +86,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   final ValueChanged<int?>? onSelected;
 
   /// An optional controller that can be used to navigate to a specific index.
-  final YaruLayoutIndexController? controller;
+  final YaruPageController? controller;
 
   @override
   _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
@@ -94,10 +94,10 @@ class YaruMasterDetailPage extends StatefulWidget {
 
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   double? _previousPaneWidth;
-  late final YaruLayoutIndexController _controller;
+  late final YaruPageController _controller;
 
   void _updateController() => _controller =
-      widget.controller ?? YaruLayoutIndexController(length: widget.length);
+      widget.controller ?? YaruPageController(length: widget.length);
 
   @override
   void initState() {

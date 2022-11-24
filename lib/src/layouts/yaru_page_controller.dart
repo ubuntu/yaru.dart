@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class YaruLayoutIndexController extends ChangeNotifier {
-  YaruLayoutIndexController({required this.length, this.initialIndex = -1})
+class YaruPageController extends ChangeNotifier {
+  YaruPageController({required this.length, this.initialIndex = -1})
       : _index = initialIndex,
         _previousIndex = initialIndex;
   final int length;

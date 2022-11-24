@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_layout_index_controller.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_list_view.dart';
+import 'yaru_page_controller.dart';
 
 class YaruPortraitLayout extends StatefulWidget {
   const YaruPortraitLayout({
@@ -21,7 +21,7 @@ class YaruPortraitLayout extends StatefulWidget {
 
   final PreferredSizeWidget? appBar;
 
-  final YaruLayoutIndexController controller;
+  final YaruPageController controller;
 
   @override
   _YaruPortraitLayoutState createState() => _YaruPortraitLayoutState();

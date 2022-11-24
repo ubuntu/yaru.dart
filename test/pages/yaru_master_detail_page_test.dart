@@ -49,7 +49,7 @@ void main() {
     'controller',
     (tester) async {
       final variant = goldenVariant.currentValue!;
-      final controller = YaruLayoutIndexController(length: 8);
+      final controller = YaruPageController(length: 8);
       await tester.pumpScaffold(
         YaruMasterDetailPage(
           controller: controller,

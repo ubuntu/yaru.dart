@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'yaru_layout_index_controller.dart';
 import 'yaru_master_detail_layout_delegate.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_list_view.dart';
+import 'yaru_page_controller.dart';
 
 class YaruLandscapeLayout extends StatefulWidget {
   /// Creates a landscape layout
@@ -45,7 +45,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// If provided, a second [AppBar] will be created right to it.
   final PreferredSizeWidget? appBar;
 
-  final YaruLayoutIndexController controller;
+  final YaruPageController controller;
 
   @override
   State<YaruLandscapeLayout> createState() => _YaruLandscapeLayoutState();

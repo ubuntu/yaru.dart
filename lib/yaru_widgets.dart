@@ -30,13 +30,13 @@ export 'src/extensions/border_radius_extension.dart';
 export 'src/layouts/yaru_compact_layout.dart';
 export 'src/layouts/yaru_compact_layout_theme.dart';
 export 'src/layouts/yaru_detail_page.dart';
-export 'src/layouts/yaru_layout_index_controller.dart';
 export 'src/layouts/yaru_master_detail_layout_delegate.dart';
 export 'src/layouts/yaru_master_detail_page.dart';
 export 'src/layouts/yaru_master_detail_theme.dart';
 export 'src/layouts/yaru_master_tile.dart';
 export 'src/layouts/yaru_navigation_rail.dart';
 export 'src/layouts/yaru_navigation_rail_item.dart';
+export 'src/layouts/yaru_page_controller.dart';
 // Pages
 export 'src/pages/yaru_section.dart';
 export 'src/pages/yaru_tabbed_page.dart';
