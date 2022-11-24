@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'yaru_layout_index_controller.dart';
 import 'yaru_master_detail_layout_delegate.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_master_detail_theme.dart';
@@ -10,23 +13,15 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// Creates a landscape layout
   const YaruLandscapeLayout({
     super.key,
-    required this.length,
-    required this.selectedIndex,
     required this.tileBuilder,
     required this.pageBuilder,
-    required this.onSelected,
+    this.onSelected,
     required this.layoutDelegate,
     this.previousPaneWidth,
     this.onLeftPaneWidthChange,
     this.appBar,
-    this.controller,
+    required this.controller,
   });
-
-  /// The total number of pages.
-  final int length;
-
-  /// Current index of the selected page.
-  final int selectedIndex;
 
   /// A builder that is called for each page to build its master tile.
   final YaruMasterDetailBuilder tileBuilder;
@@ -35,7 +30,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   final IndexedWidgetBuilder pageBuilder;
 
   /// Callback that returns an index when the page changes.
-  final ValueChanged<int> onSelected;
+  final ValueChanged<int>? onSelected;
 
   /// Controls the pane width with defined parameters
   final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
@@ -50,8 +45,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   /// If provided, a second [AppBar] will be created right to it.
   final PreferredSizeWidget? appBar;
 
-  /// An optional controller that can be used to navigate to a specific index.
-  final ValueNotifier<int>? controller;
+  final YaruLayoutIndexController controller;
 
   @override
   State<YaruLandscapeLayout> createState() => _YaruLandscapeLayoutState();
@@ -73,24 +67,27 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.selectedIndex;
     _paneWidth = widget.previousPaneWidth;
-    widget.controller?.addListener(_controllerCallback);
+    widget.controller.addListener(_controllerCallback);
+    _selectedIndex = max(widget.controller.index, 0);
   }
 
   @override
   void dispose() {
-    widget.controller?.removeListener(_controllerCallback);
+    widget.controller.removeListener(_controllerCallback);
     super.dispose();
   }
 
   void _controllerCallback() {
-    _onTap(widget.controller!.value);
+    if (widget.controller.index != _selectedIndex) {
+      _selectedIndex = max(widget.controller.index, 0);
+      setState(() {});
+    }
   }
 
   void _onTap(int index) {
-    widget.onSelected(index);
-    setState(() => _selectedIndex = index);
+    widget.controller.index = index;
+    widget.onSelected?.call(_selectedIndex);
   }
 
   void updatePaneWidth({
@@ -162,7 +159,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       child: Scaffold(
         appBar: widget.appBar,
         body: YaruMasterListView(
-          length: widget.length,
+          length: widget.controller.length,
           selectedIndex: _selectedIndex,
           onTap: _onTap,
           builder: widget.tileBuilder,
@@ -198,7 +195,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
         pages: [
           MaterialPage(
             key: ValueKey(_selectedIndex),
-            child: widget.length > _selectedIndex
+            child: widget.controller.length > _selectedIndex
                 ? widget.pageBuilder(context, _selectedIndex)
                 : widget.pageBuilder(context, 0),
           ),

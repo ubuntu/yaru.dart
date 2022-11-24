@@ -49,7 +49,7 @@ void main() {
     'controller',
     (tester) async {
       final variant = goldenVariant.currentValue!;
-      final controller = ValueNotifier<int>(0);
+      final controller = YaruLayoutIndexController(length: 8);
       await tester.pumpScaffold(
         YaruMasterDetailPage(
           controller: controller,
@@ -73,7 +73,7 @@ void main() {
         size: Size(variant.value!, 480),
       );
 
-      controller.value = 3;
+      controller.index = 3;
       await tester.pumpAndSettle();
       if (variant.label.startsWith('portrait')) {
         expect(find.text('Master'), findsNothing);

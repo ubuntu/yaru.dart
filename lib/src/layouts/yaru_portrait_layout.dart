@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'yaru_layout_index_controller.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_list_view.dart';
@@ -7,25 +8,20 @@ import 'yaru_master_list_view.dart';
 class YaruPortraitLayout extends StatefulWidget {
   const YaruPortraitLayout({
     super.key,
-    required this.length,
-    required this.selectedIndex,
     required this.tileBuilder,
     required this.pageBuilder,
-    required this.onSelected,
+    this.onSelected,
     this.appBar,
-    this.controller,
+    required this.controller,
   });
 
-  final int length;
-  final int selectedIndex;
   final YaruMasterDetailBuilder tileBuilder;
   final IndexedWidgetBuilder pageBuilder;
-  final ValueChanged<int> onSelected;
+  final ValueChanged<int>? onSelected;
 
   final PreferredSizeWidget? appBar;
 
-  /// An optional controller that can be used to navigate to a specific index.
-  final ValueNotifier<int>? controller;
+  final YaruLayoutIndexController controller;
 
   @override
   _YaruPortraitLayoutState createState() => _YaruPortraitLayoutState();
@@ -39,31 +35,34 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
 
   @override
   void initState() {
-    _selectedIndex = widget.selectedIndex;
-    widget.controller?.addListener(_controllerCallback);
+    widget.controller.addListener(_controllerCallback);
+    _selectedIndex = widget.controller.index;
     super.initState();
   }
 
   @override
   void dispose() {
-    widget.controller?.removeListener(_controllerCallback);
+    widget.controller.removeListener(_controllerCallback);
     super.dispose();
   }
 
   void _controllerCallback() {
-    _navigator.popUntil((route) => route.isFirst);
-    _onTap(widget.controller!.value);
+    if (widget.controller.index != _selectedIndex) {
+      _selectedIndex = widget.controller.index;
+      setState(() => () {});
+    }
   }
 
   void _onTap(int index) {
-    widget.onSelected(index);
-    _navigator.push(pageRoute(index));
-    setState(() => _selectedIndex = index);
+    widget.controller.index = index;
+    widget.onSelected?.call(_selectedIndex);
   }
 
-  MaterialPageRoute pageRoute(int index) {
-    return MaterialPageRoute(
-      builder: (context) => widget.pageBuilder(context, index),
+  MaterialPage page(int index) {
+    return MaterialPage(
+      child: Builder(
+        builder: (context) => widget.pageBuilder(context, _selectedIndex),
+      ),
     );
   }
 
@@ -78,24 +77,24 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
         ),
         child: Navigator(
           key: _navigatorKey,
-          onGenerateInitialRoutes: (navigator, initialRoute) {
-            return [
-              MaterialPageRoute(
-                builder: (context) {
-                  return Scaffold(
-                    appBar: widget.appBar,
-                    body: YaruMasterListView(
-                      length: widget.length,
-                      selectedIndex: _selectedIndex,
-                      onTap: _onTap,
-                      builder: widget.tileBuilder,
-                    ),
-                  );
-                },
-              ),
-              if (_selectedIndex != -1) pageRoute(_selectedIndex)
-            ];
+          onPopPage: (route, result) {
+            _selectedIndex = -1;
+            return route.didPop(result);
           },
+          pages: [
+            MaterialPage(
+              child: Scaffold(
+                appBar: widget.appBar,
+                body: YaruMasterListView(
+                  length: widget.controller.length,
+                  selectedIndex: _selectedIndex,
+                  onTap: _onTap,
+                  builder: widget.tileBuilder,
+                ),
+              ),
+            ),
+            if (_selectedIndex != -1) page(_selectedIndex)
+          ],
         ),
       ),
     );
