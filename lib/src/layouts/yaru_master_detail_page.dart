@@ -106,6 +106,12 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   }
 
   @override
+  void dispose() {
+    if (widget.controller == null) _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   void didUpdateWidget(covariant YaruMasterDetailPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) _updateController();
