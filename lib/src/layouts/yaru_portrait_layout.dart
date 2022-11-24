@@ -48,8 +48,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
 
   void _controllerCallback() {
     if (widget.controller.index != _selectedIndex) {
-      _selectedIndex = widget.controller.index;
-      setState(() => () {});
+      setState(() => _selectedIndex = widget.controller.index);
     }
   }
 

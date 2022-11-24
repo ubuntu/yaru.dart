@@ -80,8 +80,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   void _controllerCallback() {
     if (widget.controller.index != _selectedIndex) {
-      _selectedIndex = max(widget.controller.index, 0);
-      setState(() {});
+      setState(() => _selectedIndex = max(widget.controller.index, 0));
     }
   }
 
