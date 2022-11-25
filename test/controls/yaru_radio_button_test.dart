@@ -179,6 +179,7 @@ void main() {
         ),
         themeMode: variant.themeMode,
         size: const Size(224, 56),
+        alignment: Alignment.centerLeft,
       );
       await tester.pumpAndSettle();
 

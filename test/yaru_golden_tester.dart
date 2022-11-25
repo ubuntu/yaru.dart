@@ -11,6 +11,7 @@ extension YaruGoldenTester on WidgetTester {
     ThemeData? theme,
     ThemeData? darkTheme,
     Size? size,
+    AlignmentGeometry alignment = Alignment.center,
   }) {
     binding.window.devicePixelRatioTestValue = 1;
     if (size != null) binding.window.physicalSizeTestValue = size;
@@ -21,7 +22,10 @@ extension YaruGoldenTester on WidgetTester {
         darkTheme: darkTheme ?? yaruDark,
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: Center(child: widget),
+          body: Align(
+            child: widget,
+            alignment: alignment,
+          ),
         ),
       ),
     );
