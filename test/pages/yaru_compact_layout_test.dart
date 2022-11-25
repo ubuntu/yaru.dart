@@ -45,7 +45,6 @@ void main() {
       await tester.pumpScaffold(
         YaruCompactLayout(
           controller: controller,
-          length: 8,
           itemBuilder: (context, index, selected) => YaruNavigationRailItem(
             icon: const Icon(YaruIcons.menu),
             label: Text('Tile $index'),

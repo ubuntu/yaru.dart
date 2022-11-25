@@ -51,7 +51,7 @@ typedef YaruMasterDetailBuilder = Widget Function(
 class YaruMasterDetailPage extends StatefulWidget {
   const YaruMasterDetailPage({
     super.key,
-    required this.length,
+    this.length,
     required this.tileBuilder,
     required this.pageBuilder,
     this.layoutDelegate =
@@ -60,10 +60,11 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.initialIndex,
     this.onSelected,
     this.controller,
-  }) : assert(initialIndex == null || controller == null);
+  })  : assert(initialIndex == null || controller == null),
+        assert((length == null) != (controller == null));
 
   /// The total number of pages.
-  final int length;
+  final int? length;
 
   /// A builder that is called for each page to build its master tile.
   ///
@@ -99,16 +100,18 @@ class YaruMasterDetailPage extends StatefulWidget {
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   double? _previousPaneWidth;
   late final YaruPageController _controller;
+  late final int _length;
 
   void _updateController() => _controller = widget.controller ??
       YaruPageController(
-        length: widget.length,
+        length: _length,
         initialIndex: widget.initialIndex ?? -1,
       );
 
   @override
   void initState() {
     super.initState();
+    _length = widget.length ?? widget.controller!.length;
     _updateController();
   }
 

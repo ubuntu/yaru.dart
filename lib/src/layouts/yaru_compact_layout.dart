@@ -18,16 +18,17 @@ const _kScrollbarThickness = 4.0;
 class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
     super.key,
-    required this.length,
+    this.length,
     required this.itemBuilder,
     required this.pageBuilder,
     this.initialIndex,
     this.onSelected,
     this.controller,
-  }) : assert(initialIndex == null || controller == null);
+  })  : assert(initialIndex == null || controller == null),
+        assert((length == null) != (controller == null));
 
   /// The total number of pages.
-  final int length;
+  final int? length;
 
   /// A builder that is called for each page to build its navigation rail item.
   ///
@@ -53,16 +54,18 @@ class YaruCompactLayout extends StatefulWidget {
 
 class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   late int _index;
+  late final int _length;
 
   late final ScrollController _scrollController;
   late final YaruPageController _pageController;
 
   @override
   void initState() {
+    super.initState();
+    _length = widget.length ?? widget.controller!.length;
     _scrollController = ScrollController();
     _updatePageController();
     _index = max(_pageController.initialIndex, widget.initialIndex ?? 0);
-    super.initState();
   }
 
   @override
@@ -80,8 +83,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   }
 
   void _updatePageController() {
-    _pageController =
-        widget.controller ?? YaruPageController(length: widget.length);
+    _pageController = widget.controller ?? YaruPageController(length: _length);
     _pageController.addListener(_pageControllerCallback);
   }
 
@@ -131,7 +133,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
           child: YaruNavigationRail(
             selectedIndex: _index,
             onDestinationSelected: _onTap,
-            length: widget.length,
+            length: _length,
             itemBuilder: widget.itemBuilder,
           ),
         ),
@@ -154,7 +156,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
           pages: [
             MaterialPage(
               key: ValueKey(_index),
-              child: widget.length > _index
+              child: _length > _index
                   ? widget.pageBuilder(context, _index)
                   : widget.pageBuilder(context, 0),
             ),

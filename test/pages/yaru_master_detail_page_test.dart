@@ -56,7 +56,6 @@ void main() {
           layoutDelegate: const YaruMasterFixedPaneDelegate(
             paneWidth: kYaruMasterDetailBreakpoint / 3,
           ),
-          length: 8,
           appBar: AppBar(title: const Text('Master')),
           tileBuilder: (context, index, selected) => YaruMasterTile(
             leading: const Icon(YaruIcons.menu),
