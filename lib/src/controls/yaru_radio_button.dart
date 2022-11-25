@@ -52,18 +52,13 @@ class YaruRadioButton<T> extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       contentPadding: contentPadding,
-      leading: SizedBox.square(
-        dimension: kMinInteractiveDimension - 8,
-        child: Center(
-          child: YaruRadio<T>(
-            value: value,
-            groupValue: groupValue,
-            onChanged: onChanged,
-            toggleable: toggleable,
-            focusNode: focusNode,
-            autofocus: autofocus,
-          ),
-        ),
+      leading: YaruRadio<T>(
+        value: value,
+        groupValue: groupValue,
+        onChanged: onChanged,
+        toggleable: toggleable,
+        focusNode: focusNode,
+        autofocus: autofocus,
       ),
       onToggled: onChanged == null ? null : _onToggled,
     );
