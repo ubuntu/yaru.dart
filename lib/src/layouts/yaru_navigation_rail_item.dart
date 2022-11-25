@@ -27,7 +27,7 @@ class YaruNavigationRailItem extends StatefulWidget {
     required this.style,
   });
 
-  /// Whatever the related page item is selected in the rail.
+  /// Whether the related page item is selected in the rail.
   final bool? selected;
 
   /// Icon widget, displayed agaist the [label].
