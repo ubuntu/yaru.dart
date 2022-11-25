@@ -79,7 +79,10 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   @override
   void didUpdateWidget(covariant YaruCompactLayout oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.controller != oldWidget.controller) _updatePageController();
+    if (widget.controller != oldWidget.controller) {
+      oldWidget.controller?.removeListener(_pageControllerCallback);
+      _updatePageController();
+    }
   }
 
   void _updatePageController() {

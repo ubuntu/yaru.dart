@@ -78,6 +78,15 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     super.dispose();
   }
 
+  @override
+  void didUpdateWidget(covariant YaruLandscapeLayout oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.controller != oldWidget.controller) {
+      oldWidget.controller.removeListener(_controllerCallback);
+      widget.controller.addListener(_controllerCallback);
+    }
+  }
+
   void _controllerCallback() {
     if (widget.controller.index != _selectedIndex) {
       setState(() => _selectedIndex = max(widget.controller.index, 0));

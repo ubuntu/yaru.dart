@@ -46,6 +46,15 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
     super.dispose();
   }
 
+  @override
+  void didUpdateWidget(covariant YaruPortraitLayout oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.controller != oldWidget.controller) {
+      oldWidget.controller.removeListener(_controllerCallback);
+      widget.controller.addListener(_controllerCallback);
+    }
+  }
+
   void _controllerCallback() {
     if (widget.controller.index != _selectedIndex) {
       setState(() => _selectedIndex = widget.controller.index);
