@@ -33,7 +33,7 @@ class YaruNavigationRailItem extends StatefulWidget {
   /// Icon widget, displayed beside the [label].
   final Widget icon;
 
-  /// Label widget, displayed agaist the [icon].
+  /// Label widget, displayed beside the [icon].
   final Widget label;
 
   /// Optional string tooltip.
