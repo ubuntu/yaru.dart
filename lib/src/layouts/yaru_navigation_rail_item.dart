@@ -41,7 +41,7 @@ class YaruNavigationRailItem extends StatefulWidget {
   /// It should describe the whole tile if possible.
   final String? tooltip;
 
-  /// Callback called on tap the tile.
+  /// Callback called when the tile is tapped.
   final VoidCallback? onTap;
 
   /// Style of this tile, see [YaruNavigationRailStyle].
