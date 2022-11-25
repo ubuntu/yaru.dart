@@ -21,9 +21,10 @@ class YaruCompactLayout extends StatefulWidget {
     required this.length,
     required this.itemBuilder,
     required this.pageBuilder,
+    this.initialIndex,
     this.onSelected,
     this.controller,
-  });
+  }) : assert(initialIndex == null || controller == null);
 
   /// The total number of pages.
   final int length;
@@ -36,6 +37,9 @@ class YaruCompactLayout extends StatefulWidget {
 
   /// A builder that is called for each page to build its content.
   final IndexedWidgetBuilder pageBuilder;
+
+  /// The index of the initial page to show.
+  final int? initialIndex;
 
   /// Called when the user selects a page.
   final ValueChanged<int>? onSelected;
@@ -57,7 +61,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   void initState() {
     _scrollController = ScrollController();
     _updatePageController();
-    _index = max(_pageController.initialIndex, 0);
+    _index = max(_pageController.initialIndex, widget.initialIndex ?? 0);
     super.initState();
   }
 

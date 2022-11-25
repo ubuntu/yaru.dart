@@ -57,9 +57,10 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.layoutDelegate =
         const YaruMasterFixedPaneDelegate(paneWidth: _kDefaultPaneWidth),
     this.appBar,
+    this.initialIndex,
     this.onSelected,
     this.controller,
-  });
+  }) : assert(initialIndex == null || controller == null);
 
   /// The total number of pages.
   final int length;
@@ -82,6 +83,9 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// An optional custom AppBar for the left pane.
   final PreferredSizeWidget? appBar;
 
+  /// An optional index of the initial page to show.
+  final int? initialIndex;
+
   /// Called when the user selects a page.
   final ValueChanged<int?>? onSelected;
 
@@ -96,8 +100,11 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   double? _previousPaneWidth;
   late final YaruPageController _controller;
 
-  void _updateController() => _controller =
-      widget.controller ?? YaruPageController(length: widget.length);
+  void _updateController() => _controller = widget.controller ??
+      YaruPageController(
+        length: widget.length,
+        initialIndex: widget.initialIndex ?? -1,
+      );
 
   @override
   void initState() {
