@@ -48,17 +48,12 @@ class YaruCheckButton extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       contentPadding: contentPadding,
-      leading: SizedBox.square(
-        dimension: kMinInteractiveDimension - 8,
-        child: Center(
-          child: YaruCheckbox(
-            value: value,
-            onChanged: onChanged,
-            tristate: tristate,
-            focusNode: focusNode,
-            autofocus: autofocus,
-          ),
-        ),
+      leading: YaruCheckbox(
+        value: value,
+        onChanged: onChanged,
+        tristate: tristate,
+        focusNode: focusNode,
+        autofocus: autofocus,
       ),
       onToggled: onChanged == null ? null : _onToggled,
     );
