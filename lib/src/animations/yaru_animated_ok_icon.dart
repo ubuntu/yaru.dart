@@ -9,11 +9,11 @@ const _kAnimationDuration = 500;
 class YaruAnimatedOkIcon extends StatefulWidget {
   /// Create an animated Yaru ok icon, similar to the original one
   const YaruAnimatedOkIcon({
+    super.key,
     this.size = 24.0,
     this.filled = false,
     this.color,
     this.onCompleted,
-    super.key,
   });
 
   /// Determines the icon canvas size
@@ -75,7 +75,7 @@ class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>
         dimension: widget.size,
         child: AnimatedBuilder(
           animation: _animation,
-          builder: ((context, child) {
+          builder: (context, child) {
             return CustomPaint(
               painter: _YaruAnimatedOkIconPainter(
                 widget.size,
@@ -84,7 +84,7 @@ class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>
                 _animation.value,
               ),
             );
-          }),
+          },
         ),
       ),
     );
@@ -113,13 +113,14 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
         height: this.size * 2,
       );
       final clipPath = Path.combine(
-          PathOperation.difference,
-          Path()..addRect(clipRect),
-          Path.combine(
-            PathOperation.intersect,
-            _createCheckmarkPath(true),
-            _createInnerCirclePath(true),
-          ));
+        PathOperation.difference,
+        Path()..addRect(clipRect),
+        Path.combine(
+          PathOperation.intersect,
+          _createCheckmarkPath(true),
+          _createInnerCirclePath(true),
+        ),
+      );
 
       canvas.save();
       canvas.clipPath(clipPath);

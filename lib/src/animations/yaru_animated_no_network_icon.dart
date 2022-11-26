@@ -9,10 +9,10 @@ const _kAnimationDuration = 600;
 class YaruAnimatedNoNetworkIcon extends StatefulWidget {
   /// Create an animated Yaru no network icon, similar to `network_wirless` and `network_wirless_disabled`
   const YaruAnimatedNoNetworkIcon({
+    super.key,
     this.size = 24.0,
     this.color,
     this.onCompleted,
-    super.key,
   });
 
   /// Determines the icon canvas size
@@ -71,7 +71,7 @@ class _YaruAnimatedNoNetworkIconState extends State<YaruAnimatedNoNetworkIcon>
         dimension: widget.size,
         child: AnimatedBuilder(
           animation: _animation,
-          builder: ((context, child) {
+          builder: (context, child) {
             return CustomPaint(
               painter: _YaruAnimatedNoNetworkIconPainter(
                 widget.size,
@@ -79,7 +79,7 @@ class _YaruAnimatedNoNetworkIconState extends State<YaruAnimatedNoNetworkIcon>
                 _animation.value,
               ),
             );
-          }),
+          },
         ),
       ),
     );
@@ -142,10 +142,22 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   Path _getWave1Path() {
     final wave = Path();
     wave.moveTo(size * 0.6466471, size * 0.6155599);
-    wave.cubicTo(size * 0.6054710, size * 0.5812731, size * 0.5535823,
-        size * 0.5624987, size * 0.5000000, size * 0.5625000);
-    wave.cubicTo(size * 0.4464713, size * 0.5626250, size * 0.3946749,
-        size * 0.5814829, size * 0.3535970, size * 0.6158040);
+    wave.cubicTo(
+      size * 0.6054710,
+      size * 0.5812731,
+      size * 0.5535823,
+      size * 0.5624987,
+      size * 0.5000000,
+      size * 0.5625000,
+    );
+    wave.cubicTo(
+      size * 0.4464713,
+      size * 0.5626250,
+      size * 0.3946749,
+      size * 0.5814829,
+      size * 0.3535970,
+      size * 0.6158040,
+    );
 
     return wave;
   }
@@ -153,10 +165,22 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   Path _getWave2Path() {
     final wave = Path();
     wave.moveTo(size * 0.7352702, size * 0.5269368);
-    wave.cubicTo(size * 0.6704428, size * 0.4693235, size * 0.5867288,
-        size * 0.4375000, size * 0.5000000, size * 0.4375000);
-    wave.cubicTo(size * 0.4133234, size * 0.4376250, size * 0.3297026,
-        size * 0.4695350, size * 0.2649740, size * 0.5271810);
+    wave.cubicTo(
+      size * 0.6704428,
+      size * 0.4693235,
+      size * 0.5867288,
+      size * 0.4375000,
+      size * 0.5000000,
+      size * 0.4375000,
+    );
+    wave.cubicTo(
+      size * 0.4133234,
+      size * 0.4376250,
+      size * 0.3297026,
+      size * 0.4695350,
+      size * 0.2649740,
+      size * 0.5271810,
+    );
 
     return wave;
   }
@@ -164,10 +188,22 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   Path _getWave3Path() {
     final wave = Path();
     wave.moveTo(size * 0.8237305, size * 0.4384766);
-    wave.cubicTo(size * 0.7353761, size * 0.3574702, size * 0.6198688,
-        size * 0.3125217, size * 0.5000000, size * 0.3125000);
-    wave.cubicTo(size * 0.3802343, size * 0.3127771, size * 0.2649141,
-        size * 0.3578946, size * 0.1767578, size * 0.4389648);
+    wave.cubicTo(
+      size * 0.7353761,
+      size * 0.3574702,
+      size * 0.6198688,
+      size * 0.3125217,
+      size * 0.5000000,
+      size * 0.3125000,
+    );
+    wave.cubicTo(
+      size * 0.3802343,
+      size * 0.3127771,
+      size * 0.2649141,
+      size * 0.3578946,
+      size * 0.1767578,
+      size * 0.4389648,
+    );
 
     return wave;
   }
@@ -175,10 +211,22 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   Path _getWave4Path() {
     final wave = Path();
     wave.moveTo(size * 0.9121094, size * 0.3500977);
-    wave.cubicTo(size * 0.8002838, size * 0.2456712, size * 0.6530028,
-        size * 0.1875615, size * 0.5000000, size * 0.1875000);
-    wave.cubicTo(size * 0.3471336, size * 0.1879029, size * 0.2001027,
-        size * 0.2462382, size * 0.08854167, size * 0.3507487);
+    wave.cubicTo(
+      size * 0.8002838,
+      size * 0.2456712,
+      size * 0.6530028,
+      size * 0.1875615,
+      size * 0.5000000,
+      size * 0.1875000,
+    );
+    wave.cubicTo(
+      size * 0.3471336,
+      size * 0.1879029,
+      size * 0.2001027,
+      size * 0.2462382,
+      size * 0.08854167,
+      size * 0.3507487,
+    );
 
     return wave;
   }
@@ -219,7 +267,9 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
     double duration,
   ) {
     final drawPath = metric.extractPath(
-        0, metric.length * _computeLocalAnimationPosition(start, duration));
+      0,
+      metric.length * _computeLocalAnimationPosition(start, duration),
+    );
 
     canvas.drawPath(drawPath, _getStrokePaint());
   }
