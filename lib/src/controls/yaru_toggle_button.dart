@@ -51,7 +51,7 @@ class YaruToggleButton extends StatelessWidget {
                 : SystemMouseCursors.basic,
             child: Padding(
               padding: contentPadding ?? EdgeInsets.zero,
-              child: _YaryToggleButtonLayout(
+              child: _YaruToggleButtonLayout(
                 horizontalSpacing: theme?.horizontalSpacing ?? 8,
                 verticalSpacing: theme?.verticalSpacing ?? 4,
                 textDirection: Directionality.of(context),
