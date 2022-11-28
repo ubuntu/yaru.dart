@@ -53,15 +53,14 @@ class YaruCompactLayout extends StatefulWidget {
 }
 
 class _YaruCompactLayoutState extends State<YaruCompactLayout> {
-  late final int _length;
-
   late final ScrollController _scrollController;
   late final YaruPageController _pageController;
+
+  int get _length => widget.length ?? widget.controller!.length;
 
   @override
   void initState() {
     super.initState();
-    _length = widget.length ?? widget.controller!.length;
     _scrollController = ScrollController();
     _updatePageController();
   }
@@ -77,9 +76,6 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   @override
   void didUpdateWidget(covariant YaruCompactLayout oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.length != oldWidget.length) {
-      _length = widget.length ?? widget.controller!.length;
-    }
     if (widget.controller != oldWidget.controller) {
       oldWidget.controller?.removeListener(_pageControllerCallback);
       _updatePageController();
