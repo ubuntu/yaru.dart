@@ -53,7 +53,6 @@ class YaruCompactLayout extends StatefulWidget {
 }
 
 class _YaruCompactLayoutState extends State<YaruCompactLayout> {
-  late int _index;
   late final int _length;
 
   late final ScrollController _scrollController;
@@ -65,7 +64,6 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
     _length = widget.length ?? widget.controller!.length;
     _scrollController = ScrollController();
     _updatePageController();
-    _index = max(_pageController.initialIndex, widget.initialIndex ?? 0);
   }
 
   @override
@@ -79,6 +77,9 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   @override
   void didUpdateWidget(covariant YaruCompactLayout oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (widget.length != oldWidget.length) {
+      _length = widget.length ?? widget.controller!.length;
+    }
     if (widget.controller != oldWidget.controller) {
       oldWidget.controller?.removeListener(_pageControllerCallback);
       _updatePageController();
@@ -86,14 +87,13 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   }
 
   void _updatePageController() {
-    _pageController = widget.controller ?? YaruPageController(length: _length);
+    _pageController =
+        widget.controller ?? YaruPageController(length: widget.length!);
     _pageController.addListener(_pageControllerCallback);
   }
 
   void _pageControllerCallback() {
-    if (_pageController.index != _index) {
-      setState(() => _index = _pageController.index);
-    }
+    setState(() {});
   }
 
   @override
@@ -134,7 +134,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: constraint.maxHeight),
           child: YaruNavigationRail(
-            selectedIndex: _index,
+            selectedIndex: max(_pageController.index, 0),
             onDestinationSelected: _onTap,
             length: _length,
             itemBuilder: widget.itemBuilder,
@@ -150,6 +150,8 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
 
   Widget _buildPageView(BuildContext context) {
     final theme = YaruCompactLayoutTheme.of(context);
+    final index = max(_pageController.index, 0);
+
     return Expanded(
       child: Theme(
         data: Theme.of(context).copyWith(
@@ -158,9 +160,9 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
         child: Navigator(
           pages: [
             MaterialPage(
-              key: ValueKey(_index),
-              child: _length > _index
-                  ? widget.pageBuilder(context, _index)
+              key: ValueKey(index),
+              child: _length > index
+                  ? widget.pageBuilder(context, index)
                   : widget.pageBuilder(context, 0),
             ),
           ],
