@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+enum YaruTileStyle { normal, banner }
+
 class YaruTile extends StatelessWidget {
   /// Creates a Yaru style [ListTile] similar widget.
   ///
@@ -19,7 +21,7 @@ class YaruTile extends StatelessWidget {
     this.trailing,
     this.enabled = true,
     this.padding = const EdgeInsets.all(8.0),
-    this.subTitlePadding = const EdgeInsets.only(top: 4.0),
+    this.style = YaruTileStyle.normal,
   });
 
   /// The [Widget] placed at the leading position.
@@ -43,15 +45,14 @@ class YaruTile extends StatelessWidget {
   /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
   final EdgeInsets padding;
 
-  final EdgeInsets subTitlePadding;
+  /// The style of the tile. Defaults to `YaruTileStyle.normal`.
+  final YaruTileStyle style;
 
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
       style: TextStyle(
-        color: enabled
-            ? Theme.of(context).textTheme.bodyLarge!.color
-            : Theme.of(context).disabledColor,
+        color: _textColor(context),
       ),
       child: Padding(
         padding: padding,
@@ -63,16 +64,17 @@ class YaruTile extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  title,
+                  DefaultTextStyle(
+                    style: _titleTextStyle(context),
+                    child: title,
+                  ),
                   if (subtitle != null)
                     Padding(
-                      padding: subTitlePadding,
+                      padding: style != YaruTileStyle.banner
+                          ? const EdgeInsets.only(top: 4.0)
+                          : EdgeInsets.zero,
                       child: DefaultTextStyle(
-                        style: enabled
-                            ? Theme.of(context).textTheme.bodySmall!
-                            : Theme.of(context).textTheme.bodySmall!.copyWith(
-                                  color: Theme.of(context).disabledColor,
-                                ),
+                        style: _subtitleTextStyle(context),
                         child: subtitle!,
                       ),
                     ),
@@ -84,5 +86,30 @@ class YaruTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color? _textColor(BuildContext context) {
+    return enabled ? null : Theme.of(context).disabledColor;
+  }
+
+  TextStyle _titleTextStyle(BuildContext context) {
+    final theme = Theme.of(context);
+    switch (style) {
+      case YaruTileStyle.normal:
+        return theme.textTheme.bodyText1!;
+      case YaruTileStyle.banner:
+        return theme.textTheme.bodyLarge!;
+    }
+  }
+
+  TextStyle _subtitleTextStyle(BuildContext context) {
+    final theme = Theme.of(context);
+    switch (style) {
+      case YaruTileStyle.normal:
+        return theme.textTheme.bodySmall!;
+      case YaruTileStyle.banner:
+        return theme.textTheme.bodyMedium!
+            .copyWith(color: enabled ? theme.textTheme.bodySmall!.color : null);
+    }
   }
 }
