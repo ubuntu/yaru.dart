@@ -65,7 +65,6 @@ class YaruBanner extends StatelessWidget {
               borderRadius: borderRadius,
               color: surfaceTintColor ?? defaultCardColor,
               elevation: light ? 4 : 6,
-              mouseCursor: onTap != null ? SystemMouseCursors.click : null,
             ),
             if (copyIconAsWatermark == true)
               Padding(
@@ -92,7 +91,6 @@ class _Banner extends StatelessWidget {
     required this.elevation,
     required this.icon,
     required this.borderRadius,
-    this.mouseCursor,
     this.subtitle,
     required this.iconPadding,
   });
@@ -102,7 +100,6 @@ class _Banner extends StatelessWidget {
   final double elevation;
   final Widget icon;
   final BorderRadius borderRadius;
-  final MouseCursor? mouseCursor;
   final Widget? subtitle;
   final EdgeInsets iconPadding;
 
