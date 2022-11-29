@@ -54,44 +54,32 @@ class YaruBanner extends StatelessWidget {
         onTap: onTap,
         borderRadius: borderRadius,
         hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-        child: copyIconAsWatermark
-            ? Stack(
-                alignment: Alignment.center,
-                children: [
-                  _Banner(
-                    icon: icon,
-                    iconPadding: iconPadding,
-                    title: title,
-                    subtitle: subtitle,
-                    borderRadius: borderRadius,
-                    color: surfaceTintColor ?? defaultCardColor,
-                    elevation: light ? 4 : 6,
-                    mouseCursor:
-                        onTap != null ? SystemMouseCursors.click : null,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            _Banner(
+              icon: icon,
+              iconPadding: iconPadding,
+              title: title,
+              subtitle: subtitle,
+              borderRadius: borderRadius,
+              color: surfaceTintColor ?? defaultCardColor,
+              elevation: light ? 4 : 6,
+              mouseCursor: onTap != null ? SystemMouseCursors.click : null,
+            ),
+            if (copyIconAsWatermark == true)
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Opacity(
+                    opacity: 0.1,
+                    child: watermarkIcon != null ? watermarkIcon! : icon,
                   ),
-                  if (copyIconAsWatermark == true)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Opacity(
-                          opacity: 0.1,
-                          child: watermarkIcon != null ? watermarkIcon! : icon,
-                        ),
-                      ),
-                    ),
-                ],
-              )
-            : _Banner(
-                icon: icon,
-                iconPadding: iconPadding,
-                title: title,
-                subtitle: subtitle,
-                borderRadius: borderRadius,
-                color: surfaceTintColor ?? defaultCardColor,
-                elevation: light ? 2 : 1,
-                mouseCursor: onTap != null ? SystemMouseCursors.click : null,
+                ),
               ),
+          ],
+        ),
       ),
     );
   }
