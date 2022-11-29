@@ -11,7 +11,6 @@ class YaruBanner extends StatelessWidget {
     required this.title,
     required this.icon,
     this.subtitle,
-    this.thirdTitle,
     this.watermarkIcon,
     this.iconPadding = const EdgeInsets.only(left: 10),
   });
@@ -41,9 +40,6 @@ class YaruBanner extends StatelessWidget {
   /// Optional [Widget] placed as the watermark
   final Widget? watermarkIcon;
 
-  /// The [Widget] used as the third line.
-  final Widget? thirdTitle;
-
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(10);
@@ -67,7 +63,6 @@ class YaruBanner extends StatelessWidget {
                     iconPadding: iconPadding,
                     title: title,
                     subtitle: subtitle,
-                    thirdTitle: thirdTitle,
                     borderRadius: borderRadius,
                     color: surfaceTintColor ?? defaultCardColor,
                     elevation: light ? 4 : 6,
@@ -92,7 +87,6 @@ class YaruBanner extends StatelessWidget {
                 iconPadding: iconPadding,
                 title: title,
                 subtitle: subtitle,
-                thirdTitle: thirdTitle,
                 borderRadius: borderRadius,
                 color: defaultCardColor,
                 elevation: light ? 2 : 1,
@@ -112,7 +106,6 @@ class _Banner extends StatelessWidget {
     required this.borderRadius,
     this.mouseCursor,
     this.subtitle,
-    this.thirdTitle,
     required this.iconPadding,
   });
 
@@ -123,21 +116,10 @@ class _Banner extends StatelessWidget {
   final BorderRadius borderRadius;
   final MouseCursor? mouseCursor;
   final Widget? subtitle;
-  final Widget? thirdTitle;
   final EdgeInsets iconPadding;
 
   @override
   Widget build(BuildContext context) {
-    final sub = Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (subtitle != null) subtitle!,
-        if (thirdTitle != null) thirdTitle!,
-      ],
-    );
-
     return Card(
       shadowColor: Colors.transparent,
       surfaceTintColor: color,
@@ -151,12 +133,14 @@ class _Banner extends StatelessWidget {
         constraints: const BoxConstraints.expand(),
         child: YaruTile(
           subTitlePadding: EdgeInsets.zero,
-          subtitle: DefaultTextStyle(
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Theme.of(context).textTheme.bodySmall!.color,
-                ),
-            child: sub,
-          ),
+          subtitle: subtitle != null
+              ? DefaultTextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).textTheme.bodySmall!.color,
+                      ),
+                  child: subtitle!,
+                )
+              : null,
           title: DefaultTextStyle(
             child: title,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
