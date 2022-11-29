@@ -7,7 +7,6 @@ class YaruBanner extends StatelessWidget {
     super.key,
     this.onTap,
     this.surfaceTintColor,
-    this.copyIconAsWatermark = false,
     required this.title,
     required this.icon,
     this.subtitle,
@@ -27,9 +26,6 @@ class YaruBanner extends StatelessWidget {
   /// The color used for the soft background tint.
   /// If null [Theme]'s background color is used.
   final Color? surfaceTintColor;
-
-  /// If true the [icon] will be displayed a second time, with small opacity.
-  final bool copyIconAsWatermark;
 
   /// The [Widget] used as the leading icon.
   final Widget icon;
@@ -67,14 +63,14 @@ class YaruBanner extends StatelessWidget {
               elevation: light ? 4 : 6,
               mouseCursor: onTap != null ? SystemMouseCursors.click : null,
             ),
-            if (copyIconAsWatermark == true)
+            if (watermarkIcon != null)
               Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Opacity(
                     opacity: 0.1,
-                    child: watermarkIcon != null ? watermarkIcon! : icon,
+                    child: watermarkIcon,
                   ),
                 ),
               ),
