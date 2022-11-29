@@ -20,8 +20,13 @@ class BannerPage extends StatelessWidget {
         for (int i = 0; i < 20; i++)
           YaruBanner(
             title: Text('YaruBanner $i'),
-            subtitle: const Text('Description'),
-            thirdTitle: i.isEven ? const Text('Third line') : null,
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Description'),
+                if (i.isEven) const Text('Third line'),
+              ],
+            ),
             icon: Icon(
               YaruIcons.weather_clear,
               size: 80,
