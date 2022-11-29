@@ -145,7 +145,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             onSelected: _setIndex,
             layoutDelegate: widget.layoutDelegate,
             previousPaneWidth: _previousPaneWidth,
-            onLeftPaneWidthChange: (paneWidth) => _previousPaneWidth = paneWidth,
+            onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
             appBar: widget.appBar,
             controller: widget.controller,
           );
