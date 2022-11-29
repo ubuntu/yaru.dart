@@ -88,7 +88,7 @@ class YaruBanner extends StatelessWidget {
                 title: title,
                 subtitle: subtitle,
                 borderRadius: borderRadius,
-                color: defaultCardColor,
+                color: surfaceTintColor ?? defaultCardColor,
                 elevation: light ? 2 : 1,
                 mouseCursor: onTap != null ? SystemMouseCursors.click : null,
               ),
