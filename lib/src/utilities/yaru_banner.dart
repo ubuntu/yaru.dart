@@ -10,7 +10,6 @@ class YaruBanner extends StatelessWidget {
     this.copyIconAsWatermark = false,
     required this.title,
     required this.icon,
-    this.bannerWidth,
     this.subtitle,
     this.thirdTitle,
     this.watermarkIcon,
@@ -44,9 +43,6 @@ class YaruBanner extends StatelessWidget {
 
   /// The [Widget] used as the third line.
   final Widget? thirdTitle;
-
-  /// Optional width for the banner - if null it defaults to 370.
-  final double? bannerWidth;
 
   @override
   Widget build(BuildContext context) {
