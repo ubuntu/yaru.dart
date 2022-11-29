@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 import '../constants.dart';
 import 'yaru_detail_page.dart';
 import 'yaru_landscape_layout.dart';
 import 'yaru_master_detail_layout_delegate.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_tile.dart';
+import 'yaru_page_controller.dart';
 import 'yaru_portrait_layout.dart';
 
 const _kDefaultPaneWidth = 280.0;
@@ -49,7 +51,7 @@ typedef YaruMasterDetailBuilder = Widget Function(
 class YaruMasterDetailPage extends StatefulWidget {
   const YaruMasterDetailPage({
     super.key,
-    required this.length,
+    this.length,
     required this.tileBuilder,
     required this.pageBuilder,
     this.layoutDelegate =
@@ -58,10 +60,11 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.initialIndex,
     this.onSelected,
     this.controller,
-  });
+  })  : assert(initialIndex == null || controller == null),
+        assert((length == null) != (controller == null));
 
   /// The total number of pages.
-  final int length;
+  final int? length;
 
   /// A builder that is called for each page to build its master tile.
   ///
@@ -88,36 +91,40 @@ class YaruMasterDetailPage extends StatefulWidget {
   final ValueChanged<int?>? onSelected;
 
   /// An optional controller that can be used to navigate to a specific index.
-  final ValueNotifier<int>? controller;
+  final YaruPageController? controller;
 
   @override
   _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
 }
 
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
-  var _index = -1;
-  var _previousIndex = 0;
-
   double? _previousPaneWidth;
+  late final YaruPageController _controller;
 
-  void _setIndex(int index) {
-    _previousIndex = _index;
-    _index = index;
-    widget.onSelected?.call(index == -1 ? null : index);
-  }
+  void _updateController() => _controller = widget.controller ??
+      YaruPageController(
+        length: _length,
+        initialIndex: widget.initialIndex ?? -1,
+      );
+
+  int get _length => widget.length ?? widget.controller!.length;
 
   @override
   void initState() {
     super.initState();
-    _index = widget.initialIndex ?? -1;
+    _updateController();
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) _controller.dispose();
+    super.dispose();
   }
 
   @override
   void didUpdateWidget(covariant YaruMasterDetailPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.initialIndex != oldWidget.initialIndex) {
-      _index = widget.initialIndex ?? -1;
-    }
+    if (widget.controller != oldWidget.controller) _updateController();
   }
 
   @override
@@ -128,26 +135,22 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
       builder: (context, constraints) {
         if (constraints.maxWidth < breakpoint) {
           return YaruPortraitLayout(
-            length: widget.length,
-            selectedIndex: _index,
             tileBuilder: widget.tileBuilder,
             pageBuilder: widget.pageBuilder,
-            onSelected: _setIndex,
+            onSelected: widget.onSelected,
             appBar: widget.appBar,
-            controller: widget.controller,
+            controller: _controller,
           );
         } else {
           return YaruLandscapeLayout(
-            length: widget.length,
-            selectedIndex: _index == -1 ? _previousIndex : _index,
             tileBuilder: widget.tileBuilder,
             pageBuilder: widget.pageBuilder,
-            onSelected: _setIndex,
+            onSelected: widget.onSelected,
             layoutDelegate: widget.layoutDelegate,
             previousPaneWidth: _previousPaneWidth,
             onLeftPaneWidthChange: (panWidth) => _previousPaneWidth = panWidth,
             appBar: widget.appBar,
-            controller: widget.controller,
+            controller: _controller,
           );
         }
       },

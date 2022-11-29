@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'yaru_compact_layout_theme.dart';
 import 'yaru_navigation_rail.dart';
+import 'yaru_page_controller.dart';
 
 typedef YaruCompactLayoutBuilder = Widget Function(
   BuildContext context,
@@ -15,15 +18,17 @@ const _kScrollbarThickness = 4.0;
 class YaruCompactLayout extends StatefulWidget {
   const YaruCompactLayout({
     super.key,
-    required this.length,
+    this.length,
     required this.itemBuilder,
     required this.pageBuilder,
-    this.initialIndex = 0,
+    this.initialIndex,
     this.onSelected,
-  });
+    this.controller,
+  })  : assert(initialIndex == null || controller == null),
+        assert((length == null) != (controller == null));
 
   /// The total number of pages.
-  final int length;
+  final int? length;
 
   /// A builder that is called for each page to build its navigation rail item.
   ///
@@ -35,31 +40,56 @@ class YaruCompactLayout extends StatefulWidget {
   final IndexedWidgetBuilder pageBuilder;
 
   /// The index of the initial page to show.
-  final int initialIndex;
+  final int? initialIndex;
 
   /// Called when the user selects a page.
   final ValueChanged<int>? onSelected;
+
+  /// An optional controller that can be used to navigate to a specific index.
+  final YaruPageController? controller;
 
   @override
   State<YaruCompactLayout> createState() => _YaruCompactLayoutState();
 }
 
 class _YaruCompactLayoutState extends State<YaruCompactLayout> {
-  late int _index;
+  late final ScrollController _scrollController;
+  late final YaruPageController _pageController;
 
-  late ScrollController _controller;
+  int get _length => widget.length ?? widget.controller!.length;
 
   @override
   void initState() {
-    _controller = ScrollController();
-    _index = widget.initialIndex;
     super.initState();
+    _scrollController = ScrollController();
+    _updatePageController();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
+    _pageController.removeListener(_pageControllerCallback);
+    if (widget.controller == null) _pageController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant YaruCompactLayout oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.controller != oldWidget.controller) {
+      oldWidget.controller?.removeListener(_pageControllerCallback);
+      _updatePageController();
+    }
+  }
+
+  void _updatePageController() {
+    _pageController =
+        widget.controller ?? YaruPageController(length: widget.length!);
+    _pageController.addListener(_pageControllerCallback);
+  }
+
+  void _pageControllerCallback() {
+    setState(() {});
   }
 
   @override
@@ -83,6 +113,11 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
     );
   }
 
+  void _onTap(int index) {
+    _pageController.index = index;
+    widget.onSelected?.call(index);
+  }
+
   Widget _buildNavigationRail(BuildContext context, BoxConstraints constraint) {
     return Theme(
       data: Theme.of(context).copyWith(
@@ -91,18 +126,13 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
         ),
       ),
       child: SingleChildScrollView(
-        controller: _controller,
+        controller: _scrollController,
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: constraint.maxHeight),
           child: YaruNavigationRail(
-            selectedIndex: _index,
-            onDestinationSelected: (index) {
-              setState(() {
-                _index = index;
-                widget.onSelected?.call(index);
-              });
-            },
-            length: widget.length,
+            selectedIndex: max(_pageController.index, 0),
+            onDestinationSelected: _onTap,
+            length: _length,
             itemBuilder: widget.itemBuilder,
           ),
         ),
@@ -116,6 +146,8 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
 
   Widget _buildPageView(BuildContext context) {
     final theme = YaruCompactLayoutTheme.of(context);
+    final index = max(_pageController.index, 0);
+
     return Expanded(
       child: Theme(
         data: Theme.of(context).copyWith(
@@ -124,9 +156,9 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
         child: Navigator(
           pages: [
             MaterialPage(
-              key: ValueKey(_index),
-              child: widget.length > _index
-                  ? widget.pageBuilder(context, _index)
+              key: ValueKey(index),
+              child: _length > index
+                  ? widget.pageBuilder(context, index)
                   : widget.pageBuilder(context, 0),
             ),
           ],

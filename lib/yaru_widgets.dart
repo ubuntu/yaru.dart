@@ -36,6 +36,7 @@ export 'src/layouts/yaru_master_detail_theme.dart';
 export 'src/layouts/yaru_master_tile.dart';
 export 'src/layouts/yaru_navigation_rail.dart';
 export 'src/layouts/yaru_navigation_rail_item.dart';
+export 'src/layouts/yaru_page_controller.dart';
 // Pages
 export 'src/pages/yaru_section.dart';
 export 'src/pages/yaru_tabbed_page.dart';

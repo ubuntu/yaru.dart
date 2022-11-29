@@ -49,14 +49,13 @@ void main() {
     'controller',
     (tester) async {
       final variant = goldenVariant.currentValue!;
-      final controller = ValueNotifier<int>(0);
+      final controller = YaruPageController(length: 8);
       await tester.pumpScaffold(
         YaruMasterDetailPage(
           controller: controller,
           layoutDelegate: const YaruMasterFixedPaneDelegate(
             paneWidth: kYaruMasterDetailBreakpoint / 3,
           ),
-          length: 8,
           appBar: AppBar(title: const Text('Master')),
           tileBuilder: (context, index, selected) => YaruMasterTile(
             leading: const Icon(YaruIcons.menu),
@@ -73,7 +72,7 @@ void main() {
         size: Size(variant.value!, 480),
       );
 
-      controller.value = 3;
+      controller.index = 3;
       await tester.pumpAndSettle();
       if (variant.label.startsWith('portrait')) {
         expect(find.text('Master'), findsNothing);
