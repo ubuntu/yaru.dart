@@ -18,25 +18,27 @@ class BannerPage extends StatelessWidget {
       ),
       children: [
         for (int i = 0; i < 20; i++)
-          YaruBanner(
-            title: Text('YaruBanner $i'),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Description'),
-                if (i.isEven) const Text('Third line'),
-              ],
-            ),
-            icon: Icon(
-              YaruIcons.weather_clear,
-              size: 80,
-              color: Theme.of(context).primaryColor,
-            ),
-            onTap: () => showAboutDialog(context: context),
-            surfaceTintColor: i.isEven ? Colors.pink : null,
-            watermarkIcon: const Icon(
+          YaruWatermark(
+            watermark: const Icon(
               Icons.cloud,
               size: 100,
+            ),
+            child: YaruBanner(
+              title: Text('YaruBanner $i'),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Description'),
+                  if (i.isEven) const Text('Third line'),
+                ],
+              ),
+              icon: Icon(
+                YaruIcons.weather_clear,
+                size: 80,
+                color: Theme.of(context).primaryColor,
+              ),
+              onTap: () => showAboutDialog(context: context),
+              surfaceTintColor: i.isEven ? Colors.pink : null,
             ),
           )
       ],
