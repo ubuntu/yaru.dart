@@ -132,21 +132,9 @@ class _Banner extends StatelessWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints.expand(),
         child: YaruTile(
-          subTitlePadding: EdgeInsets.zero,
-          subtitle: subtitle != null
-              ? DefaultTextStyle(
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).textTheme.bodySmall!.color,
-                      ),
-                  child: subtitle!,
-                )
-              : null,
-          title: DefaultTextStyle(
-            child: title,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontSize: 20,
-                ),
-          ),
+          style: YaruTileStyle.banner,
+          title: title,
+          subtitle: subtitle,
           leading: Padding(
             padding: iconPadding,
             child: icon,
