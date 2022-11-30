@@ -12,7 +12,7 @@ void main() {
       final variant = goldenVariant.currentValue!;
 
       await tester.pumpScaffold(
-        YaruCompactLayout(
+        YaruNavigationPage(
           length: 4,
           itemBuilder: (context, index, selected) => YaruNavigationRailItem(
             icon: const Icon(YaruIcons.menu),
@@ -29,8 +29,8 @@ void main() {
       await tester.pumpAndSettle();
 
       await expectLater(
-        find.byType(YaruCompactLayout),
-        matchesGoldenFile('goldens/yaru_compact_layout-${variant.label}.png'),
+        find.byType(YaruNavigationPage),
+        matchesGoldenFile('goldens/yaru_navigation_page-${variant.label}.png'),
       );
     },
     variant: goldenVariant,
@@ -43,7 +43,7 @@ void main() {
       final variant = goldenVariant.currentValue!;
       final controller = YaruPageController(length: 8);
       await tester.pumpScaffold(
-        YaruCompactLayout(
+        YaruNavigationPage(
           controller: controller,
           itemBuilder: (context, index, selected) => YaruNavigationRailItem(
             icon: const Icon(YaruIcons.menu),

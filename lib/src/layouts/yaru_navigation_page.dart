@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'yaru_compact_layout_theme.dart';
+import 'yaru_navigation_page_theme.dart';
 import 'yaru_navigation_rail.dart';
 import 'yaru_page_controller.dart';
 
-typedef YaruCompactLayoutBuilder = Widget Function(
+typedef YaruNavigationPageBuilder = Widget Function(
   BuildContext context,
   int index,
   bool selected,
@@ -15,8 +15,8 @@ typedef YaruCompactLayoutBuilder = Widget Function(
 const _kScrollbarThickness = 4.0;
 
 /// A page layout which use a [YaruNavigationRail] on left for page navigation
-class YaruCompactLayout extends StatefulWidget {
-  const YaruCompactLayout({
+class YaruNavigationPage extends StatefulWidget {
+  const YaruNavigationPage({
     super.key,
     this.length,
     required this.itemBuilder,
@@ -34,7 +34,7 @@ class YaruCompactLayout extends StatefulWidget {
   ///
   /// See also:
   ///  * [YaruNavigationRailItem]
-  final YaruCompactLayoutBuilder itemBuilder;
+  final YaruNavigationPageBuilder itemBuilder;
 
   /// A builder that is called for each page to build its content.
   final IndexedWidgetBuilder pageBuilder;
@@ -49,10 +49,10 @@ class YaruCompactLayout extends StatefulWidget {
   final YaruPageController? controller;
 
   @override
-  State<YaruCompactLayout> createState() => _YaruCompactLayoutState();
+  State<YaruNavigationPage> createState() => _YaruNavigationPageState();
 }
 
-class _YaruCompactLayoutState extends State<YaruCompactLayout> {
+class _YaruNavigationPageState extends State<YaruNavigationPage> {
   late final ScrollController _scrollController;
   late final YaruPageController _pageController;
 
@@ -74,7 +74,7 @@ class _YaruCompactLayoutState extends State<YaruCompactLayout> {
   }
 
   @override
-  void didUpdateWidget(covariant YaruCompactLayout oldWidget) {
+  void didUpdateWidget(covariant YaruNavigationPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       oldWidget.controller?.removeListener(_pageControllerCallback);
