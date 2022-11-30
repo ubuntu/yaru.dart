@@ -27,13 +27,13 @@ export 'src/controls/yaru_window_control.dart';
 // Extensions
 export 'src/extensions/border_radius_extension.dart';
 // Layouts
-export 'src/layouts/yaru_compact_layout.dart';
-export 'src/layouts/yaru_compact_layout_theme.dart';
 export 'src/layouts/yaru_detail_page.dart';
 export 'src/layouts/yaru_master_detail_layout_delegate.dart';
 export 'src/layouts/yaru_master_detail_page.dart';
 export 'src/layouts/yaru_master_detail_theme.dart';
 export 'src/layouts/yaru_master_tile.dart';
+export 'src/layouts/yaru_navigation_page.dart';
+export 'src/layouts/yaru_navigation_page_theme.dart';
 export 'src/layouts/yaru_navigation_rail.dart';
 export 'src/layouts/yaru_navigation_rail_item.dart';
 export 'src/layouts/yaru_page_controller.dart';

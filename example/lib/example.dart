@@ -98,7 +98,7 @@ class _CompactPage extends StatelessWidget {
 
     final pageItems = [configItem] + examplePageItems;
 
-    return YaruCompactLayout(
+    return YaruNavigationPage(
       length: pageItems.length,
       itemBuilder: (context, index, selected) => YaruNavigationRailItem(
         icon: pageItems[index].iconBuilder(context, selected),

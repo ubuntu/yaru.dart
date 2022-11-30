@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_compact_layout.dart';
+import 'yaru_navigation_page.dart';
 import 'yaru_navigation_rail_item.dart';
 
 class YaruNavigationRail extends StatelessWidget {
@@ -20,7 +20,7 @@ class YaruNavigationRail extends StatelessWidget {
   final int length;
 
   /// A builder that is called for each page to build its navigation rail item.
-  final YaruCompactLayoutBuilder itemBuilder;
+  final YaruNavigationPageBuilder itemBuilder;
 
   /// The index into [destinations] for the current selected
   /// item or null if no destination is selected.
