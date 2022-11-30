@@ -161,7 +161,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
   }
 
   Widget _buildNavigationButton(
-    AlignmentGeometry alignement,
+    AlignmentGeometry alignment,
     VoidCallback? onPressed,
     Widget icon,
   ) {
@@ -171,7 +171,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
         duration: _controller.scrollAnimationDuration,
         curve: _controller.scrollAnimationCurve,
         child: Align(
-          alignment: alignement,
+          alignment: alignment,
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
               shape: const CircleBorder(),
