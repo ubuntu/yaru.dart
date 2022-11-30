@@ -10,7 +10,6 @@ class YaruBanner extends StatelessWidget {
     required this.title,
     required this.icon,
     this.subtitle,
-    this.watermarkIcon,
     this.iconPadding = const EdgeInsets.only(left: 10),
   });
 
@@ -33,9 +32,6 @@ class YaruBanner extends StatelessWidget {
   /// Padding for the leading icon. Defaults to `EdgeInsets.only(left: 10)`
   final EdgeInsets iconPadding;
 
-  /// Optional [Widget] placed as the watermark
-  final Widget? watermarkIcon;
-
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(10);
@@ -50,30 +46,14 @@ class YaruBanner extends StatelessWidget {
         onTap: onTap,
         borderRadius: borderRadius,
         hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            _Banner(
-              icon: icon,
-              iconPadding: iconPadding,
-              title: title,
-              subtitle: subtitle,
-              borderRadius: borderRadius,
-              color: surfaceTintColor ?? defaultCardColor,
-              elevation: light ? 4 : 6,
-            ),
-            if (watermarkIcon != null)
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Opacity(
-                    opacity: 0.1,
-                    child: watermarkIcon,
-                  ),
-                ),
-              ),
-          ],
+        child: _Banner(
+          icon: icon,
+          iconPadding: iconPadding,
+          title: title,
+          subtitle: subtitle,
+          borderRadius: borderRadius,
+          color: surfaceTintColor ?? defaultCardColor,
+          elevation: light ? 4 : 6,
         ),
       ),
     );
