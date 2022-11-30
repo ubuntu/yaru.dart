@@ -22,7 +22,7 @@ class YaruIconButton extends StatelessWidget {
     super.key,
   });
 
-  final Alignment alignment;
+  final AlignmentGeometry alignment;
   final bool autofocus;
   final BoxConstraints? constraints;
   final bool enableFeedback;
