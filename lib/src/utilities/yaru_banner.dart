@@ -3,21 +3,39 @@ import '../../yaru_widgets.dart';
 
 /// A colorable [Card] with a border which is tap-able via an [onTap] callback.
 class YaruBanner extends StatelessWidget {
+  /// Creates a banner with an arbitrary child widget.
   const YaruBanner({
     super.key,
     this.onTap,
     this.surfaceTintColor,
-    required this.title,
-    required this.icon,
-    this.subtitle,
+    required this.child,
     this.padding = const EdgeInsets.all(kYaruPagePadding),
   });
 
-  /// The name of the card
-  final Widget title;
+  /// Creates a banner with a [YaruTile] child widget.
+  YaruBanner.tile({
+    Key? key,
+    VoidCallback? onTap,
+    Color? surfaceTintColor,
+    required Widget title,
+    Widget? icon,
+    Widget? subtitle,
+    EdgeInsetsGeometry padding = const EdgeInsets.all(kYaruPagePadding),
+  }) : this(
+          key: key,
+          onTap: onTap,
+          padding: EdgeInsets.zero,
+          surfaceTintColor: surfaceTintColor,
+          child: YaruTile(
+            leading: icon,
+            title: title,
+            subtitle: subtitle,
+            padding: padding,
+          ),
+        );
 
-  /// The subtitle shown in the second line.
-  final Widget? subtitle;
+  /// The widget to display inside the banner.
+  final Widget child;
 
   /// An optional callback
   final Function()? onTap;
@@ -25,9 +43,6 @@ class YaruBanner extends StatelessWidget {
   /// The color used for the soft background tint.
   /// If null [Theme]'s background color is used.
   final Color? surfaceTintColor;
-
-  /// The [Widget] used as the leading icon.
-  final Widget icon;
 
   /// Padding for the banner content. Defaults to `EdgeInsets.all(kYaruPagePadding)`
   final EdgeInsetsGeometry padding;
@@ -46,58 +61,21 @@ class YaruBanner extends StatelessWidget {
         onTap: onTap,
         borderRadius: borderRadius,
         hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-        child: _Banner(
-          icon: icon,
-          padding: padding,
-          title: title,
-          subtitle: subtitle,
-          borderRadius: borderRadius,
-          color: surfaceTintColor ?? defaultCardColor,
+        child: Card(
+          shadowColor: Colors.transparent,
+          surfaceTintColor: surfaceTintColor ?? defaultCardColor,
           elevation: light ? 4 : 6,
-        ),
-      ),
-    );
-  }
-}
-
-class _Banner extends StatelessWidget {
-  const _Banner({
-    required this.color,
-    required this.title,
-    required this.elevation,
-    required this.icon,
-    required this.borderRadius,
-    this.subtitle,
-    required this.padding,
-  });
-
-  final Color color;
-  final Widget title;
-  final double elevation;
-  final Widget icon;
-  final BorderRadius borderRadius;
-  final Widget? subtitle;
-  final EdgeInsetsGeometry padding;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shadowColor: Colors.transparent,
-      surfaceTintColor: color,
-      elevation: elevation,
-      shape: RoundedRectangleBorder(
-        borderRadius: borderRadius
-            .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
-        side: BorderSide(color: Theme.of(context).dividerColor, width: 1),
-      ),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints.expand(),
-        child: YaruTile(
-          padding: padding,
-          style: YaruTileStyle.banner,
-          title: title,
-          subtitle: subtitle,
-          leading: icon,
+          shape: RoundedRectangleBorder(
+            borderRadius: borderRadius
+                .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
+            side: BorderSide(color: Theme.of(context).dividerColor, width: 1),
+          ),
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            padding: padding,
+            child: child,
+          ),
         ),
       ),
     );

@@ -23,7 +23,7 @@ class BannerPage extends StatelessWidget {
               Icons.cloud,
               size: 100,
             ),
-            child: YaruBanner(
+            child: YaruBanner.tile(
               title: Text('YaruBanner $i'),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

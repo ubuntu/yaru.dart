@@ -53,7 +53,7 @@ class _DialogPageState extends State<DialogPage> {
                       ),
                       content: SizedBox(
                         height: 100,
-                        child: YaruBanner(
+                        child: YaruBanner.tile(
                           surfaceTintColor: Colors.pink,
                           title: Text(
                             isCloseable
