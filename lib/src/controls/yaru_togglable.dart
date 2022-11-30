@@ -74,7 +74,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: handleTap),
   };
 
-  EdgeInsets get activableAreaPadding;
+  EdgeInsetsGeometry get activableAreaPadding;
   Size get togglableSize;
 
   @override

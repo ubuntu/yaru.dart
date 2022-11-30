@@ -33,7 +33,7 @@ class YaruMasterDetailThemeData with Diagnosticable {
   final double? tileSpacing;
 
   /// The padding around the master list.
-  final EdgeInsets? listPadding;
+  final EdgeInsetsGeometry? listPadding;
 
   /// The page transitions to use when in portrait mode.
   final PageTransitionsTheme? portraitTransitions;
@@ -46,7 +46,7 @@ class YaruMasterDetailThemeData with Diagnosticable {
   YaruMasterDetailThemeData copyWith({
     double? breakpoint,
     double? tileSpacing,
-    EdgeInsets? listPadding,
+    EdgeInsetsGeometry? listPadding,
     PageTransitionsTheme? portraitTransitions,
     PageTransitionsTheme? landscapeTransitions,
   }) {

@@ -32,7 +32,7 @@ class YaruIconButton extends StatelessWidget {
   final bool? isSelected;
   final MouseCursor? mouseCursor;
   final VoidCallback? onPressed;
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
   final Widget? selectedIcon;
   final double? splashRadius;
   final ButtonStyle? style;

@@ -30,8 +30,8 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final String? tooltip;
   final PopupMenuPosition position;
   final List<PopupMenuEntry<T>> Function(BuildContext) itemBuilder;
-  final EdgeInsets padding;
-  final EdgeInsets childPadding;
+  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry childPadding;
   final bool enabled;
   final Offset offset;
   final bool? enableFeedback;
@@ -78,8 +78,8 @@ class _YaruPopupDecoration extends StatelessWidget {
   });
 
   final Widget child;
-  final EdgeInsets padding;
-  final EdgeInsets childPadding;
+  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry childPadding;
 
   @override
   Widget build(BuildContext context) {

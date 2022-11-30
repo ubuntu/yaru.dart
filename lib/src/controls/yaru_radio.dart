@@ -126,7 +126,8 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
 
 class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
   @override
-  EdgeInsets get activableAreaPadding => kCheckradioActivableAreaPadding;
+  EdgeInsetsGeometry get activableAreaPadding =>
+      kCheckradioActivableAreaPadding;
 
   @override
   Size get togglableSize => kCheckradioTogglableSize;

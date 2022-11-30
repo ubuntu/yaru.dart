@@ -37,7 +37,7 @@ class YaruSelectableContainer extends StatelessWidget {
   final double radius;
 
   /// Optional custom padding for the child which defaults to 6.0 on all sides.
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// Optional custom [Color] which is used for the selection border.
   final Color? selectionColor;
@@ -62,7 +62,8 @@ class YaruSelectableContainer extends StatelessWidget {
         child: Padding(
           padding: padding,
           child: ClipRRect(
-            borderRadius: borderRadius.inner(padding),
+            borderRadius:
+                borderRadius.inner(padding.resolve(Directionality.of(context))),
             child: child,
           ),
         ),

@@ -29,13 +29,13 @@ class YaruSection extends StatelessWidget {
 
   /// The padding between the section border and its [child] which defaults to
   /// `EdgeInsets.all(8.0)`.
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The padding around the [headline] which defaults to `EdgeInsets.all(8.0)`.
-  final EdgeInsets headlinePadding;
+  final EdgeInsetsGeometry headlinePadding;
 
   /// An optional margin around the section border.
-  final EdgeInsets? margin;
+  final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {

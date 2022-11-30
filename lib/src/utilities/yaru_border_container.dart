@@ -29,7 +29,7 @@ class YaruBorderContainer extends StatelessWidget {
   final AlignmentGeometry? alignment;
 
   /// See [Container.padding].
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// See [Container.color].
   final Color? color;

@@ -95,7 +95,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
 
 class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
   @override
-  EdgeInsets get activableAreaPadding => _kSwitchActivableAreaPadding;
+  EdgeInsetsGeometry get activableAreaPadding => _kSwitchActivableAreaPadding;
 
   @override
   Size get togglableSize => _kSwitchSize;
