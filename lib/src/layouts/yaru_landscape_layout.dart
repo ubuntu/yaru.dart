@@ -10,7 +10,6 @@ import 'yaru_master_list_view.dart';
 import 'yaru_page_controller.dart';
 
 class YaruLandscapeLayout extends StatefulWidget {
-  /// Creates a landscape layout
   const YaruLandscapeLayout({
     super.key,
     required this.tileBuilder,
@@ -23,28 +22,13 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.controller,
   });
 
-  /// A builder that is called for each page to build its master tile.
   final YaruMasterDetailBuilder tileBuilder;
-
-  /// A builder that is called for each page to build its detail page.
   final IndexedWidgetBuilder pageBuilder;
-
-  /// Callback that returns an index when the page changes.
   final ValueChanged<int>? onSelected;
-
-  /// Controls the pane width with defined parameters
   final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
-
-  /// Previous width of the pane
   final double? previousPaneWidth;
-
-  /// Callback called when the left pane is resizing.
   final Function(double)? onLeftPaneWidthChange;
-
-  /// An optional [PreferredSizeWidget] used as the left [AppBar]
-  /// If provided, a second [AppBar] will be created right to it.
   final PreferredSizeWidget? appBar;
-
   final YaruPageController controller;
 
   @override
