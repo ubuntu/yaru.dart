@@ -10,7 +10,7 @@ class YaruBanner extends StatelessWidget {
     required this.title,
     required this.icon,
     this.subtitle,
-    this.iconPadding = const EdgeInsets.only(left: 10),
+    this.padding = const EdgeInsets.all(kYaruPagePadding),
   });
 
   /// The name of the card
@@ -29,8 +29,8 @@ class YaruBanner extends StatelessWidget {
   /// The [Widget] used as the leading icon.
   final Widget icon;
 
-  /// Padding for the leading icon. Defaults to `EdgeInsets.only(left: 10)`
-  final EdgeInsets iconPadding;
+  /// Padding for the banner content. Defaults to `EdgeInsets.all(kYaruPagePadding)`
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class YaruBanner extends StatelessWidget {
         hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
         child: _Banner(
           icon: icon,
-          iconPadding: iconPadding,
+          padding: padding,
           title: title,
           subtitle: subtitle,
           borderRadius: borderRadius,
@@ -68,7 +68,7 @@ class _Banner extends StatelessWidget {
     required this.icon,
     required this.borderRadius,
     this.subtitle,
-    required this.iconPadding,
+    required this.padding,
   });
 
   final Color color;
@@ -77,7 +77,7 @@ class _Banner extends StatelessWidget {
   final Widget icon;
   final BorderRadius borderRadius;
   final Widget? subtitle;
-  final EdgeInsets iconPadding;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -93,13 +93,11 @@ class _Banner extends StatelessWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints.expand(),
         child: YaruTile(
+          padding: padding,
           style: YaruTileStyle.banner,
           title: title,
           subtitle: subtitle,
-          leading: Padding(
-            padding: iconPadding,
-            child: icon,
-          ),
+          leading: icon,
         ),
       ),
     );
