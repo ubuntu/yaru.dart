@@ -30,7 +30,7 @@ class _TabbedPagePageState extends State<TabbedPagePage> {
           ),
           children: [
             for (int i = 0; i < 20; i++)
-              YaruBanner(
+              YaruBanner.tile(
                 title: Text('YaruBanner $i'),
                 subtitle: const Text('Description'),
                 icon: Image.asset('assets/ubuntuhero.jpg'),
