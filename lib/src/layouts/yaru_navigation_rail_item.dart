@@ -105,7 +105,7 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
         YaruNavigationRailItemScope.maybeOf(context)?.selected == true;
   }
 
-  Alignment get _alignement {
+  Alignment get _alignment {
     return widget.style == YaruNavigationRailStyle.labelledExtended ||
             oldStyle == YaruNavigationRailStyle.labelledExtended
         ? Alignment.centerLeft
@@ -126,9 +126,9 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
   Widget _buildSizedContainer(Widget child) {
     return AnimatedSize(
       duration: _kSizeAnimationDuration,
-      alignment: _alignement,
+      alignment: _alignment,
       child: Align(
-        alignment: _alignement,
+        alignment: _alignment,
         child: SizedBox(
           width: _width,
           child: child,
