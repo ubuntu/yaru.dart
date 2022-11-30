@@ -30,7 +30,7 @@ class YaruBanner extends StatelessWidget {
   final Widget icon;
 
   /// Padding for the banner content. Defaults to `EdgeInsets.all(kYaruPagePadding)`
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class _Banner extends StatelessWidget {
   final Widget icon;
   final BorderRadius borderRadius;
   final Widget? subtitle;
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {

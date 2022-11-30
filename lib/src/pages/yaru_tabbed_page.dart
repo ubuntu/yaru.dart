@@ -34,7 +34,7 @@ class YaruTabbedPage extends StatefulWidget {
   final double? width;
 
   /// The padding [EdgeInsets] which defaults to [kDefaultPadding] at top, right and left.
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The initialIndex of the [TabController]
   final int initialIndex;

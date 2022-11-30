@@ -116,7 +116,8 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
 
 class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
   @override
-  EdgeInsets get activableAreaPadding => kCheckradioActivableAreaPadding;
+  EdgeInsetsGeometry get activableAreaPadding =>
+      kCheckradioActivableAreaPadding;
 
   @override
   Size get togglableSize => kCheckradioTogglableSize;

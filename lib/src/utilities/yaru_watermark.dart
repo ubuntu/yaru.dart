@@ -31,7 +31,7 @@ class YaruWatermark extends StatelessWidget {
 
   /// The amount of space by which to inset the [watermark]. Defaults to
   /// `EdgeInsets.all(20)`.
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The opacity of the watermark. Defaults to 0.1.
   final double opacity;

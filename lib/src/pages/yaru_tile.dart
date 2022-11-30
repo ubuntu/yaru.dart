@@ -42,8 +42,8 @@ class YaruTile extends StatelessWidget {
   /// Whether or not we can interact with the widget
   final bool enabled;
 
-  /// The padding [EdgeInsets] which defaults to `EdgeInsets.all(8.0)`.
-  final EdgeInsets padding;
+  /// The padding [EdgeInsetsGeometry] which defaults to `EdgeInsets.all(8.0)`.
+  final EdgeInsetsGeometry padding;
 
   /// The style of the tile. Defaults to `YaruTileStyle.normal`.
   final YaruTileStyle style;

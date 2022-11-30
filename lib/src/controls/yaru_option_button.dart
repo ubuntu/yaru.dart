@@ -51,7 +51,7 @@ class YaruOptionButton extends OutlinedButton {
           ),
         );
 
-  static ButtonStyle _styleFrom({EdgeInsets? padding}) {
+  static ButtonStyle _styleFrom({EdgeInsetsGeometry? padding}) {
     return OutlinedButton.styleFrom(
       minimumSize: const Size.square(40),
       maximumSize: const Size.square(40),
