@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+const yaruAnimatedOkIconAnimationCurve = Curves.easeInCubic;
+const yaruAnimatedOkIconAnimationDuration = 500;
 const _kTargetCanvasSize = 24.0;
 const _kTargetIconSize = 20.0;
-const _kAnimationCurve = Curves.easeInCubic;
-const _kAnimationDuration = 500;
 
 /// An animated Yaru ok icon, similar to the original one
 class YaruAnimatedOkIcon extends StatefulWidget {
@@ -13,7 +13,7 @@ class YaruAnimatedOkIcon extends StatefulWidget {
     this.size = 24.0,
     this.filled = false,
     this.color,
-    this.onCompleted,
+    this.progress,
   });
 
   /// Determines the icon canvas size
@@ -29,8 +29,10 @@ class YaruAnimatedOkIcon extends StatefulWidget {
   /// If null, defaults to colorScheme.onSurface
   final Color? color;
 
-  /// Callback called once animation completed
-  final Function? onCompleted;
+  /// The animation progress for the animated icon.
+  /// The value is clamped to be between 0 and 1.
+  /// If null, a defaut animation controller will be created, which will run only once.
+  final Animation<double>? progress;
 
   @override
   State<YaruAnimatedOkIcon> createState() => _YaruAnimatedOkIconState();
@@ -41,30 +43,32 @@ class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>
   late final Animation<double> _animation;
   late final AnimationController _controller;
 
+  Animation<double> get progress => widget.progress ?? _animation;
+
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: _kAnimationDuration),
-      vsync: this,
-    );
-    _animation = Tween(begin: 0.0, end: 1.0)
-        .chain(CurveTween(curve: _kAnimationCurve))
-        .animate(_controller);
+    if (widget.progress == null) {
+      _controller = AnimationController(
+        duration:
+            const Duration(milliseconds: yaruAnimatedOkIconAnimationDuration),
+        vsync: this,
+      );
+      _animation = Tween(begin: 0.0, end: 1.0)
+          .chain(CurveTween(curve: yaruAnimatedOkIconAnimationCurve))
+          .animate(_controller);
 
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed && widget.onCompleted != null) {
-        widget.onCompleted!();
-      }
-    });
-
-    _controller.forward();
+      _controller.forward();
+    }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (widget.progress == null) {
+      _controller.dispose();
+    }
+
     super.dispose();
   }
 
@@ -74,14 +78,14 @@ class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>
       child: SizedBox.square(
         dimension: widget.size,
         child: AnimatedBuilder(
-          animation: _animation,
+          animation: progress,
           builder: (context, child) {
             return CustomPaint(
               painter: _YaruAnimatedOkIconPainter(
                 widget.size,
                 widget.filled,
                 widget.color ?? Theme.of(context).colorScheme.onSurface,
-                _animation.value,
+                progress.value,
               ),
             );
           },
@@ -96,17 +100,17 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
     this.size,
     this.filled,
     this.color,
-    this.animationPosition,
-  ) : assert(animationPosition >= 0.0 && animationPosition <= 1.0);
+    this.progress,
+  ) : assert(progress >= 0.0 && progress <= 1.0);
 
   final double size;
   final bool filled;
   final Color color;
-  final double animationPosition;
+  final double progress;
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (filled && animationPosition >= 0.5) {
+    if (filled && progress >= 0.5) {
       final clipRect = Rect.fromCenter(
         center: Offset.zero,
         width: this.size * 2,
@@ -152,8 +156,8 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
         ? Offset(size * 0.939, size * 0.314)
         : Offset(size * 0.892, size * 0.360);
 
-    if (animationPosition < 0.5) {
-      final pathT = animationPosition * 2.0;
+    if (progress < 0.5) {
+      final pathT = progress * 2.0;
       final drawMid1 = Offset.lerp(start1, mid1, pathT)!;
       final drawMid2 = Offset.lerp(start2, mid2, pathT)!;
 
@@ -163,7 +167,7 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
       checkmark.lineTo(start2.dx, start2.dy);
       checkmark.close();
     } else {
-      final pathT = (animationPosition - 0.5) * 2.0;
+      final pathT = (progress - 0.5) * 2.0;
       final drawEnd1 = Offset.lerp(mid1, end1, pathT)!;
       final drawEnd2 = Offset.lerp(mid2, end2, pathT)!;
 
@@ -183,10 +187,9 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
     final finalCircleRadius =
         (size / 2 - 1) * _kTargetIconSize / _kTargetCanvasSize;
     // From 1.0 to 0.75 to 1.0
-    final circleRadius = animationPosition < 0.5
-        ? finalCircleRadius - finalCircleRadius * 0.25 * animationPosition
-        : finalCircleRadius * 0.75 +
-            finalCircleRadius * 0.25 * animationPosition;
+    final circleRadius = progress < 0.5
+        ? finalCircleRadius - finalCircleRadius * 0.25 * progress
+        : finalCircleRadius * 0.75 + finalCircleRadius * 0.25 * progress;
 
     return Path()
       ..addOval(
@@ -202,9 +205,8 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
     final finalCircleRadius =
         (size / 2 - 1) * _kTargetIconSize / _kTargetCanvasSize;
     // From 1.0 to 0.75 to 1.0
-    final circleRadius = animationPosition < 0.5
-        ? 0.0
-        : (animationPosition - 0.5) * 2 * finalCircleRadius;
+    final circleRadius =
+        progress < 0.5 ? 0.0 : (progress - 0.5) * 2 * finalCircleRadius;
 
     return Path()
       ..addOval(
@@ -236,7 +238,7 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
   bool shouldRepaint(
     _YaruAnimatedOkIconPainter oldDelegate,
   ) {
-    return oldDelegate.animationPosition != animationPosition ||
+    return oldDelegate.progress != progress ||
         oldDelegate.size != size ||
         oldDelegate.filled != filled ||
         oldDelegate.color != color;

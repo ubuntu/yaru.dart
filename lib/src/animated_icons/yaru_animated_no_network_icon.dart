@@ -12,7 +12,7 @@ class YaruAnimatedNoNetworkIcon extends StatefulWidget {
     super.key,
     this.size = 24.0,
     this.color,
-    this.onCompleted,
+    this.progress,
   });
 
   /// Determines the icon canvas size
@@ -24,8 +24,10 @@ class YaruAnimatedNoNetworkIcon extends StatefulWidget {
   /// If null, defaults to colorScheme.onSurface
   final Color? color;
 
-  /// Callback called once animation completeds
-  final Function? onCompleted;
+  /// The animation progress for the animated icon.
+  /// The value is clamped to be between 0 and 1.
+  /// If null, a defaut animation controller will be created, which will run only once.
+  final Animation<double>? progress;
 
   @override
   State<YaruAnimatedNoNetworkIcon> createState() =>
@@ -33,34 +35,35 @@ class YaruAnimatedNoNetworkIcon extends StatefulWidget {
 }
 
 class _YaruAnimatedNoNetworkIconState extends State<YaruAnimatedNoNetworkIcon>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late final Animation<double> _animation;
   late final AnimationController _controller;
+
+  Animation<double> get progress => widget.progress ?? _animation;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: _kAnimationDuration),
-      vsync: this,
-    );
-    _animation = Tween(begin: 0.0, end: 1.0)
-        .chain(CurveTween(curve: _kAnimationCurve))
-        .animate(_controller);
+    if (widget.progress == null) {
+      _controller = AnimationController(
+        duration: const Duration(milliseconds: _kAnimationDuration),
+        vsync: this,
+      );
+      _animation = Tween(begin: 0.0, end: 1.0)
+          .chain(CurveTween(curve: _kAnimationCurve))
+          .animate(_controller);
 
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed && widget.onCompleted != null) {
-        widget.onCompleted!();
-      }
-    });
-
-    _controller.forward();
+      _controller.forward();
+    }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (widget.progress == null) {
+      _controller.dispose();
+    }
+
     super.dispose();
   }
 
@@ -70,13 +73,13 @@ class _YaruAnimatedNoNetworkIconState extends State<YaruAnimatedNoNetworkIcon>
       child: SizedBox.square(
         dimension: widget.size,
         child: AnimatedBuilder(
-          animation: _animation,
+          animation: progress,
           builder: (context, child) {
             return CustomPaint(
               painter: _YaruAnimatedNoNetworkIconPainter(
                 widget.size,
                 widget.color ?? Theme.of(context).colorScheme.onSurface,
-                _animation.value,
+                progress.value,
               ),
             );
           },
@@ -91,8 +94,8 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   _YaruAnimatedNoNetworkIconPainter(
     this.size,
     this.color,
-    this.animationPosition,
-  ) : assert(animationPosition >= 0.0 && animationPosition <= 1.0) {
+    this.progress,
+  ) : assert(progress >= 0.0 && progress <= 1.0) {
     wave1Metric = _getWave1Path().computeMetrics().single;
     wave2Metric = _getWave2Path().computeMetrics().single;
     wave3Metric = _getWave3Path().computeMetrics().single;
@@ -102,7 +105,7 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
 
   final double size;
   final Color color;
-  final double animationPosition;
+  final double progress;
 
   late final PathMetric wave1Metric;
   late final PathMetric wave2Metric;
@@ -245,10 +248,10 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
     final end1 = Offset(size * 0.8358561, size * 0.7058105);
     final end2 = Offset(size * 0.8063965, size * 0.7352702);
 
-    final localAnimationPosition = _computeLocalAnimationPosition(.4, .6);
+    final localProgress = _computeLocalProgress(.4, .6);
 
-    final drawEnd1 = Offset.lerp(start1, end1, localAnimationPosition)!;
-    final drawEnd2 = Offset.lerp(start2, end2, localAnimationPosition)!;
+    final drawEnd1 = Offset.lerp(start1, end1, localProgress)!;
+    final drawEnd2 = Offset.lerp(start2, end2, localProgress)!;
 
     final stripe2 = Path();
     stripe2.moveTo(start1.dx, start1.dy);
@@ -268,7 +271,7 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   ) {
     final drawPath = metric.extractPath(
       0,
-      metric.length * _computeLocalAnimationPosition(start, duration),
+      metric.length * _computeLocalProgress(start, duration),
     );
 
     canvas.drawPath(drawPath, _getStrokePaint());
@@ -277,7 +280,7 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   void _drawDot(Canvas canvas) {
     canvas.drawCircle(
       Offset(size * 0.5, size * 0.7916667),
-      (size * 0.08333333) * _computeLocalAnimationPosition(0, .1),
+      (size * 0.08333333) * _computeLocalProgress(0, .1),
       _getFillPaint(),
     );
   }
@@ -297,21 +300,20 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
       ..blendMode = BlendMode.src;
   }
 
-  double _computeLocalAnimationPosition(double start, double duration) {
+  double _computeLocalProgress(double start, double duration) {
     assert(start >= 0.0 && start <= 1.0);
     assert(duration >= 0.0 && duration <= 1.0);
     assert(start + duration <= 1.0);
 
-    final localAnimationPosition = animationPosition >= start
-        ? (animationPosition - start) * (1.0 / duration)
-        : 0.0;
+    final localProgress =
+        progress >= start ? (progress - start) * (1.0 / duration) : 0.0;
 
-    return localAnimationPosition < 1.0 ? localAnimationPosition : 1.0;
+    return localProgress < 1.0 ? localProgress : 1.0;
   }
 
   @override
   bool shouldRepaint(_YaruAnimatedNoNetworkIconPainter oldDelegate) {
-    return oldDelegate.animationPosition != animationPosition ||
+    return oldDelegate.progress != progress ||
         oldDelegate.size != size ||
         oldDelegate.color != color;
   }
