@@ -10,11 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    
+
 flutter:
   fonts:
     - family: YaruIcons
       fonts:
         - asset: assets/yaru_icons.ttf
+
 dev_dependencies:
   flutter_lints: ^2.0.1

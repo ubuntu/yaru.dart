@@ -1,67 +1,34 @@
-import 'package:example/src/animated_icons_grid.dart';
-import 'package:example/src/icon_size_provider.dart';
-import 'package:example/src/icon_table.dart';
-import 'package:provider/provider.dart';
-import 'package:yaru_colors/yaru_colors.dart';
-import 'package:yaru_icons/yaru_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
 
+import 'src/example.dart';
+import 'src/provider/icon_size_provider.dart';
+import 'src/provider/search_provider.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(_MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class _MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Yaru Icons Demo',
-      debugShowCheckedModeBanner: false,
-      home: YaruTheme(
-        child: ChangeNotifierProvider(
-          create: (context) => IconSizeProvider(),
-          builder: (context, child) {
-            final iconSizeProvider = Provider.of<IconSizeProvider>(context);
-
-            return DefaultTabController(
-              length: 2,
-              child: Scaffold(
-                appBar: AppBar(
-                  leading:
-                      Icon(YaruIcons.ubuntu_logo, color: YaruColors.orange),
-                  title: Consumer<IconSizeProvider>(
-                    builder: (context, iconsSize, _) => Text(
-                      'Flutter Yaru Icons Demo (${iconsSize.size.truncate()}px)',
-                    ),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: iconSizeProvider.isMinSize()
-                          ? null
-                          : iconSizeProvider.decreaseSize,
-                      child: Icon(YaruIcons.minus),
-                    ),
-                    TextButton(
-                      onPressed: iconSizeProvider.increaseSize,
-                      child: Icon(YaruIcons.plus),
-                    )
-                  ],
-                  bottom: TabBar(
-                    tabs: [
-                      Tab(text: 'Static Icons'),
-                      Tab(text: 'Animated Icons'),
-                    ],
-                  ),
-                ),
-                body: TabBarView(
-                  children: [
-                    YaruIconTable(),
-                    YaruAnimatedIconsGrid(),
-                  ],
-                ),
-              ),
-            );
-          },
+    return YaruTheme(
+      builder: (context, yaru, child) => MaterialApp(
+        title: 'Flutter Yaru Icons Demo',
+        debugShowCheckedModeBanner: false,
+        theme: yaru.theme,
+        darkTheme: yaru.darkTheme,
+        home: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (_) => IconViewProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => SearchProvider(),
+            ),
+          ],
+          builder: (context, child) => const Example(),
         ),
       ),
     );
