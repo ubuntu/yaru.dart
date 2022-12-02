@@ -40,6 +40,7 @@ class YaruMasterTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final scope = YaruMasterTileScope.maybeOf(context);
     final isSelected = selected ?? scope?.selected ?? false;
     final scrollbarThicknessWithTrack =
@@ -52,13 +53,12 @@ class YaruMasterTile extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius:
               const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
-          color: isSelected
-              ? Theme.of(context).colorScheme.onSurface.withOpacity(0.07)
-              : null,
+          color:
+              isSelected ? theme.colorScheme.onSurface.withOpacity(0.07) : null,
         ),
         child: ListTile(
-          selectedColor: Theme.of(context).colorScheme.onSurface,
-          iconColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+          selectedColor: theme.colorScheme.onSurface,
+          iconColor: theme.colorScheme.onSurface.withOpacity(0.8),
           visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),
