@@ -57,6 +57,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.layoutDelegate =
         const YaruMasterFixedPaneDelegate(paneWidth: _kDefaultPaneWidth),
     this.appBar,
+    this.bottomBar,
     this.initialIndex,
     this.onSelected,
     this.controller,
@@ -83,6 +84,9 @@ class YaruMasterDetailPage extends StatefulWidget {
 
   /// An optional custom AppBar for the left pane.
   final PreferredSizeWidget? appBar;
+
+  /// An optional bottom bar for the left pane.
+  final Widget? bottomBar;
 
   /// An optional index of the initial page to show.
   final int? initialIndex;
@@ -139,6 +143,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             pageBuilder: widget.pageBuilder,
             onSelected: widget.onSelected,
             appBar: widget.appBar,
+            bottomBar: widget.bottomBar,
             controller: _controller,
           );
         } else {
@@ -150,6 +155,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
             previousPaneWidth: _previousPaneWidth,
             onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
             appBar: widget.appBar,
+            bottomBar: widget.bottomBar,
             controller: _controller,
           );
         }

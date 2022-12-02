@@ -19,6 +19,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     this.previousPaneWidth,
     this.onLeftPaneWidthChange,
     this.appBar,
+    this.bottomBar,
     required this.controller,
   });
 
@@ -29,6 +30,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   final double? previousPaneWidth;
   final Function(double)? onLeftPaneWidthChange;
   final PreferredSizeWidget? appBar;
+  final Widget? bottomBar;
   final YaruPageController controller;
 
   @override
@@ -156,6 +158,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           onTap: _onTap,
           builder: widget.tileBuilder,
         ),
+        bottomNavigationBar: widget.bottomBar,
       ),
     );
   }
