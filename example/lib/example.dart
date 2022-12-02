@@ -34,29 +34,10 @@ class _ExampleState extends State<Example> {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
-    final configItem = PageItem(
-      titleBuilder: (context) => const Text('Layout'),
-      tooltipMessage: 'Layout',
-      snippetUrl:
-          'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/lib/src/layouts/yaru_landscape_layout.dart',
-      pageBuilder: (_) => ListView(
-        padding: const EdgeInsets.all(kYaruPagePadding),
-        children: [
-          YaruTile(
-            title: const Text('Compact mode'),
-            trailing: YaruSwitch(
-              value: model.compactMode,
-              onChanged: (v) => model.compactMode = v,
-            ),
-          ),
-        ],
-      ),
-      iconBuilder: (context, selected) => const Icon(YaruIcons.settings),
-    );
 
-    final pageItems = [configItem] + examplePageItems;
+    final pageItems = examplePageItems;
     return model.compactMode
-        ? _CompactPage(configItem: configItem)
+        ? const _CompactPage()
         : YaruMasterDetailPage(
             layoutDelegate: const YaruMasterResizablePaneDelegate(
               initialPaneWidth: 280,
@@ -81,22 +62,40 @@ class _ExampleState extends State<Example> {
             appBar: AppBar(
               title: const Text('Example'),
             ),
+            bottomBar: BottomAppBar(
+              elevation: 0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Divider(height: 1),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: YaruMasterTile(
+                      leading: const Icon(YaruIcons.settings),
+                      title: const Text('Settings'),
+                      onTap: () => showSettingsDialog(context),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
   }
 }
 
 class _CompactPage extends StatelessWidget {
-  const _CompactPage({
-    required this.configItem,
-  });
-
-  final PageItem configItem;
+  const _CompactPage();
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final style = width > 1000
+        ? YaruNavigationRailStyle.labelledExtended
+        : width > 500
+            ? YaruNavigationRailStyle.labelled
+            : YaruNavigationRailStyle.compact;
 
-    final pageItems = [configItem] + examplePageItems;
+    final pageItems = examplePageItems;
 
     return YaruNavigationPage(
       length: pageItems.length,
@@ -104,13 +103,56 @@ class _CompactPage extends StatelessWidget {
         icon: pageItems[index].iconBuilder(context, selected),
         label: pageItems[index].titleBuilder(context),
         tooltip: pageItems[index].tooltipMessage,
-        style: width > 1000
-            ? YaruNavigationRailStyle.labelledExtended
-            : width > 500
-                ? YaruNavigationRailStyle.labelled
-                : YaruNavigationRailStyle.compact,
+        style: style,
       ),
       pageBuilder: (context, index) => pageItems[index].pageBuilder(context),
+      trailing: YaruNavigationRailItem(
+        icon: const Icon(YaruIcons.settings),
+        label: const Text('Settings'),
+        tooltip: 'Settings',
+        style: style,
+        onTap: () => showSettingsDialog(context),
+      ),
     );
   }
+}
+
+Future<void> showSettingsDialog(BuildContext context) {
+  final model = context.read<ExampleModel>();
+
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AnimatedBuilder(
+        animation: model,
+        builder: (context, child) {
+          return AlertDialog(
+            title: const YaruTitleBar(
+              title: Text('Settings'),
+            ),
+            titlePadding: EdgeInsets.zero,
+            contentPadding: const EdgeInsets.all(kYaruPagePadding),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                YaruTile(
+                  title: const Text('Compact mode'),
+                  trailing: YaruSwitch(
+                    value: model.compactMode,
+                    onChanged: (v) => model.compactMode = v,
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              OutlinedButton(
+                onPressed: Navigator.of(context).pop,
+                child: const Text('Close'),
+              )
+            ],
+          );
+        },
+      );
+    },
+  );
 }
