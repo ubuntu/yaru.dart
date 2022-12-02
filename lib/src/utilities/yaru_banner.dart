@@ -7,6 +7,8 @@ class YaruBanner extends StatelessWidget {
   const YaruBanner({
     super.key,
     this.onTap,
+    this.color,
+    this.elevation,
     this.surfaceTintColor,
     required this.child,
     this.padding = const EdgeInsets.all(kYaruPagePadding),
@@ -16,6 +18,8 @@ class YaruBanner extends StatelessWidget {
   YaruBanner.tile({
     Key? key,
     VoidCallback? onTap,
+    Color? color,
+    double? elevation,
     Color? surfaceTintColor,
     required Widget title,
     Widget? icon,
@@ -25,6 +29,8 @@ class YaruBanner extends StatelessWidget {
           key: key,
           onTap: onTap,
           padding: EdgeInsets.zero,
+          color: color,
+          elevation: elevation,
           surfaceTintColor: surfaceTintColor,
           child: YaruTile(
             leading: icon,
@@ -40,8 +46,16 @@ class YaruBanner extends StatelessWidget {
   /// An optional callback
   final Function()? onTap;
 
+  /// The banner's background color.
+  /// If null, [Theme]'s card color is used.
+  final Color? color;
+
+  /// The elevation of the banner determines the strength of [surfaceTintColor].
+  /// A higher elevation means a stronger tint.
+  final double? elevation;
+
   /// The color used for the soft background tint.
-  /// If null [Theme]'s background color is used.
+  /// If null, [Theme]'s background color is used.
   final Color? surfaceTintColor;
 
   /// Padding for the banner content. Defaults to `EdgeInsets.all(kYaruPagePadding)`
@@ -53,7 +67,7 @@ class YaruBanner extends StatelessWidget {
     final borderRadius = BorderRadius.circular(10);
 
     final light = theme.brightness == Brightness.light;
-    final defaultCardColor = light
+    final defaultSurfaceTintColor = light
         ? theme.colorScheme.background
         : theme.colorScheme.onSurface.withOpacity(0.01);
     return Material(
@@ -63,9 +77,10 @@ class YaruBanner extends StatelessWidget {
         borderRadius: borderRadius,
         hoverColor: theme.colorScheme.onSurface.withOpacity(0.1),
         child: Card(
+          color: color,
           shadowColor: Colors.transparent,
-          surfaceTintColor: surfaceTintColor ?? defaultCardColor,
-          elevation: light ? 4 : 6,
+          surfaceTintColor: surfaceTintColor ?? defaultSurfaceTintColor,
+          elevation: elevation ?? (light ? 4 : 6),
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius
                 .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
