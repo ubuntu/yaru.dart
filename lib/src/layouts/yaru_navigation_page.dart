@@ -24,6 +24,8 @@ class YaruNavigationPage extends StatefulWidget {
     this.initialIndex,
     this.onSelected,
     this.controller,
+    this.leading,
+    this.trailing,
   })  : assert(initialIndex == null || controller == null),
         assert((length == null) != (controller == null));
 
@@ -47,6 +49,12 @@ class YaruNavigationPage extends StatefulWidget {
 
   /// An optional controller that can be used to navigate to a specific index.
   final YaruPageController? controller;
+
+  /// The leading widget in the rail that is placed above the destinations.
+  final Widget? leading;
+
+  /// The trailing widget in the rail that is placed below the destinations.
+  final Widget? trailing;
 
   @override
   State<YaruNavigationPage> createState() => _YaruNavigationPageState();
@@ -134,6 +142,8 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
             onDestinationSelected: _onTap,
             length: _length,
             itemBuilder: widget.itemBuilder,
+            leading: widget.leading,
+            trailing: widget.trailing,
           ),
         ),
       ),

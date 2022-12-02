@@ -10,6 +10,8 @@ class YaruNavigationRail extends StatelessWidget {
     required this.itemBuilder,
     required this.selectedIndex,
     required this.onDestinationSelected,
+    this.leading,
+    this.trailing,
   })  : assert(length >= 2),
         assert(
           selectedIndex == null ||
@@ -33,26 +35,37 @@ class YaruNavigationRail extends StatelessWidget {
   /// `setState` to rebuild the navigation rail with the new [selectedIndex].
   final ValueChanged<int>? onDestinationSelected;
 
+  /// The leading widget in the rail that is placed above the destinations.
+  final Widget? leading;
+
+  /// The trailing widget in the rail that is placed below the destinations.
+  final Widget? trailing;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Column(
-        children: <Widget>[
-          for (int i = 0; i < length; i += 1)
-            YaruNavigationRailItemScope(
-              index: i,
-              selected: i == selectedIndex,
-              onTap: () => onDestinationSelected?.call(i),
-              child: Builder(
-                builder: (context) => itemBuilder(
-                  context,
-                  i,
-                  i == selectedIndex,
+      child: IntrinsicHeight(
+        child: Column(
+          children: <Widget>[
+            if (leading != null) leading!,
+            for (int i = 0; i < length; i += 1)
+              YaruNavigationRailItemScope(
+                index: i,
+                selected: i == selectedIndex,
+                onTap: () => onDestinationSelected?.call(i),
+                child: Builder(
+                  builder: (context) => itemBuilder(
+                    context,
+                    i,
+                    i == selectedIndex,
+                  ),
                 ),
               ),
-            )
-        ],
+            const Spacer(),
+            if (trailing != null) trailing!,
+          ],
+        ),
       ),
     );
   }
