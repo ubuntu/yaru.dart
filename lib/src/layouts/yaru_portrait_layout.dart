@@ -12,6 +12,7 @@ class YaruPortraitLayout extends StatefulWidget {
     required this.pageBuilder,
     this.onSelected,
     this.appBar,
+    this.bottomBar,
     required this.controller,
   });
 
@@ -20,6 +21,7 @@ class YaruPortraitLayout extends StatefulWidget {
   final ValueChanged<int>? onSelected;
 
   final PreferredSizeWidget? appBar;
+  final Widget? bottomBar;
 
   final YaruPageController controller;
 
@@ -99,6 +101,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                   onTap: _onTap,
                   builder: widget.tileBuilder,
                 ),
+                bottomNavigationBar: widget.bottomBar,
               ),
             ),
             if (_selectedIndex != -1) page(_selectedIndex)
