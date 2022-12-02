@@ -49,18 +49,19 @@ class YaruBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final borderRadius = BorderRadius.circular(10);
 
-    final light = Theme.of(context).brightness == Brightness.light;
+    final light = theme.brightness == Brightness.light;
     final defaultCardColor = light
-        ? Theme.of(context).colorScheme.background
-        : Theme.of(context).colorScheme.onSurface.withOpacity(0.01);
+        ? theme.colorScheme.background
+        : theme.colorScheme.onSurface.withOpacity(0.01);
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
         borderRadius: borderRadius,
-        hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+        hoverColor: theme.colorScheme.onSurface.withOpacity(0.1),
         child: Card(
           shadowColor: Colors.transparent,
           surfaceTintColor: surfaceTintColor ?? defaultCardColor,
@@ -68,7 +69,7 @@ class YaruBanner extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius
                 .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
-            side: BorderSide(color: Theme.of(context).dividerColor, width: 1),
+            side: BorderSide(color: theme.dividerColor, width: 1),
           ),
           child: Container(
             width: double.infinity,
