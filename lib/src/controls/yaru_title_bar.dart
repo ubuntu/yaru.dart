@@ -7,7 +7,7 @@ import 'yaru_close_button.dart';
 /// which pops the top-most route off the navigator
 /// that most tightly encloses the given context.
 ///
-class YaruTitleBar extends StatelessWidget {
+class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   const YaruTitleBar({
     super.key,
     this.leading,
@@ -31,6 +31,9 @@ class YaruTitleBar extends StatelessWidget {
 
   /// The background color. Defaults to [Colors.transparent].
   final Color? backgroundColor;
+
+  @override
+  Size get preferredSize => const Size(0, kYaruTitleBarHeight);
 
   @override
   Widget build(BuildContext context) {
