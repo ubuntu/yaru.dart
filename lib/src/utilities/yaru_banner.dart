@@ -12,6 +12,7 @@ class YaruBanner extends StatelessWidget {
     this.surfaceTintColor,
     required this.child,
     this.padding = const EdgeInsets.all(kYaruPagePadding),
+    this.onHover,
   });
 
   /// Creates a banner with a [YaruTile] child widget.
@@ -46,6 +47,9 @@ class YaruBanner extends StatelessWidget {
   /// An optional callback
   final Function()? onTap;
 
+  /// An optional callback used when hovering the [YaruBanner]
+  final Function(bool)? onHover;
+
   /// The banner's background color.
   /// If null, [Theme]'s card color is used.
   final Color? color;
@@ -74,6 +78,7 @@ class YaruBanner extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
+        onHover: onHover,
         borderRadius: borderRadius,
         hoverColor: theme.colorScheme.onSurface.withOpacity(0.1),
         child: Card(
