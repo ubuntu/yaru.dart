@@ -155,7 +155,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
   }
 
   Widget _buildPageView(BuildContext context) {
-    final theme = YaruCompactLayoutTheme.of(context);
+    final theme = YaruNavigationPageTheme.of(context);
     final index = max(_pageController.index, 0);
 
     return Expanded(
