@@ -110,7 +110,7 @@ class YaruToggleButtonTheme extends InheritedWidget {
   static YaruToggleButtonThemeData? of(BuildContext context) {
     final t =
         context.dependOnInheritedWidgetOfExactType<YaruToggleButtonTheme>();
-    return t?.data;
+    return t?.data ?? Theme.of(context).extension<YaruToggleButtonThemeData>();
   }
 
   @override
