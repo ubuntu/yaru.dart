@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +9,8 @@ import 'package:flutter/material.dart';
 /// using `YaruToggleButtonTheme.of(context)`. Instances of [YaruToggleButtonThemeData]
 /// can be customized with [YaruToggleButtonThemeData.copyWith].
 @immutable
-class YaruToggleButtonThemeData with Diagnosticable {
+class YaruToggleButtonThemeData
+    extends ThemeExtension<YaruToggleButtonThemeData> with Diagnosticable {
   /// Creates a theme that can be used for [YaruToggleButtonTheme.data].
   const YaruToggleButtonThemeData({
     this.horizontalSpacing,
@@ -29,6 +32,7 @@ class YaruToggleButtonThemeData with Diagnosticable {
   final TextStyle? subtitleStyle;
 
   /// Creates a copy with the given fields replaced with new values.
+  @override
   YaruToggleButtonThemeData copyWith({
     double? horizontalSpacing,
     double? verticalSpacing,
@@ -40,6 +44,20 @@ class YaruToggleButtonThemeData with Diagnosticable {
       verticalSpacing: verticalSpacing ?? this.verticalSpacing,
       titleStyle: titleStyle ?? this.titleStyle,
       subtitleStyle: subtitleStyle ?? this.subtitleStyle,
+    );
+  }
+
+  @override
+  ThemeExtension<YaruToggleButtonThemeData> lerp(
+    ThemeExtension<YaruToggleButtonThemeData>? other,
+    double t,
+  ) {
+    final o = other as YaruToggleButtonThemeData?;
+    return YaruToggleButtonThemeData(
+      horizontalSpacing: lerpDouble(horizontalSpacing, o?.horizontalSpacing, t),
+      verticalSpacing: lerpDouble(verticalSpacing, o?.verticalSpacing, t),
+      titleStyle: TextStyle.lerp(titleStyle, o?.titleStyle, t),
+      subtitleStyle: TextStyle.lerp(subtitleStyle, o?.subtitleStyle, t),
     );
   }
 
@@ -92,7 +110,7 @@ class YaruToggleButtonTheme extends InheritedWidget {
   static YaruToggleButtonThemeData? of(BuildContext context) {
     final t =
         context.dependOnInheritedWidgetOfExactType<YaruToggleButtonTheme>();
-    return t?.data;
+    return t?.data ?? Theme.of(context).extension<YaruToggleButtonThemeData>();
   }
 
   @override
