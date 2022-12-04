@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
 @immutable
-class YaruCompactLayoutThemeData with Diagnosticable {
-  /// Creates a theme that can be used with [YaruCompactLayout].
-  const YaruCompactLayoutThemeData({
+class NavigationPageThemeData with Diagnosticable {
+  /// Creates a theme that can be used with [YaruNavigationPage].
+  const NavigationPageThemeData({
     this.pageTransitions,
   });
 
-  factory YaruCompactLayoutThemeData.fallback() {
-    return const YaruCompactLayoutThemeData(
+  factory NavigationPageThemeData.fallback() {
+    return const NavigationPageThemeData(
       pageTransitions: YaruPageTransitionsTheme.vertical,
     );
   }
@@ -20,10 +20,10 @@ class YaruCompactLayoutThemeData with Diagnosticable {
 
   /// Creates a copy of this object but with the given fields replaced with the
   /// new values.
-  YaruCompactLayoutThemeData copyWith({
+  NavigationPageThemeData copyWith({
     PageTransitionsTheme? pageTransitions,
   }) {
-    return YaruCompactLayoutThemeData(
+    return NavigationPageThemeData(
       pageTransitions: pageTransitions ?? this.pageTransitions,
     );
   }
@@ -37,7 +37,7 @@ class YaruCompactLayoutThemeData with Diagnosticable {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is YaruCompactLayoutThemeData &&
+    return other is NavigationPageThemeData &&
         other.pageTransitions == pageTransitions;
   }
 
@@ -49,28 +49,28 @@ class YaruCompactLayoutThemeData with Diagnosticable {
   }
 }
 
-class YaruCompactLayoutTheme extends InheritedTheme {
-  const YaruCompactLayoutTheme({
+class YaruNavigationPageTheme extends InheritedTheme {
+  const YaruNavigationPageTheme({
     super.key,
     required this.data,
     required super.child,
   });
 
-  final YaruCompactLayoutThemeData data;
+  final NavigationPageThemeData data;
 
-  static YaruCompactLayoutThemeData of(BuildContext context) {
+  static NavigationPageThemeData of(BuildContext context) {
     final theme =
-        context.dependOnInheritedWidgetOfExactType<YaruCompactLayoutTheme>();
-    return theme?.data ?? YaruCompactLayoutThemeData.fallback();
+        context.dependOnInheritedWidgetOfExactType<YaruNavigationPageTheme>();
+    return theme?.data ?? NavigationPageThemeData.fallback();
   }
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    return YaruCompactLayoutTheme(data: data, child: child);
+    return YaruNavigationPageTheme(data: data, child: child);
   }
 
   @override
-  bool updateShouldNotify(YaruCompactLayoutTheme oldWidget) {
+  bool updateShouldNotify(YaruNavigationPageTheme oldWidget) {
     return data != oldWidget.data;
   }
 }
