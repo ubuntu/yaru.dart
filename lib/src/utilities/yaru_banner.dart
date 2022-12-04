@@ -19,6 +19,7 @@ class YaruBanner extends StatelessWidget {
   YaruBanner.tile({
     Key? key,
     VoidCallback? onTap,
+    Function(bool)? onHover,
     Color? color,
     double? elevation,
     Color? surfaceTintColor,
@@ -29,6 +30,7 @@ class YaruBanner extends StatelessWidget {
   }) : this(
           key: key,
           onTap: onTap,
+          onHover: onHover,
           padding: EdgeInsets.zero,
           color: color,
           elevation: elevation,
