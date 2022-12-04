@@ -73,9 +73,9 @@ class YaruBanner extends StatelessWidget {
     final borderRadius = BorderRadius.circular(10);
 
     final light = theme.brightness == Brightness.light;
-    final defaultSurfaceTintColor = light
-        ? theme.colorScheme.background
-        : theme.colorScheme.onSurface.withOpacity(0.01);
+
+    final defaultSurfaceTintColor =
+        light ? theme.cardColor : const Color.fromARGB(255, 126, 126, 126);
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -87,7 +87,7 @@ class YaruBanner extends StatelessWidget {
           color: color,
           shadowColor: Colors.transparent,
           surfaceTintColor: surfaceTintColor ?? defaultSurfaceTintColor,
-          elevation: elevation ?? (light ? 4 : 6),
+          elevation: elevation ?? 1,
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius
                 .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
