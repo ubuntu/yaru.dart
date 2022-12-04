@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
@@ -6,7 +8,8 @@ import '../constants.dart';
 
 /// Holds theme data for [YaruMasterDetailTheme].
 @immutable
-class YaruMasterDetailThemeData with Diagnosticable {
+class YaruMasterDetailThemeData
+    extends ThemeExtension<YaruMasterDetailThemeData> with Diagnosticable {
   const YaruMasterDetailThemeData({
     this.breakpoint,
     this.tileSpacing,
@@ -43,6 +46,7 @@ class YaruMasterDetailThemeData with Diagnosticable {
 
   /// Creates a copy of this object but with the given fields replaced with the
   /// new values.
+  @override
   YaruMasterDetailThemeData copyWith({
     double? breakpoint,
     double? tileSpacing,
@@ -56,6 +60,23 @@ class YaruMasterDetailThemeData with Diagnosticable {
       listPadding: listPadding ?? this.listPadding,
       portraitTransitions: portraitTransitions ?? this.portraitTransitions,
       landscapeTransitions: landscapeTransitions ?? this.landscapeTransitions,
+    );
+  }
+
+  @override
+  ThemeExtension<YaruMasterDetailThemeData> lerp(
+    ThemeExtension<YaruMasterDetailThemeData>? other,
+    double t,
+  ) {
+    final o = other as YaruMasterDetailThemeData?;
+    return YaruMasterDetailThemeData(
+      breakpoint: lerpDouble(breakpoint, o?.breakpoint, t),
+      tileSpacing: lerpDouble(tileSpacing, o?.tileSpacing, t),
+      listPadding: EdgeInsetsGeometry.lerp(listPadding, o?.listPadding, t),
+      portraitTransitions:
+          t < 0.5 ? portraitTransitions : o?.portraitTransitions,
+      landscapeTransitions:
+          t < 0.5 ? landscapeTransitions : o?.landscapeTransitions,
     );
   }
 
@@ -107,7 +128,9 @@ class YaruMasterDetailTheme extends InheritedTheme {
   static YaruMasterDetailThemeData of(BuildContext context) {
     final theme =
         context.dependOnInheritedWidgetOfExactType<YaruMasterDetailTheme>();
-    return theme?.data ?? YaruMasterDetailThemeData.fallback();
+    return theme?.data ??
+        Theme.of(context).extension<YaruMasterDetailThemeData>() ??
+        YaruMasterDetailThemeData.fallback();
   }
 
   @override
