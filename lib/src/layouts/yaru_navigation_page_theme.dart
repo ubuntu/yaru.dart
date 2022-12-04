@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
 @immutable
-class NavigationPageThemeData with Diagnosticable {
+class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
+    with Diagnosticable {
   /// Creates a theme that can be used with [YaruNavigationPage].
   const NavigationPageThemeData({
     this.pageTransitions,
@@ -20,11 +21,23 @@ class NavigationPageThemeData with Diagnosticable {
 
   /// Creates a copy of this object but with the given fields replaced with the
   /// new values.
+  @override
   NavigationPageThemeData copyWith({
     PageTransitionsTheme? pageTransitions,
   }) {
     return NavigationPageThemeData(
       pageTransitions: pageTransitions ?? this.pageTransitions,
+    );
+  }
+
+  @override
+  ThemeExtension<NavigationPageThemeData> lerp(
+    ThemeExtension<NavigationPageThemeData>? other,
+    double t,
+  ) {
+    final o = other as NavigationPageThemeData?;
+    return NavigationPageThemeData(
+      pageTransitions: t < 0.5 ? pageTransitions : o?.pageTransitions,
     );
   }
 
@@ -61,7 +74,9 @@ class YaruNavigationPageTheme extends InheritedTheme {
   static NavigationPageThemeData of(BuildContext context) {
     final theme =
         context.dependOnInheritedWidgetOfExactType<YaruNavigationPageTheme>();
-    return theme?.data ?? NavigationPageThemeData.fallback();
+    return theme?.data ??
+        Theme.of(context).extension<NavigationPageThemeData>() ??
+        NavigationPageThemeData.fallback();
   }
 
   @override
