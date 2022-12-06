@@ -444,10 +444,10 @@ class YaruIcons {
   static const sun = _YaruIconsData(0xf2a7, 'sun');
   static const swiss_knife_filled = _YaruIconsData(0xf2a8, 'swiss_knife_filled');
   static const swiss_knife = _YaruIconsData(0xf2a9, 'swiss_knife');
-  static const switch = _YaruIconsData(0xf2aa, 'switch');
-  static const switch_checked_filled = _YaruIconsData(0xf2ab, 'switch_checked_filled');
-  static const switch_checked = _YaruIconsData(0xf2ac, 'switch_checked');
-  static const switch_filled = _YaruIconsData(0xf2ad, 'switch_filled');
+  static const switchbox = _YaruIconsData(0xf2aa, 'switchbox');
+  static const switchbox_checked_filled = _YaruIconsData(0xf2ab, 'switchbox_checked_filled');
+  static const switchbox_checked = _YaruIconsData(0xf2ac, 'switchbox_checked');
+  static const switchbox_filled = _YaruIconsData(0xf2ad, 'switchbox_filled');
   static const synchronizing = _YaruIconsData(0xf2ae, 'synchronizing');
   static const tab_new_filled = _YaruIconsData(0xf2af, 'tab_new_filled');
   static const tab_new = _YaruIconsData(0xf2b0, 'tab_new');
@@ -933,10 +933,10 @@ class YaruIcons {
     'sun': sun,
     'swiss_knife_filled': swiss_knife_filled,
     'swiss_knife': swiss_knife,
-    'switch': switch,
-    'switch_checked_filled': switch_checked_filled,
-    'switch_checked': switch_checked,
-    'switch_filled': switch_filled,
+    'switchbox': switchbox,
+    'switchbox_checked_filled': switchbox_checked_filled,
+    'switchbox_checked': switchbox_checked,
+    'switchbox_filled': switchbox_filled,
     'synchronizing': synchronizing,
     'tab_new_filled': tab_new_filled,
     'tab_new': tab_new,
