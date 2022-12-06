@@ -1,10 +1,15 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import 'yaru_title_bar_theme.dart';
+import 'yaru_window.dart';
 import 'yaru_window_control.dart';
+import 'yaru_window_controller.dart';
+import 'yaru_window_state.dart';
 
 const _kTitleButtonPadding = EdgeInsets.symmetric(horizontal: 7);
 
@@ -205,6 +210,142 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class YaruWindowTitleBar extends StatefulWidget implements PreferredSizeWidget {
+  const YaruWindowTitleBar({
+    super.key,
+    this.leading,
+    this.title,
+    this.trailing,
+    this.centerTitle,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.controller,
+  });
+
+  /// The primary title widget.
+  final Widget? title;
+
+  /// A widget to display before the [title] widget.
+  final Widget? leading;
+
+  /// A widget to display after the [title] widget.
+  final Widget? trailing;
+
+  /// Whether the title should be centered.
+  final bool? centerTitle;
+
+  /// The foreground color.
+  final Color? foregroundColor;
+
+  /// The background color.
+  final Color? backgroundColor;
+
+  /// An optional controller.
+  final YaruWindowController? controller;
+
+  @override
+  Size get preferredSize => const Size(0, kIsWeb ? 0 : kYaruTitleBarHeight);
+
+  @override
+  State<YaruWindowTitleBar> createState() => _YaruWindowTitleBarState();
+
+  static Future<void> ensureInitialized() => YaruWindow.ensureInitialized();
+}
+
+class _YaruWindowTitleBarState extends State<YaruWindowTitleBar> {
+  late YaruWindowController _controller;
+
+  YaruWindowController createController() {
+    return YaruWindowController(
+      state: kIsWeb || Platform.isMacOS
+          ? const YaruWindowState(
+              closable: false,
+              maximizable: false,
+              minimizable: false,
+            )
+          : null,
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? createController();
+    _controller.init();
+  }
+
+  @override
+  void didUpdateWidget(covariant YaruWindowTitleBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.controller != oldWidget.controller) {
+      if (oldWidget.controller == null) _controller.dispose();
+      _controller = widget.controller ?? createController();
+      _controller.init();
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (kIsWeb) return const SizedBox.shrink();
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) => YaruTitleBar(
+        leading: widget.leading,
+        title: widget.title ?? Text(_controller.state?.title ?? ''),
+        trailing: widget.trailing,
+        centerTitle: widget.centerTitle,
+        backgroundColor: widget.backgroundColor,
+        isActive: _controller.state?.active,
+        isClosable: _controller.state?.closable,
+        isMaximizable: _controller.state?.maximizable,
+        isMinimizable: _controller.state?.minimizable,
+        isRestorable: _controller.state?.restorable,
+        onClose: _controller.close,
+        onDrag: _controller.drag,
+        onMaximize: _controller.maximize,
+        onMinimize: _controller.minimize,
+        onRestore: _controller.restore,
+        onShowMenu: _controller.showMenu,
+      ),
+    );
+  }
+}
+
+class YaruDialogTitleBar extends YaruWindowTitleBar {
+  const YaruDialogTitleBar({
+    super.key,
+    super.leading,
+    super.title,
+    super.trailing,
+    super.centerTitle,
+    super.backgroundColor,
+    super.controller,
+  });
+
+  @override
+  State<YaruWindowTitleBar> createState() => _YaruDialogTitleBarState();
+}
+
+class _YaruDialogTitleBarState extends _YaruWindowTitleBarState {
+  @override
+  YaruWindowController createController() {
+    return YaruWindowController(
+      state: const YaruWindowState(
+        maximizable: false,
+        minimizable: false,
+        restorable: false,
+      ),
+      close: Navigator.of(context).maybePop,
     );
   }
 }

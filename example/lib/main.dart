@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'example.dart';
 import 'theme.dart';
 
-void main() {
+Future<void> main() async {
+  await YaruWindowTitleBar.ensureInitialized();
+
   registerService<Connectivity>(Connectivity.new);
   runApp(
     MultiProvider(
@@ -30,7 +33,10 @@ class Home extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: context.watch<LightTheme>().value,
       darkTheme: context.watch<DarkTheme>().value,
-      home: Example.create(context),
+      home: Scaffold(
+        appBar: const YaruWindowTitleBar(),
+        body: Example.create(context),
+      ),
     );
   }
 }
