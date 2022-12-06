@@ -32,7 +32,7 @@ class SearchEntry extends StatelessWidget implements PreferredSizeWidget {
         decoration: InputDecoration(
           border: const UnderlineInputBorder(),
           prefixIcon: const Icon(
-            YaruIcons.search,
+            YaruIcons.magnifying_glass,
             size: 24,
           ),
           prefixIconConstraints: BoxConstraints.expand(

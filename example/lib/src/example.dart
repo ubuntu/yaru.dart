@@ -36,7 +36,7 @@ class Example extends StatelessWidget {
             child: TextButton(
               onPressed: iconViewProvider.toggleGridView,
               child: iconViewProvider.gridView
-                  ? const Icon(YaruIcons.format_unordered_list)
+                  ? const Icon(YaruIcons.unordered_list)
                   : const Icon(YaruIcons.app_grid),
             ),
           ),
@@ -46,7 +46,7 @@ class Example extends StatelessWidget {
                 : 'Show search entry',
             child: TextButton(
               onPressed: searchProvider.toggleSearch,
-              child: const Icon(YaruIcons.search),
+              child: const Icon(YaruIcons.magnifying_glass),
             ),
           ),
           Tooltip(
