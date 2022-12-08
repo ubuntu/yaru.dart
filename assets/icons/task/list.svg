@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 1 24 24"
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="tasks.svg"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:snap-page="true"
+     inkscape:zoom="28"
+     inkscape:cx="11.071429"
+     inkscape:cy="12.607143"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid821" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid823"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <path
+     id="rect896"
+     style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round"
+     d="m 11.5,2 c -1.380712,0 -2.5,1.1192881 -2.5,2.5 0.00266,0.1682136 0.022289,0.3357294 0.058594,0.5 h -0.5585938 c -1.4999955,0 -2.5560519,-0.050744 -3.3828125,0.4453125 -0.4133803,0.2480283 -0.7199381,0.6559085 -0.8886719,1.1621094 -0.1687335,0.5062009 -0.2285156,1.1148027 -0.2285156,1.8925781 v 9 c 0,0.777775 0.059782,1.386378 0.2285156,1.892578 0.1687338,0.506202 0.4752916,0.914081 0.8886719,1.16211 0.7278584,0.436715 1.6530603,0.448472 2.8828125,0.445312 h 7 c 1.229751,0.0032 2.154955,-0.0086 2.882812,-0.445312 0.413381,-0.248029 0.71994,-0.655908 0.888672,-1.16211 0.168736,-0.506199 0.228516,-1.114804 0.228516,-1.892578 v -8.5 -0.5 c 0,-0.7777754 -0.05978,-1.3863772 -0.228516,-1.8925781 -0.168732,-0.5062009 -0.47529,-0.9140811 -0.888672,-1.1621094 -0.826759,-0.4960563 -1.882816,-0.4453125 -3.382812,-0.4453125 h -0.558594 c 0.0363,-0.1642706 0.05594,-0.3317864 0.05859,-0.5 0,-1.3807119 -1.119288,-2.5 -2.5,-2.5 z m 0,1 c 0.828427,0 1.5,0.6715729 1.5,1.5 0,0.8284271 -0.671573,1.5 -1.5,1.5 -0.828427,0 -1.5,-0.6715729 -1.5,-1.5 0,-0.8284271 0.671573,-1.5 1.5,-1.5 z m -3.5,3.0058594 v 0.9941406 h 3.5 3.5 v -0.9941406 c 1.197469,0.012903 1.995743,0.075962 2.367188,0.2988281 0.211616,0.1269708 0.342562,0.2815942 0.455078,0.6191406 0.112515,0.3375467 0.177734,0.8539518 0.177734,1.5761719 v 0.5 8.5 c 0,0.722218 -0.06522,1.238625 -0.177734,1.576172 -0.112516,0.337547 -0.243461,0.492173 -0.455078,0.61914 -0.371443,0.222859 -1.16972,0.285929 -2.367188,0.298829 v 0.0059 h -7 v -0.0059 c -1.1974688,-0.0129 -1.9957438,-0.07597 -2.3671875,-0.298829 -0.2116179,-0.126968 -0.3425626,-0.281593 -0.4550781,-0.61914 -0.1125156,-0.337547 -0.1777344,-0.853953 -0.1777344,-1.576172 v -9 c 0,-0.7222201 0.065219,-1.2386252 0.1777344,-1.5761719 0.1125155,-0.3375464 0.2434602,-0.4921698 0.4550781,-0.6191406 0.3714437,-0.2228663 1.1697187,-0.2859248 2.3671875,-0.2988281 z"
+     sodipodi:nodetypes="sccsssssssccssccssssccsssssscccccsssccssccccssssssc" />
+  <rect
+     style="fill:#808080;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round"
+     id="rect450"
+     width="9"
+     height="1"
+     x="7"
+     y="9" />
+  <rect
+     style="fill:#808080;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round"
+     id="rect452"
+     width="9"
+     height="1"
+     x="7"
+     y="11" />
+  <rect
+     style="fill:#808080;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round"
+     id="rect454"
+     width="9"
+     height="1"
+     x="7"
+     y="13" />
+  <rect
+     style="fill:#808080;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round"
+     id="rect456"
+     width="5"
+     height="1"
+     x="7"
+     y="15" />
+</svg>
