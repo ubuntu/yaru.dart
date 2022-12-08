@@ -91,8 +91,11 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
   }
 
   void _updatePageController() {
-    _pageController =
-        widget.controller ?? YaruPageController(length: widget.length!);
+    _pageController = widget.controller ??
+        YaruPageController(
+          length: widget.length!,
+          initialIndex: widget.initialIndex ?? -1,
+        );
     _pageController.addListener(_pageControllerCallback);
   }
 
