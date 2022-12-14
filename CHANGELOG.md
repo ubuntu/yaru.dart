@@ -1,3 +1,18 @@
+# 1.0.0
+
+* Add arrow and flag icons
+* Better linting and code analysing
+* Refine project organization
+* checkmark icon look is outdated
+* Pimp up example app
+* Fix camera-web overlay path
+* Extract animationController from animated icons
+* Simplify all icon names
+* Fix reserved switch const name
+* Add missing freedesktop icon
+* Add Freedesktop compliant icon names enum
+* Add missing filled icons
+
 # 0.2.7
 
 * Add *code* </> icon
