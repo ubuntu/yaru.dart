@@ -61,8 +61,8 @@ final examplePageItems = <PageItem>[
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/checkbox_page.dart',
     pageBuilder: (context) => const CheckboxPage(),
     iconBuilder: (context, selected) => selected
-        ? const Icon(YaruIcons.checkbox_button_checked_filled)
-        : const Icon(YaruIcons.checkbox_button_checked),
+        ? const Icon(YaruIcons.checkbox_checked_filled)
+        : const Icon(YaruIcons.checkbox_checked),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruColorDisk'),
@@ -102,8 +102,8 @@ final examplePageItems = <PageItem>[
     snippetUrl:
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/option_button_page.dart',
     iconBuilder: (context, selected) => selected
-        ? const Icon(YaruIcons.settings_filled)
-        : const Icon(YaruIcons.settings),
+        ? const Icon(YaruIcons.gear_filled)
+        : const Icon(YaruIcons.gear),
     pageBuilder: (_) => const OptionButtonPage(),
   ),
   PageItem(
@@ -111,8 +111,7 @@ final examplePageItems = <PageItem>[
     tooltipMessage: 'YaruPopupMenuButton',
     snippetUrl:
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/option_button_page.dart',
-    iconBuilder: (context, selected) =>
-        const Icon(YaruIcons.media_playback_stop),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.stop),
     pageBuilder: (_) => const PopupPage(),
   ),
   PageItem(
@@ -130,8 +129,8 @@ final examplePageItems = <PageItem>[
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/radio_page.dart',
     pageBuilder: (context) => const RadioPage(),
     iconBuilder: (context, selected) => selected
-        ? const Icon(YaruIcons.radio_button_checked_filled)
-        : const Icon(YaruIcons.radio_button_checked),
+        ? const Icon(YaruIcons.radiobox_checked_filled)
+        : const Icon(YaruIcons.radiobox_checked),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruSection'),
@@ -156,8 +155,8 @@ final examplePageItems = <PageItem>[
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/switch_page.dart',
     pageBuilder: (context) => const SwitchPage(),
     iconBuilder: (context, selected) => selected
-        ? const Icon(YaruIcons.switch_button_checked_filled)
-        : const Icon(YaruIcons.switch_button),
+        ? const Icon(YaruIcons.switchbox_checked_filled)
+        : const Icon(YaruIcons.switchbox),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruTabbedPage'),
@@ -172,8 +171,7 @@ final examplePageItems = <PageItem>[
     tooltipMessage: 'YaruTile',
     snippetUrl:
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/tile_page.dart',
-    iconBuilder: (context, selected) =>
-        const Icon(YaruIcons.format_unordered_list),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.unordered_list),
     pageBuilder: (_) => const TilePage(),
   ),
   PageItem(

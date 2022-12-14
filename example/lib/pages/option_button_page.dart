@@ -26,7 +26,7 @@ class _OptionButtonPageState extends State<OptionButtonPage> {
             ),
             YaruOptionButton(
               onPressed: () {},
-              child: const Icon(YaruIcons.audio),
+              child: const Icon(YaruIcons.music_note),
             ),
             const SizedBox(
               width: 10.0,

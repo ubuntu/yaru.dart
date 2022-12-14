@@ -27,7 +27,7 @@ class _SectionPageState extends State<SectionPage> {
                 const YaruTile(
                   title: Text('Title'),
                   trailing: Icon(YaruIcons.information),
-                  leading: Icon(YaruIcons.audio),
+                  leading: Icon(YaruIcons.music_note),
                   subtitle: Text('Subtitle'),
                 ),
             ],
@@ -59,7 +59,7 @@ class DummySection extends StatelessWidget {
       child: const YaruTile(
         title: Text('Title'),
         trailing: Icon(YaruIcons.information),
-        leading: Icon(YaruIcons.audio),
+        leading: Icon(YaruIcons.music_note),
         subtitle: Text('Subtitle'),
       ),
       width: width,

@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   yaru: ^0.4.3
-  yaru_icons: ^0.2.7
+  yaru_icons: ^1.0.0
 
 dev_dependencies:
   collection: ^1.16.0
