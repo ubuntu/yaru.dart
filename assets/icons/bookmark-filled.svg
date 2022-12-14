@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 1 24 24"
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="bookmark-filled.svg"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     width="24px"
+     inkscape:zoom="28"
+     inkscape:cx="11"
+     inkscape:cy="7.5714285"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid821" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid823"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <path
+     id="path858"
+     style="color:#000000;fill:#808080;fill-opacity:1"
+     d="M 4.7871094 3 C 4.1101664 3.00559 3.5365049 3.0481534 3.0273438 3.3027344 C 2.6879025 3.4724548 2.3973376 3.7651696 2.2304688 4.140625 C 2.0635992 4.5160804 2 4.9583359 2 5.5 L 2 16.5 C 2 17.041662 2.0635992 17.483918 2.2304688 17.859375 C 2.3973376 18.234832 2.6879025 18.527544 3.0273438 18.697266 C 3.7062255 19.036704 4.500005 19 5.5 19 L 9.5 19 C 10.666662 19 11.583984 20.277344 11.583984 20.277344 L 12 20.902344 L 12.416016 20.277344 C 12.416016 20.277344 13.333338 19 14.5 19 L 18.5 19 C 19.499995 19 20.293775 19.036708 20.972656 18.697266 C 21.312099 18.527544 21.602661 18.234832 21.769531 17.859375 C 21.936401 17.483918 22 17.041662 22 16.5 L 22 5.5 C 22 4.9583359 21.9364 4.5160804 21.769531 4.140625 C 21.602661 3.7651696 21.312099 3.4724548 20.972656 3.3027344 C 20.412813 3.0228118 19.767329 2.9998519 19 3 L 18 3 L 18 4 L 18 5.5 L 18 12 L 15 13 L 15 4 L 15 3 L 14.5 3 C 13.161758 3 12.409168 3.7620725 12 4.2578125 C 11.590832 3.7620725 10.838242 3 9.5 3 L 5.5 3 C 5.2500011 3 5.0127568 2.99814 4.7871094 3 z M 6 7 L 9 7 L 9 8 L 6 8 L 6 7 z M 6 9 L 9 9 L 9 10 L 6 10 L 6 9 z M 6 11 L 9 11 L 9 12 L 6 12 L 6 11 z M 6 13 L 9 13 L 9 14 L 6 14 L 6 13 z " />
+</svg>

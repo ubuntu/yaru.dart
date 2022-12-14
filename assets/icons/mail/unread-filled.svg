@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 1 24 24"
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="unread-filled.svg"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:snap-page="true"
+     inkscape:zoom="28"
+     inkscape:cx="10.678571"
+     inkscape:cy="10.928571"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid6" />
+  </sodipodi:namedview>
+  <path
+     id="path291"
+     style="color:#000000;fill:#808080;fill-opacity:1"
+     d="M 4.7871094 5 C 4.1101678 5.00559 3.5365037 5.0481532 3.0273438 5.3027344 C 2.6879032 5.4724544 2.3973372 5.7651704 2.2304688 6.140625 C 2.0635995 6.5160796 2 6.9583369 2 7.5 L 2 10 L 2 15 L 2 17.5 C 2 18.041661 2.0635991 18.483919 2.2304688 18.859375 C 2.3973372 19.234831 2.6879032 19.527545 3.0273438 19.697266 C 3.5365037 19.951846 4.1101678 19.9944 4.7871094 20 C 5.0127562 20.0019 5.2500015 20 5.5 20 L 18.5 20 C 19.499993 20 20.293777 20.036709 20.972656 19.697266 C 21.312099 19.527545 21.602661 19.234831 21.769531 18.859375 C 21.9364 18.483919 22 18.041661 22 17.5 L 22 15 L 22 10 L 22 7.9375 A 3.5 3.5 0 0 1 19.5 9 A 3.5 3.5 0 0 1 18.798828 8.9199219 L 12 13.822266 L 4.6582031 8.546875 L 5.015625 8 L 12 12.216797 L 17.945312 8.6289062 A 3.5 3.5 0 0 1 16 5.5 A 3.5 3.5 0 0 1 16.035156 5 L 5.5 5 C 5.2500015 5 5.0127562 4.9981401 4.7871094 5 z " />
+  <circle
+     style="fill:#808080;fill-rule:evenodd;stroke-width:2;stroke-linecap:square;stroke-linejoin:round"
+     id="path1267"
+     cx="19.5"
+     cy="5.5"
+     r="2.5" />
+</svg>

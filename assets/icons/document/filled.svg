@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 1 24 24"
+   height="24"
+   id="svg7384"
+   version="1.1"
+   width="24"
+   sodipodi:docname="filled.svg"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview21"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     width="24px"
+     inkscape:zoom="9.8994925"
+     inkscape:cx="-15.051277"
+     inkscape:cy="13.889601"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg7384"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid837"
+       dotted="false" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid839"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata20854">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs7386">
+    <linearGradient
+       id="linearGradient5606"
+       inkscape:swatch="solid">
+      <stop
+         id="stop5608"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4526"
+       inkscape:swatch="solid">
+      <stop
+         id="stop4528"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3600-4"
+       inkscape:swatch="gradient">
+      <stop
+         id="stop3602-7"
+         offset="0"
+         style="stop-color:#f4f4f4;stop-opacity:1" />
+      <stop
+         id="stop3604-6"
+         offset="1"
+         style="stop-color:#dbdbdb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path
+     id="path874"
+     style="color:#000000;fill:#808080;fill-opacity:1"
+     d="M 6.4550781 2 C 5.4864982 2.0089807 4.7372585 2.0732697 4.1171875 2.4453125 C 3.7038068 2.693341 3.3972495 3.1012205 3.2285156 3.6074219 C 3.0597819 4.1136233 3 4.7222238 3 5.5 L 3 18.5 C 3 19.277776 3.0585582 19.89131 3.25 20.408203 C 3.4414419 20.925097 3.8029639 21.335075 4.2773438 21.572266 C 5.2261035 22.046645 6.500004 22 8.5 22 L 15.5 22 C 16.999997 22 18.056051 22.05074 18.882812 21.554688 C 19.296194 21.30666 19.602751 20.89878 19.771484 20.392578 C 19.940218 19.886377 20 19.277776 20 18.5 L 20 8 L 15 8 L 14 8 L 14 2 L 7.5 2 C 7.1250007 2 6.7779381 1.9970064 6.4550781 2 z M 15 2.2929688 L 15 7 L 19.707031 7 L 15 2.2929688 z M 7 11 L 16 11 L 16 12 L 7 12 L 7 11 z M 7 13 L 16 13 L 16 14 L 7 14 L 7 13 z M 7 15 L 16 15 L 16 16 L 7 16 L 7 15 z M 7 17 L 12 17 L 12 18 L 7 18 L 7 17 z " />
+  <g
+     id="layer9"
+     label="status"
+     style="display:inline"
+     transform="translate(-613.0002,327)" />
+  <g
+     id="layer4"
+     style="display:inline"
+     transform="translate(-372,-39.999996)" />
+  <g
+     id="g1812"
+     style="display:inline"
+     transform="translate(-372,-39.999996)" />
+  <g
+     id="g6217"
+     style="display:inline"
+     transform="translate(-372,-39.999996)" />
+  <g
+     id="layer3"
+     style="display:inline"
+     transform="translate(-372,-39.999996)" />
+  <g
+     id="g1833"
+     style="display:inline"
+     transform="translate(-372,-39.999996)" />
+  <g
+     id="layer1"
+     style="display:inline"
+     transform="translate(-372,-39.999996)" />
+</svg>

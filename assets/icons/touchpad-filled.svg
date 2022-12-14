@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 1 24 24"
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="touchpad-filled.svg"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:snap-page="true"
+     inkscape:zoom="28"
+     inkscape:cx="14.25"
+     inkscape:cy="9.8928571"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid824" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid826"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <path
+     id="path352"
+     style="color:#000000;fill:#808080;fill-opacity:1"
+     d="M 5.4550781 3 C 4.4865002 3.00898 3.7372573 3.0732702 3.1171875 3.4453125 C 2.7038076 3.6933406 2.3972493 4.1012215 2.2285156 4.6074219 C 2.0597823 5.1136223 2 5.7222254 2 6.5 L 2 16 L 11 16 L 12 16 L 21 16 L 21 6.5 C 21 5.7222254 20.94022 5.1136223 20.771484 4.6074219 C 20.602753 4.1012215 20.296194 3.6933406 19.882812 3.4453125 C 19.056054 2.9492567 17.999995 3 16.5 3 L 6.5 3 C 6.1250016 3 5.7779375 2.99701 5.4550781 3 z M 5 4 L 18 4 C 19.099348 4 20 4.9006519 20 6 L 20 15 L 19 15 L 19 6 C 19 5.4373531 18.562646 5 18 5 L 5 5 C 4.4373531 5 4 5.4373531 4 6 L 4 15 L 3 15 L 3 6 C 3 4.9006519 3.9006519 4 5 4 z M 2 17 L 2 17.5 C 2 18.277774 2.0597826 18.886379 2.2285156 19.392578 C 2.3972493 19.89878 2.7038076 20.306659 3.1171875 20.554688 C 3.9439473 21.050743 5.000006 21 6.5 21 L 11 21 L 11 17 L 2 17 z M 12 17 L 12 21 L 16.5 21 C 17.999995 21 19.056053 21.050737 19.882812 20.554688 C 20.296194 20.306659 20.602753 19.89878 20.771484 19.392578 C 20.940218 18.886379 21 18.277774 21 17.5 L 21 17 L 12 17 z " />
+</svg>

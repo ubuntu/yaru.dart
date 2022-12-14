@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 1 24 24"
+   height="24"
+   width="24"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="dialpad-filled.svg"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:snap-page="true"
+     inkscape:zoom="28"
+     inkscape:cx="12.928571"
+     inkscape:cy="10.321429"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid822" />
+  </sodipodi:namedview>
+  <path
+     id="path1920"
+     style="color:#000000;fill:#808080;fill-rule:evenodd;stroke-linecap:round;-inkscape-stroke:none;fill-opacity:1"
+     d="M 3.25 2 C 2.5747993 2 2 2.5747993 2 3.25 L 2 5.75 C 2 6.4252007 2.5747993 7 3.25 7 L 5.75 7 C 6.4252007 7 7 6.4252007 7 5.75 L 7 3.25 C 7 2.5747993 6.4252007 2 5.75 2 L 3.25 2 z M 10.25 2 C 9.5747986 2 9 2.5747986 9 3.25 L 9 5.75 C 9 6.4252014 9.5747986 7 10.25 7 L 12.75 7 C 13.425201 7 14 6.4252014 14 5.75 L 14 3.25 C 14 2.5747986 13.425201 2 12.75 2 L 10.25 2 z M 17.25 2 C 16.574799 2 16 2.5747986 16 3.25 L 16 5.75 C 16 6.4252014 16.574799 7 17.25 7 L 19.75 7 C 20.425201 7 21 6.4252014 21 5.75 L 21 3.25 C 21 2.5747986 20.425201 2 19.75 2 L 17.25 2 z M 3.25 9 C 2.5747986 9 2 9.5747986 2 10.25 L 2 12.75 C 2 13.425201 2.5747986 14 3.25 14 L 5.75 14 C 6.4252014 14 7 13.425201 7 12.75 L 7 10.25 C 7 9.5747986 6.4252014 9 5.75 9 L 3.25 9 z M 10.25 9 C 9.5747986 9 9 9.5747986 9 10.25 L 9 12.75 C 9 13.425201 9.5747986 14 10.25 14 L 12.75 14 C 13.425201 14 14 13.425201 14 12.75 L 14 10.25 C 14 9.5747986 13.425201 9 12.75 9 L 10.25 9 z M 17.25 9 C 16.574799 9 16 9.5747986 16 10.25 L 16 12.75 C 16 13.425201 16.574799 14 17.25 14 L 19.75 14 C 20.425201 14 21 13.425201 21 12.75 L 21 10.25 C 21 9.5747986 20.425201 9 19.75 9 L 17.25 9 z M 3.25 16 C 2.5747986 16 2 16.574799 2 17.25 L 2 19.75 C 2 20.425201 2.5747986 21 3.25 21 L 5.75 21 C 6.4252014 21 7 20.425201 7 19.75 L 7 17.25 C 7 16.574799 6.4252014 16 5.75 16 L 3.25 16 z M 10.25 16 C 9.5747986 16 9 16.574799 9 17.25 L 9 19.75 C 9 20.425201 9.5747986 21 10.25 21 L 12.75 21 C 13.425201 21 14 20.425201 14 19.75 L 14 17.25 C 14 16.574799 13.425201 16 12.75 16 L 10.25 16 z M 17.25 16 C 16.574799 16 16 16.574799 16 17.25 L 16 19.75 C 16 20.425201 16.574799 21 17.25 21 L 19.75 21 C 20.425201 21 21 20.425201 21 19.75 L 21 17.25 C 21 16.574799 20.425201 16 19.75 16 L 17.25 16 z " />
+</svg>
