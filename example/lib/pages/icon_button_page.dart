@@ -28,7 +28,7 @@ class _IconButtonPageState extends State<IconButtonPage> {
                 () => _selected = !_selected,
               ),
               isSelected: _selected,
-              icon: const Icon(YaruIcons.view),
+              icon: const Icon(YaruIcons.eye),
               tooltip: 'View',
             ),
           ],

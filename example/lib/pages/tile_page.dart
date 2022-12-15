@@ -12,7 +12,7 @@ class TilePage extends StatelessWidget {
       itemBuilder: (context, index) => const YaruTile(
         title: Text('Title'),
         trailing: Icon(YaruIcons.information),
-        leading: Icon(YaruIcons.audio),
+        leading: Icon(YaruIcons.music_note),
         subtitle: Text('Subtitle'),
       ),
       itemCount: 20,

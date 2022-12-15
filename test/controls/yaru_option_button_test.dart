@@ -60,7 +60,7 @@ void main() {
         YaruOptionButton(
           autofocus: variant.hasState(MaterialState.focused),
           onPressed: variant.hasState(MaterialState.disabled) ? null : () {},
-          child: const Icon(YaruIcons.settings),
+          child: const Icon(YaruIcons.gear),
         ),
         themeMode: variant.themeMode,
         size: const Size(40, 40),

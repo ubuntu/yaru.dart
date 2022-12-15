@@ -44,9 +44,9 @@ class _TabbedPagePageState extends State<TabbedPagePage> {
         const Center(child: Text('Television')),
       ],
       tabIcons: const [
-        YaruIcons.addon,
-        YaruIcons.accessibility,
-        YaruIcons.audio,
+        YaruIcons.puzzle_piece,
+        YaruIcons.human,
+        YaruIcons.music_note,
         YaruIcons.address_book,
         YaruIcons.television
       ].map(Icon.new).toList(),

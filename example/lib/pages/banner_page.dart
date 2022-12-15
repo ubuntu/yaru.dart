@@ -61,7 +61,7 @@ class _BannerState extends State<_Banner> {
     final icon = _hovered
         ? null
         : Icon(
-            YaruIcons.weather_clear,
+            YaruIcons.sun,
             size: 80,
             color: Theme.of(context).primaryColor,
           );

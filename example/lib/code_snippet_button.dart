@@ -65,7 +65,7 @@ class _CodeDialog extends StatelessWidget {
             ? null
             : Center(
                 child: YaruIconButton(
-                  icon: const Icon(YaruIcons.edit_copy),
+                  icon: const Icon(YaruIcons.copy),
                   tooltip: 'Copy',
                   onPressed: () async {
                     await Clipboard.setData(

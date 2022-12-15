@@ -71,7 +71,7 @@ class _ExampleState extends State<Example> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: YaruMasterTile(
-                      leading: const Icon(YaruIcons.settings),
+                      leading: const Icon(YaruIcons.gear),
                       title: const Text('Settings'),
                       onTap: () => showSettingsDialog(context),
                     ),
@@ -107,7 +107,7 @@ class _CompactPage extends StatelessWidget {
       ),
       pageBuilder: (context, index) => pageItems[index].pageBuilder(context),
       trailing: YaruNavigationRailItem(
-        icon: const Icon(YaruIcons.settings),
+        icon: const Icon(YaruIcons.gear),
         label: const Text('Settings'),
         tooltip: 'Settings',
         style: style,
