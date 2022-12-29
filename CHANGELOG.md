@@ -1,5 +1,47 @@
 # Changelog
 
+# 2.0.0-beta-3
+
+* YaruTitleBar: expose background color by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/412
+* Toggle buttons: themable title and subtitle text style by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/413
+* Toggle buttons: don't expand horizontally by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/415
+* YaruCheck/RadioButton: remove extra padding by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/417
+* Add missing comments in YaruNavigationRailItem by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/418
+* Fix typo in _YaruToggleButtonLayout name by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/419
+* YaruBanner: remove unused bannerWidth property by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/421
+* Remove YaruBanner.thirdTitle by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/423
+* Introduce YaruTileStyle by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/424
+* YaruBanner: don't ignore the surface tint color when no watermark is set by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/425
+* YaruBanner: align tint/elevation with and without watermark by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/426
+* YaruBanner: remove effectively unused copyIconAsWatermark by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/428
+* Yaru layout index controller by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/414
+* Fix "paneWidth" typo by @larsb24 in https://github.com/ubuntu/yaru_widgets.dart/pull/420
+* YaruBanner: clean up unused internal mouse cursor property by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/427
+* Extract YaruWatermark from YaruBanner by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/430
+* YaruLandscapeLayout: remove docs from an internal helper class by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/431
+* YaruBanner: generalize padding & fix RTL by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/432
+* Fix RTL support for paddings and margins by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/433
+* YaruBanner: allow arbitrary child & offer tile for convenience by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/434
+* Fix YaruIconButton.alignment type by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/435
+* Fix typo: "alignement" by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/436
+* Rename YaruCompactLayout to YaruNavigationPage by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/437
+* Reduce repetitive Theme.of() calls by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/438
+* Add MasterDetailPage.bottomBar by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/441
+* YaruBanner: give full control over the colors by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/439
+* Add YaruNavigationPage.leading/trailing by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/442
+* Example: settings dialog by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/443
+* YaruTitleBar: implement PreferredSizeWidget by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/444
+* YaruBanner: add onHover callback by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/445
+* YaruBanner: forward onHover to .tile constructor by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/446
+* YaruBanner: more sane default colors by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/449
+* Rename YaruCompactLayoutTheme(Data) to YaruNavigationPageTheme(Data) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/452
+* YaruMasterDetailThemeData: implement ThemeExtension interface by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/450
+* YaruToggleButtonThemeData: implement ThemeExtension by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/451
+* Example: reorganize checkboxes, radios, and switches by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/453
+* NavigationPageThemeData: implement ThemeExtension by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/454
+* Forward initialIndex to default YaruPageController by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/457
+* Adapt to yaru_icons 1.0 by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/461
+
 # 2.0.0-beta-2
 
 - [Paul Kepinski](https://github.com/Jupi007): Add control tiles (#409)
