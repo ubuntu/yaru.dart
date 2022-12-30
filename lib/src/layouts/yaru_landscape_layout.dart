@@ -186,17 +186,19 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       data: Theme.of(context).copyWith(
         pageTransitionsTheme: theme.landscapeTransitions,
       ),
-      child: Navigator(
-        pages: [
-          MaterialPage(
-            key: ValueKey(_selectedIndex),
-            child: widget.controller.length > _selectedIndex
-                ? widget.pageBuilder(context, _selectedIndex)
-                : widget.pageBuilder(context, 0),
-          ),
-        ],
-        onPopPage: (route, result) => route.didPop(result),
-        observers: [HeroController()],
+      child: ScaffoldMessenger(
+        child: Navigator(
+          pages: [
+            MaterialPage(
+              key: ValueKey(_selectedIndex),
+              child: widget.controller.length > _selectedIndex
+                  ? widget.pageBuilder(context, _selectedIndex)
+                  : widget.pageBuilder(context, 0),
+            ),
+          ],
+          onPopPage: (route, result) => route.didPop(result),
+          observers: [HeroController()],
+        ),
       ),
     );
   }
