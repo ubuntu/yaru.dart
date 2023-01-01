@@ -21,6 +21,7 @@ export 'src/controls/yaru_switch.dart';
 export 'src/controls/yaru_switch_button.dart';
 export 'src/controls/yaru_switch_list_tile.dart';
 export 'src/controls/yaru_title_bar.dart';
+export 'src/controls/yaru_title_bar_theme.dart';
 export 'src/controls/yaru_toggle_button.dart';
 export 'src/controls/yaru_toggle_button_theme.dart';
 export 'src/controls/yaru_window_control.dart';
