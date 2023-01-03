@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'yaru_navigation_page.dart';
+import 'yaru_navigation_page_theme.dart';
 import 'yaru_navigation_rail_item.dart';
 
 class YaruNavigationRail extends StatelessWidget {
@@ -43,8 +44,9 @@ class YaruNavigationRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruNavigationPageTheme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: theme.railPadding ?? EdgeInsets.zero,
       child: IntrinsicHeight(
         child: Column(
           children: <Widget>[

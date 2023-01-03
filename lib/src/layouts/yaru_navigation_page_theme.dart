@@ -7,6 +7,7 @@ class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
     with Diagnosticable {
   /// Creates a theme that can be used with [YaruNavigationPage].
   const NavigationPageThemeData({
+    this.railPadding,
     this.pageTransitions,
   });
 
@@ -16,6 +17,9 @@ class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
     );
   }
 
+  /// The padding around the navigation rail.
+  final EdgeInsetsGeometry? railPadding;
+
   /// The page transitions to use.
   final PageTransitionsTheme? pageTransitions;
 
@@ -23,9 +27,11 @@ class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
   /// new values.
   @override
   NavigationPageThemeData copyWith({
+    EdgeInsetsGeometry? railPadding,
     PageTransitionsTheme? pageTransitions,
   }) {
     return NavigationPageThemeData(
+      railPadding: railPadding ?? this.railPadding,
       pageTransitions: pageTransitions ?? this.pageTransitions,
     );
   }
@@ -37,6 +43,7 @@ class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
   ) {
     final o = other as NavigationPageThemeData?;
     return NavigationPageThemeData(
+      railPadding: EdgeInsetsGeometry.lerp(railPadding, o?.railPadding, t),
       pageTransitions: t < 0.5 ? pageTransitions : o?.pageTransitions,
     );
   }
@@ -44,6 +51,7 @@ class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('railPadding', railPadding));
     properties.add(DiagnosticsProperty('pageTransitions', pageTransitions));
   }
 
@@ -51,12 +59,14 @@ class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is NavigationPageThemeData &&
+        other.railPadding == railPadding &&
         other.pageTransitions == pageTransitions;
   }
 
   @override
   int get hashCode {
     return Object.hashAll([
+      railPadding,
       pageTransitions,
     ]);
   }
