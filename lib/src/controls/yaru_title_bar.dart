@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -22,12 +24,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.isActive,
     this.isClosable,
     this.isMaximizable,
-    this.isRestorable,
     this.isMinimizable,
+    this.isRestorable,
     this.onClose,
+    this.onDrag,
     this.onMaximize,
     this.onMinimize,
-    this.onMove,
     this.onRestore,
     this.onShowMenu,
   });
@@ -59,31 +61,31 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   /// Whether the title bar shows a maximize button.
   final bool? isMaximizable;
 
-  /// Whether the title bar shows a restore button.
-  final bool? isRestorable;
-
   /// Whether the title bar shows a minimize button.
   final bool? isMinimizable;
 
+  /// Whether the title bar shows a restore button.
+  final bool? isRestorable;
+
   /// Called when the close button is pressed.
-  final void Function(BuildContext)? onClose;
+  final FutureOr<void> Function(BuildContext)? onClose;
+
+  /// Called when the title bar is dragged to move the window.
+  final FutureOr<void> Function(BuildContext)? onDrag;
 
   /// Called when the maximize button is pressed or the title bar is
   /// double-clicked while the window is not maximized.
-  final void Function(BuildContext)? onMaximize;
+  final FutureOr<void> Function(BuildContext)? onMaximize;
 
   /// Called when the minimize button is pressed.
-  final void Function(BuildContext)? onMinimize;
-
-  /// Called when the title bar is drag to move the window.
-  final void Function(BuildContext)? onMove;
+  final FutureOr<void> Function(BuildContext)? onMinimize;
 
   /// Called when the restore button is pressed or the title bar is
   /// double-clicked while the window is maximized.
-  final void Function(BuildContext)? onRestore;
+  final FutureOr<void> Function(BuildContext)? onRestore;
 
   /// Called when the secondary mouse button is pressed.
-  final void Function(BuildContext)? onShowMenu;
+  final FutureOr<void> Function(BuildContext)? onShowMenu;
 
   @override
   Size get preferredSize => const Size(0, kYaruTitleBarHeight);
@@ -121,7 +123,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onPanStart: (_) => onMove?.call(context),
+      onPanStart: (_) => onDrag?.call(context),
       onDoubleTap: () => isMaximizable == true
           ? onMaximize?.call(context)
           : isRestorable == true
