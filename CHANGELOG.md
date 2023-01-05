@@ -1,3 +1,8 @@
+# 1.0.1
+
+* Add Ubuntu CoF icon without baseplates
+* Add various packaging variant icons
+
 # 1.0.0
 
 * Add arrow and flag icons
