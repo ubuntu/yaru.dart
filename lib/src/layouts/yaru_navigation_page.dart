@@ -62,9 +62,7 @@ class YaruNavigationPage extends StatefulWidget {
 
 class _YaruNavigationPageState extends State<YaruNavigationPage> {
   late final ScrollController _scrollController;
-  late final YaruPageController _pageController;
-
-  int get _length => widget.length ?? widget.controller!.length;
+  late YaruPageController _pageController;
 
   @override
   void initState() {
@@ -84,7 +82,9 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
   @override
   void didUpdateWidget(covariant YaruNavigationPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.controller != oldWidget.controller) {
+    if (widget.controller != oldWidget.controller ||
+        widget.length != oldWidget.length ||
+        widget.initialIndex != oldWidget.initialIndex) {
       oldWidget.controller?.removeListener(_pageControllerCallback);
       _updatePageController();
     }
@@ -143,7 +143,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
           child: YaruNavigationRail(
             selectedIndex: max(_pageController.index, 0),
             onDestinationSelected: _onTap,
-            length: _length,
+            length: _pageController.length,
             itemBuilder: widget.itemBuilder,
             leading: widget.leading,
             trailing: widget.trailing,
@@ -170,7 +170,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
           pages: [
             MaterialPage(
               key: ValueKey(index),
-              child: _length > index
+              child: _pageController.length > index
                   ? widget.pageBuilder(context, index)
                   : widget.pageBuilder(context, 0),
             ),
