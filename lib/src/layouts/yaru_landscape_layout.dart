@@ -70,6 +70,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     if (widget.controller != oldWidget.controller) {
       oldWidget.controller.removeListener(_controllerCallback);
       widget.controller.addListener(_controllerCallback);
+      _selectedIndex = max(widget.controller.index, 0);
     }
   }
 

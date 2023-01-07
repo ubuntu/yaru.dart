@@ -103,15 +103,13 @@ class YaruMasterDetailPage extends StatefulWidget {
 
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   double? _previousPaneWidth;
-  late final YaruPageController _controller;
+  late YaruPageController _controller;
 
   void _updateController() => _controller = widget.controller ??
       YaruPageController(
-        length: _length,
+        length: widget.length ?? widget.controller!.length,
         initialIndex: widget.initialIndex ?? -1,
       );
-
-  int get _length => widget.length ?? widget.controller!.length;
 
   @override
   void initState() {
@@ -128,7 +126,11 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   @override
   void didUpdateWidget(covariant YaruMasterDetailPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.controller != oldWidget.controller) _updateController();
+    if (widget.controller != oldWidget.controller ||
+        widget.length != oldWidget.length ||
+        widget.initialIndex != oldWidget.initialIndex) {
+      _updateController();
+    }
   }
 
   @override
