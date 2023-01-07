@@ -30,7 +30,7 @@ void main() {
           ),
         ),
         themeMode: variant.themeMode,
-        size: Size(variant.value!, 480),
+        size: Size(variant.value!.width, 480),
       );
       await tester.pumpAndSettle();
 
@@ -48,47 +48,84 @@ void main() {
   testWidgets(
     'controller',
     (tester) async {
-      final variant = goldenVariant.currentValue!;
+      final variant = orientationVariant.currentValue!;
       final controller = YaruPageController(length: 8);
-      await tester.pumpScaffold(
-        YaruMasterDetailPage(
-          controller: controller,
-          layoutDelegate: const YaruMasterFixedPaneDelegate(
-            paneWidth: kYaruMasterDetailBreakpoint / 3,
-          ),
-          appBar: AppBar(title: const Text('Master')),
-          tileBuilder: (context, index, selected) => YaruMasterTile(
-            leading: const Icon(YaruIcons.menu),
-            title: Text('Tile $index'),
-          ),
-          pageBuilder: (context, index) => YaruDetailPage(
-            appBar: AppBar(
-              title: Text('Detail title $index'),
-            ),
-            body: Center(child: Text('Detail body $index')),
-          ),
-        ),
-        themeMode: variant.themeMode,
-        size: Size(variant.value!, 480),
-      );
 
-      controller.index = 3;
-      await tester.pumpAndSettle();
-      if (variant.label.startsWith('portrait')) {
-        expect(find.text('Master'), findsNothing);
-        expect(find.text('Tile 3'), findsNothing);
-      } else if (variant.label.startsWith('landscape')) {
-        expect(find.text('Master'), findsOneWidget);
-        expect(find.text('Tile 3'), findsOneWidget);
+      Future<void> buildMasterDetailPage({
+        int? length,
+        int? initialIndex,
+        YaruPageController? controller,
+      }) {
+        return tester.pumpScaffold(
+          YaruMasterDetailPage(
+            length: length,
+            initialIndex: initialIndex,
+            controller: controller,
+            layoutDelegate: const YaruMasterFixedPaneDelegate(
+              paneWidth: kYaruMasterDetailBreakpoint / 3,
+            ),
+            appBar: AppBar(title: const Text('Master')),
+            tileBuilder: (context, index, selected) => YaruMasterTile(
+              leading: const Icon(YaruIcons.menu),
+              title: Text('Tile $index'),
+            ),
+            pageBuilder: (context, index) => YaruDetailPage(
+              appBar: AppBar(
+                title: Text('Detail title $index'),
+              ),
+              body: Center(child: Text('Detail body $index')),
+            ),
+          ),
+          size: Size(variant.width, 480),
+        );
       }
-      expect(find.text('Detail title 3'), findsOneWidget);
-      expect(find.text('Detail body 3'), findsOneWidget);
+
+      void expectDetailPage(int index) {
+        for (var i = 0; i < 8; i++) {
+          final matcher = i == index ? findsOneWidget : findsNothing;
+          expect(find.text('Detail title $i'), matcher);
+          expect(find.text('Detail body $i'), matcher);
+        }
+      }
+
+      await buildMasterDetailPage(controller: controller);
+      await tester.pumpAndSettle();
+      if (variant == Orientation.portrait) {
+        expectDetailPage(-1);
+      } else {
+        expectDetailPage(0);
+      }
+
+      controller.index = 0;
+      await tester.pumpAndSettle();
+      expectDetailPage(0);
+
+      controller.index = 5;
+      await tester.pumpAndSettle();
+      expectDetailPage(5);
+
+      await buildMasterDetailPage(length: 3, initialIndex: 1);
+      await tester.pumpAndSettle();
+      expectDetailPage(1);
     },
-    variant: goldenVariant,
+    variant: orientationVariant,
   );
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('portrait', kYaruMasterDetailBreakpoint / 2),
-  ...goldenThemeVariants('landscape', kYaruMasterDetailBreakpoint),
+  ...goldenThemeVariants('portrait', Orientation.portrait),
+  ...goldenThemeVariants('landscape', Orientation.landscape),
 });
+
+final orientationVariant = ValueVariant(Orientation.values.toSet());
+
+extension OrientationX on Orientation {
+  double get width {
+    switch (this) {
+      case Orientation.portrait:
+        return kYaruMasterDetailBreakpoint / 2;
+      case Orientation.landscape:
+        return kYaruMasterDetailBreakpoint;
+    }
+  }
+}
