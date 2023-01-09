@@ -57,6 +57,10 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
           offset: offset,
           enableFeedback: enableFeedback,
           constraints: constraints,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Theme.of(context).dividerColor),
+            borderRadius: BorderRadius.circular(kYaruButtonRadius),
+          ),
           child: _YaruPopupDecoration(
             child: child,
             padding: padding,
