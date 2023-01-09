@@ -3,8 +3,6 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-const _kTitleTextStyle = TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
-
 @immutable
 class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
     with Diagnosticable {
@@ -14,7 +12,7 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
     this.titleSpacing,
     this.foregroundColor,
     this.backgroundColor,
-    this.titleTextStyle = _kTitleTextStyle,
+    this.titleTextStyle,
     this.shape,
   });
 

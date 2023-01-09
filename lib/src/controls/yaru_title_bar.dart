@@ -117,8 +117,16 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         MaterialStateProperty.resolveAs(this.foregroundColor, states) ??
             theme.foregroundColor?.resolve(states) ??
             Theme.of(context).colorScheme.onSurface;
-    final titleTextStyle =
-        theme.titleTextStyle?.copyWith(color: foregroundColor);
+
+    final titleTextStyle = Theme.of(context)
+        .appBarTheme
+        .titleTextStyle!
+        .copyWith(
+          color: foregroundColor,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+        )
+        .merge(theme.titleTextStyle);
     final shape = theme.shape ??
         Border(
           bottom: BorderSide(
