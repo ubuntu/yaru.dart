@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,6 @@ import '../constants.dart';
 import 'yaru_title_bar_theme.dart';
 import 'yaru_window.dart';
 import 'yaru_window_control.dart';
-import 'yaru_window_controller.dart';
-import 'yaru_window_state.dart';
 
 const _kTitleButtonPadding = EdgeInsets.symmetric(horizontal: 7);
 
@@ -29,6 +26,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.isActive,
     this.isClosable,
+    this.isDraggable,
     this.isMaximizable,
     this.isMinimizable,
     this.isRestorable,
@@ -66,6 +64,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// Whether the title bar shows a close button.
   final bool? isClosable;
+
+  /// Whether the title bar can be dragged.
+  final bool? isDraggable;
 
   /// Whether the title bar shows a maximize button.
   final bool? isMaximizable;
@@ -150,7 +151,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onPanStart: (_) => onDrag?.call(context),
+      onPanStart: isDraggable == true ? (_) => onDrag?.call(context) : null,
       onDoubleTap: () => isMaximizable == true
           ? onMaximize?.call(context)
           : isRestorable == true
@@ -234,7 +235,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class YaruWindowTitleBar extends StatefulWidget implements PreferredSizeWidget {
+class YaruWindowTitleBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const YaruWindowTitleBar({
     super.key,
     this.leading,
@@ -242,9 +244,21 @@ class YaruWindowTitleBar extends StatefulWidget implements PreferredSizeWidget {
     this.trailing,
     this.centerTitle,
     this.titleSpacing,
-    this.backgroundColor,
     this.foregroundColor,
-    this.controller,
+    this.backgroundColor,
+    this.isActive,
+    this.isClosable,
+    this.isDraggable,
+    this.isMaximizable,
+    this.isMinimizable,
+    this.isRestorable,
+    this.isVisible = !kIsWeb,
+    this.onClose = YaruWindow.close,
+    this.onDrag = YaruWindow.drag,
+    this.onMaximize = YaruWindow.maximize,
+    this.onMinimize = YaruWindow.minimize,
+    this.onRestore = YaruWindow.restore,
+    this.onShowMenu = YaruWindow.showMenu,
   });
 
   /// The primary title widget.
@@ -268,89 +282,87 @@ class YaruWindowTitleBar extends StatefulWidget implements PreferredSizeWidget {
   /// The background color.
   final Color? backgroundColor;
 
-  /// An optional controller.
-  final YaruWindowController? controller;
+  /// Whether the title bar visualized as active.
+  final bool? isActive;
+
+  /// Whether the title bar shows a close button.
+  final bool? isClosable;
+
+  /// Whether the title bar can be dragged to move the window.
+  final bool? isDraggable;
+
+  /// Whether the title bar shows a maximize button.
+  final bool? isMaximizable;
+
+  /// Whether the title bar shows a minimize button.
+  final bool? isMinimizable;
+
+  /// Whether the title bar shows a restore button.
+  final bool? isRestorable;
+
+  /// Whether the title bar is visible.
+  final bool? isVisible;
+
+  /// Called when the close button is pressed.
+  final FutureOr<void> Function(BuildContext)? onClose;
+
+  /// Called when the title bar is dragged to move the window.
+  final FutureOr<void> Function(BuildContext)? onDrag;
+
+  /// Called when the maximize button is pressed or the title bar is
+  /// double-clicked while the window is not maximized.
+  final FutureOr<void> Function(BuildContext)? onMaximize;
+
+  /// Called when the minimize button is pressed.
+  final FutureOr<void> Function(BuildContext)? onMinimize;
+
+  /// Called when the restore button is pressed or the title bar is
+  /// double-clicked while the window is maximized.
+  final FutureOr<void> Function(BuildContext)? onRestore;
+
+  /// Called when the secondary mouse button is pressed.
+  final FutureOr<void> Function(BuildContext)? onShowMenu;
 
   @override
   Size get preferredSize => const Size(0, kIsWeb ? 0 : kYaruTitleBarHeight);
 
-  @override
-  State<YaruWindowTitleBar> createState() => _YaruWindowTitleBarState();
-
   static Future<void> ensureInitialized() => YaruWindow.ensureInitialized();
-}
-
-class _YaruWindowTitleBarState extends State<YaruWindowTitleBar> {
-  late YaruWindowController _controller;
-
-  YaruWindowController createController() {
-    return YaruWindowController(
-      state: kIsWeb
-          ? const YaruWindowState(
-              closable: false,
-              movable: false,
-              maximizable: false,
-              minimizable: false,
-            )
-          : Platform.isMacOS
-              ? const YaruWindowState(
-                  closable: false,
-                  maximizable: false,
-                  minimizable: false,
-                )
-              : null,
-    );
-  }
-
-  bool get isVisible => !kIsWeb;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller ?? createController();
-    _controller.init();
-  }
-
-  @override
-  void didUpdateWidget(covariant YaruWindowTitleBar oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.controller != oldWidget.controller) {
-      if (oldWidget.controller == null) _controller.dispose();
-      _controller = widget.controller ?? createController();
-      _controller.init();
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (!isVisible) return const SizedBox.shrink();
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) => YaruTitleBar(
-        leading: widget.leading,
-        title: widget.title ?? Text(_controller.state?.title ?? ''),
-        trailing: widget.trailing,
-        centerTitle: widget.centerTitle,
-        titleSpacing: widget.titleSpacing,
-        backgroundColor: widget.backgroundColor,
-        isActive: _controller.state?.active,
-        isClosable: _controller.state?.closable,
-        isMaximizable: _controller.state?.maximizable,
-        isMinimizable: _controller.state?.minimizable,
-        isRestorable: _controller.state?.restorable,
-        onClose: _controller.close,
-        onDrag: _controller.state?.movable == true ? _controller.drag : null,
-        onMaximize: _controller.maximize,
-        onMinimize: _controller.minimize,
-        onRestore: _controller.restore,
-        onShowMenu: _controller.showMenu,
+    if (isVisible == false) return const SizedBox.shrink();
+    return StreamBuilder<YaruWindowState>(
+      stream: YaruWindow.states(),
+      initialData: YaruWindowState(
+        isActive: isActive,
+        isClosable: isClosable,
+        isMaximizable: isMaximizable,
+        isMinimizable: isMinimizable,
+        isRestorable: isRestorable,
       ),
+      builder: (context, snapshot) {
+        final window = snapshot.data;
+        return YaruTitleBar(
+          leading: leading,
+          title: title ?? Text(window?.title ?? ''),
+          trailing: trailing,
+          centerTitle: centerTitle,
+          titleSpacing: titleSpacing,
+          backgroundColor: backgroundColor,
+          isActive: isActive ?? window?.isActive,
+          isClosable: isClosable ?? window?.isClosable,
+          isDraggable: isDraggable ?? window?.isMovable,
+          isMaximizable: isMaximizable ?? window?.isMaximizable,
+          isMinimizable: isMinimizable ?? window?.isMinimizable,
+          isRestorable: isRestorable ?? window?.isRestorable,
+          onClose: onClose,
+          onDrag: onDrag,
+          onMaximize: onMaximize,
+          onMinimize: onMinimize,
+          onRestore: onRestore,
+          onShowMenu: onShowMenu,
+        );
+      },
     );
   }
 }
@@ -363,29 +375,20 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.trailing,
     super.centerTitle,
     super.titleSpacing,
+    super.foregroundColor,
     super.backgroundColor,
-    super.controller,
+    super.isActive,
+    super.isClosable = true,
+    super.isDraggable,
+    super.isMaximizable = false,
+    super.isMinimizable = false,
+    super.isRestorable = false,
+    super.isVisible = true,
+    super.onClose = YaruWindow.maybePop,
+    super.onDrag = YaruWindow.drag,
+    super.onMaximize = null,
+    super.onMinimize = null,
+    super.onRestore = null,
+    super.onShowMenu = YaruWindow.showMenu,
   });
-
-  @override
-  State<YaruWindowTitleBar> createState() => _YaruDialogTitleBarState();
-}
-
-class _YaruDialogTitleBarState extends _YaruWindowTitleBarState {
-  @override
-  YaruWindowController createController() {
-    return YaruWindowController(
-      state: const YaruWindowState(
-        closable: true,
-        maximizable: false,
-        minimizable: false,
-        movable: !kIsWeb,
-        restorable: false,
-      ),
-      close: Navigator.of(context).maybePop,
-    );
-  }
-
-  @override
-  bool get isVisible => true;
 }

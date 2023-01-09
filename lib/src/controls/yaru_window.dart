@@ -1,29 +1,33 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'yaru_window_state.dart';
-
 class YaruWindow {
   @visibleForTesting
   static WindowManager wm = WindowManager.instance;
 
-  static Future<void> close(_) => wm.close();
-  static Future<void> drag(_) => wm.startDragging();
-  static Future<void> maximize(_) => wm.maximize();
-  static Future<void> minimize(_) => wm.minimize();
-  static Future<void> restore(_) => wm.unmaximize();
+  static Future<void> close(_) => wm.close().catchError((_) {});
+  static Future<void> drag(_) => wm.startDragging().catchError((_) {});
+  static Future<void> maximize(_) => wm.maximize().catchError((_) {});
+  static Future<void> minimize(_) => wm.minimize().catchError((_) {});
+  static Future<void> restore(_) => wm.unmaximize().catchError((_) {});
   static Future<void> showMenu(_) => wm.popUpWindowMenu().catchError((_) {});
   static Future<YaruWindowState> state() => wm.state();
   static Stream<YaruWindowState> states() async* {
     final listener = YaruWindowListener(wm);
+    yield await wm.state();
     try {
       yield* listener.listen();
     } finally {
       await listener.close();
     }
+  }
+
+  static Future<void> maybePop(BuildContext context) {
+    return Navigator.maybePop(context);
   }
 
   static Future<void> ensureInitialized() async {
@@ -39,13 +43,13 @@ extension YaruWindowManagerX on WindowManager {
   Future<YaruWindowState> state() {
     return Future.wait([
       isFocused().catchError((_) => true),
-      isClosable().catchError((_) => true),
+      isClosable().catchError((_) => !Platform.isMacOS),
       isFullScreen().catchError((_) => false),
-      isMaximizable().catchError((_) => true),
+      isMaximizable().catchError((_) => !Platform.isMacOS),
       isMaximized().catchError((_) => false),
-      isMinimizable().catchError((_) => true),
+      isMinimizable().catchError((_) => !Platform.isMacOS),
       isMinimized().catchError((_) => false),
-      isMovable().catchError((_) => true),
+      isMovable().catchError((_) => !kIsWeb),
       getTitle().catchError((_) => ''),
     ]).then((values) {
       final active = values[0] as bool;
@@ -58,15 +62,15 @@ extension YaruWindowManagerX on WindowManager {
       final movable = values[7] as bool;
       final title = values[8] as String;
       return YaruWindowState(
-        active: active,
-        closable: closable,
-        fullscreen: fullscreen,
-        maximizable: maximizable && !maximized,
-        maximized: maximized,
-        minimizable: minimizable && !minimized,
-        minimized: minimized,
-        movable: movable,
-        restorable: fullscreen || maximized || minimized,
+        isActive: active,
+        isClosable: closable,
+        isFullscreen: fullscreen,
+        isMaximizable: maximizable && !maximized,
+        isMaximized: maximized,
+        isMinimizable: minimizable && !minimized,
+        isMinimized: minimized,
+        isMovable: movable,
+        isRestorable: fullscreen || maximized || minimized,
         title: title,
       );
     });
@@ -119,4 +123,68 @@ class YaruWindowListener implements WindowListener {
   void onWindowMoved() {}
   @override
   void onWindowEvent(String eventName) {}
+}
+
+@immutable
+class YaruWindowState {
+  const YaruWindowState({
+    this.isActive,
+    this.isClosable,
+    this.isFullscreen,
+    this.isMaximizable,
+    this.isMaximized,
+    this.isMinimizable,
+    this.isMinimized,
+    this.isMovable,
+    this.isRestorable,
+    this.title,
+  });
+
+  final bool? isActive;
+  final bool? isClosable;
+  final bool? isFullscreen;
+  final bool? isMaximizable;
+  final bool? isMaximized;
+  final bool? isMinimizable;
+  final bool? isMinimized;
+  final bool? isMovable;
+  final bool? isRestorable;
+  final String? title;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is YaruWindowState &&
+        other.isActive == isActive &&
+        other.isClosable == isClosable &&
+        other.isFullscreen == isFullscreen &&
+        other.isMaximizable == isMaximizable &&
+        other.isMaximized == isMaximized &&
+        other.isMinimizable == isMinimizable &&
+        other.isMinimized == isMinimized &&
+        other.isMovable == isMovable &&
+        other.isRestorable == isRestorable &&
+        other.title == title;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      isActive,
+      isClosable,
+      isFullscreen,
+      isMaximizable,
+      isMaximized,
+      isMinimizable,
+      isMinimized,
+      isMovable,
+      isRestorable,
+      title,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'YaruWindowState(isActive: $isActive, isClosable: $isClosable, isFullscreen: $isFullscreen, isMaximizable: $isMaximizable, isMaximized: $isMaximized, isMinimizable: $isMinimizable, isMinimized: $isMinimized, isMovable: $isMovable, isRestorable: $isRestorable, title: $title)';
+  }
 }

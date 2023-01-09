@@ -9,19 +9,7 @@ class DialogPage extends StatefulWidget {
 }
 
 class _DialogPageState extends State<DialogPage> {
-  final controller = YaruWindowController(
-    state: const YaruWindowState(
-      closable: true,
-      minimizable: false,
-      maximizable: false,
-    ),
-    close: Navigator.maybePop,
-  );
-
-  bool get isCloseable => controller.state!.closable == true;
-  set isCloseable(bool value) {
-    controller.state = controller.state!.copyWith(closable: value);
-  }
+  bool isCloseable = true;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +50,7 @@ class _DialogPageState extends State<DialogPage> {
                           ),
                         ),
                         title: const Text('The Title'),
-                        controller: controller,
+                        isClosable: isCloseable,
                       ),
                       content: SizedBox(
                         height: 100,

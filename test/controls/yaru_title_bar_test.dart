@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:yaru_widgets/src/controls/yaru_window.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 import '../yaru_golden_tester.dart';
@@ -10,10 +11,18 @@ void main() {
     (tester) async {
       final variant = goldenVariant.currentValue!;
 
-      final controller = YaruWindowController(state: variant.value!);
+      final state = variant.value!;
 
       await tester.pumpScaffold(
-        YaruWindowTitleBar(controller: controller),
+        YaruWindowTitleBar(
+          isActive: state.isActive,
+          isClosable: state.isClosable,
+          isDraggable: false,
+          isMaximizable: state.isMaximizable,
+          isMinimizable: state.isMinimizable,
+          isRestorable: state.isRestorable,
+          title: Text(state.title!),
+        ),
         themeMode: variant.themeMode,
         size: const Size(480, kYaruTitleBarHeight),
       );
@@ -33,45 +42,45 @@ final goldenVariant = ValueVariant({
   ...goldenThemeVariants(
     'empty',
     const YaruWindowState(
-      active: true,
+      isActive: true,
       title: 'empty',
     ),
   ),
   ...goldenThemeVariants(
     'closable',
     const YaruWindowState(
-      active: true,
-      closable: true,
+      isActive: true,
+      isClosable: true,
       title: 'closable',
     ),
   ),
   ...goldenThemeVariants(
     'maximizable',
     const YaruWindowState(
-      active: true,
-      minimizable: true,
-      maximizable: true,
-      closable: true,
+      isActive: true,
+      isMinimizable: true,
+      isMaximizable: true,
+      isClosable: true,
       title: 'maximizable',
     ),
   ),
   ...goldenThemeVariants(
     'restorable',
     const YaruWindowState(
-      active: true,
-      minimizable: true,
-      restorable: true,
-      closable: true,
+      isActive: true,
+      isMinimizable: true,
+      isRestorable: true,
+      isClosable: true,
       title: 'restorable',
     ),
   ),
   ...goldenThemeVariants(
     'inactive',
     const YaruWindowState(
-      active: false,
-      minimizable: true,
-      maximizable: true,
-      closable: true,
+      isActive: false,
+      isMinimizable: true,
+      isMaximizable: true,
+      isClosable: true,
       title: 'inactive',
     ),
   ),
