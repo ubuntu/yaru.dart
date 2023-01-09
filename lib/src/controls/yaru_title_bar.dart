@@ -330,6 +330,7 @@ class _YaruWindowTitleBarState extends State<YaruWindowTitleBar> {
         title: widget.title ?? Text(_controller.state?.title ?? ''),
         trailing: widget.trailing,
         centerTitle: widget.centerTitle,
+        titleSpacing: widget.titleSpacing,
         backgroundColor: widget.backgroundColor,
         isActive: _controller.state?.active,
         isClosable: _controller.state?.closable,
