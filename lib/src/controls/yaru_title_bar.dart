@@ -142,7 +142,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     Widget? backdropEffect(Widget? child) {
       if (child == null) return null;
       return AnimatedOpacity(
-        opacity: isActive == true ? 1 : 0.6,
+        opacity: isActive == true ? 1 : 0.75,
         duration: const Duration(milliseconds: 100),
         child: child,
       );
