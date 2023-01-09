@@ -82,7 +82,7 @@ class _BannerState extends State<_Banner> {
         builder: (context) => SimpleDialog(
           titlePadding: EdgeInsets.zero,
           contentPadding: const EdgeInsets.all(10),
-          title: YaruTitleBar(
+          title: YaruDialogTitleBar(
             title: title,
           ),
           children: [

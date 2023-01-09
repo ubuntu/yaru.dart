@@ -127,7 +127,7 @@ Future<void> showSettingsDialog(BuildContext context) {
         animation: model,
         builder: (context, child) {
           return AlertDialog(
-            title: const YaruTitleBar(
+            title: const YaruDialogTitleBar(
               title: Text('Settings'),
             ),
             titlePadding: EdgeInsets.zero,

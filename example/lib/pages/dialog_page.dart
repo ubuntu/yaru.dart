@@ -39,7 +39,7 @@ class _DialogPageState extends State<DialogPage> {
                           )
                       ],
                       titlePadding: EdgeInsets.zero,
-                      title: YaruTitleBar(
+                      title: YaruDialogTitleBar(
                         leading: const Center(
                           child: SizedBox.square(
                             dimension: 25,
@@ -49,7 +49,7 @@ class _DialogPageState extends State<DialogPage> {
                           ),
                         ),
                         title: const Text('The Title'),
-                        trailing: YaruCloseButton(enabled: isCloseable),
+                        isClosable: isCloseable,
                       ),
                       content: SizedBox(
                         height: 100,
