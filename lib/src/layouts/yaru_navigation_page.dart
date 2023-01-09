@@ -63,6 +63,7 @@ class YaruNavigationPage extends StatefulWidget {
 class _YaruNavigationPageState extends State<YaruNavigationPage> {
   late final ScrollController _scrollController;
   late YaruPageController _pageController;
+  final _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   void initState() {
@@ -127,6 +128,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
   void _onTap(int index) {
     _pageController.index = index;
     widget.onSelected?.call(index);
+    _navigatorKey.currentState?.popUntil((route) => route.isFirst);
   }
 
   Widget _buildNavigationRail(BuildContext context, BoxConstraints constraint) {
@@ -167,6 +169,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
           pageTransitionsTheme: theme.pageTransitions,
         ),
         child: Navigator(
+          key: _navigatorKey,
           pages: [
             MaterialPage(
               key: ValueKey(index),
