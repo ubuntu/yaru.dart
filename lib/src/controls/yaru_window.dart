@@ -45,6 +45,7 @@ extension YaruWindowManagerX on WindowManager {
       isMaximized().catchError((_) => false),
       isMinimizable().catchError((_) => true),
       isMinimized().catchError((_) => false),
+      isMovable().catchError((_) => true),
       getTitle().catchError((_) => ''),
       isVisible().catchError((_) => true),
     ]).then((values) {
@@ -55,7 +56,8 @@ extension YaruWindowManagerX on WindowManager {
       final maximized = values[4] as bool;
       final minimizable = values[5] as bool;
       final minimized = values[6] as bool;
-      final title = values[7] as String;
+      final movable = values[7] as bool;
+      final title = values[8] as String;
       return YaruWindowState(
         active: active,
         closable: closable,
@@ -64,6 +66,7 @@ extension YaruWindowManagerX on WindowManager {
         maximized: maximized,
         minimizable: minimizable && !minimized,
         minimized: minimized,
+        movable: movable,
         restorable: fullscreen || maximized || minimized,
         title: title,
       );

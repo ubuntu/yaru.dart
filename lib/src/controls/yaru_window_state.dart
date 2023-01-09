@@ -10,6 +10,7 @@ class YaruWindowState {
     this.maximized,
     this.minimizable,
     this.minimized,
+    this.movable,
     this.restorable,
     this.title,
   });
@@ -21,6 +22,7 @@ class YaruWindowState {
   final bool? maximized;
   final bool? minimizable;
   final bool? minimized;
+  final bool? movable;
   final bool? restorable;
   final String? title;
 
@@ -32,6 +34,7 @@ class YaruWindowState {
     bool? maximized,
     bool? minimizable,
     bool? minimized,
+    bool? movable,
     bool? restorable,
     String? title,
   }) {
@@ -43,6 +46,7 @@ class YaruWindowState {
       maximized: maximized ?? this.maximized,
       minimizable: minimizable ?? this.minimizable,
       minimized: minimized ?? this.minimized,
+      movable: movable ?? this.movable,
       restorable: restorable ?? this.restorable,
       title: title ?? this.title,
     );
@@ -57,6 +61,7 @@ class YaruWindowState {
       maximized: other?.maximized,
       minimizable: other?.minimizable,
       minimized: other?.minimized,
+      movable: other?.movable,
       restorable: other?.restorable,
       title: other?.title,
     );
@@ -73,6 +78,7 @@ class YaruWindowState {
         other.maximized == maximized &&
         other.minimizable == minimizable &&
         other.minimized == minimized &&
+        other.movable == movable &&
         other.restorable == restorable &&
         other.title == title;
   }
@@ -87,6 +93,7 @@ class YaruWindowState {
       maximized,
       minimizable,
       minimized,
+      movable,
       restorable,
       title,
     );
@@ -94,6 +101,6 @@ class YaruWindowState {
 
   @override
   String toString() {
-    return 'YaruWindowState(active: $active, closable: $closable, fullscreen: $fullscreen, maximizable: $maximizable, maximized: $maximized, minimizable: $minimizable, minimized: $minimized, restorable: $restorable, title: $title)';
+    return 'YaruWindowState(active: $active, closable: $closable, fullscreen: $fullscreen, maximizable: $maximizable, maximized: $maximized, minimizable: $minimizable, minimized: $minimized, movable: $movable, restorable: $restorable, title: $title)';
   }
 }

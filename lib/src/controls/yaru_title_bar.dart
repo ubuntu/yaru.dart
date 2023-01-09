@@ -261,15 +261,24 @@ class _YaruWindowTitleBarState extends State<YaruWindowTitleBar> {
 
   YaruWindowController createController() {
     return YaruWindowController(
-      state: kIsWeb || Platform.isMacOS
+      state: kIsWeb
           ? const YaruWindowState(
               closable: false,
+              movable: false,
               maximizable: false,
               minimizable: false,
             )
-          : null,
+          : Platform.isMacOS
+              ? const YaruWindowState(
+                  closable: false,
+                  maximizable: false,
+                  minimizable: false,
+                )
+              : null,
     );
   }
+
+  bool get isVisible => !kIsWeb;
 
   @override
   void initState() {
@@ -296,7 +305,7 @@ class _YaruWindowTitleBarState extends State<YaruWindowTitleBar> {
 
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb) return const SizedBox.shrink();
+    if (!isVisible) return const SizedBox.shrink();
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) => YaruTitleBar(
@@ -311,7 +320,7 @@ class _YaruWindowTitleBarState extends State<YaruWindowTitleBar> {
         isMinimizable: _controller.state?.minimizable,
         isRestorable: _controller.state?.restorable,
         onClose: _controller.close,
-        onDrag: _controller.drag,
+        onDrag: _controller.state?.movable == true ? _controller.drag : null,
         onMaximize: _controller.maximize,
         onMinimize: _controller.minimize,
         onRestore: _controller.restore,
@@ -341,11 +350,16 @@ class _YaruDialogTitleBarState extends _YaruWindowTitleBarState {
   YaruWindowController createController() {
     return YaruWindowController(
       state: const YaruWindowState(
+        closable: true,
         maximizable: false,
         minimizable: false,
+        movable: !kIsWeb,
         restorable: false,
       ),
       close: Navigator.of(context).maybePop,
     );
   }
+
+  @override
+  bool get isVisible => true;
 }
