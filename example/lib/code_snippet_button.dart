@@ -58,9 +58,8 @@ class _CodeDialog extends StatelessWidget {
 
     return AlertDialog(
       titlePadding: EdgeInsets.zero,
-      title: YaruTitleBar(
+      title: YaruDialogTitleBar(
         title: Text(!model.appIsOnline ? 'Offline' : pageItem.tooltipMessage),
-        trailing: const YaruCloseButton(),
         leading: !model.appIsOnline
             ? null
             : Center(
