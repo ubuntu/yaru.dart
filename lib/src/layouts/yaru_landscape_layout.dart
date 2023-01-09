@@ -42,6 +42,7 @@ const _kLeftPaneResizingRegionAnimationDuration = Duration(milliseconds: 250);
 
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
+  final _navigatorKey = GlobalKey<NavigatorState>();
 
   double? _paneWidth;
   double? _initialPaneWidth;
@@ -83,6 +84,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   void _onTap(int index) {
     widget.controller.index = index;
     widget.onSelected?.call(_selectedIndex);
+    _navigatorKey.currentState?.popUntil((route) => route.isFirst);
   }
 
   void updatePaneWidth({
@@ -189,6 +191,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       ),
       child: ScaffoldMessenger(
         child: Navigator(
+          key: _navigatorKey,
           pages: [
             MaterialPage(
               key: ValueKey(_selectedIndex),
