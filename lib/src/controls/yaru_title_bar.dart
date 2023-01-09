@@ -24,6 +24,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.trailing,
     this.centerTitle,
+    this.titleSpacing,
     this.foregroundColor,
     this.backgroundColor,
     this.isActive,
@@ -50,6 +51,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// Whether the title should be centered.
   final bool? centerTitle;
+
+  /// Spacing around the title.
+  final double? titleSpacing;
 
   /// The foreground color.
   final Color? foregroundColor;
@@ -153,7 +157,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
           automaticallyImplyLeading: false,
           title: title,
           centerTitle: centerTitle ?? theme.centerTitle,
-          titleSpacing: theme.titleSpacing,
+          titleSpacing: titleSpacing ?? theme.titleSpacing,
           toolbarHeight: kYaruTitleBarHeight,
           foregroundColor: foregroundColor,
           backgroundColor: backgroundColor,
@@ -230,6 +234,7 @@ class YaruWindowTitleBar extends StatefulWidget implements PreferredSizeWidget {
     this.title,
     this.trailing,
     this.centerTitle,
+    this.titleSpacing,
     this.backgroundColor,
     this.foregroundColor,
     this.controller,
@@ -246,6 +251,9 @@ class YaruWindowTitleBar extends StatefulWidget implements PreferredSizeWidget {
 
   /// Whether the title should be centered.
   final bool? centerTitle;
+
+  /// Spacing around the title.
+  final double? titleSpacing;
 
   /// The foreground color.
   final Color? foregroundColor;
@@ -346,6 +354,7 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.title,
     super.trailing,
     super.centerTitle,
+    super.titleSpacing,
     super.backgroundColor,
     super.controller,
   });
