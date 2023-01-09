@@ -43,13 +43,13 @@ extension YaruWindowManagerX on WindowManager {
   Future<YaruWindowState> state() {
     return Future.wait([
       isFocused().catchError((_) => true),
-      isClosable().catchError((_) => !Platform.isMacOS),
+      isClosable().catchError((_) => true),
       isFullScreen().catchError((_) => false),
-      isMaximizable().catchError((_) => !Platform.isMacOS),
+      isMaximizable().catchError((_) => true),
       isMaximized().catchError((_) => false),
-      isMinimizable().catchError((_) => !Platform.isMacOS),
+      isMinimizable().catchError((_) => true),
       isMinimized().catchError((_) => false),
-      isMovable().catchError((_) => !kIsWeb),
+      isMovable().catchError((_) => true),
       getTitle().catchError((_) => ''),
     ]).then((values) {
       final active = values[0] as bool;
@@ -63,14 +63,15 @@ extension YaruWindowManagerX on WindowManager {
       final title = values[8] as String;
       return YaruWindowState(
         isActive: active,
-        isClosable: closable,
+        isClosable: closable && !Platform.isMacOS,
         isFullscreen: fullscreen,
-        isMaximizable: maximizable && !maximized,
+        isMaximizable: maximizable && !maximized && !Platform.isMacOS,
         isMaximized: maximized,
-        isMinimizable: minimizable && !minimized,
+        isMinimizable: minimizable && !minimized && !Platform.isMacOS,
         isMinimized: minimized,
-        isMovable: movable,
-        isRestorable: fullscreen || maximized || minimized,
+        isMovable: movable && !kIsWeb,
+        isRestorable:
+            (fullscreen || maximized || minimized) && !Platform.isMacOS,
         title: title,
       );
     });
