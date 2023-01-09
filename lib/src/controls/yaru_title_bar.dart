@@ -153,6 +153,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
           automaticallyImplyLeading: false,
           title: title,
           centerTitle: centerTitle ?? theme.centerTitle,
+          titleSpacing: theme.titleSpacing,
           toolbarHeight: kYaruTitleBarHeight,
           foregroundColor: foregroundColor,
           backgroundColor: backgroundColor,
