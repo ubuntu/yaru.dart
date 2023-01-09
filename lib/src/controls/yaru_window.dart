@@ -15,7 +15,7 @@ class YaruWindow {
   static Future<void> maximize(_) => wm.maximize();
   static Future<void> minimize(_) => wm.minimize();
   static Future<void> restore(_) => wm.unmaximize();
-  static Future<void> showMenu(_) => wm.popUpWindowMenu();
+  static Future<void> showMenu(_) => wm.popUpWindowMenu().catchError((_) {});
   static Future<YaruWindowState> state() => wm.state();
   static Stream<YaruWindowState> states() async* {
     final listener = YaruWindowListener(wm);
