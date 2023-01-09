@@ -138,6 +138,15 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         );
 
+    // TODO: backdrop effect
+    Widget backdropEffect(Widget? child) {
+      return AnimatedOpacity(
+        opacity: isActive == true ? 1 : 0.6,
+        duration: const Duration(milliseconds: 100),
+        child: child,
+      );
+    }
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onPanStart: (_) => onDrag?.call(context),
@@ -147,26 +156,23 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
               ? onRestore?.call(context)
               : null,
       onSecondaryTap: onShowMenu != null ? () => onShowMenu!(context) : null,
-      child: AnimatedOpacity(
-        // TODO: backdrop effect
-        opacity: isActive == true ? 1 : 0.75,
-        duration: kThemeAnimationDuration,
-        child: AppBar(
-          elevation: theme.elevation,
-          leading: leading,
-          automaticallyImplyLeading: false,
-          title: title,
-          centerTitle: centerTitle ?? theme.centerTitle,
-          titleSpacing: titleSpacing ?? theme.titleSpacing,
-          toolbarHeight: kYaruTitleBarHeight,
-          foregroundColor: foregroundColor,
-          backgroundColor: backgroundColor,
-          titleTextStyle: titleTextStyle,
-          shape: shape,
-          actions: [
-            Hero(
-              tag: '$this',
-              child: Row(
+      child: AppBar(
+        elevation: theme.elevation,
+        automaticallyImplyLeading: false,
+        leading: backdropEffect(leading),
+        title: backdropEffect(title),
+        centerTitle: centerTitle ?? theme.centerTitle,
+        titleSpacing: titleSpacing ?? theme.titleSpacing,
+        toolbarHeight: kYaruTitleBarHeight,
+        foregroundColor: foregroundColor,
+        backgroundColor: backgroundColor,
+        titleTextStyle: titleTextStyle,
+        shape: shape,
+        actions: [
+          Hero(
+            tag: '$this',
+            child: backdropEffect(
+              Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (trailing != null)
@@ -220,8 +226,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
