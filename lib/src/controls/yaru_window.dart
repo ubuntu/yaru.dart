@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -40,17 +41,28 @@ class YaruWindow {
 }
 
 extension YaruWindowManagerX on WindowManager {
+  Future<T> _invokeGetter<T>(
+    Future<T> Function() getter, {
+    required T orElse,
+  }) async {
+    try {
+      return await getter();
+    } on MissingPluginException catch (_) {
+      return orElse;
+    }
+  }
+
   Future<YaruWindowState> state() {
     return Future.wait([
-      isFocused().catchError((_) => true),
-      isClosable().catchError((_) => true),
-      isFullScreen().catchError((_) => false),
-      isMaximizable().catchError((_) => true),
-      isMaximized().catchError((_) => false),
-      isMinimizable().catchError((_) => true),
-      isMinimized().catchError((_) => false),
-      isMovable().catchError((_) => true),
-      getTitle().catchError((_) => ''),
+      _invokeGetter(isFocused, orElse: true),
+      _invokeGetter(isClosable, orElse: true),
+      _invokeGetter(isFullScreen, orElse: false),
+      _invokeGetter(isMaximizable, orElse: true),
+      _invokeGetter(isMaximized, orElse: false),
+      _invokeGetter(isMinimizable, orElse: true),
+      _invokeGetter(isMinimized, orElse: false),
+      _invokeGetter(isMovable, orElse: true),
+      _invokeGetter(getTitle, orElse: ''),
     ]).then((values) {
       final active = values[0] as bool;
       final closable = values[1] as bool;
