@@ -10,7 +10,6 @@ class DialogPage extends StatefulWidget {
 
 class _DialogPageState extends State<DialogPage> {
   bool isCloseable = true;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
