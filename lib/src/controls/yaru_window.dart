@@ -47,7 +47,6 @@ extension YaruWindowManagerX on WindowManager {
       isMinimized().catchError((_) => false),
       isMovable().catchError((_) => true),
       getTitle().catchError((_) => ''),
-      isVisible().catchError((_) => true),
     ]).then((values) {
       final active = values[0] as bool;
       final closable = values[1] as bool;
