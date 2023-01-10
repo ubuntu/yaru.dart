@@ -112,7 +112,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       if (!states.contains(MaterialState.focused)) {
         return Colors.transparent;
       }
-      return Colors.black.withOpacity(light ? 0.075 : 0.2);
+      return light ? kYaruTitleBarBgLight : kYaruTitleBarBgDark;
     });
     final backgroundColor =
         MaterialStateProperty.resolveAs(this.backgroundColor, states) ??
@@ -135,7 +135,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final shape = theme.shape ??
         Border(
           bottom: BorderSide(
-            color: Colors.black.withOpacity(light ? 0.1 : 0.2),
+            color: light
+                ? Colors.black.withOpacity(0.1)
+                : Colors.white.withOpacity(0.06),
           ),
         );
 
