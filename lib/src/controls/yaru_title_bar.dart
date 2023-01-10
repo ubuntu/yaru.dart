@@ -106,7 +106,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final light = Theme.of(context).brightness == Brightness.light;
 
     final states = <MaterialState>{
-      if (isActive == true) MaterialState.focused,
+      if (isActive != false) MaterialState.focused,
     };
     final defaultBackgroundColor = MaterialStateProperty.resolveWith((states) {
       if (!states.contains(MaterialState.focused)) {
