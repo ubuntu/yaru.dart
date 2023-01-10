@@ -8,6 +8,7 @@ environment:
   flutter: ">=3.3.0"
 
 dependencies:
+  collection: ^1.16.0
   connectivity_plus: ^3.0.2
   flutter:
     sdk: flutter
