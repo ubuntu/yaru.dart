@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
+
 import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/checkbox_page.dart';
@@ -8,6 +9,7 @@ import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
 import 'pages/icon_button_page.dart';
+import 'pages/navigation_page.dart';
 import 'pages/option_button_page.dart';
 import 'pages/popup_page.dart';
 import 'pages/progress_indicator_page.dart';
@@ -95,6 +97,12 @@ final examplePageItems = <PageItem>[
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/icon_button_page.dart',
     iconBuilder: (context, selected) => const Icon(YaruIcons.app_grid),
     pageBuilder: (_) => const IconButtonPage(),
+  ),
+  PageItem(
+    titleBuilder: (context) => const Text('NavigationPage'),
+    tooltipMessage: 'YaruNavigationPage',
+    iconBuilder: (context, selected) => const Icon(YaruIcons.compass),
+    pageBuilder: (_) => const NavigationPage(),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruOptionButton'),
