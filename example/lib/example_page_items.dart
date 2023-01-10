@@ -175,8 +175,8 @@ final examplePageItems = <PageItem>[
     pageBuilder: (_) => const TilePage(),
   ),
   PageItem(
-    titleBuilder: (context) => const Text('YaruTitleBar'),
-    tooltipMessage: 'YaruTitleBar',
+    titleBuilder: (context) => const Text('YaruDialogTitleBar'),
+    tooltipMessage: 'YaruDialogTitleBar',
     snippetUrl:
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/dialog_page.dart',
     iconBuilder: (context, selected) => selected

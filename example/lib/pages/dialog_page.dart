@@ -19,7 +19,7 @@ class _DialogPageState extends State<DialogPage> {
         child: Column(
           children: [
             YaruTile(
-              title: const Text('YaruDialogTitle'),
+              title: const Text('YaruDialogTitleBar'),
               trailing: OutlinedButton(
                 onPressed: () => showDialog(
                   barrierDismissible: isCloseable,
