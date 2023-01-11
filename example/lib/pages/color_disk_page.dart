@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 import '../theme.dart';
@@ -14,8 +13,6 @@ class ColorDiskPage extends StatefulWidget {
 class _ColorDiskPageState extends State<ColorDiskPage> {
   @override
   Widget build(BuildContext context) {
-    final lightTheme = context.read<LightTheme>();
-    final darkTheme = context.read<DarkTheme>();
     return SingleChildScrollView(
       padding: const EdgeInsets.all(kYaruPagePadding),
       scrollDirection: Axis.horizontal,
@@ -23,14 +20,11 @@ class _ColorDiskPageState extends State<ColorDiskPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          for (var theme in YaruVariant.values)
+          for (var variant in YaruVariant.values)
             YaruColorDisk(
-              onPressed: () {
-                lightTheme.value = theme.theme;
-                darkTheme.value = theme.darkTheme;
-              },
-              color: theme.color,
-              selected: Theme.of(context).primaryColor == theme.color,
+              onPressed: () => InheritedYaruVariant.apply(context, variant),
+              color: variant.color,
+              selected: YaruTheme.of(context).variant == variant,
             ),
         ],
       ),
