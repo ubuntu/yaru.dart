@@ -1,5 +1,34 @@
 # Changelog
 
+# 2.0.0-beta-4
+
+* MD: wrap detail page with ScaffoldMessenger in landscape layout by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/463
+* Add YaruNavigationPageTheme.railPadding by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/466
+* YaruTitleBar: make themable and use window controls by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/464
+* YaruTitleBar: adjust callbacks by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/467
+* MD: fix page controller updates by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/468
+* NavigationPage: fix controller updates by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/469
+* Update goldens for yaru.dart border changes by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/472
+* YaruPopupMenuButton: align drop indicator to the end by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/471
+* Example: update yaru and handy_window by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/470
+* Navigation/MD pages: pop all but first on select by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/473
+* Introduce YaruWindowTitleBar & YaruDialogTitleBar by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/455
+* Example: change YaruDialogTitleBar menu entry name by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/476
+* YaruTitleBar: small styling changes by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/478
+* add NavigationPage by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/474
+* CI: add missing apt update by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/491
+* Use new filled icons in sidebar navigation by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/488
+* Fix stretched yaru togglables by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/490
+* Fix title bar corners by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/487
+* Fix the example to respect the system theme variant by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/485
+* Expose title bar / window control metrics by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/486
+* YaruTitleBar: consider active by default by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/482
+* example: sort page items in alphabetical order by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/479
+* Hide `kTogglableActiveResizeFactor` out of the public API by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/494
+* Move `kCheckboxRadio*` constants out of the public API by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/495
+* Use title bar colors from yaru_colors by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/496
+* YaruTitleBar: remove empty padding when there are no window controls by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/497
+
 # 2.0.0-beta-3
 
 * YaruTitleBar: expose background color by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/412
