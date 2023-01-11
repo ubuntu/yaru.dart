@@ -91,15 +91,21 @@ final goldenVariant = ValueVariant({
   ...goldenThemeVariants(
     'dialog',
     const YaruWindowState(
-      title: 'dialog',
+      isActive: true,
+      isMinimizable: false,
+      isMaximizable: false,
       isClosable: true,
+      title: 'dialog',
     ),
   ),
   ...goldenThemeVariants(
     'dialog-red',
     const YaruWindowState(
-      title: 'dialog red',
+      isActive: true,
       isClosable: true,
+      isMinimizable: false,
+      isMaximizable: false,
+      title: 'red dialog',
     ),
   ),
 });
