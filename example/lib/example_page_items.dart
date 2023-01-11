@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
@@ -208,4 +209,4 @@ final examplePageItems = <PageItem>[
         : const Icon(YaruIcons.window_top_bar),
     pageBuilder: (_) => const WindowControlsPage(),
   ),
-];
+].sortedBy((page) => page.tooltipMessage);
