@@ -12,9 +12,12 @@ void main() {
       final variant = goldenVariant.currentValue!;
 
       final state = variant.value!;
+      final builder = variant.label.contains('dialog')
+          ? YaruDialogTitleBar.new
+          : YaruWindowTitleBar.new;
 
       await tester.pumpScaffold(
-        YaruWindowTitleBar(
+        builder(
           isActive: state.isActive,
           isClosable: state.isClosable,
           isDraggable: false,
@@ -22,6 +25,7 @@ void main() {
           isMinimizable: state.isMinimizable,
           isRestorable: state.isRestorable,
           title: Text(state.title!),
+          backgroundColor: variant.label.contains('red') ? Colors.red : null,
         ),
         themeMode: variant.themeMode,
         size: const Size(480, kYaruTitleBarHeight),
@@ -82,6 +86,20 @@ final goldenVariant = ValueVariant({
       isMaximizable: true,
       isClosable: true,
       title: 'inactive',
+    ),
+  ),
+  ...goldenThemeVariants(
+    'dialog',
+    const YaruWindowState(
+      title: 'dialog',
+      isClosable: true,
+    ),
+  ),
+  ...goldenThemeVariants(
+    'dialog-red',
+    const YaruWindowState(
+      title: 'dialog red',
+      isClosable: true,
     ),
   ),
 });

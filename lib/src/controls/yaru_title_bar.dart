@@ -24,6 +24,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleSpacing,
     this.foregroundColor,
     this.backgroundColor,
+    this.shape,
+    this.border,
     this.isActive,
     this.isClosable,
     this.isDraggable,
@@ -58,6 +60,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// The background color.
   final Color? backgroundColor;
+
+  /// The shape.
+  final ShapeBorder? shape;
+
+  /// The border.
+  final BorderSide? border;
 
   /// Whether the title bar visualized as active.
   final bool? isActive;
@@ -132,14 +140,14 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
           fontWeight: FontWeight.w500,
         )
         .merge(theme.titleTextStyle);
-    final shape = theme.shape ??
-        Border(
-          bottom: BorderSide(
-            color: light
-                ? Colors.black.withOpacity(0.1)
-                : Colors.white.withOpacity(0.06),
-          ),
-        );
+
+    final defaultBorder = BorderSide(
+      color: light
+          ? Colors.black.withOpacity(0.1)
+          : Colors.white.withOpacity(0.06),
+    );
+    final border = Border(bottom: this.border ?? theme.border ?? defaultBorder);
+    final shape = border + (this.shape ?? theme.shape ?? const Border());
 
     // TODO: backdrop effect
     Widget? backdropEffect(Widget? child) {
@@ -248,6 +256,8 @@ class YaruWindowTitleBar extends StatelessWidget
     this.titleSpacing,
     this.foregroundColor,
     this.backgroundColor,
+    this.shape,
+    this.border,
     this.isActive,
     this.isClosable,
     this.isDraggable,
@@ -283,6 +293,12 @@ class YaruWindowTitleBar extends StatelessWidget
 
   /// The background color.
   final Color? backgroundColor;
+
+  /// The shape.
+  final ShapeBorder? shape;
+
+  /// The border.
+  final BorderSide? border;
 
   /// Whether the title bar visualized as active.
   final bool? isActive;
@@ -351,6 +367,8 @@ class YaruWindowTitleBar extends StatelessWidget
           centerTitle: centerTitle,
           titleSpacing: titleSpacing,
           backgroundColor: backgroundColor,
+          shape: shape,
+          border: border,
           isActive: isActive ?? window?.isActive,
           isClosable: isClosable ?? window?.isClosable,
           isDraggable: isDraggable ?? window?.isMovable,
@@ -379,6 +397,8 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.titleSpacing,
     super.foregroundColor,
     super.backgroundColor,
+    super.shape = defaultShape,
+    super.border,
     super.isActive,
     super.isClosable = true,
     super.isDraggable,
@@ -393,4 +413,10 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.onRestore = null,
     super.onShowMenu = YaruWindow.showMenu,
   });
+
+  static const defaultShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.vertical(
+      top: Radius.circular(kYaruContainerRadius),
+    ),
+  );
 }
