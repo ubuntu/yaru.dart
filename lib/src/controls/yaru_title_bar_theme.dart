@@ -14,6 +14,7 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
     this.backgroundColor,
     this.titleTextStyle,
     this.shape,
+    this.border,
   });
 
   final double? elevation;
@@ -23,6 +24,7 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
   final MaterialStateProperty<Color?>? backgroundColor;
   final TextStyle? titleTextStyle;
   final ShapeBorder? shape;
+  final BorderSide? border;
 
   @override
   YaruTitleBarThemeData copyWith({
@@ -33,6 +35,7 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
     MaterialStateProperty<Color?>? backgroundColor,
     TextStyle? titleTextStyle,
     ShapeBorder? shape,
+    BorderSide? border,
   }) {
     return YaruTitleBarThemeData(
       elevation: elevation ?? this.elevation,
@@ -42,6 +45,7 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
       backgroundColor: backgroundColor ?? this.backgroundColor,
       titleTextStyle: titleTextStyle ?? this.titleTextStyle,
       shape: shape ?? this.shape,
+      border: border ?? this.border,
     );
   }
 
@@ -69,6 +73,11 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
       ),
       titleTextStyle: TextStyle.lerp(titleTextStyle, o?.titleTextStyle, t),
       shape: ShapeBorder.lerp(shape, o?.shape, t),
+      border: BorderSide.lerp(
+        border ?? BorderSide.none,
+        o?.border ?? BorderSide.none,
+        t,
+      ),
     );
   }
 
@@ -82,6 +91,7 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
     properties.add(DiagnosticsProperty('backgroundColor', backgroundColor));
     properties.add(DiagnosticsProperty('titleTextStyle', titleTextStyle));
     properties.add(DiagnosticsProperty('shape', shape));
+    properties.add(DiagnosticsProperty('border', border));
   }
 
   @override
@@ -94,7 +104,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
         other.foregroundColor == foregroundColor &&
         other.backgroundColor == backgroundColor &&
         other.titleTextStyle == titleTextStyle &&
-        other.shape == shape;
+        other.shape == shape &&
+        other.border == border;
   }
 
   @override
@@ -107,6 +118,7 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
       backgroundColor,
       titleTextStyle,
       shape,
+      border,
     );
   }
 }

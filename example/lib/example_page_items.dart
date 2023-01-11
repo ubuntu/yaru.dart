@@ -101,7 +101,9 @@ final examplePageItems = <PageItem>[
   PageItem(
     titleBuilder: (context) => const Text('NavigationPage'),
     tooltipMessage: 'YaruNavigationPage',
-    iconBuilder: (context, selected) => const Icon(YaruIcons.compass),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.compass_filled)
+        : const Icon(YaruIcons.compass),
     pageBuilder: (_) => const NavigationPage(),
   ),
   PageItem(
@@ -127,7 +129,9 @@ final examplePageItems = <PageItem>[
     tooltipMessage: 'YaruProgressIndicator',
     snippetUrl:
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/progress_indicator_page.dart',
-    iconBuilder: (context, selected) => const Icon(YaruIcons.download),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.download_filled)
+        : const Icon(YaruIcons.download),
     pageBuilder: (_) => const ProgressIndicatorPage(),
   ),
   PageItem(
@@ -145,7 +149,9 @@ final examplePageItems = <PageItem>[
     tooltipMessage: 'YaruSection',
     snippetUrl:
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/section_page.dart',
-    iconBuilder: (context, selected) => const Icon(YaruIcons.window),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.window_filled)
+        : const Icon(YaruIcons.window),
     pageBuilder: (_) => const SectionPage(),
   ),
   PageItem(
@@ -172,7 +178,9 @@ final examplePageItems = <PageItem>[
     snippetUrl:
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/tabbed_page_page.dart',
     pageBuilder: (_) => const TabbedPagePage(),
-    iconBuilder: (context, selected) => const Icon(YaruIcons.tab_new),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.tab_new_filled)
+        : const Icon(YaruIcons.tab_new),
   ),
   PageItem(
     titleBuilder: (context) => const Text('YaruTile'),
@@ -195,7 +203,9 @@ final examplePageItems = <PageItem>[
   PageItem(
     titleBuilder: (context) => const Text('YaruWindowControl'),
     tooltipMessage: 'YaruWindowControl',
-    iconBuilder: (context, selected) => const Icon(YaruIcons.window_top_bar),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.window_top_bar_filled)
+        : const Icon(YaruIcons.window_top_bar),
     pageBuilder: (_) => const WindowControlsPage(),
   ),
 ];
