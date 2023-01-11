@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:yaru_colors/yaru_colors.dart';
 
 import '../constants.dart';
 import 'yaru_title_bar_theme.dart';
@@ -118,7 +119,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       if (!states.contains(MaterialState.focused)) {
         return Colors.transparent;
       }
-      return light ? kYaruTitleBarBgLight : kYaruTitleBarBgDark;
+      return light ? YaruColors.titleBarLight : YaruColors.titleBarDark;
     });
     final backgroundColor =
         MaterialStateProperty.resolveAs(this.backgroundColor, states) ??
