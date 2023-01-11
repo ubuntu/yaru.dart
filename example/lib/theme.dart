@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
-class LightTheme extends ValueNotifier<ThemeData> {
-  LightTheme(super.value);
-}
+class InheritedYaruVariant
+    extends InheritedNotifier<ValueNotifier<YaruVariant?>> {
+  InheritedYaruVariant({
+    super.key,
+    required super.child,
+  }) : super(notifier: ValueNotifier(null));
 
-class DarkTheme extends ValueNotifier<ThemeData> {
-  DarkTheme(super.value);
+  static YaruVariant? of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<InheritedYaruVariant>()!
+        .notifier!
+        .value;
+  }
+
+  static void apply(BuildContext context, YaruVariant variant) {
+    context
+        .findAncestorWidgetOfExactType<InheritedYaruVariant>()!
+        .notifier!
+        .value = variant;
+  }
 }

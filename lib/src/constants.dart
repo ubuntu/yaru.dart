@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 const kYaruPagePadding = 20.0;
 
 /// The default height of [YaruTitleBar].
-const kYaruTitleBarHeight = 50.0;
+const kYaruTitleBarHeight = 47.0;
+
+/// The default background color of [YaruTitleBar] in the light theme.
+const kYaruTitleBarBgLight = Color(0xFFebebeb);
+
+/// The default background color of [YaruTitleBar] in the dark theme.
+const kYaruTitleBarBgDark = Color(0xFF303030);
 
 /// The default border radius for Yaru-style containers.
 const kYaruContainerRadius = 8.0;

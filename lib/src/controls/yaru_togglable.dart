@@ -250,33 +250,38 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
     return _buildSemantics(
       child: _buildEventDetectors(
-        child: SizedBox(
-          width: togglableSize.width + activableAreaPadding.horizontal,
-          height: togglableSize.height + activableAreaPadding.vertical,
-          child: Padding(
-            padding: activableAreaPadding,
-            child: CustomPaint(
-              size: togglableSize,
-              painter: painter
-                ..interactive = widget.interactive
-                ..hover = _hover
-                ..focus = _focus
-                ..active = _active
-                ..checked = widget.checked
-                ..oldChecked = _oldChecked
-                ..position = _position
-                ..sizePosition = _sizePosition
-                ..indicatorPosition = _indicatorPosition
-                ..uncheckedColor = uncheckedColor
-                ..uncheckedBorderColor = uncheckedBorderColor
-                ..checkedColor = checkedColor
-                ..checkmarkColor = checkmarkColor
-                ..disabledUncheckedColor = uncheckedDisabledColor
-                ..disabledUncheckedBorderColor = uncheckedDisabledBorderColor
-                ..disabledCheckedColor = checkedDisabledColor
-                ..disabledCheckmarkColor = checkmarkDisabledColor
-                ..hoverIndicatorColor = hoverIndicatorColor
-                ..focusIndicatorColor = focusIndicatorColor,
+        child: Padding(
+          padding: activableAreaPadding,
+          child: SizedBox(
+            width: togglableSize.width,
+            height: togglableSize.height,
+            child: Center(
+              child: RepaintBoundary(
+                child: CustomPaint(
+                  size: togglableSize,
+                  painter: painter
+                    ..interactive = widget.interactive
+                    ..hover = _hover
+                    ..focus = _focus
+                    ..active = _active
+                    ..checked = widget.checked
+                    ..oldChecked = _oldChecked
+                    ..position = _position
+                    ..sizePosition = _sizePosition
+                    ..indicatorPosition = _indicatorPosition
+                    ..uncheckedColor = uncheckedColor
+                    ..uncheckedBorderColor = uncheckedBorderColor
+                    ..checkedColor = checkedColor
+                    ..checkmarkColor = checkmarkColor
+                    ..disabledUncheckedColor = uncheckedDisabledColor
+                    ..disabledUncheckedBorderColor =
+                        uncheckedDisabledBorderColor
+                    ..disabledCheckedColor = checkedDisabledColor
+                    ..disabledCheckmarkColor = checkmarkDisabledColor
+                    ..hoverIndicatorColor = hoverIndicatorColor
+                    ..focusIndicatorColor = focusIndicatorColor,
+                ),
+              ),
             ),
           ),
         ),
