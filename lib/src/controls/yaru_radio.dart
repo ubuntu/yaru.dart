@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
 import 'yaru_checkbox.dart';
 import 'yaru_radio_button.dart';
 import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
+
+// NOTE: keep in sync with Checkbox
+const _kRadioActivableAreaPadding = EdgeInsets.all(6);
+const _kRadioTogglableSize = Size.square(20);
 
 const _kDotSizeFactor = 0.4;
 
@@ -126,11 +129,10 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
 
 class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
   @override
-  EdgeInsetsGeometry get activableAreaPadding =>
-      kCheckradioActivableAreaPadding;
+  EdgeInsetsGeometry get activableAreaPadding => _kRadioActivableAreaPadding;
 
   @override
-  Size get togglableSize => kCheckradioTogglableSize;
+  Size get togglableSize => _kRadioTogglableSize;
 
   @override
   void handleTap([Intent? _]) {

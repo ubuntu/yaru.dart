@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
 import 'yaru_check_button.dart';
 import 'yaru_radio.dart';
 import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
+
+// NOTE: keep in sync with Radio
+const _kCheckboxActivableAreaPadding = EdgeInsets.all(6);
+const _kCheckboxTogglableSize = Size.square(20);
 
 const _kCheckboxBorderRadius = Radius.circular(4);
 const _kCheckboxDashStroke = 2.0;
@@ -116,11 +119,10 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
 
 class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
   @override
-  EdgeInsetsGeometry get activableAreaPadding =>
-      kCheckradioActivableAreaPadding;
+  EdgeInsetsGeometry get activableAreaPadding => _kCheckboxActivableAreaPadding;
 
   @override
-  Size get togglableSize => kCheckradioTogglableSize;
+  Size get togglableSize => _kCheckboxTogglableSize;
 
   @override
   void handleTap([Intent? _]) {
