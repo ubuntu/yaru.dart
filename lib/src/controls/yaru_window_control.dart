@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-const _kWindowControlSize = 24.0;
+/// The size of [YaruWindowControl].
+const kYaruWindowControlSize = 24.0;
+
 const _kWindowControlIconSize = 8.0;
 const _kWindowControlIconStrokeWidth = 1.0;
 const _kWindowControlIconStrokeAlign = _kWindowControlIconStrokeWidth / 2;
@@ -148,7 +150,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
             shape: BoxShape.circle,
           ),
           child: SizedBox.square(
-            dimension: _kWindowControlSize,
+            dimension: kYaruWindowControlSize,
             child: Center(
               child: AnimatedBuilder(
                 animation: _position,

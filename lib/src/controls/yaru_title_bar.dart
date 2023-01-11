@@ -8,8 +8,6 @@ import 'yaru_title_bar_theme.dart';
 import 'yaru_window.dart';
 import 'yaru_window_control.dart';
 
-const _kTitleButtonPadding = EdgeInsets.symmetric(horizontal: 7);
-
 /// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
 /// that most tightly encloses the given context.
@@ -141,6 +139,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         );
 
+    final buttonSpacing = theme.buttonSpacing ?? 0;
+    final buttonPadding = theme.buttonPadding ?? EdgeInsets.zero;
+
     // TODO: backdrop effect
     Widget? backdropEffect(Widget? child) {
       if (child == null) return null;
@@ -179,54 +180,42 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (trailing != null)
-                    Padding(
-                      padding: _kTitleButtonPadding,
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: trailing,
-                      ),
+                  if (trailing != null) trailing!,
+                  Padding(
+                    padding: buttonPadding,
+                    child: Row(
+                      children: [
+                        if (isMinimizable == true)
+                          YaruWindowControl(
+                            type: YaruWindowControlType.minimize,
+                            onTap: onMinimize != null
+                                ? () => onMinimize!(context)
+                                : null,
+                          ),
+                        if (isRestorable == true)
+                          YaruWindowControl(
+                            type: YaruWindowControlType.restore,
+                            onTap: onRestore != null
+                                ? () => onRestore!(context)
+                                : null,
+                          ),
+                        if (isMaximizable == true)
+                          YaruWindowControl(
+                            type: YaruWindowControlType.maximize,
+                            onTap: onMaximize != null
+                                ? () => onMaximize!(context)
+                                : null,
+                          ),
+                        if (isClosable == true)
+                          YaruWindowControl(
+                            type: YaruWindowControlType.close,
+                            onTap: onClose != null
+                                ? () => onClose!(context)
+                                : null,
+                          ),
+                      ].withSpacing(buttonSpacing),
                     ),
-                  const SizedBox(width: 3),
-                  if (isMinimizable == true)
-                    Padding(
-                      padding: _kTitleButtonPadding,
-                      child: YaruWindowControl(
-                        type: YaruWindowControlType.minimize,
-                        onTap: onMinimize != null
-                            ? () => onMinimize!(context)
-                            : null,
-                      ),
-                    ),
-                  if (isRestorable == true)
-                    Padding(
-                      padding: _kTitleButtonPadding,
-                      child: YaruWindowControl(
-                        type: YaruWindowControlType.restore,
-                        onTap: onRestore != null
-                            ? () => onRestore!(context)
-                            : null,
-                      ),
-                    ),
-                  if (isMaximizable == true)
-                    Padding(
-                      padding: _kTitleButtonPadding,
-                      child: YaruWindowControl(
-                        type: YaruWindowControlType.maximize,
-                        onTap: onMaximize != null
-                            ? () => onMaximize!(context)
-                            : null,
-                      ),
-                    ),
-                  if (isClosable == true)
-                    Padding(
-                      padding: _kTitleButtonPadding,
-                      child: YaruWindowControl(
-                        type: YaruWindowControlType.close,
-                        onTap: onClose != null ? () => onClose!(context) : null,
-                      ),
-                    ),
-                  const SizedBox(width: 3),
+                  ),
                 ],
               ),
             )!,
@@ -234,6 +223,15 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
     );
+  }
+}
+
+extension _ListSpacing on List<Widget> {
+  List<Widget> withSpacing(double spacing) {
+    return expand((item) sync* {
+      yield SizedBox(width: spacing);
+      yield item;
+    }).skip(1).toList();
   }
 }
 
