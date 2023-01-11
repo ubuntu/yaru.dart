@@ -190,41 +190,45 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (trailing != null) trailing!,
-                  Padding(
-                    padding: buttonPadding,
-                    child: Row(
-                      children: [
-                        if (isMinimizable == true)
-                          YaruWindowControl(
-                            type: YaruWindowControlType.minimize,
-                            onTap: onMinimize != null
-                                ? () => onMinimize!(context)
-                                : null,
-                          ),
-                        if (isRestorable == true)
-                          YaruWindowControl(
-                            type: YaruWindowControlType.restore,
-                            onTap: onRestore != null
-                                ? () => onRestore!(context)
-                                : null,
-                          ),
-                        if (isMaximizable == true)
-                          YaruWindowControl(
-                            type: YaruWindowControlType.maximize,
-                            onTap: onMaximize != null
-                                ? () => onMaximize!(context)
-                                : null,
-                          ),
-                        if (isClosable == true)
-                          YaruWindowControl(
-                            type: YaruWindowControlType.close,
-                            onTap: onClose != null
-                                ? () => onClose!(context)
-                                : null,
-                          ),
-                      ].withSpacing(buttonSpacing),
+                  if (isMinimizable == true ||
+                      isRestorable == true ||
+                      isMaximizable == true ||
+                      isClosable == true)
+                    Padding(
+                      padding: buttonPadding,
+                      child: Row(
+                        children: [
+                          if (isMinimizable == true)
+                            YaruWindowControl(
+                              type: YaruWindowControlType.minimize,
+                              onTap: onMinimize != null
+                                  ? () => onMinimize!(context)
+                                  : null,
+                            ),
+                          if (isRestorable == true)
+                            YaruWindowControl(
+                              type: YaruWindowControlType.restore,
+                              onTap: onRestore != null
+                                  ? () => onRestore!(context)
+                                  : null,
+                            ),
+                          if (isMaximizable == true)
+                            YaruWindowControl(
+                              type: YaruWindowControlType.maximize,
+                              onTap: onMaximize != null
+                                  ? () => onMaximize!(context)
+                                  : null,
+                            ),
+                          if (isClosable == true)
+                            YaruWindowControl(
+                              type: YaruWindowControlType.close,
+                              onTap: onClose != null
+                                  ? () => onClose!(context)
+                                  : null,
+                            ),
+                        ].withSpacing(buttonSpacing),
+                      ),
                     ),
-                  ),
                 ],
               ),
             )!,
