@@ -21,7 +21,3 @@ const kYaruButtonRadius = 6.0;
 /// The default breakpoint width [YaruMasterDetailPage] uses for switching
 /// between portrait and landscape modes.
 const kYaruMasterDetailBreakpoint = 620.0;
-
-const kCheckradioActivableAreaPadding = EdgeInsets.all(6);
-
-const kCheckradioTogglableSize = Size.square(20);
