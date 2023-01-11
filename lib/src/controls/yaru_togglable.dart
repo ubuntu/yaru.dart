@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
 import 'yaru_switch.dart';
@@ -9,6 +8,8 @@ const _kTogglableAnimationDuration = Duration(milliseconds: 150);
 const _kTogglableSizeAnimationDuration = Duration(milliseconds: 100);
 const _kIndicatorAnimationDuration = Duration(milliseconds: 200);
 const _kIndicatorRadius = 20.0;
+// Used to resize the canvas on active state. Must be an even number.
+const _kTogglableActiveResizeFactor = 2;
 
 /// A generic class to create a togglable widget
 ///
@@ -366,12 +367,12 @@ abstract class YaruTogglablePainter extends ChangeNotifier
     final canvasSize = size;
     final t = position.value;
     final drawingOrigin = Offset(
-      kTogglableActiveResizeFactor / 2 * sizePosition.value,
-      kTogglableActiveResizeFactor / 2 * sizePosition.value,
+      _kTogglableActiveResizeFactor / 2 * sizePosition.value,
+      _kTogglableActiveResizeFactor / 2 * sizePosition.value,
     );
     final drawingSize = Size(
-      canvasSize.width - kTogglableActiveResizeFactor * sizePosition.value,
-      canvasSize.height - kTogglableActiveResizeFactor * sizePosition.value,
+      canvasSize.width - _kTogglableActiveResizeFactor * sizePosition.value,
+      canvasSize.height - _kTogglableActiveResizeFactor * sizePosition.value,
     );
 
     paintTogglable(canvas, size, drawingSize, drawingOrigin, t);
