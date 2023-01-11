@@ -10,6 +10,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
     this.elevation = 0,
     this.centerTitle = true,
     this.titleSpacing,
+    this.buttonSpacing = 14,
+    this.buttonPadding = const EdgeInsets.symmetric(horizontal: 10),
     this.foregroundColor,
     this.backgroundColor,
     this.titleTextStyle,
@@ -20,6 +22,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
   final double? elevation;
   final bool? centerTitle;
   final double? titleSpacing;
+  final double? buttonSpacing;
+  final EdgeInsets? buttonPadding;
   final MaterialStateProperty<Color?>? foregroundColor;
   final MaterialStateProperty<Color?>? backgroundColor;
   final TextStyle? titleTextStyle;
@@ -31,6 +35,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
     double? elevation,
     bool? centerTitle,
     double? titleSpacing,
+    double? buttonSpacing,
+    EdgeInsets? buttonPadding,
     MaterialStateProperty<Color?>? foregroundColor,
     MaterialStateProperty<Color?>? backgroundColor,
     TextStyle? titleTextStyle,
@@ -41,6 +47,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
       elevation: elevation ?? this.elevation,
       centerTitle: centerTitle ?? this.centerTitle,
       titleSpacing: titleSpacing ?? this.titleSpacing,
+      buttonSpacing: buttonSpacing ?? this.buttonSpacing,
+      buttonPadding: buttonPadding ?? this.buttonPadding,
       foregroundColor: foregroundColor ?? this.foregroundColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       titleTextStyle: titleTextStyle ?? this.titleTextStyle,
@@ -59,6 +67,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
       elevation: lerpDouble(elevation, o?.elevation, t),
       centerTitle: t < 0.5 ? centerTitle : o?.centerTitle,
       titleSpacing: lerpDouble(titleSpacing, o?.titleSpacing, t),
+      buttonSpacing: lerpDouble(buttonSpacing, o?.buttonSpacing, t),
+      buttonPadding: EdgeInsets.lerp(buttonPadding, o?.buttonPadding, t),
       foregroundColor: MaterialStateProperty.lerp<Color?>(
         foregroundColor,
         o?.foregroundColor,
@@ -87,6 +97,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
     properties.add(DoubleProperty('elevation', elevation));
     properties.add(DiagnosticsProperty('centerTitle', centerTitle));
     properties.add(DoubleProperty('titleSpacing', titleSpacing));
+    properties.add(DoubleProperty('buttonSpacing', buttonSpacing));
+    properties.add(DiagnosticsProperty('buttonPadding', buttonPadding));
     properties.add(DiagnosticsProperty('foregroundColor', foregroundColor));
     properties.add(DiagnosticsProperty('backgroundColor', backgroundColor));
     properties.add(DiagnosticsProperty('titleTextStyle', titleTextStyle));
@@ -101,6 +113,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
         other.elevation == elevation &&
         other.centerTitle == centerTitle &&
         other.titleSpacing == titleSpacing &&
+        other.buttonSpacing == buttonSpacing &&
+        other.buttonPadding == buttonPadding &&
         other.foregroundColor == foregroundColor &&
         other.backgroundColor == backgroundColor &&
         other.titleTextStyle == titleTextStyle &&
@@ -114,6 +128,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
       elevation,
       centerTitle,
       titleSpacing,
+      buttonSpacing,
+      buttonPadding,
       foregroundColor,
       backgroundColor,
       titleTextStyle,
