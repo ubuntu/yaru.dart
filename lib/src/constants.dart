@@ -22,10 +22,6 @@ const kYaruButtonRadius = 6.0;
 /// between portrait and landscape modes.
 const kYaruMasterDetailBreakpoint = 620.0;
 
-// Used by tooglable widgets to resize the canvas on active state
-// Need to be an even number
-const kTogglableActiveResizeFactor = 2;
-
 const kCheckradioActivableAreaPadding = EdgeInsets.all(6);
 
 const kCheckradioTogglableSize = Size.square(20);
