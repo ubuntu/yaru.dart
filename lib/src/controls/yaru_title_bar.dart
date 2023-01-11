@@ -141,15 +141,13 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         )
         .merge(theme.titleTextStyle);
 
-    final border = this.border ??
-        theme.border ??
-        BorderSide(
-          color: light
-              ? Colors.black.withOpacity(0.1)
-              : Colors.white.withOpacity(0.06),
-        );
-    final shape =
-        Border(bottom: border) + (this.shape ?? theme.shape ?? const Border());
+    final defaultBorder = BorderSide(
+      color: light
+          ? Colors.black.withOpacity(0.1)
+          : Colors.white.withOpacity(0.06),
+    );
+    final border = Border(bottom: this.border ?? theme.border ?? defaultBorder);
+    final shape = border + (this.shape ?? theme.shape ?? const Border());
 
     // TODO: backdrop effect
     Widget? backdropEffect(Widget? child) {
