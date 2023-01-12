@@ -14,7 +14,7 @@ void main() {
       final state = variant.value!;
       final builder = variant.label.contains('dialog')
           ? YaruDialogTitleBar.new
-          : YaruWindowTitleBar.new;
+          : YaruTitleBar.new;
 
       await tester.pumpScaffold(
         builder(
@@ -25,6 +25,10 @@ void main() {
           isMinimizable: state.isMinimizable,
           isRestorable: state.isRestorable,
           title: Text(state.title!),
+          onClose: (_) {},
+          onMaximize: (_) {},
+          onMinimize: (_) {},
+          onRestore: (_) {},
           backgroundColor: variant.label.contains('red') ? Colors.red : null,
         ),
         themeMode: variant.themeMode,

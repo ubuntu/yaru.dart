@@ -352,33 +352,33 @@ class YaruWindowTitleBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     if (isVisible == false) return const SizedBox.shrink();
-    final windowState = YaruWindow.state(context);
+    final defaultState = YaruWindowState(
+      isActive: isActive,
+      isClosable: isClosable,
+      isMaximizable: isMaximizable,
+      isMinimizable: isMinimizable,
+      isRestorable: isRestorable,
+    );
     return StreamBuilder<YaruWindowState>(
       stream: YaruWindow.states(context),
-      initialData: YaruWindowState(
-        isActive: isActive ?? windowState?.isActive,
-        isClosable: isClosable ?? windowState?.isClosable,
-        isMaximizable: isMaximizable ?? windowState?.isMaximizable,
-        isMinimizable: isMinimizable ?? windowState?.isMinimizable,
-        isRestorable: isRestorable ?? windowState?.isRestorable,
-      ),
+      initialData: YaruWindow.state(context),
       builder: (context, snapshot) {
-        final window = snapshot.data;
+        final state = snapshot.data?.merge(defaultState) ?? defaultState;
         return YaruTitleBar(
           leading: leading,
-          title: title ?? Text(window?.title ?? ''),
+          title: title ?? Text(state.title ?? ''),
           trailing: trailing,
           centerTitle: centerTitle,
           titleSpacing: titleSpacing,
           backgroundColor: backgroundColor,
           shape: shape,
           border: border,
-          isActive: isActive ?? window?.isActive,
-          isClosable: isClosable ?? window?.isClosable,
-          isDraggable: isDraggable ?? window?.isMovable,
-          isMaximizable: isMaximizable ?? window?.isMaximizable,
-          isMinimizable: isMinimizable ?? window?.isMinimizable,
-          isRestorable: isRestorable ?? window?.isRestorable,
+          isActive: state.isActive,
+          isClosable: state.isClosable,
+          isDraggable: state.isMovable,
+          isMaximizable: state.isMaximizable,
+          isMinimizable: state.isMinimizable,
+          isRestorable: state.isRestorable,
           onClose: onClose,
           onDrag: onDrag,
           onMaximize: onMaximize,
