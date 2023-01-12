@@ -7,24 +7,43 @@ import 'package:flutter/widgets.dart';
 import 'package:window_manager/window_manager.dart';
 
 class YaruWindow {
-  @visibleForTesting
-  static WindowManager wm = WindowManager.instance;
+  static final Map<Object, YaruWindowInstance> _windows = {};
 
-  static Future<void> close(_) => wm.close().catchError((_) {});
-  static Future<void> drag(_) => wm.startDragging().catchError((_) {});
-  static Future<void> maximize(_) => wm.maximize().catchError((_) {});
-  static Future<void> minimize(_) => wm.minimize().catchError((_) {});
-  static Future<void> restore(_) => wm.unmaximize().catchError((_) {});
-  static Future<void> showMenu(_) => wm.popUpWindowMenu().catchError((_) {});
-  static Future<YaruWindowState> state() => wm.state();
-  static Stream<YaruWindowState> states() async* {
-    final listener = YaruWindowListener(wm);
-    yield await wm.state();
-    try {
-      yield* listener.listen();
-    } finally {
-      await listener.close();
-    }
+  static YaruWindowInstance of(BuildContext context) {
+    const id = 0; // View.of(context).windowId;
+    return _windows[id] ??= YaruWindowInstance._(id);
+  }
+
+  static Future<void> close(BuildContext context) {
+    return YaruWindow.of(context).close();
+  }
+
+  static Future<void> drag(BuildContext context) {
+    return YaruWindow.of(context).drag();
+  }
+
+  static Future<void> maximize(BuildContext context) {
+    return YaruWindow.of(context).maximize();
+  }
+
+  static Future<void> minimize(BuildContext context) {
+    return YaruWindow.of(context).minimize();
+  }
+
+  static Future<void> restore(BuildContext context) {
+    return YaruWindow.of(context).restore();
+  }
+
+  static Future<void> showMenu(BuildContext context) {
+    return YaruWindow.of(context).showMenu();
+  }
+
+  static YaruWindowState? state(BuildContext context) {
+    return YaruWindow.of(context).state;
+  }
+
+  static Stream<YaruWindowState> states(BuildContext context) {
+    return YaruWindow.of(context).states();
   }
 
   static Future<void> maybePop(BuildContext context) {
@@ -34,10 +53,30 @@ class YaruWindow {
   static Future<void> ensureInitialized() async {
     WidgetsFlutterBinding.ensureInitialized();
     if (!kIsWeb) {
-      await wm.ensureInitialized();
-      await wm.setTitleBarStyle(TitleBarStyle.hidden);
+      await windowManager.ensureInitialized();
+      await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
     }
   }
+}
+
+class YaruWindowInstance {
+  YaruWindowInstance._(this._id);
+
+  final Object _id; // ignore: unused_field
+  final _listener = YaruWindowListener(wm);
+
+  @visibleForTesting
+  static WindowManager wm = WindowManager.instance;
+
+  Future<void> close() => wm.close().catchError((_) {});
+  Future<void> drag() => wm.startDragging().catchError((_) {});
+  Future<void> maximize() => wm.maximize().catchError((_) {});
+  Future<void> minimize() => wm.minimize().catchError((_) {});
+  Future<void> restore() => wm.unmaximize().catchError((_) {});
+  Future<void> showMenu() => wm.popUpWindowMenu().catchError((_) {});
+
+  YaruWindowState? get state => _listener.state;
+  Stream<YaruWindowState> states() => _listener.states();
 }
 
 extension YaruWindowManagerX on WindowManager {
@@ -94,36 +133,42 @@ class YaruWindowListener implements WindowListener {
   YaruWindowListener(this._wm);
 
   final WindowManager _wm;
-  final _controller = StreamController<YaruWindowState>();
+  StreamController<YaruWindowState>? _controller;
+  YaruWindowState? _state;
 
-  Stream<YaruWindowState> listen() {
-    _wm.addListener(this);
-    return _controller.stream;
+  YaruWindowState? get state => _state;
+
+  Stream<YaruWindowState> states() {
+    _controller ??= StreamController<YaruWindowState>.broadcast(
+      onListen: () => _wm.addListener(this),
+      onCancel: () => _wm.removeListener(this),
+    );
+    return _controller!.stream;
   }
 
-  Future<void> close() async {
-    _wm.removeListener(this);
-    await _controller.close();
+  Future<void> close() async => await _controller?.close();
+
+  Future<void> _updateState() async {
+    _state = await _wm.state();
+    _controller?.add(_state!);
   }
 
-  Future<void> _emitState() async => _controller.add(await _wm.state());
-
   @override
-  void onWindowBlur() => _emitState();
+  void onWindowBlur() => _updateState();
   @override
-  void onWindowFocus() => _emitState();
+  void onWindowFocus() => _updateState();
   @override
-  void onWindowEnterFullScreen() => _emitState();
+  void onWindowEnterFullScreen() => _updateState();
   @override
-  void onWindowLeaveFullScreen() => _emitState();
+  void onWindowLeaveFullScreen() => _updateState();
   @override
-  void onWindowMaximize() => _emitState();
+  void onWindowMaximize() => _updateState();
   @override
-  void onWindowUnmaximize() => _emitState();
+  void onWindowUnmaximize() => _updateState();
   @override
-  void onWindowMinimize() => _emitState();
+  void onWindowMinimize() => _updateState();
   @override
-  void onWindowRestore() => _emitState();
+  void onWindowRestore() => _updateState();
   @override
   void onWindowClose() {}
   @override
