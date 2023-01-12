@@ -61,10 +61,7 @@ class YaruDetailPage extends StatelessWidget {
     if (appBar == null) return null;
 
     return PreferredSize(
-      preferredSize: Size(
-        0,
-        Theme.of(context).appBarTheme.toolbarHeight ?? kToolbarHeight,
-      ),
+      preferredSize: appBar!.preferredSize,
       child: Hero(
         tag: '<YaruDetailPage Hero tag - $appBar>',
         child: appBar!,
