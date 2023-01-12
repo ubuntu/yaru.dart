@@ -138,12 +138,16 @@ class YaruWindowListener implements WindowListener {
 
   YaruWindowState? get state => _state;
 
-  Stream<YaruWindowState> states() {
+  Stream<YaruWindowState> states() async* {
     _controller ??= StreamController<YaruWindowState>.broadcast(
       onListen: () => _wm.addListener(this),
       onCancel: () => _wm.removeListener(this),
     );
-    return _controller!.stream;
+    if (_state == null) {
+      _state = await _wm.state();
+      yield _state!;
+    }
+    yield* _controller!.stream;
   }
 
   Future<void> close() async => await _controller?.close();
@@ -208,6 +212,47 @@ class YaruWindowState {
   final bool? isMovable;
   final bool? isRestorable;
   final String? title;
+
+  YaruWindowState copyWith({
+    bool? isActive,
+    bool? isClosable,
+    bool? isFullscreen,
+    bool? isMaximizable,
+    bool? isMaximized,
+    bool? isMinimizable,
+    bool? isMinimized,
+    bool? isMovable,
+    bool? isRestorable,
+    String? title,
+  }) {
+    return YaruWindowState(
+      isActive: isActive ?? this.isActive,
+      isClosable: isClosable ?? this.isClosable,
+      isFullscreen: isFullscreen ?? this.isFullscreen,
+      isMaximizable: isMaximizable ?? this.isMaximizable,
+      isMaximized: isMaximized ?? this.isMaximized,
+      isMinimizable: isMinimizable ?? this.isMinimizable,
+      isMinimized: isMinimized ?? this.isMinimized,
+      isMovable: isMovable ?? this.isMovable,
+      isRestorable: isRestorable ?? this.isRestorable,
+      title: title ?? this.title,
+    );
+  }
+
+  YaruWindowState merge(YaruWindowState? other) {
+    return copyWith(
+      isActive: other?.isActive,
+      isClosable: other?.isClosable,
+      isFullscreen: other?.isFullscreen,
+      isMaximizable: other?.isMaximizable,
+      isMaximized: other?.isMaximized,
+      isMinimizable: other?.isMinimizable,
+      isMinimized: other?.isMinimized,
+      isMovable: other?.isMovable,
+      isRestorable: other?.isRestorable,
+      title: other?.title,
+    );
+  }
 
   @override
   bool operator ==(Object other) {
