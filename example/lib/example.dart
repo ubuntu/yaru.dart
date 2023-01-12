@@ -47,14 +47,14 @@ class _ExampleState extends State<Example> {
             length: pageItems.length,
             tileBuilder: (context, index, selected) => YaruMasterTile(
               leading: pageItems[index].iconBuilder(context, selected),
-              title: pageItems[index].titleBuilder(context),
+              title: buildTitle(context, pageItems[index]),
             ),
             pageBuilder: (context, index) => YaruDetailPage(
               appBar: AppBar(
                 leading: Navigator.of(context).canPop()
                     ? const YaruBackButton()
                     : null,
-                title: pageItems[index].titleBuilder(context),
+                title: buildTitle(context, pageItems[index]),
                 actions: [CodeSnippedButton(pageItem: pageItems[index])],
               ),
               body: pageItems[index].pageBuilder(context),
@@ -101,8 +101,8 @@ class _CompactPage extends StatelessWidget {
       length: pageItems.length,
       itemBuilder: (context, index, selected) => YaruNavigationRailItem(
         icon: pageItems[index].iconBuilder(context, selected),
-        label: pageItems[index].titleBuilder(context),
-        tooltip: pageItems[index].tooltipMessage,
+        label: buildTitle(context, pageItems[index]),
+        tooltip: pageItems[index].title,
         style: style,
       ),
       pageBuilder: (context, index) => pageItems[index].pageBuilder(context),
@@ -115,6 +115,10 @@ class _CompactPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget buildTitle(BuildContext context, PageItem item) {
+  return item.titleBuilder?.call(context) ?? Text(item.title);
 }
 
 Future<void> showSettingsDialog(BuildContext context) {
