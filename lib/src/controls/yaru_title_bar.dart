@@ -9,6 +9,18 @@ import 'yaru_title_bar_theme.dart';
 import 'yaru_window.dart';
 import 'yaru_window_control.dart';
 
+/// The title bar style.
+enum YaruTitleBarStyle {
+  /// The title bar is hidden.
+  hidden,
+
+  /// Only the title bar background is shown without window controls.
+  background,
+
+  /// The title bar is shown as normal.
+  normal,
+}
+
 /// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
 /// that most tightly encloses the given context.
@@ -25,6 +37,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.shape,
     this.border,
+    this.style = YaruTitleBarStyle.normal,
     this.isActive,
     this.isClosable,
     this.isDraggable,
@@ -65,6 +78,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// The border.
   final BorderSide? border;
+
+  /// The style.
+  final YaruTitleBarStyle style;
 
   /// Whether the title bar visualized as active.
   final bool? isActive;
@@ -109,6 +125,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
+
     final theme = YaruTitleBarTheme.of(context);
     final light = Theme.of(context).brightness == Brightness.light;
 
@@ -190,10 +208,11 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (trailing != null) trailing!,
-                  if (isMinimizable == true ||
-                      isRestorable == true ||
-                      isMaximizable == true ||
-                      isClosable == true)
+                  if (style == YaruTitleBarStyle.normal &&
+                      (isMinimizable == true ||
+                          isRestorable == true ||
+                          isMaximizable == true ||
+                          isClosable == true))
                     Padding(
                       padding: buttonPadding,
                       child: Row(
@@ -261,13 +280,13 @@ class YaruWindowTitleBar extends StatelessWidget
     this.backgroundColor,
     this.shape,
     this.border,
+    this.style,
     this.isActive,
     this.isClosable,
     this.isDraggable,
     this.isMaximizable,
     this.isMinimizable,
     this.isRestorable,
-    this.isVisible = !kIsWeb,
     this.onClose = YaruWindow.close,
     this.onDrag = YaruWindow.drag,
     this.onMaximize = YaruWindow.maximize,
@@ -303,6 +322,9 @@ class YaruWindowTitleBar extends StatelessWidget
   /// The border.
   final BorderSide? border;
 
+  /// The style.
+  final YaruTitleBarStyle? style;
+
   /// Whether the title bar visualized as active.
   final bool? isActive;
 
@@ -320,9 +342,6 @@ class YaruWindowTitleBar extends StatelessWidget
 
   /// Whether the title bar shows a restore button.
   final bool? isRestorable;
-
-  /// Whether the title bar is visible.
-  final bool? isVisible;
 
   /// Called when the close button is pressed.
   final FutureOr<void> Function(BuildContext)? onClose;
@@ -351,7 +370,10 @@ class YaruWindowTitleBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    if (isVisible == false) return const SizedBox.shrink();
+    final style = this.style ??
+        (kIsWeb ? YaruTitleBarStyle.hidden : YaruTitleBarStyle.normal);
+    if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
+
     final defaultState = YaruWindowState(
       isActive: isActive,
       isClosable: isClosable,
@@ -359,6 +381,7 @@ class YaruWindowTitleBar extends StatelessWidget
       isMinimizable: isMinimizable,
       isRestorable: isRestorable,
     );
+
     return StreamBuilder<YaruWindowState>(
       stream: YaruWindow.states(context),
       initialData: YaruWindow.state(context),
@@ -373,6 +396,7 @@ class YaruWindowTitleBar extends StatelessWidget
           backgroundColor: backgroundColor,
           shape: shape,
           border: border,
+          style: style,
           isActive: state.isActive,
           isClosable: state.isClosable,
           isDraggable: state.isMovable,
@@ -403,13 +427,13 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.backgroundColor,
     super.shape = defaultShape,
     super.border,
+    super.style = YaruTitleBarStyle.normal,
     super.isActive,
     super.isClosable = true,
     super.isDraggable,
     super.isMaximizable = false,
     super.isMinimizable = false,
     super.isRestorable = false,
-    super.isVisible = true,
     super.onClose = YaruWindow.maybePop,
     super.onDrag = YaruWindow.drag,
     super.onMaximize = null,
