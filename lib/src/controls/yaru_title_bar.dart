@@ -352,14 +352,15 @@ class YaruWindowTitleBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     if (isVisible == false) return const SizedBox.shrink();
+    final windowState = YaruWindow.state(context);
     return StreamBuilder<YaruWindowState>(
-      stream: YaruWindow.states(),
+      stream: YaruWindow.states(context),
       initialData: YaruWindowState(
-        isActive: isActive,
-        isClosable: isClosable,
-        isMaximizable: isMaximizable,
-        isMinimizable: isMinimizable,
-        isRestorable: isRestorable,
+        isActive: isActive ?? windowState?.isActive,
+        isClosable: isClosable ?? windowState?.isClosable,
+        isMaximizable: isMaximizable ?? windowState?.isMaximizable,
+        isMinimizable: isMinimizable ?? windowState?.isMinimizable,
+        isRestorable: isRestorable ?? windowState?.isRestorable,
       ),
       builder: (context, snapshot) {
         final window = snapshot.data;
