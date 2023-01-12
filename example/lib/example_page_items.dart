@@ -100,7 +100,7 @@ final examplePageItems = <PageItem>[
     pageBuilder: (_) => const IconButtonPage(),
   ),
   PageItem(
-    titleBuilder: (context) => const Text('NavigationPage'),
+    titleBuilder: (context) => const Text('YaruNavigationPage'),
     tooltipMessage: 'YaruNavigationPage',
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.compass_filled)
