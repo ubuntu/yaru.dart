@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -50,18 +51,16 @@ class _ExampleState extends State<Example> {
               title: buildTitle(context, pageItems[index]),
             ),
             pageBuilder: (context, index) => YaruDetailPage(
-              appBar: AppBar(
-                leading: Navigator.of(context).canPop()
-                    ? const YaruBackButton()
-                    : null,
-                title: buildTitle(context, pageItems[index]),
-                actions: [CodeSnippedButton(pageItem: pageItems[index])],
-              ),
+              appBar: _appBar(context, pageItems, index),
               body: pageItems[index].pageBuilder(context),
             ),
-            appBar: AppBar(
-              title: const Text('Example'),
-            ),
+            appBar: kIsWeb
+                ? AppBar(
+                    title: const Text('Example'),
+                  )
+                : const YaruWindowTitleBar(
+                    title: Text('Example'),
+                  ),
             bottomBar: BottomAppBar(
               elevation: 0,
               child: Column(
@@ -80,6 +79,30 @@ class _ExampleState extends State<Example> {
               ),
             ),
           );
+  }
+
+  PreferredSizeWidget _appBar(
+    BuildContext context,
+    List<PageItem> pageItems,
+    int index,
+  ) {
+    final leading =
+        Navigator.of(context).canPop() ? const YaruBackButton() : null;
+    final title = buildTitle(context, pageItems[index]);
+    final trailing = CodeSnippedButton(pageItem: pageItems[index]);
+    if (kIsWeb) {
+      return AppBar(
+        leading: leading,
+        title: title,
+        actions: [trailing],
+      );
+    } else {
+      return YaruWindowTitleBar(
+        title: title,
+        leading: leading,
+        trailing: trailing,
+      );
+    }
   }
 }
 
