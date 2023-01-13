@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../controls/yaru_title_bar_theme.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_list_view.dart';
@@ -94,15 +95,20 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
           },
           pages: [
             MaterialPage(
-              child: Scaffold(
-                appBar: widget.appBar,
-                body: YaruMasterListView(
-                  length: widget.controller.length,
-                  selectedIndex: _selectedIndex,
-                  onTap: _onTap,
-                  builder: widget.tileBuilder,
+              child: YaruTitleBarTheme(
+                data: const YaruTitleBarThemeData(
+                  style: YaruTitleBarStyle.normal,
                 ),
-                bottomNavigationBar: widget.bottomBar,
+                child: Scaffold(
+                  appBar: widget.appBar,
+                  body: YaruMasterListView(
+                    length: widget.controller.length,
+                    selectedIndex: _selectedIndex,
+                    onTap: _onTap,
+                    builder: widget.tileBuilder,
+                  ),
+                  bottomNavigationBar: widget.bottomBar,
+                ),
               ),
             ),
             if (_selectedIndex != -1) page(_selectedIndex)
