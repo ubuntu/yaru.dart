@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../controls/yaru_title_bar_theme.dart';
 import 'yaru_master_detail_layout_delegate.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_master_detail_theme.dart';
@@ -153,15 +154,20 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   Widget _buildLeftPane() {
     return SizedBox(
       width: _paneWidth,
-      child: Scaffold(
-        appBar: widget.appBar,
-        body: YaruMasterListView(
-          length: widget.controller.length,
-          selectedIndex: _selectedIndex,
-          onTap: _onTap,
-          builder: widget.tileBuilder,
+      child: YaruTitleBarTheme(
+        data: const YaruTitleBarThemeData(
+          style: YaruTitleBarStyle.undecorated,
         ),
-        bottomNavigationBar: widget.bottomBar,
+        child: Scaffold(
+          appBar: widget.appBar,
+          body: YaruMasterListView(
+            length: widget.controller.length,
+            selectedIndex: _selectedIndex,
+            onTap: _onTap,
+            builder: widget.tileBuilder,
+          ),
+          bottomNavigationBar: widget.bottomBar,
+        ),
       ),
     );
   }
