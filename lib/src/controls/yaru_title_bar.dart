@@ -179,6 +179,18 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
+    Widget maybeHero({
+      required Widget child,
+    }) {
+      if (context.findAncestorWidgetOfExactType<Hero>() != null) {
+        return child;
+      }
+      return Hero(
+        tag: '<YaruTitleBar $this>',
+        child: child,
+      );
+    }
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onPanStart: isDraggable == true ? (_) => onDrag?.call(context) : null,
@@ -201,8 +213,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         titleTextStyle: titleTextStyle,
         shape: shape,
         actions: [
-          Hero(
-            tag: '$this',
+          maybeHero(
             child: backdropEffect(
               Row(
                 mainAxisSize: MainAxisSize.min,
