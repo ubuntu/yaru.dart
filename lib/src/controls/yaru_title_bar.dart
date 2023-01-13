@@ -9,18 +9,6 @@ import 'yaru_title_bar_theme.dart';
 import 'yaru_window.dart';
 import 'yaru_window_control.dart';
 
-/// The title bar style.
-enum YaruTitleBarStyle {
-  /// The title bar is hidden.
-  hidden,
-
-  /// Only the title bar background is shown without window controls.
-  background,
-
-  /// The title bar is shown as normal.
-  normal,
-}
-
 /// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
 /// that most tightly encloses the given context.
@@ -37,7 +25,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.shape,
     this.border,
-    this.style = YaruTitleBarStyle.normal,
+    this.style,
     this.isActive,
     this.isClosable,
     this.isDraggable,
@@ -80,7 +68,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   final BorderSide? border;
 
   /// The style.
-  final YaruTitleBarStyle style;
+  final YaruTitleBarStyle? style;
 
   /// Whether the title bar visualized as active.
   final bool? isActive;
@@ -125,11 +113,11 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruTitleBarTheme.of(context);
+    final style = this.style ?? theme.style ?? YaruTitleBarStyle.normal;
     if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
 
-    final theme = YaruTitleBarTheme.of(context);
     final light = Theme.of(context).brightness == Brightness.light;
-
     final states = <MaterialState>{
       if (isActive != false) MaterialState.focused,
     };
@@ -381,7 +369,9 @@ class YaruWindowTitleBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruTitleBarTheme.of(context);
     final style = this.style ??
+        theme.style ??
         (kIsWeb ? YaruTitleBarStyle.hidden : YaruTitleBarStyle.normal);
     if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
 
