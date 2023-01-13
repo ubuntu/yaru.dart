@@ -109,7 +109,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   final FutureOr<void> Function(BuildContext)? onShowMenu;
 
   @override
-  Size get preferredSize => const Size(0, kYaruTitleBarHeight);
+  Size get preferredSize =>
+      Size(0, style == YaruTitleBarStyle.hidden ? 0 : kYaruTitleBarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -363,7 +364,8 @@ class YaruWindowTitleBar extends StatelessWidget
   final FutureOr<void> Function(BuildContext)? onShowMenu;
 
   @override
-  Size get preferredSize => const Size(0, kIsWeb ? 0 : kYaruTitleBarHeight);
+  Size get preferredSize =>
+      Size(0, style == YaruTitleBarStyle.hidden ? 0 : kYaruTitleBarHeight);
 
   static Future<void> ensureInitialized() => YaruWindow.ensureInitialized();
 
@@ -372,7 +374,7 @@ class YaruWindowTitleBar extends StatelessWidget
     final theme = YaruTitleBarTheme.of(context);
     final style = this.style ??
         theme.style ??
-        (kIsWeb ? YaruTitleBarStyle.hidden : YaruTitleBarStyle.normal);
+        (kIsWeb ? YaruTitleBarStyle.undecorated : YaruTitleBarStyle.normal);
     if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
 
     final defaultState = YaruWindowState(
