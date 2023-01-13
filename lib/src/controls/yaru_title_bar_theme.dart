@@ -8,8 +8,8 @@ enum YaruTitleBarStyle {
   /// The title bar is hidden.
   hidden,
 
-  /// Only the title bar background is shown without window controls.
-  background,
+  /// The title bar is shown without window controls.
+  undecorated,
 
   /// The title bar is shown as normal.
   normal,
