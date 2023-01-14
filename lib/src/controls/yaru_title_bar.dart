@@ -18,7 +18,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.leading,
     this.title,
-    this.trailing,
+    this.actions,
     this.centerTitle,
     this.titleSpacing,
     this.foregroundColor,
@@ -46,8 +46,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   /// A widget to display before the [title] widget.
   final Widget? leading;
 
-  /// A widget to display after the [title] widget.
-  final Widget? trailing;
+  /// Widgets to display after the [title] widget.
+  final List<Widget>? actions;
 
   /// Whether the title should be centered.
   final bool? centerTitle;
@@ -207,7 +207,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (trailing != null) trailing!,
+                  ...?actions,
                   if (style == YaruTitleBarStyle.normal &&
                       (isMinimizable == true ||
                           isRestorable == true ||
@@ -273,7 +273,7 @@ class YaruWindowTitleBar extends StatelessWidget
     super.key,
     this.leading,
     this.title,
-    this.trailing,
+    this.actions,
     this.centerTitle,
     this.titleSpacing,
     this.foregroundColor,
@@ -301,8 +301,8 @@ class YaruWindowTitleBar extends StatelessWidget
   /// A widget to display before the [title] widget.
   final Widget? leading;
 
-  /// A widget to display after the [title] widget.
-  final Widget? trailing;
+  /// Widgets to display after the [title] widget.
+  final List<Widget>? actions;
 
   /// Whether the title should be centered.
   final bool? centerTitle;
@@ -393,7 +393,7 @@ class YaruWindowTitleBar extends StatelessWidget
         return YaruTitleBar(
           leading: leading,
           title: title ?? Text(state.title ?? ''),
-          trailing: trailing,
+          actions: actions,
           centerTitle: centerTitle,
           titleSpacing: titleSpacing,
           backgroundColor: backgroundColor,
@@ -423,7 +423,7 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.key,
     super.leading,
     super.title,
-    super.trailing,
+    super.actions,
     super.centerTitle,
     super.titleSpacing,
     super.foregroundColor,
