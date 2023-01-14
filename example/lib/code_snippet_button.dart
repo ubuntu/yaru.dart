@@ -18,28 +18,26 @@ class CodeSnippedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
     if (pageItem.snippetUrl == null) {
-      return Container();
+      return const SizedBox.shrink();
     }
-    return Padding(
-      padding: const EdgeInsets.only(right: 8),
-      child: Center(
-        child: YaruIconButton(
-          onPressed: () => showDialog(
-            barrierDismissible: true,
-            context: context,
-            builder: (context) {
-              return ChangeNotifierProvider.value(
-                value: model,
-                child: _CodeDialog(
-                  pageItem: pageItem,
-                ),
-              );
-            },
-          ),
-          icon: const Icon(YaruIcons.code),
-          tooltip: 'Example snippet',
-        ),
+    return FloatingActionButton(
+      onPressed: () => showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) {
+          return ChangeNotifierProvider.value(
+            value: model,
+            child: _CodeDialog(
+              pageItem: pageItem,
+            ),
+          );
+        },
       ),
+      child: const Icon(YaruIcons.code),
+      tooltip: 'Example snippet',
+      foregroundColor: Theme.of(context).colorScheme.onSurface,
+      backgroundColor: PopupMenuTheme.of(context).color,
+      shape: PopupMenuTheme.of(context).shape,
     );
   }
 }

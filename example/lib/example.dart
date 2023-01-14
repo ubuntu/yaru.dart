@@ -55,9 +55,11 @@ class _ExampleState extends State<Example> {
                     ? const YaruBackButton()
                     : null,
                 title: buildTitle(context, pageItems[index]),
-                actions: [CodeSnippedButton(pageItem: pageItems[index])],
               ),
               body: pageItems[index].pageBuilder(context),
+              floatingActionButton: CodeSnippedButton(
+                pageItem: pageItems[index],
+              ),
             ),
             appBar: AppBar(
               title: const Text('Example'),
@@ -105,7 +107,12 @@ class _CompactPage extends StatelessWidget {
         tooltip: pageItems[index].title,
         style: style,
       ),
-      pageBuilder: (context, index) => pageItems[index].pageBuilder(context),
+      pageBuilder: (context, index) => Scaffold(
+        body: pageItems[index].pageBuilder(context),
+        floatingActionButton: CodeSnippedButton(
+          pageItem: pageItems[index],
+        ),
+      ),
       trailing: YaruNavigationRailItem(
         icon: const Icon(YaruIcons.gear),
         label: const Text('Settings'),
