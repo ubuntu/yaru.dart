@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:yaru_colors/yaru_colors.dart';
 
 import '../constants.dart';
+import 'yaru_title_bar_gesture_detector.dart';
 import 'yaru_title_bar_theme.dart';
 import 'yaru_window.dart';
 import 'yaru_window_control.dart';
@@ -180,9 +181,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onPanStart: isDraggable == true ? (_) => onDrag?.call(context) : null,
+    return YaruTitleBarGestureDetector(
+      onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
       onDoubleTap: () => isMaximizable == true
           ? onMaximize?.call(context)
           : isRestorable == true
