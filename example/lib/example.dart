@@ -42,9 +42,14 @@ class _ExampleState extends State<Example> {
 }
 
 class _MasterDetailPage extends StatelessWidget {
-  const _MasterDetailPage({required this.pageItems});
+  _MasterDetailPage({required List<PageItem> pageItems})
+      : pageItems = pageItems.where(isSupported).toList();
 
   final List<PageItem> pageItems;
+
+  static bool isSupported(PageItem pageItem) {
+    return pageItem.supportedLayouts.contains(YaruMasterDetailPage);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +100,14 @@ class _MasterDetailPage extends StatelessWidget {
 }
 
 class _CompactPage extends StatefulWidget {
-  const _CompactPage({required this.pageItems});
+  _CompactPage({required List<PageItem> pageItems})
+      : pageItems = pageItems.where(_CompactPage.isSupported).toList();
 
   final List<PageItem> pageItems;
+
+  static bool isSupported(PageItem pageItem) {
+    return pageItem.supportedLayouts.contains(YaruNavigationPage);
+  }
 
   @override
   State<_CompactPage> createState() => _CompactPageState();

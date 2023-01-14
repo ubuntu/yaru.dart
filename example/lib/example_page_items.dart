@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
@@ -29,6 +30,7 @@ class PageItem {
     required this.pageBuilder,
     required this.iconBuilder,
     this.snippetUrl,
+    this.supportedLayouts = const {YaruMasterDetailPage, YaruNavigationPage},
   });
 
   final String title;
@@ -36,6 +38,7 @@ class PageItem {
   final WidgetBuilder pageBuilder;
   final String? snippetUrl;
   final Widget Function(BuildContext context, bool selected) iconBuilder;
+  final Set<Type> supportedLayouts;
 }
 
 final examplePageItems = <PageItem>[
@@ -98,6 +101,7 @@ final examplePageItems = <PageItem>[
         ? const Icon(YaruIcons.compass_filled)
         : const Icon(YaruIcons.compass),
     pageBuilder: (_) => const NavigationPage(),
+    supportedLayouts: {YaruMasterDetailPage},
   ),
   PageItem(
     title: 'YaruOptionButton',
