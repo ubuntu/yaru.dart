@@ -29,14 +29,11 @@ class Home extends StatelessWidget {
       ),
       builder: (context, yaru, child) {
         return MaterialApp(
-          title: 'Yaru Widgets Factory',
+          title: 'Yaru Widgets',
           debugShowCheckedModeBanner: false,
           theme: yaru.theme,
           darkTheme: yaru.darkTheme,
-          home: Scaffold(
-            appBar: const YaruWindowTitleBar(),
-            body: Example.create(context),
-          ),
+          home: Example.create(context),
         );
       },
     );
