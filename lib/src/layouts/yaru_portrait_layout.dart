@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../controls/yaru_title_bar_theme.dart';
@@ -97,7 +98,9 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
             MaterialPage(
               child: YaruTitleBarTheme(
                 data: const YaruTitleBarThemeData(
-                  style: YaruTitleBarStyle.normal,
+                  style: kIsWeb
+                      ? YaruTitleBarStyle.undecorated
+                      : YaruTitleBarStyle.normal,
                 ),
                 child: Scaffold(
                   appBar: widget.appBar,
