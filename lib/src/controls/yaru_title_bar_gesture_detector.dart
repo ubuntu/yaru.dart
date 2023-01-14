@@ -66,11 +66,11 @@ class _PassiveTapGestureRecognizer extends TapGestureRecognizer {
         _firstTapDown != null &&
         _firstTapUp != null &&
         down.buttons == kPrimaryButton) {
-      // the time from the start of the first tap to the start of the second tap
+      // the time from the first tap down to the second tap down
       final interval = down.timeStamp - _firstTapDown!.timeStamp;
-      // the time from the end of the first tap to the start of the second tap
+      // the time from the first tap up to the second tap down
       final timeBetween = down.timeStamp - _firstTapUp!.timeStamp;
-      // the distance between the first tap down and up
+      // the distance between the first tap down and the first tap up
       final slop = (_firstTapDown!.position - _firstTapUp!.position).distance;
       // the distance between the first tap down and the second tap down
       final secondSlop = (_firstTapDown!.position - down.position).distance;
