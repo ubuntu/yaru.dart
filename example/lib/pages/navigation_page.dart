@@ -22,10 +22,10 @@ class NavigationPage extends StatelessWidget {
 class _PageTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Navigator.of(context).canPop() ? const YaruBackButton() : null,
-        title: const Text('Page 2'),
+    return YaruDetailPage(
+      appBar: const YaruWindowTitleBar(
+        leading: YaruBackButton(),
+        title: Text('Page 2'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(kYaruPagePadding),
@@ -44,12 +44,12 @@ class _PageTwo extends StatelessWidget {
 class _PageThree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Navigator.of(context).canPop() ? const YaruBackButton() : null,
-        title: const Text('Page 3'),
+    return const YaruDetailPage(
+      appBar: YaruWindowTitleBar(
+        leading: YaruBackButton(),
+        title: Text('Page 3'),
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.all(kYaruPagePadding),
         child: Center(child: Text('this is the last page')),
       ),

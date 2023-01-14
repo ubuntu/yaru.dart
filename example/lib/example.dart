@@ -35,58 +35,86 @@ class _ExampleState extends State<Example> {
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
 
-    final pageItems = examplePageItems;
     return model.compactMode
-        ? const _CompactPage()
-        : YaruMasterDetailPage(
-            layoutDelegate: const YaruMasterResizablePaneDelegate(
-              initialPaneWidth: 280,
-              minPageWidth: kYaruMasterDetailBreakpoint / 2,
-              minPaneWidth: 175,
-            ),
-            length: pageItems.length,
-            tileBuilder: (context, index, selected) => YaruMasterTile(
-              leading: pageItems[index].iconBuilder(context, selected),
-              title: buildTitle(context, pageItems[index]),
-            ),
-            pageBuilder: (context, index) => YaruDetailPage(
-              appBar: AppBar(
-                leading: Navigator.of(context).canPop()
-                    ? const YaruBackButton()
-                    : null,
-                title: buildTitle(context, pageItems[index]),
-              ),
-              body: pageItems[index].pageBuilder(context),
-              floatingActionButton: CodeSnippedButton(
-                pageItem: pageItems[index],
-              ),
-            ),
-            appBar: AppBar(
-              title: const Text('Example'),
-            ),
-            bottomBar: BottomAppBar(
-              elevation: 0,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Divider(height: 1),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: YaruMasterTile(
-                      leading: const Icon(YaruIcons.gear),
-                      title: const Text('Settings'),
-                      onTap: () => showSettingsDialog(context),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+        ? _CompactPage(pageItems: examplePageItems)
+        : _MasterDetailPage(pageItems: examplePageItems);
   }
 }
 
-class _CompactPage extends StatelessWidget {
-  const _CompactPage();
+class _MasterDetailPage extends StatelessWidget {
+  _MasterDetailPage({required List<PageItem> pageItems})
+      : pageItems = pageItems.where(isSupported).toList();
+
+  final List<PageItem> pageItems;
+
+  static bool isSupported(PageItem pageItem) {
+    return pageItem.supportedLayouts.contains(YaruMasterDetailPage);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return YaruMasterDetailPage(
+      layoutDelegate: const YaruMasterResizablePaneDelegate(
+        initialPaneWidth: 280,
+        minPageWidth: kYaruMasterDetailBreakpoint / 2,
+        minPaneWidth: 175,
+      ),
+      length: pageItems.length,
+      tileBuilder: (context, index, selected) => YaruMasterTile(
+        leading: pageItems[index].iconBuilder(context, selected),
+        title: buildTitle(context, pageItems[index]),
+      ),
+      pageBuilder: (context, index) => YaruDetailPage(
+        appBar: YaruWindowTitleBar(
+          leading:
+              Navigator.of(context).canPop() ? const YaruBackButton() : null,
+          title: buildTitle(context, pageItems[index]),
+        ),
+        body: pageItems[index].pageBuilder(context),
+        floatingActionButton: CodeSnippedButton(
+          pageItem: pageItems[index],
+        ),
+      ),
+      appBar: const YaruWindowTitleBar(
+        title: Text('Yaru Widgets'),
+      ),
+      bottomBar: BottomAppBar(
+        elevation: 0,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: YaruMasterTile(
+                leading: const Icon(YaruIcons.gear),
+                title: const Text('Settings'),
+                onTap: () => showSettingsDialog(context),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CompactPage extends StatefulWidget {
+  _CompactPage({required List<PageItem> pageItems})
+      : pageItems = pageItems.where(_CompactPage.isSupported).toList();
+
+  final List<PageItem> pageItems;
+
+  static bool isSupported(PageItem pageItem) {
+    return pageItem.supportedLayouts.contains(YaruNavigationPage);
+  }
+
+  @override
+  State<_CompactPage> createState() => _CompactPageState();
+}
+
+class _CompactPageState extends State<_CompactPage> {
+  final _selectedPage = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -97,28 +125,37 @@ class _CompactPage extends StatelessWidget {
             ? YaruNavigationRailStyle.labelled
             : YaruNavigationRailStyle.compact;
 
-    final pageItems = examplePageItems;
-
-    return YaruNavigationPage(
-      length: pageItems.length,
-      itemBuilder: (context, index, selected) => YaruNavigationRailItem(
-        icon: pageItems[index].iconBuilder(context, selected),
-        label: buildTitle(context, pageItems[index]),
-        tooltip: pageItems[index].title,
-        style: style,
-      ),
-      pageBuilder: (context, index) => Scaffold(
-        body: pageItems[index].pageBuilder(context),
-        floatingActionButton: CodeSnippedButton(
-          pageItem: pageItems[index],
+    return Scaffold(
+      appBar: YaruWindowTitleBar(
+        title: ValueListenableBuilder<int>(
+          valueListenable: _selectedPage,
+          builder: (context, value, child) {
+            return buildTitle(context, widget.pageItems[value]);
+          },
         ),
       ),
-      trailing: YaruNavigationRailItem(
-        icon: const Icon(YaruIcons.gear),
-        label: const Text('Settings'),
-        tooltip: 'Settings',
-        style: style,
-        onTap: () => showSettingsDialog(context),
+      body: YaruNavigationPage(
+        length: widget.pageItems.length,
+        itemBuilder: (context, index, selected) => YaruNavigationRailItem(
+          icon: widget.pageItems[index].iconBuilder(context, selected),
+          label: buildTitle(context, widget.pageItems[index]),
+          tooltip: widget.pageItems[index].title,
+          style: style,
+        ),
+        pageBuilder: (context, index) => Scaffold(
+          body: widget.pageItems[index].pageBuilder(context),
+          floatingActionButton: CodeSnippedButton(
+            pageItem: widget.pageItems[index],
+          ),
+        ),
+        trailing: YaruNavigationRailItem(
+          icon: const Icon(YaruIcons.gear),
+          label: const Text('Settings'),
+          tooltip: 'Settings',
+          style: style,
+          onTap: () => showSettingsDialog(context),
+        ),
+        onSelected: (value) => _selectedPage.value = value,
       ),
     );
   }
