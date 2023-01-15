@@ -43,6 +43,8 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
     required this.groupValue,
     this.toggleable = false,
     required this.onChanged,
+    this.selectedColor,
+    this.checkmarkColor,
     this.focusNode,
     this.autofocus = false,
   }) : assert(toggleable || value != null);
@@ -109,6 +111,18 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
   /// ```
   @override
   final ValueChanged<T?>? onChanged;
+
+  /// The color to use when this radio is checked.
+  ///
+  /// Defaults to [ColorScheme.primary].
+  @override
+  final Color? selectedColor;
+
+  /// The color to use for the checkmark when this radio is checked.
+  ///
+  /// Defaults to [ColorScheme.onPrimary].
+  @override
+  final Color? checkmarkColor;
 
   @override
   bool get interactive => onChanged != null;

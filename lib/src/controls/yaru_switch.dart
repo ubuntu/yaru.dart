@@ -35,6 +35,8 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
     super.key,
     required this.value,
     required this.onChanged,
+    this.selectedColor,
+    this.checkmarkColor,
     this.focusNode,
     this.autofocus = false,
   });
@@ -75,6 +77,18 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   /// ```
   @override
   final ValueChanged<bool>? onChanged;
+
+  /// The color to use when this switch is on.
+  ///
+  /// Defaults to [ColorScheme.primary].
+  @override
+  final Color? selectedColor;
+
+  /// The color to use for the dot when this switch is on.
+  ///
+  /// Defaults to [ColorScheme.onPrimary].
+  @override
+  final Color? checkmarkColor;
 
   @override
   bool get interactive => onChanged != null;
