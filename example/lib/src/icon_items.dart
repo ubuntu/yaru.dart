@@ -10,11 +10,9 @@ final List<IconItem> iconItems = [
     IconItem(
       name: iconName,
       usage: 'YaruIcons.$iconName',
-      iconBuilder: (context, iconSize) => RepaintBoundary(
-        child: Icon(
-          YaruIcons.all[iconName]!,
-          size: iconSize,
-        ),
+      iconBuilder: (context, iconSize) => Icon(
+        YaruIcons.all[iconName]!,
+        size: iconSize,
       ),
     )
 ];
