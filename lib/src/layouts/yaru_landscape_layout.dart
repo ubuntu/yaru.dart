@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../controls/yaru_title_bar_theme.dart';
@@ -173,15 +172,6 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   }
 
   Widget _buildVerticalSeparator() {
-    // Fix for the ultra white divider on flutter web
-    final darkAndWeb =
-        kIsWeb && Theme.of(context).brightness == Brightness.dark;
-    if (darkAndWeb) {
-      return const VerticalDivider(
-        thickness: 0,
-        width: 0.01,
-      );
-    }
     return const VerticalDivider(
       thickness: 1,
       width: 1,
