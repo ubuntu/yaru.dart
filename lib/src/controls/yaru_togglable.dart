@@ -23,6 +23,8 @@ abstract class YaruTogglable<T> extends StatefulWidget {
     required this.value,
     this.tristate = false,
     required this.onChanged,
+    this.selectedColor,
+    this.checkmarkColor,
     this.focusNode,
     this.autofocus = false,
   });
@@ -44,6 +46,16 @@ abstract class YaruTogglable<T> extends StatefulWidget {
   /// [StatefulWidget] using the [State.setState] method, so that the parent
   /// gets rebuilt.
   final ValueChanged<T>? onChanged;
+
+  /// The color to use when this togglable is checked.
+  ///
+  /// Defaults to [ColorScheme.primary].
+  final Color? selectedColor;
+
+  /// The color to use for the checkmark when this togglable is checked.
+  ///
+  /// Defaults to [ColorScheme.onPrimary].
+  final Color? checkmarkColor;
 
   /// Determine if this [YaruTogglable] can handle events.
   bool get interactive;
@@ -236,8 +248,8 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     // Normal colors
     final uncheckedColor = colorScheme.surface;
     final uncheckedBorderColor = colorScheme.onSurface.withOpacity(.3);
-    final checkedColor = colorScheme.primary;
-    final checkmarkColor = colorScheme.onPrimary;
+    final checkedColor = widget.selectedColor ?? colorScheme.primary;
+    final checkmarkColor = widget.checkmarkColor ?? colorScheme.onPrimary;
 
     // Disabled colors
     final uncheckedDisabledColor = colorScheme.onSurface.withOpacity(.1);

@@ -44,6 +44,8 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
     required this.value,
     this.tristate = false,
     required this.onChanged,
+    this.selectedColor,
+    this.checkmarkColor,
     this.focusNode,
     this.autofocus = false,
   }) : assert(tristate || value != null);
@@ -99,6 +101,18 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
   /// ```
   @override
   final ValueChanged<bool?>? onChanged;
+
+  /// The color to use when this checkbox is checked.
+  ///
+  /// Defaults to [ColorScheme.primary].
+  @override
+  final Color? selectedColor;
+
+  /// The color to use for the checkmark when this checkbox is checked.
+  ///
+  /// Defaults to [ColorScheme.onPrimary].
+  @override
+  final Color? checkmarkColor;
 
   @override
   bool get interactive => onChanged != null;
