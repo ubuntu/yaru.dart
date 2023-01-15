@@ -137,31 +137,33 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   Widget build(BuildContext context) {
     final breakpoint = YaruMasterDetailTheme.of(context).breakpoint ??
         YaruMasterDetailThemeData.fallback().breakpoint!;
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth < breakpoint) {
-          return YaruPortraitLayout(
-            tileBuilder: widget.tileBuilder,
-            pageBuilder: widget.pageBuilder,
-            onSelected: widget.onSelected,
-            appBar: widget.appBar,
-            bottomBar: widget.bottomBar,
-            controller: _controller,
-          );
-        } else {
-          return YaruLandscapeLayout(
-            tileBuilder: widget.tileBuilder,
-            pageBuilder: widget.pageBuilder,
-            onSelected: widget.onSelected,
-            layoutDelegate: widget.layoutDelegate,
-            previousPaneWidth: _previousPaneWidth,
-            onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
-            appBar: widget.appBar,
-            bottomBar: widget.bottomBar,
-            controller: _controller,
-          );
-        }
-      },
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < breakpoint) {
+            return YaruPortraitLayout(
+              tileBuilder: widget.tileBuilder,
+              pageBuilder: widget.pageBuilder,
+              onSelected: widget.onSelected,
+              appBar: widget.appBar,
+              bottomBar: widget.bottomBar,
+              controller: _controller,
+            );
+          } else {
+            return YaruLandscapeLayout(
+              tileBuilder: widget.tileBuilder,
+              pageBuilder: widget.pageBuilder,
+              onSelected: widget.onSelected,
+              layoutDelegate: widget.layoutDelegate,
+              previousPaneWidth: _previousPaneWidth,
+              onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
+              appBar: widget.appBar,
+              bottomBar: widget.bottomBar,
+              controller: _controller,
+            );
+          }
+        },
+      ),
     );
   }
 }
