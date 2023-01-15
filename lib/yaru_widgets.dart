@@ -40,7 +40,6 @@ export 'src/layouts/yaru_navigation_rail_item.dart';
 export 'src/layouts/yaru_page_controller.dart';
 // Pages
 export 'src/pages/yaru_section.dart';
-export 'src/pages/yaru_tabbed_page.dart';
 export 'src/pages/yaru_tile.dart';
 // Utilities
 export 'src/utilities/yaru_banner.dart';

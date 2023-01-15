@@ -19,7 +19,6 @@ import 'pages/radio_page.dart';
 import 'pages/section_page.dart';
 import 'pages/selectable_container_page.dart';
 import 'pages/switch_page.dart';
-import 'pages/tabbed_page_page.dart';
 import 'pages/tile_page.dart';
 import 'pages/window_controls_page.dart';
 
@@ -161,15 +160,6 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.switchbox_checked_filled)
         : const Icon(YaruIcons.switchbox),
-  ),
-  PageItem(
-    title: 'YaruTabbedPage',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/tabbed_page_page.dart',
-    pageBuilder: (_) => const TabbedPagePage(),
-    iconBuilder: (context, selected) => selected
-        ? const Icon(YaruIcons.tab_new_filled)
-        : const Icon(YaruIcons.tab_new),
   ),
   PageItem(
     title: 'YaruTile',
