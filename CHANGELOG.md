@@ -28,6 +28,22 @@
 * Move `kCheckboxRadio*` constants out of the public API by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/495
 * Use title bar colors from yaru_colors by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/496
 * YaruTitleBar: remove empty padding when there are no window controls by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/497
+* YaruExpandable: expand button position control by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/499
+* Example: eliminate duplicate page titles/tooltips by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/504
+* YaruDetailPage: fix app/title bar height by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/501
+* YaruWindowTitleBar: fix slow window state init by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/506
+* YaruWindowTitleBar: fix state init by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/507
+* YaruTitleBar: fix hero conflict by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/509
+* Add YaruTitleBarStyle (hidden, background, normal) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/510
+* MD: specify the desired title bar style in landscape and portrait modes by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/511
+* YaruWindowTitleBar: improve defaults for web by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/514
+* YaruTitleBar: trailing -> actions by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/517
+* Example: move code snippet button out of the app bar by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/519
+* Remove all RepaintBoundary widgets by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/520
+* Example: make better use of YaruWindowTitleBar by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/521
+* YaruTitleBar: fix single-click delay by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/524
+* Add scaffold to yaru-master-detail page by @whiskeyPeak in https://github.com/ubuntu/yaru_widgets.dart/pull/525
+* Allow color customization of single togglable by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/527
 
 # 2.0.0-beta-3
 
