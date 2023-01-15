@@ -4,6 +4,7 @@ library yaru_widgets;
 export 'src/constants.dart';
 // Controls
 export 'src/controls/yaru_back_button.dart';
+export 'src/controls/yaru_back_button_theme.dart';
 export 'src/controls/yaru_check_button.dart';
 export 'src/controls/yaru_checkbox.dart';
 export 'src/controls/yaru_checkbox_list_tile.dart';
