@@ -28,7 +28,6 @@
 * Move `kCheckboxRadio*` constants out of the public API by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/495
 * Use title bar colors from yaru_colors by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/496
 * YaruTitleBar: remove empty padding when there are no window controls by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/497
-* Release 2.0.0-beta-4 by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/498
 * YaruExpandable: expand button position control by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/499
 * Example: eliminate duplicate page titles/tooltips by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/504
 * YaruDetailPage: fix app/title bar height by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/501
