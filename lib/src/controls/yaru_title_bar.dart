@@ -115,11 +115,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = YaruTitleBarTheme.of(context);
-    final style = this.style ?? theme.style ?? YaruTitleBarStyle.normal;
+    final titleBarTheme = YaruTitleBarTheme.of(context);
+    final style = this.style ?? titleBarTheme.style ?? YaruTitleBarStyle.normal;
     if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
 
-    final light = Theme.of(context).brightness == Brightness.light;
+    final theme = Theme.of(context);
+    final light = theme.brightness == Brightness.light;
     final states = <MaterialState>{
       if (isActive != false) MaterialState.focused,
     };
@@ -131,33 +132,34 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     });
     final backgroundColor =
         MaterialStateProperty.resolveAs(this.backgroundColor, states) ??
-            theme.backgroundColor?.resolve(states) ??
+            titleBarTheme.backgroundColor?.resolve(states) ??
             defaultBackgroundColor.resolve(states);
     final foregroundColor =
         MaterialStateProperty.resolveAs(this.foregroundColor, states) ??
-            theme.foregroundColor?.resolve(states) ??
-            Theme.of(context).colorScheme.onSurface;
+            titleBarTheme.foregroundColor?.resolve(states) ??
+            theme.colorScheme.onSurface;
 
-    final titleTextStyle = Theme.of(context)
-        .appBarTheme
-        .titleTextStyle!
-        .copyWith(
-          color: foregroundColor,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        )
-        .merge(theme.titleTextStyle);
+    final titleTextStyle =
+        (theme.appBarTheme.titleTextStyle ?? theme.textTheme.titleLarge!)
+            .copyWith(
+              color: foregroundColor,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            )
+            .merge(titleBarTheme.titleTextStyle);
 
     final defaultBorder = BorderSide(
       color: light
           ? Colors.black.withOpacity(0.1)
           : Colors.white.withOpacity(0.06),
     );
-    final border = Border(bottom: this.border ?? theme.border ?? defaultBorder);
-    final shape = border + (this.shape ?? theme.shape ?? const Border());
+    final border =
+        Border(bottom: this.border ?? titleBarTheme.border ?? defaultBorder);
+    final shape =
+        border + (this.shape ?? titleBarTheme.shape ?? const Border());
 
-    final buttonSpacing = theme.buttonSpacing ?? 0;
-    final buttonPadding = theme.buttonPadding ?? EdgeInsets.zero;
+    final buttonSpacing = titleBarTheme.buttonSpacing ?? 0;
+    final buttonPadding = titleBarTheme.buttonPadding ?? EdgeInsets.zero;
 
     // TODO: backdrop effect
     Widget? backdropEffect(Widget? child) {
@@ -190,12 +192,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
               : null,
       onSecondaryTap: onShowMenu != null ? () => onShowMenu!(context) : null,
       child: AppBar(
-        elevation: theme.elevation,
+        elevation: titleBarTheme.elevation,
         automaticallyImplyLeading: false,
         leading: backdropEffect(leading),
         title: backdropEffect(title),
-        centerTitle: centerTitle ?? theme.centerTitle,
-        titleSpacing: titleSpacing ?? theme.titleSpacing,
+        centerTitle: centerTitle ?? titleBarTheme.centerTitle,
+        titleSpacing: titleSpacing ?? titleBarTheme.titleSpacing,
         toolbarHeight: kYaruTitleBarHeight,
         foregroundColor: foregroundColor,
         backgroundColor: backgroundColor,
