@@ -16,7 +16,7 @@ class YaruTile extends StatelessWidget {
   const YaruTile({
     super.key,
     this.leading,
-    required this.title,
+    this.title,
     this.subtitle,
     this.trailing,
     this.enabled = true,
@@ -31,7 +31,7 @@ class YaruTile extends StatelessWidget {
   final Widget? leading;
 
   /// The [Widget] placed at title position.
-  final Widget title;
+  final Widget? title;
 
   /// The [Widget] placed below [title].
   final Widget? subtitle;
@@ -64,13 +64,14 @@ class YaruTile extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DefaultTextStyle(
-                    style: _titleTextStyle(context),
-                    child: title,
-                  ),
+                  if (title != null)
+                    DefaultTextStyle(
+                      style: _titleTextStyle(context),
+                      child: title!,
+                    ),
                   if (subtitle != null)
                     Padding(
-                      padding: style != YaruTileStyle.banner
+                      padding: title != null && style != YaruTileStyle.banner
                           ? const EdgeInsets.only(top: 4.0)
                           : EdgeInsets.zero,
                       child: DefaultTextStyle(
