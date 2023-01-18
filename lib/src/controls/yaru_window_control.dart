@@ -142,25 +142,27 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   @override
   Widget build(BuildContext context) {
     return _buildEventDetectors(
-      AnimatedContainer(
-        duration: _kWindowControlBackgroundAnimationDuration,
-        decoration: BoxDecoration(
-          color: _getColor(context),
-          shape: BoxShape.circle,
-        ),
-        child: SizedBox.square(
-          dimension: kYaruWindowControlSize,
-          child: Center(
-            child: AnimatedBuilder(
-              animation: _position,
-              builder: (context, child) => CustomPaint(
-                size: const Size.square(_kWindowControlIconSize),
-                painter: _YaruWindowControlPainter(
-                  type: widget.type,
-                  oldType: oldType,
-                  iconColor: Theme.of(context).colorScheme.onSurface,
-                  position: _position.value,
-                  interactive: interactive,
+      RepaintBoundary(
+        child: AnimatedContainer(
+          duration: _kWindowControlBackgroundAnimationDuration,
+          decoration: BoxDecoration(
+            color: _getColor(context),
+            shape: BoxShape.circle,
+          ),
+          child: SizedBox.square(
+            dimension: kYaruWindowControlSize,
+            child: Center(
+              child: AnimatedBuilder(
+                animation: _position,
+                builder: (context, child) => CustomPaint(
+                  size: const Size.square(_kWindowControlIconSize),
+                  painter: _YaruWindowControlPainter(
+                    type: widget.type,
+                    oldType: oldType,
+                    iconColor: Theme.of(context).colorScheme.onSurface,
+                    position: _position.value,
+                    interactive: interactive,
+                  ),
                 ),
               ),
             ),
