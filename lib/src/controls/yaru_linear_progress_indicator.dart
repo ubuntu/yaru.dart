@@ -109,7 +109,9 @@ class _YaruLinearProgressIndicatorState
           minWidth: double.infinity,
           minHeight: widget.minHeight,
         ),
-        child: child,
+        child: RepaintBoundary(
+          child: child,
+        ),
       ),
     );
   }
