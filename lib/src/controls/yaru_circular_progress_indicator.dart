@@ -110,7 +110,9 @@ class _YaruCircularProgressIndicatorState
           minWidth: _kMinCircularProgressIndicatorSize,
           minHeight: _kMinCircularProgressIndicatorSize,
         ),
-        child: child,
+        child: RepaintBoundary(
+          child: child,
+        ),
       ),
     );
   }
