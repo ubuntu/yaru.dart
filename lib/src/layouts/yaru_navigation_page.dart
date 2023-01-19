@@ -179,6 +179,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
             ),
           ],
           onPopPage: (route, result) => route.didPop(result),
+          observers: [HeroController()],
         ),
       ),
     );
