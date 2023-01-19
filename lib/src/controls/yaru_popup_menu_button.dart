@@ -62,7 +62,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
           initialValue: initialValue,
           onSelected: onSelected,
           onCanceled: onCanceled,
-          tooltip: tooltip,
+          tooltip: tooltip ?? '',
           itemBuilder: itemBuilder,
           offset: offset,
           enableFeedback: enableFeedback,
