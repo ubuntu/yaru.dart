@@ -80,12 +80,14 @@ class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>
         child: AnimatedBuilder(
           animation: progress,
           builder: (context, child) {
-            return CustomPaint(
-              painter: _YaruAnimatedOkIconPainter(
-                widget.size,
-                widget.filled,
-                widget.color ?? Theme.of(context).colorScheme.onSurface,
-                progress.value,
+            return RepaintBoundary(
+              child: CustomPaint(
+                painter: _YaruAnimatedOkIconPainter(
+                  widget.size,
+                  widget.filled,
+                  widget.color ?? Theme.of(context).colorScheme.onSurface,
+                  progress.value,
+                ),
               ),
             );
           },

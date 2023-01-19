@@ -75,11 +75,13 @@ class _YaruAnimatedNoNetworkIconState extends State<YaruAnimatedNoNetworkIcon>
         child: AnimatedBuilder(
           animation: progress,
           builder: (context, child) {
-            return CustomPaint(
-              painter: _YaruAnimatedNoNetworkIconPainter(
-                widget.size,
-                widget.color ?? Theme.of(context).colorScheme.onSurface,
-                progress.value,
+            return RepaintBoundary(
+              child: CustomPaint(
+                painter: _YaruAnimatedNoNetworkIconPainter(
+                  widget.size,
+                  widget.color ?? Theme.of(context).colorScheme.onSurface,
+                  progress.value,
+                ),
               ),
             );
           },
