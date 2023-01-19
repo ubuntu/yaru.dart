@@ -40,10 +40,20 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(kYaruButtonRadius),
+    final style = OutlinedButtonTheme.of(context).style;
+    final state = <MaterialState>{if (!enabled) MaterialState.disabled};
+    final side = style?.side?.resolve(state);
+    final shape = style?.shape?.resolve(state) ??
+        RoundedRectangleBorder(
+          side: BorderSide(color: Theme.of(context).dividerColor),
+          borderRadius: BorderRadius.circular(kYaruButtonRadius),
+        );
+    return DecoratedBox(
+      decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
       child: Material(
         color: Colors.transparent,
+        clipBehavior: Clip.antiAlias,
+        shape: shape,
         child: PopupMenuButton(
           enabled: enabled,
           elevation: elevation,
@@ -57,62 +67,35 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
           offset: offset,
           enableFeedback: enableFeedback,
           constraints: constraints,
-          child: _YaruPopupDecoration(
-            child: child,
-            padding: padding,
-            childPadding: childPadding,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _YaruPopupDecoration extends StatelessWidget {
-  const _YaruPopupDecoration({
-    // ignore: unused_element
-    super.key,
-    required this.child,
-    required this.padding,
-    required this.childPadding,
-  });
-
-  final Widget child;
-  final EdgeInsetsGeometry padding;
-  final EdgeInsetsGeometry childPadding;
-
-  @override
-  Widget build(BuildContext context) {
-    final side = OutlinedButtonTheme.of(context).style?.side?.resolve({});
-    return DefaultTextStyle(
-      style: TextStyle(
-        color: Theme.of(context).colorScheme.onSurface,
-        fontWeight: FontWeight.w500,
-      ),
-      child: Container(
-        padding: childPadding,
-        decoration: ShapeDecoration(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(kYaruButtonRadius),
-            side: side ?? BorderSide(color: Theme.of(context).dividerColor),
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
+          child: Opacity(
+            opacity: enabled ? 1 : 0.38,
+            child: Padding(
               padding: padding,
-              child: child,
-            ),
-            const SizedBox(
-              height: 40,
-              child: Icon(
-                YaruIcons.pan_down,
-                size: 20,
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.w500,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: padding,
+                      child: child,
+                    ),
+                    const SizedBox(
+                      height: 40,
+                      child: Icon(
+                        YaruIcons.pan_down,
+                        size: 20,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );
