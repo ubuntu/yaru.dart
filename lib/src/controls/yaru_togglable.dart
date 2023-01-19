@@ -269,28 +269,31 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
             width: togglableSize.width,
             height: togglableSize.height,
             child: Center(
-              child: CustomPaint(
-                size: togglableSize,
-                painter: painter
-                  ..interactive = widget.interactive
-                  ..hover = _hover
-                  ..focus = _focus
-                  ..active = _active
-                  ..checked = widget.checked
-                  ..oldChecked = _oldChecked
-                  ..position = _position
-                  ..sizePosition = _sizePosition
-                  ..indicatorPosition = _indicatorPosition
-                  ..uncheckedColor = uncheckedColor
-                  ..uncheckedBorderColor = uncheckedBorderColor
-                  ..checkedColor = checkedColor
-                  ..checkmarkColor = checkmarkColor
-                  ..disabledUncheckedColor = uncheckedDisabledColor
-                  ..disabledUncheckedBorderColor = uncheckedDisabledBorderColor
-                  ..disabledCheckedColor = checkedDisabledColor
-                  ..disabledCheckmarkColor = checkmarkDisabledColor
-                  ..hoverIndicatorColor = hoverIndicatorColor
-                  ..focusIndicatorColor = focusIndicatorColor,
+              child: RepaintBoundary(
+                child: CustomPaint(
+                  size: togglableSize,
+                  painter: painter
+                    ..interactive = widget.interactive
+                    ..hover = _hover
+                    ..focus = _focus
+                    ..active = _active
+                    ..checked = widget.checked
+                    ..oldChecked = _oldChecked
+                    ..position = _position
+                    ..sizePosition = _sizePosition
+                    ..indicatorPosition = _indicatorPosition
+                    ..uncheckedColor = uncheckedColor
+                    ..uncheckedBorderColor = uncheckedBorderColor
+                    ..checkedColor = checkedColor
+                    ..checkmarkColor = checkmarkColor
+                    ..disabledUncheckedColor = uncheckedDisabledColor
+                    ..disabledUncheckedBorderColor =
+                        uncheckedDisabledBorderColor
+                    ..disabledCheckedColor = checkedDisabledColor
+                    ..disabledCheckmarkColor = checkmarkDisabledColor
+                    ..hoverIndicatorColor = hoverIndicatorColor
+                    ..focusIndicatorColor = focusIndicatorColor,
+                ),
               ),
             ),
           ),

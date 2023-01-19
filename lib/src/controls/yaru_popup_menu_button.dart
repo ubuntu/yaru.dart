@@ -83,6 +83,7 @@ class _YaruPopupDecoration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final side = OutlinedButtonTheme.of(context).style?.side?.resolve({});
     return DefaultTextStyle(
       style: TextStyle(
         color: Theme.of(context).colorScheme.onSurface,
@@ -90,9 +91,11 @@ class _YaruPopupDecoration extends StatelessWidget {
       ),
       child: Container(
         padding: childPadding,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(kYaruButtonRadius),
-          border: Border.all(color: Theme.of(context).dividerColor),
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(kYaruButtonRadius),
+            side: side ?? BorderSide(color: Theme.of(context).dividerColor),
+          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
