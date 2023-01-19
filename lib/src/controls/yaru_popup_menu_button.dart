@@ -81,7 +81,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: padding,
+                      padding: childPadding,
                       child: child,
                     ),
                     const SizedBox(
