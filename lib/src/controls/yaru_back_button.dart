@@ -25,11 +25,9 @@ class YaruBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = YaruBackButtonTheme.of(context);
-    final shape = (style ?? theme?.style) == YaruBackButtonStyle.rounded
-        ? const CircleBorder()
-        : const BeveledRectangleBorder();
-
-    return YaruIconButton(
+    final round = (style ?? theme?.style) == YaruBackButtonStyle.rounded;
+    final shape = round ? const CircleBorder() : const BeveledRectangleBorder();
+    final button = YaruIconButton(
       icon: const Icon(YaruIcons.go_previous),
       style: ButtonStyle(
         shape: ButtonStyleButton.allOrNull(shape),
@@ -42,5 +40,6 @@ class YaruBackButton extends StatelessWidget {
         }
       },
     );
+    return round ? Center(child: button) : button;
   }
 }
