@@ -10,7 +10,7 @@ import 'yaru_title_bar_theme.dart';
 import 'yaru_window.dart';
 import 'yaru_window_control.dart';
 
-const _kYaruTitleBarHeroTag = '<_YaruTitleBar hero tag>';
+const _kYaruTitleBarHeroTag = '<YaruTitleBar hero tag>';
 
 /// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
