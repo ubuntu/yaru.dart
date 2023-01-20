@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const _kYaruDetailPageHeroTag = '<YaruDetailPageHeroTag>';
+const _kYaruDetailPageHeroTag = '<YaruDetailPage hero tag>';
 
 /// Provides the recommended layout for [YaruMasterDetailPage.pageBuilder].
 ///
