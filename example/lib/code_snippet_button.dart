@@ -80,7 +80,7 @@ class _CodeDialog extends StatelessWidget {
                 children: [
                   YaruAnimatedNoNetworkIcon(
                     size: 200,
-                    color: Theme.of(context).errorColor,
+                    color: Theme.of(context).colorScheme.error,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
