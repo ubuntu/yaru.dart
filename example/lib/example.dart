@@ -78,21 +78,16 @@ class _MasterDetailPage extends StatelessWidget {
       appBar: const YaruWindowTitleBar(
         title: Text('Yaru Widgets'),
       ),
-      bottomBar: BottomAppBar(
-        elevation: 0,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Divider(height: 1),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: YaruMasterTile(
-                leading: const Icon(YaruIcons.gear),
-                title: const Text('Settings'),
-                onTap: () => showSettingsDialog(context),
-              ),
-            ),
-          ],
+      bottomBar: Material(
+        color: Theme.of(context).colorScheme.background,
+        shape: Border(top: BorderSide(color: Theme.of(context).dividerColor)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: YaruMasterTile(
+            leading: const Icon(YaruIcons.gear),
+            title: const Text('Settings'),
+            onTap: () => showSettingsDialog(context),
+          ),
         ),
       ),
     );
