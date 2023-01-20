@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import '../extensions/border_radius_extension.dart';
 
 /// A container with a rounded Yaru-style border.
 class YaruBorderContainer extends StatelessWidget {
@@ -70,8 +71,12 @@ class YaruBorderContainer extends StatelessWidget {
     final theme = Theme.of(context);
     final effectiveBorder = border ??
         Border.all(color: DividerTheme.of(context).color ?? theme.dividerColor);
-    final effectiveBorderRadius =
+    final outerBorderRadius =
         borderRadius ?? BorderRadius.circular(kYaruContainerRadius);
+    final direction = Directionality.of(context);
+    final innerBorderRadius = outerBorderRadius
+        .resolve(direction)
+        .inner(effectiveBorder.dimensions.resolve(direction));
 
     return Container(
       alignment: alignment,
@@ -83,16 +88,15 @@ class YaruBorderContainer extends StatelessWidget {
       padding: padding,
       height: height,
       width: width,
-      foregroundDecoration: BoxDecoration(
-        border: effectiveBorder,
-        borderRadius: effectiveBorderRadius,
-      ),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: effectiveBorderRadius,
+        border: effectiveBorder,
+        borderRadius: outerBorderRadius,
       ),
       child: Material(
         color: Colors.transparent,
+        clipBehavior: clipBehavior,
+        borderRadius: innerBorderRadius,
         child: child,
       ),
     );
