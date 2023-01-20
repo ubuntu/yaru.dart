@@ -1,5 +1,25 @@
 # Changelog
 
+# 2.0.0-beta-5
+
+* Landscape: remove separator fix for web, not needed anymore by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/529
+* Remove YaruTabbedPage by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/530
+* YaruTile: make title optional by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/533
+* YaruTitleBar: use TextTheme.titleLarge as a fallback by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/535
+* Revert "Remove all RepaintBoundary widgets" by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/537
+* Update goldens by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/538
+* YaruPopupMenuButton: sync border with OutlinedButton by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/539
+* YaruPopupMenuButton: fix styling issues by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/541
+* YaruNavigationPage: add HeroController to support YaruDetailPage by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/545
+* Add YaruBackButtonTheme & YaruBackButtonStyle (rounded vs. square) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/531
+* YaruPopupMenuButton: remove default tooltip by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/543
+* YaruTitleBarThemeData: fix buttonPadding type by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/544
+* Add missing RepaintBoundary on painter widgets by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/547
+* Fix use of deprecated members (beta channel) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/551
+* Example: fix the settings bottom bar look sensible with Flutter beta by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/552
+* YaruDetailPage: allow specifying the hero tag by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/553
+* YaruTitleBar: allow specifying the hero tag by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/554
+
 # 2.0.0-beta-4
 
 * MD: wrap detail page with ScaffoldMessenger in landscape layout by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/463
