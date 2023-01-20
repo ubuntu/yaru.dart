@@ -94,13 +94,7 @@ class YaruTile extends StatelessWidget {
   }
 
   TextStyle _titleTextStyle(BuildContext context) {
-    final theme = Theme.of(context);
-    switch (style) {
-      case YaruTileStyle.normal:
-        return theme.textTheme.bodyText1!;
-      case YaruTileStyle.banner:
-        return theme.textTheme.bodyLarge!;
-    }
+    return Theme.of(context).textTheme.bodyLarge!;
   }
 
   TextStyle _subtitleTextStyle(BuildContext context) {
