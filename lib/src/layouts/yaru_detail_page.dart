@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const _kYaruDetailPageHeroTag = '<YaruDetailPage hero tag>';
+
 /// Provides the recommended layout for [YaruMasterDetailPage.pageBuilder].
 ///
 /// This widget is similar to [Scaffold] with the exception that it wraps the
@@ -19,6 +21,7 @@ class YaruDetailPage extends StatelessWidget {
     this.backgroundColor,
     this.extendBody = false,
     this.extendBodyBehindAppBar = false,
+    this.heroTag = _kYaruDetailPageHeroTag,
   });
 
   /// See [Scaffold.extendBody].
@@ -57,13 +60,23 @@ class YaruDetailPage extends StatelessWidget {
   /// See [Scaffold.bottomSheet].
   final Widget? bottomSheet;
 
+  /// The tag to use for the [Hero] wrapping the [appBar].
+  ///
+  /// By default, a unique tag is used to ensure that the [appBar] stays in
+  /// place during page transitions. If set to `null`, no [Hero] will be used.
+  final Object? heroTag;
+
   PreferredSizeWidget? _buildAppBar(BuildContext context) {
-    if (appBar == null) return null;
+    if (appBar == null ||
+        heroTag == null ||
+        context.findAncestorWidgetOfExactType<Hero>() != null) {
+      return appBar;
+    }
 
     return PreferredSize(
       preferredSize: appBar!.preferredSize,
       child: Hero(
-        tag: '<YaruDetailPage Hero tag - $appBar>',
+        tag: heroTag!,
         child: appBar!,
       ),
     );
