@@ -10,6 +10,11 @@ import 'yaru_title_bar_theme.dart';
 import 'yaru_window.dart';
 import 'yaru_window_control.dart';
 
+class _YaruTitleBarHeroTag {
+  const _YaruTitleBarHeroTag();
+  static Object id(Object? id) => '<_YaruTitleBarHeroTag $id>';
+}
+
 /// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
 /// that most tightly encloses the given context.
@@ -39,6 +44,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.onMinimize,
     this.onRestore,
     this.onShowMenu,
+    this.heroTag,
   });
 
   /// The primary title widget.
@@ -109,6 +115,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   /// Called when the secondary mouse button is pressed.
   final FutureOr<void> Function(BuildContext)? onShowMenu;
 
+  /// The tag to use for the [Hero] wrapping the window controls.
+  ///
+  /// By default, a unique tag is used to ensure that the window controls stay
+  /// in place during page transitions. If set to `null`, no [Hero] will be used.
+  final Object? heroTag;
+
   @override
   Size get preferredSize =>
       Size(0, style == YaruTitleBarStyle.hidden ? 0 : kYaruTitleBarHeight);
@@ -174,11 +186,14 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     Widget maybeHero({
       required Widget child,
     }) {
-      if (context.findAncestorWidgetOfExactType<Hero>() != null) {
+      if (heroTag == null ||
+          context.findAncestorWidgetOfExactType<Hero>() != null) {
         return child;
       }
       return Hero(
-        tag: '<YaruTitleBar $this>',
+        tag: heroTag is _YaruTitleBarHeroTag
+            ? _YaruTitleBarHeroTag.id(this)
+            : heroTag!,
         child: child,
       );
     }
@@ -295,6 +310,7 @@ class YaruWindowTitleBar extends StatelessWidget
     this.onMinimize = YaruWindow.minimize,
     this.onRestore = YaruWindow.restore,
     this.onShowMenu = YaruWindow.showMenu,
+    this.heroTag,
   });
 
   /// The primary title widget.
@@ -365,6 +381,12 @@ class YaruWindowTitleBar extends StatelessWidget
   /// Called when the secondary mouse button is pressed.
   final FutureOr<void> Function(BuildContext)? onShowMenu;
 
+  /// The tag to use for the [Hero] wrapping the window controls.
+  ///
+  /// By default, a unique tag is used to ensure that the window controls stay
+  /// in place during page transitions. If set to `null`, no [Hero] will be used.
+  final Object? heroTag;
+
   @override
   Size get preferredSize =>
       Size(0, style == YaruTitleBarStyle.hidden ? 0 : kYaruTitleBarHeight);
@@ -414,6 +436,7 @@ class YaruWindowTitleBar extends StatelessWidget
           onMinimize: onMinimize,
           onRestore: onRestore,
           onShowMenu: onShowMenu,
+          heroTag: heroTag,
         );
       },
     );
@@ -445,6 +468,7 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.onMinimize = null,
     super.onRestore = null,
     super.onShowMenu = YaruWindow.showMenu,
+    super.heroTag,
   });
 
   static const defaultShape = RoundedRectangleBorder(
