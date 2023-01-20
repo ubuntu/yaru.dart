@@ -10,10 +10,7 @@ import 'yaru_title_bar_theme.dart';
 import 'yaru_window.dart';
 import 'yaru_window_control.dart';
 
-class _YaruTitleBarHeroTag {
-  const _YaruTitleBarHeroTag();
-  static Object id(Object? id) => '<_YaruTitleBarHeroTag $id>';
-}
+const _kYaruTitleBarHeroTag = '<_YaruTitleBar hero tag>';
 
 /// A [Stack] of a [Widget] as [title] with a close button
 /// which pops the top-most route off the navigator
@@ -44,7 +41,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.onMinimize,
     this.onRestore,
     this.onShowMenu,
-    this.heroTag,
+    this.heroTag = _kYaruTitleBarHeroTag,
   });
 
   /// The primary title widget.
@@ -191,9 +188,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         return child;
       }
       return Hero(
-        tag: heroTag is _YaruTitleBarHeroTag
-            ? _YaruTitleBarHeroTag.id(this)
-            : heroTag!,
+        tag: heroTag!,
         child: child,
       );
     }
@@ -310,7 +305,7 @@ class YaruWindowTitleBar extends StatelessWidget
     this.onMinimize = YaruWindow.minimize,
     this.onRestore = YaruWindow.restore,
     this.onShowMenu = YaruWindow.showMenu,
-    this.heroTag,
+    this.heroTag = _kYaruTitleBarHeroTag,
   });
 
   /// The primary title widget.
@@ -468,7 +463,7 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.onMinimize = null,
     super.onRestore = null,
     super.onShowMenu = YaruWindow.showMenu,
-    super.heroTag,
+    super.heroTag = _kYaruTitleBarHeroTag,
   });
 
   static const defaultShape = RoundedRectangleBorder(
