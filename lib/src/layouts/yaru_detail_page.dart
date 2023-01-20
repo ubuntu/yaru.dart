@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class _YaruDetailPageDefaultHeroTag {
-  const _YaruDetailPageDefaultHeroTag();
-  static Object id(Object? id) => '<_YaruDetailPageDefaultHeroTag $id>';
+class _YaruDetailPageHeroTag {
+  const _YaruDetailPageHeroTag();
+  static Object id(Object? id) => '<_YaruDetailPageHeroTag $id>';
 }
 
 /// Provides the recommended layout for [YaruMasterDetailPage.pageBuilder].
@@ -24,7 +24,7 @@ class YaruDetailPage extends StatelessWidget {
     this.backgroundColor,
     this.extendBody = false,
     this.extendBodyBehindAppBar = false,
-    this.heroTag = const _YaruDetailPageDefaultHeroTag(),
+    this.heroTag = const _YaruDetailPageHeroTag(),
   });
 
   /// See [Scaffold.extendBody].
@@ -75,8 +75,8 @@ class YaruDetailPage extends StatelessWidget {
     return PreferredSize(
       preferredSize: appBar!.preferredSize,
       child: Hero(
-        tag: heroTag is _YaruDetailPageDefaultHeroTag
-            ? _YaruDetailPageDefaultHeroTag.id(appBar)
+        tag: heroTag is _YaruDetailPageHeroTag
+            ? _YaruDetailPageHeroTag.id(appBar)
             : heroTag!,
         child: appBar!,
       ),
