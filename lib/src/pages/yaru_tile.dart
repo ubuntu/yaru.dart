@@ -50,10 +50,8 @@ class YaruTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTextStyle(
-      style: TextStyle(
-        color: _textColor(context),
-      ),
+    return _maybeBuildDisabledTextStyle(
+      context: context,
       child: Padding(
         padding: padding,
         child: Row(
@@ -89,8 +87,20 @@ class YaruTile extends StatelessWidget {
     );
   }
 
-  Color? _textColor(BuildContext context) {
-    return enabled ? null : Theme.of(context).disabledColor;
+  Widget _maybeBuildDisabledTextStyle({
+    required BuildContext context,
+    required Widget child,
+  }) {
+    if (enabled) {
+      return child;
+    }
+
+    return DefaultTextStyle(
+      style: TextStyle(
+        color: Theme.of(context).disabledColor,
+      ),
+      child: child,
+    );
   }
 
   TextStyle _titleTextStyle(BuildContext context) {
