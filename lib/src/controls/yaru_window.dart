@@ -184,7 +184,11 @@ class YaruWindowListener implements WindowListener {
   @override
   void onWindowMoved() {}
   @override
-  void onWindowEvent(String eventName) {}
+  void onWindowEvent(String eventName) {
+    if (eventName == 'state') {
+      _updateState();
+    }
+  }
 }
 
 @immutable
