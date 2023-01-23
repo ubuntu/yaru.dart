@@ -57,6 +57,10 @@ class YaruWindow {
       await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
     }
   }
+
+  static Future<void> updateState(BuildContext context) {
+    return YaruWindow.of(context).updateState();
+  }
 }
 
 class YaruWindowInstance {
@@ -74,6 +78,7 @@ class YaruWindowInstance {
   Future<void> minimize() => wm.minimize().catchError((_) {});
   Future<void> restore() => wm.unmaximize().catchError((_) {});
   Future<void> showMenu() => wm.popUpWindowMenu().catchError((_) {});
+  Future<void> updateState() => _listener._updateState();
 
   YaruWindowState? get state => _listener.state;
   Stream<YaruWindowState> states() => _listener.states();

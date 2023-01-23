@@ -388,6 +388,17 @@ class YaruWindowTitleBar extends StatelessWidget
 
   static Future<void> ensureInitialized() => YaruWindow.ensureInitialized();
 
+  /// Updates the title bar to reflect the native window state and attributes.
+  ///
+  /// Even though [YaruWindowTitleBar] listens to native window state changes
+  /// (minimized, maximized, fullscreen), it is not possible to detect changes
+  /// to native window attributes (closable, minimizable, maximizable) after the
+  /// window has been created. This method can be called when changing window
+  /// attributes at runtime.
+  static Future<void> updateState(BuildContext context) {
+    return YaruWindow.updateState(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = YaruTitleBarTheme.of(context);
