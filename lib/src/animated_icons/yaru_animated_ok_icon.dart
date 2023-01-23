@@ -74,23 +74,23 @@ class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      child: SizedBox.square(
-        dimension: widget.size,
-        child: AnimatedBuilder(
-          animation: progress,
-          builder: (context, child) {
-            return RepaintBoundary(
-              child: CustomPaint(
+    return RepaintBoundary(
+      child: ClipRect(
+        child: SizedBox.square(
+          dimension: widget.size,
+          child: AnimatedBuilder(
+            animation: progress,
+            builder: (context, child) {
+              return CustomPaint(
                 painter: _YaruAnimatedOkIconPainter(
                   widget.size,
                   widget.filled,
                   widget.color ?? Theme.of(context).colorScheme.onSurface,
                   progress.value,
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
