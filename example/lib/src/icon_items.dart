@@ -41,3 +41,13 @@ final List<IconItem> animatedIconItems = [
     ),
   ),
 ];
+
+final List<IconItem> widgetIconItems = [
+  IconItem(
+    name: 'Placeholder',
+    usage: 'YaruPlaceholderIcon()',
+    iconBuilder: (context, iconSize) => YaruPlaceholderIcon(
+      size: Size.square(iconSize),
+    ),
+  ),
+];

@@ -79,7 +79,7 @@ class Example extends StatelessWidget {
             : null,
       ),
       body: YaruCompactLayout(
-        length: 2,
+        length: 3,
         itemBuilder: (context, index, selected) {
           const style = YaruNavigationRailStyle.labelled;
 
@@ -98,6 +98,13 @@ class Example extends StatelessWidget {
                 tooltip: 'Animated icons',
                 style: style,
               );
+            case 2:
+              return const YaruNavigationRailItem(
+                icon: Icon(YaruIcons.rule_and_pen),
+                label: Text('Widget icons'),
+                tooltip: 'Widget icons',
+                style: style,
+              );
             default:
               throw 'Invalid index';
           }
@@ -108,6 +115,8 @@ class Example extends StatelessWidget {
               return const _IconView();
             case 1:
               return const _AnimatedIconView();
+            case 2:
+              return const _WidgetIconView();
             default:
               throw 'Invalid index';
           }
@@ -151,5 +160,23 @@ class _AnimatedIconView extends StatelessWidget {
     return iconViewProvider.gridView
         ? IconGrid(iconItems: localAnimatedIconItems)
         : IconTable(iconItems: localAnimatedIconItems);
+  }
+}
+
+class _WidgetIconView extends StatelessWidget {
+  const _WidgetIconView();
+
+  @override
+  Widget build(BuildContext context) {
+    final iconViewProvider = Provider.of<IconViewProvider>(context);
+    final searchProvider = Provider.of<SearchProvider>(context);
+
+    final localWidgetIconItems = searchProvider.filteredWidgetIconItems != null
+        ? searchProvider.filteredWidgetIconItems!
+        : widgetIconItems;
+
+    return iconViewProvider.gridView
+        ? IconGrid(iconItems: localWidgetIconItems)
+        : IconTable(iconItems: localWidgetIconItems);
   }
 }

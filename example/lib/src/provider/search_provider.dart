@@ -6,6 +6,7 @@ import '../icon_items.dart';
 class SearchProvider extends ChangeNotifier {
   List<IconItem>? filteredIconItems;
   List<IconItem>? filteredAnimatedIconItems;
+  List<IconItem>? filteredWidgetIconItems;
 
   final textEntryController = TextEditingController();
   final textEntryFocusNode = FocusNode();
@@ -24,6 +25,7 @@ class SearchProvider extends ChangeNotifier {
   void _escape() {
     filteredIconItems = null;
     filteredAnimatedIconItems = null;
+    filteredWidgetIconItems = null;
     textEntryController.clear();
     textEntryFocusNode.unfocus();
   }
@@ -51,6 +53,7 @@ class SearchProvider extends ChangeNotifier {
     if (value == '') {
       filteredIconItems = null;
       filteredAnimatedIconItems = null;
+      filteredWidgetIconItems = null;
       textEntryController.clear();
 
       notifyListeners();
@@ -69,6 +72,13 @@ class SearchProvider extends ChangeNotifier {
         return animatedIconItem.name
             .toLowerCase()
             .contains(value.toLowerCase());
+      }),
+    );
+
+    filteredWidgetIconItems = [];
+    filteredWidgetIconItems!.addAll(
+      widgetIconItems.where((widgetIconItem) {
+        return widgetIconItem.name.toLowerCase().contains(value.toLowerCase());
       }),
     );
 
