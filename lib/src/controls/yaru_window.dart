@@ -38,6 +38,22 @@ class YaruWindow {
     return YaruWindow.of(context).showMenu();
   }
 
+  static Future<void> setTitle(BuildContext context, String title) {
+    return YaruWindow.of(context).setTitle(title);
+  }
+
+  static Future<void> setMinimizable(BuildContext context, bool minimizable) {
+    return YaruWindow.of(context).setMinimizable(minimizable);
+  }
+
+  static Future<void> setMaximizable(BuildContext context, bool maximizable) {
+    return YaruWindow.of(context).setMaximizable(maximizable);
+  }
+
+  static Future<void> setClosable(BuildContext context, bool closable) {
+    return YaruWindow.of(context).setClosable(closable);
+  }
+
   static YaruWindowState? state(BuildContext context) {
     return YaruWindow.of(context).state;
   }
@@ -57,10 +73,6 @@ class YaruWindow {
       await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
     }
   }
-
-  static Future<void> updateState(BuildContext context) {
-    return YaruWindow.of(context).updateState();
-  }
 }
 
 class YaruWindowInstance {
@@ -78,7 +90,23 @@ class YaruWindowInstance {
   Future<void> minimize() => wm.minimize().catchError((_) {});
   Future<void> restore() => wm.unmaximize().catchError((_) {});
   Future<void> showMenu() => wm.popUpWindowMenu().catchError((_) {});
-  Future<void> updateState() => _listener._updateState();
+
+  Future<void> setTitle(String title) => wm
+      .setTitle(title)
+      .catchError((_) {})
+      .then((_) => _listener._updateState());
+  Future<void> setMinimizable(bool minimizable) => wm
+      .setMinimizable(minimizable)
+      .catchError((_) {})
+      .then((_) => _listener._updateState());
+  Future<void> setMaximizable(bool maximizable) => wm
+      .setMaximizable(maximizable)
+      .catchError((_) {})
+      .then((_) => _listener._updateState());
+  Future<void> setClosable(bool closable) => wm
+      .setClosable(closable)
+      .catchError((_) {})
+      .then((_) => _listener._updateState());
 
   YaruWindowState? get state => _listener.state;
   Stream<YaruWindowState> states() => _listener.states();

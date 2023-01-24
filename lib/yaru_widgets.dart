@@ -25,6 +25,7 @@ export 'src/controls/yaru_title_bar.dart';
 export 'src/controls/yaru_title_bar_theme.dart';
 export 'src/controls/yaru_toggle_button.dart';
 export 'src/controls/yaru_toggle_button_theme.dart';
+export 'src/controls/yaru_window.dart' show YaruWindow;
 export 'src/controls/yaru_window_control.dart';
 // Extensions
 export 'src/extensions/border_radius_extension.dart';
