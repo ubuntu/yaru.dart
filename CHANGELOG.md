@@ -1,3 +1,12 @@
+# 1.0.2
+
+* Add RepaintBoundary around animated icons
+* Create placeholder icon
+* Add placeholder icon (static icon font)
+* Move RepaintBoundary before ClipRect
+* Realign placeholder icon with viexBox
+* Add a few semantic icon names
+
 # 1.0.1
 
 * Add Ubuntu CoF icon without baseplates
