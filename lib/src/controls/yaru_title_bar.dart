@@ -193,78 +193,80 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    return YaruTitleBarGestureDetector(
-      onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
-      onDoubleTap: () => isMaximizable == true
-          ? onMaximize?.call(context)
-          : isRestorable == true
-              ? onRestore?.call(context)
-              : null,
-      onSecondaryTap: onShowMenu != null ? () => onShowMenu!(context) : null,
-      child: AppBar(
-        elevation: titleBarTheme.elevation,
-        automaticallyImplyLeading: false,
-        leading: backdropEffect(leading),
-        title: backdropEffect(title),
-        centerTitle: centerTitle ?? titleBarTheme.centerTitle,
-        titleSpacing: titleSpacing ?? titleBarTheme.titleSpacing,
-        toolbarHeight: kYaruTitleBarHeight,
-        foregroundColor: foregroundColor,
-        backgroundColor: backgroundColor,
-        titleTextStyle: titleTextStyle,
-        shape: shape,
-        actions: [
-          maybeHero(
-            child: backdropEffect(
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ...?actions,
-                  if (style == YaruTitleBarStyle.normal &&
-                      (isMinimizable == true ||
-                          isRestorable == true ||
-                          isMaximizable == true ||
-                          isClosable == true))
-                    Padding(
-                      padding: buttonPadding,
-                      child: Row(
-                        children: [
-                          if (isMinimizable == true)
-                            YaruWindowControl(
-                              type: YaruWindowControlType.minimize,
-                              onTap: onMinimize != null
-                                  ? () => onMinimize!(context)
-                                  : null,
-                            ),
-                          if (isRestorable == true)
-                            YaruWindowControl(
-                              type: YaruWindowControlType.restore,
-                              onTap: onRestore != null
-                                  ? () => onRestore!(context)
-                                  : null,
-                            ),
-                          if (isMaximizable == true)
-                            YaruWindowControl(
-                              type: YaruWindowControlType.maximize,
-                              onTap: onMaximize != null
-                                  ? () => onMaximize!(context)
-                                  : null,
-                            ),
-                          if (isClosable == true)
-                            YaruWindowControl(
-                              type: YaruWindowControlType.close,
-                              onTap: onClose != null
-                                  ? () => onClose!(context)
-                                  : null,
-                            ),
-                        ].withSpacing(buttonSpacing),
+    return TextFieldTapRegion(
+      child: YaruTitleBarGestureDetector(
+        onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
+        onDoubleTap: () => isMaximizable == true
+            ? onMaximize?.call(context)
+            : isRestorable == true
+                ? onRestore?.call(context)
+                : null,
+        onSecondaryTap: onShowMenu != null ? () => onShowMenu!(context) : null,
+        child: AppBar(
+          elevation: titleBarTheme.elevation,
+          automaticallyImplyLeading: false,
+          leading: backdropEffect(leading),
+          title: backdropEffect(title),
+          centerTitle: centerTitle ?? titleBarTheme.centerTitle,
+          titleSpacing: titleSpacing ?? titleBarTheme.titleSpacing,
+          toolbarHeight: kYaruTitleBarHeight,
+          foregroundColor: foregroundColor,
+          backgroundColor: backgroundColor,
+          titleTextStyle: titleTextStyle,
+          shape: shape,
+          actions: [
+            maybeHero(
+              child: backdropEffect(
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ...?actions,
+                    if (style == YaruTitleBarStyle.normal &&
+                        (isMinimizable == true ||
+                            isRestorable == true ||
+                            isMaximizable == true ||
+                            isClosable == true))
+                      Padding(
+                        padding: buttonPadding,
+                        child: Row(
+                          children: [
+                            if (isMinimizable == true)
+                              YaruWindowControl(
+                                type: YaruWindowControlType.minimize,
+                                onTap: onMinimize != null
+                                    ? () => onMinimize!(context)
+                                    : null,
+                              ),
+                            if (isRestorable == true)
+                              YaruWindowControl(
+                                type: YaruWindowControlType.restore,
+                                onTap: onRestore != null
+                                    ? () => onRestore!(context)
+                                    : null,
+                              ),
+                            if (isMaximizable == true)
+                              YaruWindowControl(
+                                type: YaruWindowControlType.maximize,
+                                onTap: onMaximize != null
+                                    ? () => onMaximize!(context)
+                                    : null,
+                              ),
+                            if (isClosable == true)
+                              YaruWindowControl(
+                                type: YaruWindowControlType.close,
+                                onTap: onClose != null
+                                    ? () => onClose!(context)
+                                    : null,
+                              ),
+                          ].withSpacing(buttonSpacing),
+                        ),
                       ),
-                    ),
-                ],
-              ),
-            )!,
-          ),
-        ],
+                  ],
+                ),
+              )!,
+            ),
+          ],
+        ),
       ),
     );
   }
