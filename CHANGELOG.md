@@ -1,5 +1,16 @@
 # Changelog
 
+# 2.0.0
+
+* Fix YaruTile wrong text color by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/560
+* YaruWindowTitleBar: allow notifying window state changes by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/561
+* Expose YaruWindow API by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/562
+* Update goldens with Flutter 3.7.0 & latest yaru by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/564
+* CI: no need to run tests when publishing to GH pages by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/563
+* Fix YaruNavigationPageThemeData class name by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/565
+* Prevent YaruTitleBar from reseting input focus by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/566
+* YaruBorderRadiusExtension by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/567
+
 # 2.0.0-beta-5
 
 * Landscape: remove separator fix for web, not needed anymore by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/529
