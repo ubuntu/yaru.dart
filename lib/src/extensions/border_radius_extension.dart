@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-extension BorderRadiusExtension on BorderRadius {
+extension YaruBorderRadiusExtension on BorderRadius {
   /// Compute an inner border radius from a given padding
   BorderRadius inner(EdgeInsets padding) {
     final topLeftX = topLeft.x - padding.left / 2;
