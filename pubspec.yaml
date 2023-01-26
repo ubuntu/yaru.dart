@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   window_manager: ^0.3.0
-  yaru: ^0.4.3
+  yaru: ^0.5.0
   yaru_colors: ^0.1.2
   yaru_icons: ^1.0.0
 
