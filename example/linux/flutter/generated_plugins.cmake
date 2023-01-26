@@ -3,10 +3,10 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  gtk
   handy_window
   screen_retriever
   window_manager
-  yaru
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
