@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
 @immutable
-class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
-    with Diagnosticable {
+class YaruNavigationPageThemeData
+    extends ThemeExtension<YaruNavigationPageThemeData> with Diagnosticable {
   /// Creates a theme that can be used with [YaruNavigationPage].
-  const NavigationPageThemeData({
+  const YaruNavigationPageThemeData({
     this.railPadding,
     this.pageTransitions,
   });
 
-  factory NavigationPageThemeData.fallback() {
-    return const NavigationPageThemeData(
+  factory YaruNavigationPageThemeData.fallback() {
+    return const YaruNavigationPageThemeData(
       pageTransitions: YaruPageTransitionsTheme.vertical,
     );
   }
@@ -26,23 +26,23 @@ class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
   /// Creates a copy of this object but with the given fields replaced with the
   /// new values.
   @override
-  NavigationPageThemeData copyWith({
+  YaruNavigationPageThemeData copyWith({
     EdgeInsetsGeometry? railPadding,
     PageTransitionsTheme? pageTransitions,
   }) {
-    return NavigationPageThemeData(
+    return YaruNavigationPageThemeData(
       railPadding: railPadding ?? this.railPadding,
       pageTransitions: pageTransitions ?? this.pageTransitions,
     );
   }
 
   @override
-  ThemeExtension<NavigationPageThemeData> lerp(
-    ThemeExtension<NavigationPageThemeData>? other,
+  ThemeExtension<YaruNavigationPageThemeData> lerp(
+    ThemeExtension<YaruNavigationPageThemeData>? other,
     double t,
   ) {
-    final o = other as NavigationPageThemeData?;
-    return NavigationPageThemeData(
+    final o = other as YaruNavigationPageThemeData?;
+    return YaruNavigationPageThemeData(
       railPadding: EdgeInsetsGeometry.lerp(railPadding, o?.railPadding, t),
       pageTransitions: t < 0.5 ? pageTransitions : o?.pageTransitions,
     );
@@ -58,7 +58,7 @@ class NavigationPageThemeData extends ThemeExtension<NavigationPageThemeData>
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is NavigationPageThemeData &&
+    return other is YaruNavigationPageThemeData &&
         other.railPadding == railPadding &&
         other.pageTransitions == pageTransitions;
   }
@@ -79,14 +79,14 @@ class YaruNavigationPageTheme extends InheritedTheme {
     required super.child,
   });
 
-  final NavigationPageThemeData data;
+  final YaruNavigationPageThemeData data;
 
-  static NavigationPageThemeData of(BuildContext context) {
+  static YaruNavigationPageThemeData of(BuildContext context) {
     final theme =
         context.dependOnInheritedWidgetOfExactType<YaruNavigationPageTheme>();
     return theme?.data ??
-        Theme.of(context).extension<NavigationPageThemeData>() ??
-        NavigationPageThemeData.fallback();
+        Theme.of(context).extension<YaruNavigationPageThemeData>() ??
+        YaruNavigationPageThemeData.fallback();
   }
 
   @override
