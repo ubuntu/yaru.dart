@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 /// Defines the look of a [YaruNavigationRailItem]
 enum YaruNavigationRailStyle {
-  /// Will only show icons
+  /// Will only show icons.
+  /// Default width: 60
   compact,
 
-  /// Will show both icons and labels vertically
+  /// Will show both icons and labels vertically.
+  /// Default width: 100
   labelled,
 
-  /// Will show both icons and labels horizontally
+  /// Will show both icons and labels horizontally.
+  /// Default width: 250
   labelledExtended,
 }
 
@@ -25,6 +28,7 @@ class YaruNavigationRailItem extends StatefulWidget {
     this.tooltip,
     this.onTap,
     required this.style,
+    this.width,
   });
 
   /// Whether the related page item is selected in the rail.
@@ -46,6 +50,10 @@ class YaruNavigationRailItem extends StatefulWidget {
 
   /// Style of this tile, see [YaruNavigationRailStyle].
   final YaruNavigationRailStyle style;
+
+  /// Defines the width of this tile.
+  /// If null, it will use default values, see [YaruNavigationRailStyle].
+  final double? width;
 
   @override
   State<YaruNavigationRailItem> createState() => _YaruNavigationRailItemState();
@@ -113,6 +121,10 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
   }
 
   double get _width {
+    if (widget.width != null) {
+      return widget.width!;
+    }
+
     switch (widget.style) {
       case YaruNavigationRailStyle.labelledExtended:
         return 250;
