@@ -171,15 +171,13 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
           return;
         }
 
-        setState(() {
-          final dotSize = _kSwitchSize.height * _kSwitchDotSizeFactor;
-          final dotGap = (_kSwitchSize.height - dotSize) / 2;
-          final dragGap = dotGap + dotSize / 2;
-          final innerWidth = _kSwitchSize.width - dragGap * 2;
+        final dotSize = _kSwitchSize.height * _kSwitchDotSizeFactor;
+        final dotGap = (_kSwitchSize.height - dotSize) / 2;
+        final dragGap = dotGap + dotSize / 2;
+        final innerWidth = _kSwitchSize.width - dragGap * 2;
 
-          positionController.value =
-              (details.localPosition.dx - dragGap) / innerWidth;
-        });
+        positionController.value =
+            (details.localPosition.dx - dragGap) / innerWidth;
       },
       onPanEnd: (details) {
         if (!isDragging) {
