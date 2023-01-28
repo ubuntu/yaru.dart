@@ -114,6 +114,8 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
   @override
   Size get togglableSize => _kSwitchSize;
 
+  bool isDragging = false;
+
   @override
   void handleTap([Intent? _]) {
     if (!widget.interactive) {
@@ -131,11 +133,75 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
     const uncheckedDotColor = Colors.white;
     final disabledDotColor = colorScheme.onSurface.withOpacity(.4);
 
-    return buildToggleable(
-      _YaruSwitchPainter()
-        ..uncheckedSwitchColor = uncheckedSwitchColor
-        ..uncheckedDotColor = uncheckedDotColor
-        ..disabledDotColor = disabledDotColor,
+    return _maybeBuildGestureDetector(
+      buildToggleable(
+        _YaruSwitchPainter()
+          ..uncheckedSwitchColor = uncheckedSwitchColor
+          ..uncheckedDotColor = uncheckedDotColor
+          ..disabledDotColor = disabledDotColor,
+      ),
+    );
+  }
+
+  Widget _maybeBuildGestureDetector(Widget child) {
+    if (!widget.interactive) {
+      return child;
+    }
+
+    return GestureDetector(
+      onPanStart: (details) {
+        final dotSize = _kSwitchSize.height * _kSwitchDotSizeFactor;
+        final dotGap = (_kSwitchSize.height - dotSize) / 2;
+
+        final minDragX =
+            widget.value ? _kSwitchSize.width - (dotGap + dotSize) : dotGap;
+        final maxDragX =
+            widget.value ? _kSwitchSize.width - dotGap : dotGap + dotSize;
+
+        if (details.localPosition.dx >= minDragX &&
+            details.localPosition.dx <= maxDragX) {
+          setState(() {
+            isDragging = true;
+            handleActiveChange(true);
+          });
+        }
+      },
+      onPanUpdate: (details) {
+        if (!isDragging) {
+          return;
+        }
+
+        final dotSize = _kSwitchSize.height * _kSwitchDotSizeFactor;
+        final dotGap = (_kSwitchSize.height - dotSize) / 2;
+        final dragGap = dotGap + dotSize / 2;
+        final innerWidth = _kSwitchSize.width - dragGap * 2;
+
+        positionController.value =
+            (details.localPosition.dx - dragGap) / innerWidth;
+      },
+      onPanEnd: (details) {
+        if (!isDragging) {
+          return;
+        }
+
+        setState(() {
+          isDragging = false;
+          handleActiveChange(false);
+
+          if (positionController.value < .5) {
+            if (widget.value != false) {
+              widget.onChanged!(false);
+            }
+            positionController.animateTo(0);
+          } else {
+            if (widget.value != true) {
+              widget.onChanged!(true);
+            }
+            positionController.animateTo(1);
+          }
+        });
+      },
+      child: child,
     );
   }
 }
