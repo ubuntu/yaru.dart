@@ -69,19 +69,19 @@ abstract class YaruTogglable<T> extends StatefulWidget {
 
 abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     with TickerProviderStateMixin {
-  bool _hover = false;
-  bool _focus = false;
-  bool _active = false;
-  bool? _oldChecked;
+  bool hover = false;
+  bool focus = false;
+  bool active = false;
+  bool? oldChecked;
 
-  late CurvedAnimation _position;
-  late AnimationController _positionController;
+  late CurvedAnimation position;
+  late AnimationController positionController;
 
-  late CurvedAnimation _sizePosition;
-  late AnimationController _sizeController;
+  late CurvedAnimation sizePosition;
+  late AnimationController sizeController;
 
-  late CurvedAnimation _indicatorPosition;
-  late AnimationController _indicatorController;
+  late CurvedAnimation indicatorPosition;
+  late AnimationController indicatorController;
 
   late final Map<Type, Action<Intent>> _actionMap = <Type, Action<Intent>>{
     ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: handleTap),
@@ -94,35 +94,35 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   void initState() {
     super.initState();
 
-    _oldChecked = widget.checked;
+    oldChecked = widget.checked;
 
-    _positionController = AnimationController(
+    positionController = AnimationController(
       duration: _kTogglableAnimationDuration,
       value: widget.checked == false ? 0.0 : 1.0,
       vsync: this,
     );
-    _position = CurvedAnimation(
-      parent: _positionController,
+    position = CurvedAnimation(
+      parent: positionController,
       curve: Curves.easeInQuad,
       reverseCurve: Curves.easeOutQuad,
     );
 
-    _sizeController = AnimationController(
+    sizeController = AnimationController(
       duration: _kTogglableSizeAnimationDuration,
       vsync: this,
     );
-    _sizePosition = CurvedAnimation(
-      parent: _sizeController,
+    sizePosition = CurvedAnimation(
+      parent: sizeController,
       curve: Curves.easeIn,
       reverseCurve: Curves.easeOut,
     );
 
-    _indicatorController = AnimationController(
+    indicatorController = AnimationController(
       duration: _kIndicatorAnimationDuration,
       vsync: this,
     );
-    _indicatorPosition = CurvedAnimation(
-      parent: _indicatorController,
+    indicatorPosition = CurvedAnimation(
+      parent: indicatorController,
       curve: Curves.fastOutSlowIn,
     );
   }
@@ -132,79 +132,79 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.checked != widget.checked) {
-      _oldChecked = oldWidget.checked;
+      oldChecked = oldWidget.checked;
 
       if (widget.tristate) {
         if (widget.checked == null) {
-          _positionController.value = 0.0;
+          positionController.value = 0.0;
         }
         if (widget.checked ?? true) {
-          _positionController.forward();
+          positionController.forward();
         } else {
-          _positionController.reverse();
+          positionController.reverse();
         }
       } else {
         if (widget.checked ?? false) {
-          _positionController.forward();
+          positionController.forward();
         } else {
-          _positionController.reverse();
+          positionController.reverse();
         }
       }
 
-      _sizeController.forward().then((_) {
-        _sizeController.reverse();
+      sizeController.forward().then((_) {
+        sizeController.reverse();
       });
     }
   }
 
   @override
   void dispose() {
-    _positionController.dispose();
-    _indicatorController.dispose();
-    _sizeController.dispose();
+    positionController.dispose();
+    indicatorController.dispose();
+    sizeController.dispose();
 
     super.dispose();
   }
 
-  void _handleFocusChange(bool value) {
-    if (_focus == value) {
+  void handleFocusChange(bool value) {
+    if (focus == value) {
       return;
     }
 
-    setState(() => _focus = value);
+    setState(() => focus = value);
 
-    if (_focus) {
-      _indicatorController.forward();
+    if (focus) {
+      indicatorController.forward();
     } else {
-      _indicatorController.reverse();
+      indicatorController.reverse();
     }
   }
 
-  void _handleHoverChange(bool value) {
-    if (_hover == value) {
+  void handleHoverChange(bool value) {
+    if (hover == value) {
       return;
     }
 
-    setState(() => _hover = value);
+    setState(() => hover = value);
 
-    if (_hover) {
-      _indicatorController.forward();
+    if (hover) {
+      indicatorController.forward();
     } else {
-      _indicatorController.reverse();
+      indicatorController.reverse();
     }
   }
 
-  void _handleActiveChange(bool value) {
-    if (_active == value) {
+  void handleActiveChange(bool value) {
+    if (active == value) {
       return;
     }
 
-    setState(() => _active = value);
+    setState(() => active = value);
 
-    if (_active) {
-      _sizeController.forward();
+    if (active) {
+      sizeController.forward();
     } else {
-      _sizeController.reverse();
+      sizeController.reverse();
     }
   }
 
@@ -224,17 +224,17 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       enabled: widget.interactive,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
-      onShowFocusHighlight: _handleFocusChange,
-      onShowHoverHighlight: _handleHoverChange,
+      onShowFocusHighlight: handleFocusChange,
+      onShowHoverHighlight: handleHoverChange,
       mouseCursor: widget.interactive
           ? SystemMouseCursors.click
           : SystemMouseCursors.basic,
       child: GestureDetector(
         excludeFromSemantics: !widget.interactive,
-        onTapDown: (_) => _handleActiveChange(widget.interactive),
+        onTapDown: (_) => handleActiveChange(widget.interactive),
         onTap: handleTap,
-        onTapUp: (_) => _handleActiveChange(false),
-        onTapCancel: () => _handleActiveChange(false),
+        onTapUp: (_) => handleActiveChange(false),
+        onTapCancel: () => handleActiveChange(false),
         child: AbsorbPointer(
           child: child,
         ),
@@ -274,14 +274,14 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
                   size: togglableSize,
                   painter: painter
                     ..interactive = widget.interactive
-                    ..hover = _hover
-                    ..focus = _focus
-                    ..active = _active
+                    ..hover = hover
+                    ..focus = focus
+                    ..active = active
                     ..checked = widget.checked
-                    ..oldChecked = _oldChecked
-                    ..position = _position
-                    ..sizePosition = _sizePosition
-                    ..indicatorPosition = _indicatorPosition
+                    ..oldChecked = oldChecked
+                    ..position = position
+                    ..sizePosition = sizePosition
+                    ..indicatorPosition = indicatorPosition
                     ..uncheckedColor = uncheckedColor
                     ..uncheckedBorderColor = uncheckedBorderColor
                     ..checkedColor = checkedColor
