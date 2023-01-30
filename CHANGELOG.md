@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.0.1
+
+* Fix: YaruBanners bg color with upgrading yaru to 0.5.1 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/575 
+
 # 2.0.0
 
 * Fix YaruTile wrong text color by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/560
