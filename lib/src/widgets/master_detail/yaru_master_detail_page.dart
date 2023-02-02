@@ -16,6 +16,10 @@ typedef YaruMasterDetailBuilder = Widget Function(
   bool selected,
 );
 
+typedef YaruAppBarBuilder = PreferredSizeWidget? Function(
+  BuildContext context,
+);
+
 /// A responsive master-detail page.
 ///
 /// [YaruMasterDetailPage] automatically switches between portrait and landscape
@@ -56,6 +60,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.layoutDelegate =
         const YaruMasterFixedPaneDelegate(paneWidth: _kDefaultPaneWidth),
     this.appBar,
+    this.appBarBuilder,
     this.bottomBar,
     this.initialIndex,
     this.onSelected,
@@ -82,7 +87,19 @@ class YaruMasterDetailPage extends StatefulWidget {
   final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
 
   /// An optional custom AppBar for the left pane.
+  ///
+  /// See also:
+  ///  * [YaruMasterDetailPage.appBarBuilder]
   final PreferredSizeWidget? appBar;
+
+  /// An optional custom AppBar builder for the master pane.
+  ///
+  /// The builder is called whenever the master-detail layout changes between
+  /// landscape and portrait modes.
+  ///
+  /// See also:
+  ///  * [YaruMasterDetailPage.appBar]
+  final YaruAppBarBuilder? appBarBuilder;
 
   /// An optional bottom bar for the left pane.
   final Widget? bottomBar;
@@ -95,6 +112,14 @@ class YaruMasterDetailPage extends StatefulWidget {
 
   /// An optional controller that can be used to navigate to a specific index.
   final YaruPageController? controller;
+
+  /// Returns the orientation of the [YaruMasterDetailPage] that most tightly
+  /// encloses the given context.
+  static Orientation orientationOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_YaruMasterDetailLayoutScope>()!
+        .orientation;
+  }
 
   @override
   _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
@@ -134,35 +159,75 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final breakpoint = YaruMasterDetailTheme.of(context).breakpoint ??
-        YaruMasterDetailThemeData.fallback().breakpoint!;
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth < breakpoint) {
-            return YaruPortraitLayout(
-              tileBuilder: widget.tileBuilder,
-              pageBuilder: widget.pageBuilder,
-              onSelected: widget.onSelected,
-              appBar: widget.appBar,
-              bottomBar: widget.bottomBar,
-              controller: _controller,
-            );
-          } else {
-            return YaruLandscapeLayout(
-              tileBuilder: widget.tileBuilder,
-              pageBuilder: widget.pageBuilder,
-              onSelected: widget.onSelected,
-              layoutDelegate: widget.layoutDelegate,
-              previousPaneWidth: _previousPaneWidth,
-              onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
-              appBar: widget.appBar,
-              bottomBar: widget.bottomBar,
-              controller: _controller,
-            );
+      body: _YaruMasterDetailLayoutBuilder(
+        builder: (context, orientation) {
+          switch (orientation) {
+            case Orientation.portrait:
+              return YaruPortraitLayout(
+                tileBuilder: widget.tileBuilder,
+                pageBuilder: widget.pageBuilder,
+                onSelected: widget.onSelected,
+                appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
+                bottomBar: widget.bottomBar,
+                controller: _controller,
+              );
+            case Orientation.landscape:
+              return YaruLandscapeLayout(
+                tileBuilder: widget.tileBuilder,
+                pageBuilder: widget.pageBuilder,
+                onSelected: widget.onSelected,
+                layoutDelegate: widget.layoutDelegate,
+                previousPaneWidth: _previousPaneWidth,
+                onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
+                appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
+                bottomBar: widget.bottomBar,
+                controller: _controller,
+              );
           }
         },
       ),
     );
+  }
+}
+
+class _YaruMasterDetailLayoutBuilder extends StatelessWidget {
+  const _YaruMasterDetailLayoutBuilder({
+    required this.builder,
+  });
+
+  final OrientationWidgetBuilder builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final breakpoint = YaruMasterDetailTheme.of(context).breakpoint ??
+        YaruMasterDetailThemeData.fallback().breakpoint!;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final orientation = constraints.maxWidth < breakpoint
+            ? Orientation.portrait
+            : Orientation.landscape;
+        return _YaruMasterDetailLayoutScope(
+          orientation: orientation,
+          builder: builder,
+        );
+      },
+    );
+  }
+}
+
+class _YaruMasterDetailLayoutScope extends InheritedWidget {
+  _YaruMasterDetailLayoutScope({
+    required this.orientation,
+    required OrientationWidgetBuilder builder,
+  }) : super(
+            child:
+                Builder(builder: (context) => builder(context, orientation)));
+
+  final Orientation orientation;
+
+  @override
+  bool updateShouldNotify(_YaruMasterDetailLayoutScope oldWidget) {
+    return orientation != oldWidget.orientation;
   }
 }
