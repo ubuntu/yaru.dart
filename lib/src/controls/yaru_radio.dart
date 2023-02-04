@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'yaru_checkbox.dart';
@@ -134,6 +135,26 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
   /// {@macro flutter.widgets.Focus.autofocus}
   @override
   final bool autofocus;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      FlagProperty(
+        'value',
+        value: checked,
+        ifTrue: 'selected',
+        ifFalse: 'unselected',
+      ),
+    );
+    properties.add(
+      ObjectFlagProperty<ValueChanged<T?>>(
+        'onChanged',
+        onChanged,
+        ifNull: 'disabled',
+      ),
+    );
+  }
 
   @override
   YaruTogglableState<YaruRadio<T?>> createState() {
