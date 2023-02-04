@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'yaru_check_button.dart';
@@ -124,6 +125,30 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
   /// {@macro flutter.widgets.Focus.autofocus}
   @override
   final bool autofocus;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<bool?>(
+        'value',
+        checked,
+        description: checked == null
+            ? 'mixed'
+            : checked == true
+                ? 'checked'
+                : 'unchecked',
+        showName: false,
+      ),
+    );
+    properties.add(
+      ObjectFlagProperty<ValueChanged<bool?>>(
+        'onChanged',
+        onChanged,
+        ifNull: 'disabled',
+      ),
+    );
+  }
 
   @override
   YaruTogglableState<YaruCheckbox> createState() {

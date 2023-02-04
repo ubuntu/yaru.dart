@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'yaru_checkbox.dart';
@@ -100,6 +101,26 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   /// {@macro flutter.widgets.Focus.autofocus}
   @override
   final bool autofocus;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      FlagProperty(
+        'value',
+        value: checked,
+        ifTrue: 'on',
+        ifFalse: 'off',
+      ),
+    );
+    properties.add(
+      ObjectFlagProperty<ValueChanged<bool>>(
+        'onChanged',
+        onChanged,
+        ifNull: 'disabled',
+      ),
+    );
+  }
 
   @override
   YaruTogglableState<YaruSwitch> createState() {
