@@ -45,6 +45,7 @@ class YaruSection extends StatelessWidget {
       padding: padding,
       margin: margin,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (headline != null)
@@ -55,7 +56,7 @@ class YaruSection extends StatelessWidget {
                 child: headline!,
               ),
             ),
-          child,
+          Flexible(child: child),
         ],
       ),
     );
