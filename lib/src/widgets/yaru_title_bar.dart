@@ -135,7 +135,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     };
     final defaultBackgroundColor = MaterialStateProperty.resolveWith((states) {
       if (!states.contains(MaterialState.focused)) {
-        return Colors.transparent;
+        return theme.colorScheme.background;
       }
       return light ? YaruColors.titleBarLight : YaruColors.titleBarDark;
     });
