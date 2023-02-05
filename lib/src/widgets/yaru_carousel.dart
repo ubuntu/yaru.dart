@@ -224,6 +224,7 @@ class YaruCarouselController extends PageController {
   final Duration autoScrollDuration;
 
   Timer? _timer;
+  bool _animating = false;
 
   @override
   void attach(ScrollPosition position) {
@@ -243,16 +244,22 @@ class YaruCarouselController extends PageController {
     int page, {
     Duration? duration,
     Curve? curve,
-  }) {
-    cancelTimer();
+  }) async {
+    if (!_animating) {
+      _animating = true;
+      cancelTimer();
 
-    return super
-        .animateToPage(
-          page,
-          duration: duration ?? scrollAnimationDuration,
-          curve: scrollAnimationCurve,
-        )
-        .then((value) => startTimer());
+      return super
+          .animateToPage(
+        page,
+        duration: duration ?? scrollAnimationDuration,
+        curve: curve ?? scrollAnimationCurve,
+      )
+          .then((value) {
+        _animating = false;
+        startTimer();
+      });
+    }
   }
 
   @override
