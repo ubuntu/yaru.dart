@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
-import '../../yaru_widgets.dart';
+
+import 'yaru_icon_button.dart';
 
 const _kAnimationDuration = Duration(milliseconds: 250);
 const _kAnimationCurve = Curves.easeInOutCubic;

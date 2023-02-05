@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
-import '../../yaru_widgets.dart';
+import 'package:yaru_widgets/constants.dart';
+
+import 'yaru_check_button.dart';
 
 /// A generic wrapper around [PopupMenuButton] that is visually more consistent
 /// to buttons and dialogs than [DropdownButton]

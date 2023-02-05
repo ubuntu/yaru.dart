@@ -7,11 +7,11 @@ import 'package:flutter/widgets.dart';
 import 'package:window_manager/window_manager.dart';
 
 class YaruWindow {
-  static final Map<Object, YaruWindowInstance> _windows = {};
+  static final Map<Object, _YaruWindowInstance> _windows = {};
 
-  static YaruWindowInstance of(BuildContext context) {
+  static _YaruWindowInstance of(BuildContext context) {
     const id = 0; // View.of(context).windowId;
-    return _windows[id] ??= YaruWindowInstance._(id);
+    return _windows[id] ??= _YaruWindowInstance._(id);
   }
 
   static Future<void> close(BuildContext context) {
@@ -75,11 +75,11 @@ class YaruWindow {
   }
 }
 
-class YaruWindowInstance {
-  YaruWindowInstance._(this._id);
+class _YaruWindowInstance {
+  _YaruWindowInstance._(this._id);
 
   final Object _id; // ignore: unused_field
-  final _listener = YaruWindowListener(wm);
+  final _listener = _YaruWindowListener(wm);
 
   @visibleForTesting
   static WindowManager wm = WindowManager.instance;
@@ -112,7 +112,7 @@ class YaruWindowInstance {
   Stream<YaruWindowState> states() => _listener.states();
 }
 
-extension YaruWindowManagerX on WindowManager {
+extension _YaruWindowManagerX on WindowManager {
   Future<T> _invokeGetter<T>(
     Future<T> Function() getter, {
     required T orElse,
@@ -162,8 +162,8 @@ extension YaruWindowManagerX on WindowManager {
   }
 }
 
-class YaruWindowListener implements WindowListener {
-  YaruWindowListener(this._wm);
+class _YaruWindowListener implements WindowListener {
+  _YaruWindowListener(this._wm);
 
   final WindowManager _wm;
   StreamController<YaruWindowState>? _controller;

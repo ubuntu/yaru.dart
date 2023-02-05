@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/src/controls/yaru_window.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 import '../yaru_golden_tester.dart';

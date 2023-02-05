@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/foundation.dart' show YaruPageController;
+import 'package:yaru_widgets/widgets.dart'
+    show YaruTitleBarTheme, YaruTitleBarThemeData, YaruTitleBarStyle;
 
-import '../controls/yaru_title_bar_theme.dart';
 import 'yaru_master_detail_page.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_list_view.dart';
-import 'yaru_page_controller.dart';
 
 class YaruPortraitLayout extends StatefulWidget {
   const YaruPortraitLayout({

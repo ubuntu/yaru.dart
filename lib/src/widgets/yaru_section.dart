@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../utilities/yaru_border_container.dart';
+
+import 'yaru_border_container.dart';
 
 class YaruSection extends StatelessWidget {
   /// Creates a yaru style section widget with multiple
