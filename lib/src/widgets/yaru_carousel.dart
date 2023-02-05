@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
+import 'yaru_page_indicator.dart';
+
 class YaruCarousel extends StatefulWidget {
   const YaruCarousel({
     super.key,
@@ -102,7 +104,13 @@ class _YaruCarouselState extends State<YaruCarousel> {
             SizedBox(
               height: widget.placeIndicatorMarginTop,
             ),
-            _buildPlaceIndicator()
+            YaruPageIndicator(
+              length: widget.children.length,
+              page: _page,
+              animationDuration: _controller.scrollAnimationDuration,
+              animationCurve: _controller.scrollAnimationCurve,
+              onDotTap: (page) => _controller.animateToPage(page),
+            )
           ]
         ],
       ),
@@ -182,67 +190,6 @@ class _YaruCarouselState extends State<YaruCarousel> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildPlaceIndicator() {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        const dotSize = 12.0;
-
-        for (final layout in [
-          [48.0, constraints.maxWidth / 2],
-          [24.0, constraints.maxWidth / 3 * 2],
-          [12.0, constraints.maxWidth / 6 * 5]
-        ]) {
-          final dotSpacing = layout[0];
-          final maxWidth = layout[1];
-
-          if (dotSize * widget.children.length +
-                  dotSpacing * (widget.children.length - 1) <
-              maxWidth) {
-            return _buildDotIndicator(dotSize, dotSpacing);
-          }
-        }
-
-        return _buildTextIndicator();
-      },
-    );
-  }
-
-  Widget _buildDotIndicator(double dotSize, double dotSpacing) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: List<Widget>.generate(
-        widget.children.length,
-        (index) => GestureDetector(
-          onTap: _page == index ? null : () => _controller.animateToPage(index),
-          child: Padding(
-            padding: EdgeInsets.only(left: index != 0 ? dotSpacing : 0),
-            child: AnimatedContainer(
-              duration: _controller.scrollAnimationDuration,
-              curve: _controller.scrollAnimationCurve,
-              width: dotSize,
-              height: dotSize,
-              decoration: BoxDecoration(
-                color: _page == index
-                    ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.onSurface.withOpacity(.3),
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTextIndicator() {
-    return Text(
-      '${_page + 1}/${widget.children.length}',
-      style: Theme.of(context).textTheme.bodySmall,
-      textAlign: TextAlign.center,
     );
   }
 
