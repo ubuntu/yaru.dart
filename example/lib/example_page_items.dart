@@ -6,6 +6,7 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/checkbox_page.dart';
+import 'pages/clip_page.dart';
 import 'pages/color_disk_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
@@ -65,6 +66,18 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.checkbox_checked_filled)
         : const Icon(YaruIcons.checkbox_checked),
+  ),
+  PageItem(
+    title: 'YaruClip',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/clip_page.dart',
+    pageBuilder: (context) => const ClipPage(),
+    iconBuilder: (context, selected) => Transform.scale(
+      scaleX: -1,
+      child: selected
+          ? const Icon(YaruIcons.network_cellular_signal_excellent)
+          : const Icon(YaruIcons.network_cellular_signal_none),
+    ),
   ),
   PageItem(
     title: 'YaruColorDisk',
