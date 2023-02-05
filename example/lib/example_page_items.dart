@@ -14,6 +14,7 @@ import 'pages/expandable_page.dart';
 import 'pages/icon_button_page.dart';
 import 'pages/navigation_page.dart';
 import 'pages/option_button_page.dart';
+import 'pages/page_indicator.dart';
 import 'pages/popup_page.dart';
 import 'pages/progress_indicator_page.dart';
 import 'pages/radio_page.dart';
@@ -123,6 +124,14 @@ final examplePageItems = <PageItem>[
         ? const Icon(YaruIcons.gear_filled)
         : const Icon(YaruIcons.gear),
     pageBuilder: (_) => const OptionButtonPage(),
+  ),
+  PageItem(
+    title: 'YaruPageIndicator',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/page_indicator.dart',
+    iconBuilder: (context, selected) =>
+        const Icon(YaruIcons.view_more_horizontal),
+    pageBuilder: (_) => const PageIndicatorPage(),
   ),
   PageItem(
     title: 'YaruPopupMenuButton',
