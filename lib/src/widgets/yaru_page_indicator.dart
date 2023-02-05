@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
-/// A Yaru page indicator.
+import 'yaru_carousel.dart';
+
+/// A responsive page indicator.
 ///
 /// If there's enough space, it will be rendered into a line of dots,
 /// if not, it will be rendered into a text-based indicator.
+///
+/// See also:
+///
+///  * [YaruCarousel], display a list of widgets in a carousel view.
 class YaruPageIndicator extends StatelessWidget {
   /// Create a [YaruPageIndicator].
   const YaruPageIndicator({

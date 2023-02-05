@@ -8,7 +8,10 @@ import 'yaru_page_indicator.dart';
 ///
 /// It comes with useful features like navigation controls,
 /// a default place indicator and auto-scroll (through [YaruCarouselController]).
-
+///
+/// See also:
+///
+///  * [YaruPageIndicator], a responsive page indicator, used by default in this carousel.
 class YaruCarousel extends StatefulWidget {
   /// Creates a [YaruCarousel].
   const YaruCarousel({
