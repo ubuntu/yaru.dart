@@ -16,6 +16,7 @@ class YaruBanner extends StatelessWidget {
     required this.child,
     this.padding = const EdgeInsets.all(kYaruPagePadding),
     this.onHover,
+    this.selected,
   });
 
   /// Creates a banner with a [YaruTile] child widget.
@@ -30,6 +31,7 @@ class YaruBanner extends StatelessWidget {
     Widget? icon,
     Widget? subtitle,
     EdgeInsetsGeometry padding = const EdgeInsets.all(kYaruPagePadding),
+    bool? selected,
   }) : this(
           key: key,
           onTap: onTap,
@@ -38,6 +40,7 @@ class YaruBanner extends StatelessWidget {
           color: color,
           elevation: elevation,
           surfaceTintColor: surfaceTintColor,
+          selected: selected,
           child: YaruTile(
             leading: icon,
             title: title,
@@ -70,6 +73,10 @@ class YaruBanner extends StatelessWidget {
   /// Padding for the banner content. Defaults to `EdgeInsets.all(kYaruPagePadding)`
   final EdgeInsetsGeometry padding;
 
+  /// Whether the banner is selected. A selected banner is highlighted with the
+  /// theme's primary color.
+  final bool? selected;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -80,7 +87,10 @@ class YaruBanner extends StatelessWidget {
     final defaultSurfaceTintColor =
         light ? theme.cardColor : const Color.fromARGB(255, 126, 126, 126);
     return Material(
-      color: Colors.transparent,
+      color: selected == true
+          ? theme.primaryColor.withOpacity(0.8)
+          : Colors.transparent,
+      borderRadius: borderRadius,
       child: InkWell(
         onTap: onTap,
         onHover: onHover,
