@@ -24,12 +24,12 @@ class YaruNavigationRailItem extends StatefulWidget {
     super.key,
     this.selected,
     required this.icon,
-    required this.label,
+    this.label,
     this.tooltip,
     this.onTap,
     required this.style,
     this.width,
-  });
+  }) : assert(style == YaruNavigationRailStyle.compact || label != null);
 
   /// Whether the related page item is selected in the rail.
   final bool? selected;
@@ -38,7 +38,8 @@ class YaruNavigationRailItem extends StatefulWidget {
   final Widget icon;
 
   /// Label widget, displayed beside the [icon].
-  final Widget label;
+  /// If [style] is [YaruNavigationRailStyle.compact], this property can be left null.
+  final Widget? label;
 
   /// Optional string tooltip.
   /// If not null a tooltip will be displayed on hover.
@@ -206,7 +207,7 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
 
   Widget _buildLabel(BuildContext context) {
     final label = DefaultTextStyle.merge(
-      child: widget.label,
+      child: widget.label!,
       style: TextStyle(
         fontSize:
             widget.style == YaruNavigationRailStyle.labelledExtended ? 13 : 12,
