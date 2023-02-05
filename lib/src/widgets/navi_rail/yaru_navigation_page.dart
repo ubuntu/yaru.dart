@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/foundation.dart' show YaruPageController;
 
 import 'yaru_navigation_page_theme.dart';
 import 'yaru_navigation_rail.dart';
-import 'yaru_page_controller.dart';
 
 typedef YaruNavigationPageBuilder = Widget Function(
   BuildContext context,

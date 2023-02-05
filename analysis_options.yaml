@@ -19,7 +19,6 @@ linter:
     prefer_final_locals: true
     prefer_null_aware_method_calls: true
     prefer_null_aware_operators: true
-    prefer_relative_imports: true
     sort_constructors_first: true
     sort_unnamed_constructors_first: true
     sort_pub_dependencies: true

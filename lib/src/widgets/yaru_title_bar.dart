@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru_colors/yaru_colors.dart';
+import 'package:yaru_widgets/constants.dart';
+import 'package:yaru_widgets/foundation.dart' show YaruWindow, YaruWindowState;
 
-import '../constants.dart';
 import 'yaru_title_bar_gesture_detector.dart';
 import 'yaru_title_bar_theme.dart';
-import 'yaru_window.dart';
 import 'yaru_window_control.dart';
 
 const _kYaruTitleBarHeroTag = '<YaruTitleBar hero tag>';

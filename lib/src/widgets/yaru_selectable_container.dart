@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
-import '../extensions/border_radius_extension.dart';
+import 'package:yaru_widgets/constants.dart';
+import 'package:yaru_widgets/foundation.dart' show YaruBorderRadiusExtension;
 
 const _kAnimationDuration = Duration(milliseconds: 250);
 
