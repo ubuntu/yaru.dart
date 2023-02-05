@@ -244,7 +244,7 @@ class YaruCarouselController extends PageController {
     int page, {
     Duration? duration,
     Curve? curve,
-  }) {
+  }) async {
     if (!_animating) {
       _animating = true;
       cancelTimer();
@@ -260,9 +260,6 @@ class YaruCarouselController extends PageController {
         startTimer();
       });
     }
-
-    // Return a never finishing future if already animating.
-    return Future.any([]);
   }
 
   @override
