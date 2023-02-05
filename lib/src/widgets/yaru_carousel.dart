@@ -2,7 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
+/// Display a list of widgets in a carousel view.
+///
+/// It comes with useful features like navigation controls,
+/// a default place indicator and auto-scroll (through [YaruCarouselController]).
 class YaruCarousel extends StatefulWidget {
+  /// Creates a [YaruCarousel].
   const YaruCarousel({
     super.key,
     this.height = 500,
@@ -22,29 +27,31 @@ class YaruCarousel extends StatefulWidget {
   /// The width of the children, defaults to 500.0.
   final double width;
 
+  /// An optional controller that can be used to enable the auto-scroll behavior.
+  /// It can also be used to navigate to a specific page.
   final YaruCarouselController? controller;
 
   /// The list of child widgets shown in the carousel.
   final List<Widget> children;
 
-  /// Display a place indicator
+  /// Display a place indicator.
   ///
-  /// Show a dot based indicator if there  is enough space,
+  /// Show a dot based indicator if there is enough space,
   /// else use a text based indicator
   final bool placeIndicator;
 
-  /// Margin between the carousel and the place indicator
+  /// Margin between the carousel and the place indicator.
   final double placeIndicatorMarginTop;
 
-  /// Display previous and next navigation buttons
+  /// Display previous and next navigation buttons.
   final bool navigationControls;
 
-  /// Icon used for the previous button
-  /// Require [navigationControls] to be true
+  /// Icon used for the previous button.
+  /// Require [navigationControls] to be true.
   final Widget? previousIcon;
 
-  /// Icon used for the next button
-  /// Require [navigationControls] to be true
+  /// Icon used for the next button.
+  /// Require [navigationControls] to be true.
   final Widget? nextIcon;
 
   @override
@@ -255,7 +262,10 @@ class _YaruCarouselState extends State<YaruCarousel> {
   }
 }
 
+/// A controller that can be used to enable the auto-scroll behavior of a [YaruCarousel].
+/// It can also be used to navigate to a specific page.
 class YaruCarouselController extends PageController {
+  /// Creates a [YaruCarousel].
   YaruCarouselController({
     super.initialPage,
     super.keepPage,
@@ -266,14 +276,16 @@ class YaruCarouselController extends PageController {
     this.autoScrollDuration = const Duration(seconds: 3),
   });
 
+  /// Default duration of a transition between two pages.
   final Duration scrollAnimationDuration;
 
+  /// Default curve used in a transition between two page.
   final Curve scrollAnimationCurve;
 
-  /// Enable an auto scrolling loop of all children
+  /// Enable an auto scrolling loop of all children.
   final bool autoScroll;
 
-  /// If [autoScroll] is enabled, this value determine the time spent on each carousel child
+  /// If [autoScroll] is enabled, this value determine the time spent on each carousel child.
   final Duration autoScrollDuration;
 
   Timer? _timer;
@@ -331,6 +343,7 @@ class YaruCarouselController extends PageController {
     );
   }
 
+  /// Start the auto-scroll timer.
   void startTimer() {
     if (autoScroll && hasClients) {
       _timer = Timer(autoScrollDuration, () {
@@ -342,6 +355,7 @@ class YaruCarouselController extends PageController {
     }
   }
 
+  /// Cancel the auto-scroll timer.
   void cancelTimer() {
     if (autoScroll) {
       _timer!.cancel();
