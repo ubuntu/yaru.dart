@@ -35,7 +35,7 @@ class YaruMasterTile extends StatelessWidget {
   final Widget? trailing;
 
   /// See [ListTile.onTap].
-  final Function()? onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {

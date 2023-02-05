@@ -25,7 +25,7 @@ class YaruDraggable extends StatefulWidget {
   ) childBuilder;
 
   /// Callback called when this element starts to be dragged
-  final void Function()? onDragStart;
+  final VoidCallback? onDragStart;
 
   /// Callback called on each position update - usefull for collision checks
   ///
@@ -37,7 +37,7 @@ class YaruDraggable extends StatefulWidget {
   )? onDragUpdate;
 
   /// Callback called when this element finished to be dragged
-  final void Function()? onDragEnd;
+  final VoidCallback? onDragEnd;
 
   /// Cursor used when hovering this element, also used when dragging if [dragCursor] is null
   final MouseCursor? cursor;

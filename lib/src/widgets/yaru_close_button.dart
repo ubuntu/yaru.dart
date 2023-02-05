@@ -14,7 +14,7 @@ class YaruCloseButton extends StatelessWidget {
   });
 
   final bool enabled;
-  final Function()? onPressed;
+  final VoidCallback? onPressed;
   final AlignmentGeometry alignment;
 
   @override
