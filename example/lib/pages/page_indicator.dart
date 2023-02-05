@@ -21,7 +21,7 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
         YaruPageIndicator(
           length: _length,
           page: _page,
-          onDotTap: (page) => setState(() => _page = page),
+          onTap: (page) => setState(() => _page = page),
         ),
         const SizedBox(height: 15),
         ButtonBar(

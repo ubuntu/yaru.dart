@@ -12,7 +12,7 @@ class YaruPageIndicator extends StatelessWidget {
     required this.page,
     this.animationDuration = Duration.zero,
     this.animationCurve = Curves.linear,
-    this.onDotTap,
+    this.onTap,
   }) : assert(page >= 0 && page <= length - 1);
 
   /// Determine the number of pages.
@@ -31,7 +31,7 @@ class YaruPageIndicator extends StatelessWidget {
 
   /// Callback called when tapping a dot.
   /// It passes the tapped page index as parameter.
-  final Function(int page)? onDotTap;
+  final ValueChanged<int>? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +74,11 @@ class YaruPageIndicator extends StatelessWidget {
         );
 
         return GestureDetector(
-          onTap: onDotTap == null ? null : () => onDotTap!(index),
+          onTap: onTap == null ? null : () => onTap!(index),
           child: Padding(
             padding: EdgeInsets.only(left: index != 0 ? dotSpacing : 0),
             child: MouseRegion(
-              cursor: onDotTap == null
+              cursor: onTap == null
                   ? SystemMouseCursors.basic
                   : SystemMouseCursors.click,
               child: animationDuration == Duration.zero

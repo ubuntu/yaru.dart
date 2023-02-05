@@ -109,7 +109,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
               page: _page,
               animationDuration: _controller.scrollAnimationDuration,
               animationCurve: _controller.scrollAnimationCurve,
-              onDotTap: (page) => _controller.animateToPage(page),
+              onTap: (page) => _controller.animateToPage(page),
             )
           ]
         ],
