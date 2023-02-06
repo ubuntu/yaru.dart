@@ -29,7 +29,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   final ValueChanged<int>? onSelected;
   final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
   final double? previousPaneWidth;
-  final Function(double)? onLeftPaneWidthChange;
+  final ValueChanged<double>? onLeftPaneWidthChange;
   final PreferredSizeWidget? appBar;
   final Widget? bottomBar;
   final YaruPageController controller;

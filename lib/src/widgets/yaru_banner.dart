@@ -23,7 +23,7 @@ class YaruBanner extends StatelessWidget {
   YaruBanner.tile({
     Key? key,
     VoidCallback? onTap,
-    Function(bool)? onHover,
+    ValueChanged<bool>? onHover,
     Color? color,
     double? elevation,
     Color? surfaceTintColor,
@@ -53,10 +53,10 @@ class YaruBanner extends StatelessWidget {
   final Widget child;
 
   /// An optional callback
-  final Function()? onTap;
+  final VoidCallback? onTap;
 
   /// An optional callback used when hovering the [YaruBanner]
-  final Function(bool)? onHover;
+  final ValueChanged<bool>? onHover;
 
   /// The banner's background color.
   /// If null, [Theme]'s card color is used.

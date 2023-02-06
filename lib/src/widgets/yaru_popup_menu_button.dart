@@ -27,8 +27,8 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
 
   final T? initialValue;
   final Widget child;
-  final Function(T)? onSelected;
-  final Function()? onCanceled;
+  final ValueChanged<T>? onSelected;
+  final VoidCallback? onCanceled;
   final String? tooltip;
   final PopupMenuPosition position;
   final List<PopupMenuEntry<T>> Function(BuildContext) itemBuilder;

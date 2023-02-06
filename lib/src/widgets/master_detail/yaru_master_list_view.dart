@@ -17,7 +17,7 @@ class YaruMasterListView extends StatefulWidget {
   final int length;
   final YaruMasterDetailBuilder builder;
   final int selectedIndex;
-  final Function(int index) onTap;
+  final ValueChanged<int> onTap;
   final bool materialTiles;
 
   @override

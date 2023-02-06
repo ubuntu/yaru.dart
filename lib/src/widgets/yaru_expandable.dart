@@ -50,9 +50,7 @@ class YaruExpandable extends StatefulWidget {
   final bool isExpanded;
 
   /// Callback called on expand or collapse
-  final void Function(
-    bool isExpanded,
-  )? onChange;
+  final ValueChanged<bool>? onChange;
 
   @override
   State<YaruExpandable> createState() => _YaruExpandableState();
