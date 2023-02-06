@@ -289,7 +289,7 @@ class YaruCarouselController extends PageController {
   Future<void> nextPage({Duration? duration, Curve? curve}) {
     return super.nextPage(
       duration: duration ?? scrollAnimationDuration,
-      curve: scrollAnimationCurve,
+      curve: curve ?? scrollAnimationCurve,
     );
   }
 
@@ -297,7 +297,7 @@ class YaruCarouselController extends PageController {
   Future<void> previousPage({Duration? duration, Curve? curve}) {
     return super.previousPage(
       duration: duration ?? scrollAnimationDuration,
-      curve: scrollAnimationCurve,
+      curve: curve ?? scrollAnimationCurve,
     );
   }
 
