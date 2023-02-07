@@ -1,10 +1,106 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru_window_platform_interface/yaru_window_platform_interface.dart';
 
 import '../yaru_golden_tester.dart';
 
+class MockYaruWindowPlatform
+    with Mock, MockPlatformInterfaceMixin
+    implements YaruWindowPlatform {}
+
 void main() {
+  testWidgets(
+    'window state',
+    (tester) async {
+      const state = YaruWindowState(
+        isClosable: true,
+        isMaximizable: true,
+        isMinimizable: true,
+        isRestorable: true,
+      );
+
+      final window = MockYaruWindowPlatform();
+      when(() => window.state(0)).thenAnswer((_) async => state);
+      when(() => window.states(0)).thenAnswer((_) => Stream.value(state));
+      YaruWindowPlatform.instance = window;
+
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            appBar: YaruWindowTitleBar(),
+          ),
+        ),
+      );
+      await untilCalled(() => window.states(0));
+      await tester.pump();
+
+      expect(find.byType(YaruTitleBar), findsOneWidget);
+      final titleBar = tester.widget<YaruTitleBar>(
+        find.byType(YaruTitleBar),
+      );
+
+      if (defaultTargetPlatform == TargetPlatform.macOS) {
+        expect(titleBar.isClosable, isFalse);
+        expect(titleBar.isMaximizable, isFalse);
+        expect(titleBar.isMinimizable, isFalse);
+        expect(titleBar.isRestorable, isFalse);
+      } else {
+        expect(titleBar.isClosable, isTrue);
+        expect(titleBar.isMaximizable, isTrue);
+        expect(titleBar.isMinimizable, isTrue);
+        expect(titleBar.isRestorable, isTrue);
+      }
+    },
+    variant: TargetPlatformVariant.desktop(),
+  );
+
+  testWidgets(
+    'explicit state',
+    (tester) async {
+      const state = YaruWindowState(
+        isClosable: true,
+        isMaximizable: true,
+        isMinimizable: true,
+        isRestorable: true,
+      );
+
+      final window = MockYaruWindowPlatform();
+      when(() => window.state(0)).thenAnswer((_) async => state);
+      when(() => window.states(0)).thenAnswer((_) => Stream.value(state));
+      YaruWindowPlatform.instance = window;
+
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            appBar: YaruWindowTitleBar(
+              isClosable: false,
+              isMinimizable: false,
+              isMaximizable: false,
+              isRestorable: false,
+            ),
+          ),
+        ),
+      );
+      await untilCalled(() => window.states(0));
+      await tester.pump();
+
+      expect(find.byType(YaruTitleBar), findsOneWidget);
+      final titleBar = tester.widget<YaruTitleBar>(
+        find.byType(YaruTitleBar),
+      );
+
+      expect(titleBar.isClosable, isFalse);
+      expect(titleBar.isMaximizable, isFalse);
+      expect(titleBar.isMinimizable, isFalse);
+      expect(titleBar.isRestorable, isFalse);
+    },
+    variant: TargetPlatformVariant.desktop(),
+  );
+
   testWidgets(
     'golden images',
     (tester) async {
@@ -97,6 +193,7 @@ final goldenVariant = ValueVariant({
       isActive: true,
       isMinimizable: false,
       isMaximizable: false,
+      isRestorable: false,
       isClosable: true,
       title: 'dialog',
     ),
@@ -108,6 +205,7 @@ final goldenVariant = ValueVariant({
       isClosable: true,
       isMinimizable: false,
       isMaximizable: false,
+      isRestorable: false,
       title: 'red dialog',
     ),
   ),

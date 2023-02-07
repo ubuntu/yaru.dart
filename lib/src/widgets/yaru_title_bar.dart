@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru_colors/yaru_colors.dart';
 import 'package:yaru_widgets/constants.dart';
-import 'package:yaru_widgets/foundation.dart' show YaruWindow, YaruWindowState;
+import 'package:yaru_window/yaru_window.dart';
 
 import 'yaru_title_bar_gesture_detector.dart';
 import 'yaru_title_bar_theme.dart';
@@ -388,7 +388,11 @@ class YaruWindowTitleBar extends StatelessWidget
   Size get preferredSize =>
       Size(0, style == YaruTitleBarStyle.hidden ? 0 : kYaruTitleBarHeight);
 
-  static Future<void> ensureInitialized() => YaruWindow.ensureInitialized();
+  static Future<void> ensureInitialized() {
+    return YaruWindow.ensureInitialized().then((window) => window.hideTitle());
+  }
+
+  static final _windowStates = <YaruWindowInstance, YaruWindowState>{};
 
   @override
   Widget build(BuildContext context) {
@@ -398,22 +402,18 @@ class YaruWindowTitleBar extends StatelessWidget
         (kIsWeb ? YaruTitleBarStyle.undecorated : YaruTitleBarStyle.normal);
     if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
 
-    final defaultState = YaruWindowState(
-      isActive: isActive,
-      isClosable: isClosable,
-      isMaximizable: isMaximizable,
-      isMinimizable: isMinimizable,
-      isRestorable: isRestorable,
-    );
-
+    final window = YaruWindow.of(context);
     return StreamBuilder<YaruWindowState>(
-      stream: YaruWindow.states(context),
-      initialData: YaruWindow.state(context),
+      stream: window.states(),
+      initialData: _windowStates[window],
       builder: (context, snapshot) {
-        final state = snapshot.data?.merge(defaultState) ?? defaultState;
+        if (snapshot.hasData) {
+          _windowStates[window] = snapshot.data!;
+        }
+        final state = snapshot.data;
         return YaruTitleBar(
           leading: leading,
-          title: title ?? Text(state.title ?? ''),
+          title: title ?? Text(state?.title ?? ''),
           actions: actions,
           centerTitle: centerTitle,
           titleSpacing: titleSpacing,
@@ -421,12 +421,15 @@ class YaruWindowTitleBar extends StatelessWidget
           shape: shape,
           border: border,
           style: style,
-          isActive: state.isActive,
-          isClosable: state.isClosable,
-          isDraggable: state.isMovable,
-          isMaximizable: state.isMaximizable,
-          isMinimizable: state.isMinimizable,
-          isRestorable: state.isRestorable,
+          isActive: isActive ?? state?.isActive,
+          isClosable: isClosable ?? state?.isClosable?.exceptMacOS(context),
+          isDraggable: isDraggable ?? state?.isMovable,
+          isMaximizable:
+              isMaximizable ?? state?.isMaximizable?.exceptMacOS(context),
+          isMinimizable:
+              isMinimizable ?? state?.isMinimizable?.exceptMacOS(context),
+          isRestorable:
+              isRestorable ?? state?.isRestorable?.exceptMacOS(context),
           onClose: onClose,
           onDrag: onDrag,
           onMaximize: onMaximize,
@@ -459,7 +462,7 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.isMaximizable = false,
     super.isMinimizable = false,
     super.isRestorable = false,
-    super.onClose = YaruWindow.maybePop,
+    super.onClose = _maybePop,
     super.onDrag = YaruWindow.drag,
     super.onMaximize = null,
     super.onMinimize = null,
@@ -473,4 +476,15 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
       top: Radius.circular(kYaruContainerRadius),
     ),
   );
+
+  static Future<void> _maybePop(BuildContext context) {
+    return Navigator.maybePop(context);
+  }
+}
+
+extension on bool? {
+  bool? exceptMacOS(BuildContext context) {
+    final platform = Theme.of(context).platform;
+    return !kIsWeb && platform == TargetPlatform.macOS ? false : this;
+  }
 }
