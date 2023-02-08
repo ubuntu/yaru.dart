@@ -19,6 +19,7 @@ class YaruExpandable extends StatefulWidget {
     super.key,
     required this.header,
     this.expandIcon,
+    this.expandIconPadding = EdgeInsets.zero,
     this.expandButtonPosition = YaruExpandableButtonPosition.end,
     required this.child,
     this.collapsedChild,
@@ -27,29 +28,33 @@ class YaruExpandable extends StatefulWidget {
     this.onChange,
   });
 
-  /// Widget placed in the header, against the expand button
+  /// Widget placed in the header, against the expand button.
   final Widget header;
 
-  /// Icon used in the expand button
-  /// Prefer use a "right arrow" icon
-  /// A 25° rotation is used when expanded
+  /// Icon used in the expand button.
+  /// Prefer use a "right arrow" icon.
+  /// A 25° rotation is used when expanded.
   final Widget? expandIcon;
 
-  /// Controls expand button position, see [YaruExpandableButtonPosition]
+  /// Optional padding around the expand button.
+  final EdgeInsetsGeometry expandIconPadding;
+
+  /// Controls expand button position, see [YaruExpandableButtonPosition].
   final YaruExpandableButtonPosition expandButtonPosition;
 
-  /// Widget show when expanded
+  /// Widget show when expanded.
   final Widget child;
 
-  /// Widget show when collapsed
+  /// Widget show when collapsed.
   final Widget? collapsedChild;
 
+  /// Gap between [header] and [child].
   final double gapHeight;
 
   /// Optional initial value.
   final bool isExpanded;
 
-  /// Callback called on expand or collapse
+  /// Callback called on expand or collapse.
   final ValueChanged<bool>? onChange;
 
   @override
@@ -67,15 +72,18 @@ class _YaruExpandableState extends State<YaruExpandable> {
 
   @override
   Widget build(BuildContext context) {
-    final iconButton = YaruIconButton(
-      iconSize: 36,
-      padding: EdgeInsets.zero,
-      onPressed: _onTap,
-      icon: AnimatedRotation(
-        turns: _isExpanded ? .25 : 0,
-        duration: _kAnimationDuration,
-        curve: _kAnimationCurve,
-        child: widget.expandIcon ?? const Icon(YaruIcons.pan_end),
+    final iconButton = Padding(
+      padding: widget.expandIconPadding,
+      child: YaruIconButton(
+        iconSize: 36,
+        padding: EdgeInsets.zero,
+        onPressed: _onTap,
+        icon: AnimatedRotation(
+          turns: _isExpanded ? .25 : 0,
+          duration: _kAnimationDuration,
+          curve: _kAnimationCurve,
+          child: widget.expandIcon ?? const Icon(YaruIcons.pan_end),
+        ),
       ),
     );
 
