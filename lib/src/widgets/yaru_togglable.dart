@@ -135,10 +135,8 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       oldChecked = oldWidget.checked;
 
       if (widget.tristate) {
-        if (widget.checked == null) {
+        if (widget.checked == null || widget.checked == true) {
           positionController.value = 0.0;
-        }
-        if (widget.checked ?? true) {
           positionController.forward();
         } else {
           positionController.reverse();
