@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 1 24 24"
+   width="24"
+   height="24"
+   fill="#808080"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="bag-filled.svg"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:zoom="24.09375"
+     inkscape:cx="6.4747082"
+     inkscape:cy="9.5875486"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid16" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid656"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <path
+     id="path712"
+     style="color:#000000;fill:#808080;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"
+     d="M 12 2 C 9.748375 2 7.8978106 3.7481435 7.5566406 6 L 5 6 C 3.3466554 6 2 7.3466554 2 9 L 2 19 C 2 20.653344 3.3466554 22 5 22 L 19 22 C 20.653344 22 22 20.653344 22 19 L 22 9 C 22 7.3466554 20.653344 6 19 6 L 16.443359 6 C 16.102191 3.7481435 14.251626 2 12 2 z M 12 3 C 13.6858 3 15.105867 4.2744636 15.429688 6 L 8.5703125 6 C 8.8941316 4.2744636 10.3142 3 12 3 z M 10.960938 8 L 13.021484 8 C 13.425524 8.8542524 13.818267 9.7203164 14.199219 10.597656 C 14.580167 11.474996 14.960845 12.397492 15.341797 13.367188 C 15.554707 13.893198 15.769884 14.439552 15.986328 15 L 16.5 15 C 17.330997 15 18 15.669003 18 16.5 C 18 17.126992 17.618143 17.66194 17.074219 17.886719 C 17.322946 18.561619 17.575673 19.259249 17.835938 20 L 15.480469 20 C 15.318853 19.526696 15.151672 19.059416 14.978516 18.597656 C 14.904691 18.400792 14.831448 18.201064 14.759766 18 L 9.1386719 18 C 9.0663206 18.205924 8.992503 18.411509 8.9179688 18.615234 L 8.4335938 20 L 6.1640625 20 C 6.424562 19.258578 6.6749189 18.560217 6.9199219 17.884766 C 6.3790459 17.658612 6 17.124794 6 16.5 C 6 15.669003 6.6690024 15 7.5 15 L 7.9921875 15 C 8.2057095 14.439514 8.4163861 13.893232 8.6230469 13.367188 C 9.0155413 12.397492 9.4022527 11.474996 9.7832031 10.597656 C 10.164155 9.7203164 10.556898 8.8542524 10.960938 8 z M 11.947266 10.320312 C 11.681754 10.932144 11.37757 11.677344 11.03125 12.554688 C 10.742953 13.310221 10.439055 14.133114 10.125 15 L 13.771484 15 C 13.455766 14.131005 13.146102 13.303118 12.847656 12.537109 C 12.50134 11.648225 12.20123 10.909056 11.947266 10.320312 z M 7.5 16 C 7.2230006 16 7 16.223 7 16.5 C 7 16.777 7.2230006 17 7.5 17 L 16.5 17 C 16.777 17 17 16.777 17 16.5 C 17 16.223 16.777 16 16.5 16 L 7.5 16 z " />
+  <g
+     id="g1833"
+     style="display:inline;stroke-width:1.15789"
+     transform="matrix(0.86363636,0,0,0.86363636,-437.09094,-165.59091)" />
+  <g
+     aria-label="A"
+     id="text619"
+     style="font-weight:500;font-size:17.316px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';letter-spacing:0px;word-spacing:0px;fill:#ffff00" />
+</svg>

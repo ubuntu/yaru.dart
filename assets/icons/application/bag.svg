@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 1 24 24"
+   width="24"
+   height="24"
+   fill="#808080"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="bag.svg"
+   inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:zoom="24.09375"
+     inkscape:cx="6.4124514"
+     inkscape:cy="9.5875486"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid16" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid656"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <path
+     id="path712"
+     style="color:#000000;fill:#808080;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"
+     d="M 12 2 C 9.7483704 2 7.8978112 3.7481389 7.5566406 6 L 5 6 C 3.346652 6 2 7.346652 2 9 L 2 19 C 2 20.653348 3.346652 22 5 22 L 19 22 C 20.653348 22 22 20.653348 22 19 L 22 9 C 22 7.346652 20.653348 6 19 6 L 16.443359 6 C 16.102189 3.7481389 14.25163 2 12 2 z M 12 3 C 13.685804 3 15.105867 4.2744602 15.429688 6 L 8.5703125 6 C 8.8941322 4.2744602 10.314196 3 12 3 z M 5 7 L 19 7 C 20.116646 7 21 7.8833536 21 9 L 21 19 C 21 20.116646 20.116646 21 19 21 L 5 21 C 3.8833536 21 3 20.116646 3 19 L 3 9 C 3 7.8833536 3.8833536 7 5 7 z " />
+  <g
+     id="g1833"
+     style="display:inline;stroke-width:1.15789"
+     transform="matrix(0.86363636,0,0,0.86363636,-437.09094,-165.59091)" />
+  <path
+     id="text518"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:17.316px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#808080;stroke-width:1"
+     d="M 10.960938 8 C 10.556898 8.8542533 10.164155 9.7203153 9.7832031 10.597656 C 9.4022523 11.474997 9.0155417 12.397492 8.6230469 13.367188 C 8.4163859 13.893233 8.2057097 14.439513 7.9921875 15 L 7.5 15 C 6.6690016 15 6 15.669002 6 16.5 C 6 17.124795 6.3790454 17.658612 6.9199219 17.884766 C 6.6749187 18.560218 6.4245623 19.258577 6.1640625 20 L 8.4335938 20 L 8.9179688 18.615234 C 8.9925031 18.411508 9.0663206 18.205924 9.1386719 18 L 14.759766 18 C 14.831448 18.201064 14.904691 18.400792 14.978516 18.597656 C 15.151673 19.059416 15.318853 19.526696 15.480469 20 L 17.835938 20 C 17.575673 19.259248 17.322946 18.56162 17.074219 17.886719 C 17.618144 17.66194 18 17.126993 18 16.5 C 18 15.669002 17.330998 15 16.5 15 L 15.986328 15 C 15.769884 14.439551 15.554707 13.893199 15.341797 13.367188 C 14.960845 12.397492 14.580168 11.474997 14.199219 10.597656 C 13.818267 9.7203153 13.425524 8.8542533 13.021484 8 L 10.960938 8 z M 11.947266 10.320312 C 12.201231 10.909056 12.501339 11.648224 12.847656 12.537109 C 13.146102 13.303118 13.455765 14.131004 13.771484 15 L 10.125 15 C 10.439055 14.133113 10.742953 13.310222 11.03125 12.554688 C 11.37757 11.677344 11.681754 10.932144 11.947266 10.320312 z M 7.5 16 L 16.5 16 C 16.777 16 17 16.223 17 16.5 C 17 16.777 16.777 17 16.5 17 L 7.5 17 C 7.2230003 17 7 16.777 7 16.5 C 7 16.223 7.2230003 16 7.5 16 z " />
+  <g
+     aria-label="A"
+     id="text619"
+     style="font-weight:500;font-size:17.316px;line-height:1.25;font-family:Ubuntu;-inkscape-font-specification:'Ubuntu, Medium';letter-spacing:0px;word-spacing:0px;fill:#ffff00" />
+</svg>
