@@ -23,6 +23,3 @@ dev_dependencies:
     sdk: flutter
   golden_toolkit: ^0.13.0
   test: ^1.21.4
-
-flutter:
-  uses-material-design: true
