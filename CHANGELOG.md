@@ -1,5 +1,27 @@
 # Changelog
 
+# 2.0.2
+
+* Add diagnosticable properties to togglable widgets by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/579
+* YaruSection: fix unbounded height by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/584
+* pubspec: add missing issue tracker link by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/590
+* Restructure by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/586
+* Update screenshot by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/589
+* Introduce YaruClip.diagonal() by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/591
+* Allow null YaruNavigationRailItem label with compact style by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/592
+* Introduce YaruPageIndicator by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/593
+* Add YaruBanner.selected property by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/596
+* YaruCarousel: fix laggy animation on multiple clicks by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/597
+* YaruTitleBar: set an opaque background when the window is inactive by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/599
+* Expose `kYaruBannerRadius` constant by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/601
+* Example: remove generated files to fix pub.dev warnings by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/600
+* Use Flutter's callback typedefs by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/598
+* Improve YaruCarousel comments by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/594
+* YaruExpandable: leave iconbutton padding indvidually from widget padding by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/605
+* Missing mixed->checked checkbox animation by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/606
+* Pass curve parameter to next/previousPage methods by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/602
+* pubspec.yaml: clean up `uses-material-design: true` by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/608
+
 # 2.0.1
 
 * Fix: YaruBanners bg color with upgrading yaru to 0.5.1 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/575 
