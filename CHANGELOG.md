@@ -1,3 +1,8 @@
+# 1.0.3
+
+* Add new application icon
+* Add new *-bag icons
+
 # 1.0.2
 
 * Add RepaintBoundary around animated icons
