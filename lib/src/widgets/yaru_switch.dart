@@ -365,7 +365,10 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
       ..color = interactive
           ? Color.lerp(uncheckedThumbColor, checkedThumbColor, t)!
           : Color.lerp(
-              disabledUncheckedThumbColor, disabledCheckedThumbColor, t)!
+              disabledUncheckedThumbColor,
+              disabledCheckedThumbColor,
+              t,
+            )!
       ..style = PaintingStyle.fill;
 
     drawStateIndicator(canvas, size, center);
