@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_radio_button.dart';
+import 'yaru_radio_theme.dart';
 import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
 
@@ -116,13 +117,11 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
   /// The color to use when this radio is checked.
   ///
   /// Defaults to [ColorScheme.primary].
-  @override
   final Color? selectedColor;
 
   /// The color to use for the checkmark when this radio is checked.
   ///
   /// Defaults to [ColorScheme.onPrimary].
-  @override
   final Color? checkmarkColor;
 
   @override
@@ -184,7 +183,65 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
 
   @override
   Widget build(BuildContext context) {
-    return buildToggleable(_YaruRadioPainter());
+    final radioTheme = YaruRadioTheme.of(context);
+    final painter = _YaruRadioPainter();
+    fillPainterDefaults(painter);
+
+    const unselectedState = <MaterialState>{};
+    const selectedState = {MaterialState.selected};
+    const disabledState = {MaterialState.disabled};
+    const selectedDisabledState = {
+      MaterialState.selected,
+      MaterialState.disabled
+    };
+
+    // Normal colors
+    final uncheckedColor =
+        radioTheme.color?.resolve(unselectedState) ?? painter.uncheckedColor;
+    final uncheckedBorderColor =
+        radioTheme.borderColor?.resolve(unselectedState) ??
+            painter.uncheckedBorderColor;
+    final checkedColor = widget.selectedColor ??
+        radioTheme.color?.resolve(selectedState) ??
+        painter.checkedColor;
+    final checkmarkColor = widget.checkmarkColor ??
+        radioTheme.checkmarkColor?.resolve(selectedState) ??
+        painter.checkmarkColor;
+
+    // Disabled colors
+    final disabledUncheckedColor = radioTheme.color?.resolve(disabledState) ??
+        painter.disabledUncheckedColor;
+    final disabledUncheckedBorderColor =
+        radioTheme.borderColor?.resolve(disabledState) ??
+            painter.disabledUncheckedBorderColor;
+    final disabledCheckedColor =
+        radioTheme.color?.resolve(selectedDisabledState) ??
+            painter.disabledCheckedColor;
+    final disabledCheckmarkColor =
+        radioTheme.checkmarkColor?.resolve(selectedDisabledState) ??
+            painter.disabledCheckmarkColor;
+
+    // Indicator colors
+    final hoverIndicatorColor =
+        radioTheme.indicatorColor?.resolve({MaterialState.hovered}) ??
+            painter.hoverIndicatorColor;
+    final focusIndicatorColor =
+        radioTheme.indicatorColor?.resolve({MaterialState.focused}) ??
+            painter.focusIndicatorColor;
+
+    return buildToggleable(
+      painter
+        ..uncheckedColor = uncheckedColor
+        ..uncheckedBorderColor = uncheckedBorderColor
+        ..checkedColor = checkedColor
+        ..checkmarkColor = checkmarkColor
+        ..disabledUncheckedColor = disabledUncheckedColor
+        ..disabledUncheckedBorderColor = disabledUncheckedBorderColor
+        ..disabledCheckedColor = disabledCheckedColor
+        ..disabledCheckmarkColor = disabledCheckmarkColor
+        ..hoverIndicatorColor = hoverIndicatorColor
+        ..focusIndicatorColor = focusIndicatorColor,
+    );
   }
 }
 
@@ -226,8 +283,12 @@ class _YaruRadioPainter extends YaruTogglablePainter {
       ),
       Paint()
         ..color = interactive
-            ? Color.lerp(uncheckedBorderColor, checkedColor, t)!
-            : Color.lerp(disabledUncheckedBorderColor, Colors.transparent, t)!
+            ? Color.lerp(uncheckedBorderColor, checkedBorderColor, t)!
+            : Color.lerp(
+                disabledUncheckedBorderColor,
+                disabledCheckedBorderColor,
+                t,
+              )!
         ..style = PaintingStyle.stroke,
     );
   }

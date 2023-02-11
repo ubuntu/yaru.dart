@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
 import 'yaru_switch_button.dart';
+import 'yaru_switch_theme.dart';
 import 'yaru_togglable.dart';
 
 const _kSwitchActivableAreaPadding =
     EdgeInsets.symmetric(horizontal: 2, vertical: 5);
 const _kSwitchSize = Size(55, 30);
-const _kSwitchDotSizeFactor = 0.8;
+const _kSwitchThumbSizeFactor = 0.8;
 
 /// A Yaru switch.
 ///
@@ -37,6 +38,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
     required this.value,
     required this.onChanged,
     this.selectedColor,
+    this.thumbColor,
     this.checkmarkColor,
     this.focusNode,
     this.autofocus = false,
@@ -82,13 +84,17 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   /// The color to use when this switch is on.
   ///
   /// Defaults to [ColorScheme.primary].
-  @override
   final Color? selectedColor;
 
-  /// The color to use for the dot when this switch is on.
+  /// The color to use for the thumb when this switch is on.
   ///
   /// Defaults to [ColorScheme.onPrimary].
-  @override
+  final Color? thumbColor;
+
+  /// The color to use for the thumb when this switch is on.
+  ///
+  /// Defaults to [ColorScheme.onPrimary].
+  @Deprecated('Use `thumbColor` instead. Will be removed in yaru_widgets 3.0.0')
   final Color? checkmarkColor;
 
   @override
@@ -148,18 +154,80 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 
   @override
   Widget build(BuildContext context) {
+    final switchTheme = YaruSwitchTheme.of(context);
     final colorScheme = Theme.of(context).colorScheme;
+    final painter = _YaruSwitchPainter();
+    fillPainterDefaults(painter);
 
-    final uncheckedSwitchColor = colorScheme.onSurface.withOpacity(.25);
-    const uncheckedDotColor = Colors.white;
-    final disabledDotColor = colorScheme.onSurface.withOpacity(.4);
+    const unselectedState = <MaterialState>{};
+    const selectedState = {MaterialState.selected};
+    const disabledState = {MaterialState.disabled};
+    const selectedDisabledState = {
+      MaterialState.selected,
+      MaterialState.disabled
+    };
+
+    // Normal colors
+    final uncheckedColor = switchTheme.color?.resolve(unselectedState) ??
+        colorScheme.onSurface.withOpacity(.25);
+    final uncheckedBorderColor =
+        switchTheme.borderColor?.resolve(unselectedState) ?? Colors.transparent;
+    final uncheckedThumbColor =
+        switchTheme.thumbColor?.resolve(unselectedState) ?? Colors.white;
+    final checkedColor = widget.selectedColor ??
+        switchTheme.color?.resolve(selectedState) ??
+        painter.checkedColor;
+    final checkedBorderColor =
+        switchTheme.borderColor?.resolve(selectedState) ?? Colors.transparent;
+    final checkedThumbColor = widget.thumbColor ??
+        // ignore: deprecated_member_use_from_same_package
+        widget.checkmarkColor ??
+        switchTheme.thumbColor?.resolve(selectedState) ??
+        painter.checkmarkColor;
+
+    // Disabled colors
+    final disabledUncheckedColor = switchTheme.color?.resolve(disabledState) ??
+        painter.disabledUncheckedColor;
+    final disabledUncheckedBorderColor =
+        switchTheme.borderColor?.resolve(disabledState) ?? Colors.transparent;
+    final disabledUncheckedThumbColor =
+        switchTheme.thumbColor?.resolve(disabledState) ??
+            colorScheme.onSurface.withOpacity(.4);
+    final disabledCheckedColor =
+        switchTheme.color?.resolve(selectedDisabledState) ??
+            painter.disabledCheckedColor;
+    final disabledCheckedBorderColor =
+        switchTheme.borderColor?.resolve(selectedDisabledState) ??
+            Colors.transparent;
+    final disabledCheckedThumbColor =
+        switchTheme.thumbColor?.resolve(selectedDisabledState) ??
+            disabledUncheckedThumbColor;
+
+    // Indicator colors
+    final hoverIndicatorColor =
+        switchTheme.indicatorColor?.resolve({MaterialState.hovered}) ??
+            painter.hoverIndicatorColor;
+    final focusIndicatorColor =
+        switchTheme.indicatorColor?.resolve({MaterialState.focused}) ??
+            painter.focusIndicatorColor;
 
     return _maybeBuildGestureDetector(
       buildToggleable(
-        _YaruSwitchPainter()
-          ..uncheckedSwitchColor = uncheckedSwitchColor
-          ..uncheckedDotColor = uncheckedDotColor
-          ..disabledDotColor = disabledDotColor,
+        painter
+          ..uncheckedColor = uncheckedColor
+          ..uncheckedBorderColor = uncheckedBorderColor
+          ..uncheckedThumbColor = uncheckedThumbColor
+          ..checkedColor = checkedColor
+          ..checkedBorderColor = checkedBorderColor
+          ..checkedThumbColor = checkedThumbColor
+          ..disabledUncheckedColor = disabledUncheckedColor
+          ..disabledUncheckedBorderColor = disabledUncheckedBorderColor
+          ..disabledUncheckedThumbColor = disabledUncheckedThumbColor
+          ..disabledCheckedColor = disabledCheckedColor
+          ..disabledCheckedBorderColor = disabledCheckedBorderColor
+          ..disabledCheckedThumbColor = disabledCheckedThumbColor
+          ..hoverIndicatorColor = hoverIndicatorColor
+          ..focusIndicatorColor = focusIndicatorColor,
       ),
     );
   }
@@ -171,13 +239,14 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 
     return GestureDetector(
       onPanStart: (details) {
-        final dotSize = _kSwitchSize.height * _kSwitchDotSizeFactor;
-        final dotGap = (_kSwitchSize.height - dotSize) / 2;
+        final thumbSize = _kSwitchSize.height * _kSwitchThumbSizeFactor;
+        final thumbGap = (_kSwitchSize.height - thumbSize) / 2;
 
-        final minDragX =
-            widget.value ? _kSwitchSize.width - (dotGap + dotSize) : dotGap;
+        final minDragX = widget.value
+            ? _kSwitchSize.width - (thumbGap + thumbSize)
+            : thumbGap;
         final maxDragX =
-            widget.value ? _kSwitchSize.width - dotGap : dotGap + dotSize;
+            widget.value ? _kSwitchSize.width - thumbGap : thumbGap + thumbSize;
 
         if (details.localPosition.dx >= minDragX &&
             details.localPosition.dx <= maxDragX) {
@@ -192,9 +261,9 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
           return;
         }
 
-        final dotSize = _kSwitchSize.height * _kSwitchDotSizeFactor;
-        final dotGap = (_kSwitchSize.height - dotSize) / 2;
-        final dragGap = dotGap + dotSize / 2;
+        final thumbSize = _kSwitchSize.height * _kSwitchThumbSizeFactor;
+        final thumbGap = (_kSwitchSize.height - thumbSize) / 2;
+        final dragGap = thumbGap + thumbSize / 2;
         final innerWidth = _kSwitchSize.width - dragGap * 2;
 
         positionController.value =
@@ -228,9 +297,10 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 }
 
 class _YaruSwitchPainter extends YaruTogglablePainter {
-  late Color uncheckedSwitchColor;
-  late Color uncheckedDotColor;
-  late Color disabledDotColor;
+  late Color uncheckedThumbColor;
+  late Color checkedThumbColor;
+  late Color disabledCheckedThumbColor;
+  late Color disabledUncheckedThumbColor;
 
   @override
   void paintTogglable(
@@ -241,7 +311,7 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
     double t,
   ) {
     _drawBox(canvas, size, origin, t);
-    _drawDot(canvas, size, origin, t);
+    _drawThumb(canvas, size, origin, t);
   }
 
   void _drawBox(Canvas canvas, Size size, Offset origin, double t) {
@@ -252,14 +322,35 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
       ),
       Paint()
         ..color = interactive
-            ? Color.lerp(uncheckedSwitchColor, checkedColor, t)!
+            ? Color.lerp(uncheckedColor, checkedColor, t)!
             : Color.lerp(disabledUncheckedColor, disabledCheckedColor, t)!
         ..style = PaintingStyle.fill,
     );
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(
+          origin.dx + 0.5,
+          origin.dy + 0.5,
+          size.width - 1.0,
+          size.height - 1.0,
+        ),
+        Radius.circular(size.height),
+      ),
+      Paint()
+        ..color = interactive
+            ? Color.lerp(uncheckedBorderColor, checkedBorderColor, t)!
+            : Color.lerp(
+                disabledUncheckedBorderColor,
+                disabledCheckedBorderColor,
+                t,
+              )!
+        ..style = PaintingStyle.stroke,
+    );
   }
 
-  void _drawDot(Canvas canvas, Size size, Offset origin, double t) {
-    final margin = (size.height - size.height * _kSwitchDotSizeFactor) / 2;
+  void _drawThumb(Canvas canvas, Size size, Offset origin, double t) {
+    final margin = (size.height - size.height * _kSwitchThumbSizeFactor) / 2;
     final innerSize = Size(
       size.width - margin * 2,
       size.height - margin * 2,
@@ -272,8 +363,12 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
 
     final paint = Paint()
       ..color = interactive
-          ? Color.lerp(uncheckedDotColor, checkmarkColor, t)!
-          : disabledDotColor
+          ? Color.lerp(uncheckedThumbColor, checkedThumbColor, t)!
+          : Color.lerp(
+              disabledUncheckedThumbColor,
+              disabledCheckedThumbColor,
+              t,
+            )!
       ..style = PaintingStyle.fill;
 
     drawStateIndicator(canvas, size, center);
