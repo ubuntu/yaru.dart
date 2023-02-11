@@ -7,26 +7,26 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
   const YaruSwitchThemeData({
     this.color,
     this.borderColor,
-    this.dotColor,
+    this.thumbColor,
     this.indicatorColor,
   });
 
   final MaterialStateProperty<Color?>? color;
   final MaterialStateProperty<Color?>? borderColor;
-  final MaterialStateProperty<Color?>? dotColor;
+  final MaterialStateProperty<Color?>? thumbColor;
   final MaterialStateProperty<Color?>? indicatorColor;
 
   @override
   YaruSwitchThemeData copyWith({
     MaterialStateProperty<Color?>? color,
     MaterialStateProperty<Color?>? borderColor,
-    MaterialStateProperty<Color?>? dotColor,
+    MaterialStateProperty<Color?>? thumbColor,
     MaterialStateProperty<Color?>? indicatorColor,
   }) {
     return YaruSwitchThemeData(
       color: color ?? this.color,
       borderColor: borderColor ?? this.borderColor,
-      dotColor: dotColor ?? this.dotColor,
+      thumbColor: thumbColor ?? this.thumbColor,
       indicatorColor: indicatorColor ?? this.indicatorColor,
     );
   }
@@ -50,9 +50,9 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
         t,
         Color.lerp,
       ),
-      dotColor: MaterialStateProperty.lerp<Color?>(
-        dotColor,
-        o?.dotColor,
+      thumbColor: MaterialStateProperty.lerp<Color?>(
+        thumbColor,
+        o?.thumbColor,
         t,
         Color.lerp,
       ),
@@ -72,7 +72,7 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
     properties.add(
       DiagnosticsProperty('borderColor', borderColor),
     );
-    properties.add(DiagnosticsProperty('dotColor', dotColor));
+    properties.add(DiagnosticsProperty('thumbColor', thumbColor));
     properties.add(DiagnosticsProperty('indicatorColor', indicatorColor));
   }
 
@@ -82,7 +82,7 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
     return other is YaruSwitchThemeData &&
         other.color == color &&
         other.borderColor == borderColor &&
-        other.dotColor == dotColor &&
+        other.thumbColor == thumbColor &&
         other.indicatorColor == indicatorColor;
   }
 
@@ -91,7 +91,7 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
     return Object.hash(
       color,
       borderColor,
-      dotColor,
+      thumbColor,
       indicatorColor,
     );
   }
