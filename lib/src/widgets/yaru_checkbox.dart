@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'yaru_check_button.dart';
+import 'yaru_checkbox_theme.dart';
 import 'yaru_radio.dart';
 import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
@@ -106,13 +107,11 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
   /// The color to use when this checkbox is checked.
   ///
   /// Defaults to [ColorScheme.primary].
-  @override
   final Color? selectedColor;
 
   /// The color to use for the checkmark when this checkbox is checked.
   ///
   /// Defaults to [ColorScheme.onPrimary].
-  @override
   final Color? checkmarkColor;
 
   @override
@@ -183,7 +182,71 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
 
   @override
   Widget build(BuildContext context) {
-    return buildToggleable(_YaruCheckboxPainter());
+    final checkboxTheme = YaruCheckboxTheme.of(context);
+    final painter = _YaruCheckboxPainter();
+    fillPainterDefaults(painter);
+
+    final unselectedState = <MaterialState>{};
+    final selectedState = unselectedState.union({MaterialState.selected});
+    final disabledState = unselectedState.union({MaterialState.disabled});
+    final selectedDisabledState = selectedState.union({MaterialState.disabled});
+
+    // Normal colors
+    final uncheckedColor =
+        checkboxTheme.color?.resolve(unselectedState) ?? painter.uncheckedColor;
+    final uncheckedBorderColor =
+        checkboxTheme.borderColor?.resolve(unselectedState) ??
+            painter.uncheckedBorderColor;
+    final checkedColor = widget.selectedColor ??
+        checkboxTheme.color?.resolve(selectedState) ??
+        painter.checkedColor;
+    final checkedBorderColor =
+        checkboxTheme.borderColor?.resolve(selectedState) ??
+            painter.checkedBorderColor;
+    final checkmarkColor = widget.checkmarkColor ??
+        checkboxTheme.checkmarkColor?.resolve(selectedState) ??
+        painter.checkmarkColor;
+
+    // Disabled colors
+    final disabledUncheckedColor =
+        checkboxTheme.color?.resolve(disabledState) ??
+            painter.disabledUncheckedColor;
+    final disabledUncheckedBorderColor =
+        checkboxTheme.borderColor?.resolve(disabledState) ??
+            painter.disabledUncheckedBorderColor;
+    final disabledCheckedColor =
+        checkboxTheme.color?.resolve(selectedDisabledState) ??
+            painter.disabledCheckedColor;
+    final disabledCheckedBorderColor =
+        checkboxTheme.borderColor?.resolve(selectedDisabledState) ??
+            painter.disabledCheckedBorderColor;
+    final disabledCheckmarkColor =
+        checkboxTheme.checkmarkColor?.resolve(selectedDisabledState) ??
+            painter.disabledCheckmarkColor;
+
+    // Indicator colors
+    final hoverIndicatorColor =
+        checkboxTheme.indicatorColor?.resolve({MaterialState.hovered}) ??
+            painter.hoverIndicatorColor;
+    final focusIndicatorColor =
+        checkboxTheme.indicatorColor?.resolve({MaterialState.focused}) ??
+            painter.focusIndicatorColor;
+
+    return buildToggleable(
+      painter
+        ..uncheckedColor = uncheckedColor
+        ..uncheckedBorderColor = uncheckedBorderColor
+        ..checkedColor = checkedColor
+        ..checkedBorderColor = checkedBorderColor
+        ..checkmarkColor = checkmarkColor
+        ..disabledUncheckedColor = disabledUncheckedColor
+        ..disabledUncheckedBorderColor = disabledUncheckedBorderColor
+        ..disabledCheckedColor = disabledCheckedColor
+        ..disabledCheckedBorderColor = disabledCheckedBorderColor
+        ..disabledCheckmarkColor = disabledCheckmarkColor
+        ..hoverIndicatorColor = hoverIndicatorColor
+        ..focusIndicatorColor = focusIndicatorColor,
+    );
   }
 }
 
@@ -257,8 +320,12 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
       ),
       Paint()
         ..color = interactive
-            ? Color.lerp(uncheckedBorderColor, checkedColor, t)!
-            : Color.lerp(disabledUncheckedBorderColor, Colors.transparent, t)!
+            ? Color.lerp(uncheckedBorderColor, checkedBorderColor, t)!
+            : Color.lerp(
+                disabledUncheckedBorderColor,
+                disabledCheckedBorderColor,
+                t,
+              )!
         ..style = PaintingStyle.stroke,
     );
   }

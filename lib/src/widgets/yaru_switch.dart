@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
 import 'yaru_switch_button.dart';
+import 'yaru_switch_theme.dart';
 import 'yaru_togglable.dart';
 
 const _kSwitchActivableAreaPadding =
@@ -37,6 +38,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
     required this.value,
     required this.onChanged,
     this.selectedColor,
+    this.dotColor,
     this.checkmarkColor,
     this.focusNode,
     this.autofocus = false,
@@ -82,13 +84,17 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   /// The color to use when this switch is on.
   ///
   /// Defaults to [ColorScheme.primary].
-  @override
   final Color? selectedColor;
 
   /// The color to use for the dot when this switch is on.
   ///
   /// Defaults to [ColorScheme.onPrimary].
-  @override
+  final Color? dotColor;
+
+  /// The color to use for the dot when this switch is on.
+  ///
+  /// Defaults to [ColorScheme.onPrimary].
+  @Deprecated('Use `dotColor` instead. Will be removed in yaru_widgets 3.0.0')
   final Color? checkmarkColor;
 
   @override
@@ -148,18 +154,77 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 
   @override
   Widget build(BuildContext context) {
+    final switchTheme = YaruSwitchTheme.of(context);
     final colorScheme = Theme.of(context).colorScheme;
+    final painter = _YaruSwitchPainter();
+    fillPainterDefaults(painter);
 
-    final uncheckedSwitchColor = colorScheme.onSurface.withOpacity(.25);
-    const uncheckedDotColor = Colors.white;
-    final disabledDotColor = colorScheme.onSurface.withOpacity(.4);
+    final unselectedState = <MaterialState>{};
+    final selectedState = unselectedState.union({MaterialState.selected});
+    final disabledState = unselectedState.union({MaterialState.disabled});
+    final selectedDisabledState = selectedState.union({MaterialState.disabled});
+
+    // Normal colors
+    final uncheckedColor = switchTheme.color?.resolve(unselectedState) ??
+        colorScheme.onSurface.withOpacity(.25);
+    final uncheckedBorderColor =
+        switchTheme.borderColor?.resolve(unselectedState) ?? Colors.transparent;
+    final uncheckedDotColor =
+        switchTheme.dotColor?.resolve(unselectedState) ?? Colors.white;
+    final checkedColor = widget.selectedColor ??
+        switchTheme.color?.resolve(selectedState) ??
+        painter.checkedColor;
+    final checkedBorderColor =
+        switchTheme.borderColor?.resolve(selectedState) ?? Colors.transparent;
+    final checkedDotColor = widget.dotColor ??
+        // ignore: deprecated_member_use_from_same_package
+        widget.checkmarkColor ??
+        switchTheme.dotColor?.resolve(selectedState) ??
+        painter.checkmarkColor;
+
+    // Disabled colors
+    final disabledUncheckedColor = switchTheme.color?.resolve(disabledState) ??
+        painter.disabledUncheckedColor;
+    final disabledUncheckedBorderColor =
+        switchTheme.borderColor?.resolve(disabledState) ?? Colors.transparent;
+    final disabledUncheckedDotColor =
+        switchTheme.dotColor?.resolve(disabledState) ??
+            colorScheme.onSurface.withOpacity(.4);
+    final disabledCheckedColor =
+        switchTheme.color?.resolve(selectedDisabledState) ??
+            painter.disabledCheckedColor;
+    final disabledCheckedBorderColor =
+        switchTheme.borderColor?.resolve(selectedDisabledState) ??
+            Colors.transparent;
+    final disabledCheckedDotColor =
+        switchTheme.dotColor?.resolve(selectedDisabledState) ??
+            disabledUncheckedDotColor;
+
+    // Indicator colors
+    final hoverIndicatorColor =
+        switchTheme.indicatorColor?.resolve({MaterialState.hovered}) ??
+            painter.hoverIndicatorColor;
+    final focusIndicatorColor =
+        switchTheme.indicatorColor?.resolve({MaterialState.focused}) ??
+            painter.focusIndicatorColor;
 
     return _maybeBuildGestureDetector(
       buildToggleable(
-        _YaruSwitchPainter()
-          ..uncheckedSwitchColor = uncheckedSwitchColor
+        painter
+          ..uncheckedColor = uncheckedColor
+          ..uncheckedBorderColor = uncheckedBorderColor
           ..uncheckedDotColor = uncheckedDotColor
-          ..disabledDotColor = disabledDotColor,
+          ..checkedColor = checkedColor
+          ..checkedBorderColor = checkedBorderColor
+          ..checkedDotColor = checkedDotColor
+          ..disabledUncheckedColor = disabledUncheckedColor
+          ..disabledUncheckedBorderColor = disabledUncheckedBorderColor
+          ..disabledUncheckedDotColor = disabledUncheckedDotColor
+          ..disabledCheckedColor = disabledCheckedColor
+          ..disabledCheckedBorderColor = disabledCheckedBorderColor
+          ..disabledCheckedDotColor = disabledCheckedDotColor
+          ..hoverIndicatorColor = hoverIndicatorColor
+          ..focusIndicatorColor = focusIndicatorColor,
       ),
     );
   }
@@ -228,9 +293,10 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 }
 
 class _YaruSwitchPainter extends YaruTogglablePainter {
-  late Color uncheckedSwitchColor;
   late Color uncheckedDotColor;
-  late Color disabledDotColor;
+  late Color checkedDotColor;
+  late Color disabledCheckedDotColor;
+  late Color disabledUncheckedDotColor;
 
   @override
   void paintTogglable(
@@ -252,9 +318,30 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
       ),
       Paint()
         ..color = interactive
-            ? Color.lerp(uncheckedSwitchColor, checkedColor, t)!
+            ? Color.lerp(uncheckedColor, checkedColor, t)!
             : Color.lerp(disabledUncheckedColor, disabledCheckedColor, t)!
         ..style = PaintingStyle.fill,
+    );
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(
+          origin.dx + 0.5,
+          origin.dy + 0.5,
+          size.width - 1.0,
+          size.height - 1.0,
+        ),
+        Radius.circular(size.height),
+      ),
+      Paint()
+        ..color = interactive
+            ? Color.lerp(uncheckedBorderColor, checkedBorderColor, t)!
+            : Color.lerp(
+                disabledUncheckedBorderColor,
+                disabledCheckedBorderColor,
+                t,
+              )!
+        ..style = PaintingStyle.stroke,
     );
   }
 
@@ -272,8 +359,8 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
 
     final paint = Paint()
       ..color = interactive
-          ? Color.lerp(uncheckedDotColor, checkmarkColor, t)!
-          : disabledDotColor
+          ? Color.lerp(uncheckedDotColor, checkedDotColor, t)!
+          : Color.lerp(disabledUncheckedDotColor, disabledCheckedDotColor, t)!
       ..style = PaintingStyle.fill;
 
     drawStateIndicator(canvas, size, center);

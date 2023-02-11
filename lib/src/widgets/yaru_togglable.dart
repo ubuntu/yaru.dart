@@ -23,8 +23,6 @@ abstract class YaruTogglable<T> extends StatefulWidget {
     required this.value,
     this.tristate = false,
     required this.onChanged,
-    this.selectedColor,
-    this.checkmarkColor,
     this.focusNode,
     this.autofocus = false,
   });
@@ -47,16 +45,6 @@ abstract class YaruTogglable<T> extends StatefulWidget {
   /// gets rebuilt.
   final ValueChanged<T>? onChanged;
 
-  /// The color to use when this togglable is checked.
-  ///
-  /// Defaults to [ColorScheme.primary].
-  final Color? selectedColor;
-
-  /// The color to use for the checkmark when this togglable is checked.
-  ///
-  /// Defaults to [ColorScheme.onPrimary].
-  final Color? checkmarkColor;
-
   /// Determine if this [YaruTogglable] can handle events.
   bool get interactive;
 
@@ -69,8 +57,8 @@ abstract class YaruTogglable<T> extends StatefulWidget {
 
 abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     with TickerProviderStateMixin {
-  bool hover = false;
-  bool focus = false;
+  bool hovered = false;
+  bool focused = false;
   bool active = false;
   bool? oldChecked;
 
@@ -165,13 +153,13 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   }
 
   void handleFocusChange(bool value) {
-    if (focus == value) {
+    if (focused == value) {
       return;
     }
 
-    setState(() => focus = value);
+    setState(() => focused = value);
 
-    if (focus) {
+    if (focused) {
       indicatorController.forward();
     } else {
       indicatorController.reverse();
@@ -179,13 +167,13 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   }
 
   void handleHoverChange(bool value) {
-    if (hover == value) {
+    if (hovered == value) {
       return;
     }
 
-    setState(() => hover = value);
+    setState(() => hovered = value);
 
-    if (hover) {
+    if (hovered) {
       indicatorController.forward();
     } else {
       indicatorController.reverse();
@@ -240,25 +228,52 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     );
   }
 
-  Widget buildToggleable(YaruTogglablePainter painter) {
+  void fillPainterDefaults(YaruTogglablePainter painter) {
     final colorScheme = Theme.of(context).colorScheme;
 
     // Normal colors
     final uncheckedColor = colorScheme.surface;
     final uncheckedBorderColor = colorScheme.onSurface.withOpacity(.3);
-    final checkedColor = widget.selectedColor ?? colorScheme.primary;
-    final checkmarkColor = widget.checkmarkColor ?? colorScheme.onPrimary;
+    final checkedColor = colorScheme.primary;
+    const checkedBorderColor = Colors.transparent;
+    final checkmarkColor = colorScheme.onPrimary;
 
     // Disabled colors
-    final uncheckedDisabledColor = colorScheme.onSurface.withOpacity(.1);
-    final uncheckedDisabledBorderColor = colorScheme.onSurface.withOpacity(.1);
-    final checkedDisabledColor = colorScheme.onSurface.withOpacity(.2);
-    final checkmarkDisabledColor = colorScheme.onSurface.withOpacity(.5);
+    final disabledUncheckedColor = colorScheme.onSurface.withOpacity(.1);
+    final disabledUncheckedBorderColor = disabledUncheckedColor;
+    final disabledCheckedColor = colorScheme.onSurface.withOpacity(.2);
+    const disabledCheckedBorderColor = Colors.transparent;
+    final disabledCheckmarkColor = colorScheme.onSurface.withOpacity(.5);
 
     // Indicator colors
     final hoverIndicatorColor = colorScheme.onSurface.withOpacity(.05);
     final focusIndicatorColor = colorScheme.onSurface.withOpacity(.1);
 
+    painter
+      ..interactive = widget.interactive
+      ..hovered = hovered
+      ..focused = focused
+      ..active = active
+      ..checked = widget.checked
+      ..oldChecked = oldChecked
+      ..position = position
+      ..sizePosition = sizePosition
+      ..indicatorPosition = indicatorPosition
+      ..uncheckedColor = uncheckedColor
+      ..uncheckedBorderColor = uncheckedBorderColor
+      ..checkedColor = checkedColor
+      ..checkedBorderColor = checkedBorderColor
+      ..checkmarkColor = checkmarkColor
+      ..disabledUncheckedColor = disabledUncheckedColor
+      ..disabledUncheckedBorderColor = disabledUncheckedBorderColor
+      ..disabledCheckedColor = disabledCheckedColor
+      ..disabledCheckedBorderColor = disabledCheckedBorderColor
+      ..disabledCheckmarkColor = disabledCheckmarkColor
+      ..hoverIndicatorColor = hoverIndicatorColor
+      ..focusIndicatorColor = focusIndicatorColor;
+  }
+
+  Widget buildToggleable(YaruTogglablePainter painter) {
     return _buildSemantics(
       child: _buildEventDetectors(
         child: Padding(
@@ -270,27 +285,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
               child: RepaintBoundary(
                 child: CustomPaint(
                   size: togglableSize,
-                  painter: painter
-                    ..interactive = widget.interactive
-                    ..hover = hover
-                    ..focus = focus
-                    ..active = active
-                    ..checked = widget.checked
-                    ..oldChecked = oldChecked
-                    ..position = position
-                    ..sizePosition = sizePosition
-                    ..indicatorPosition = indicatorPosition
-                    ..uncheckedColor = uncheckedColor
-                    ..uncheckedBorderColor = uncheckedBorderColor
-                    ..checkedColor = checkedColor
-                    ..checkmarkColor = checkmarkColor
-                    ..disabledUncheckedColor = uncheckedDisabledColor
-                    ..disabledUncheckedBorderColor =
-                        uncheckedDisabledBorderColor
-                    ..disabledCheckedColor = checkedDisabledColor
-                    ..disabledCheckmarkColor = checkmarkDisabledColor
-                    ..hoverIndicatorColor = hoverIndicatorColor
-                    ..focusIndicatorColor = focusIndicatorColor,
+                  painter: painter,
                 ),
               ),
             ),
@@ -304,8 +299,8 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 abstract class YaruTogglablePainter extends ChangeNotifier
     implements CustomPainter {
   late bool interactive;
-  late bool hover;
-  late bool focus;
+  late bool hovered;
+  late bool focused;
   late bool active;
   late bool? checked;
   late bool? oldChecked;
@@ -313,11 +308,13 @@ abstract class YaruTogglablePainter extends ChangeNotifier
   late Color uncheckedColor;
   late Color uncheckedBorderColor;
   late Color checkedColor;
+  late Color checkedBorderColor;
   late Color checkmarkColor;
 
   late Color disabledUncheckedColor;
   late Color disabledUncheckedBorderColor;
   late Color disabledCheckedColor;
+  late Color disabledCheckedBorderColor;
   late Color disabledCheckmarkColor;
 
   late Color hoverIndicatorColor;
@@ -362,7 +359,7 @@ abstract class YaruTogglablePainter extends ChangeNotifier
   void drawStateIndicator(Canvas canvas, Size canvasSize, Offset? offset) {
     if (interactive) {
       final defaultOffset = Offset(canvasSize.width / 2, canvasSize.height / 2);
-      final color = focus ? focusIndicatorColor : hoverIndicatorColor;
+      final color = focused ? focusIndicatorColor : hoverIndicatorColor;
       final paint = Paint()
         ..color =
             Color.lerp(Colors.transparent, color, indicatorPosition.value)!
