@@ -187,10 +187,13 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
     final painter = _YaruRadioPainter();
     fillPainterDefaults(painter);
 
-    final unselectedState = <MaterialState>{};
-    final selectedState = unselectedState.union({MaterialState.selected});
-    final disabledState = unselectedState.union({MaterialState.disabled});
-    final selectedDisabledState = selectedState.union({MaterialState.disabled});
+    const unselectedState = <MaterialState>{};
+    const selectedState = {MaterialState.selected};
+    const disabledState = {MaterialState.disabled};
+    const selectedDisabledState = {
+      MaterialState.selected,
+      MaterialState.disabled
+    };
 
     // Normal colors
     final uncheckedColor =

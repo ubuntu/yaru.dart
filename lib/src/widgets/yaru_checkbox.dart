@@ -186,10 +186,13 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
     final painter = _YaruCheckboxPainter();
     fillPainterDefaults(painter);
 
-    final unselectedState = <MaterialState>{};
-    final selectedState = unselectedState.union({MaterialState.selected});
-    final disabledState = unselectedState.union({MaterialState.disabled});
-    final selectedDisabledState = selectedState.union({MaterialState.disabled});
+    const unselectedState = <MaterialState>{};
+    const selectedState = {MaterialState.selected};
+    const disabledState = {MaterialState.disabled};
+    const selectedDisabledState = {
+      MaterialState.selected,
+      MaterialState.disabled
+    };
 
     // Normal colors
     final uncheckedColor =
