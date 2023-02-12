@@ -1,5 +1,10 @@
 # Changelog
 
+# 2.0.3
+
+* Add themes and various enhancements to togglables by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/613
+* YaruPopupMenuButton: make radius changeable by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/616
+
 # 2.0.2
 
 * Add diagnosticable properties to togglable widgets by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/579
