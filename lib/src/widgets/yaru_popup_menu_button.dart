@@ -23,6 +23,9 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.enableFeedback,
     this.constraints,
     this.elevation,
+    this.borderRadius = const BorderRadius.all(
+      Radius.circular(kYaruButtonRadius),
+    ),
   });
 
   final T? initialValue;
@@ -39,6 +42,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final bool? enableFeedback;
   final BoxConstraints? constraints;
   final double? elevation;
+  final BorderRadius borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     final shape = style?.shape?.resolve(state) ??
         RoundedRectangleBorder(
           side: BorderSide(color: Theme.of(context).dividerColor),
-          borderRadius: BorderRadius.circular(kYaruButtonRadius),
+          borderRadius: borderRadius,
         );
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
