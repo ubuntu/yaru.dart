@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/constants.dart';
 
 import 'yaru_check_button.dart';
 
@@ -23,9 +22,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.enableFeedback,
     this.constraints,
     this.elevation,
-    this.borderRadius = const BorderRadius.all(
-      Radius.circular(kYaruButtonRadius),
-    ),
+    this.style,
   });
 
   final T? initialValue;
@@ -42,17 +39,16 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final bool? enableFeedback;
   final BoxConstraints? constraints;
   final double? elevation;
-  final BorderRadius borderRadius;
+  final ButtonStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    final style = OutlinedButtonTheme.of(context).style;
+    final style = this.style ?? OutlinedButtonTheme.of(context).style;
     final state = <MaterialState>{if (!enabled) MaterialState.disabled};
     final side = style?.side?.resolve(state);
     final shape = style?.shape?.resolve(state) ??
         RoundedRectangleBorder(
           side: BorderSide(color: Theme.of(context).dividerColor),
-          borderRadius: borderRadius,
         );
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
