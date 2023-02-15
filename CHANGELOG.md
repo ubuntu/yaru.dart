@@ -1,5 +1,10 @@
 # Changelog
 
+# 2.1.0
+
+* Switch to yaru_window by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/618
+* YaruPopupMenuButton: replace borderRadius with style by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/620
+
 # 2.0.3
 
 * Add themes and various enhancements to togglables by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/613
