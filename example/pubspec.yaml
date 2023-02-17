@@ -12,11 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.0.3
-  yaru: ^0.4.4
-  yaru_colors: ^0.1.0
+  yaru: ^0.5.2
+  yaru_colors: ^0.1.3
   yaru_icons:
     path: ../
-  yaru_widgets: 2.0.0-beta-2
+  yaru_widgets: ^2.0.1
 
 dependency_overrides:
   yaru_icons:

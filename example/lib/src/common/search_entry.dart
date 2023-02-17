@@ -30,7 +30,13 @@ class SearchEntry extends StatelessWidget implements PreferredSizeWidget {
       },
       child: TextField(
         decoration: InputDecoration(
-          border: const UnderlineInputBorder(),
+          enabledBorder: InputBorder.none,
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            borderRadius: BorderRadius.zero,
+          ),
           prefixIcon: const Icon(
             YaruIcons.magnifying_glass,
             size: 24,

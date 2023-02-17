@@ -29,7 +29,7 @@ class IconDialog extends StatelessWidget {
       titlePadding: EdgeInsets.zero,
       contentPadding:
           const EdgeInsets.symmetric(vertical: _dialogContentPaddingValue),
-      title: YaruTitleBar(
+      title: YaruDialogTitleBar(
         title: Text(beautifyIconName(iconItem.name)),
       ),
       children: [
@@ -60,7 +60,7 @@ class IconDialog extends StatelessWidget {
                     ),
                     Text(
                       '${size.toInt().toString()}px',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
