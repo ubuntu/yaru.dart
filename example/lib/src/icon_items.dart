@@ -40,6 +40,21 @@ final List<IconItem> animatedIconItems = [
       size: iconSize,
     ),
   ),
+  IconItem(
+    name: 'Compass',
+    usage: 'YaruAnimatedCompassIcon()',
+    iconBuilder: (context, iconSize) => YaruAnimatedCompassIcon(
+      size: iconSize,
+    ),
+  ),
+  IconItem(
+    name: 'Compass filled',
+    usage: 'YaruAnimatedCompassIcon(filled: true)',
+    iconBuilder: (context, iconSize) => YaruAnimatedCompassIcon(
+      size: iconSize,
+      filled: true,
+    ),
+  ),
 ];
 
 final List<IconItem> widgetIconItems = [
