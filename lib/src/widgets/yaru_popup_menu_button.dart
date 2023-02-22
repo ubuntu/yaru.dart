@@ -48,7 +48,9 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     final side = style?.side?.resolve(state);
     final shape = style?.shape?.resolve(state) ??
         RoundedRectangleBorder(
-          side: BorderSide(color: Theme.of(context).dividerColor),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.outline,
+          ),
         );
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
