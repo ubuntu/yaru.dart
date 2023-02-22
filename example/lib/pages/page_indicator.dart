@@ -12,8 +12,8 @@ class PageIndicatorPage extends StatefulWidget {
 class _PageIndicatorPageState extends State<PageIndicatorPage> {
   int _page = 0;
   int _length = 5;
-  double _dotSizeFactor = 1.0;
-  double _dotSpacingFactor = 1.0;
+  double _dotSize = 12.0;
+  double _dotSpacing = 48.0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,8 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
           length: _length,
           page: _page,
           onTap: (page) => setState(() => _page = page),
-          dotSizeFactor: _dotSizeFactor,
-          dotSpacingFactor: _dotSpacingFactor,
+          dotSize: _dotSize,
+          dotSpacing: _dotSpacing,
         ),
         const SizedBox(height: 15),
         ButtonBar(
@@ -50,16 +50,16 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
           ],
         ),
         Slider(
-          min: 0.5,
-          max: 2,
-          value: _dotSizeFactor,
-          onChanged: (scale) => setState(() => _dotSizeFactor = scale),
+          min: 6.0,
+          max: 24.0,
+          value: _dotSize,
+          onChanged: (scale) => setState(() => _dotSize = scale),
         ),
         Slider(
-          min: 0.5,
-          max: 2,
-          value: _dotSpacingFactor,
-          onChanged: (scale) => setState(() => _dotSpacingFactor = scale),
+          min: 12.0,
+          max: 96.0,
+          value: _dotSpacing,
+          onChanged: (scale) => setState(() => _dotSpacing = scale),
         ),
       ],
     );
