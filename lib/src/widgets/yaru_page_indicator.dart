@@ -19,6 +19,8 @@ class YaruPageIndicator extends StatelessWidget {
     this.animationDuration = Duration.zero,
     this.animationCurve = Curves.linear,
     this.onTap,
+    this.dotSizeFactor = 1.0,
+    this.dotSpacingFactor = 1.0,
   }) : assert(page >= 0 && page <= length - 1);
 
   /// Determine the number of pages.
@@ -39,19 +41,25 @@ class YaruPageIndicator extends StatelessWidget {
   /// It passes the tapped page index as parameter.
   final ValueChanged<int>? onTap;
 
+  /// Scaling factor that controls the size of the dots.
+  final double dotSizeFactor;
+
+  /// Scaling factor that controls the spacing of the dots.
+  final double dotSpacingFactor;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        const dotSize = 12.0;
+        final dotSize = 12.0 * dotSizeFactor;
 
         for (final layout in [
           [48.0, constraints.maxWidth / 2],
           [24.0, constraints.maxWidth / 3 * 2],
           [12.0, constraints.maxWidth / 6 * 5]
         ]) {
-          final dotSpacing = layout[0];
-          final maxWidth = layout[1];
+          final dotSpacing = layout[0] * dotSpacingFactor;
+          final maxWidth = layout[1] * dotSpacingFactor;
 
           if (dotSize * length + dotSpacing * (length - 1) < maxWidth) {
             return _buildDotIndicator(context, dotSize, dotSpacing);
