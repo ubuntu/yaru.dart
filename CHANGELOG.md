@@ -1,5 +1,11 @@
 # Changelog
 
+# 2.1.1
+
+* YaruPageIndicator: add custom scale parameters by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/624
+* YaruPopupMenuButton: use outline color by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/626
+
+
 # 2.1.0
 
 * Switch to yaru_window by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/618
