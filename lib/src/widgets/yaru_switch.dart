@@ -91,10 +91,12 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   /// Defaults to [ColorScheme.onPrimary].
   final Color? thumbColor;
 
+  // TODO: Drop this in 2.2.0 release.
+  //
   /// The color to use for the thumb when this switch is on.
   ///
   /// Defaults to [ColorScheme.onPrimary].
-  @Deprecated('Use `thumbColor` instead. Will be removed in yaru_widgets 3.0.0')
+  @Deprecated('Use `thumbColor` instead. Will be removed in yaru_widgets 2.2.0')
   final Color? checkmarkColor;
 
   @override
