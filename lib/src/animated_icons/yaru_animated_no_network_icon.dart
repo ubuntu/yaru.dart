@@ -70,21 +70,19 @@ class _YaruAnimatedNoNetworkIconState extends State<YaruAnimatedNoNetworkIcon>
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
-      child: ClipRect(
-        child: SizedBox.square(
-          dimension: widget.size,
-          child: AnimatedBuilder(
-            animation: progress,
-            builder: (context, child) {
-              return CustomPaint(
-                painter: _YaruAnimatedNoNetworkIconPainter(
-                  widget.size,
-                  widget.color ?? Theme.of(context).colorScheme.onSurface,
-                  progress.value,
-                ),
-              );
-            },
-          ),
+      child: SizedBox.square(
+        dimension: widget.size,
+        child: AnimatedBuilder(
+          animation: progress,
+          builder: (context, child) {
+            return CustomPaint(
+              painter: _YaruAnimatedNoNetworkIconPainter(
+                widget.size,
+                widget.color ?? Theme.of(context).colorScheme.onSurface,
+                progress.value,
+              ),
+            );
+          },
         ),
       ),
     );
