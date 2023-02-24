@@ -37,7 +37,7 @@ class YaruPageIndicatorThemeData
   final double? dotSpacing;
 
   /// Decoration of the dots.
-  final DotDecorationBuilder? dotDecorationBuilder;
+  final YaruDotDecorationBuilder? dotDecorationBuilder;
 
   /// Creates a copy with the given fields replaced with new values.
   @override
@@ -46,7 +46,7 @@ class YaruPageIndicatorThemeData
     Curve? animationCurve,
     double? dotSize,
     double? dotSpacing,
-    DotDecorationBuilder? dotDecorationBuilder,
+    YaruDotDecorationBuilder? dotDecorationBuilder,
   }) {
     return YaruPageIndicatorThemeData(
       animationDuration: animationDuration ?? this.animationDuration,

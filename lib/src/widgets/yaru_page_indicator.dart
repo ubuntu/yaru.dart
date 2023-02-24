@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'yaru_carousel.dart';
 import 'yaru_page_indicator_theme.dart';
 
-typedef DotDecorationBuilder = Decoration Function(
+typedef YaruDotDecorationBuilder = Decoration Function(
   int index,
 );
 
@@ -55,7 +55,7 @@ class YaruPageIndicator extends StatelessWidget {
   final double dotSpacing;
 
   /// Decoration of the dots.
-  final DotDecorationBuilder? dotDecorationBuilder;
+  final YaruDotDecorationBuilder? dotDecorationBuilder;
 
   @override
   Widget build(BuildContext context) {
