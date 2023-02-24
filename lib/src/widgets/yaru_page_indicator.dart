@@ -23,11 +23,11 @@ class YaruPageIndicator extends StatelessWidget {
     super.key,
     required this.length,
     required this.page,
-    this.animationDuration = Duration.zero,
-    this.animationCurve = Curves.linear,
+    this.animationDuration,
+    this.animationCurve,
     this.onTap,
-    this.dotSize = 12.0,
-    this.dotSpacing = 48.0,
+    this.dotSize,
+    this.dotSpacing,
     this.dotDecorationBuilder,
   }) : assert(page >= 0 && page <= length - 1);
 
@@ -40,21 +40,29 @@ class YaruPageIndicator extends StatelessWidget {
 
   /// Duration of a transition between two dots.
   /// Use [Duration.zero] (defaults) to disable transition.
-  final Duration animationDuration;
+  ///
+  /// Defaults to [Duration.zero].
+  final Duration? animationDuration;
 
   /// Curve used in a transition between two dots.
-  final Curve animationCurve;
+  ///
+  /// Defaults to [Curves.linear].
+  final Curve? animationCurve;
 
   /// Callback called when tapping a dot.
   /// It passes the tapped page index as parameter.
   final ValueChanged<int>? onTap;
 
   /// Size of the dots.
-  final double dotSize;
+  ///
+  /// Defaults to 12.0
+  final double? dotSize;
 
   /// Base length for the space between the dots.
   /// Will be automatically reduced to fit the vertical constraints.
-  final double dotSpacing;
+  ///
+  /// Defaults to 48.0
+  final double? dotSpacing;
 
   /// Decoration of the dots.
   final YaruDotDecorationBuilder? dotDecorationBuilder;
@@ -64,8 +72,8 @@ class YaruPageIndicator extends StatelessWidget {
     final theme = Theme.of(context);
     final indicatorTheme = YaruPageIndicatorTheme.of(context);
 
-    final dotSize = indicatorTheme?.dotSize ?? this.dotSize;
-    final dotSpacing = indicatorTheme?.dotSpacing ?? this.dotSpacing;
+    final dotSize = this.dotSize ?? indicatorTheme?.dotSize ?? 12.0;
+    final dotSpacing = this.dotSpacing ?? indicatorTheme?.dotSpacing ?? 48.0;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -99,11 +107,12 @@ class YaruPageIndicator extends StatelessWidget {
     double dotSpacing,
   ) {
     final dotDecorationBuilder =
-        indicatorTheme?.dotDecorationBuilder ?? this.dotDecorationBuilder;
-    final animationDuration =
-        indicatorTheme?.animationDuration ?? this.animationDuration;
+        this.dotDecorationBuilder ?? indicatorTheme?.dotDecorationBuilder;
+    final animationDuration = this.animationDuration ??
+        indicatorTheme?.animationDuration ??
+        Duration.zero;
     final animationCurve =
-        indicatorTheme?.animationCurve ?? this.animationCurve;
+        this.animationCurve ?? indicatorTheme?.animationCurve ?? Curves.linear;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
