@@ -110,37 +110,47 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
   final Color color;
   final double progress;
 
+  late Canvas canvas;
+
   @override
   void paint(Canvas canvas, Size size) {
-    if (filled && progress >= 0.5) {
-      final clipRect = Rect.fromCenter(
-        center: Offset.zero,
-        width: this.size * 2,
-        height: this.size * 2,
+    this.canvas = canvas;
+
+    canvas.saveLayer(null, Paint());
+
+    _paintOuterCirclePath();
+    _paintCheckmark();
+
+    canvas.restore();
+  }
+
+  void _paintOuterCirclePath() {
+    canvas.drawPath(_createOuterCirclePath(), _createStrokePaint());
+  }
+
+  void _paintCheckmark() {
+    if (filled) {
+      canvas.drawPath(
+        _createCheckmarkPath(false),
+        _createFillPaint(),
       );
-      final clipPath = Path.combine(
-        PathOperation.difference,
-        Path()..addRect(clipRect),
+      canvas.drawPath(
+        _createInnerCirclePath(false),
+        _createFillPaint(),
+      );
+      canvas.drawPath(
         Path.combine(
           PathOperation.intersect,
-          _createCheckmarkPath(true),
           _createInnerCirclePath(true),
+          _createCheckmarkPath(true),
         ),
+        _getDiffFillPaint(),
       );
-
-      canvas.save();
-      canvas.clipPath(clipPath);
-      canvas.saveLayer(clipRect, Paint());
-
-      canvas.drawPath(_createOuterCirclePath(), _createStrokePaint());
-      canvas.drawPath(_createInnerCirclePath(false), _createFillPaint());
-      canvas.drawPath(_createCheckmarkPath(false), _createFillPaint());
-
-      canvas.restore();
-      canvas.restore();
     } else {
-      canvas.drawPath(_createCheckmarkPath(false), _createFillPaint());
-      canvas.drawPath(_createOuterCirclePath(), _createStrokePaint());
+      canvas.drawPath(
+        _createCheckmarkPath(false),
+        _createFillPaint(),
+      );
     }
   }
 
@@ -215,7 +225,7 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
         Rect.fromCircle(
           center: Offset(size / 2, size / 2),
           radius: large
-              ? circleRadius + (1 / (_kTargetCanvasSize / size) / 2)
+              ? circleRadius + (1 / (_kTargetCanvasSize / size))
               : circleRadius,
         ),
       );
@@ -234,6 +244,13 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1 / (_kTargetCanvasSize / size)
       ..blendMode = BlendMode.src;
+  }
+
+  Paint _getDiffFillPaint() {
+    return Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.fill
+      ..blendMode = BlendMode.dstOut;
   }
 
   @override

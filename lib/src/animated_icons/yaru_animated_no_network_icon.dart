@@ -115,32 +115,24 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   late final PathMetric wave4Metric;
   late final PathMetric stripe1Metric;
 
+  late Canvas canvas;
+
   @override
   void paint(Canvas canvas, Size size) {
-    final clipRect = Rect.fromCenter(
-      center: Offset.zero,
-      width: this.size * 2,
-      height: this.size * 2,
-    );
-    final clipPath = Path.combine(
-      PathOperation.difference,
-      Path()..addRect(clipRect),
-      _getStripe2Path(),
-    );
+    this.canvas = canvas;
 
-    canvas.save();
-    canvas.clipPath(clipPath);
-    canvas.saveLayer(clipRect, Paint());
+    canvas.saveLayer(null, Paint());
 
-    _drawExtractedPathMetric(canvas, wave1Metric, 0, .4);
-    _drawExtractedPathMetric(canvas, wave2Metric, 0.1, .5);
-    _drawExtractedPathMetric(canvas, wave3Metric, 0.2, .6);
-    _drawExtractedPathMetric(canvas, wave4Metric, 0.3, .7);
-    _drawExtractedPathMetric(canvas, stripe1Metric, .4, .6);
+    _drawExtractedPathMetric(wave1Metric, 0, .4);
+    _drawExtractedPathMetric(wave2Metric, 0.1, .5);
+    _drawExtractedPathMetric(wave3Metric, 0.2, .6);
+    _drawExtractedPathMetric(wave4Metric, 0.3, .7);
+    _drawExtractedPathMetric(stripe1Metric, .4, .6);
 
-    _drawDot(canvas);
+    _drawStripe2Diff();
 
-    canvas.restore();
+    _drawDot();
+
     canvas.restore();
   }
 
@@ -245,28 +237,21 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   }
 
   Path _getStripe2Path() {
-    final start1 = Offset(size * 0.2108561, size * 0.08081055);
-    final start2 = Offset(size * 0.1813965, size * 0.1102702);
-    final end1 = Offset(size * 0.8358561, size * 0.7058105);
-    final end2 = Offset(size * 0.8063965, size * 0.7352702);
+    final start = Offset(size * 0.19614, size * 0.09552);
+    final end = Offset(size * 0.82116, size * 0.72055);
 
     final localProgress = _computeLocalProgress(.4, .6);
 
-    final drawEnd1 = Offset.lerp(start1, end1, localProgress)!;
-    final drawEnd2 = Offset.lerp(start2, end2, localProgress)!;
+    final drawEnd = Offset.lerp(start, end, localProgress)!;
 
     final stripe2 = Path();
-    stripe2.moveTo(start1.dx, start1.dy);
-    stripe2.lineTo(drawEnd1.dx, drawEnd1.dy);
-    stripe2.lineTo(drawEnd2.dx, drawEnd2.dy);
-    stripe2.lineTo(start2.dx, start2.dy);
-    stripe2.close();
+    stripe2.moveTo(start.dx, start.dy);
+    stripe2.lineTo(drawEnd.dx, drawEnd.dy);
 
     return stripe2;
   }
 
   void _drawExtractedPathMetric(
-    Canvas canvas,
     PathMetric metric,
     double start,
     double duration,
@@ -279,7 +264,14 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
     canvas.drawPath(drawPath, _getStrokePaint());
   }
 
-  void _drawDot(Canvas canvas) {
+  void _drawStripe2Diff() {
+    canvas.drawPath(
+      _getStripe2Path(),
+      _getDiffStrokePaint(),
+    );
+  }
+
+  void _drawDot() {
     canvas.drawCircle(
       Offset(size * 0.5, size * 0.7916667),
       (size * 0.08333333) * _computeLocalProgress(0, .1),
@@ -300,6 +292,14 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
       ..color = color
       ..strokeWidth = 1 / (_kTargetCanvasSize / size)
       ..blendMode = BlendMode.src;
+  }
+
+  Paint _getDiffStrokePaint() {
+    return Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1 / (_kTargetCanvasSize / size)
+      ..blendMode = BlendMode.dstOut;
   }
 
   double _computeLocalProgress(double start, double duration) {
