@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'yaru_carousel.dart';
+import 'yaru_page_indicator_theme.dart';
+
+typedef DotDecorationBuilder = Decoration Function(
+  int index,
+);
 
 /// A responsive page indicator.
 ///
@@ -21,6 +26,7 @@ class YaruPageIndicator extends StatelessWidget {
     this.onTap,
     this.dotSize = 12.0,
     this.dotSpacing = 48.0,
+    this.dotDecorationBuilder,
   }) : assert(page >= 0 && page <= length - 1);
 
   /// Determine the number of pages.
@@ -48,8 +54,17 @@ class YaruPageIndicator extends StatelessWidget {
   /// Will be automatically reduced to fit the vertical constraints.
   final double dotSpacing;
 
+  /// Decoration of the dots.
+  final DotDecorationBuilder? dotDecorationBuilder;
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final indicatorTheme = YaruPageIndicatorTheme.of(context);
+
+    final dotSize = indicatorTheme?.dotSize ?? this.dotSize;
+    final dotSpacing = indicatorTheme?.dotSpacing ?? this.dotSpacing;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         for (final layout in [
@@ -61,30 +76,45 @@ class YaruPageIndicator extends StatelessWidget {
           final maxWidth = layout[1];
 
           if (dotSize * length + dotSpacing * (length - 1) < maxWidth) {
-            return _buildDotIndicator(context, dotSize, dotSpacing);
+            return _buildDotIndicator(
+              theme,
+              indicatorTheme,
+              dotSize,
+              dotSpacing,
+            );
           }
         }
 
-        return _buildTextIndicator(context);
+        return _buildTextIndicator(theme);
       },
     );
   }
 
   Widget _buildDotIndicator(
-    BuildContext context,
+    ThemeData theme,
+    YaruPageIndicatorThemeData? indicatorTheme,
     double dotSize,
     double dotSpacing,
   ) {
+    final dotDecorationBuilder =
+        indicatorTheme?.dotDecorationBuilder ?? this.dotDecorationBuilder;
+    final animationDuration =
+        indicatorTheme?.animationDuration ?? this.animationDuration;
+    final animationCurve =
+        indicatorTheme?.animationCurve ?? this.animationCurve;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: List<Widget>.generate(length, (index) {
-        final dotDecoration = BoxDecoration(
-          color: page == index
-              ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.onSurface.withOpacity(.3),
-          shape: BoxShape.circle,
-        );
+        final dotDecoration = dotDecorationBuilder != null
+            ? dotDecorationBuilder.call(index)
+            : BoxDecoration(
+                color: page == index
+                    ? theme.colorScheme.primary
+                    : theme.colorScheme.onSurface.withOpacity(.3),
+                shape: BoxShape.circle,
+              );
 
         return GestureDetector(
           onTap: onTap == null ? null : () => onTap!(index),
@@ -114,10 +144,10 @@ class YaruPageIndicator extends StatelessWidget {
     );
   }
 
-  Widget _buildTextIndicator(BuildContext context) {
+  Widget _buildTextIndicator(ThemeData theme) {
     return Text(
       '${page + 1}/$length',
-      style: Theme.of(context).textTheme.bodySmall,
+      style: theme.textTheme.bodySmall,
       textAlign: TextAlign.center,
     );
   }
