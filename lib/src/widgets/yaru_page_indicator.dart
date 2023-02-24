@@ -5,6 +5,8 @@ import 'yaru_page_indicator_theme.dart';
 
 typedef YaruDotDecorationBuilder = Decoration Function(
   int index,
+  int selectedIndex,
+  int length,
 );
 
 /// A responsive page indicator.
@@ -108,7 +110,7 @@ class YaruPageIndicator extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: List<Widget>.generate(length, (index) {
         final dotDecoration = dotDecorationBuilder != null
-            ? dotDecorationBuilder.call(index)
+            ? dotDecorationBuilder.call(index, page, length)
             : BoxDecoration(
                 color: page == index
                     ? theme.colorScheme.primary
