@@ -334,7 +334,7 @@ extension _ListSpacing on List<Widget> {
 /// MaterialApp(
 ///   builder: (context, child) => Scaffold(
 ///     appBar: const YaruWindowTitleBar(
-///       title: Text('Window Title'),
+///       title: Text('YaruWindowTitleBar'),
 ///     ),
 ///     body: child,
 ///   ),
