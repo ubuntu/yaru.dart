@@ -16,9 +16,7 @@ typedef YaruMasterDetailBuilder = Widget Function(
   bool selected,
 );
 
-typedef YaruAppBarBuilder = PreferredSizeWidget? Function(
-  BuildContext context,
-);
+typedef YaruAppBarBuilder = PreferredSizeWidget? Function(BuildContext context);
 
 /// A responsive master-detail page.
 ///
@@ -221,8 +219,8 @@ class _YaruMasterDetailLayoutScope extends InheritedWidget {
     required this.orientation,
     required OrientationWidgetBuilder builder,
   }) : super(
-            child:
-                Builder(builder: (context) => builder(context, orientation)));
+          child: Builder(builder: (context) => builder(context, orientation)),
+        );
 
   final Orientation orientation;
 
