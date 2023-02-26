@@ -118,7 +118,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   }
 
   /// Returns the orientation of the [YaruMasterDetailPage] that most tightly
-  /// encloses the given context.
+  /// encloses the given context or `null` if there is no [YaruMasterDetailPage].
   static Orientation? maybeOrientationOf(BuildContext context) {
     final scope = context
         .dependOnInheritedWidgetOfExactType<_YaruMasterDetailLayoutScope>();
