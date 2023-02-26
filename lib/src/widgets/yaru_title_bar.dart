@@ -6,6 +6,7 @@ import 'package:yaru_colors/yaru_colors.dart';
 import 'package:yaru_widgets/constants.dart';
 import 'package:yaru_window/yaru_window.dart';
 
+import 'yaru_back_button.dart';
 import 'yaru_title_bar_gesture_detector.dart';
 import 'yaru_title_bar_theme.dart';
 import 'yaru_window_control.dart';
@@ -42,6 +43,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.onRestore,
     this.onShowMenu,
     this.heroTag = _kYaruTitleBarHeroTag,
+    this.automaticallyImplyLeading = false,
   });
 
   /// The primary title widget.
@@ -118,6 +120,10 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   /// in place during page transitions. If set to `null`, no [Hero] will be used.
   final Object? heroTag;
 
+  /// Whether the [leading] widget is automatically set to a back button when
+  /// the [Navigator] can be popped.
+  final bool automaticallyImplyLeading;
+
   @override
   Size get preferredSize =>
       Size(0, style == YaruTitleBarStyle.hidden ? 0 : kYaruTitleBarHeight);
@@ -169,6 +175,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     final buttonSpacing = titleBarTheme.buttonSpacing ?? 0;
     final buttonPadding = titleBarTheme.buttonPadding ?? EdgeInsets.zero;
+
+    final leading = this.leading ??
+        (automaticallyImplyLeading &&
+                Navigator.maybeOf(context)?.canPop() == true
+            ? const YaruBackButton()
+            : null);
 
     // TODO: backdrop effect
     Widget? backdropEffect(Widget? child) {
@@ -308,6 +320,7 @@ class YaruWindowTitleBar extends StatelessWidget
     this.onRestore = YaruWindow.restore,
     this.onShowMenu = YaruWindow.showMenu,
     this.heroTag = _kYaruTitleBarHeroTag,
+    this.automaticallyImplyLeading = false,
   });
 
   /// The primary title widget.
@@ -384,6 +397,10 @@ class YaruWindowTitleBar extends StatelessWidget
   /// in place during page transitions. If set to `null`, no [Hero] will be used.
   final Object? heroTag;
 
+  /// Whether the [leading] widget is automatically set to a back button when
+  /// the [Navigator] can be popped.
+  final bool automaticallyImplyLeading;
+
   @override
   Size get preferredSize =>
       Size(0, style == YaruTitleBarStyle.hidden ? 0 : kYaruTitleBarHeight);
@@ -437,6 +454,7 @@ class YaruWindowTitleBar extends StatelessWidget
           onRestore: onRestore,
           onShowMenu: onShowMenu,
           heroTag: heroTag,
+          automaticallyImplyLeading: automaticallyImplyLeading,
         );
       },
     );
@@ -469,6 +487,7 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.onRestore = null,
     super.onShowMenu = YaruWindow.showMenu,
     super.heroTag = _kYaruTitleBarHeroTag,
+    super.automaticallyImplyLeading = false,
   });
 
   static const defaultShape = RoundedRectangleBorder(
