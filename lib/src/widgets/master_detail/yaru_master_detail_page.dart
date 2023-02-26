@@ -165,31 +165,25 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _YaruMasterDetailLayoutBuilder(
-        builder: (context, orientation) {
-          switch (orientation) {
-            case Orientation.portrait:
-              return YaruPortraitLayout(
-                tileBuilder: widget.tileBuilder,
-                pageBuilder: widget.pageBuilder,
-                onSelected: widget.onSelected,
-                appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
-                bottomBar: widget.bottomBar,
-                controller: _controller,
-              );
-            case Orientation.landscape:
-              return YaruLandscapeLayout(
-                tileBuilder: widget.tileBuilder,
-                pageBuilder: widget.pageBuilder,
-                onSelected: widget.onSelected,
-                layoutDelegate: widget.layoutDelegate,
-                previousPaneWidth: _previousPaneWidth,
-                onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
-                appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
-                bottomBar: widget.bottomBar,
-                controller: _controller,
-              );
-          }
-        },
+        portrait: (context) => YaruPortraitLayout(
+          tileBuilder: widget.tileBuilder,
+          pageBuilder: widget.pageBuilder,
+          onSelected: widget.onSelected,
+          appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
+          bottomBar: widget.bottomBar,
+          controller: _controller,
+        ),
+        landscape: (context) => YaruLandscapeLayout(
+          tileBuilder: widget.tileBuilder,
+          pageBuilder: widget.pageBuilder,
+          onSelected: widget.onSelected,
+          layoutDelegate: widget.layoutDelegate,
+          previousPaneWidth: _previousPaneWidth,
+          onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
+          appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
+          bottomBar: widget.bottomBar,
+          controller: _controller,
+        ),
       ),
     );
   }
@@ -197,10 +191,12 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
 class _YaruMasterDetailLayoutBuilder extends StatelessWidget {
   const _YaruMasterDetailLayoutBuilder({
-    required this.builder,
+    required this.portrait,
+    required this.landscape,
   });
 
-  final OrientationWidgetBuilder builder;
+  final WidgetBuilder portrait;
+  final WidgetBuilder landscape;
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +209,9 @@ class _YaruMasterDetailLayoutBuilder extends StatelessWidget {
             : Orientation.landscape;
         return _YaruMasterDetailLayoutScope(
           orientation: orientation,
-          builder: builder,
+          child: orientation == Orientation.portrait
+              ? portrait(context)
+              : landscape(context),
         );
       },
     );
@@ -221,12 +219,10 @@ class _YaruMasterDetailLayoutBuilder extends StatelessWidget {
 }
 
 class _YaruMasterDetailLayoutScope extends InheritedWidget {
-  _YaruMasterDetailLayoutScope({
+  const _YaruMasterDetailLayoutScope({
     required this.orientation,
-    required OrientationWidgetBuilder builder,
-  }) : super(
-          child: Builder(builder: (context) => builder(context, orientation)),
-        );
+    required super.child,
+  });
 
   final Orientation orientation;
 
