@@ -1,6 +1,6 @@
 <!-- REMINDER:
 
-1) For a bug fix, please target the latest `2.x` branch, else target `main`.
+1) For a bug fix, please target the `release` branch, else target `main`.
 
 2) If this PR introduces any visual changes, please run:
 ```
