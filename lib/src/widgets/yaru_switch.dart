@@ -39,7 +39,6 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
     required this.onChanged,
     this.selectedColor,
     this.thumbColor,
-    this.checkmarkColor,
     this.focusNode,
     this.autofocus = false,
   });
@@ -90,14 +89,6 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   ///
   /// Defaults to [ColorScheme.onPrimary].
   final Color? thumbColor;
-
-  // TODO: Drop this in 2.2.0 release.
-  //
-  /// The color to use for the thumb when this switch is on.
-  ///
-  /// Defaults to [ColorScheme.onPrimary].
-  @Deprecated('Use `thumbColor` instead. Will be removed in yaru_widgets 2.2.0')
-  final Color? checkmarkColor;
 
   @override
   bool get interactive => onChanged != null;
@@ -182,8 +173,6 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
     final checkedBorderColor =
         switchTheme.borderColor?.resolve(selectedState) ?? Colors.transparent;
     final checkedThumbColor = widget.thumbColor ??
-        // ignore: deprecated_member_use_from_same_package
-        widget.checkmarkColor ??
         switchTheme.thumbColor?.resolve(selectedState) ??
         painter.checkmarkColor;
 
