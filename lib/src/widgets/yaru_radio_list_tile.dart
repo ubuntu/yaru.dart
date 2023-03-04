@@ -42,6 +42,7 @@ class YaruRadioListTile<T> extends StatelessWidget {
     this.visualDensity,
     this.focusNode,
     this.enableFeedback,
+    this.mouseCursor,
   }) : assert(!isThreeLine || subtitle != null);
 
   /// See [RadioListTile.value].
@@ -101,6 +102,9 @@ class YaruRadioListTile<T> extends StatelessWidget {
   /// See [RadioListTile.enableFeedback].
   final bool? enableFeedback;
 
+  /// See [RadioListTile.mouseCursor].
+  final MouseCursor? mouseCursor;
+
   void _handleValueChange() {
     assert(onChanged != null);
     if (groupValue != value || !toggleable) {
@@ -119,6 +123,7 @@ class YaruRadioListTile<T> extends StatelessWidget {
       onChanged: onChanged,
       toggleable: toggleable,
       autofocus: autofocus,
+      mouseCursor: mouseCursor,
     );
 
     switch (controlAffinity) {
@@ -152,6 +157,7 @@ class YaruRadioListTile<T> extends StatelessWidget {
         visualDensity: visualDensity,
         focusNode: focusNode,
         enableFeedback: enableFeedback,
+        mouseCursor: mouseCursor,
       ),
     );
   }

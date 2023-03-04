@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'yaru_switch.dart';
 import 'yaru_toggle_button.dart';
+import 'yaru_toggle_button_theme.dart';
 
 /// A desktop style switch button with an interactive label.
 class YaruSwitchButton extends StatelessWidget {
@@ -15,6 +16,7 @@ class YaruSwitchButton extends StatelessWidget {
     this.contentPadding,
     this.autofocus = false,
     this.focusNode,
+    this.mouseCursor,
   });
 
   /// See [Switch.value]
@@ -38,8 +40,19 @@ class YaruSwitchButton extends StatelessWidget {
   /// See [Switch.autofocus].
   final bool autofocus;
 
+  /// See [Switch.mouseCursor].
+  final MouseCursor? mouseCursor;
+
   @override
   Widget build(BuildContext context) {
+    final mouseCursor = this.mouseCursor ??
+        YaruToggleButtonTheme.of(context)
+            ?.mouseCursor
+            ?.resolve({if (onChanged == null) MaterialState.disabled}) ??
+        (onChanged != null
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic);
+
     return YaruToggleButton(
       title: title,
       subtitle: subtitle,
@@ -49,7 +62,9 @@ class YaruSwitchButton extends StatelessWidget {
         onChanged: onChanged,
         focusNode: focusNode,
         autofocus: autofocus,
+        mouseCursor: mouseCursor,
       ),
+      mouseCursor: mouseCursor,
       onToggled: onChanged != null ? () => onChanged!(!value) : null,
     );
   }

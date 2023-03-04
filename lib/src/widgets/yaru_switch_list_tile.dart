@@ -41,6 +41,7 @@ class YaruSwitchListTile extends StatelessWidget {
     this.focusNode,
     this.enableFeedback,
     this.hoverColor,
+    this.mouseCursor,
   }) : assert(!isThreeLine || subtitle != null);
 
   /// See [SwitchListTile.value].
@@ -97,12 +98,16 @@ class YaruSwitchListTile extends StatelessWidget {
   /// See [SwitchListTile.hoverColor].
   final Color? hoverColor;
 
+  /// See [SwitchListTile.mouseCursor].
+  final MouseCursor? mouseCursor;
+
   @override
   Widget build(BuildContext context) {
     final control = YaruSwitch(
       value: value,
       onChanged: onChanged,
       autofocus: autofocus,
+      mouseCursor: mouseCursor,
     );
 
     Widget? leading, trailing;
@@ -142,6 +147,7 @@ class YaruSwitchListTile extends StatelessWidget {
         focusNode: focusNode,
         enableFeedback: enableFeedback,
         hoverColor: hoverColor,
+        mouseCursor: mouseCursor,
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_toggle_button.dart';
+import 'yaru_toggle_button_theme.dart';
 
 /// A desktop style check button with an interactive label.
 class YaruCheckButton extends StatelessWidget {
@@ -16,6 +17,7 @@ class YaruCheckButton extends StatelessWidget {
     this.tristate = false,
     this.autofocus = false,
     this.focusNode,
+    this.mouseCursor,
   });
 
   /// See [Checkbox.value]
@@ -42,8 +44,19 @@ class YaruCheckButton extends StatelessWidget {
   /// See [Checkbox.autofocus].
   final bool autofocus;
 
+  /// See [Checkbox.mouseCursor].
+  final MouseCursor? mouseCursor;
+
   @override
   Widget build(BuildContext context) {
+    final mouseCursor = this.mouseCursor ??
+        YaruToggleButtonTheme.of(context)
+            ?.mouseCursor
+            ?.resolve({if (onChanged == null) MaterialState.disabled}) ??
+        (onChanged != null
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic);
+
     return YaruToggleButton(
       title: title,
       subtitle: subtitle,
@@ -54,7 +67,9 @@ class YaruCheckButton extends StatelessWidget {
         tristate: tristate,
         focusNode: focusNode,
         autofocus: autofocus,
+        mouseCursor: mouseCursor,
       ),
+      mouseCursor: mouseCursor,
       onToggled: onChanged == null ? null : _onToggled,
     );
   }

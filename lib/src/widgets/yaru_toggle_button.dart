@@ -19,6 +19,7 @@ class YaruToggleButton extends StatelessWidget {
     this.subtitle,
     this.contentPadding,
     this.onToggled,
+    this.mouseCursor,
   });
 
   /// The toggle indicator.
@@ -36,6 +37,9 @@ class YaruToggleButton extends StatelessWidget {
   /// Called when the button is toggled.
   final VoidCallback? onToggled;
 
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MouseCursor? mouseCursor;
+
   @override
   Widget build(BuildContext context) {
     final theme = YaruToggleButtonTheme.of(context);
@@ -46,9 +50,10 @@ class YaruToggleButton extends StatelessWidget {
         child: GestureDetector(
           onTap: onToggled,
           child: MouseRegion(
-            cursor: onToggled != null
-                ? SystemMouseCursors.click
-                : SystemMouseCursors.basic,
+            cursor: mouseCursor ??
+                (onToggled != null
+                    ? SystemMouseCursors.click
+                    : SystemMouseCursors.basic),
             child: Padding(
               padding: contentPadding ?? EdgeInsets.zero,
               child: _YaruToggleButtonLayout(
