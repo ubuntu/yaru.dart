@@ -12,10 +12,12 @@ import 'yaru_window_control.dart';
 
 const _kYaruTitleBarHeroTag = '<YaruTitleBar hero tag>';
 
-/// A [Stack] of a [Widget] as [title] with a close button
-/// which pops the top-most route off the navigator
-/// that most tightly encloses the given context.
+/// A generic title bar widget.
 ///
+/// See also:
+///  * [YaruTitleBarTheme]
+///  * [YaruWindowTitleBar]
+///  * [YaruDialogTitleBar]
 class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   const YaruTitleBar({
     super.key,
@@ -281,6 +283,94 @@ extension _ListSpacing on List<Widget> {
   }
 }
 
+/// A window title bar.
+///
+/// `YaruWindowTitleBar` is a replacement for the native window title bar, that
+/// allows inserting arbitrary Flutter widgets. It provides the same functionality
+/// as the native window title bar, including window controls for minimizing,
+/// maximizing, restoring, and closing the window, as well as a context menu,
+/// and double-click-to-maximize and drag-to-move functionality.
+///
+/// ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar.png)
+///
+/// ### Initialization
+///
+/// `YaruWindowTitleBar` must be initialized on application startup. This
+/// ensures that the native window title bar is hidden and the window content
+/// area is configured as appropriate for the underlying platform.
+///
+/// ```dart
+/// Future<void> main() async {
+///   await YaruWindowTitleBar.ensureInitialized();
+///
+///   runApp(...);
+/// }
+/// ```
+///
+/// ### Usage
+///
+/// `YaruWindowTitleBar` is typically used in place of `AppBar` in `Scaffold`.
+///
+/// ```dart
+/// Scaffold(
+///   appBar: const YaruWindowTitleBar(
+///     title: Text('YaruWindowTitleBar'),
+///   ),
+///   body: ...
+/// )
+/// ```
+///
+/// ### Modal barrier
+///
+/// When `YaruWindowTitleBar` is placed inside a page route, it is not possible
+/// to interact with the window title bar while a modal dialog is open because
+/// the modal barrier is placed on top of the window title bar.
+///
+/// The issue can be avoided either by using [YaruDialogTitleBar] that allows
+/// dragging the window from the dialog title bar, or by using [MaterialApp.builder](https://api.flutter.dev/flutter/material/MaterialApp/builder.html)
+/// to place the window title bar outside of the page route.
+///
+/// ```dart
+/// MaterialApp(
+///   builder: (context, child) => Scaffold(
+///     appBar: const YaruWindowTitleBar(
+///       title: Text('YaruWindowTitleBar'),
+///     ),
+///     body: child,
+///   ),
+///   home: ...
+/// )
+/// ```
+///
+/// | Home | Builder |
+/// |---|---|
+/// | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-home.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-builder.png) |
+///
+/// ### Debug banner
+///
+/// The [debug banner](https://api.flutter.dev/flutter/material/MaterialApp/debugShowCheckedModeBanner.html)
+/// shown by `MaterialApp` by default in debug mode does not fit well with an
+/// in-scene window title bar. Therefore, when using `YaruWindowTitleBar`, it is
+/// recommended to turn off the built-in debug banner by setting `debugShowCheckedModeBanner`
+/// to `false` in `MaterialApp`. Optionally, [`CheckedModeBanner`](https://api.flutter.dev/flutter/widgets/CheckedModeBanner-class.html)
+/// can be used to display the same debug banner in the content area instead so
+/// that it does not overlap with the window title bar.
+///
+/// ```dart
+/// MaterialApp(
+///   debugShowCheckedModeBanner: false,
+///   home: Scaffold(
+///     appBar: YaruWindowTitleBar(),
+///     body: CheckedModeBanner(
+///       child: ...
+///     ),
+///   ),
+/// )
+/// ```
+///
+/// | `MaterialApp` | `CheckedModeBanner` |
+/// |---|---|
+/// | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-debug.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-banner.png) |
 class YaruWindowTitleBar extends StatelessWidget
     implements PreferredSizeWidget {
   const YaruWindowTitleBar({
@@ -443,6 +533,12 @@ class YaruWindowTitleBar extends StatelessWidget
   }
 }
 
+/// A dialog title bar.
+///
+/// `YaruDialogTitleBar` makes Flutter dialogs feel as close as possible to top-
+/// level windows. Dragging the dialog title bar moves the parent window, and it
+/// is also possible to access the window context menu as if it was a real top-
+/// level window.
 class YaruDialogTitleBar extends YaruWindowTitleBar {
   const YaruDialogTitleBar({
     super.key,
