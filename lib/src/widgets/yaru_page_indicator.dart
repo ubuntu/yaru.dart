@@ -29,6 +29,7 @@ class YaruPageIndicator extends StatelessWidget {
     this.dotSize,
     this.dotSpacing,
     this.dotDecorationBuilder,
+    this.mouseCursor,
   }) : assert(page >= 0 && page <= length - 1);
 
   /// Determine the number of pages.
@@ -66,6 +67,9 @@ class YaruPageIndicator extends StatelessWidget {
 
   /// Decoration of the dots.
   final YaruDotDecorationBuilder? dotDecorationBuilder;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MouseCursor? mouseCursor;
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +117,10 @@ class YaruPageIndicator extends StatelessWidget {
         Duration.zero;
     final animationCurve =
         this.animationCurve ?? indicatorTheme?.animationCurve ?? Curves.linear;
+    final mouseCursor = this.mouseCursor ??
+        indicatorTheme?.mouseCursor
+            ?.resolve({if (onTap == null) MaterialState.disabled}) ??
+        (onTap == null ? SystemMouseCursors.basic : SystemMouseCursors.click);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -132,9 +140,7 @@ class YaruPageIndicator extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(left: index != 0 ? dotSpacing : 0),
             child: MouseRegion(
-              cursor: onTap == null
-                  ? SystemMouseCursors.basic
-                  : SystemMouseCursors.click,
+              cursor: mouseCursor,
               child: animationDuration == Duration.zero
                   ? Container(
                       width: dotSize,

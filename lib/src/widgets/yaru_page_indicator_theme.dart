@@ -20,6 +20,7 @@ class YaruPageIndicatorThemeData
     this.dotSize,
     this.dotSpacing,
     this.dotDecorationBuilder,
+    this.mouseCursor,
   });
 
   /// Duration of a transition between two items.
@@ -39,6 +40,9 @@ class YaruPageIndicatorThemeData
   /// Decoration of the dots.
   final YaruDotDecorationBuilder? dotDecorationBuilder;
 
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MaterialStateProperty<MouseCursor?>? mouseCursor;
+
   /// Creates a copy with the given fields replaced with new values.
   @override
   YaruPageIndicatorThemeData copyWith({
@@ -47,6 +51,7 @@ class YaruPageIndicatorThemeData
     double? dotSize,
     double? dotSpacing,
     YaruDotDecorationBuilder? dotDecorationBuilder,
+    MaterialStateProperty<MouseCursor?>? mouseCursor,
   }) {
     return YaruPageIndicatorThemeData(
       animationDuration: animationDuration ?? this.animationDuration,
@@ -54,6 +59,7 @@ class YaruPageIndicatorThemeData
       dotSize: dotSize ?? this.dotSize,
       dotSpacing: dotSpacing ?? this.dotSpacing,
       dotDecorationBuilder: dotDecorationBuilder ?? this.dotDecorationBuilder,
+      mouseCursor: mouseCursor ?? this.mouseCursor,
     );
   }
 
@@ -74,6 +80,7 @@ class YaruPageIndicatorThemeData
       dotSpacing: lerpDouble(dotSpacing, o?.dotSpacing, t),
       dotDecorationBuilder:
           t < 0.5 ? dotDecorationBuilder : o?.dotDecorationBuilder,
+      mouseCursor: t < 0.5 ? mouseCursor : o?.mouseCursor,
     );
   }
 
@@ -85,6 +92,7 @@ class YaruPageIndicatorThemeData
       dotSize,
       dotSpacing,
       dotDecorationBuilder,
+      mouseCursor,
     );
   }
 
@@ -97,7 +105,8 @@ class YaruPageIndicatorThemeData
         other.animationCurve == animationCurve &&
         other.dotSize == dotSize &&
         other.dotSpacing == dotSpacing &&
-        other.dotDecorationBuilder == dotDecorationBuilder;
+        other.dotDecorationBuilder == dotDecorationBuilder &&
+        other.mouseCursor == mouseCursor;
   }
 }
 
