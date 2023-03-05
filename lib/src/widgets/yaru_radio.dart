@@ -245,6 +245,9 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
         ..disabledCheckmarkColor = disabledCheckmarkColor
         ..hoverIndicatorColor = hoverIndicatorColor
         ..focusIndicatorColor = focusIndicatorColor,
+      mouseCursor: widget.mouseCursor ??
+          radioTheme.mouseCursor
+              ?.resolve({if (!widget.interactive) MaterialState.disabled}),
     );
   }
 }

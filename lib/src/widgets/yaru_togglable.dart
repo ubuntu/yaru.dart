@@ -208,7 +208,10 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     );
   }
 
-  Widget _buildEventDetectors({required Widget child}) {
+  Widget _buildEventDetectors({
+    required Widget child,
+    MouseCursor? mouseCursor,
+  }) {
     return FocusableActionDetector(
       actions: _actionMap,
       enabled: widget.interactive,
@@ -216,7 +219,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       autofocus: widget.autofocus,
       onShowFocusHighlight: handleFocusChange,
       onShowHoverHighlight: handleHoverChange,
-      mouseCursor: widget.mouseCursor ??
+      mouseCursor: mouseCursor ??
           (widget.interactive
               ? SystemMouseCursors.click
               : SystemMouseCursors.basic),
@@ -278,9 +281,13 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       ..focusIndicatorColor = focusIndicatorColor;
   }
 
-  Widget buildToggleable(YaruTogglablePainter painter) {
+  Widget buildToggleable(
+    YaruTogglablePainter painter, {
+    MouseCursor? mouseCursor,
+  }) {
     return _buildSemantics(
       child: _buildEventDetectors(
+        mouseCursor: mouseCursor,
         child: Padding(
           padding: activableAreaPadding,
           child: SizedBox(

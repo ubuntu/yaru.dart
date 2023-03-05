@@ -9,12 +9,14 @@ class YaruRadioThemeData extends ThemeExtension<YaruRadioThemeData>
     this.borderColor,
     this.checkmarkColor,
     this.indicatorColor,
+    this.mouseCursor,
   });
 
   final MaterialStateProperty<Color?>? color;
   final MaterialStateProperty<Color?>? borderColor;
   final MaterialStateProperty<Color?>? checkmarkColor;
   final MaterialStateProperty<Color?>? indicatorColor;
+  final MaterialStateProperty<MouseCursor?>? mouseCursor;
 
   @override
   YaruRadioThemeData copyWith({
@@ -22,12 +24,14 @@ class YaruRadioThemeData extends ThemeExtension<YaruRadioThemeData>
     MaterialStateProperty<Color?>? borderColor,
     MaterialStateProperty<Color?>? checkmarkColor,
     MaterialStateProperty<Color?>? indicatorColor,
+    MaterialStateProperty<MouseCursor?>? mouseCursor,
   }) {
     return YaruRadioThemeData(
       color: color ?? this.color,
       borderColor: borderColor ?? this.borderColor,
       checkmarkColor: checkmarkColor ?? this.checkmarkColor,
       indicatorColor: indicatorColor ?? this.indicatorColor,
+      mouseCursor: mouseCursor ?? this.mouseCursor,
     );
   }
 
@@ -62,6 +66,12 @@ class YaruRadioThemeData extends ThemeExtension<YaruRadioThemeData>
         t,
         Color.lerp,
       ),
+      mouseCursor: MaterialStateProperty.lerp<MouseCursor?>(
+        mouseCursor,
+        o?.mouseCursor,
+        t,
+        (a, b, t) => t < 0.5 ? a : b,
+      ),
     );
   }
 
@@ -74,6 +84,7 @@ class YaruRadioThemeData extends ThemeExtension<YaruRadioThemeData>
     );
     properties.add(DiagnosticsProperty('checkmarkColor', checkmarkColor));
     properties.add(DiagnosticsProperty('indicatorColor', indicatorColor));
+    properties.add(DiagnosticsProperty('mouseCursor', mouseCursor));
   }
 
   @override
@@ -83,7 +94,8 @@ class YaruRadioThemeData extends ThemeExtension<YaruRadioThemeData>
         other.color == color &&
         other.borderColor == borderColor &&
         other.checkmarkColor == checkmarkColor &&
-        other.indicatorColor == indicatorColor;
+        other.indicatorColor == indicatorColor &&
+        other.mouseCursor == mouseCursor;
   }
 
   @override
@@ -93,6 +105,7 @@ class YaruRadioThemeData extends ThemeExtension<YaruRadioThemeData>
       borderColor,
       checkmarkColor,
       indicatorColor,
+      mouseCursor,
     );
   }
 }

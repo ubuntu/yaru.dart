@@ -9,12 +9,14 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
     this.borderColor,
     this.thumbColor,
     this.indicatorColor,
+    this.mouseCursor,
   });
 
   final MaterialStateProperty<Color?>? color;
   final MaterialStateProperty<Color?>? borderColor;
   final MaterialStateProperty<Color?>? thumbColor;
   final MaterialStateProperty<Color?>? indicatorColor;
+  final MaterialStateProperty<MouseCursor?>? mouseCursor;
 
   @override
   YaruSwitchThemeData copyWith({
@@ -22,12 +24,14 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
     MaterialStateProperty<Color?>? borderColor,
     MaterialStateProperty<Color?>? thumbColor,
     MaterialStateProperty<Color?>? indicatorColor,
+    MaterialStateProperty<MouseCursor?>? mouseCursor,
   }) {
     return YaruSwitchThemeData(
       color: color ?? this.color,
       borderColor: borderColor ?? this.borderColor,
       thumbColor: thumbColor ?? this.thumbColor,
       indicatorColor: indicatorColor ?? this.indicatorColor,
+      mouseCursor: mouseCursor ?? this.mouseCursor,
     );
   }
 
@@ -62,6 +66,12 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
         t,
         Color.lerp,
       ),
+      mouseCursor: MaterialStateProperty.lerp<MouseCursor?>(
+        mouseCursor,
+        o?.mouseCursor,
+        t,
+        (a, b, t) => t < 0.5 ? a : b,
+      ),
     );
   }
 
@@ -74,6 +84,7 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
     );
     properties.add(DiagnosticsProperty('thumbColor', thumbColor));
     properties.add(DiagnosticsProperty('indicatorColor', indicatorColor));
+    properties.add(DiagnosticsProperty('mouseCursor', mouseCursor));
   }
 
   @override
@@ -83,7 +94,8 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
         other.color == color &&
         other.borderColor == borderColor &&
         other.thumbColor == thumbColor &&
-        other.indicatorColor == indicatorColor;
+        other.indicatorColor == indicatorColor &&
+        other.mouseCursor == mouseCursor;
   }
 
   @override
@@ -93,6 +105,7 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
       borderColor,
       thumbColor,
       indicatorColor,
+      mouseCursor,
     );
   }
 }

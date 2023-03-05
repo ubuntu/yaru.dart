@@ -223,6 +223,9 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
           ..disabledCheckedThumbColor = disabledCheckedThumbColor
           ..hoverIndicatorColor = hoverIndicatorColor
           ..focusIndicatorColor = focusIndicatorColor,
+        mouseCursor: widget.mouseCursor ??
+            switchTheme.mouseCursor
+                ?.resolve({if (!widget.interactive) MaterialState.disabled}),
       ),
     );
   }

@@ -52,10 +52,7 @@ class YaruCheckButton extends StatelessWidget {
     final mouseCursor = this.mouseCursor ??
         YaruToggleButtonTheme.of(context)
             ?.mouseCursor
-            ?.resolve({if (onChanged == null) MaterialState.disabled}) ??
-        (onChanged != null
-            ? SystemMouseCursors.click
-            : SystemMouseCursors.basic);
+            ?.resolve({if (onChanged == null) MaterialState.disabled});
 
     return YaruToggleButton(
       title: title,
@@ -69,7 +66,10 @@ class YaruCheckButton extends StatelessWidget {
         autofocus: autofocus,
         mouseCursor: mouseCursor,
       ),
-      mouseCursor: mouseCursor,
+      mouseCursor: mouseCursor ??
+          (onChanged != null
+              ? SystemMouseCursors.click
+              : SystemMouseCursors.basic),
       onToggled: onChanged == null ? null : _onToggled,
     );
   }

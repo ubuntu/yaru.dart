@@ -253,6 +253,9 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
         ..disabledCheckmarkColor = disabledCheckmarkColor
         ..hoverIndicatorColor = hoverIndicatorColor
         ..focusIndicatorColor = focusIndicatorColor,
+      mouseCursor: widget.mouseCursor ??
+          checkboxTheme.mouseCursor
+              ?.resolve({if (!widget.interactive) MaterialState.disabled}),
     );
   }
 }
