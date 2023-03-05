@@ -25,6 +25,7 @@ abstract class YaruTogglable<T> extends StatefulWidget {
     required this.onChanged,
     this.focusNode,
     this.autofocus = false,
+    this.mouseCursor,
   });
 
   /// Value of this [YaruTogglable].
@@ -53,6 +54,9 @@ abstract class YaruTogglable<T> extends StatefulWidget {
 
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MouseCursor? mouseCursor;
 }
 
 abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
@@ -204,7 +208,10 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     );
   }
 
-  Widget _buildEventDetectors({required Widget child}) {
+  Widget _buildEventDetectors({
+    required Widget child,
+    MouseCursor? mouseCursor,
+  }) {
     return FocusableActionDetector(
       actions: _actionMap,
       enabled: widget.interactive,
@@ -212,9 +219,10 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       autofocus: widget.autofocus,
       onShowFocusHighlight: handleFocusChange,
       onShowHoverHighlight: handleHoverChange,
-      mouseCursor: widget.interactive
-          ? SystemMouseCursors.click
-          : SystemMouseCursors.basic,
+      mouseCursor: mouseCursor ??
+          (widget.interactive
+              ? SystemMouseCursors.click
+              : SystemMouseCursors.basic),
       child: GestureDetector(
         excludeFromSemantics: !widget.interactive,
         onTapDown: (_) => handleActiveChange(widget.interactive),
@@ -273,9 +281,13 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       ..focusIndicatorColor = focusIndicatorColor;
   }
 
-  Widget buildToggleable(YaruTogglablePainter painter) {
+  Widget buildToggleable(
+    YaruTogglablePainter painter, {
+    MouseCursor? mouseCursor,
+  }) {
     return _buildSemantics(
       child: _buildEventDetectors(
+        mouseCursor: mouseCursor,
         child: Padding(
           padding: activableAreaPadding,
           child: SizedBox(

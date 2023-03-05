@@ -41,6 +41,7 @@ class YaruCheckboxListTile extends StatelessWidget {
     this.visualDensity,
     this.focusNode,
     this.enableFeedback,
+    this.mouseCursor,
   })  : assert(tristate || value != null),
         assert(!isThreeLine || subtitle != null);
 
@@ -98,6 +99,9 @@ class YaruCheckboxListTile extends StatelessWidget {
   /// See [CheckboxListTile.enableFeedback].
   final bool? enableFeedback;
 
+  /// See [CheckboxListTile.mouseCursor].
+  final MouseCursor? mouseCursor;
+
   void _handleValueChange() {
     assert(onChanged != null);
     switch (value) {
@@ -121,6 +125,7 @@ class YaruCheckboxListTile extends StatelessWidget {
       onChanged: onChanged,
       autofocus: autofocus,
       tristate: tristate,
+      mouseCursor: mouseCursor,
     );
 
     switch (controlAffinity) {
@@ -154,6 +159,7 @@ class YaruCheckboxListTile extends StatelessWidget {
         visualDensity: visualDensity,
         focusNode: focusNode,
         enableFeedback: enableFeedback,
+        mouseCursor: mouseCursor,
       ),
     );
   }

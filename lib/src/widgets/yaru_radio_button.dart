@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'yaru_radio.dart';
 import 'yaru_toggle_button.dart';
+import 'yaru_toggle_button_theme.dart';
 
 /// A desktop style radio button with an interactive label.
 class YaruRadioButton<T> extends StatelessWidget {
@@ -17,6 +18,7 @@ class YaruRadioButton<T> extends StatelessWidget {
     this.toggleable = false,
     this.autofocus = false,
     this.focusNode,
+    this.mouseCursor,
   });
 
   /// See [Radio.value]
@@ -46,8 +48,16 @@ class YaruRadioButton<T> extends StatelessWidget {
   /// See [Radio.autofocus].
   final bool autofocus;
 
+  /// See [Radio.mouseCursor].
+  final MouseCursor? mouseCursor;
+
   @override
   Widget build(BuildContext context) {
+    final mouseCursor = this.mouseCursor ??
+        YaruToggleButtonTheme.of(context)
+            ?.mouseCursor
+            ?.resolve({if (onChanged == null) MaterialState.disabled});
+
     return YaruToggleButton(
       title: title,
       subtitle: subtitle,
@@ -59,7 +69,12 @@ class YaruRadioButton<T> extends StatelessWidget {
         toggleable: toggleable,
         focusNode: focusNode,
         autofocus: autofocus,
+        mouseCursor: mouseCursor,
       ),
+      mouseCursor: mouseCursor ??
+          (onChanged != null
+              ? SystemMouseCursors.click
+              : SystemMouseCursors.basic),
       onToggled: onChanged == null ? null : _onToggled,
     );
   }

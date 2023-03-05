@@ -49,6 +49,7 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
     this.checkmarkColor,
     this.focusNode,
     this.autofocus = false,
+    this.mouseCursor,
   }) : assert(toggleable || value != null);
 
   /// The value represented by this radio button.
@@ -134,6 +135,9 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
   /// {@macro flutter.widgets.Focus.autofocus}
   @override
   final bool autofocus;
+
+  @override
+  final MouseCursor? mouseCursor;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -241,6 +245,9 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
         ..disabledCheckmarkColor = disabledCheckmarkColor
         ..hoverIndicatorColor = hoverIndicatorColor
         ..focusIndicatorColor = focusIndicatorColor,
+      mouseCursor: widget.mouseCursor ??
+          radioTheme.mouseCursor
+              ?.resolve({if (!widget.interactive) MaterialState.disabled}),
     );
   }
 }

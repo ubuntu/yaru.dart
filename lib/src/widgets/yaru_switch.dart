@@ -41,6 +41,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
     this.thumbColor,
     this.focusNode,
     this.autofocus = false,
+    this.mouseCursor,
   });
 
   /// Whether this switch is on or off.
@@ -100,6 +101,9 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   /// {@macro flutter.widgets.Focus.autofocus}
   @override
   final bool autofocus;
+
+  @override
+  final MouseCursor? mouseCursor;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -219,6 +223,9 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
           ..disabledCheckedThumbColor = disabledCheckedThumbColor
           ..hoverIndicatorColor = hoverIndicatorColor
           ..focusIndicatorColor = focusIndicatorColor,
+        mouseCursor: widget.mouseCursor ??
+            switchTheme.mouseCursor
+                ?.resolve({if (!widget.interactive) MaterialState.disabled}),
       ),
     );
   }
