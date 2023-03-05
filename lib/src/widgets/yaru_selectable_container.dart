@@ -15,6 +15,7 @@ class YaruSelectableContainer extends StatelessWidget {
     this.radius = kYaruContainerRadius,
     this.padding,
     this.selectionColor,
+    this.mouseCursor,
   });
 
   // The child which will be selected with [onTap]
@@ -42,6 +43,9 @@ class YaruSelectableContainer extends StatelessWidget {
   /// Optional custom [Color] which is used for the selection border.
   final Color? selectionColor;
 
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MouseCursor? mouseCursor;
+
   @override
   Widget build(BuildContext context) {
     final padding = this.padding ?? const EdgeInsets.all(6);
@@ -50,6 +54,7 @@ class YaruSelectableContainer extends StatelessWidget {
     return InkWell(
       borderRadius: borderRadius,
       onTap: onTap,
+      mouseCursor: mouseCursor,
       child: AnimatedContainer(
         duration: _kAnimationDuration,
         decoration: BoxDecoration(
