@@ -17,6 +17,7 @@ class YaruBanner extends StatelessWidget {
     this.padding = const EdgeInsets.all(kYaruPagePadding),
     this.onHover,
     this.selected,
+    this.mouseCursor,
   });
 
   /// Creates a banner with a [YaruTile] child widget.
@@ -32,6 +33,7 @@ class YaruBanner extends StatelessWidget {
     Widget? subtitle,
     EdgeInsetsGeometry padding = const EdgeInsets.all(kYaruPagePadding),
     bool? selected,
+    MouseCursor? mouseCursor,
   }) : this(
           key: key,
           onTap: onTap,
@@ -41,6 +43,7 @@ class YaruBanner extends StatelessWidget {
           elevation: elevation,
           surfaceTintColor: surfaceTintColor,
           selected: selected,
+          mouseCursor: mouseCursor,
           child: YaruTile(
             leading: icon,
             title: title,
@@ -77,6 +80,9 @@ class YaruBanner extends StatelessWidget {
   /// theme's primary color.
   final bool? selected;
 
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MouseCursor? mouseCursor;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -96,6 +102,7 @@ class YaruBanner extends StatelessWidget {
         onHover: onHover,
         borderRadius: borderRadius,
         hoverColor: theme.colorScheme.onSurface.withOpacity(0.1),
+        mouseCursor: mouseCursor,
         child: Card(
           color: color,
           shadowColor: Colors.transparent,
