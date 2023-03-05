@@ -19,15 +19,27 @@ class YaruColorDisk extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextButton(
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            shape: CircleBorder(
-              side: BorderSide(
-                color: selected
-                    ? Theme.of(context).primaryColor
-                    : Colors.transparent,
-              ),
-            ),
+          statesController: MaterialStatesController({
+            if (selected) MaterialState.selected,
+          }),
+          style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
+            padding: ButtonStyleButton.allOrNull(EdgeInsets.zero),
+            shape: MaterialStateProperty.resolveWith<OutlinedBorder?>((states) {
+              return CircleBorder(
+                side: BorderSide(
+                  color: color.withOpacity(
+                    states.contains(MaterialState.selected) ||
+                            states.contains(MaterialState.pressed)
+                        ? 1.0
+                        : states.contains(MaterialState.hovered) ||
+                                states.contains(MaterialState.focused)
+                            ? 0.5
+                            : 0,
+                  ),
+                ),
+              );
+            }),
           ),
           onPressed: onPressed,
           child: SizedBox(
