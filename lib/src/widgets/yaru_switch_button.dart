@@ -48,11 +48,29 @@ class YaruSwitchButton extends StatefulWidget {
 }
 
 class _YaruSwitchButtonState extends State<YaruSwitchButton> {
+  final _statesController = MaterialStatesController();
+
+  @override
+  void initState() {
+    super.initState();
+    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+  }
+
+  @override
+  void didUpdateWidget(YaruSwitchButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+  }
+
+  @override
+  void dispose() {
+    _statesController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final states = {
-      if (widget.onChanged == null) MaterialState.disabled,
-    };
+    final states = _statesController.value;
     final mouseCursor =
         MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
             YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
@@ -67,9 +85,11 @@ class _YaruSwitchButtonState extends State<YaruSwitchButton> {
         focusNode: widget.focusNode,
         autofocus: widget.autofocus,
         mouseCursor: mouseCursor,
+        statesController: _statesController,
       ),
       mouseCursor:
           mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
+      statesController: _statesController,
       onToggled: widget.onChanged != null
           ? () => widget.onChanged!(!widget.value)
           : null,
