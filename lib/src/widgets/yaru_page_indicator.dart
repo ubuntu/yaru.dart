@@ -117,10 +117,13 @@ class YaruPageIndicator extends StatelessWidget {
         Duration.zero;
     final animationCurve =
         this.animationCurve ?? indicatorTheme?.animationCurve ?? Curves.linear;
-    final mouseCursor = this.mouseCursor ??
-        indicatorTheme?.mouseCursor
-            ?.resolve({if (onTap == null) MaterialState.disabled}) ??
-        (onTap == null ? SystemMouseCursors.basic : SystemMouseCursors.click);
+    final states = {
+      if (onTap == null) MaterialState.disabled,
+    };
+    final mouseCursor =
+        MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
+            indicatorTheme?.mouseCursor?.resolve(states) ??
+            MaterialStateMouseCursor.clickable.resolve(states);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

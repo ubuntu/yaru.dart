@@ -54,11 +54,10 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
             color: Theme.of(context).colorScheme.outline,
           ),
         );
-    final mouseCursor = this.mouseCursor ??
-        style?.mouseCursor?.resolve(state) ??
-        (onSelected != null
-            ? SystemMouseCursors.click
-            : SystemMouseCursors.basic);
+    final mouseCursor =
+        MaterialStateProperty.resolveAs(this.mouseCursor, state) ??
+            style?.mouseCursor?.resolve(state) ??
+            MaterialStateMouseCursor.clickable.resolve(state);
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
       child: Material(
