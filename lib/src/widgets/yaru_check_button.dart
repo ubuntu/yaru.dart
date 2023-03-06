@@ -5,7 +5,7 @@ import 'yaru_toggle_button.dart';
 import 'yaru_toggle_button_theme.dart';
 
 /// A desktop style check button with an interactive label.
-class YaruCheckButton extends StatelessWidget {
+class YaruCheckButton extends StatefulWidget {
   /// Creates a new check button.
   const YaruCheckButton({
     super.key,
@@ -48,42 +48,47 @@ class YaruCheckButton extends StatelessWidget {
   final MouseCursor? mouseCursor;
 
   @override
+  State<YaruCheckButton> createState() => _YaruCheckButtonState();
+}
+
+class _YaruCheckButtonState extends State<YaruCheckButton> {
+  @override
   Widget build(BuildContext context) {
     final states = {
-      if (onChanged == null) MaterialState.disabled,
+      if (widget.onChanged == null) MaterialState.disabled,
     };
     final mouseCursor =
-        MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
+        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
             YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
 
     return YaruToggleButton(
-      title: title,
-      subtitle: subtitle,
-      contentPadding: contentPadding,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      contentPadding: widget.contentPadding,
       leading: YaruCheckbox(
-        value: value,
-        onChanged: onChanged,
-        tristate: tristate,
-        focusNode: focusNode,
-        autofocus: autofocus,
+        value: widget.value,
+        onChanged: widget.onChanged,
+        tristate: widget.tristate,
+        focusNode: widget.focusNode,
+        autofocus: widget.autofocus,
         mouseCursor: mouseCursor,
       ),
       mouseCursor:
           mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
-      onToggled: onChanged == null ? null : _onToggled,
+      onToggled: widget.onChanged == null ? null : _onToggled,
     );
   }
 
   void _onToggled() {
-    switch (value) {
+    switch (widget.value) {
       case false:
-        onChanged!(true);
+        widget.onChanged!(true);
         break;
       case true:
-        onChanged!(tristate ? null : false);
+        widget.onChanged!(widget.tristate ? null : false);
         break;
       case null:
-        onChanged!(false);
+        widget.onChanged!(false);
         break;
     }
   }

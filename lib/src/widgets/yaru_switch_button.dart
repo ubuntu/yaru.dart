@@ -5,7 +5,7 @@ import 'yaru_toggle_button.dart';
 import 'yaru_toggle_button_theme.dart';
 
 /// A desktop style switch button with an interactive label.
-class YaruSwitchButton extends StatelessWidget {
+class YaruSwitchButton extends StatefulWidget {
   /// Creates a new switch button.
   const YaruSwitchButton({
     super.key,
@@ -44,28 +44,35 @@ class YaruSwitchButton extends StatelessWidget {
   final MouseCursor? mouseCursor;
 
   @override
+  State<YaruSwitchButton> createState() => _YaruSwitchButtonState();
+}
+
+class _YaruSwitchButtonState extends State<YaruSwitchButton> {
+  @override
   Widget build(BuildContext context) {
     final states = {
-      if (onChanged == null) MaterialState.disabled,
+      if (widget.onChanged == null) MaterialState.disabled,
     };
     final mouseCursor =
-        MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
+        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
             YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
 
     return YaruToggleButton(
-      title: title,
-      subtitle: subtitle,
-      contentPadding: contentPadding,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      contentPadding: widget.contentPadding,
       leading: YaruSwitch(
-        value: value,
-        onChanged: onChanged,
-        focusNode: focusNode,
-        autofocus: autofocus,
+        value: widget.value,
+        onChanged: widget.onChanged,
+        focusNode: widget.focusNode,
+        autofocus: widget.autofocus,
         mouseCursor: mouseCursor,
       ),
       mouseCursor:
           mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
-      onToggled: onChanged != null ? () => onChanged!(!value) : null,
+      onToggled: widget.onChanged != null
+          ? () => widget.onChanged!(!widget.value)
+          : null,
     );
   }
 }
