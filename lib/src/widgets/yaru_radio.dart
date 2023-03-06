@@ -50,6 +50,7 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
     this.focusNode,
     this.autofocus = false,
     this.mouseCursor,
+    this.statesController,
   }) : assert(toggleable || value != null);
 
   /// The value represented by this radio button.
@@ -138,6 +139,9 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
 
   @override
   final MouseCursor? mouseCursor;
+
+  @override
+  final MaterialStatesController? statesController;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

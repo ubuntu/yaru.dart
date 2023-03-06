@@ -51,6 +51,7 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
     this.focusNode,
     this.autofocus = false,
     this.mouseCursor,
+    this.statesController,
   }) : assert(tristate || value != null);
 
   /// Whether this checkbox is checked.
@@ -128,6 +129,9 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
 
   @override
   final MouseCursor? mouseCursor;
+
+  @override
+  final MaterialStatesController? statesController;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
