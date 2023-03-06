@@ -182,6 +182,10 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     handleActiveChange(states.contains(MaterialState.pressed));
   }
 
+  void updateState(MaterialState state, bool add) {
+    statesController.update(state, add);
+  }
+
   void handleFocusChange(bool value) {
     if (focused == value) {
       return;
@@ -244,9 +248,9 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
       onShowFocusHighlight: (value) =>
-          statesController.update(MaterialState.focused, value),
+          updateState(MaterialState.focused, value),
       onShowHoverHighlight: (value) =>
-          statesController.update(MaterialState.hovered, value),
+          updateState(MaterialState.hovered, value),
       mouseCursor: mouseCursor ??
           (widget.interactive
               ? SystemMouseCursors.click
@@ -254,11 +258,10 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       child: GestureDetector(
         excludeFromSemantics: !widget.interactive,
         onTapDown: (_) =>
-            statesController.update(MaterialState.pressed, widget.interactive),
+            updateState(MaterialState.pressed, widget.interactive),
         onTap: handleTap,
-        onTapUp: (_) => statesController.update(MaterialState.pressed, false),
-        onTapCancel: () =>
-            statesController.update(MaterialState.pressed, false),
+        onTapUp: (_) => updateState(MaterialState.pressed, false),
+        onTapCancel: () => updateState(MaterialState.pressed, false),
         child: AbsorbPointer(
           child: child,
         ),
