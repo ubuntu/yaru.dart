@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 1 24 24"
+   height="24"
+   id="svg7384"
+   version="1.1"
+   width="24"
+   sodipodi:docname="artist-filled.svg"
+   inkscape:version="1.2.2 (1:1.2.2+202212051551+b0a8486541)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview21"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:snap-page="true"
+     inkscape:zoom="30.801711"
+     inkscape:cx="9.0254726"
+     inkscape:cy="14.528414"
+     inkscape:window-width="1850"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg7384"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1044"
+       dotted="false" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid892"
+       dotted="true"
+       spacingx="0.5"
+       spacingy="0.5"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata20854">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs7386">
+    <linearGradient
+       id="linearGradient5606"
+       inkscape:swatch="solid">
+      <stop
+         id="stop5608"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4526"
+       inkscape:swatch="solid">
+      <stop
+         id="stop4528"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3600-4"
+       inkscape:swatch="gradient">
+      <stop
+         id="stop3602-7"
+         offset="0"
+         style="stop-color:#f4f4f4;stop-opacity:1" />
+      <stop
+         id="stop3604-6"
+         offset="1"
+         style="stop-color:#dbdbdb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <g
+     id="layer2"
+     style="display:inline;stroke-width:0.80002"
+     transform="matrix(1.25,0,0,1.2499376,-937.99998,-522.97378)" />
+  <g
+     id="layer4"
+     style="display:inline;stroke-width:0.80002"
+     transform="matrix(1.25,0,0,1.2499376,-937.99998,-522.97378)" />
+  <g
+     id="g1812"
+     style="display:inline;stroke-width:0.80002"
+     transform="matrix(1.25,0,0,1.2499376,-937.99998,-522.97378)" />
+  <g
+     id="g6217"
+     style="display:inline;stroke-width:0.80002"
+     transform="matrix(1.25,0,0,1.2499376,-937.99998,-522.97378)" />
+  <g
+     id="layer3"
+     style="display:inline;stroke-width:0.80002"
+     transform="matrix(1.25,0,0,1.2499376,-937.99998,-522.97378)" />
+  <g
+     id="g1833"
+     style="display:inline;stroke-width:0.80002"
+     transform="matrix(1.25,0,0,1.2499376,-937.99998,-522.97378)" />
+  <g
+     id="layer1"
+     style="display:inline;stroke-width:0.80002"
+     transform="matrix(1.25,0,0,1.2499376,-937.99998,-522.97378)" />
+  <path
+     id="path460"
+     style="color:#000000;fill:#808080;-inkscape-stroke:none"
+     d="M 12 2 C 9.2385819 2 7 4.4624399 7 7.5 C 7 10.53756 9.2385819 13 12 13 C 14.761418 13 17 10.53756 17 7.5 C 17 4.4624399 14.761418 2 12 2 z M 12 15 C 7.6094587 15.002 5.3171787 16.023096 4.140625 17.357422 C 2.9640713 18.691748 3 20.264086 3 21 L 12.800781 21 A 4 4 0 0 1 12.5 19.5 A 4 4 0 0 1 16.5 15.5 A 4 4 0 0 1 16.535156 15.5 C 15.351853 15.184643 13.868035 14.999155 12 15 z " />
+  <path
+     id="path433"
+     style="color:#000000;fill:#808080;stroke-linejoin:round;-inkscape-stroke:none"
+     d="M 18 12 L 18 17.501953 C 17.581604 17.186692 17.061028 17 16.5 17 C 15.125214 17 14 18.125214 14 19.5 C 14 20.874786 15.125214 22 16.5 22 C 17.874786 22 19 20.874786 19 19.5 L 19 14 L 21.5 14 L 21.5 12 L 18 12 z " />
+</svg>
