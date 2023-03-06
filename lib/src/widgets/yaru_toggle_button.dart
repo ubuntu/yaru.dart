@@ -49,6 +49,7 @@ class YaruToggleButton extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final states = statesController?.value ??
         {if (onToggled == null) MaterialState.disabled};
+    final enabled = !states.contains(MaterialState.disabled);
     final mouseCursor =
         MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
             MaterialStateMouseCursor.clickable.resolve(states);
@@ -57,6 +58,12 @@ class YaruToggleButton extends StatelessWidget {
       child: Semantics(
         child: GestureDetector(
           onTap: onToggled,
+          onTapDown: (_) =>
+              statesController?.update(MaterialState.pressed, enabled),
+          onTapUp: (_) =>
+              statesController?.update(MaterialState.pressed, false),
+          onTapCancel: () =>
+              statesController?.update(MaterialState.pressed, false),
           child: MouseRegion(
             cursor: mouseCursor,
             onEnter: (_) =>
