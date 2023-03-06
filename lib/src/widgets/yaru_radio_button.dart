@@ -5,7 +5,7 @@ import 'yaru_toggle_button.dart';
 import 'yaru_toggle_button_theme.dart';
 
 /// A desktop style radio button with an interactive label.
-class YaruRadioButton<T> extends StatelessWidget {
+class YaruRadioButton<T> extends StatefulWidget {
   /// Creates a new radio button.
   const YaruRadioButton({
     super.key,
@@ -52,38 +52,43 @@ class YaruRadioButton<T> extends StatelessWidget {
   final MouseCursor? mouseCursor;
 
   @override
+  State<YaruRadioButton<T>> createState() => _YaruRadioButtonState<T>();
+}
+
+class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
+  @override
   Widget build(BuildContext context) {
     final states = {
-      if (onChanged == null) MaterialState.disabled,
+      if (widget.onChanged == null) MaterialState.disabled,
     };
     final mouseCursor =
-        MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
+        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
             YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
 
     return YaruToggleButton(
-      title: title,
-      subtitle: subtitle,
-      contentPadding: contentPadding,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      contentPadding: widget.contentPadding,
       leading: YaruRadio<T>(
-        value: value,
-        groupValue: groupValue,
-        onChanged: onChanged,
-        toggleable: toggleable,
-        focusNode: focusNode,
-        autofocus: autofocus,
+        value: widget.value,
+        groupValue: widget.groupValue,
+        onChanged: widget.onChanged,
+        toggleable: widget.toggleable,
+        focusNode: widget.focusNode,
+        autofocus: widget.autofocus,
         mouseCursor: mouseCursor,
       ),
       mouseCursor:
           mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
-      onToggled: onChanged == null ? null : _onToggled,
+      onToggled: widget.onChanged == null ? null : _onToggled,
     );
   }
 
   void _onToggled() {
-    if (groupValue != value || !toggleable) {
-      onChanged!(value);
-    } else if (toggleable) {
-      onChanged!(null);
+    if (widget.groupValue != widget.value || !widget.toggleable) {
+      widget.onChanged!(widget.value);
+    } else if (widget.toggleable) {
+      widget.onChanged!(null);
     }
   }
 }
