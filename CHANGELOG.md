@@ -1,3 +1,11 @@
+# 1.0.4
+
+* Add animated compass icon by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/131
+* Canvas masking issue on web platform by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/136
+* Remove useless ClipRect by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/139
+* Add repeat single icon by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/142
+* Add new music icons by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/143
+
 # 1.0.3
 
 * Add new application icon
