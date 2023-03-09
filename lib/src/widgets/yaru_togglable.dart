@@ -271,10 +271,13 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
   void fillPainterDefaults(YaruTogglablePainter painter) {
     final colorScheme = Theme.of(context).colorScheme;
+    final brightness = Theme.of(context).brightness;
 
     // Normal colors
     final uncheckedColor = colorScheme.surface;
-    final uncheckedBorderColor = colorScheme.onSurface.withOpacity(.3);
+    final uncheckedBorderColor = brightness == Brightness.light
+        ? const Color(0xFF959595)
+        : const Color(0xFF757575);
     final checkedColor = colorScheme.primary;
     const checkedBorderColor = Colors.transparent;
     final checkmarkColor = colorScheme.onPrimary;
