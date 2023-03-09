@@ -1,9 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'yaru_page_indicator.dart';
+import 'yaru_page_indicator_layout_delegate.dart';
 
 /// Defines default property values for descendant [YaruPageIndicator] widgets.
 ///
@@ -15,51 +14,56 @@ class YaruPageIndicatorThemeData
     extends ThemeExtension<YaruPageIndicatorThemeData> with Diagnosticable {
   /// Creates a theme that can be used for [YaruPageIndicatorTheme.data].
   const YaruPageIndicatorThemeData({
-    this.animationDuration,
-    this.animationCurve,
-    this.dotSize,
-    this.dotSpacing,
-    this.dotDecorationBuilder,
+    this.itemSizeBuilder,
+    this.itemBuilder,
     this.mouseCursor,
+    this.textBuilder,
+    this.textStyle,
+    this.layoutDelegate,
   });
 
-  /// Duration of a transition between two items.
-  /// Use [Duration.zero] (defaults) to disable transition.
-  final Duration? animationDuration;
+  /// Returns the [Size] of a given item.
+  /// These values are used to compute the layout using [layoutDelegate].
+  final YaruPageIndicatorItemBuilder<Size>? itemSizeBuilder;
 
-  /// Curve used in a transition between two items.
-  final Curve? animationCurve;
-
-  /// Size of the dots.
-  final double? dotSize;
-
-  /// Base length for the space between the dots.
-  /// Will be automatically reduced to fit the vertical constraints.
-  final double? dotSpacing;
-
-  /// Decoration of the dots.
-  final YaruDotDecorationBuilder? dotDecorationBuilder;
+  /// Returns the [Widget] of a given item.
+  final YaruPageIndicatorItemBuilder<Widget>? itemBuilder;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MaterialStateProperty<MouseCursor?>? mouseCursor;
 
+  /// Returns the [Widget] of the text based indicator.
+  /// Be careful to use something small enough to fit in a small vertical constraints.
+  ///
+  /// Defaults to a basic [Text] like "2/12".
+  /// You can custimize the text style with [textStyle].
+  final YaruPageIndicatorTextBuilder? textBuilder;
+
+  /// Text style used to customize the default text based indicator.
+  ///
+  /// Defaults to [TextTheme.bodySmall].
+  final TextStyle? textStyle;
+
+  /// Controls the items spacing, depending on the vertical constraints.
+  final YaruPageIndicatorLayoutDelegate? layoutDelegate;
+
   /// Creates a copy with the given fields replaced with new values.
   @override
   YaruPageIndicatorThemeData copyWith({
-    Duration? animationDuration,
-    Curve? animationCurve,
-    double? dotSize,
-    double? dotSpacing,
-    YaruDotDecorationBuilder? dotDecorationBuilder,
+    YaruPageIndicatorItemBuilder<Size>? itemSizeBuilder,
+    YaruPageIndicatorItemBuilder<Widget>? itemBuilder,
     MaterialStateProperty<MouseCursor?>? mouseCursor,
+    YaruPageIndicatorTextBuilder? textBuilder,
+    TextStyle? textStyle,
+    YaruPageIndicatorLayoutDelegate? layoutDelegate,
   }) {
     return YaruPageIndicatorThemeData(
-      animationDuration: animationDuration ?? this.animationDuration,
-      animationCurve: animationCurve ?? this.animationCurve,
-      dotSize: dotSize ?? this.dotSize,
-      dotSpacing: dotSpacing ?? this.dotSpacing,
-      dotDecorationBuilder: dotDecorationBuilder ?? this.dotDecorationBuilder,
+      itemSizeBuilder: itemSizeBuilder ?? this.itemSizeBuilder,
+      itemBuilder: itemBuilder ?? this.itemBuilder,
       mouseCursor: mouseCursor ?? this.mouseCursor,
+      textBuilder: textBuilder ?? this.textBuilder,
+      textStyle: textStyle ?? this.textStyle,
+      layoutDelegate: layoutDelegate ?? this.layoutDelegate,
     );
   }
 
@@ -70,29 +74,24 @@ class YaruPageIndicatorThemeData
   ) {
     final o = other as YaruPageIndicatorThemeData?;
     return YaruPageIndicatorThemeData(
-      animationDuration: lerpDuration(
-        animationDuration ?? Duration.zero,
-        o?.animationDuration ?? Duration.zero,
-        t,
-      ),
-      animationCurve: t < 0.5 ? animationCurve : o?.animationCurve,
-      dotSize: lerpDouble(dotSize, o?.dotSize, t),
-      dotSpacing: lerpDouble(dotSpacing, o?.dotSpacing, t),
-      dotDecorationBuilder:
-          t < 0.5 ? dotDecorationBuilder : o?.dotDecorationBuilder,
+      itemSizeBuilder: t < 0.5 ? itemSizeBuilder : o?.itemSizeBuilder,
+      itemBuilder: t < 0.5 ? itemBuilder : o?.itemBuilder,
       mouseCursor: t < 0.5 ? mouseCursor : o?.mouseCursor,
+      textBuilder: t < 0.5 ? textBuilder : o?.textBuilder,
+      textStyle: TextStyle.lerp(textStyle, o?.textStyle, t),
+      layoutDelegate: t < 0.5 ? layoutDelegate : o?.layoutDelegate,
     );
   }
 
   @override
   int get hashCode {
     return Object.hash(
-      animationDuration,
-      animationCurve,
-      dotSize,
-      dotSpacing,
-      dotDecorationBuilder,
+      itemSizeBuilder,
+      itemBuilder,
       mouseCursor,
+      textBuilder,
+      textStyle,
+      layoutDelegate,
     );
   }
 
@@ -101,12 +100,12 @@ class YaruPageIndicatorThemeData
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
     return other is YaruPageIndicatorThemeData &&
-        other.animationDuration == animationDuration &&
-        other.animationCurve == animationCurve &&
-        other.dotSize == dotSize &&
-        other.dotSpacing == dotSpacing &&
-        other.dotDecorationBuilder == dotDecorationBuilder &&
-        other.mouseCursor == mouseCursor;
+        other.itemSizeBuilder == itemSizeBuilder &&
+        other.itemBuilder == itemBuilder &&
+        other.mouseCursor == mouseCursor &&
+        other.textBuilder == textBuilder &&
+        other.textStyle == textStyle &&
+        other.layoutDelegate == layoutDelegate;
   }
 }
 

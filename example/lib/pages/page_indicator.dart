@@ -24,8 +24,28 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
           length: _length,
           page: _page,
           onTap: (page) => setState(() => _page = page),
-          dotSize: _dotSize,
-          dotSpacing: _dotSpacing,
+          itemSizeBuilder: (_, __, ___) => Size.square(_dotSize + 8),
+          layoutDelegate:
+              YaruPageIndicatorSteppedDelegate(baseItemSpacing: _dotSpacing),
+          itemBuilder: (index, selectedIndex, length) => YaruPageIndicatorItem(
+            selected: index == selectedIndex,
+            size: Size.square(index == selectedIndex ? _dotSize + 8 : _dotSize),
+            animationDuration: const Duration(milliseconds: 250),
+          ),
+        ),
+        const SizedBox(height: 15),
+        YaruPageIndicator(
+          length: _length,
+          page: _page,
+          onTap: (page) => setState(() => _page = page),
+          itemSizeBuilder: (_, __, ___) => Size.square(_dotSize + 8),
+          layoutDelegate:
+              YaruPageIndicatorSteppedDelegate(baseItemSpacing: _dotSpacing),
+          itemBuilder: (index, selectedIndex, length) => YaruPageIndicatorItem(
+            selected: index <= selectedIndex,
+            size: Size.square(index <= selectedIndex ? _dotSize + 8 : _dotSize),
+            animationDuration: const Duration(milliseconds: 250),
+          ),
         ),
         const SizedBox(height: 15),
         ButtonBar(

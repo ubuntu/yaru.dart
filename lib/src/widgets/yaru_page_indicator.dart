@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'yaru_carousel.dart';
+import 'yaru_page_indicator_layout_delegate.dart';
 import 'yaru_page_indicator_theme.dart';
 
-typedef YaruDotDecorationBuilder = Decoration Function(
+typedef YaruPageIndicatorItemBuilder<T> = T Function(
   int index,
   int selectedIndex,
+  int length,
+);
+
+typedef YaruPageIndicatorTextBuilder = Widget Function(
+  int page,
   int length,
 );
 
@@ -23,13 +29,13 @@ class YaruPageIndicator extends StatelessWidget {
     super.key,
     required this.length,
     required this.page,
-    this.animationDuration,
-    this.animationCurve,
     this.onTap,
-    this.dotSize,
-    this.dotSpacing,
-    this.dotDecorationBuilder,
+    this.itemSizeBuilder,
+    this.itemBuilder,
     this.mouseCursor,
+    this.textBuilder,
+    this.textStyle,
+    this.layoutDelegate,
   }) : assert(page >= 0 && page <= length - 1);
 
   /// Determine the number of pages.
@@ -39,84 +45,58 @@ class YaruPageIndicator extends StatelessWidget {
   /// This value should be clamped between 0 and [length] - 1
   final int page;
 
-  /// Duration of a transition between two dots.
-  /// Use [Duration.zero] (defaults) to disable transition.
-  ///
-  /// Defaults to [Duration.zero].
-  final Duration? animationDuration;
-
-  /// Curve used in a transition between two dots.
-  ///
-  /// Defaults to [Curves.linear].
-  final Curve? animationCurve;
-
   /// Callback called when tapping a dot.
   /// It passes the tapped page index as parameter.
   final ValueChanged<int>? onTap;
 
-  /// Size of the dots.
+  /// Returns the [Size] of a given item.
+  /// These values are used to compute the layout using [layoutDelegate].
+  /// If you want an animated items size, just return the largest bounds.
   ///
-  /// Defaults to 12.0
-  final double? dotSize;
+  /// Defaults to a constant 12.0 square.
+  final YaruPageIndicatorItemBuilder<Size>? itemSizeBuilder;
 
-  /// Base length for the space between the dots.
-  /// Will be automatically reduced to fit the vertical constraints.
+  /// Returns the [Widget] of a given item.
   ///
-  /// Defaults to 48.0
-  final double? dotSpacing;
-
-  /// Decoration of the dots.
-  final YaruDotDecorationBuilder? dotDecorationBuilder;
+  /// Defaults to [YaruPageIndicatorItem].
+  final YaruPageIndicatorItemBuilder<Widget>? itemBuilder;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor? mouseCursor;
+
+  /// Returns the [Widget] of the text based indicator.
+  /// Be careful to use something small enough to fit in a small vertical constraints.
+  ///
+  /// Defaults to a basic [Text] like "2/12".
+  /// You can custimize the text style with [textStyle].
+  final YaruPageIndicatorTextBuilder? textBuilder;
+
+  /// Text style used to customize the default text based indicator.
+  /// Useless if you set a custom [textBuilder];
+  ///
+  /// Defaults to [TextTheme.bodySmall].
+  final TextStyle? textStyle;
+
+  /// Controls the items spacing, depending on the vertical constraints.
+  ///
+  /// Defaults to [YaruPageIndicatorSteppedDelegate].
+  final YaruPageIndicatorLayoutDelegate? layoutDelegate;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final indicatorTheme = YaruPageIndicatorTheme.of(context);
 
-    final dotSize = this.dotSize ?? indicatorTheme?.dotSize ?? 12.0;
-    final dotSpacing = this.dotSpacing ?? indicatorTheme?.dotSpacing ?? 48.0;
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        for (final layout in [
-          [dotSpacing, constraints.maxWidth / 2],
-          [dotSpacing / 2, constraints.maxWidth / 3 * 2],
-          [dotSpacing / 4, constraints.maxWidth / 6 * 5]
-        ]) {
-          final dotSpacing = layout[0];
-          final maxWidth = layout[1];
-
-          if (dotSize * length + dotSpacing * (length - 1) < maxWidth) {
-            return _buildDotIndicator(
-              theme,
-              indicatorTheme,
-              dotSize,
-              dotSpacing,
-            );
-          }
-        }
-
-        return _buildTextIndicator(theme);
-      },
-    );
-  }
-
-  Widget _buildDotIndicator(
-    ThemeData theme,
-    YaruPageIndicatorThemeData? indicatorTheme,
-    double dotSize,
-    double dotSpacing,
-  ) {
-    final dotDecorationBuilder =
-        this.dotDecorationBuilder ?? indicatorTheme?.dotDecorationBuilder;
-    final animationDuration = this.animationDuration ??
-        indicatorTheme?.animationDuration ??
-        Duration.zero;
-    final animationCurve =
-        this.animationCurve ?? indicatorTheme?.animationCurve ?? Curves.linear;
+    final layoutDelegate = this.layoutDelegate ??
+        indicatorTheme?.layoutDelegate ??
+        YaruPageIndicatorSteppedDelegate();
+    final itemSizeBuilder = this.itemSizeBuilder ??
+        indicatorTheme?.itemSizeBuilder ??
+        (_, __, ___) => const Size.square(12.0);
+    final itemBuilder = this.itemBuilder ??
+        indicatorTheme?.itemBuilder ??
+        (index, selectedIndex, _) =>
+            YaruPageIndicatorItem(selected: selectedIndex == index);
     final states = {
       if (onTap == null) MaterialState.disabled,
     };
@@ -124,51 +104,123 @@ class YaruPageIndicator extends StatelessWidget {
         MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
             indicatorTheme?.mouseCursor?.resolve(states) ??
             MaterialStateMouseCursor.clickable.resolve(states);
+    final textStyle = this.textStyle ??
+        indicatorTheme?.textStyle ??
+        theme.textTheme.bodySmall;
+    final textBuilder = this.textBuilder ??
+        indicatorTheme?.textBuilder ??
+        (page, length) => Text(
+              '$page/$length',
+              style: textStyle,
+              textAlign: TextAlign.center,
+            );
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: List<Widget>.generate(length, (index) {
-        final dotDecoration = dotDecorationBuilder != null
-            ? dotDecorationBuilder.call(index, page, length)
-            : BoxDecoration(
-                color: page == index
-                    ? theme.colorScheme.primary
-                    : theme.colorScheme.onSurface.withOpacity(.3),
-                shape: BoxShape.circle,
-              );
+    final itemSizes = <Size>[];
+    var maxHeight = 0.0;
+    var maxWidth = 0.0;
 
-        return GestureDetector(
-          onTap: onTap == null ? null : () => onTap!(index),
-          child: Padding(
-            padding: EdgeInsets.only(left: index != 0 ? dotSpacing : 0),
-            child: MouseRegion(
-              cursor: mouseCursor,
-              child: animationDuration == Duration.zero
-                  ? Container(
-                      width: dotSize,
-                      height: dotSize,
-                      decoration: dotDecoration,
-                    )
-                  : AnimatedContainer(
-                      duration: animationDuration,
-                      curve: animationCurve,
-                      width: dotSize,
-                      height: dotSize,
-                      decoration: dotDecoration,
-                    ),
-            ),
-          ),
+    for (var i = 0; i < length; i++) {
+      itemSizes.add(itemSizeBuilder(i, page, length));
+
+      maxWidth = itemSizes[i].width > maxWidth ? itemSizes[i].width : maxWidth;
+      maxHeight =
+          itemSizes[i].height > maxHeight ? itemSizes[i].height : maxHeight;
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final itemSpacing = layoutDelegate.calculateItemsSpacing(
+          allItemsWidth: maxWidth * length,
+          length: length,
+          availableWidth: constraints.maxWidth,
         );
-      }),
+
+        if (null == itemSpacing) {
+          return textBuilder(page + 1, length);
+        }
+
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: List<Widget>.generate(length, (index) {
+            return Padding(
+              padding: EdgeInsets.only(left: index != 0 ? itemSpacing : 0),
+              child: SizedBox(
+                width: itemSizes[index].width,
+                height: itemSizes[index].height,
+                child: Center(
+                  child: GestureDetector(
+                    onTap: onTap == null ? null : () => onTap!(index),
+                    child: MouseRegion(
+                      cursor: mouseCursor,
+                      child: itemBuilder(index, page, length),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
+        );
+      },
     );
   }
+}
 
-  Widget _buildTextIndicator(ThemeData theme) {
-    return Text(
-      '${page + 1}/$length',
-      style: theme.textTheme.bodySmall,
-      textAlign: TextAlign.center,
+/// Default item used in [YaruPageIndicator.itemBuilder].
+/// Looks like a simple dot grey when unselected, and accented when selected.
+class YaruPageIndicatorItem extends StatelessWidget {
+  /// Default item used in [YaruPageIndicator.itemBuilder].
+  /// Looks like a simple dot grey when unselected, and accented when selected.
+  const YaruPageIndicatorItem({
+    super.key,
+    required this.selected,
+    this.size,
+    this.animationDuration,
+    this.animationCurve,
+  });
+
+  /// Define if this is a selected item.
+  final bool selected;
+
+  /// Optionnal item size.
+  final Size? size;
+
+  /// Duration of a transition between two items.
+  /// Use [Duration.zero] to disable transition.
+  ///
+  /// Defaults to [Duration.zero].
+  final Duration? animationDuration;
+
+  /// Curve used in a transition between two items.
+  ///
+  /// Defaults to [Curves.linear].
+  final Curve? animationCurve;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    final decoration = BoxDecoration(
+      color: selected
+          ? theme.colorScheme.primary
+          : theme.colorScheme.onSurface.withOpacity(.3),
+      shape: BoxShape.circle,
     );
+    final animationDuration = this.animationDuration ?? Duration.zero;
+    final animationCurve = this.animationCurve ?? Curves.linear;
+
+    return animationDuration != Duration.zero
+        ? AnimatedContainer(
+            width: size?.width,
+            height: size?.height,
+            duration: animationDuration,
+            curve: animationCurve,
+            decoration: decoration,
+          )
+        : Container(
+            width: size?.width,
+            height: size?.height,
+            decoration: decoration,
+          );
   }
 }
