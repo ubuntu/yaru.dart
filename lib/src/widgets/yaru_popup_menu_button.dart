@@ -23,6 +23,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.constraints,
     this.elevation,
     this.style,
+    this.mouseCursor,
   });
 
   final T? initialValue;
@@ -40,6 +41,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final BoxConstraints? constraints;
   final double? elevation;
   final ButtonStyle? style;
+  final MouseCursor? mouseCursor;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,10 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
             color: Theme.of(context).colorScheme.outline,
           ),
         );
+    final mouseCursor =
+        MaterialStateProperty.resolveAs(this.mouseCursor, state) ??
+            style?.mouseCursor?.resolve(state) ??
+            MaterialStateMouseCursor.clickable.resolve(state);
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
       child: Material(
@@ -71,31 +77,34 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
           offset: offset,
           enableFeedback: enableFeedback,
           constraints: constraints,
-          child: Opacity(
-            opacity: enabled ? 1 : 0.38,
-            child: Padding(
-              padding: padding,
-              child: DefaultTextStyle(
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.w500,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: childPadding,
-                      child: child,
-                    ),
-                    const SizedBox(
-                      height: 40,
-                      child: Icon(
-                        YaruIcons.pan_down,
-                        size: 20,
+          child: MouseRegion(
+            cursor: mouseCursor,
+            child: Opacity(
+              opacity: enabled ? 1 : 0.38,
+              child: Padding(
+                padding: padding,
+                child: DefaultTextStyle(
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: childPadding,
+                        child: child,
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 40,
+                        child: Icon(
+                          YaruIcons.pan_down,
+                          size: 20,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

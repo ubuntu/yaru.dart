@@ -16,6 +16,7 @@ class YaruPageIndicatorThemeData
   const YaruPageIndicatorThemeData({
     this.itemSizeBuilder,
     this.itemBuilder,
+    this.mouseCursor,
     this.textBuilder,
     this.textStyle,
     this.layoutDelegate,
@@ -27,6 +28,9 @@ class YaruPageIndicatorThemeData
 
   /// Returns the [Widget] of a given item.
   final YaruPageIndicatorItemBuilder<Widget>? itemBuilder;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MaterialStateProperty<MouseCursor?>? mouseCursor;
 
   /// Returns the [Widget] of the text based indicator.
   /// Be careful to use something small enough to fit in a small vertical constraints.
@@ -48,6 +52,7 @@ class YaruPageIndicatorThemeData
   YaruPageIndicatorThemeData copyWith({
     YaruPageIndicatorItemBuilder<Size>? itemSizeBuilder,
     YaruPageIndicatorItemBuilder<Widget>? itemBuilder,
+    MaterialStateProperty<MouseCursor?>? mouseCursor,
     YaruPageIndicatorTextBuilder? textBuilder,
     TextStyle? textStyle,
     YaruPageIndicatorLayoutDelegate? layoutDelegate,
@@ -55,6 +60,7 @@ class YaruPageIndicatorThemeData
     return YaruPageIndicatorThemeData(
       itemSizeBuilder: itemSizeBuilder ?? this.itemSizeBuilder,
       itemBuilder: itemBuilder ?? this.itemBuilder,
+      mouseCursor: mouseCursor ?? this.mouseCursor,
       textBuilder: textBuilder ?? this.textBuilder,
       textStyle: textStyle ?? this.textStyle,
       layoutDelegate: layoutDelegate ?? this.layoutDelegate,
@@ -70,6 +76,7 @@ class YaruPageIndicatorThemeData
     return YaruPageIndicatorThemeData(
       itemSizeBuilder: t < 0.5 ? itemSizeBuilder : o?.itemSizeBuilder,
       itemBuilder: t < 0.5 ? itemBuilder : o?.itemBuilder,
+      mouseCursor: t < 0.5 ? mouseCursor : o?.mouseCursor,
       textBuilder: t < 0.5 ? textBuilder : o?.textBuilder,
       textStyle: TextStyle.lerp(textStyle, o?.textStyle, t),
       layoutDelegate: t < 0.5 ? layoutDelegate : o?.layoutDelegate,
@@ -81,6 +88,7 @@ class YaruPageIndicatorThemeData
     return Object.hash(
       itemSizeBuilder,
       itemBuilder,
+      mouseCursor,
       textBuilder,
       textStyle,
       layoutDelegate,
@@ -94,6 +102,7 @@ class YaruPageIndicatorThemeData
     return other is YaruPageIndicatorThemeData &&
         other.itemSizeBuilder == itemSizeBuilder &&
         other.itemBuilder == itemBuilder &&
+        other.mouseCursor == mouseCursor &&
         other.textBuilder == textBuilder &&
         other.textStyle == textStyle &&
         other.layoutDelegate == layoutDelegate;

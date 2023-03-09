@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'yaru_switch.dart';
 import 'yaru_toggle_button.dart';
+import 'yaru_toggle_button_theme.dart';
 
 /// A desktop style switch button with an interactive label.
-class YaruSwitchButton extends StatelessWidget {
+class YaruSwitchButton extends StatefulWidget {
   /// Creates a new switch button.
   const YaruSwitchButton({
     super.key,
@@ -15,6 +16,7 @@ class YaruSwitchButton extends StatelessWidget {
     this.contentPadding,
     this.autofocus = false,
     this.focusNode,
+    this.mouseCursor,
   });
 
   /// See [Switch.value]
@@ -38,19 +40,59 @@ class YaruSwitchButton extends StatelessWidget {
   /// See [Switch.autofocus].
   final bool autofocus;
 
+  /// See [Switch.mouseCursor].
+  final MouseCursor? mouseCursor;
+
+  @override
+  State<YaruSwitchButton> createState() => _YaruSwitchButtonState();
+}
+
+class _YaruSwitchButtonState extends State<YaruSwitchButton> {
+  final _statesController = MaterialStatesController();
+
+  @override
+  void initState() {
+    super.initState();
+    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+  }
+
+  @override
+  void didUpdateWidget(YaruSwitchButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+  }
+
+  @override
+  void dispose() {
+    _statesController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final states = _statesController.value;
+    final mouseCursor =
+        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
+            YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
+
     return YaruToggleButton(
-      title: title,
-      subtitle: subtitle,
-      contentPadding: contentPadding,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      contentPadding: widget.contentPadding,
       leading: YaruSwitch(
-        value: value,
-        onChanged: onChanged,
-        focusNode: focusNode,
-        autofocus: autofocus,
+        value: widget.value,
+        onChanged: widget.onChanged,
+        focusNode: widget.focusNode,
+        autofocus: widget.autofocus,
+        mouseCursor: mouseCursor,
+        statesController: _statesController,
       ),
-      onToggled: onChanged != null ? () => onChanged!(!value) : null,
+      mouseCursor:
+          mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
+      statesController: _statesController,
+      onToggled: widget.onChanged != null
+          ? () => widget.onChanged!(!widget.value)
+          : null,
     );
   }
 }

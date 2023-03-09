@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'yaru_radio.dart';
 import 'yaru_toggle_button.dart';
+import 'yaru_toggle_button_theme.dart';
 
 /// A desktop style radio button with an interactive label.
-class YaruRadioButton<T> extends StatelessWidget {
+class YaruRadioButton<T> extends StatefulWidget {
   /// Creates a new radio button.
   const YaruRadioButton({
     super.key,
@@ -17,6 +18,7 @@ class YaruRadioButton<T> extends StatelessWidget {
     this.toggleable = false,
     this.autofocus = false,
     this.focusNode,
+    this.mouseCursor,
   });
 
   /// See [Radio.value]
@@ -46,29 +48,67 @@ class YaruRadioButton<T> extends StatelessWidget {
   /// See [Radio.autofocus].
   final bool autofocus;
 
+  /// See [Radio.mouseCursor].
+  final MouseCursor? mouseCursor;
+
+  @override
+  State<YaruRadioButton<T>> createState() => _YaruRadioButtonState<T>();
+}
+
+class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
+  final _statesController = MaterialStatesController();
+
+  @override
+  void initState() {
+    super.initState();
+    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+  }
+
+  @override
+  void didUpdateWidget(YaruRadioButton<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+  }
+
+  @override
+  void dispose() {
+    _statesController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final states = _statesController.value;
+    final mouseCursor =
+        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
+            YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
+
     return YaruToggleButton(
-      title: title,
-      subtitle: subtitle,
-      contentPadding: contentPadding,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      contentPadding: widget.contentPadding,
       leading: YaruRadio<T>(
-        value: value,
-        groupValue: groupValue,
-        onChanged: onChanged,
-        toggleable: toggleable,
-        focusNode: focusNode,
-        autofocus: autofocus,
+        value: widget.value,
+        groupValue: widget.groupValue,
+        onChanged: widget.onChanged,
+        toggleable: widget.toggleable,
+        focusNode: widget.focusNode,
+        autofocus: widget.autofocus,
+        mouseCursor: mouseCursor,
+        statesController: _statesController,
       ),
-      onToggled: onChanged == null ? null : _onToggled,
+      mouseCursor:
+          mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
+      statesController: _statesController,
+      onToggled: widget.onChanged == null ? null : _onToggled,
     );
   }
 
   void _onToggled() {
-    if (groupValue != value || !toggleable) {
-      onChanged!(value);
-    } else if (toggleable) {
-      onChanged!(null);
+    if (widget.groupValue != widget.value || !widget.toggleable) {
+      widget.onChanged!(widget.value);
+    } else if (widget.toggleable) {
+      widget.onChanged!(null);
     }
   }
 }

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_toggle_button.dart';
+import 'yaru_toggle_button_theme.dart';
 
 /// A desktop style check button with an interactive label.
-class YaruCheckButton extends StatelessWidget {
+class YaruCheckButton extends StatefulWidget {
   /// Creates a new check button.
   const YaruCheckButton({
     super.key,
@@ -16,6 +17,7 @@ class YaruCheckButton extends StatelessWidget {
     this.tristate = false,
     this.autofocus = false,
     this.focusNode,
+    this.mouseCursor,
   });
 
   /// See [Checkbox.value]
@@ -42,33 +44,71 @@ class YaruCheckButton extends StatelessWidget {
   /// See [Checkbox.autofocus].
   final bool autofocus;
 
+  /// See [Checkbox.mouseCursor].
+  final MouseCursor? mouseCursor;
+
+  @override
+  State<YaruCheckButton> createState() => _YaruCheckButtonState();
+}
+
+class _YaruCheckButtonState extends State<YaruCheckButton> {
+  final _statesController = MaterialStatesController();
+
+  @override
+  void initState() {
+    super.initState();
+    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+  }
+
+  @override
+  void didUpdateWidget(YaruCheckButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+  }
+
+  @override
+  void dispose() {
+    _statesController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final states = _statesController.value;
+    final mouseCursor =
+        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
+            YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
+
     return YaruToggleButton(
-      title: title,
-      subtitle: subtitle,
-      contentPadding: contentPadding,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      contentPadding: widget.contentPadding,
       leading: YaruCheckbox(
-        value: value,
-        onChanged: onChanged,
-        tristate: tristate,
-        focusNode: focusNode,
-        autofocus: autofocus,
+        value: widget.value,
+        onChanged: widget.onChanged,
+        tristate: widget.tristate,
+        focusNode: widget.focusNode,
+        autofocus: widget.autofocus,
+        mouseCursor: mouseCursor,
+        statesController: _statesController,
       ),
-      onToggled: onChanged == null ? null : _onToggled,
+      mouseCursor:
+          mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
+      statesController: _statesController,
+      onToggled: widget.onChanged == null ? null : _onToggled,
     );
   }
 
   void _onToggled() {
-    switch (value) {
+    switch (widget.value) {
       case false:
-        onChanged!(true);
+        widget.onChanged!(true);
         break;
       case true:
-        onChanged!(tristate ? null : false);
+        widget.onChanged!(widget.tristate ? null : false);
         break;
       case null:
-        onChanged!(false);
+        widget.onChanged!(false);
         break;
     }
   }

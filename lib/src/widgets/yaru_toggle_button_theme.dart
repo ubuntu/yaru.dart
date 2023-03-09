@@ -17,6 +17,7 @@ class YaruToggleButtonThemeData
     this.verticalSpacing,
     this.titleStyle,
     this.subtitleStyle,
+    this.mouseCursor,
   });
 
   /// The spacing between the indicator and the title.
@@ -31,6 +32,9 @@ class YaruToggleButtonThemeData
   /// The style of the subtitle text.
   final TextStyle? subtitleStyle;
 
+  /// The mouse cursor.
+  final MaterialStateProperty<MouseCursor?>? mouseCursor;
+
   /// Creates a copy with the given fields replaced with new values.
   @override
   YaruToggleButtonThemeData copyWith({
@@ -38,12 +42,14 @@ class YaruToggleButtonThemeData
     double? verticalSpacing,
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
+    MaterialStateProperty<MouseCursor?>? mouseCursor,
   }) {
     return YaruToggleButtonThemeData(
       horizontalSpacing: horizontalSpacing ?? this.horizontalSpacing,
       verticalSpacing: verticalSpacing ?? this.verticalSpacing,
       titleStyle: titleStyle ?? this.titleStyle,
       subtitleStyle: subtitleStyle ?? this.subtitleStyle,
+      mouseCursor: mouseCursor ?? this.mouseCursor,
     );
   }
 
@@ -58,6 +64,7 @@ class YaruToggleButtonThemeData
       verticalSpacing: lerpDouble(verticalSpacing, o?.verticalSpacing, t),
       titleStyle: TextStyle.lerp(titleStyle, o?.titleStyle, t),
       subtitleStyle: TextStyle.lerp(subtitleStyle, o?.subtitleStyle, t),
+      mouseCursor: t < 0.5 ? mouseCursor : o?.mouseCursor,
     );
   }
 
@@ -68,6 +75,7 @@ class YaruToggleButtonThemeData
       verticalSpacing,
       titleStyle,
       subtitleStyle,
+      mouseCursor,
     );
   }
 
@@ -79,7 +87,8 @@ class YaruToggleButtonThemeData
         other.horizontalSpacing == horizontalSpacing &&
         other.verticalSpacing == verticalSpacing &&
         other.titleStyle == titleStyle &&
-        other.subtitleStyle == subtitleStyle;
+        other.subtitleStyle == subtitleStyle &&
+        other.mouseCursor == mouseCursor;
   }
 }
 

@@ -19,6 +19,8 @@ class YaruToggleButton extends StatelessWidget {
     this.subtitle,
     this.contentPadding,
     this.onToggled,
+    this.mouseCursor,
+    this.statesController,
   });
 
   /// The toggle indicator.
@@ -36,19 +38,40 @@ class YaruToggleButton extends StatelessWidget {
   /// Called when the button is toggled.
   final VoidCallback? onToggled;
 
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MouseCursor? mouseCursor;
+
+  final MaterialStatesController? statesController;
+
   @override
   Widget build(BuildContext context) {
     final theme = YaruToggleButtonTheme.of(context);
     final textTheme = Theme.of(context).textTheme;
+    final states = statesController?.value ??
+        {if (onToggled == null) MaterialState.disabled};
+    final enabled = !states.contains(MaterialState.disabled);
+    final mouseCursor =
+        MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
+            MaterialStateMouseCursor.clickable.resolve(states);
 
     return MergeSemantics(
       child: Semantics(
         child: GestureDetector(
           onTap: onToggled,
+          onTapDown: (_) =>
+              statesController?.update(MaterialState.pressed, enabled),
+          onTapUp: (_) =>
+              statesController?.update(MaterialState.pressed, false),
+          onTapCancel: () =>
+              statesController?.update(MaterialState.pressed, false),
           child: MouseRegion(
-            cursor: onToggled != null
-                ? SystemMouseCursors.click
-                : SystemMouseCursors.basic,
+            cursor: mouseCursor,
+            onEnter: (_) =>
+                statesController?.update(MaterialState.hovered, true),
+            onHover: (_) =>
+                statesController?.update(MaterialState.hovered, true),
+            onExit: (_) =>
+                statesController?.update(MaterialState.hovered, false),
             child: Padding(
               padding: contentPadding ?? EdgeInsets.zero,
               child: _YaruToggleButtonLayout(

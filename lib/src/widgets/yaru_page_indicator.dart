@@ -32,6 +32,7 @@ class YaruPageIndicator extends StatelessWidget {
     this.onTap,
     this.itemSizeBuilder,
     this.itemBuilder,
+    this.mouseCursor,
     this.textBuilder,
     this.textStyle,
     this.layoutDelegate,
@@ -59,6 +60,9 @@ class YaruPageIndicator extends StatelessWidget {
   ///
   /// Defaults to [YaruPageIndicatorItem].
   final YaruPageIndicatorItemBuilder<Widget>? itemBuilder;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MouseCursor? mouseCursor;
 
   /// Returns the [Widget] of the text based indicator.
   /// Be careful to use something small enough to fit in a small vertical constraints.
@@ -93,6 +97,13 @@ class YaruPageIndicator extends StatelessWidget {
         indicatorTheme?.itemBuilder ??
         (index, selectedIndex, _) =>
             YaruPageIndicatorItem(selected: selectedIndex == index);
+    final states = {
+      if (onTap == null) MaterialState.disabled,
+    };
+    final mouseCursor =
+        MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
+            indicatorTheme?.mouseCursor?.resolve(states) ??
+            MaterialStateMouseCursor.clickable.resolve(states);
     final textStyle = this.textStyle ??
         indicatorTheme?.textStyle ??
         theme.textTheme.bodySmall;
@@ -141,9 +152,7 @@ class YaruPageIndicator extends StatelessWidget {
                   child: GestureDetector(
                     onTap: onTap == null ? null : () => onTap!(index),
                     child: MouseRegion(
-                      cursor: onTap == null
-                          ? SystemMouseCursors.basic
-                          : SystemMouseCursors.click,
+                      cursor: mouseCursor,
                       child: itemBuilder(index, page, length),
                     ),
                   ),
