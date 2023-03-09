@@ -2,7 +2,7 @@ import 'yaru_page_indicator.dart';
 
 /// Layout delegate interface which controls a [YaruPageIndicator] items spacing.
 abstract class YaruPageIndicatorLayoutDelegate {
-  double? calculatePaneWidth({
+  double? calculateItemsSpacing({
     required double itemsWidth,
     required int length,
     required double availableWidth,
@@ -21,7 +21,7 @@ class YaruPageIndicatorSteppedDelegate extends YaruPageIndicatorLayoutDelegate {
   final double? baseItemSpacing;
 
   @override
-  double? calculatePaneWidth({
+  double? calculateItemsSpacing({
     required double itemsWidth,
     required int length,
     required double availableWidth,
@@ -56,7 +56,7 @@ class YaruPageIndicatorFixedDelegate extends YaruPageIndicatorLayoutDelegate {
   final double? itemSpacing;
 
   @override
-  double? calculatePaneWidth({
+  double? calculateItemsSpacing({
     required double itemsWidth,
     required int length,
     required double availableWidth,
@@ -90,7 +90,7 @@ class YaruPageIndicatorBoundedDelegate extends YaruPageIndicatorLayoutDelegate {
   final double? minItemSpacing;
 
   @override
-  double? calculatePaneWidth({
+  double? calculateItemsSpacing({
     required double itemsWidth,
     required int length,
     required double availableWidth,
