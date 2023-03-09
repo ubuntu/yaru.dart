@@ -3,7 +3,7 @@ import 'yaru_page_indicator.dart';
 /// Layout delegate interface which controls a [YaruPageIndicator] items spacing.
 abstract class YaruPageIndicatorLayoutDelegate {
   double? calculateItemsSpacing({
-    required double itemsWidth,
+    required double allItemsWidth,
     required int length,
     required double availableWidth,
   });
@@ -22,7 +22,7 @@ class YaruPageIndicatorSteppedDelegate extends YaruPageIndicatorLayoutDelegate {
 
   @override
   double? calculateItemsSpacing({
-    required double itemsWidth,
+    required double allItemsWidth,
     required int length,
     required double availableWidth,
   }) {
@@ -36,7 +36,7 @@ class YaruPageIndicatorSteppedDelegate extends YaruPageIndicatorLayoutDelegate {
       final baseItemSpacing = layout[0];
       final maxWidth = layout[1];
 
-      if (itemsWidth + baseItemSpacing * (length - 1) < maxWidth) {
+      if (allItemsWidth + baseItemSpacing * (length - 1) < maxWidth) {
         return baseItemSpacing;
       }
     }
@@ -57,13 +57,13 @@ class YaruPageIndicatorFixedDelegate extends YaruPageIndicatorLayoutDelegate {
 
   @override
   double? calculateItemsSpacing({
-    required double itemsWidth,
+    required double allItemsWidth,
     required int length,
     required double availableWidth,
   }) {
     final itemSpacing = this.itemSpacing ?? 24.0;
 
-    if (itemsWidth + itemSpacing * (length - 1) < availableWidth) {
+    if (allItemsWidth + itemSpacing * (length - 1) < availableWidth) {
       return itemSpacing;
     }
 
@@ -91,19 +91,19 @@ class YaruPageIndicatorBoundedDelegate extends YaruPageIndicatorLayoutDelegate {
 
   @override
   double? calculateItemsSpacing({
-    required double itemsWidth,
+    required double allItemsWidth,
     required int length,
     required double availableWidth,
   }) {
     final maxItemSpacing = this.maxItemSpacing ?? 48.0;
     final minItemSpacing = this.minItemSpacing ?? 16.0;
 
-    if (itemsWidth + maxItemSpacing * (length - 1) < availableWidth) {
+    if (allItemsWidth + maxItemSpacing * (length - 1) < availableWidth) {
       return maxItemSpacing;
-    } else if (itemsWidth + minItemSpacing * (length - 1) > availableWidth) {
+    } else if (allItemsWidth + minItemSpacing * (length - 1) > availableWidth) {
       return null;
     }
 
-    return (availableWidth - itemsWidth) / (length - 1);
+    return (availableWidth - allItemsWidth) / (length - 1);
   }
 }

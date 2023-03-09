@@ -130,7 +130,7 @@ class YaruPageIndicator extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final itemSpacing = layoutDelegate.calculateItemsSpacing(
-          itemsWidth: maxWidth * length,
+          allItemsWidth: maxWidth * length,
           length: length,
           availableWidth: constraints.maxWidth,
         );
