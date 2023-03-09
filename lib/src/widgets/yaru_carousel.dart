@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
@@ -118,9 +119,13 @@ class _YaruCarouselState extends State<YaruCarousel> {
             YaruPageIndicator(
               length: widget.children.length,
               page: _page,
-              animationDuration: _controller.scrollAnimationDuration,
-              animationCurve: _controller.scrollAnimationCurve,
               onTap: (page) => _controller.animateToPage(page),
+              itemBuilder: (index, selectedIndex, length) =>
+                  YaruPageIndicatorItem(
+                selected: index == selectedIndex,
+                animationDuration: _controller.scrollAnimationDuration,
+                animationCurve: _controller.scrollAnimationCurve,
+              ),
             )
           ]
         ],
