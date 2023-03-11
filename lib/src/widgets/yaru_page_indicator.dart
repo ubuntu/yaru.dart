@@ -25,7 +25,28 @@ typedef YaruPageIndicatorTextBuilder = Widget Function(
 ///  * [YaruCarousel], display a list of widgets in a carousel view.
 class YaruPageIndicator extends StatelessWidget {
   /// Create a [YaruPageIndicator].
-  const YaruPageIndicator({
+  YaruPageIndicator({
+    super.key,
+    required this.length,
+    required this.page,
+    this.onTap,
+    this.itemBuilder,
+    this.mouseCursor,
+    this.textBuilder,
+    this.textStyle,
+    double? dotSize,
+    double? dotSpacing,
+  }) : assert(page >= 0 && page <= length - 1) {
+    itemSizeBuilder =
+        dotSize != null ? (_, __, ___) => Size.square(dotSize) : null;
+    layoutDelegate = dotSpacing != null
+        ? YaruPageIndicatorSteppedDelegate(baseItemSpacing: dotSpacing)
+        : null;
+  }
+
+  /// Create a [YaruPageIndicator].
+  // ignore: prefer_const_constructors_in_immutables
+  YaruPageIndicator.builder({
     super.key,
     required this.length,
     required this.page,
@@ -54,7 +75,7 @@ class YaruPageIndicator extends StatelessWidget {
   /// If you want an animated items size, just return the largest bounds.
   ///
   /// Defaults to a constant 12.0 square.
-  final YaruPageIndicatorItemBuilder<Size>? itemSizeBuilder;
+  late final YaruPageIndicatorItemBuilder<Size>? itemSizeBuilder;
 
   /// Returns the [Widget] of a given item.
   ///
@@ -80,7 +101,7 @@ class YaruPageIndicator extends StatelessWidget {
   /// Controls the items spacing, depending on the vertical constraints.
   ///
   /// Defaults to [YaruPageIndicatorSteppedDelegate].
-  final YaruPageIndicatorLayoutDelegate? layoutDelegate;
+  late final YaruPageIndicatorLayoutDelegate? layoutDelegate;
 
   @override
   Widget build(BuildContext context) {
