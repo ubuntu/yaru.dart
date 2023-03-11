@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
-import 'pages/autocomplete_page.dart';
 import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/checkbox_page.dart';
@@ -44,13 +43,6 @@ class PageItem {
 }
 
 final examplePageItems = <PageItem>[
-  PageItem(
-    title: 'YaruAutocomplete',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/autocomplete_page.dart',
-    pageBuilder: (context) => const AutocompletePage(),
-    iconBuilder: (context, selected) => const Icon(YaruIcons.question),
-  ),
   PageItem(
     title: 'YaruBanner',
     snippetUrl:
