@@ -46,7 +46,7 @@ class YaruPageIndicator extends StatelessWidget {
 
   /// Create a [YaruPageIndicator].
   // ignore: prefer_const_constructors_in_immutables
-  YaruPageIndicator.builder({
+  YaruPageIndicator.delegate({
     super.key,
     required this.length,
     required this.page,
