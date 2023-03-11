@@ -7,6 +7,7 @@ export 'src/widgets/navi_rail/yaru_navigation_page.dart';
 export 'src/widgets/navi_rail/yaru_navigation_page_theme.dart';
 export 'src/widgets/navi_rail/yaru_navigation_rail.dart';
 export 'src/widgets/navi_rail/yaru_navigation_rail_item.dart';
+export 'src/widgets/yaru_autocomplete.dart';
 export 'src/widgets/yaru_back_button.dart';
 export 'src/widgets/yaru_back_button_theme.dart';
 export 'src/widgets/yaru_banner.dart';
