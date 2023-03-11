@@ -147,6 +147,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
           duration: _kWindowControlBackgroundAnimationDuration,
           decoration: BoxDecoration(
             color: _getColor(context),
+            border: Border.all(color: Theme.of(context).colorScheme.outline),
             shape: BoxShape.circle,
           ),
           child: SizedBox.square(
