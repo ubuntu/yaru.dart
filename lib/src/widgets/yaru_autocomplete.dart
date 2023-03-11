@@ -95,11 +95,15 @@ class _YaruAutocompleteOptions<T extends Object> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Align(
       alignment: Alignment.topLeft,
       child: YaruBorderContainer(
         width: optionsWidth,
         clipBehavior: Clip.antiAlias,
+        color: colorScheme.brightness == Brightness.dark
+            ? colorScheme.surfaceVariant
+            : colorScheme.surface,
         constraints: BoxConstraints(maxHeight: maxOptionsHeight),
         child: ListView.builder(
           padding: EdgeInsets.zero,
