@@ -20,7 +20,7 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
     return ListView(
       padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
-        YaruPageIndicator.delegate(
+        YaruPageIndicator.builder(
           length: _length,
           page: _page,
           onTap: (page) => setState(() => _page = page),
@@ -34,7 +34,7 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
           ),
         ),
         const SizedBox(height: 15),
-        YaruPageIndicator.delegate(
+        YaruPageIndicator.builder(
           length: _length,
           page: _page,
           onTap: (page) => setState(() => _page = page),

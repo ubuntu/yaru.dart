@@ -30,13 +30,13 @@ class YaruPageIndicator extends StatelessWidget {
     required this.length,
     required this.page,
     this.onTap,
-    this.itemBuilder,
     this.mouseCursor,
     this.textBuilder,
     this.textStyle,
     double? dotSize,
     double? dotSpacing,
-  }) : assert(page >= 0 && page <= length - 1) {
+  })  : assert(page >= 0 && page <= length - 1),
+        itemBuilder = null {
     itemSizeBuilder =
         dotSize != null ? (_, __, ___) => Size.square(dotSize) : null;
     layoutDelegate = dotSpacing != null
@@ -46,7 +46,7 @@ class YaruPageIndicator extends StatelessWidget {
 
   /// Create a [YaruPageIndicator].
   // ignore: prefer_const_constructors_in_immutables
-  YaruPageIndicator.delegate({
+  YaruPageIndicator.builder({
     super.key,
     required this.length,
     required this.page,
