@@ -116,7 +116,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
             SizedBox(
               height: widget.placeIndicatorMarginTop,
             ),
-            YaruPageIndicator(
+            YaruPageIndicator.builder(
               length: widget.children.length,
               page: _page,
               onTap: (page) => _controller.animateToPage(page),
