@@ -1,5 +1,38 @@
 # Changelog
 
+# 2.2.0
+
+* Update goldens with new dependencies by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/630
+* Drop YaruSwitch.checkmarkColor earlier (2.2.0) by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/629
+* Introduce YaruPageIndicatorTheme by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/632
+* Update PR template by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/640
+* Example: upgrade handy_window to ^0.3.0 by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/637
+* Example: add macOS by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/635
+* Update PR template for the new branch organization by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/646
+* Cherry pick 2.2-dev into main by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/647
+* Check/Radio/Switch/Button/ListTile: allow customizing mouse cursor by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/648
+* Add docs for YaruWindowTitleBar & friends by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/639
+* `YaruPortraitLayout`: add missing hero controller by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/643
+* Add `YaruBanner.mouseCursor` by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/649
+* CI: add nightly job to update golden images (PR) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/638
+* Example: add Windows by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/636
+* Add YaruSelectableContainer.mouseCursor by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/652
+* widgets.dart: add missing export yaru_page_indicator_theme.dart by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/653
+* Merge `release` into `main` by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/655
+* Add YaruPageIndicator(ThemeData).mouseCursor by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/654
+* Add YaruPopupMenuButton.mouseCursor by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/656
+* YaruColorDisk: add subtle hover & focus highlight by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/657
+* Resolve mouse cursor widget properties by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/658
+* YaruTogglable: add states controller by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/660
+* Make YaruToggleButton subclasses stateful by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/661
+* YaruWatermark: ignore pointer for the watermark by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/662
+* YaruCheck/Radio/SwitchButton: add hover & press effects by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/663
+* Add `YaruMasterDetailPage.orientationOf()` and `appBarBuilder` by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/642
+* Improve YaruPageIndicator by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/666
+* Add YaruAutocomplete by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/668
+* Increase contrast of togglables unchecked border by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/667
+* YaruPageIndicator: restore compatibility by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/672
+
 # 2.1.1
 
 * YaruPageIndicator: add custom scale parameters by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/624
