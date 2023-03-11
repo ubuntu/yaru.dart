@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  yaru: ^0.5.4
+  yaru: ^0.5.7
   yaru_colors: ^0.1.2
   yaru_icons: ^1.0.0
   yaru_window: ^0.1.1
