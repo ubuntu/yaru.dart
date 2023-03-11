@@ -41,13 +41,15 @@ class YaruWatermark extends StatelessWidget {
     return Stack(
       children: [
         child,
-        Padding(
-          padding: padding,
-          child: Align(
-            alignment: alignment,
-            child: Opacity(
-              opacity: opacity,
-              child: watermark,
+        IgnorePointer(
+          child: Padding(
+            padding: padding,
+            child: Align(
+              alignment: alignment,
+              child: Opacity(
+                opacity: opacity,
+                child: watermark,
+              ),
             ),
           ),
         ),
