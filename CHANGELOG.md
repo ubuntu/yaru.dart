@@ -1,5 +1,10 @@
 # Changelog
 
+# 2.2.1
+
+* YaruAutocomplete: calculate matching options width by default by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/673
+* Example: add autocomplete by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/674
+
 # 2.2.0
 
 * Update goldens with new dependencies by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/630
