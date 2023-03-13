@@ -54,6 +54,7 @@ class _MasterDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruMasterDetailPage(
+      initialIndex: 1,
       layoutDelegate: const YaruMasterResizablePaneDelegate(
         initialPaneWidth: 280,
         minPageWidth: kYaruMasterDetailBreakpoint / 2,
@@ -130,6 +131,7 @@ class _CompactPageState extends State<_CompactPage> {
         ),
       ),
       body: YaruNavigationPage(
+        initialIndex: 1,
         length: widget.pageItems.length,
         itemBuilder: (context, index, selected) => YaruNavigationRailItem(
           icon: widget.pageItems[index].iconBuilder(context, selected),
