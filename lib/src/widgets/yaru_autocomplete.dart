@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'yaru_border_container.dart';
 
-class YaruAutocomplete<T extends Object> extends StatelessWidget {
+class YaruAutocomplete<T extends Object> extends StatefulWidget {
   const YaruAutocomplete({
     super.key,
     required this.optionsBuilder,
@@ -32,7 +32,11 @@ class YaruAutocomplete<T extends Object> extends StatelessWidget {
 
   /// The width used for the default options list widget.
   ///
-  /// The default value is null.
+  /// The default value is null which means the width will be the same as the
+  /// width of the [YaruAutocomplete] widget.
+  ///
+  /// Note: Passing `double.infinity` makes the options expand to the width of
+  /// the screen similarly to the Material design Autocomplete widget.
   final double? optionsWidth;
 
   /// The maximum height used for the options list widget.
@@ -44,24 +48,7 @@ class YaruAutocomplete<T extends Object> extends StatelessWidget {
   final TextEditingValue? initialValue;
 
   @override
-  Widget build(BuildContext context) {
-    return RawAutocomplete<T>(
-      displayStringForOption: displayStringForOption,
-      fieldViewBuilder: fieldViewBuilder,
-      initialValue: initialValue,
-      optionsBuilder: optionsBuilder,
-      onSelected: onSelected,
-      optionsViewBuilder: (context, onSelected, options) {
-        return _YaruAutocompleteOptions<T>(
-          displayStringForOption: displayStringForOption,
-          onSelected: onSelected,
-          options: options,
-          optionsWidth: optionsWidth,
-          maxOptionsHeight: optionsMaxHeight,
-        );
-      },
-    );
-  }
+  State<YaruAutocomplete<T>> createState() => _YaruAutocompleteState<T>();
 
   static Widget _defaultFieldViewBuilder(
     BuildContext context,
@@ -73,6 +60,57 @@ class YaruAutocomplete<T extends Object> extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       onFieldSubmitted: (value) => onSubmitted(),
+    );
+  }
+}
+
+class _YaruAutocompleteState<T extends Object>
+    extends State<YaruAutocomplete<T>> {
+  double? _optionsWidth;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateOptionsWidth();
+  }
+
+  @override
+  void didUpdateWidget(YaruAutocomplete<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.optionsWidth != oldWidget.optionsWidth) {
+      _updateOptionsWidth();
+    }
+  }
+
+  void _updateOptionsWidth() {
+    _optionsWidth = widget.optionsWidth;
+    if (_optionsWidth == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final width = (context.findRenderObject() as RenderBox?)?.size.width;
+        if (_optionsWidth != width) {
+          setState(() => _optionsWidth = width);
+        }
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RawAutocomplete<T>(
+      displayStringForOption: widget.displayStringForOption,
+      fieldViewBuilder: widget.fieldViewBuilder,
+      initialValue: widget.initialValue,
+      optionsBuilder: widget.optionsBuilder,
+      onSelected: widget.onSelected,
+      optionsViewBuilder: (context, onSelected, options) {
+        return _YaruAutocompleteOptions<T>(
+          displayStringForOption: widget.displayStringForOption,
+          onSelected: onSelected,
+          options: options,
+          optionsWidth: _optionsWidth,
+          maxOptionsHeight: widget.optionsMaxHeight,
+        );
+      },
     );
   }
 }
