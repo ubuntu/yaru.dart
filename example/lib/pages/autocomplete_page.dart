@@ -10,7 +10,6 @@ class AutocompletePage extends StatelessWidget {
       child: SizedBox(
         width: 200,
         child: YaruAutocomplete<String>(
-          optionsWidth: 200,
           optionsBuilder: (value) {
             const options = ['foo', 'bar', 'baz', 'qux', 'quux'];
             return options.where((o) => o.contains(value.text.toLowerCase()));
