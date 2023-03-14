@@ -110,25 +110,23 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.length == 0 || widget.controller?.length == 0
-        ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
-        : LayoutBuilder(
-            builder: (context, constraint) {
-              return SafeArea(
-                child: Scaffold(
-                  body: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      _buildNavigationRail(context, constraint),
-                      _buildVerticalSeparator(),
-                      _buildPageView(context),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
+    return Scaffold(
+      body: widget.length == 0 || widget.controller?.length == 0
+          ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
+          : LayoutBuilder(
+              builder: (context, constraint) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _buildNavigationRail(context, constraint),
+                    _buildVerticalSeparator(),
+                    _buildPageView(context),
+                  ],
+                );
+              },
+            ),
+    );
   }
 
   void _onTap(int index) {
