@@ -21,6 +21,7 @@ class YaruNavigationPage extends StatefulWidget {
     this.length,
     required this.itemBuilder,
     required this.pageBuilder,
+    this.emptyBuilder,
     this.initialIndex,
     this.onSelected,
     this.controller,
@@ -40,6 +41,9 @@ class YaruNavigationPage extends StatefulWidget {
 
   /// A builder that is called for each page to build its content.
   final IndexedWidgetBuilder pageBuilder;
+
+  /// A builder that is called if there are no pages to display.
+  final WidgetBuilder? emptyBuilder;
 
   /// The index of the initial page to show.
   final int? initialIndex;
@@ -106,23 +110,25 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraint) {
-        return SafeArea(
-          child: Scaffold(
-            body: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _buildNavigationRail(context, constraint),
-                _buildVerticalSeparator(),
-                _buildPageView(context),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+    return widget.length == 0 || widget.controller?.length == 0
+        ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
+        : LayoutBuilder(
+            builder: (context, constraint) {
+              return SafeArea(
+                child: Scaffold(
+                  body: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildNavigationRail(context, constraint),
+                      _buildVerticalSeparator(),
+                      _buildPageView(context),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
   }
 
   void _onTap(int index) {
