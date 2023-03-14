@@ -167,10 +167,10 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.length == 0 || widget.controller?.length == 0
-        ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
-        : Scaffold(
-            body: _YaruMasterDetailLayoutBuilder(
+    return Scaffold(
+      body: widget.length == 0 || widget.controller?.length == 0
+          ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
+          : _YaruMasterDetailLayoutBuilder(
               portrait: (context) => YaruPortraitLayout(
                 tileBuilder: widget.tileBuilder,
                 pageBuilder: widget.pageBuilder,
@@ -191,7 +191,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
                 controller: _controller,
               ),
             ),
-          );
+    );
   }
 }
 
