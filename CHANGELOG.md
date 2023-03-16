@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.2.2
+
+* Upgrade dependency yaru to ^0.6.0
+
 # 2.2.1
 
 * YaruAutocomplete: calculate matching options width by default by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/673
