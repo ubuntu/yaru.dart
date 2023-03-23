@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 import 'package:yaru_colors/yaru_colors.dart';
 import 'package:yaru_widgets/constants.dart';
 import 'package:yaru_window/yaru_window.dart';
@@ -131,7 +132,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
 
     final theme = Theme.of(context);
-    final light = theme.brightness == Brightness.light;
+    final light = theme.colorScheme.isLight;
+    final highContrast = theme.colorScheme.isHighContrast;
     final states = <MaterialState>{
       if (isActive != false) MaterialState.focused,
     };
@@ -161,8 +163,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     final defaultBorder = BorderSide(
       color: light
-          ? Colors.black.withOpacity(0.1)
-          : Colors.white.withOpacity(0.06),
+          ? Colors.black.withOpacity(highContrast ? 1 : 0.1)
+          : Colors.white.withOpacity(highContrast ? 1 : 0.06),
     );
     final border =
         Border(bottom: this.border ?? titleBarTheme.border ?? defaultBorder);
