@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
 /// The size of [YaruWindowControl].
 const kYaruWindowControlSize = 24.0;
@@ -141,12 +142,19 @@ class _YaruWindowControlState extends State<YaruWindowControl>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return _buildEventDetectors(
       RepaintBoundary(
         child: AnimatedContainer(
           duration: _kWindowControlBackgroundAnimationDuration,
           decoration: BoxDecoration(
             color: _getColor(context),
+            border: colorScheme.isHighContrast
+                ? Border.all(
+                    color: colorScheme.outlineVariant,
+                    strokeAlign: BorderSide.strokeAlignOutside,
+                  )
+                : null,
             shape: BoxShape.circle,
           ),
           child: SizedBox.square(
