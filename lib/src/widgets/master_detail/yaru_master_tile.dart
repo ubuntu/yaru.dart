@@ -64,7 +64,10 @@ class YaruMasterTile extends StatelessWidget {
             borderRadius:
                 const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
             side: theme.colorScheme.isHighContrast && isSelected
-                ? BorderSide(color: theme.colorScheme.outlineVariant)
+                ? BorderSide(
+                    color: theme.colorScheme.outlineVariant,
+                    strokeAlign: 1,
+                  )
                 : BorderSide.none,
           ),
           leading: leading,

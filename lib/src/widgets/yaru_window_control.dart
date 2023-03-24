@@ -150,7 +150,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
           decoration: BoxDecoration(
             color: _getColor(context),
             border: colorScheme.isHighContrast
-                ? Border.all(color: colorScheme.outlineVariant)
+                ? Border.all(color: colorScheme.outlineVariant, strokeAlign: 1)
                 : null,
             shape: BoxShape.circle,
           ),
