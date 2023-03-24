@@ -66,7 +66,7 @@ class YaruMasterTile extends StatelessWidget {
             side: theme.colorScheme.isHighContrast && isSelected
                 ? BorderSide(
                     color: theme.colorScheme.outlineVariant,
-                    strokeAlign: 1,
+                    strokeAlign: BorderSide.strokeAlignOutside,
                   )
                 : BorderSide.none,
           ),
