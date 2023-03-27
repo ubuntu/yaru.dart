@@ -481,6 +481,7 @@ class YaruWindowTitleBar extends StatelessWidget
       Size(0, style == YaruTitleBarStyle.hidden ? 0 : kYaruTitleBarHeight);
 
   static Future<void> ensureInitialized() {
+    _windowStates.clear();
     return YaruWindow.ensureInitialized().then((window) => window.hideTitle());
   }
 
