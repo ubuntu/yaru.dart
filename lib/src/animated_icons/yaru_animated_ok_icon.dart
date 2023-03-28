@@ -1,19 +1,48 @@
 import 'package:flutter/material.dart';
 
-const yaruAnimatedOkIconAnimationCurve = Curves.easeInCubic;
-const yaruAnimatedOkIconAnimationDuration = 500;
+import 'yaru_animated_icon.dart';
+
+const _kAnimationCurve = Curves.easeInCubic;
+const _kAnimationDuration = Duration(milliseconds: 500);
 const _kTargetCanvasSize = 24.0;
 const _kTargetIconSize = 20.0;
 
+class YaruAnimatedOkIcon extends YaruAnimatedIconData {
+  const YaruAnimatedOkIcon({this.filled = false});
+
+  final bool filled;
+
+  @override
+  Duration get defaultDuration => _kAnimationDuration;
+
+  @override
+  Curve get defaultCurve => _kAnimationCurve;
+
+  @override
+  Widget build(
+    BuildContext context,
+    Animation<double> progress,
+    double? size,
+    Color? color,
+  ) {
+    return YaruAnimatedOkIconWidget(
+      progress: progress,
+      size: size ?? _kTargetCanvasSize,
+      color: color,
+      filled: filled,
+    );
+  }
+}
+
 /// An animated Yaru ok icon, similar to the original one
-class YaruAnimatedOkIcon extends StatefulWidget {
+class YaruAnimatedOkIconWidget extends StatelessWidget {
   /// Create an animated Yaru ok icon, similar to the original one
-  const YaruAnimatedOkIcon({
+  const YaruAnimatedOkIconWidget({
     super.key,
+    required this.progress,
     this.size = 24.0,
     this.filled = false,
     this.color,
-    this.progress,
   });
 
   /// Determines the icon canvas size
@@ -32,63 +61,20 @@ class YaruAnimatedOkIcon extends StatefulWidget {
   /// The animation progress for the animated icon.
   /// The value is clamped to be between 0 and 1.
   /// If null, a defaut animation controller will be created, which will run only once.
-  final Animation<double>? progress;
-
-  @override
-  State<YaruAnimatedOkIcon> createState() => _YaruAnimatedOkIconState();
-}
-
-class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>
-    with TickerProviderStateMixin {
-  late final Animation<double> _animation;
-  late final AnimationController _controller;
-
-  Animation<double> get progress => widget.progress ?? _animation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.progress == null) {
-      _controller = AnimationController(
-        duration:
-            const Duration(milliseconds: yaruAnimatedOkIconAnimationDuration),
-        vsync: this,
-      );
-      _animation = Tween(begin: 0.0, end: 1.0)
-          .chain(CurveTween(curve: yaruAnimatedOkIconAnimationCurve))
-          .animate(_controller);
-
-      _controller.forward();
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.progress == null) {
-      _controller.dispose();
-    }
-
-    super.dispose();
-  }
+  final Animation<double> progress;
 
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: SizedBox.square(
-        dimension: widget.size,
-        child: AnimatedBuilder(
-          animation: progress,
-          builder: (context, child) {
-            return CustomPaint(
-              painter: _YaruAnimatedOkIconPainter(
-                widget.size,
-                widget.filled,
-                widget.color ?? Theme.of(context).colorScheme.onSurface,
-                progress.value,
-              ),
-            );
-          },
+        dimension: size,
+        child: CustomPaint(
+          painter: _YaruAnimatedOkIconPainter(
+            size,
+            filled,
+            color ?? Theme.of(context).colorScheme.onSurface,
+            progress.value,
+          ),
         ),
       ),
     );
@@ -96,7 +82,7 @@ class _YaruAnimatedOkIconState extends State<YaruAnimatedOkIcon>
 }
 
 class _YaruAnimatedOkIconPainter extends CustomPainter {
-  _YaruAnimatedOkIconPainter(
+  const _YaruAnimatedOkIconPainter(
     this.size,
     this.filled,
     this.color,
@@ -108,25 +94,21 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
   final Color color;
   final double progress;
 
-  late Canvas canvas;
-
   @override
   void paint(Canvas canvas, Size size) {
-    this.canvas = canvas;
-
     canvas.saveLayer(null, Paint());
 
-    _paintOuterCirclePath();
-    _paintCheckmark();
+    _paintOuterCirclePath(canvas);
+    _paintCheckmark(canvas);
 
     canvas.restore();
   }
 
-  void _paintOuterCirclePath() {
+  void _paintOuterCirclePath(Canvas canvas) {
     canvas.drawPath(_createOuterCirclePath(), _createStrokePaint());
   }
 
-  void _paintCheckmark() {
+  void _paintCheckmark(Canvas canvas) {
     if (filled) {
       canvas.drawPath(
         _createCheckmarkPath(false),

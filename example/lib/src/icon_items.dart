@@ -21,38 +21,45 @@ final List<IconItem> animatedIconItems = [
   IconItem(
     name: 'Ok',
     usage: 'YaruAnimatedOkIcon()',
-    iconBuilder: (context, iconSize) => YaruAnimatedOkIcon(
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedOkIcon(),
+      mode: YaruAnimationMode.once,
       size: iconSize,
     ),
   ),
   IconItem(
     name: 'Ok filled',
     usage: 'YaruAnimatedOkIcon(filled: true)',
-    iconBuilder: (context, iconSize) => YaruAnimatedOkIcon(
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedOkIcon(filled: true),
+      mode: YaruAnimationMode.once,
       size: iconSize,
-      filled: true,
     ),
   ),
   IconItem(
     name: 'No network',
     usage: 'YaruAnimatedNoNetworkIcon()',
-    iconBuilder: (context, iconSize) => YaruAnimatedNoNetworkIcon(
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedNoNetworkIcon(),
       size: iconSize,
     ),
   ),
   IconItem(
     name: 'Compass',
     usage: 'YaruAnimatedCompassIcon()',
-    iconBuilder: (context, iconSize) => YaruAnimatedCompassIcon(
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedCompassIcon(),
+      mode: YaruAnimationMode.once,
       size: iconSize,
     ),
   ),
   IconItem(
     name: 'Compass filled',
     usage: 'YaruAnimatedCompassIcon(filled: true)',
-    iconBuilder: (context, iconSize) => YaruAnimatedCompassIcon(
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedCompassIcon(filled: true),
+      mode: YaruAnimationMode.once,
       size: iconSize,
-      filled: true,
     ),
   ),
 ];

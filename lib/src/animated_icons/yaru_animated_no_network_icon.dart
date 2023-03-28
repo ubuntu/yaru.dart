@@ -1,18 +1,43 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+
+import 'yaru_animated_icon.dart';
 
 const _kTargetCanvasSize = 24.0;
 const _kAnimationCurve = Curves.easeInQuart;
-const _kAnimationDuration = 600;
+const _kAnimationDuration = Duration(milliseconds: 600);
+
+class YaruAnimatedNoNetworkIcon extends YaruAnimatedIconData {
+  const YaruAnimatedNoNetworkIcon();
+
+  @override
+  Duration get defaultDuration => _kAnimationDuration;
+
+  @override
+  Curve get defaultCurve => _kAnimationCurve;
+
+  @override
+  Widget build(
+    BuildContext context,
+    Animation<double> progress,
+    double? size,
+    Color? color,
+  ) {
+    return YaruAnimatedNoNetworkIconWidget(
+      progress: progress,
+      size: size ?? _kTargetCanvasSize,
+      color: color,
+    );
+  }
+}
 
 /// An animated Yaru no network icon, similar to `network_wirless` and `network_wirless_disabled`
-class YaruAnimatedNoNetworkIcon extends StatefulWidget {
+class YaruAnimatedNoNetworkIconWidget extends StatelessWidget {
   /// Create an animated Yaru no network icon, similar to `network_wirless` and `network_wirless_disabled`
-  const YaruAnimatedNoNetworkIcon({
+  const YaruAnimatedNoNetworkIconWidget({
     super.key,
+    required this.progress,
     this.size = 24.0,
     this.color,
-    this.progress,
   });
 
   /// Determines the icon canvas size
@@ -27,62 +52,19 @@ class YaruAnimatedNoNetworkIcon extends StatefulWidget {
   /// The animation progress for the animated icon.
   /// The value is clamped to be between 0 and 1.
   /// If null, a defaut animation controller will be created, which will run only once.
-  final Animation<double>? progress;
-
-  @override
-  State<YaruAnimatedNoNetworkIcon> createState() =>
-      _YaruAnimatedNoNetworkIconState();
-}
-
-class _YaruAnimatedNoNetworkIconState extends State<YaruAnimatedNoNetworkIcon>
-    with SingleTickerProviderStateMixin {
-  late final Animation<double> _animation;
-  late final AnimationController _controller;
-
-  Animation<double> get progress => widget.progress ?? _animation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.progress == null) {
-      _controller = AnimationController(
-        duration: const Duration(milliseconds: _kAnimationDuration),
-        vsync: this,
-      );
-      _animation = Tween(begin: 0.0, end: 1.0)
-          .chain(CurveTween(curve: _kAnimationCurve))
-          .animate(_controller);
-
-      _controller.forward();
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.progress == null) {
-      _controller.dispose();
-    }
-
-    super.dispose();
-  }
+  final Animation<double> progress;
 
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: SizedBox.square(
-        dimension: widget.size,
-        child: AnimatedBuilder(
-          animation: progress,
-          builder: (context, child) {
-            return CustomPaint(
-              painter: _YaruAnimatedNoNetworkIconPainter(
-                widget.size,
-                widget.color ?? Theme.of(context).colorScheme.onSurface,
-                progress.value,
-              ),
-            );
-          },
+        dimension: size,
+        child: CustomPaint(
+          painter: _YaruAnimatedNoNetworkIconPainter(
+            size,
+            color ?? Theme.of(context).colorScheme.onSurface,
+            progress.value,
+          ),
         ),
       ),
     );
@@ -91,45 +73,29 @@ class _YaruAnimatedNoNetworkIconState extends State<YaruAnimatedNoNetworkIcon>
 
 // Path created with the help of https://fluttershapemaker.com/
 class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
-  _YaruAnimatedNoNetworkIconPainter(
+  const _YaruAnimatedNoNetworkIconPainter(
     this.size,
     this.color,
     this.progress,
-  ) : assert(progress >= 0.0 && progress <= 1.0) {
-    wave1Metric = _getWave1Path().computeMetrics().single;
-    wave2Metric = _getWave2Path().computeMetrics().single;
-    wave3Metric = _getWave3Path().computeMetrics().single;
-    wave4Metric = _getWave4Path().computeMetrics().single;
-    stripe1Metric = _getStripe1Path().computeMetrics().single;
-  }
+  ) : assert(progress >= 0.0 && progress <= 1.0);
 
   final double size;
   final Color color;
   final double progress;
 
-  late final PathMetric wave1Metric;
-  late final PathMetric wave2Metric;
-  late final PathMetric wave3Metric;
-  late final PathMetric wave4Metric;
-  late final PathMetric stripe1Metric;
-
-  late Canvas canvas;
-
   @override
   void paint(Canvas canvas, Size size) {
-    this.canvas = canvas;
-
     canvas.saveLayer(null, Paint());
 
-    _drawExtractedPathMetric(wave1Metric, 0, .4);
-    _drawExtractedPathMetric(wave2Metric, 0.1, .5);
-    _drawExtractedPathMetric(wave3Metric, 0.2, .6);
-    _drawExtractedPathMetric(wave4Metric, 0.3, .7);
-    _drawExtractedPathMetric(stripe1Metric, .4, .6);
+    _drawExtractedPathMetric(canvas, _getWave1Path(), 0, .4);
+    _drawExtractedPathMetric(canvas, _getWave2Path(), 0.1, .5);
+    _drawExtractedPathMetric(canvas, _getWave3Path(), 0.2, .6);
+    _drawExtractedPathMetric(canvas, _getWave4Path(), 0.3, .7);
+    _drawExtractedPathMetric(canvas, _getStripe1Path(), .4, .6);
 
-    _drawStripe2Diff();
+    _drawStripe2Diff(canvas);
 
-    _drawDot();
+    _drawDot(canvas);
 
     canvas.restore();
   }
@@ -250,10 +216,12 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   }
 
   void _drawExtractedPathMetric(
-    PathMetric metric,
+    Canvas canvas,
+    Path path,
     double start,
     double duration,
   ) {
+    final metric = path.computeMetrics().single;
     final drawPath = metric.extractPath(
       0,
       metric.length * _computeLocalProgress(start, duration),
@@ -262,14 +230,14 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
     canvas.drawPath(drawPath, _getStrokePaint());
   }
 
-  void _drawStripe2Diff() {
+  void _drawStripe2Diff(Canvas canvas) {
     canvas.drawPath(
       _getStripe2Path(),
       _getDiffStrokePaint(),
     );
   }
 
-  void _drawDot() {
+  void _drawDot(Canvas canvas) {
     canvas.drawCircle(
       Offset(size * 0.5, size * 0.7916667),
       (size * 0.08333333) * _computeLocalProgress(0, .1),

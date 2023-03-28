@@ -2,20 +2,49 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-const yaruAnimatedCompassIconAnimationCurve = Curves.easeInOutCubic;
-const yaruAnimatedCompassIconAnimationDuration = 500;
+import 'yaru_animated_icon.dart';
+
+const _kAnimationCurve = Curves.easeInOutCubic;
+const _kAnimationDuration = Duration(milliseconds: 500);
 const _kTargetCanvasSize = 24.0;
 const _kTargetIconSize = 20.0;
 
+class YaruAnimatedCompassIcon extends YaruAnimatedIconData {
+  const YaruAnimatedCompassIcon({this.filled = false});
+
+  final bool filled;
+
+  @override
+  Duration get defaultDuration => _kAnimationDuration;
+
+  @override
+  Curve get defaultCurve => _kAnimationCurve;
+
+  @override
+  Widget build(
+    BuildContext context,
+    Animation<double> progress,
+    double? size,
+    Color? color,
+  ) {
+    return YaruAnimatedCompassIconWidget(
+      progress: progress,
+      size: size ?? _kTargetCanvasSize,
+      color: color,
+      filled: filled,
+    );
+  }
+}
+
 /// An animated Yaru compass icon, similar to the original one
-class YaruAnimatedCompassIcon extends StatefulWidget {
+class YaruAnimatedCompassIconWidget extends StatelessWidget {
   /// Create an animated Yaru compass icon, similar to the original one
-  const YaruAnimatedCompassIcon({
+  const YaruAnimatedCompassIconWidget({
     super.key,
+    required this.progress,
     this.size = 24.0,
     this.filled = false,
     this.color,
-    this.progress,
   });
 
   /// Determines the icon canvas size
@@ -33,62 +62,21 @@ class YaruAnimatedCompassIcon extends StatefulWidget {
 
   /// The animation progress for the animated icon.
   /// The value is clamped to be between 0 and 1.
-  /// If null, a defaut animation controller will be created, which will run only once.
-  final Animation<double>? progress;
-
-  @override
-  State<YaruAnimatedCompassIcon> createState() =>
-      _YaruAnimatedCompassIconState();
-}
-
-class _YaruAnimatedCompassIconState extends State<YaruAnimatedCompassIcon>
-    with TickerProviderStateMixin {
-  late final Animation<double> _animation;
-  late final AnimationController _controller;
-
-  Animation<double> get progress => widget.progress ?? _animation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.progress == null) {
-      _controller = AnimationController(
-        duration: const Duration(
-          milliseconds: yaruAnimatedCompassIconAnimationDuration,
-        ),
-        vsync: this,
-      );
-      _animation = Tween(begin: 0.0, end: 1.0)
-          .chain(CurveTween(curve: yaruAnimatedCompassIconAnimationCurve))
-          .animate(_controller);
-
-      _controller.forward();
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.progress == null) {
-      _controller.dispose();
-    }
-
-    super.dispose();
-  }
+  final Animation<double> progress;
 
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: SizedBox.square(
-        dimension: widget.size,
+        dimension: size,
         child: AnimatedBuilder(
           animation: progress,
           builder: (context, child) {
             return CustomPaint(
               painter: _YaruAnimatedCompassIconPainter(
-                widget.size,
-                widget.filled,
-                widget.color ?? Theme.of(context).colorScheme.onSurface,
+                size,
+                filled,
+                color ?? Theme.of(context).colorScheme.onSurface,
                 progress.value,
               ),
             );
@@ -100,7 +88,7 @@ class _YaruAnimatedCompassIconState extends State<YaruAnimatedCompassIcon>
 }
 
 class _YaruAnimatedCompassIconPainter extends CustomPainter {
-  _YaruAnimatedCompassIconPainter(
+  const _YaruAnimatedCompassIconPainter(
     this.size,
     this.filled,
     this.color,
@@ -112,18 +100,15 @@ class _YaruAnimatedCompassIconPainter extends CustomPainter {
   final Color color;
   final double progress;
 
-  late Canvas canvas;
-
   @override
   void paint(Canvas canvas, Size size) {
-    this.canvas = canvas;
-
-    _paintNeedle();
-    _paintOuterCirclePath();
+    _paintNeedle(canvas);
+    _paintOuterCirclePath(canvas);
   }
 
-  void _paintNeedle() {
+  void _paintNeedle(Canvas canvas) {
     paintRotated(
+      canvas,
       Offset(size / 2, size / 2),
       progress,
       () => canvas.drawPath(
@@ -139,7 +124,7 @@ class _YaruAnimatedCompassIconPainter extends CustomPainter {
     );
   }
 
-  void _paintOuterCirclePath() {
+  void _paintOuterCirclePath(Canvas canvas) {
     canvas.drawPath(_getOuterCirclePath(), _getStrokePaint());
   }
 
@@ -274,6 +259,7 @@ class _YaruAnimatedCompassIconPainter extends CustomPainter {
   }
 
   void paintRotated(
+    Canvas canvas,
     Offset center,
     double angle,
     VoidCallback paint,
