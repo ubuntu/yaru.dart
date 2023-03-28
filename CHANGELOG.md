@@ -1,5 +1,13 @@
 # Changelog
 
+# 2.3.0
+
+* Add `emptyBuilder` by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/676
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/681
+* Add support for high contrast theme by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/682
+* YaruPageIndicator: fix RTL layout by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/684
+* YaruWindowTitleBar.ensureInitialized(): clear cached window states by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/685
+
 # 2.2.2
 
 * Upgrade dependency yaru to ^0.6.0
