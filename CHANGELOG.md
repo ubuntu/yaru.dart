@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.3.1
+
+* YaruTitleBarTheme: fix border side lerp by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/688
+
 # 2.3.0
 
 * Add `emptyBuilder` by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/676
