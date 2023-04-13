@@ -12,6 +12,7 @@ import 'pages/color_disk_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
+import 'pages/expansion_panel_page.dart';
 import 'pages/icon_button_page.dart';
 import 'pages/navigation_page.dart';
 import 'pages/option_button_page.dart';
@@ -108,6 +109,13 @@ final examplePageItems = <PageItem>[
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/expandable_page.dart',
     iconBuilder: (context, selected) => const Icon(YaruIcons.pan_down),
     pageBuilder: (_) => const ExpandablePage(),
+  ),
+  PageItem(
+    title: 'YaruExpansionPanel',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/expansion_panel_page.dart',
+    iconBuilder: (context, selected) => const Icon(YaruIcons.ordered_list_new),
+    pageBuilder: (_) => const ExpansionPanelPage(),
   ),
   PageItem(
     title: 'YaruIconButton',
