@@ -10,11 +10,12 @@ class ExpansionPanelPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(kYaruPagePadding),
         child: YaruExpansionPanel(
+          width: 500,
           headers: List.generate(
             10,
-            (index) => Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20),
-              child: Text('Header $index'),
+            (index) => Text(
+              'Header $index',
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
           children: List.generate(
