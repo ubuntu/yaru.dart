@@ -71,6 +71,14 @@ class _YaruExpandableState extends State<YaruExpandable> {
   }
 
   @override
+  void didUpdateWidget(YaruExpandable oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isExpanded != widget.isExpanded) {
+      _isExpanded = widget.isExpanded;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final iconButton = Padding(
       padding: widget.expandIconPadding,
