@@ -1,5 +1,11 @@
 # Changelog
 
+# 2.4.0
+
+* YaruExpandable: update isExpanded property by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/691
+* Expansion_panel by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/692
+* Update yaru, drop yaru_colors & update goldens by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/693
+
 # 2.3.1
 
 * YaruTitleBarTheme: fix border side lerp by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/688
