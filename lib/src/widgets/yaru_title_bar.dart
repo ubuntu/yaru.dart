@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_colors/yaru_colors.dart';
 import 'package:yaru_widgets/constants.dart';
 import 'package:yaru_window/yaru_window.dart';
 
