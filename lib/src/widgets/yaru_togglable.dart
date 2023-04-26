@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
@@ -275,18 +276,24 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
     // Normal colors
     final uncheckedColor = colorScheme.surface;
-    final uncheckedBorderColor = theme.brightness == Brightness.light
-        ? const Color(0xFF959595)
-        : const Color(0xFF757575);
+    final uncheckedBorderColor = colorScheme.isHighContrast
+        ? colorScheme.outlineVariant
+        : theme.brightness == Brightness.light
+            ? const Color(0xFF959595)
+            : const Color(0xFF757575);
     final checkedColor = colorScheme.primary;
     const checkedBorderColor = Colors.transparent;
     final checkmarkColor = colorScheme.onPrimary;
 
     // Disabled colors
     final disabledUncheckedColor = colorScheme.onSurface.withOpacity(.1);
-    final disabledUncheckedBorderColor = disabledUncheckedColor;
+    final disabledUncheckedBorderColor = colorScheme.isHighContrast
+        ? colorScheme.outlineVariant
+        : disabledUncheckedColor;
     final disabledCheckedColor = colorScheme.onSurface.withOpacity(.2);
-    const disabledCheckedBorderColor = Colors.transparent;
+    final disabledCheckedBorderColor = colorScheme.isHighContrast
+        ? colorScheme.outlineVariant
+        : Colors.transparent;
     final disabledCheckmarkColor = colorScheme.onSurface.withOpacity(.5);
 
     // Indicator colors

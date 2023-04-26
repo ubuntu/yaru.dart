@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
@@ -168,18 +169,22 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
       MaterialState.disabled
     };
 
+    final defaultBorderColor = colorScheme.isHighContrast
+        ? colorScheme.outlineVariant
+        : Colors.transparent;
+
     // Normal colors
     final uncheckedColor = switchTheme.color?.resolve(unselectedState) ??
         colorScheme.onSurface.withOpacity(.25);
     final uncheckedBorderColor =
-        switchTheme.borderColor?.resolve(unselectedState) ?? Colors.transparent;
+        switchTheme.borderColor?.resolve(unselectedState) ?? defaultBorderColor;
     final uncheckedThumbColor =
         switchTheme.thumbColor?.resolve(unselectedState) ?? Colors.white;
     final checkedColor = widget.selectedColor ??
         switchTheme.color?.resolve(selectedState) ??
         painter.checkedColor;
     final checkedBorderColor =
-        switchTheme.borderColor?.resolve(selectedState) ?? Colors.transparent;
+        switchTheme.borderColor?.resolve(selectedState) ?? defaultBorderColor;
     final checkedThumbColor = widget.thumbColor ??
         switchTheme.thumbColor?.resolve(selectedState) ??
         painter.checkmarkColor;
@@ -188,7 +193,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
     final disabledUncheckedColor = switchTheme.color?.resolve(disabledState) ??
         painter.disabledUncheckedColor;
     final disabledUncheckedBorderColor =
-        switchTheme.borderColor?.resolve(disabledState) ?? Colors.transparent;
+        switchTheme.borderColor?.resolve(disabledState) ?? defaultBorderColor;
     final disabledUncheckedThumbColor =
         switchTheme.thumbColor?.resolve(disabledState) ??
             colorScheme.onSurface.withOpacity(.4);
@@ -197,7 +202,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
             painter.disabledCheckedColor;
     final disabledCheckedBorderColor =
         switchTheme.borderColor?.resolve(selectedDisabledState) ??
-            Colors.transparent;
+            defaultBorderColor;
     final disabledCheckedThumbColor =
         switchTheme.thumbColor?.resolve(selectedDisabledState) ??
             disabledUncheckedThumbColor;
