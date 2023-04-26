@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.4.1
+
+* YaruCheckbox/Radio/Switch: fix high-contrast borders by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/696
+
 # 2.4.0
 
 * YaruExpandable: update isExpanded property by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/691
