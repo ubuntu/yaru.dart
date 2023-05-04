@@ -83,16 +83,16 @@ class YaruExpansionPanelList extends StatelessWidget {
         ],
       );
 
-      const _radiusValue = kYaruContainerRadius;
+      const radiusValue = kYaruContainerRadius;
       final borderRadius = index == 0
           ? const BorderRadius.only(
-              topLeft: Radius.circular(_radiusValue),
-              topRight: Radius.circular(_radiusValue),
+              topLeft: Radius.circular(radiusValue),
+              topRight: Radius.circular(radiusValue),
             )
           : index == children.length - 1
               ? const BorderRadius.only(
-                  bottomLeft: Radius.circular(_radiusValue),
-                  bottomRight: Radius.circular(_radiusValue),
+                  bottomLeft: Radius.circular(radiusValue),
+                  bottomRight: Radius.circular(radiusValue),
                 )
               : BorderRadius.zero;
       items.add(

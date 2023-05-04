@@ -130,7 +130,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   }
 
   @override
-  _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
+  State<YaruMasterDetailPage> createState() => _YaruMasterDetailPageState();
 }
 
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {

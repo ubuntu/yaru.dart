@@ -23,8 +23,8 @@ extension YaruGoldenTester on WidgetTester {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: Align(
-            child: widget,
             alignment: alignment,
+            child: widget,
           ),
         ),
       ),

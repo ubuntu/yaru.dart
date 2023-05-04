@@ -22,7 +22,7 @@ class YaruLinearProgressIndicator extends YaruProgressIndicator {
   final double minHeight;
 
   @override
-  _YaruLinearProgressIndicatorState createState() =>
+  State<YaruLinearProgressIndicator> createState() =>
       _YaruLinearProgressIndicatorState();
 }
 

@@ -29,7 +29,7 @@ class YaruPortraitLayout extends StatefulWidget {
   final YaruPageController controller;
 
   @override
-  _YaruPortraitLayoutState createState() => _YaruPortraitLayoutState();
+  State<YaruPortraitLayout> createState() => _YaruPortraitLayoutState();
 }
 
 class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {

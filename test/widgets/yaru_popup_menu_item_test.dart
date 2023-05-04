@@ -16,9 +16,9 @@ void main() {
           itemBuilder: (context) => [
             for (var i = 0; i < 3; ++i)
               YaruCheckedPopupMenuItem(
-                child: Text('YaruPopupMenuItem $i'),
                 checked: variant.hasState(MaterialState.selected),
                 enabled: !variant.hasState(MaterialState.disabled),
+                child: Text('YaruPopupMenuItem $i'),
               ),
           ],
         ),

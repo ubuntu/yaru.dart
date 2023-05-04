@@ -21,7 +21,7 @@ class YaruDraggable extends StatefulWidget {
     BuildContext context,
     Offset position,
     bool isDragging,
-    bool _isHovering,
+    bool isHovering,
   ) childBuilder;
 
   /// Callback called when this element starts to be dragged
@@ -46,7 +46,7 @@ class YaruDraggable extends StatefulWidget {
   final MouseCursor? dragCursor;
 
   @override
-  _YaruDraggableState createState() => _YaruDraggableState();
+  State<YaruDraggable> createState() => _YaruDraggableState();
 }
 
 class _YaruDraggableState extends State<YaruDraggable> {
