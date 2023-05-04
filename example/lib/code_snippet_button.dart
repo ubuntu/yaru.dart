@@ -33,11 +33,11 @@ class CodeSnippedButton extends StatelessWidget {
           );
         },
       ),
-      child: const Icon(YaruIcons.code),
       tooltip: 'Example snippet',
       foregroundColor: Theme.of(context).colorScheme.onSurface,
       backgroundColor: PopupMenuTheme.of(context).color,
       shape: PopupMenuTheme.of(context).shape,
+      child: const Icon(YaruIcons.code),
     );
   }
 }
