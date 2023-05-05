@@ -12,9 +12,9 @@ void main() {
 
       await tester.pumpScaffold(
         YaruPopupMenuButton<dynamic>(
-          child: const Text('Menu'),
           itemBuilder: (context) => [],
           enabled: !variant.hasState(MaterialState.disabled),
+          child: const Text('Menu'),
         ),
         themeMode: variant.themeMode,
         size: const Size(104, 48),

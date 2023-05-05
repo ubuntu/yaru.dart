@@ -6,7 +6,7 @@ class IconButtonPage extends StatefulWidget {
   const IconButtonPage({super.key});
 
   @override
-  _IconButtonPageState createState() => _IconButtonPageState();
+  State<IconButtonPage> createState() => _IconButtonPageState();
 }
 
 class _IconButtonPageState extends State<IconButtonPage> {

@@ -5,7 +5,7 @@ class RadioPage extends StatefulWidget {
   const RadioPage({super.key});
 
   @override
-  _RadioPageState createState() => _RadioPageState();
+  State<RadioPage> createState() => _RadioPageState();
 }
 
 class _RadioPageState extends State<RadioPage> {

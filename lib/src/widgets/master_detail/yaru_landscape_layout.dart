@@ -211,6 +211,11 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     final isRtl = Directionality.of(context) == TextDirection.rtl;
 
     return Positioned(
+      width: _kLeftPaneResizingRegionWidth,
+      top: 0,
+      bottom: 0,
+      left: isRtl ? null : 0,
+      right: isRtl ? 0 : null,
       child: AnimatedContainer(
         duration: _kLeftPaneResizingRegionAnimationDuration,
         color: _isHovering || _isDragging
@@ -243,11 +248,6 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           ),
         ),
       ),
-      width: _kLeftPaneResizingRegionWidth,
-      top: 0,
-      bottom: 0,
-      left: isRtl ? null : 0,
-      right: isRtl ? 0 : null,
     );
   }
 }
