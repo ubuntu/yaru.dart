@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: "3.10.x"
       - run: flutter test --update-goldens
       - uses: peter-evans/create-pull-request@v4
         with:

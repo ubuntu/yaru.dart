@@ -17,6 +17,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
+          flutter-version: "3.10.x"
 
       - name: test
         run: flutter test
