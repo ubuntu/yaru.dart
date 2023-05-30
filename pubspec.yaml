@@ -5,13 +5,13 @@ issue_tracker: https://github.com/ubuntu/yaru_widgets.dart/issues
 version: 2.4.1
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
-  flutter: ">=3.7.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  yaru: ^0.7.0
+  yaru: ^0.8.0
   yaru_icons: ^1.0.0
   yaru_window: ^0.1.1
 
