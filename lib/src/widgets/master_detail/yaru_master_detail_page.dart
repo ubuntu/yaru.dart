@@ -21,11 +21,10 @@ typedef YaruAppBarBuilder = PreferredSizeWidget? Function(BuildContext context);
 /// A responsive master-detail page.
 ///
 /// [YaruMasterDetailPage] automatically switches between portrait and landscape
-/// modes using [kYaruMasterDetailBreakpoint] by default as a breakpoint width.
+/// mode depending on [layoutDelegate].
 ///
 /// ```dart
 /// YaruMasterDetailPage(
-///   leftPaneWidth: 280,
 ///   length: 8,
 ///   appBar: AppBar(title: const Text('Master')),
 ///   tileBuilder: (context, index, selected) => YaruMasterTile(
@@ -85,7 +84,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// A builder that is called if there are no pages to display.
   final WidgetBuilder? emptyBuilder;
 
-  /// Specifies the initial width of left pane.
+  /// Controls the width and resizing capacity of the left pane.
   final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
 
   /// An optional custom AppBar for the left pane.
