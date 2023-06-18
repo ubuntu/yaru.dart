@@ -10,7 +10,7 @@ import 'yaru_portrait_layout.dart';
 
 const _kDefaultPaneWidth = 280.0;
 
-typedef YaruMasterDetailBuilder = Widget Function(
+typedef YaruMasterTileBuilder = Widget Function(
   BuildContext context,
   int index,
   bool selected,
@@ -74,7 +74,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   ///
   /// See also:
   ///  * [YaruMasterTile]
-  final YaruMasterDetailBuilder tileBuilder;
+  final YaruMasterTileBuilder tileBuilder;
 
   /// A builder that is called for each page to build its detail page.
   ///

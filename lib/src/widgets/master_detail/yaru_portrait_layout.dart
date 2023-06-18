@@ -19,7 +19,7 @@ class YaruPortraitLayout extends StatefulWidget {
     required this.controller,
   });
 
-  final YaruMasterDetailBuilder tileBuilder;
+  final YaruMasterTileBuilder tileBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int>? onSelected;
 
