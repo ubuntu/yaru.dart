@@ -1,6 +1,6 @@
 import 'yaru_master_detail_page.dart';
 
-/// Layout delegate interface which controls a [YaruMasterDetailPage] pane width.
+/// Layout delegate interface which controls a [YaruMasterDetailPage] pane width and resizing capacity.
 abstract class YaruMasterDetailPaneLayoutDelegate {
   const YaruMasterDetailPaneLayoutDelegate();
 
