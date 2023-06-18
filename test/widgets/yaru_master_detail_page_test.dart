@@ -18,7 +18,7 @@ void main() {
           ),
           length: 8,
           appBar: AppBar(title: const Text('Master')),
-          tileBuilder: (context, index, selected) => YaruMasterTile(
+          tileBuilder: (context, index, selected, maxWidth) => YaruMasterTile(
             leading: const Icon(YaruIcons.menu),
             title: Text('Tile $index'),
           ),
@@ -65,7 +65,7 @@ void main() {
               paneWidth: kYaruMasterDetailBreakpoint / 3,
             ),
             appBar: AppBar(title: const Text('Master')),
-            tileBuilder: (context, index, selected) => YaruMasterTile(
+            tileBuilder: (context, index, selected, maxWidth) => YaruMasterTile(
               leading: const Icon(YaruIcons.menu),
               title: Text('Tile $index'),
             ),

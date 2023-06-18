@@ -14,6 +14,7 @@ typedef YaruMasterDetailBuilder = Widget Function(
   BuildContext context,
   int index,
   bool selected,
+  double availableWidth,
 );
 
 typedef YaruAppBarBuilder = PreferredSizeWidget? Function(BuildContext context);
