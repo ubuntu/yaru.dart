@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import 'yaru_progress_indicator.dart';
@@ -24,7 +25,7 @@ class YaruCircularProgressIndicator extends YaruProgressIndicator {
   final double strokeWidth;
 
   @override
-  _YaruCircularProgressIndicatorState createState() =>
+  State<YaruCircularProgressIndicator> createState() =>
       _YaruCircularProgressIndicatorState();
 }
 

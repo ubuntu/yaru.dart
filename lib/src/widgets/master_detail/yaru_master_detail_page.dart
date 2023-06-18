@@ -54,6 +54,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.length,
     required this.tileBuilder,
     required this.pageBuilder,
+    this.emptyBuilder,
     this.layoutDelegate =
         const YaruMasterFixedPaneDelegate(paneWidth: _kDefaultPaneWidth),
     this.appBar,
@@ -79,6 +80,9 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// See also:
   ///  * [YaruDetailPage]
   final IndexedWidgetBuilder pageBuilder;
+
+  /// A builder that is called if there are no pages to display.
+  final WidgetBuilder? emptyBuilder;
 
   /// Controls the width and resizing capacity of the left pane.
   final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
@@ -125,7 +129,7 @@ class YaruMasterDetailPage extends StatefulWidget {
   }
 
   @override
-  _YaruMasterDetailPageState createState() => _YaruMasterDetailPageState();
+  State<YaruMasterDetailPage> createState() => _YaruMasterDetailPageState();
 }
 
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
@@ -163,27 +167,29 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _YaruMasterDetailLayoutBuilder(
-        portrait: (context) => YaruPortraitLayout(
-          tileBuilder: widget.tileBuilder,
-          pageBuilder: widget.pageBuilder,
-          onSelected: widget.onSelected,
-          appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
-          bottomBar: widget.bottomBar,
-          controller: _controller,
-        ),
-        landscape: (context) => YaruLandscapeLayout(
-          tileBuilder: widget.tileBuilder,
-          pageBuilder: widget.pageBuilder,
-          onSelected: widget.onSelected,
-          layoutDelegate: widget.layoutDelegate,
-          previousPaneWidth: _previousPaneWidth,
-          onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
-          appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
-          bottomBar: widget.bottomBar,
-          controller: _controller,
-        ),
-      ),
+      body: widget.length == 0 || widget.controller?.length == 0
+          ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
+          : _YaruMasterDetailLayoutBuilder(
+              portrait: (context) => YaruPortraitLayout(
+                tileBuilder: widget.tileBuilder,
+                pageBuilder: widget.pageBuilder,
+                onSelected: widget.onSelected,
+                appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
+                bottomBar: widget.bottomBar,
+                controller: _controller,
+              ),
+              landscape: (context) => YaruLandscapeLayout(
+                tileBuilder: widget.tileBuilder,
+                pageBuilder: widget.pageBuilder,
+                onSelected: widget.onSelected,
+                layoutDelegate: widget.layoutDelegate,
+                previousPaneWidth: _previousPaneWidth,
+                onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
+                appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
+                bottomBar: widget.bottomBar,
+                controller: _controller,
+              ),
+            ),
     );
   }
 }

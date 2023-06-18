@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
+import 'pages/autocomplete_page.dart';
 import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/checkbox_page.dart';
@@ -11,6 +12,7 @@ import 'pages/color_disk_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
+import 'pages/expansion_panel_page.dart';
 import 'pages/icon_button_page.dart';
 import 'pages/navigation_page.dart';
 import 'pages/option_button_page.dart';
@@ -43,6 +45,13 @@ class PageItem {
 }
 
 final examplePageItems = <PageItem>[
+  PageItem(
+    title: 'YaruAutocomplete',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/autocomplete_page.dart',
+    pageBuilder: (context) => const AutocompletePage(),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.question),
+  ),
   PageItem(
     title: 'YaruBanner',
     snippetUrl:
@@ -100,6 +109,13 @@ final examplePageItems = <PageItem>[
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/expandable_page.dart',
     iconBuilder: (context, selected) => const Icon(YaruIcons.pan_down),
     pageBuilder: (_) => const ExpandablePage(),
+  ),
+  PageItem(
+    title: 'YaruExpansionPanel',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/expansion_panel_page.dart',
+    iconBuilder: (context, selected) => const Icon(YaruIcons.ordered_list_new),
+    pageBuilder: (_) => const ExpansionPanelPage(),
   ),
   PageItem(
     title: 'YaruIconButton',

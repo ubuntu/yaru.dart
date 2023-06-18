@@ -8,7 +8,7 @@ class SectionPage extends StatefulWidget {
   const SectionPage({super.key});
 
   @override
-  _SectionPageState createState() => _SectionPageState();
+  State<SectionPage> createState() => _SectionPageState();
 }
 
 class _SectionPageState extends State<SectionPage> {
@@ -45,24 +45,24 @@ class DummySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruSection(
-      headline: Row(
+      headline: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children: [
           Text('Headline'),
           SizedBox(
-            child: YaruCircularProgressIndicator(strokeWidth: 3),
             height: 20,
             width: 20,
+            child: YaruCircularProgressIndicator(strokeWidth: 3),
           )
         ],
       ),
+      width: width,
       child: const YaruTile(
         title: Text('Title'),
         trailing: Icon(YaruIcons.information),
         leading: Icon(YaruIcons.music_note),
         subtitle: Text('Subtitle'),
       ),
-      width: width,
     );
   }
 }

@@ -165,7 +165,9 @@ class YaruPageIndicator extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: List<Widget>.generate(length, (index) {
             return Padding(
-              padding: EdgeInsets.only(left: index != 0 ? itemSpacing : 0),
+              padding: EdgeInsetsDirectional.only(
+                start: index != 0 ? itemSpacing : 0,
+              ),
               child: SizedBox(
                 width: itemSizes[index].width,
                 height: itemSizes[index].height,

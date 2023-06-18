@@ -6,7 +6,7 @@ class CarouselPage extends StatefulWidget {
   const CarouselPage({super.key});
 
   @override
-  _CarouselPageState createState() => _CarouselPageState();
+  State<CarouselPage> createState() => _CarouselPageState();
 }
 
 class _CarouselPageState extends State<CarouselPage> {
@@ -28,9 +28,9 @@ class _CarouselPageState extends State<CarouselPage> {
           headline: const Text('Auto scroll: off'),
           width: 700,
           child: YaruCarousel(
-            children: _getCarouselChildren(),
             height: 400,
             navigationControls: true,
+            children: _getCarouselChildren(),
           ),
         ),
         const SizedBox(height: 20),
@@ -39,8 +39,8 @@ class _CarouselPageState extends State<CarouselPage> {
           width: 700,
           child: YaruCarousel(
             controller: _autoScrollController,
-            children: _getCarouselChildren(),
             height: 400,
+            children: _getCarouselChildren(),
           ),
         ),
         ButtonBar(

@@ -33,6 +33,8 @@ class Home extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: yaru.theme,
           darkTheme: yaru.darkTheme,
+          highContrastTheme: yaruHighContrastLight,
+          highContrastDarkTheme: yaruHighContrastDark,
           home: Example.create(context),
         );
       },

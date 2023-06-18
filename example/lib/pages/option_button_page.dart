@@ -6,7 +6,7 @@ class OptionButtonPage extends StatefulWidget {
   const OptionButtonPage({super.key});
 
   @override
-  _OptionButtonPageState createState() => _OptionButtonPageState();
+  State<OptionButtonPage> createState() => _OptionButtonPageState();
 }
 
 class _OptionButtonPageState extends State<OptionButtonPage> {

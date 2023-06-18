@@ -100,13 +100,31 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
       ),
       titleTextStyle: TextStyle.lerp(titleTextStyle, o?.titleTextStyle, t),
       shape: ShapeBorder.lerp(shape, o?.shape, t),
-      border: BorderSide.lerp(
-        border ?? BorderSide.none,
-        o?.border ?? BorderSide.none,
-        t,
-      ),
+      border: _lerpBorderSide(border, o?.border, t),
       style: t < 0.5 ? style : o?.style,
     );
+  }
+
+  // Special case because BorderSide.lerp() doesn't support null arguments.
+  static BorderSide? _lerpBorderSide(BorderSide? a, BorderSide? b, double t) {
+    if (a == null && b == null) {
+      return null;
+    }
+    if (a == null) {
+      return BorderSide.lerp(
+        BorderSide(width: 0, color: b!.color.withAlpha(0)),
+        b,
+        t,
+      );
+    }
+    if (b == null) {
+      return BorderSide.lerp(
+        BorderSide(width: 0, color: a.color.withAlpha(0)),
+        a,
+        t,
+      );
+    }
+    return BorderSide.lerp(a, b, t);
   }
 
   @override

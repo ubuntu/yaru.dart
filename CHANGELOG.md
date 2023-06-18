@@ -1,5 +1,36 @@
 # Changelog
 
+# 2.4.1
+
+* YaruCheckbox/Radio/Switch: fix high-contrast borders by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/696
+
+# 2.4.0
+
+* YaruExpandable: update isExpanded property by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/691
+* Expansion_panel by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/692
+* Update yaru, drop yaru_colors & update goldens by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/693
+
+# 2.3.1
+
+* YaruTitleBarTheme: fix border side lerp by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/688
+
+# 2.3.0
+
+* Add `emptyBuilder` by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/676
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/681
+* Add support for high contrast theme by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/682
+* YaruPageIndicator: fix RTL layout by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/684
+* YaruWindowTitleBar.ensureInitialized(): clear cached window states by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/685
+
+# 2.2.2
+
+* Upgrade dependency yaru to ^0.6.0
+
+# 2.2.1
+
+* YaruAutocomplete: calculate matching options width by default by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/673
+* Example: add autocomplete by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/674
+
 # 2.2.0
 
 * Update goldens with new dependencies by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/630

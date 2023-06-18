@@ -13,8 +13,8 @@ extension YaruGoldenTester on WidgetTester {
     Size? size,
     AlignmentGeometry alignment = Alignment.center,
   }) {
-    binding.window.devicePixelRatioTestValue = 1;
-    if (size != null) binding.window.physicalSizeTestValue = size;
+    view.devicePixelRatio = 1;
+    if (size != null) view.physicalSize = size;
     return pumpWidget(
       MaterialApp(
         themeMode: themeMode,
@@ -23,8 +23,8 @@ extension YaruGoldenTester on WidgetTester {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: Align(
-            child: widget,
             alignment: alignment,
+            child: widget,
           ),
         ),
       ),
