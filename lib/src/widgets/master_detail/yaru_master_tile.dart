@@ -76,7 +76,6 @@ class YaruMasterTile extends StatelessWidget {
           trailing: trailing,
           selected: isSelected,
           onTap: () {
-            final scope = YaruMasterTileScope.maybeOf(context);
             scope?.onTap();
             onTap?.call();
           },
