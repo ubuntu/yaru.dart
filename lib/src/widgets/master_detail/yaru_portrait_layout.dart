@@ -105,11 +105,14 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                 ),
                 child: Scaffold(
                   appBar: widget.appBar,
-                  body: YaruMasterListView(
-                    length: widget.controller.length,
-                    selectedIndex: _selectedIndex,
-                    onTap: _onTap,
-                    builder: widget.tileBuilder,
+                  body: LayoutBuilder(
+                    builder: (context, constraints) => YaruMasterListView(
+                      length: widget.controller.length,
+                      selectedIndex: _selectedIndex,
+                      onTap: _onTap,
+                      builder: widget.tileBuilder,
+                      availableWidth: constraints.maxWidth,
+                    ),
                   ),
                   bottomNavigationBar: widget.bottomBar,
                 ),

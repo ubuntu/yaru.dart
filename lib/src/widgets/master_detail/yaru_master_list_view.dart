@@ -11,14 +11,14 @@ class YaruMasterListView extends StatefulWidget {
     required this.selectedIndex,
     required this.builder,
     required this.onTap,
-    this.materialTiles = false,
+    required this.availableWidth,
   });
 
   final int length;
   final YaruMasterDetailBuilder builder;
   final int selectedIndex;
   final ValueChanged<int> onTap;
-  final bool materialTiles;
+  final double availableWidth;
 
   @override
   State<YaruMasterListView> createState() => _YaruMasterListViewState();
@@ -46,8 +46,12 @@ class _YaruMasterListViewState extends State<YaruMasterListView> {
         selected: index == widget.selectedIndex,
         onTap: () => widget.onTap(index),
         child: Builder(
-          builder: (context) =>
-              widget.builder(context, index, index == widget.selectedIndex),
+          builder: (context) => widget.builder(
+            context,
+            index,
+            index == widget.selectedIndex,
+            widget.availableWidth,
+          ),
         ),
       ),
     );

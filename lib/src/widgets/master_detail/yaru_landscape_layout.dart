@@ -165,6 +165,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             selectedIndex: _selectedIndex,
             onTap: _onTap,
             builder: widget.tileBuilder,
+            availableWidth: _paneWidth!,
           ),
           bottomNavigationBar: widget.bottomBar,
         ),
