@@ -40,6 +40,12 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     assert(widget.labels.length == widget.isSelected.length);
 
