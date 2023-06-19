@@ -32,12 +32,33 @@ class YaruChoiceChipBar extends StatefulWidget {
 
 class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
   late ScrollController _controller;
+  bool _enableBackButton = false;
+  bool _enableForwardButton = true;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = ScrollController();
+    _controller = ScrollController()
+      ..addListener(() {
+        if (_controller.position.atEdge) {
+          final isLeft = _controller.position.pixels == 0;
+          setState(() {
+            if (isLeft) {
+              _enableForwardButton = true;
+              _enableBackButton = false;
+            } else {
+              _enableForwardButton = false;
+              _enableBackButton = true;
+            }
+          });
+        } else {
+          setState(() {
+            _enableBackButton = true;
+            _enableForwardButton = true;
+          });
+        }
+      });
   }
 
   @override
@@ -79,11 +100,13 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
           children: [
             YaruIconButton(
               icon: const Icon(YaruIcons.go_previous),
-              onPressed: () => _controller.animateTo(
-                _controller.position.pixels - widget.animationStep,
-                duration: widget.duration,
-                curve: Curves.bounceIn,
-              ),
+              onPressed: _enableBackButton
+                  ? () => _controller.animateTo(
+                        _controller.position.pixels - widget.animationStep,
+                        duration: widget.duration,
+                        curve: Curves.bounceIn,
+                      )
+                  : null,
             ),
             SizedBox(
               width: widget.spacing,
@@ -109,11 +132,13 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
             ),
             YaruIconButton(
               icon: const Icon(YaruIcons.go_next),
-              onPressed: () => _controller.animateTo(
-                _controller.position.pixels + widget.animationStep,
-                duration: widget.duration,
-                curve: Curves.bounceIn,
-              ),
+              onPressed: _enableForwardButton
+                  ? () => _controller.animateTo(
+                        _controller.position.pixels + widget.animationStep,
+                        duration: widget.duration,
+                        curve: Curves.bounceIn,
+                      )
+                  : null,
             ),
           ],
         ),
