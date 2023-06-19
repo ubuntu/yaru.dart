@@ -13,7 +13,8 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.spacing = 10.0,
     this.duration = const Duration(milliseconds: 200),
     this.animationStep = 100.0,
-  });
+  }) : assert(labels.length == isSelected.length);
+
   final Axis wrapScrollDirection;
   final bool wrap;
   final double spacing;
@@ -47,8 +48,6 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
 
   @override
   Widget build(BuildContext context) {
-    assert(widget.labels.length == widget.isSelected.length);
-
     final children = [
       for (int index = 0; index < widget.labels.length; index++)
         if (widget.isSelected[index])
