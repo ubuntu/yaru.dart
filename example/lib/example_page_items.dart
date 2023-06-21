@@ -7,6 +7,7 @@ import 'pages/autocomplete_page.dart';
 import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/checkbox_page.dart';
+import 'pages/choice_chip_bar_page.dart';
 import 'pages/clip_page.dart';
 import 'pages/color_disk_page.dart';
 import 'pages/dialog_page.dart';
@@ -76,6 +77,13 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.checkbox_checked_filled)
         : const Icon(YaruIcons.checkbox_checked),
+  ),
+  PageItem(
+    title: 'YaruChoiceChipBar',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/filter_pills_page.dart',
+    iconBuilder: (context, selected) => const Icon(YaruIcons.paper_clip),
+    pageBuilder: (_) => const ChoiceChipBarPage(),
   ),
   PageItem(
     title: 'YaruClip',

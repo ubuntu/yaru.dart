@@ -17,6 +17,7 @@ export 'src/widgets/yaru_check_button.dart';
 export 'src/widgets/yaru_checkbox.dart';
 export 'src/widgets/yaru_checkbox_list_tile.dart';
 export 'src/widgets/yaru_checkbox_theme.dart';
+export 'src/widgets/yaru_choice_chip_bar.dart';
 export 'src/widgets/yaru_circular_progress_indicator.dart';
 export 'src/widgets/yaru_close_button.dart';
 export 'src/widgets/yaru_color_disk.dart';
