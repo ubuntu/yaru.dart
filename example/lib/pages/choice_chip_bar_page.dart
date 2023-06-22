@@ -29,7 +29,7 @@ class _ChoiceChipBarPageState extends State<ChoiceChipBarPage> {
         child: Column(
           children: [
             YaruChoiceChipBar(
-              wrap: false,
+              yaruChoiceChipBarStyle: YaruChoiceChipBarStyle.stack,
               labels: _labels.map(Text.new).toList(),
               isSelected: _isSelected,
               onSelected: (index) => setState(() {
