@@ -55,3 +55,6 @@ app.*.map.json
 
 # Goldens
 test/**/failures/*.png
+
+# Example
+example/macos/Podfile.lock
