@@ -68,7 +68,6 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final children = [
       for (int index = 0; index < widget.labels.length; index++)
         if (widget.isSelected[index])
@@ -101,54 +100,29 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
           .toList(),
     );
 
-    final borderRadius = BorderRadius.circular(8);
-    final roundedRectangleBorder = RoundedRectangleBorder(
-      borderRadius: borderRadius,
-      side: BorderSide(
-        color: theme.colorScheme.outline,
-        width: 1,
-      ),
+    final goPreviousButton = _NavigationButton(
+      icon: const Icon(YaruIcons.go_previous),
+      onTap: _enableGoPreviousButton
+          ? () => _controller.animateTo(
+                _controller.position.pixels - widget.animationStep,
+                duration: widget.duration,
+                curve: Curves.bounceIn,
+              )
+          : null,
     );
+
+    final goNextButton = _NavigationButton(
+      icon: const Icon(YaruIcons.go_next),
+      onTap: _enableGoNextButton
+          ? () => _controller.animateTo(
+                _controller.position.pixels + widget.animationStep,
+                duration: widget.duration,
+                curve: Curves.bounceIn,
+              )
+          : null,
+    );
+
     const clipRadius = 40.0;
-    const navigationButtonSize = 34.0;
-
-    final goPreviousButton = SizedBox(
-      height: navigationButtonSize,
-      width: navigationButtonSize,
-      child: Material(
-        shape: roundedRectangleBorder,
-        child: InkWell(
-          customBorder: roundedRectangleBorder,
-          onTap: _enableGoPreviousButton
-              ? () => _controller.animateTo(
-                    _controller.position.pixels - widget.animationStep,
-                    duration: widget.duration,
-                    curve: Curves.bounceIn,
-                  )
-              : null,
-          child: const Icon(YaruIcons.go_previous),
-        ),
-      ),
-    );
-
-    final goNextButton = SizedBox(
-      height: navigationButtonSize,
-      width: navigationButtonSize,
-      child: Material(
-        shape: roundedRectangleBorder,
-        child: InkWell(
-          customBorder: roundedRectangleBorder,
-          onTap: _enableGoNextButton
-              ? () => _controller.animateTo(
-                    _controller.position.pixels + widget.animationStep,
-                    duration: widget.duration,
-                    curve: Curves.bounceIn,
-                  )
-              : null,
-          child: const Icon(YaruIcons.go_next),
-        ),
-      ),
-    );
 
     if (widget.yaruChoiceChipBarStyle == YaruChoiceChipBarStyle.wrap) {
       return Wrap(
@@ -215,6 +189,41 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
         ),
       );
     }
+  }
+}
+
+class _NavigationButton extends StatelessWidget {
+  const _NavigationButton({
+    this.onTap,
+    required this.icon,
+  });
+
+  final Function()? onTap;
+  final Widget icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    const navigationButtonSize = 34.0;
+    final roundedRectangleBorder = RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+      side: BorderSide(
+        color: theme.colorScheme.outline,
+        width: 1,
+      ),
+    );
+    return SizedBox(
+      height: navigationButtonSize,
+      width: navigationButtonSize,
+      child: Material(
+        shape: roundedRectangleBorder,
+        child: InkWell(
+          customBorder: roundedRectangleBorder,
+          onTap: onTap,
+          child: icon,
+        ),
+      ),
+    );
   }
 }
 
