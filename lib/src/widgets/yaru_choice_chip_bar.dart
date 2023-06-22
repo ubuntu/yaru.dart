@@ -176,16 +176,22 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
               ),
               child: listView,
             ),
-            if (_enableGoPreviousButton)
-              Positioned(
-                left: 0,
+            Positioned(
+              left: 0,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                opacity: _enableGoPreviousButton ? 1.0 : 0.0,
                 child: goPreviousButton,
               ),
-            if (_enableGoNextButton)
-              Positioned(
-                right: 0,
+            ),
+            Positioned(
+              right: 0,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                opacity: _enableGoNextButton ? 1.0 : 0.0,
                 child: goNextButton,
-              )
+              ),
+            )
           ],
         ),
       );
