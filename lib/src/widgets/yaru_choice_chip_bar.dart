@@ -109,12 +109,12 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
         width: 1,
       ),
     );
-
-    const size = 34.0;
+    const clipRadius = 40.0;
+    const navigationButtonSize = 34.0;
 
     final goPreviousButton = SizedBox(
-      height: size,
-      width: size,
+      height: navigationButtonSize,
+      width: navigationButtonSize,
       child: Material(
         shape: roundedRectangleBorder,
         child: InkWell(
@@ -132,8 +132,8 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     );
 
     final goNextButton = SizedBox(
-      height: size,
-      width: size,
+      height: navigationButtonSize,
+      width: navigationButtonSize,
       child: Material(
         shape: roundedRectangleBorder,
         child: InkWell(
@@ -163,7 +163,19 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            listView,
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft:
+                    Radius.circular(_enableGoPreviousButton ? clipRadius : 0.0),
+                bottomLeft:
+                    Radius.circular(_enableGoPreviousButton ? clipRadius : 0.0),
+                topRight:
+                    Radius.circular(_enableGoNextButton ? clipRadius : 0.0),
+                bottomRight:
+                    Radius.circular(_enableGoNextButton ? clipRadius : 0.0),
+              ),
+              child: listView,
+            ),
             if (_enableGoPreviousButton)
               Positioned(
                 left: 0,
