@@ -1,11 +1,11 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/src/widgets/yaru_circular_progress_indicator_theme.dart';
 
 import 'yaru_progress_indicator.dart';
 
 const double _kMinCircularProgressIndicatorSize = 36.0;
-const double _kDefaultCircularProgressStrokeWidth = 6;
 
 class YaruCircularProgressIndicator extends YaruProgressIndicator {
   /// Creates a Yaru circular progress indicator.
@@ -14,15 +14,15 @@ class YaruCircularProgressIndicator extends YaruProgressIndicator {
   const YaruCircularProgressIndicator({
     super.key,
     super.value,
-    this.strokeWidth = _kDefaultCircularProgressStrokeWidth,
+    super.strokeWidth,
+    super.trackStrokeWidth,
     super.color,
     super.valueColor,
+    super.trackColor,
+    super.trackValueColor,
     super.semanticsLabel,
     super.semanticsValue,
   });
-
-  /// The width of the line used to draw the circle.
-  final double strokeWidth;
 
   @override
   State<YaruCircularProgressIndicator> createState() =>
@@ -71,28 +71,67 @@ class _YaruCircularProgressIndicatorState
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final progressTheme = YaruCircularProgressIndicatorTheme.of(context);
+
+    final color = widget.valueColor?.value ??
+        widget.color ??
+        progressTheme?.color ??
+        theme.colorScheme.primary;
+    final defaultTrackColor =
+        widget.value != null ? color.withOpacity(.25) : color.withOpacity(.1);
+    final trackColor = widget.trackValueColor?.value ??
+        widget.trackColor ??
+        progressTheme?.trackColor ??
+        defaultTrackColor;
+    final strokeWidth =
+        widget.strokeWidth ?? progressTheme?.strokeWidth ?? kDefaultStrokeWidth;
+    final trackStrokeWidth = widget.trackStrokeWidth ??
+        progressTheme?.trackStrokeWidth ??
+        widget.computeDefaultTrackSize(strokeWidth);
+
+    Widget buildContainer(BuildContext context, Widget child) {
+      return widget.buildSemanticsWrapper(
+        context: context,
+        child: Container(
+          constraints: const BoxConstraints(
+            minWidth: _kMinCircularProgressIndicatorSize,
+            minHeight: _kMinCircularProgressIndicatorSize,
+          ),
+          child: RepaintBoundary(
+            child: child,
+          ),
+        ),
+      );
+    }
+
     if (widget.value != null) {
-      return _buildContainer(
+      return buildContainer(
         context,
         CustomPaint(
           painter: _DeterminateYaruCircularProgressIndicatorPainter(
             widget.value!,
-            widget.getValueColor(context),
-            widget.strokeWidth,
+            color,
+            trackColor,
+            strokeWidth,
+            trackStrokeWidth,
             Directionality.of(context),
           ),
         ),
       );
     }
+
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        return _buildContainer(
+        return buildContainer(
           context,
           CustomPaint(
             painter: _IndeterminateYaruCircularProgressIndicatorPainter(
-              widget.getValueColor(context),
-              widget.strokeWidth,
+              color,
+              trackColor,
+              strokeWidth,
+              trackStrokeWidth,
               _rotationTween.evaluate(_controller),
               _speedTween.evaluate(_controller).abs(),
               Directionality.of(context),
@@ -102,34 +141,23 @@ class _YaruCircularProgressIndicatorState
       },
     );
   }
-
-  Widget _buildContainer(BuildContext context, Widget child) {
-    return widget.buildSemanticsWrapper(
-      context: context,
-      child: Container(
-        constraints: const BoxConstraints(
-          minWidth: _kMinCircularProgressIndicatorSize,
-          minHeight: _kMinCircularProgressIndicatorSize,
-        ),
-        child: RepaintBoundary(
-          child: child,
-        ),
-      ),
-    );
-  }
 }
 
 class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
   const _IndeterminateYaruCircularProgressIndicatorPainter(
     this.color,
+    this.trackColor,
     this.strokeWidth,
+    this.trackStrokeWidth,
     this.rotationAngle,
     this.speed,
     this.textDirection,
   ) : super();
 
   final Color color;
+  final Color trackColor;
   final double strokeWidth;
+  final double trackStrokeWidth;
   final double rotationAngle;
   final double speed;
   final TextDirection textDirection;
@@ -156,22 +184,28 @@ class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
     const sweepAngle = circleThird;
     final rect = Rect.fromCircle(center: center, radius: radius);
 
-    final gradientPaint = Paint()
+    final gradientStrokePaint = Paint()
       ..shader = gradient.createShader(rect)
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
     final fillPaint = Paint()
       ..color = color
       ..style = PaintingStyle.fill;
+    final trackStrokePaint = Paint()
+      ..color = trackColor
+      ..strokeWidth = strokeWidth / 2
+      ..style = PaintingStyle.stroke;
 
     if (textDirection == TextDirection.rtl) {
       canvas.scale(-1, 1);
       canvas.translate(-size.width, 0);
     }
 
+    canvas.drawArc(rect, 0, math.pi * 2, false, trackStrokePaint);
+
     for (var i = 0; i < 3; i++) {
       final startAngle = rotationAngle + circleThird * i;
-      canvas.drawArc(rect, startAngle, sweepAngle, false, gradientPaint);
+      canvas.drawArc(rect, startAngle, sweepAngle, false, gradientStrokePaint);
     }
 
     // Draw circles after arcs, so they look on top
@@ -204,13 +238,17 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
   const _DeterminateYaruCircularProgressIndicatorPainter(
     this.value,
     this.color,
-    this.width,
+    this.trackColor,
+    this.strokeWidth,
+    this.trackStrokeWidth,
     this.textDirection,
   ) : super();
 
   final double value;
   final Color color;
-  final double width;
+  final Color trackColor;
+  final double strokeWidth;
+  final double trackStrokeWidth;
   final TextDirection textDirection;
 
   @override
@@ -221,26 +259,32 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
             ? 0
             : 1;
     final center = Offset(size.width / 2, size.height / 2);
-    final radius = math.min(size.width / 2, size.height / 2) - (width / 2);
+    final radius =
+        math.min(size.width / 2, size.height / 2) - (strokeWidth / 2);
     const startAngle = -math.pi / 2;
     final sweepAngle = math.pi * 2 * revisedValue;
     final rect = Rect.fromCircle(center: center, radius: radius);
+
+    final candidateTrackHeight = (strokeWidth / 3 * 2).truncate();
+    final trackHeight =
+        (candidateTrackHeight + (candidateTrackHeight.isEven ? 0 : 1))
+            .toDouble();
+
+    final strokePaint = Paint()
+      ..color = color
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.stroke;
+    final trackStrokePaint = Paint()
+      ..color = trackColor
+      ..strokeWidth = trackHeight
+      ..style = PaintingStyle.stroke;
 
     if (textDirection == TextDirection.rtl) {
       canvas.scale(-1, 1);
       canvas.translate(-size.width, 0);
     }
 
-    final backgroundPaint = Paint()
-      ..color = color.withOpacity(.25)
-      ..strokeWidth = width > 2 ? width - 2 : width
-      ..style = PaintingStyle.stroke;
-    final strokePaint = Paint()
-      ..color = color
-      ..strokeWidth = width
-      ..style = PaintingStyle.stroke;
-
-    canvas.drawArc(rect, 0, math.pi * 2, false, backgroundPaint);
+    canvas.drawArc(rect, 0, math.pi * 2, false, trackStrokePaint);
     canvas.drawArc(rect, startAngle, sweepAngle, false, strokePaint);
   }
 
@@ -250,7 +294,7 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
   ) {
     return oldDelegate.value != value ||
         oldDelegate.color != color ||
-        oldDelegate.width != width ||
+        oldDelegate.strokeWidth != strokeWidth ||
         oldDelegate.textDirection != textDirection;
   }
 }
