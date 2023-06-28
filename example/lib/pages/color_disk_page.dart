@@ -20,7 +20,7 @@ class _ColorDiskPageState extends State<ColorDiskPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          for (var variant in YaruVariant.values)
+          for (var variant in YaruVariant.accents)
             YaruColorDisk(
               onPressed: () => InheritedYaruVariant.apply(context, variant),
               color: variant.color,
