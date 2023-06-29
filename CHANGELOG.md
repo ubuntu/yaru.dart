@@ -1,5 +1,30 @@
 # Changelog
 
+## 2.5.0 (2023-06-29)
+
+## What's Changed
+* Upgrade to `flutter_lints` 2.0 by @pablojimpas in https://github.com/ubuntu/yaru_widgets.dart/pull/698
+* chore: migrate to Flutter 3.10 and Dart 3.0 by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/702
+* Update YaruMasterDetailPage comments by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/705
+* Remove useless YaruMasterListView.materialTiles by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/707
+* Pass available width to YaruMasterDetailBuilder by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/708
+* Rename `YaruMasterDetailBuilder` into `YaruMasterTileBuilder` by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/710
+* Drop double `YaruMasterTileScope` retrieval by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/712
+* Add YaruChoiceChipBar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/713
+* feat: add a stack option to YaruChoiceChipBar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/714
+* chore: add example/macos/Podfile.lock to gitignore by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/715
+* feat: improve YaruChipChoice parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/716
+* feat: add progress indicator themes by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/717
+* chore: bump yaru ^0.9.0 by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/719
+* ci: merge workflows with same triggers & specify FLUTTER_VERSION by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/720
+* ci: let release-please maintain the changelog by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/721
+* chore: fix up the changelog for release-please by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/723
+
+## New Contributors
+* @pablojimpas made their first contribution in https://github.com/ubuntu/yaru_widgets.dart/pull/698
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/2.4.1...v2.5.0
+
 ## 2.4.1
 
 * YaruCheckbox/Radio/Switch: fix high-contrast borders by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/696
