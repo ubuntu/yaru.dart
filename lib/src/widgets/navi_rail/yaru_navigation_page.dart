@@ -27,6 +27,7 @@ class YaruNavigationPage extends StatefulWidget {
     this.controller,
     this.leading,
     this.trailing,
+    this.onGenerateRoute,
   })  : assert(initialIndex == null || controller == null),
         assert((length == null) != (controller == null));
 
@@ -59,6 +60,9 @@ class YaruNavigationPage extends StatefulWidget {
 
   /// The trailing widget in the rail that is placed below the destinations.
   final Widget? trailing;
+
+  /// Called to generate a route for a given [RouteSettings].
+  final RouteFactory? onGenerateRoute;
 
   @override
   State<YaruNavigationPage> createState() => _YaruNavigationPageState();
@@ -182,6 +186,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
                   : widget.pageBuilder(context, 0),
             ),
           ],
+          onGenerateRoute: widget.onGenerateRoute,
           onPopPage: (route, result) => route.didPop(result),
           observers: [HeroController()],
         ),
