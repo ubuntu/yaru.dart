@@ -62,6 +62,24 @@ final List<IconItem> animatedIconItems = [
       size: iconSize,
     ),
   ),
+  IconItem(
+    name: 'Heart',
+    usage: 'YaruAnimatedHeartIcon()',
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedHeartIcon(),
+      mode: YaruAnimationMode.once,
+      size: iconSize,
+    ),
+  ),
+  IconItem(
+    name: 'Heart filled',
+    usage: 'YaruAnimatedHeartIcon(filled: true)',
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedHeartIcon(filled: true),
+      mode: YaruAnimationMode.once,
+      size: iconSize,
+    ),
+  ),
 ];
 
 final List<IconItem> widgetIconItems = [
