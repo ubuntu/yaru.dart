@@ -1,0 +1,11 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release:
+    uses: ubuntu-flutter-community/actions/.github/workflows/release-please.yaml@main
