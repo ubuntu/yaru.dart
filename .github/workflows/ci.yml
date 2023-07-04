@@ -57,19 +57,6 @@ jobs:
       - run: flutter pub get
       - run: flutter pub publish --dry-run
 
-  release:
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: google-github-actions/release-please-action@v3
-        with:
-          release-type: dart
-          changelog-notes-type: github
-          pull-request-title-pattern: 'chore: release v${version}'
-
   test:
     runs-on: ubuntu-22.04
     steps:
