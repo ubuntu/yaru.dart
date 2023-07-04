@@ -8,13 +8,4 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: google-github-actions/release-please-action@v3
-        with:
-          release-type: dart
-          changelog-notes-type: github
-          pull-request-title-pattern: 'chore: release v${version}'
+    uses: ubuntu-flutter-community/actions/.github/workflows/release-please.yaml@main
