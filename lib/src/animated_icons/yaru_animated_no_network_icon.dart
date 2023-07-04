@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_animated_icon.dart';
+import '../../yaru_icons.dart';
 
 const _kTargetCanvasSize = 24.0;
 const _kAnimationCurve = Curves.easeInQuart;
 const _kAnimationDuration = Duration(milliseconds: 600);
 
+/// An animated Yaru no network icon, similar to [YaruIcons.network_wireless] and [YaruIcons.network_wireless_disabled].
+///
+/// See also:
+///
+///  * [YaruAnimatedIcon], a widget who play a Yaru icon animation.
+///  * [YaruAnimatedNoNetworkIconWidget] if you want to play this animation manually.
 class YaruAnimatedNoNetworkIcon extends YaruAnimatedIconData {
+  /// An animated Yaru no network icon, similar to [YaruIcons.network_wireless] and [YaruIcons.network_wireless_disabled].
   const YaruAnimatedNoNetworkIcon();
 
   @override
@@ -24,45 +31,51 @@ class YaruAnimatedNoNetworkIcon extends YaruAnimatedIconData {
   ) {
     return YaruAnimatedNoNetworkIconWidget(
       progress: progress,
-      size: size ?? _kTargetCanvasSize,
+      size: size,
       color: color,
     );
   }
 }
 
-/// An animated Yaru no network icon, similar to `network_wirless` and `network_wirless_disabled`
+/// An animated Yaru no network icon, similar to [YaruIcons.network_wireless] and [YaruIcons.network_wireless_disabled].
+///
+/// See also:
+///
+///  * [YaruAnimatedNoNetworkIcon], if you want to play this animation with a [YaruAnimatedIcon] widget.
 class YaruAnimatedNoNetworkIconWidget extends StatelessWidget {
-  /// Create an animated Yaru no network icon, similar to `network_wirless` and `network_wirless_disabled`
+  /// Create an animated Yaru no network icon, similar to [YaruIcons.network_wireless] and [YaruIcons.network_wireless_disabled].
   const YaruAnimatedNoNetworkIconWidget({
     super.key,
-    required this.progress,
-    this.size = 24.0,
+    this.size,
     this.color,
+    required this.progress,
   });
 
-  /// Determines the icon canvas size
-  /// To fit the original Yaru icons, the icon will be slightly smaller (20.0 on a 24.0 canvas)
-  /// Defaults to 24.0  as the original Yaru icon
-  final double size;
+  /// Determines the icon canvas size.
+  /// To fit the original Yaru icon, the icon will be slightly smaller (20.0 on a 24.0 canvas).
+  /// Defaults to 24.0 as the original Yaru icon.
+  final double? size;
 
-  /// Color used to draw the icon
-  /// If null, defaults to colorScheme.onSurface
+  /// Color used to draw the icon.
+  /// If null, defaults to colorScheme.onSurface.
   final Color? color;
 
   /// The animation progress for the animated icon.
   /// The value is clamped to be between 0 and 1.
-  /// If null, a defaut animation controller will be created, which will run only once.
   final Animation<double> progress;
 
   @override
   Widget build(BuildContext context) {
+    final size = this.size ?? _kTargetCanvasSize;
+    final color = this.color ?? Theme.of(context).colorScheme.onSurface;
+
     return RepaintBoundary(
       child: SizedBox.square(
         dimension: size,
         child: CustomPaint(
           painter: _YaruAnimatedNoNetworkIconPainter(
             size,
-            color ?? Theme.of(context).colorScheme.onSurface,
+            color,
             progress.value,
           ),
         ),
@@ -71,7 +84,6 @@ class YaruAnimatedNoNetworkIconWidget extends StatelessWidget {
   }
 }
 
-// Path created with the help of https://fluttershapemaker.com/
 class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   const _YaruAnimatedNoNetworkIconPainter(
     this.size,

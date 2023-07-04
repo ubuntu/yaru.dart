@@ -2,17 +2,28 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'yaru_animated_icon.dart';
+import '../../yaru_icons.dart';
 
 const _kAnimationCurve = Curves.easeInOutCubic;
 const _kAnimationDuration = Duration(milliseconds: 500);
 const _kTargetCanvasSize = 24.0;
 const _kTargetIconSize = 20.0;
 
+/// An animated Yaru compass icon, similar to [YaruIcons.compass].
+///
+/// See also:
+///
+///  * [YaruAnimatedIcon], a widget who play a Yaru icon animation.
+///  * [YaruAnimatedCompassIconWidget] if you want to play this animation manually.
 class YaruAnimatedCompassIcon extends YaruAnimatedIconData {
-  const YaruAnimatedCompassIcon({this.filled = false});
+  /// An animated Yaru compass icon, similar to [YaruIcons.compass].
+  const YaruAnimatedCompassIcon({
+    this.filled,
+  });
 
-  final bool filled;
+  /// Determines if the icon uses a solid background, like [YaruIcons.compass_filled].
+  /// Defaults to false.
+  final bool? filled;
 
   @override
   Duration get defaultDuration => _kAnimationDuration;
@@ -29,35 +40,39 @@ class YaruAnimatedCompassIcon extends YaruAnimatedIconData {
   ) {
     return YaruAnimatedCompassIconWidget(
       progress: progress,
-      size: size ?? _kTargetCanvasSize,
+      size: size,
       color: color,
       filled: filled,
     );
   }
 }
 
-/// An animated Yaru compass icon, similar to the original one
+/// An animated Yaru compass icon, similar to [YaruIcons.compass].
+///
+/// See also:
+///
+///  * [YaruAnimatedCompassIcon], if you want to play this animation with a [YaruAnimatedIcon] widget.
 class YaruAnimatedCompassIconWidget extends StatelessWidget {
-  /// Create an animated Yaru compass icon, similar to the original one
+  /// Create an animated Yaru compass icon, similar to [YaruIcons.compass].
   const YaruAnimatedCompassIconWidget({
     super.key,
-    required this.progress,
-    this.size = 24.0,
-    this.filled = false,
+    this.size,
+    this.filled,
     this.color,
+    required this.progress,
   });
 
-  /// Determines the icon canvas size
-  /// To fit the original Yaru icon, the icon will be slightly smaller (20.0 on a 24.0 canvas)
-  /// Defaults to 24.0  as the original Yaru icon
-  final double size;
+  /// Determines the icon canvas size.
+  /// To fit the original Yaru icon, the icon will be slightly smaller (20.0 on a 24.0 canvas).
+  /// Defaults to 24.0 as the original Yaru icon.
+  final double? size;
 
-  /// Determines if the icon uses a solid background
-  /// Defaults to false as the original Yaru icon
-  final bool filled;
+  /// Determines if the icon uses a solid background, like [YaruIcons.compass_filled].
+  /// Defaults to false.
+  final bool? filled;
 
-  /// Color used to draw the icon
-  /// If null, defaults to colorScheme.onSurface
+  /// Color used to draw the icon.
+  /// If null, defaults to colorScheme.onSurface.
   final Color? color;
 
   /// The animation progress for the animated icon.
@@ -66,21 +81,20 @@ class YaruAnimatedCompassIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = this.size ?? _kTargetCanvasSize;
+    final color = this.color ?? Theme.of(context).colorScheme.onSurface;
+    final filled = this.filled != null ? this.filled! : false;
+
     return RepaintBoundary(
       child: SizedBox.square(
         dimension: size,
-        child: AnimatedBuilder(
-          animation: progress,
-          builder: (context, child) {
-            return CustomPaint(
-              painter: _YaruAnimatedCompassIconPainter(
-                size,
-                filled,
-                color ?? Theme.of(context).colorScheme.onSurface,
-                progress.value,
-              ),
-            );
-          },
+        child: CustomPaint(
+          painter: _YaruAnimatedCompassIconPainter(
+            size,
+            filled,
+            color,
+            progress.value,
+          ),
         ),
       ),
     );

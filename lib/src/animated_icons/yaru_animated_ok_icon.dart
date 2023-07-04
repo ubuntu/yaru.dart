@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_animated_icon.dart';
+import '../../yaru_icons.dart';
 
 const _kAnimationCurve = Curves.easeInCubic;
 const _kAnimationDuration = Duration(milliseconds: 500);
 const _kTargetCanvasSize = 24.0;
 const _kTargetIconSize = 20.0;
 
+/// An animated Yaru ok icon, similar to [YaruIcons.ok].
+///
+/// See also:
+///
+///  * [YaruAnimatedIcon], a widget who play a Yaru icon animation.
+///  * [YaruAnimatedOkIconWidget] if you want to play this animation manually.
 class YaruAnimatedOkIcon extends YaruAnimatedIconData {
-  const YaruAnimatedOkIcon({this.filled = false});
+  /// An animated Yaru ok icon, similar to [YaruIcons.ok].
+  const YaruAnimatedOkIcon({
+    this.filled = false,
+  });
 
-  final bool filled;
+  /// Determines if the icon uses a solid background, like [YaruIcons.heart_filled].
+  /// Defaults to false.
+  final bool? filled;
 
   @override
   Duration get defaultDuration => _kAnimationDuration;
@@ -34,37 +45,44 @@ class YaruAnimatedOkIcon extends YaruAnimatedIconData {
   }
 }
 
-/// An animated Yaru ok icon, similar to the original one
+/// An animated Yaru ok icon, similar to [YaruIcons.ok].
+///
+/// See also:
+///
+///  * [YaruAnimatedOkIcon], if you want to play this animation with a [YaruAnimatedIcon] widget.
 class YaruAnimatedOkIconWidget extends StatelessWidget {
-  /// Create an animated Yaru ok icon, similar to the original one
+  /// Create an animated Yaru ok icon, similar to [YaruIcons.ok].
   const YaruAnimatedOkIconWidget({
     super.key,
-    required this.progress,
-    this.size = 24.0,
-    this.filled = false,
+    this.size,
+    this.filled,
     this.color,
+    required this.progress,
   });
 
-  /// Determines the icon canvas size
-  /// To fit the original Yaru icon, the icon will be slightly smaller (20.0 on a 24.0 canvas)
-  /// Defaults to 24.0  as the original Yaru icon
-  final double size;
+  /// Determines the icon canvas size.
+  /// To fit the original Yaru icon, the icon will be slightly smaller (20.0 on a 24.0 canvas).
+  /// Defaults to 24.0 as the original Yaru icon.
+  final double? size;
 
-  /// Determines if the icon uses a solid background
-  /// Defaults to false as the original Yaru icon
-  final bool filled;
+  /// Determines if the icon uses a solid background, like [YaruIcons.ok_filled].
+  /// Defaults to false.
+  final bool? filled;
 
-  /// Color used to draw the icon
-  /// If null, defaults to colorScheme.onSurface
+  /// Color used to draw the icon.
+  /// If null, defaults to colorScheme.onSurface.
   final Color? color;
 
   /// The animation progress for the animated icon.
   /// The value is clamped to be between 0 and 1.
-  /// If null, a defaut animation controller will be created, which will run only once.
   final Animation<double> progress;
 
   @override
   Widget build(BuildContext context) {
+    final size = this.size ?? _kTargetCanvasSize;
+    final color = this.color ?? Theme.of(context).colorScheme.onSurface;
+    final filled = this.filled != null ? this.filled! : false;
+
     return RepaintBoundary(
       child: SizedBox.square(
         dimension: size,
@@ -72,7 +90,7 @@ class YaruAnimatedOkIconWidget extends StatelessWidget {
           painter: _YaruAnimatedOkIconPainter(
             size,
             filled,
-            color ?? Theme.of(context).colorScheme.onSurface,
+            color,
             progress.value,
           ),
         ),

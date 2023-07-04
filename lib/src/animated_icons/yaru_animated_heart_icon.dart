@@ -7,14 +7,19 @@ const _kAnimationDuration = Duration(milliseconds: 600);
 const _kTargetCanvasSize = 24.0;
 
 /// An animated Yaru heart icon, similar to [YaruIcons.heart].
+///
+/// See also:
+///
+///  * [YaruAnimatedIcon], a widget who play a Yaru icon animation.
+///  * [YaruAnimatedHeartIconWidget] if you want to play this animation manually.
 class YaruAnimatedHeartIcon extends YaruAnimatedIconData {
   /// An animated Yaru heart icon, similar to [YaruIcons.heart].
   const YaruAnimatedHeartIcon({
     this.filled,
   });
 
-  /// Determines if the icon uses a solid background, like [YaruIcons.heart_filled]
-  /// Defaults to false as the original Yaru icon.
+  /// Determines if the icon uses a solid background, like [YaruIcons.heart_filled].
+  /// Defaults to false.
   final bool? filled;
 
   @override
@@ -40,23 +45,27 @@ class YaruAnimatedHeartIcon extends YaruAnimatedIconData {
 }
 
 /// An animated Yaru heart icon, similar to [YaruIcons.heart].
+///
+/// See also:
+///
+///  * [YaruAnimatedHeartIcon], if you want to play this animation with a [YaruAnimatedIcon] widget.
 class YaruAnimatedHeartIconWidget extends StatelessWidget {
-  /// An animated Yaru heart icon, similar to [YaruIcons.heart].
+  /// Create an animated Yaru heart icon, similar to [YaruIcons.heart].
   const YaruAnimatedHeartIconWidget({
     super.key,
     this.size,
-    this.color,
     this.filled,
+    this.color,
     required this.progress,
   });
 
-  /// Determines the icon canvas size
+  /// Determines the icon canvas size.
   /// To fit the original Yaru icon, the icon will be slightly smaller (20.0 on a 24.0 canvas).
   /// Defaults to 24.0 as the original Yaru icon.
   final double? size;
 
-  /// Determines if the icon uses a solid background, like [YaruIcons.heart_filled]
-  /// Defaults to false as the original Yaru icon.
+  /// Determines if the icon uses a solid background, like [YaruIcons.heart_filled].
+  /// Defaults to false.
   final bool? filled;
 
   /// Color used to draw the icon.

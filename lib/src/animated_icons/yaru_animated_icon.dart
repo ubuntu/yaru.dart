@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
-enum YaruAnimationMode { once, repeat }
+/// Describes how a [YaruAnimatedIcon] will run.
+enum YaruAnimationMode {
+  /// Play the animation only one time.
+  once,
 
+  /// Play the animation indefinitely.
+  repeat
+}
+
+/// A runner widget for all Yaru animated icons.
 class YaruAnimatedIcon extends StatefulWidget {
+  /// Create a Yaru animated icon runner.
   const YaruAnimatedIcon(
     this.data, {
     this.duration,
@@ -13,11 +22,27 @@ class YaruAnimatedIcon extends StatefulWidget {
     super.key,
   });
 
+  /// Describe which animation will be played.
   final YaruAnimatedIconData data;
+
+  /// Duration of the animation.
+  /// If null, defaults to [data.defaultDuration].
   final Duration? duration;
+
+  /// Curve used to play the animation.
+  /// If null, defaults to [data.defaultCurve].
   final Curve? curve;
+
+  /// Size of the canvas used to draw the icon.
+  /// If null, the default value of the related [data.build] widget will be used.
   final double? size;
+
+  /// Color used to draw the icon.
+  /// If null, the default value of the related [data.build] widget will be used.
   final Color? color;
+
+  /// Describes how the animation will run.
+  /// See [YaruAnimationMode].
   final YaruAnimationMode mode;
 
   @override
@@ -92,6 +117,7 @@ class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
   }
 }
 
+/// Interface class for a Yaru animated icon.
 abstract class YaruAnimatedIconData {
   const YaruAnimatedIconData();
 
