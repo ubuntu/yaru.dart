@@ -51,11 +51,9 @@ class YaruAnimatedIcon extends StatefulWidget {
 
 class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
     with SingleTickerProviderStateMixin {
-  AnimationController? _controller;
+  late AnimationController _controller;
 
   void _initAnimationController(Duration? duration, YaruAnimationMode mode) {
-    _controller?.stop();
-    _controller?.value = 0;
     _controller = AnimationController(
       vsync: this,
       duration: duration ?? widget.data.defaultDuration,
@@ -63,10 +61,10 @@ class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
 
     switch (mode) {
       case YaruAnimationMode.once:
-        _controller!.forward();
+        _controller.forward();
         break;
       case YaruAnimationMode.repeat:
-        _controller!.repeat();
+        _controller.repeat();
         break;
     }
   }
@@ -78,12 +76,9 @@ class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
   }
 
   @override
-  void didUpdateWidget(covariant YaruAnimatedIcon old) {
-    if (widget.mode != old.mode) {
-      _initAnimationController(widget.duration, widget.mode);
-    }
-
-    if (widget.duration != old.duration) {
+  void didUpdateWidget(YaruAnimatedIcon old) {
+    if (widget.mode != old.mode || widget.duration != old.duration) {
+      _controller.dispose();
       _initAnimationController(widget.duration, widget.mode);
     }
 
@@ -92,21 +87,19 @@ class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
 
   @override
   void dispose() {
-    _controller?.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_controller == null) return const SizedBox();
-
     return AnimatedBuilder(
-      animation: _controller!,
+      animation: _controller,
       builder: (context, _) {
         return widget.data.build(
           context,
           CurvedAnimation(
-            parent: _controller!,
+            parent: _controller,
             curve: widget.curve ?? widget.data.defaultCurve,
           ),
           widget.size,
