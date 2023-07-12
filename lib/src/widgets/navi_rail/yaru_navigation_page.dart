@@ -28,6 +28,7 @@ class YaruNavigationPage extends StatefulWidget {
     this.leading,
     this.trailing,
     this.navigatorKey,
+    this.navigatorObservers = const <NavigatorObserver>[],
     this.initialRoute,
     this.onGenerateRoute,
     this.onUnknownRoute,
@@ -67,13 +68,28 @@ class YaruNavigationPage extends StatefulWidget {
   /// A key to use when building the [Navigator] widget.
   final GlobalKey<NavigatorState>? navigatorKey;
 
+  /// A list of observers for the [Navigator] widget.
+  ///
+  /// See also:
+  ///  * [Navigator.observers]
+  final List<NavigatorObserver> navigatorObservers;
+
   /// The route name for the initial route.
+  ///
+  /// See also:
+  ///  * [Navigator.initialRoute]
   final String? initialRoute;
 
   /// Called to generate a route for a given [RouteSettings].
+  ///
+  /// See also:
+  ///  * [Navigator.onGenerateRoute]
   final RouteFactory? onGenerateRoute;
 
   /// Called when [onGenerateRoute] fails to generate a route.
+  ///
+  /// See also:
+  ///  * [Navigator.onUnknownRoute]
   final RouteFactory? onUnknownRoute;
 
   @override
@@ -203,7 +219,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
           onGenerateRoute: widget.onGenerateRoute,
           onUnknownRoute: widget.onUnknownRoute,
           onPopPage: (route, result) => route.didPop(result),
-          observers: [HeroController()],
+          observers: [...widget.navigatorObservers, HeroController()],
         ),
       ),
     );
