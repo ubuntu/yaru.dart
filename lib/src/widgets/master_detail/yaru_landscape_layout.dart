@@ -13,6 +13,7 @@ import 'yaru_master_list_view.dart';
 class YaruLandscapeLayout extends StatefulWidget {
   const YaruLandscapeLayout({
     super.key,
+    required this.navigatorKey,
     required this.tileBuilder,
     required this.pageBuilder,
     this.onSelected,
@@ -24,6 +25,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.controller,
   });
 
+  final GlobalKey<NavigatorState> navigatorKey;
   final YaruMasterTileBuilder tileBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int>? onSelected;
@@ -43,7 +45,6 @@ const _kLeftPaneResizingRegionAnimationDuration = Duration(milliseconds: 250);
 
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
-  final _navigatorKey = GlobalKey<NavigatorState>();
 
   double? _paneWidth;
   double? _initialPaneWidth;
@@ -85,7 +86,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   void _onTap(int index) {
     widget.controller.index = index;
     widget.onSelected?.call(_selectedIndex);
-    _navigatorKey.currentState?.popUntil((route) => route.isFirst);
+    widget.navigatorKey.currentState?.popUntil((route) => route.isFirst);
   }
 
   void updatePaneWidth({
@@ -189,13 +190,15 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       ),
       child: ScaffoldMessenger(
         child: Navigator(
-          key: _navigatorKey,
+          key: widget.navigatorKey,
           pages: [
             MaterialPage(
               key: ValueKey(_selectedIndex),
-              child: widget.controller.length > _selectedIndex
-                  ? widget.pageBuilder(context, _selectedIndex)
-                  : widget.pageBuilder(context, 0),
+              child: Builder(
+                builder: (context) => widget.controller.length > _selectedIndex
+                    ? widget.pageBuilder(context, _selectedIndex)
+                    : widget.pageBuilder(context, 0),
+              ),
             ),
           ],
           onPopPage: (route, result) => route.didPop(result),

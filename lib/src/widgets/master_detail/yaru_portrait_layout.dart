@@ -11,6 +11,7 @@ import 'yaru_master_list_view.dart';
 class YaruPortraitLayout extends StatefulWidget {
   const YaruPortraitLayout({
     super.key,
+    required this.navigatorKey,
     required this.tileBuilder,
     required this.pageBuilder,
     this.onSelected,
@@ -19,6 +20,7 @@ class YaruPortraitLayout extends StatefulWidget {
     required this.controller,
   });
 
+  final GlobalKey<NavigatorState> navigatorKey;
   final YaruMasterTileBuilder tileBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int>? onSelected;
@@ -34,9 +36,8 @@ class YaruPortraitLayout extends StatefulWidget {
 
 class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   late int _selectedIndex;
-  final _navigatorKey = GlobalKey<NavigatorState>();
 
-  NavigatorState get _navigator => _navigatorKey.currentState!;
+  NavigatorState get _navigator => widget.navigatorKey.currentState!;
 
   @override
   void initState() {
@@ -74,6 +75,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
 
   MaterialPage page(int index) {
     return MaterialPage(
+      key: ValueKey(index),
       child: Builder(
         builder: (context) => widget.pageBuilder(context, _selectedIndex),
       ),
@@ -90,13 +92,14 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
           pageTransitionsTheme: theme.portraitTransitions,
         ),
         child: Navigator(
-          key: _navigatorKey,
+          key: widget.navigatorKey,
           onPopPage: (route, result) {
             _selectedIndex = -1;
             return route.didPop(result);
           },
           pages: [
             MaterialPage(
+              key: const ValueKey(-1),
               child: YaruTitleBarTheme(
                 data: const YaruTitleBarThemeData(
                   style: kIsWeb

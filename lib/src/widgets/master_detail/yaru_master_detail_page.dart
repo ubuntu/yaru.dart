@@ -136,6 +136,7 @@ class YaruMasterDetailPage extends StatefulWidget {
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   double? _previousPaneWidth;
   late YaruPageController _controller;
+  final _navigatorKey = GlobalKey<NavigatorState>();
 
   void _updateController() => _controller = widget.controller ??
       YaruPageController(
@@ -172,6 +173,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
           ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
           : _YaruMasterDetailLayoutBuilder(
               portrait: (context) => YaruPortraitLayout(
+                navigatorKey: _navigatorKey,
                 tileBuilder: widget.tileBuilder,
                 pageBuilder: widget.pageBuilder,
                 onSelected: widget.onSelected,
@@ -180,6 +182,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
                 controller: _controller,
               ),
               landscape: (context) => YaruLandscapeLayout(
+                navigatorKey: _navigatorKey,
                 tileBuilder: widget.tileBuilder,
                 pageBuilder: widget.pageBuilder,
                 onSelected: widget.onSelected,
