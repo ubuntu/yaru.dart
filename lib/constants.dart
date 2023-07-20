@@ -16,3 +16,8 @@ const kYaruButtonRadius = 6.0;
 /// The default breakpoint width [YaruMasterDetailPage] uses for switching
 /// between portrait and landscape modes.
 const kYaruMasterDetailBreakpoint = 620.0;
+
+/// The best height for any item inside a [YaruWindowTitleBar]
+const kYaruWindowTitleBarItemHeight = 35.0;
+
+const kYaruIconSize = 16.0;
