@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../yaru_icons.dart';
+import '../../../yaru_icons.dart';
+import '../../constants.dart';
+import '../../foundation/local_progress_mixin.dart';
 
-const _kTargetCanvasSize = 24.0;
 const _kAnimationCurve = Curves.easeInQuart;
 const _kAnimationDuration = Duration(milliseconds: 600);
 
@@ -42,6 +43,7 @@ class YaruAnimatedNoNetworkIcon extends YaruAnimatedIconData {
 /// See also:
 ///
 ///  * [YaruAnimatedNoNetworkIcon], if you want to play this animation with a [YaruAnimatedIcon] widget.
+///  * [YaruAnimatedIcon], a widget who play a Yaru icon animation.
 class YaruAnimatedNoNetworkIconWidget extends StatelessWidget {
   /// Create an animated Yaru no network icon, similar to [YaruIcons.network_wireless] and [YaruIcons.network_wireless_disabled].
   const YaruAnimatedNoNetworkIconWidget({
@@ -66,12 +68,12 @@ class YaruAnimatedNoNetworkIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = this.size ?? _kTargetCanvasSize;
+    final size = this.size ?? kTargetCanvasSize;
     final color = this.color ?? Theme.of(context).colorScheme.onSurface;
 
-    return RepaintBoundary(
-      child: SizedBox.square(
-        dimension: size,
+    return SizedBox.square(
+      dimension: size,
+      child: RepaintBoundary(
         child: CustomPaint(
           painter: _YaruAnimatedNoNetworkIconPainter(
             size,
@@ -84,7 +86,8 @@ class YaruAnimatedNoNetworkIconWidget extends StatelessWidget {
   }
 }
 
-class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
+class _YaruAnimatedNoNetworkIconPainter extends CustomPainter
+    with LocalProgress {
   const _YaruAnimatedNoNetworkIconPainter(
     this.size,
     this.color,
@@ -93,6 +96,7 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
 
   final double size;
   final Color color;
+  @override
   final double progress;
 
   @override
@@ -216,7 +220,7 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
     final start = Offset(size * 0.19614, size * 0.09552);
     final end = Offset(size * 0.82116, size * 0.72055);
 
-    final localProgress = _computeLocalProgress(.4, .6);
+    final localProgress = computeLocalProgress(.4, .6);
 
     final drawEnd = Offset.lerp(start, end, localProgress)!;
 
@@ -236,7 +240,7 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
     final metric = path.computeMetrics().single;
     final drawPath = metric.extractPath(
       0,
-      metric.length * _computeLocalProgress(start, duration),
+      metric.length * computeLocalProgress(start, duration),
     );
 
     canvas.drawPath(drawPath, _getStrokePaint());
@@ -252,7 +256,7 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
   void _drawDot(Canvas canvas) {
     canvas.drawCircle(
       Offset(size * 0.5, size * 0.7916667),
-      (size * 0.08333333) * _computeLocalProgress(0, .1),
+      (size * 0.08333333) * computeLocalProgress(0, .1),
       _getFillPaint(),
     );
   }
@@ -268,7 +272,7 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
     return Paint()
       ..style = PaintingStyle.stroke
       ..color = color
-      ..strokeWidth = 1 / (_kTargetCanvasSize / size)
+      ..strokeWidth = 1 / (kTargetCanvasSize / size)
       ..blendMode = BlendMode.src;
   }
 
@@ -276,19 +280,8 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter {
     return Paint()
       ..color = Colors.black
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1 / (_kTargetCanvasSize / size)
+      ..strokeWidth = 1 / (kTargetCanvasSize / size)
       ..blendMode = BlendMode.dstOut;
-  }
-
-  double _computeLocalProgress(double start, double duration) {
-    assert(start >= 0.0 && start <= 1.0);
-    assert(duration >= 0.0 && duration <= 1.0);
-    assert(start + duration <= 1.0);
-
-    final localProgress =
-        progress >= start ? (progress - start) * (1.0 / duration) : 0.0;
-
-    return localProgress < 1.0 ? localProgress : 1.0;
   }
 
   @override

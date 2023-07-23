@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../yaru_icons.dart';
+import '../../../yaru_icons.dart';
+import '../../constants.dart';
+import '../../foundation/local_progress_mixin.dart';
 
 const _kAnimationCurve = Curves.easeInOutCubic;
 const _kAnimationDuration = Duration(milliseconds: 600);
-const _kTargetCanvasSize = 24.0;
 
 /// An animated Yaru heart icon, similar to [YaruIcons.heart].
 ///
@@ -49,6 +50,7 @@ class YaruAnimatedHeartIcon extends YaruAnimatedIconData {
 /// See also:
 ///
 ///  * [YaruAnimatedHeartIcon], if you want to play this animation with a [YaruAnimatedIcon] widget.
+///  * [YaruAnimatedIcon], a widget who play a Yaru icon animation.
 class YaruAnimatedHeartIconWidget extends StatelessWidget {
   /// Create an animated Yaru heart icon, similar to [YaruIcons.heart].
   const YaruAnimatedHeartIconWidget({
@@ -78,13 +80,13 @@ class YaruAnimatedHeartIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = this.size ?? _kTargetCanvasSize;
+    final size = this.size ?? kTargetCanvasSize;
     final color = this.color ?? Theme.of(context).colorScheme.onSurface;
     final filled = this.filled != null ? this.filled! : false;
 
-    return RepaintBoundary(
-      child: SizedBox.square(
-        dimension: size,
+    return SizedBox.square(
+      dimension: size,
+      child: RepaintBoundary(
         child: CustomPaint(
           painter: _YaruAnimatedHeartIconPainter(
             size,
@@ -98,7 +100,7 @@ class YaruAnimatedHeartIconWidget extends StatelessWidget {
   }
 }
 
-class _YaruAnimatedHeartIconPainter extends CustomPainter {
+class _YaruAnimatedHeartIconPainter extends CustomPainter with LocalProgress {
   const _YaruAnimatedHeartIconPainter(
     this.size,
     this.color,
@@ -109,13 +111,14 @@ class _YaruAnimatedHeartIconPainter extends CustomPainter {
   final double size;
   final Color color;
   final bool filled;
+  @override
   final double progress;
 
   @override
   void paint(Canvas canvas, Size size) {
     if (progress < .5) {
       final metric = _getHeartPath().computeMetrics().single;
-      final localProgress = _computeLocalProgress(0, .5);
+      final localProgress = computeLocalProgress(0, .5);
       final drawPath = metric.extractPath(
         metric.length / 2 - metric.length / 2 * localProgress,
         metric.length / 2 + metric.length / 2 * localProgress,
@@ -126,10 +129,10 @@ class _YaruAnimatedHeartIconPainter extends CustomPainter {
         _getStrokePaint(),
       );
     } else {
-      final localProgress = _computeLocalProgress(.5, .5);
+      final localProgress = computeLocalProgress(.5, .5);
       final scale = localProgress < .5
-          ? 1 - .25 * _computeLocalProgress(.5, .25)
-          : .75 + .25 * _computeLocalProgress(.75, .25);
+          ? 1 - .25 * computeLocalProgress(.5, .25)
+          : .75 + .25 * computeLocalProgress(.75, .25);
       canvas.drawPath(
         _getHeartPath(scale: scale),
         _getStrokePaint(),
@@ -137,7 +140,7 @@ class _YaruAnimatedHeartIconPainter extends CustomPainter {
 
       if (filled && localProgress >= .5) {
         canvas.drawPath(
-          _getHeartPath(scale: _computeLocalProgress(.75, .25)),
+          _getHeartPath(scale: computeLocalProgress(.75, .25)),
           _getFillPaint(),
         );
       }
@@ -223,19 +226,8 @@ class _YaruAnimatedHeartIconPainter extends CustomPainter {
     return Paint()
       ..style = PaintingStyle.stroke
       ..color = color
-      ..strokeWidth = 1 / (_kTargetCanvasSize / size)
+      ..strokeWidth = 1 / (kTargetCanvasSize / size)
       ..blendMode = BlendMode.src;
-  }
-
-  double _computeLocalProgress(double start, double duration) {
-    assert(start >= 0.0 && start <= 1.0);
-    assert(duration >= 0.0 && duration <= 1.0);
-    assert(start + duration <= 1.0);
-
-    final localProgress =
-        progress >= start ? (progress - start) * (1.0 / duration) : 0.0;
-
-    return localProgress < 1.0 ? localProgress : 1.0;
   }
 
   @override

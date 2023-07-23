@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../yaru_icons.dart';
+import '../../../yaru_icons.dart';
+import '../../constants.dart';
 
 const _kAnimationCurve = Curves.easeInCubic;
 const _kAnimationDuration = Duration(milliseconds: 500);
-const _kTargetCanvasSize = 24.0;
-const _kTargetIconSize = 20.0;
 
 /// An animated Yaru ok icon, similar to [YaruIcons.ok].
 ///
@@ -38,7 +37,7 @@ class YaruAnimatedOkIcon extends YaruAnimatedIconData {
   ) {
     return YaruAnimatedOkIconWidget(
       progress: progress,
-      size: size ?? _kTargetCanvasSize,
+      size: size,
       color: color,
       filled: filled,
     );
@@ -50,6 +49,7 @@ class YaruAnimatedOkIcon extends YaruAnimatedIconData {
 /// See also:
 ///
 ///  * [YaruAnimatedOkIcon], if you want to play this animation with a [YaruAnimatedIcon] widget.
+///  * [YaruAnimatedIcon], a widget who play a Yaru icon animation.
 class YaruAnimatedOkIconWidget extends StatelessWidget {
   /// Create an animated Yaru ok icon, similar to [YaruIcons.ok].
   const YaruAnimatedOkIconWidget({
@@ -79,13 +79,13 @@ class YaruAnimatedOkIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = this.size ?? _kTargetCanvasSize;
+    final size = this.size ?? kTargetCanvasSize;
     final color = this.color ?? Theme.of(context).colorScheme.onSurface;
     final filled = this.filled != null ? this.filled! : false;
 
-    return RepaintBoundary(
-      child: SizedBox.square(
-        dimension: size,
+    return SizedBox.square(
+      dimension: size,
+      child: RepaintBoundary(
         child: CustomPaint(
           painter: _YaruAnimatedOkIconPainter(
             size,
@@ -114,12 +114,8 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.saveLayer(null, Paint());
-
     _paintOuterCirclePath(canvas);
     _paintCheckmark(canvas);
-
-    canvas.restore();
   }
 
   void _paintOuterCirclePath(Canvas canvas) {
@@ -195,7 +191,7 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
 
   Path _createOuterCirclePath() {
     final finalCircleRadius =
-        (size / 2 - 1) * _kTargetIconSize / _kTargetCanvasSize;
+        (size / 2 - 1) * kTargetIconSize / kTargetCanvasSize;
     // From 1.0 to 0.75 to 1.0
     final circleRadius = progress < 0.5
         ? finalCircleRadius - finalCircleRadius * 0.25 * progress
@@ -213,7 +209,7 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
   /// [large] param is used to increase circle radius from half pain stroke for canvas clip
   Path _createInnerCirclePath(bool large) {
     final finalCircleRadius =
-        (size / 2 - 1) * _kTargetIconSize / _kTargetCanvasSize;
+        (size / 2 - 1) * kTargetIconSize / kTargetCanvasSize;
     // From 1.0 to 0.75 to 1.0
     final circleRadius =
         progress < 0.5 ? 0.0 : (progress - 0.5) * 2 * finalCircleRadius;
@@ -223,7 +219,7 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
         Rect.fromCircle(
           center: Offset(size / 2, size / 2),
           radius: large
-              ? circleRadius + (1 / (_kTargetCanvasSize / size))
+              ? circleRadius + (1 / (kTargetCanvasSize / size))
               : circleRadius,
         ),
       );
@@ -240,7 +236,7 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
     return Paint()
       ..color = color
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1 / (_kTargetCanvasSize / size)
+      ..strokeWidth = 1 / (kTargetCanvasSize / size)
       ..blendMode = BlendMode.src;
   }
 
