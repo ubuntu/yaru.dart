@@ -12,6 +12,10 @@ class YaruPortraitLayout extends StatefulWidget {
   const YaruPortraitLayout({
     super.key,
     required this.navigatorKey,
+    this.navigatorObservers = const <NavigatorObserver>[],
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.onUnknownRoute,
     required this.tileBuilder,
     required this.pageBuilder,
     this.onSelected,
@@ -21,6 +25,10 @@ class YaruPortraitLayout extends StatefulWidget {
   });
 
   final GlobalKey<NavigatorState> navigatorKey;
+  final List<NavigatorObserver> navigatorObservers;
+  final String? initialRoute;
+  final RouteFactory? onGenerateRoute;
+  final RouteFactory? onUnknownRoute;
   final YaruMasterTileBuilder tileBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int>? onSelected;
@@ -93,6 +101,9 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
         ),
         child: Navigator(
           key: widget.navigatorKey,
+          initialRoute: widget.initialRoute,
+          onGenerateRoute: widget.onGenerateRoute,
+          onUnknownRoute: widget.onUnknownRoute,
           onPopPage: (route, result) {
             _selectedIndex = -1;
             return route.didPop(result);
@@ -123,7 +134,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
             ),
             if (_selectedIndex != -1) page(_selectedIndex)
           ],
-          observers: [HeroController()],
+          observers: [...widget.navigatorObservers, HeroController()],
         ),
       ),
     );

@@ -64,6 +64,11 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.initialIndex,
     this.onSelected,
     this.controller,
+    this.navigatorKey,
+    this.navigatorObservers = const <NavigatorObserver>[],
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.onUnknownRoute,
   })  : assert(initialIndex == null || controller == null),
         assert((length == null) != (controller == null));
 
@@ -115,6 +120,33 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// An optional controller that can be used to navigate to a specific index.
   final YaruPageController? controller;
 
+  /// A key to use when building the [Navigator] widget.
+  final GlobalKey<NavigatorState>? navigatorKey;
+
+  /// A list of observers for the [Navigator] widget.
+  ///
+  /// See also:
+  ///  * [Navigator.observers]
+  final List<NavigatorObserver> navigatorObservers;
+
+  /// The route name for the initial route.
+  ///
+  /// See also:
+  ///  * [Navigator.initialRoute]
+  final String? initialRoute;
+
+  /// Called to generate a route for a given [RouteSettings].
+  ///
+  /// See also:
+  ///  * [Navigator.onGenerateRoute]
+  final RouteFactory? onGenerateRoute;
+
+  /// Called when [onGenerateRoute] fails to generate a route.
+  ///
+  /// See also:
+  ///  * [Navigator.onUnknownRoute]
+  final RouteFactory? onUnknownRoute;
+
   /// Returns the orientation of the [YaruMasterDetailPage] that most tightly
   /// encloses the given context.
   static Orientation orientationOf(BuildContext context) {
@@ -136,7 +168,7 @@ class YaruMasterDetailPage extends StatefulWidget {
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   double? _previousPaneWidth;
   late YaruPageController _controller;
-  final _navigatorKey = GlobalKey<NavigatorState>();
+  late final GlobalKey<NavigatorState> _navigatorKey;
 
   void _updateController() => _controller = widget.controller ??
       YaruPageController(
@@ -148,6 +180,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   void initState() {
     super.initState();
     _updateController();
+    _navigatorKey = widget.navigatorKey ?? GlobalKey<NavigatorState>();
   }
 
   @override
@@ -174,6 +207,10 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
           : _YaruMasterDetailLayoutBuilder(
               portrait: (context) => YaruPortraitLayout(
                 navigatorKey: _navigatorKey,
+                navigatorObservers: widget.navigatorObservers,
+                initialRoute: widget.initialRoute,
+                onGenerateRoute: widget.onGenerateRoute,
+                onUnknownRoute: widget.onUnknownRoute,
                 tileBuilder: widget.tileBuilder,
                 pageBuilder: widget.pageBuilder,
                 onSelected: widget.onSelected,
@@ -183,6 +220,10 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
               ),
               landscape: (context) => YaruLandscapeLayout(
                 navigatorKey: _navigatorKey,
+                navigatorObservers: widget.navigatorObservers,
+                initialRoute: widget.initialRoute,
+                onGenerateRoute: widget.onGenerateRoute,
+                onUnknownRoute: widget.onUnknownRoute,
                 tileBuilder: widget.tileBuilder,
                 pageBuilder: widget.pageBuilder,
                 onSelected: widget.onSelected,
