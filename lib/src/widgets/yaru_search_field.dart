@@ -5,13 +5,14 @@ import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/constants.dart';
 import 'package:yaru_widgets/src/widgets/yaru_icon_button.dart';
 
+/// A [TextField] to with fully rounded corners,
+/// ideally in a [YaruWindowTitleBar] or [YaruDialogTitleBar]
 class YaruSearchField extends StatefulWidget {
   const YaruSearchField({
     super.key,
     this.text,
     this.onSubmitted,
     this.hintText,
-    this.onSearchActive,
     this.height = kYaruWindowTitleBarItemHeight,
     this.contentPadding = const EdgeInsets.only(
       bottom: 10,
@@ -19,18 +20,35 @@ class YaruSearchField extends StatefulWidget {
       right: 15,
       left: 15,
     ),
-    this.autofocus = true,
+    this.autoFocus = true,
     this.onClear,
+    this.onChanged,
   });
 
+  /// Optional [String] forwarded to the internal [TextEditingController]
   final String? text;
+
+  /// Optional [String] used inside the internal [InputDecoration]
   final String? hintText;
+
+  /// The callback forwarded to the [TextField] used when the enter key is pressed
   final void Function(String? value)? onSubmitted;
+
+  /// The callback forwarded to the [TextField] used when input changes
+  final void Function(String)? onChanged;
+
+  /// Optional callback used to clear the [TextField]. If provided an [IconButton] will use it
+  /// as the suffix icon inside the [InputDecoration]
   final void Function()? onClear;
-  final void Function()? onSearchActive;
+
+  /// The height of the [TextField] that defaults to [kYaruWindowTitleBarItemHeight]
   final double height;
+
+  /// The padding for the [InputDecoration] that defaults to `EdgeInsets.only(bottom: 10,top: 10, right: 15, left: 15)`
   final EdgeInsets contentPadding;
-  final bool autofocus;
+
+  /// Defines if the [TextField] is autofocused on build
+  final bool autoFocus;
 
   @override
   State<YaruSearchField> createState() => _YaruSearchFieldState();
@@ -77,7 +95,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
       child: SizedBox(
         height: widget.height,
         child: TextField(
-          autofocus: widget.autofocus,
+          autofocus: widget.autoFocus,
           style: theme.textTheme.bodyMedium,
           strutStyle: const StrutStyle(
             leading: 0.2,
@@ -85,6 +103,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
           textAlignVertical: TextAlignVertical.center,
           cursorWidth: 1,
           onSubmitted: widget.onSubmitted,
+          onChanged: widget.onChanged,
           controller: _controller,
           decoration: InputDecoration(
             border: border,
@@ -123,6 +142,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
   }
 }
 
+/// Combines [YaruSearchField] and [YaruSearchButton] in a [Stack]
 class YaruSearchFieldTitle extends StatefulWidget {
   const YaruSearchFieldTitle({
     super.key,
@@ -130,22 +150,24 @@ class YaruSearchFieldTitle extends StatefulWidget {
     required this.title,
     this.width = 190,
     this.titlePadding = const EdgeInsets.only(left: 45.0),
-    this.autofocus = true,
+    this.autoFocus = true,
     this.text,
     this.hintText,
     this.onSubmitted,
     this.onClear,
     this.onSearchActive,
+    this.onChanged,
   });
 
   final bool searchActive;
   final Widget title;
   final double width;
   final EdgeInsets titlePadding;
-  final bool autofocus;
+  final bool autoFocus;
   final String? text;
   final String? hintText;
   final void Function(String? value)? onSubmitted;
+  final void Function(String)? onChanged;
   final void Function()? onClear;
   final void Function()? onSearchActive;
 
@@ -177,9 +199,9 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
                   height: widget.width,
                   hintText: widget.hintText,
                   onClear: widget.onClear,
-                  onSearchActive: widget.onSearchActive,
-                  autofocus: widget.autofocus,
+                  autoFocus: widget.autoFocus,
                   onSubmitted: widget.onSubmitted,
+                  onChanged: widget.onChanged,
                   contentPadding: const EdgeInsets.only(
                     bottom: 10,
                     top: 10,
@@ -204,6 +226,7 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
   }
 }
 
+/// A pre-styled [YaruIconButton], ideally used in combination with [YaruSearchField]
 class YaruSearchButton extends StatelessWidget {
   const YaruSearchButton({
     super.key,
