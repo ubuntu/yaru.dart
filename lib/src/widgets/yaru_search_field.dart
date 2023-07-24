@@ -149,7 +149,7 @@ class YaruSearchFieldTitle extends StatefulWidget {
     super.key,
     required this.searchActive,
     required this.title,
-    this.height = 190,
+    this.width = 190,
     this.titlePadding = const EdgeInsets.only(left: 45.0),
     this.autoFocus = true,
     this.text,
@@ -163,7 +163,7 @@ class YaruSearchFieldTitle extends StatefulWidget {
 
   final bool searchActive;
   final Widget title;
-  final double height;
+  final double width;
   final EdgeInsets titlePadding;
   final bool autoFocus;
   final String? text;
@@ -196,7 +196,7 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widget.height,
+      width: widget.width,
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
@@ -205,7 +205,7 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
               child: SizedBox(
                 height: kYaruTitleBarItemHeight,
                 child: YaruSearchField(
-                  height: widget.height,
+                  height: widget.width,
                   hintText: widget.hintText,
                   onClear: widget.onClear,
                   autofocus: widget.autoFocus,
