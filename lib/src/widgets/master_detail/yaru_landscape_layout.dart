@@ -14,6 +14,10 @@ class YaruLandscapeLayout extends StatefulWidget {
   const YaruLandscapeLayout({
     super.key,
     required this.navigatorKey,
+    this.navigatorObservers = const <NavigatorObserver>[],
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.onUnknownRoute,
     required this.tileBuilder,
     required this.pageBuilder,
     this.onSelected,
@@ -26,6 +30,10 @@ class YaruLandscapeLayout extends StatefulWidget {
   });
 
   final GlobalKey<NavigatorState> navigatorKey;
+  final List<NavigatorObserver> navigatorObservers;
+  final String? initialRoute;
+  final RouteFactory? onGenerateRoute;
+  final RouteFactory? onUnknownRoute;
   final YaruMasterTileBuilder tileBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int>? onSelected;
@@ -191,6 +199,9 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       child: ScaffoldMessenger(
         child: Navigator(
           key: widget.navigatorKey,
+          initialRoute: widget.initialRoute,
+          onGenerateRoute: widget.onGenerateRoute,
+          onUnknownRoute: widget.onUnknownRoute,
           pages: [
             MaterialPage(
               key: ValueKey(_selectedIndex),
@@ -202,7 +213,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             ),
           ],
           onPopPage: (route, result) => route.didPop(result),
-          observers: [HeroController()],
+          observers: [...widget.navigatorObservers, HeroController()],
         ),
       ),
     );
