@@ -13,7 +13,7 @@ class YaruSearchField extends StatefulWidget {
     this.text,
     this.onSubmitted,
     this.hintText,
-    this.height = kYaruWindowTitleBarItemHeight,
+    this.height = kYaruTitleBarItemHeight,
     this.contentPadding = const EdgeInsets.only(
       bottom: 10,
       top: 10,
@@ -41,7 +41,7 @@ class YaruSearchField extends StatefulWidget {
   /// as the suffix icon inside the [InputDecoration]
   final void Function()? onClear;
 
-  /// The height of the [TextField] that defaults to [kYaruWindowTitleBarItemHeight]
+  /// The height of the [TextField] that defaults to [kYaruTitleBarItemHeight]
   final double height;
 
   /// The padding for the [InputDecoration] that defaults to `EdgeInsets.only(bottom: 10,top: 10, right: 15, left: 15)`
@@ -81,9 +81,9 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
     );
 
     const suffixRadius = BorderRadius.only(
-      topRight: Radius.circular(kYaruWindowTitleBarItemHeight),
+      topRight: Radius.circular(kYaruTitleBarItemHeight),
       bottomRight: Radius.circular(
-        kYaruWindowTitleBarItemHeight,
+        kYaruTitleBarItemHeight,
       ),
     );
     return KeyboardListener(
@@ -203,7 +203,7 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
           if (_searchActive)
             Center(
               child: SizedBox(
-                height: kYaruWindowTitleBarItemHeight,
+                height: kYaruTitleBarItemHeight,
                 child: YaruSearchField(
                   height: widget.height,
                   hintText: widget.hintText,
@@ -247,7 +247,7 @@ class YaruSearchButton extends StatelessWidget {
     super.key,
     this.searchActive,
     this.onPressed,
-    this.size = kYaruWindowTitleBarItemHeight,
+    this.size = kYaruTitleBarItemHeight,
   });
 
   final bool? searchActive;
@@ -260,8 +260,8 @@ class YaruSearchButton extends StatelessWidget {
     return Center(
       widthFactor: 1,
       child: SizedBox(
-        height: kYaruWindowTitleBarItemHeight,
-        width: kYaruWindowTitleBarItemHeight,
+        height: kYaruTitleBarItemHeight,
+        width: kYaruTitleBarItemHeight,
         child: YaruIconButton(
           isSelected: searchActive,
           selectedIcon: Icon(

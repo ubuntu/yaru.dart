@@ -17,8 +17,8 @@ const kYaruButtonRadius = 6.0;
 /// between portrait and landscape modes.
 const kYaruMasterDetailBreakpoint = 620.0;
 
-/// The best height for any item inside a [YaruWindowTitleBar]
-const kYaruWindowTitleBarItemHeight = 35.0;
+/// The best height for any item inside a [YaruTitleBar]
+const kYaruTitleBarItemHeight = 35.0;
 
 /// The default icon size
 const kYaruIconSize = 16.0;
