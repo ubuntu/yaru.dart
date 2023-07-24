@@ -12,7 +12,8 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
   var _titleSearchActive = false;
   var _fieldSearchActive = false;
 
-  String _titleText = 'YaruSearchFieldTitle';
+  String _titleText = 'The text you submitted';
+  String _fieldText = 'Or the things you changed';
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +37,20 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                 searchActive: _titleSearchActive,
                 onSearchActive: () =>
                     setState(() => _titleSearchActive = !_titleSearchActive),
-                title: Text(
-                  _titleText,
+                title: const Text(
+                  'Any Widget Here',
                 ),
               ),
             ),
-            children: const [
+            children: [
               SizedBox(
                 height: 300,
                 width: 450,
+                child: Center(
+                  child: Text(
+                    _titleText,
+                  ),
+                ),
               )
             ],
           ),
@@ -58,6 +64,9 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
               title: _fieldSearchActive
                   ? YaruSearchField(
                       onClear: () {},
+                      onChanged: (value) => setState(
+                        () => _fieldText = value,
+                      ),
                     )
                   : const Text('Title'),
               leading: YaruSearchButton(
@@ -66,10 +75,13 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                     setState(() => _fieldSearchActive = !_fieldSearchActive),
               ),
             ),
-            children: const [
+            children: [
               SizedBox(
                 height: 300,
                 width: 450,
+                child: Center(
+                  child: Text(_fieldText),
+                ),
               )
             ],
           ),

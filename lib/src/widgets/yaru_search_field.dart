@@ -35,7 +35,7 @@ class YaruSearchField extends StatefulWidget {
   final void Function(String? value)? onSubmitted;
 
   /// The callback forwarded to the [TextField] used when input changes
-  final void Function(String)? onChanged;
+  final void Function(String value)? onChanged;
 
   /// Optional callback used to clear the [TextField]. If provided an [IconButton] will use it
   /// as the suffix icon inside the [InputDecoration]
@@ -157,6 +157,7 @@ class YaruSearchFieldTitle extends StatefulWidget {
     this.onClear,
     this.onSearchActive,
     this.onChanged,
+    this.alignment = Alignment.centerLeft,
   });
 
   final bool searchActive;
@@ -170,6 +171,7 @@ class YaruSearchFieldTitle extends StatefulWidget {
   final void Function(String)? onChanged;
   final void Function()? onClear;
   final void Function()? onSearchActive;
+  final Alignment alignment;
 
   @override
   State<YaruSearchFieldTitle> createState() => _YaruSearchFieldTitleState();
@@ -214,7 +216,10 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
           else
             Padding(
               padding: widget.titlePadding,
-              child: widget.title,
+              child: Align(
+                alignment: widget.alignment,
+                child: widget.title,
+              ),
             ),
           YaruSearchButton(
             searchActive: _searchActive,
