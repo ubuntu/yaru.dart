@@ -36,24 +36,41 @@ class _YaruMasterListViewState extends State<YaruMasterListView> {
   @override
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
-    return ListView.separated(
-      separatorBuilder: (_, __) => SizedBox(height: theme.tileSpacing ?? 0),
-      padding: theme.listPadding,
+    return CustomScrollView(
       controller: _controller,
-      itemCount: widget.length,
-      itemBuilder: (context, index) => YaruMasterTileScope(
-        index: index,
-        selected: index == widget.selectedIndex,
-        onTap: () => widget.onTap(index),
-        child: Builder(
-          builder: (context) => widget.builder(
-            context,
-            index,
-            index == widget.selectedIndex,
-            widget.availableWidth,
+      slivers: [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Padding(
+            padding: theme.listPadding ?? EdgeInsets.zero,
+            child: Column(
+              children: List.generate(
+                widget.length,
+                (index) => YaruMasterTileScope(
+                  index: index,
+                  selected: index == widget.selectedIndex,
+                  onTap: () => widget.onTap(index),
+                  child: Builder(
+                    builder: (context) => widget.builder(
+                      context,
+                      index,
+                      index == widget.selectedIndex,
+                      widget.availableWidth,
+                    ),
+                  ),
+                ),
+              ).withSpacing(theme.tileSpacing ?? 0),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
+}
+
+extension on List<Widget> {
+  List<Widget> withSpacing(double height) => expand((item) sync* {
+        yield SizedBox(height: height);
+        yield item;
+      }).skip(1).toList();
 }
