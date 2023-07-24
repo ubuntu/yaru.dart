@@ -20,7 +20,7 @@ class YaruSearchField extends StatefulWidget {
       right: 15,
       left: 15,
     ),
-    this.autoFocus = true,
+    this.autofocus = true,
     this.onClear,
     this.onChanged,
   });
@@ -48,7 +48,7 @@ class YaruSearchField extends StatefulWidget {
   final EdgeInsets contentPadding;
 
   /// Defines if the [TextField] is autofocused on build
-  final bool autoFocus;
+  final bool autofocus;
 
   @override
   State<YaruSearchField> createState() => _YaruSearchFieldState();
@@ -56,6 +56,7 @@ class YaruSearchField extends StatefulWidget {
 
 class _YaruSearchFieldState extends State<YaruSearchField> {
   late TextEditingController _controller;
+  final _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -66,13 +67,13 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final focusNode = FocusNode();
 
     final border = OutlineInputBorder(
       borderSide: BorderSide.none,
@@ -86,7 +87,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
       ),
     );
     return KeyboardListener(
-      focusNode: focusNode,
+      focusNode: _focusNode,
       onKeyEvent: (value) {
         if (value.logicalKey == LogicalKeyboardKey.escape) {
           _clear();
@@ -95,7 +96,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
       child: SizedBox(
         height: widget.height,
         child: TextField(
-          autofocus: widget.autoFocus,
+          autofocus: widget.autofocus,
           style: theme.textTheme.bodyMedium,
           strutStyle: const StrutStyle(
             leading: 0.2,
@@ -148,7 +149,7 @@ class YaruSearchFieldTitle extends StatefulWidget {
     super.key,
     required this.searchActive,
     required this.title,
-    this.width = 190,
+    this.height = 190,
     this.titlePadding = const EdgeInsets.only(left: 45.0),
     this.autoFocus = true,
     this.text,
@@ -162,7 +163,7 @@ class YaruSearchFieldTitle extends StatefulWidget {
 
   final bool searchActive;
   final Widget title;
-  final double width;
+  final double height;
   final EdgeInsets titlePadding;
   final bool autoFocus;
   final String? text;
@@ -187,9 +188,15 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
   }
 
   @override
+  void didUpdateWidget(covariant YaruSearchFieldTitle oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _searchActive = widget.searchActive;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widget.width,
+      width: widget.height,
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
@@ -198,10 +205,10 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
               child: SizedBox(
                 height: kYaruWindowTitleBarItemHeight,
                 child: YaruSearchField(
-                  height: widget.width,
+                  height: widget.height,
                   hintText: widget.hintText,
                   onClear: widget.onClear,
-                  autoFocus: widget.autoFocus,
+                  autofocus: widget.autoFocus,
                   onSubmitted: widget.onSubmitted,
                   onChanged: widget.onChanged,
                   contentPadding: const EdgeInsets.only(
@@ -223,7 +230,10 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
             ),
           YaruSearchButton(
             searchActive: _searchActive,
-            onPressed: () => setState(() => _searchActive = !_searchActive),
+            onPressed: () => setState(() {
+              _searchActive = !_searchActive;
+              widget.onSearchActive?.call();
+            }),
           ),
         ],
       ),
@@ -235,12 +245,12 @@ class _YaruSearchFieldTitleState extends State<YaruSearchFieldTitle> {
 class YaruSearchButton extends StatelessWidget {
   const YaruSearchButton({
     super.key,
-    required this.searchActive,
+    this.searchActive,
     this.onPressed,
     this.size = kYaruWindowTitleBarItemHeight,
   });
 
-  final bool searchActive;
+  final bool? searchActive;
   final void Function()? onPressed;
   final double? size;
 
