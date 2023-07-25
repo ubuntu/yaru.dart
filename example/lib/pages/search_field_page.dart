@@ -29,7 +29,7 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
             title: YaruDialogTitleBar(
               titleSpacing: 0,
               centerTitle: true,
-              title: YaruSearchFieldTitle(
+              title: YaruSearchTitleField(
                 text: _titleText,
                 onClear: () => setState(() => _titleText = ''),
                 onSubmitted: (value) =>
