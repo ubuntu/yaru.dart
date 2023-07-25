@@ -58,6 +58,7 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.emptyBuilder,
     this.layoutDelegate =
         const YaruMasterFixedPaneDelegate(paneWidth: _kDefaultPaneWidth),
+    this.breakpoint,
     this.appBar,
     this.appBarBuilder,
     this.bottomBar,
@@ -92,6 +93,15 @@ class YaruMasterDetailPage extends StatefulWidget {
 
   /// Controls the width and resizing capacity of the left pane.
   final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
+
+  /// The breakpoint at which `YaruMasterDetailPage` switches between portrait
+  /// and landscape layouts.
+  ///
+  /// Set to `0` to force the landscape layout or `double.infinity` to force the
+  /// portrait layout regardless of the page size.
+  ///
+  /// Defaults to [YaruMasterDetailThemeData.breakpoint].
+  final double? breakpoint;
 
   /// An optional custom AppBar for the left pane.
   ///
@@ -201,10 +211,14 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final breakpoint = widget.breakpoint ??
+        YaruMasterDetailTheme.of(context).breakpoint ??
+        YaruMasterDetailThemeData.fallback().breakpoint!;
     return Scaffold(
       body: widget.length == 0 || widget.controller?.length == 0
           ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
           : _YaruMasterDetailLayoutBuilder(
+              breakpoint: breakpoint,
               portrait: (context) => YaruPortraitLayout(
                 navigatorKey: _navigatorKey,
                 navigatorObservers: widget.navigatorObservers,
@@ -241,17 +255,17 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
 class _YaruMasterDetailLayoutBuilder extends StatelessWidget {
   const _YaruMasterDetailLayoutBuilder({
+    required this.breakpoint,
     required this.portrait,
     required this.landscape,
   });
 
+  final double breakpoint;
   final WidgetBuilder portrait;
   final WidgetBuilder landscape;
 
   @override
   Widget build(BuildContext context) {
-    final breakpoint = YaruMasterDetailTheme.of(context).breakpoint ??
-        YaruMasterDetailThemeData.fallback().breakpoint!;
     return LayoutBuilder(
       builder: (context, constraints) {
         final orientation = constraints.maxWidth < breakpoint
