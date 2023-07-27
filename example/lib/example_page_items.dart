@@ -21,6 +21,7 @@ import 'pages/page_indicator.dart';
 import 'pages/popup_page.dart';
 import 'pages/progress_indicator_page.dart';
 import 'pages/radio_page.dart';
+import 'pages/search_field_page.dart';
 import 'pages/section_page.dart';
 import 'pages/selectable_container_page.dart';
 import 'pages/switch_page.dart';
@@ -181,6 +182,15 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.radiobox_checked_filled)
         : const Icon(YaruIcons.radiobox_checked),
+  ),
+  PageItem(
+    title: 'YaruSearchField',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/search_field_page.dart',
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.search_filled)
+        : const Icon(YaruIcons.search),
+    pageBuilder: (_) => const SearchFieldPage(),
   ),
   PageItem(
     title: 'YaruSection',
