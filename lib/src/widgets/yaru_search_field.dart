@@ -24,6 +24,9 @@ class YaruSearchField extends StatefulWidget {
     this.onClear,
     this.onChanged,
     this.radius = const Radius.circular(kYaruTitleBarItemHeight),
+    this.style = YaruSearchFieldStyle.filledOutlined,
+    this.borderColor,
+    this.fillColor,
   });
 
   /// Optional [String] forwarded to the internal [TextEditingController]
@@ -51,7 +54,18 @@ class YaruSearchField extends StatefulWidget {
   /// Defines if the [TextField] is autofocused on build
   final bool autofocus;
 
+  /// Defines the radius for the corners.
   final Radius radius;
+
+  final YaruSearchFieldStyle style;
+
+  /// Optional [Color] for the border. If not provided
+  /// it will fall back to `ColorScheme.dividerColor`.
+  final Color? borderColor;
+
+  /// Optional [Color] for the border. If not provided
+  /// it will fall back to `ColorScheme.dividerColor`.
+  final Color? fillColor;
 
   @override
   State<YaruSearchField> createState() => _YaruSearchFieldState();
@@ -77,9 +91,17 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final light = theme.brightness == Brightness.light;
 
     final border = OutlineInputBorder(
-      borderSide: BorderSide.none,
+      borderSide: widget.style == YaruSearchFieldStyle.filled
+          ? BorderSide.none
+          : BorderSide(
+              color: widget.borderColor ??
+                  theme.colorScheme.outline
+                      .scale(lightness: light ? -0.1 : 0.1),
+              width: 1,
+            ),
       borderRadius: BorderRadius.all(widget.radius),
     );
 
@@ -109,14 +131,18 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
           onChanged: widget.onChanged,
           controller: _controller,
           decoration: InputDecoration(
+            filled: widget.style != YaruSearchFieldStyle.outlined,
             border: border,
             enabledBorder: border,
             errorBorder: border,
             focusedBorder: border,
             contentPadding: widget.contentPadding,
             hintText: widget.hintText,
-            fillColor: theme.dividerColor,
-            hoverColor: theme.dividerColor.scale(lightness: 0.1),
+            fillColor: widget.fillColor ?? theme.dividerColor,
+            hoverColor:
+                (widget.fillColor ?? theme.dividerColor).scale(lightness: 0.1),
+            suffixIconConstraints:
+                const BoxConstraints(maxWidth: kYaruTitleBarItemHeight),
             suffixIcon: widget.onClear == null
                 ? null
                 : IconButton(
@@ -162,6 +188,7 @@ class YaruSearchTitleField extends StatefulWidget {
     this.onChanged,
     this.alignment = Alignment.centerLeft,
     this.radius = const Radius.circular(kYaruTitleBarItemHeight),
+    this.style = YaruSearchFieldStyle.filledOutlined,
   });
 
   final bool searchActive;
@@ -177,6 +204,7 @@ class YaruSearchTitleField extends StatefulWidget {
   final void Function()? onSearchActive;
   final Alignment alignment;
   final Radius radius;
+  final YaruSearchFieldStyle style;
 
   @override
   State<YaruSearchTitleField> createState() => _YaruSearchTitleFieldState();
@@ -201,47 +229,55 @@ class _YaruSearchTitleFieldState extends State<YaruSearchTitleField> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
-      child: Stack(
-        alignment: Alignment.centerLeft,
-        children: [
-          if (_searchActive)
-            Center(
-              child: SizedBox(
-                height: kYaruTitleBarItemHeight,
-                child: YaruSearchField(
-                  radius: widget.radius,
-                  height: widget.width,
-                  hintText: widget.hintText,
-                  onClear: widget.onClear,
-                  autofocus: widget.autoFocus,
-                  onSubmitted: widget.onSubmitted,
-                  onChanged: widget.onChanged,
-                  contentPadding: const EdgeInsets.only(
-                    bottom: 10,
-                    top: 10,
-                    right: 15,
-                    left: 45,
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(widget.radius),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Stack(
+          alignment: Alignment.centerLeft,
+          children: [
+            if (_searchActive)
+              Center(
+                child: SizedBox(
+                  height: kYaruTitleBarItemHeight,
+                  child: YaruSearchField(
+                    style: widget.style,
+                    radius: widget.radius,
+                    height: widget.width,
+                    hintText: widget.hintText,
+                    onClear: widget.onClear,
+                    autofocus: widget.autoFocus,
+                    onSubmitted: widget.onSubmitted,
+                    onChanged: widget.onChanged,
+                    contentPadding: const EdgeInsets.only(
+                      bottom: 10,
+                      top: 10,
+                      right: 15,
+                      left: 45,
+                    ),
                   ),
                 ),
+              )
+            else
+              Padding(
+                padding: widget.titlePadding,
+                child: Align(
+                  alignment: widget.alignment,
+                  child: widget.title,
+                ),
               ),
-            )
-          else
-            Padding(
-              padding: widget.titlePadding,
-              child: Align(
-                alignment: widget.alignment,
-                child: widget.title,
-              ),
+            YaruSearchButton(
+              style: widget.style == YaruSearchFieldStyle.outlined
+                  ? widget.style
+                  : YaruSearchFieldStyle.filled,
+              radius: widget.radius,
+              searchActive: _searchActive,
+              onPressed: () => setState(() {
+                _searchActive = !_searchActive;
+                widget.onSearchActive?.call();
+              }),
             ),
-          YaruSearchButton(
-            radius: widget.radius,
-            searchActive: _searchActive,
-            onPressed: () => setState(() {
-              _searchActive = !_searchActive;
-              widget.onSearchActive?.call();
-            }),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -255,16 +291,22 @@ class YaruSearchButton extends StatelessWidget {
     this.onPressed,
     this.size = kYaruTitleBarItemHeight,
     this.radius = const Radius.circular(kYaruTitleBarItemHeight),
+    this.style = YaruSearchFieldStyle.filled,
+    this.borderColor,
   });
 
   final bool? searchActive;
   final void Function()? onPressed;
   final double? size;
   final Radius radius;
+  final YaruSearchFieldStyle style;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final light = theme.brightness == Brightness.light;
+
     return Center(
       widthFactor: 1,
       child: SizedBox(
@@ -274,6 +316,14 @@ class YaruSearchButton extends StatelessWidget {
           style: IconButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(radius),
+              side: style == YaruSearchFieldStyle.filled
+                  ? BorderSide.none
+                  : BorderSide(
+                      color: borderColor ??
+                          theme.colorScheme.outline
+                              .scale(lightness: light ? -0.1 : 0.1),
+                      width: 1,
+                    ),
             ),
           ),
           isSelected: searchActive,
@@ -292,4 +342,10 @@ class YaruSearchButton extends StatelessWidget {
       ),
     );
   }
+}
+
+enum YaruSearchFieldStyle {
+  outlined,
+  filled,
+  filledOutlined;
 }
