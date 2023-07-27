@@ -143,7 +143,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
                 (widget.fillColor ?? theme.dividerColor).scale(lightness: 0.1),
             suffixIconConstraints:
                 const BoxConstraints(maxWidth: kYaruTitleBarItemHeight),
-            suffixIcon: widget.onClear == null
+            suffixIcon: widget.onClear == null || _controller.text.isEmpty
                 ? null
                 : IconButton(
                     style: IconButton.styleFrom(
@@ -231,7 +231,7 @@ class _YaruSearchTitleFieldState extends State<YaruSearchTitleField> {
       width: widget.width,
       child: ClipRRect(
         borderRadius: BorderRadius.all(widget.radius),
-        clipBehavior: Clip.antiAliasWithSaveLayer,
+        clipBehavior: Clip.antiAlias,
         child: Stack(
           alignment: Alignment.centerLeft,
           children: [
@@ -240,6 +240,7 @@ class _YaruSearchTitleFieldState extends State<YaruSearchTitleField> {
                 child: SizedBox(
                   height: kYaruTitleBarItemHeight,
                   child: YaruSearchField(
+                    text: widget.text,
                     style: widget.style,
                     radius: widget.radius,
                     height: widget.width,
