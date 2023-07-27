@@ -120,7 +120,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
     );
 
     return KeyboardListener(
-      focusNode: _focusNode ?? FocusNode(),
+      focusNode: _focusNode,
       onKeyEvent: (value) {
         if (value.logicalKey == LogicalKeyboardKey.escape) {
           _clear();
