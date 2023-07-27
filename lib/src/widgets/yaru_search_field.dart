@@ -80,8 +80,8 @@ class YaruSearchField extends StatefulWidget {
 }
 
 class _YaruSearchFieldState extends State<YaruSearchField> {
-  late TextEditingController? _controller;
-  late FocusNode? _focusNode;
+  late TextEditingController _controller;
+  late FocusNode _focusNode;
 
   @override
   void initState() {
