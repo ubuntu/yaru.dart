@@ -87,7 +87,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
   void initState() {
     super.initState();
     _controller = widget.controller ?? TextEditingController(text: widget.text);
-    _focusNode = widget.focusNode;
+    _focusNode = widget.focusNode ?? FocusNode();
   }
 
   @override
