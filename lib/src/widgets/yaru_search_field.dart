@@ -24,7 +24,7 @@ class YaruSearchField extends StatefulWidget {
     this.onClear,
     this.onChanged,
     this.radius = const Radius.circular(kYaruTitleBarItemHeight),
-    this.style = YaruSearchFieldStyle.filledOutlined,
+    this.style = YaruSearchFieldStyle.filled,
     this.borderColor,
     this.fillColor,
   });
@@ -188,7 +188,7 @@ class YaruSearchTitleField extends StatefulWidget {
     this.onChanged,
     this.alignment = Alignment.centerLeft,
     this.radius = const Radius.circular(kYaruTitleBarItemHeight),
-    this.style = YaruSearchFieldStyle.filledOutlined,
+    this.style = YaruSearchFieldStyle.filled,
   });
 
   final bool searchActive;
