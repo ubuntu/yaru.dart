@@ -1,5 +1,24 @@
 # Changelog
 
+## 2.6.0 (2023-07-27)
+
+## What's Changed
+* chore: dependabot by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/724
+* chore(dependabot): configure semantic commits by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/727
+* feat: expose YaruNavigationPage.navigatorKey and onGenerateRoute by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/730
+* ci: reuse pr title & release actions from ufc/actions by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/729
+* feat: expose YaruNavigationPage.initialRoute and onUnknownRoute by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/731
+* feat: expose NavigationPage navigator observers by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/732
+* fix(master-detail): retain state when switching orientation by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/733
+* feat(master-detail): expose Navigator properties by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/735
+* feat(master-detail): allow inserting spacers and dividers by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/736
+* feat(master-detail): expose breakpoint as widget property by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/737
+* feat: add YaruSearchField and YaruSearchTitleField by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/734
+* fix(YaruMasterTile): let onTap override scope ontap by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/738
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v2.5.0...v2.6.0
+
 ## 2.5.0 (2023-06-29)
 
 ## What's Changed
