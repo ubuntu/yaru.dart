@@ -91,6 +91,21 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
   }
 
   @override
+  void didUpdateWidget(YaruSearchField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.controller != oldWidget.controller) {
+      if (oldWidget.controller == null) _controller.dispose();
+      _controller =
+          widget.controller ?? TextEditingController(text: widget.text);
+    }
+    if (widget.focusNode != oldWidget.focusNode) {
+      if (oldWidget.focusNode == null) _focusNode.dispose();
+      _focusNode = widget.focusNode ?? FocusNode();
+    }
+  }
+
+  @override
   void dispose() {
     if (widget.controller == null) _controller.dispose();
     if (widget.focusNode == null) _focusNode.dispose();
@@ -153,7 +168,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
             suffixIconConstraints:
                 const BoxConstraints(maxWidth: kYaruTitleBarItemHeight),
             suffixIcon:
-                widget.onClear == null || _controller?.text.isEmpty == true
+                widget.onClear == null || _controller.text.isEmpty == true
                     ? null
                     : IconButton(
                         style: IconButton.styleFrom(
@@ -177,7 +192,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
 
   void _clear() {
     widget.onClear?.call();
-    _controller?.clear();
+    _controller.clear();
   }
 }
 
