@@ -92,8 +92,8 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
 
   @override
   void dispose() {
-    _controller?.dispose();
-    _focusNode?.dispose();
+    if (widget.controller == null) _controller.dispose();
+    if (widget.focusNode == null) _focusNode.dispose();
     super.dispose();
   }
 
