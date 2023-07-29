@@ -23,6 +23,8 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.wrapVerticalDirection = VerticalDirection.down,
     this.wrapClipBehavior = Clip.none,
     this.wrapTextDirection,
+    this.goPreviousIcon,
+    this.goNextIcon,
   }) : assert(labels.length == isSelected.length);
 
   /// The [List] of [Widget]'s used to generate a [List] of [ChoiceChip]s
@@ -88,6 +90,10 @@ class YaruChoiceChipBar extends StatefulWidget {
 
   /// The [VerticalDirection] of the [ChoiceChip]s with `YaruChoiceChipStyle.wrap`
   final VerticalDirection wrapVerticalDirection;
+
+  final Widget? goPreviousIcon;
+
+  final Widget? goNextIcon;
 
   @override
   State<YaruChoiceChipBar> createState() => _YaruChoiceChipBarState();
@@ -180,7 +186,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     final goPreviousButton = _NavigationButton(
       radius: widget.radius,
       chipHeight: widget.chipHeight,
-      icon: const Icon(YaruIcons.go_previous),
+      icon: widget.goPreviousIcon ?? const Icon(YaruIcons.go_previous),
       onTap: _enableGoPreviousButton
           ? () => _controller.animateTo(
                 _controller.position.pixels - widget.navigationStep,
@@ -193,7 +199,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     final goNextButton = _NavigationButton(
       chipHeight: widget.chipHeight,
       radius: widget.radius,
-      icon: const Icon(YaruIcons.go_next),
+      icon: widget.goNextIcon ?? const Icon(YaruIcons.go_next),
       onTap: _enableGoNextButton
           ? () => _controller.animateTo(
                 _controller.position.pixels + widget.navigationStep,

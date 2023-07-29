@@ -29,6 +29,7 @@ class YaruSearchField extends StatefulWidget {
     this.fillColor,
     this.controller,
     this.focusNode,
+    this.clearIcon,
   });
 
   /// Optional [String] forwarded to the internal [TextEditingController]
@@ -74,6 +75,9 @@ class YaruSearchField extends StatefulWidget {
 
   /// Optional [FocusNode] for the internal [KeyboardListener]
   final FocusNode? focusNode;
+
+  /// Optional icon shown inside the clear button.
+  final Widget? clearIcon;
 
   @override
   State<YaruSearchField> createState() => _YaruSearchFieldState();
@@ -179,9 +183,10 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
                         onPressed: _clear,
                         icon: ClipRRect(
                           borderRadius: suffixRadius,
-                          child: const Icon(
-                            YaruIcons.edit_clear,
-                          ),
+                          child: widget.clearIcon ??
+                              const Icon(
+                                YaruIcons.edit_clear,
+                              ),
                         ),
                       ),
           ),
@@ -216,6 +221,8 @@ class YaruSearchTitleField extends StatefulWidget {
     this.style = YaruSearchFieldStyle.filled,
     this.controller,
     this.focusNode,
+    this.searchIcon,
+    this.clearIcon,
   });
 
   final bool searchActive;
@@ -238,6 +245,10 @@ class YaruSearchTitleField extends StatefulWidget {
 
   /// Optional [FocusNode] for the internal [KeyboardListener]
   final FocusNode? focusNode;
+
+  final Widget? searchIcon;
+
+  final Widget? clearIcon;
 
   @override
   State<YaruSearchTitleField> createState() => _YaruSearchTitleFieldState();
@@ -273,6 +284,7 @@ class _YaruSearchTitleFieldState extends State<YaruSearchTitleField> {
                 child: SizedBox(
                   height: kYaruTitleBarItemHeight,
                   child: YaruSearchField(
+                    clearIcon: widget.clearIcon,
                     focusNode: widget.focusNode,
                     controller: widget.controller,
                     text: widget.text,
@@ -302,6 +314,8 @@ class _YaruSearchTitleFieldState extends State<YaruSearchTitleField> {
                 ),
               ),
             YaruSearchButton(
+              icon: widget.searchIcon,
+              selectedIcon: widget.searchIcon,
               style: widget.style == YaruSearchFieldStyle.outlined
                   ? widget.style
                   : YaruSearchFieldStyle.filled,
@@ -329,6 +343,8 @@ class YaruSearchButton extends StatelessWidget {
     this.radius = const Radius.circular(kYaruTitleBarItemHeight),
     this.style = YaruSearchFieldStyle.filled,
     this.borderColor,
+    this.icon,
+    this.selectedIcon,
   });
 
   final bool? searchActive;
@@ -337,6 +353,8 @@ class YaruSearchButton extends StatelessWidget {
   final Radius radius;
   final YaruSearchFieldStyle style;
   final Color? borderColor;
+  final Widget? icon;
+  final Widget? selectedIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -363,16 +381,18 @@ class YaruSearchButton extends StatelessWidget {
             ),
           ),
           isSelected: searchActive,
-          selectedIcon: Icon(
-            YaruIcons.search,
-            size: kYaruIconSize,
-            color: theme.colorScheme.onSurface,
-          ),
-          icon: Icon(
-            YaruIcons.search,
-            size: kYaruIconSize,
-            color: theme.colorScheme.onSurface,
-          ),
+          selectedIcon: selectedIcon ??
+              Icon(
+                YaruIcons.search,
+                size: kYaruIconSize,
+                color: theme.colorScheme.onSurface,
+              ),
+          icon: icon ??
+              Icon(
+                YaruIcons.search,
+                size: kYaruIconSize,
+                color: theme.colorScheme.onSurface,
+              ),
           onPressed: onPressed,
         ),
       ),
