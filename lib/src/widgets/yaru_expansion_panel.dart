@@ -17,6 +17,7 @@ class YaruExpansionPanel extends StatefulWidget {
     this.headerPadding = const EdgeInsets.only(left: 20),
     this.color,
     this.placeDividers = true,
+    this.expandIcon,
   });
 
   final List<Widget> children;
@@ -29,6 +30,7 @@ class YaruExpansionPanel extends StatefulWidget {
   final EdgeInsetsGeometry headerPadding;
   final Color? color;
   final bool placeDividers;
+  final Widget? expandIcon;
 
   @override
   State<YaruExpansionPanel> createState() => _YaruExpansionPanelState();
@@ -60,6 +62,7 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
             Column(
               children: [
                 YaruExpandable(
+                  expandIcon: widget.expandIcon,
                   expandIconPadding: widget.expandIconPadding,
                   isExpanded: _expandedStore[index],
                   onChange: (_) {

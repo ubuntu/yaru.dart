@@ -11,6 +11,7 @@ class YaruBackButton extends StatelessWidget {
     super.key,
     this.onPressed,
     this.style,
+    this.icon,
   });
 
   /// An optional callback that is called when the button is pressed.
@@ -22,13 +23,17 @@ class YaruBackButton extends StatelessWidget {
   /// defaults to [YaruBackButtonStyle.square].
   final YaruBackButtonStyle? style;
 
+  /// Optional icon used inside the [YaruIconButton]
+  /// Defaults to `const Icon(YaruIcons.go_previous)`
+  final Widget? icon;
+
   @override
   Widget build(BuildContext context) {
     final theme = YaruBackButtonTheme.of(context);
     final round = (style ?? theme?.style) == YaruBackButtonStyle.rounded;
     final shape = round ? const CircleBorder() : const BeveledRectangleBorder();
     final button = YaruIconButton(
-      icon: const Icon(YaruIcons.go_previous),
+      icon: icon ?? const Icon(YaruIcons.go_previous),
       style: ButtonStyle(
         shape: ButtonStyleButton.allOrNull(shape),
       ),
