@@ -80,6 +80,33 @@ final List<IconItem> animatedIconItems = [
       size: iconSize,
     ),
   ),
+  IconItem(
+    name: 'Star',
+    usage: 'YaruAnimatedStarIcon()',
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedStarIcon(),
+      mode: YaruAnimationMode.once,
+      size: iconSize,
+    ),
+  ),
+  IconItem(
+    name: 'Star semi filled',
+    usage: 'YaruAnimatedStarIcon(filled: true, fillSize: .5)',
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedStarIcon(filled: true, fillSize: .5),
+      mode: YaruAnimationMode.once,
+      size: iconSize,
+    ),
+  ),
+  IconItem(
+    name: 'Star filled',
+    usage: 'YaruAnimatedStarIcon(filled: true)',
+    iconBuilder: (context, iconSize) => YaruAnimatedIcon(
+      const YaruAnimatedStarIcon(filled: true),
+      mode: YaruAnimationMode.once,
+      size: iconSize,
+    ),
+  ),
 ];
 
 final List<IconItem> widgetIconItems = [

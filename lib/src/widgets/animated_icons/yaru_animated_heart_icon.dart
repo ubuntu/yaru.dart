@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../yaru_icons.dart';
 import '../../constants.dart';
-import '../../foundation/local_progress_mixin.dart';
+import 'yaru_single_path_trace_painter.dart';
 
 const _kAnimationCurve = Curves.easeInOutCubic;
 const _kAnimationDuration = Duration(milliseconds: 600);
@@ -100,141 +100,77 @@ class YaruAnimatedHeartIconWidget extends StatelessWidget {
   }
 }
 
-class _YaruAnimatedHeartIconPainter extends CustomPainter with LocalProgress {
-  const _YaruAnimatedHeartIconPainter(
-    this.size,
-    this.color,
-    this.filled,
-    this.progress,
-  ) : assert(progress >= 0.0 && progress <= 1.0);
-
-  final double size;
-  final Color color;
-  final bool filled;
-  @override
-  final double progress;
+class _YaruAnimatedHeartIconPainter extends YaruSinglePathTracePainter {
+  _YaruAnimatedHeartIconPainter(
+    super.size,
+    super.color,
+    super.filled,
+    super.progress,
+  );
 
   @override
-  void paint(Canvas canvas, Size size) {
-    if (progress < .5) {
-      final metric = _getHeartPath().computeMetrics().single;
-      final localProgress = computeLocalProgress(0, .5);
-      final drawPath = metric.extractPath(
-        metric.length / 2 - metric.length / 2 * localProgress,
-        metric.length / 2 + metric.length / 2 * localProgress,
-      );
-
-      canvas.drawPath(
-        drawPath,
-        _getStrokePaint(),
-      );
-    } else {
-      final localProgress = computeLocalProgress(.5, .5);
-      final scale = localProgress < .5
-          ? 1 - .25 * computeLocalProgress(.5, .25)
-          : .75 + .25 * computeLocalProgress(.75, .25);
-      canvas.drawPath(
-        _getHeartPath(scale: scale),
-        _getStrokePaint(),
-      );
-
-      if (filled && localProgress >= .5) {
-        canvas.drawPath(
-          _getHeartPath(scale: computeLocalProgress(.75, .25)),
-          _getFillPaint(),
-        );
-      }
-    }
-  }
-
-  Path _getHeartPath({double scale = 1.0}) {
-    assert(scale >= 0.0 && scale <= 1.0);
-    final localSize = size * scale;
-
+  Path getPath() {
     return Path()
       ..moveTo(
-        localSize * 0.5000696 + (size - localSize) / 2,
-        localSize * 0.2653214 + (size - localSize) / 2,
+        size * 0.5000696,
+        size * 0.2653214,
       )
       ..cubicTo(
-        localSize * 0.4252717 + (size - localSize) / 2,
-        localSize * 0.2038911 + (size - localSize) / 2,
-        localSize * 0.3562770 + (size - localSize) / 2,
-        localSize * 0.1784415 + (size - localSize) / 2,
-        localSize * 0.3001936 + (size - localSize) / 2,
-        localSize * 0.1904627 + (size - localSize) / 2,
+        size * 0.4252717,
+        size * 0.2038911,
+        size * 0.3562770,
+        size * 0.1784415,
+        size * 0.3001936,
+        size * 0.1904627,
       )
       ..cubicTo(
-        localSize * 0.2407755 + (size - localSize) / 2,
-        localSize * 0.2031987 + (size - localSize) / 2,
-        localSize * 0.2012291 + (size - localSize) / 2,
-        localSize * 0.2556057 + (size - localSize) / 2,
-        localSize * 0.1907196 + (size - localSize) / 2,
-        localSize * 0.3239365 + (size - localSize) / 2,
+        size * 0.2407755,
+        size * 0.2031987,
+        size * 0.2012291,
+        size * 0.2556057,
+        size * 0.1907196,
+        size * 0.3239365,
       )
       ..cubicTo(
-        localSize * 0.1697006 + (size - localSize) / 2,
-        localSize * 0.4605983 + (size - localSize) / 2,
-        localSize * 0.2522089 + (size - localSize) / 2,
-        localSize * 0.6683053 + (size - localSize) / 2,
-        localSize * 0.4883975 + (size - localSize) / 2,
-        localSize * 0.8454960 + (size - localSize) / 2,
+        size * 0.1697006,
+        size * 0.4605983,
+        size * 0.2522089,
+        size * 0.6683053,
+        size * 0.4883975,
+        size * 0.8454960,
       )
       ..lineTo(
-        localSize * 0.5000696 + (size - localSize) / 2,
-        localSize * 0.8542308 + (size - localSize) / 2,
+        size * 0.5000696,
+        size * 0.8542308,
       )
       ..lineTo(
-        localSize * 0.5117417 + (size - localSize) / 2,
-        localSize * 0.8454960 + (size - localSize) / 2,
+        size * 0.5117417,
+        size * 0.8454960,
       )
       ..cubicTo(
-        localSize * 0.7479304 + (size - localSize) / 2,
-        localSize * 0.6683053 + (size - localSize) / 2,
-        localSize * 0.8304387 + (size - localSize) / 2,
-        localSize * 0.4605982 + (size - localSize) / 2,
-        localSize * 0.8094196 + (size - localSize) / 2,
-        localSize * 0.3239365 + (size - localSize) / 2,
+        size * 0.7479304,
+        size * 0.6683053,
+        size * 0.8304387,
+        size * 0.4605982,
+        size * 0.8094196,
+        size * 0.3239365,
       )
       ..cubicTo(
-        localSize * 0.7989101 + (size - localSize) / 2,
-        localSize * 0.2556057 + (size - localSize) / 2,
-        localSize * 0.7593637 + (size - localSize) / 2,
-        localSize * 0.2031987 + (size - localSize) / 2,
-        localSize * 0.6999455 + (size - localSize) / 2,
-        localSize * 0.1904627 + (size - localSize) / 2,
+        size * 0.7989101,
+        size * 0.2556057,
+        size * 0.7593637,
+        size * 0.2031987,
+        size * 0.6999455,
+        size * 0.1904627,
       )
       ..cubicTo(
-        localSize * 0.6438623 + (size - localSize) / 2,
-        localSize * 0.1784415 + (size - localSize) / 2,
-        localSize * 0.5748676 + (size - localSize) / 2,
-        localSize * 0.2038911 + (size - localSize) / 2,
-        localSize * 0.5000696 + (size - localSize) / 2,
-        localSize * 0.2653214 + (size - localSize) / 2,
+        size * 0.6438623,
+        size * 0.1784415,
+        size * 0.5748676,
+        size * 0.2038911,
+        size * 0.5000696,
+        size * 0.2653214,
       )
       ..close();
-  }
-
-  Paint _getFillPaint() {
-    return Paint()
-      ..style = PaintingStyle.fill
-      ..color = color
-      ..blendMode = BlendMode.src;
-  }
-
-  Paint _getStrokePaint() {
-    return Paint()
-      ..style = PaintingStyle.stroke
-      ..color = color
-      ..strokeWidth = 1 / (kTargetCanvasSize / size)
-      ..blendMode = BlendMode.src;
-  }
-
-  @override
-  bool shouldRepaint(_YaruAnimatedHeartIconPainter oldDelegate) {
-    return oldDelegate.size != size ||
-        oldDelegate.color != color ||
-        oldDelegate.filled != filled ||
-        oldDelegate.progress != progress;
   }
 }
