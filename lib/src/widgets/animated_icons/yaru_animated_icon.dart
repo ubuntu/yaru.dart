@@ -53,33 +53,27 @@ class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
-  void _initAnimationController(Duration? duration, YaruAnimationMode mode) {
-    _controller = AnimationController(
-      vsync: this,
-      duration: duration ?? widget.data.defaultDuration,
-    );
-
-    switch (mode) {
-      case YaruAnimationMode.once:
-        _controller.forward();
-        break;
-      case YaruAnimationMode.repeat:
-        _controller.repeat();
-        break;
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    _initAnimationController(widget.duration, widget.mode);
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration ?? widget.data.defaultDuration,
+    );
+    _runAnimationController();
   }
 
   @override
   void didUpdateWidget(YaruAnimatedIcon old) {
-    if (widget.mode != old.mode || widget.duration != old.duration) {
-      _controller.dispose();
-      _initAnimationController(widget.duration, widget.mode);
+    if (widget.data != old.data) {
+      _controller.value = 0.0;
+    }
+    if (widget.duration != old.duration) {
+      _controller.duration = widget.duration ?? widget.data.defaultDuration;
+    }
+    if (widget.mode != old.mode || widget.data != old.data) {
+      _runAnimationController();
     }
 
     super.didUpdateWidget(old);
@@ -89,6 +83,17 @@ class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  void _runAnimationController() {
+    switch (widget.mode) {
+      case YaruAnimationMode.once:
+        _controller.forward();
+        break;
+      case YaruAnimationMode.repeat:
+        _controller.repeat();
+        break;
+    }
   }
 
   @override
