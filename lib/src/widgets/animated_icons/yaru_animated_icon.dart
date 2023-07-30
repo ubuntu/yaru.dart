@@ -19,6 +19,7 @@ class YaruAnimatedIcon extends StatefulWidget {
     this.size,
     this.color,
     this.mode = YaruAnimationMode.once,
+    this.initialProgress,
     super.key,
   });
 
@@ -45,6 +46,10 @@ class YaruAnimatedIcon extends StatefulWidget {
   /// See [YaruAnimationMode].
   final YaruAnimationMode mode;
 
+  /// Initial progress of the animation.
+  /// If null, the animation will play from the beginning.
+  final double? initialProgress;
+
   @override
   State<YaruAnimatedIcon> createState() => _YaruAnimatedIconState();
 }
@@ -58,6 +63,7 @@ class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
     super.initState();
 
     _controller = AnimationController(
+      value: widget.initialProgress,
       vsync: this,
       duration: widget.duration ?? widget.data.defaultDuration,
     );
