@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../provider/icon_size_provider.dart';
+import '../icon_items.dart';
 import '../utils.dart';
 import 'clickable_icon.dart';
-import 'icon_item.dart';
 
 class IconGrid extends StatelessWidget {
   const IconGrid({
     super.key,
     required this.iconItems,
+    required this.iconSize,
   });
 
   final List<IconItem> iconItems;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
-    final iconViewProvider = Provider.of<IconViewProvider>(context);
-
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: iconViewProvider.iconSize * 1.5,
+        maxCrossAxisExtent: iconSize * 1.5,
       ),
       padding: const EdgeInsets.all(8),
       itemCount: iconItems.length,
-      itemBuilder: (context, index) => Tooltip(
-        verticalOffset: iconViewProvider.iconSize / 2,
-        waitDuration: const Duration(milliseconds: 250),
-        message: beautifyIconName(iconItems[index].name),
-        child: ClickableIcon(iconItem: iconItems[index]),
-      ),
+      itemBuilder: (context, index) {
+        return Tooltip(
+          verticalOffset: iconSize / 2,
+          waitDuration: const Duration(milliseconds: 250),
+          message: beautifyIconName(iconItems[index].name),
+          child: ClickableIcon(
+            iconItem: iconItems[index],
+            iconSize: iconSize,
+          ),
+        );
+      },
     );
   }
 }

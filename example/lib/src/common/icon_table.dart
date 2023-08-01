@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../provider/icon_size_provider.dart';
+import '../icon_items.dart';
 import '../utils.dart';
 import 'clickable_icon.dart';
-import 'icon_item.dart';
 import 'icon_usage.dart';
 
 @immutable
@@ -12,14 +10,14 @@ class IconTable extends StatelessWidget {
   const IconTable({
     super.key,
     required this.iconItems,
+    required this.iconSize,
   });
 
   final List<IconItem> iconItems;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
-    final iconViewProvider = Provider.of<IconViewProvider>(context);
-
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: iconItems.length,
@@ -28,8 +26,11 @@ class IconTable extends StatelessWidget {
           Row(
             children: [
               SizedBox.square(
-                dimension: iconViewProvider.iconSize * 1.5,
-                child: ClickableIcon(iconItem: iconItems[index]),
+                dimension: iconSize * 1.5,
+                child: ClickableIcon(
+                  iconItem: iconItems[index],
+                  iconSize: iconSize,
+                ),
               ),
               const SizedBox(
                 width: 16,

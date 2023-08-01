@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
-import 'src/example.dart';
-import 'src/provider/icon_size_provider.dart';
-import 'src/provider/search_provider.dart';
+import 'src/app.dart';
 
-void main() {
+Future<void> main() async {
+  await YaruWindowTitleBar.ensureInitialized();
   runApp(_MyApp());
 }
 
@@ -19,16 +18,8 @@ class _MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: yaru.theme,
         darkTheme: yaru.darkTheme,
-        home: MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-              create: (_) => IconViewProvider(),
-            ),
-            ChangeNotifierProvider(
-              create: (_) => SearchProvider(),
-            ),
-          ],
-          builder: (context, child) => const Example(),
+        home: App.create(
+          context: context,
         ),
       ),
     );

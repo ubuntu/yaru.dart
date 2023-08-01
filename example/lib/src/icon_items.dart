@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
-import 'common/icon_item.dart';
+class IconItem {
+  const IconItem({
+    required this.name,
+    required this.usage,
+    required this.iconBuilder,
+  });
 
-final _iconNames = YaruIcons.all.keys.toList();
+  final String name;
+  final String usage;
+  final Widget Function(BuildContext context, double iconSize) iconBuilder;
+}
 
-final List<IconItem> iconItems = [
-  for (final iconName in _iconNames)
+final List<IconItem> _staticIconItems = [
+  for (final iconName in YaruIcons.all.keys.toList())
     IconItem(
       name: iconName,
       usage: 'YaruIcons.$iconName',
@@ -17,7 +25,7 @@ final List<IconItem> iconItems = [
     )
 ];
 
-final List<IconItem> animatedIconItems = [
+final List<IconItem> _animatedIconItems = [
   IconItem(
     name: 'Ok',
     usage: 'YaruAnimatedOkIcon()',
@@ -109,7 +117,7 @@ final List<IconItem> animatedIconItems = [
   ),
 ];
 
-final List<IconItem> widgetIconItems = [
+final List<IconItem> _widgetIconItems = [
   IconItem(
     name: 'Placeholder',
     usage: 'YaruPlaceholderIcon()',
@@ -118,3 +126,9 @@ final List<IconItem> widgetIconItems = [
     ),
   ),
 ];
+
+abstract class IconItems {
+  static List<IconItem> static = _staticIconItems;
+  static List<IconItem> animated = _animatedIconItems;
+  static List<IconItem> widget = _widgetIconItems;
+}

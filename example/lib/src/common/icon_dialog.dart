@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
+import '../icon_items.dart';
 import '../utils.dart';
-import 'icon_item.dart';
 import 'icon_usage.dart';
 
 const _iconDialogSizes = [

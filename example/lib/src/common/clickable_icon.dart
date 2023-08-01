@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../provider/icon_size_provider.dart';
+import '../icon_items.dart';
 import 'icon_dialog.dart';
-import 'icon_item.dart';
 
 class ClickableIcon extends StatelessWidget {
   const ClickableIcon({
     super.key,
     required this.iconItem,
+    required this.iconSize,
   });
 
   final IconItem iconItem;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
-    final iconViewProvider = Provider.of<IconViewProvider>(context);
-
     return AspectRatio(
       aspectRatio: 1,
       child: InkWell(
@@ -29,7 +27,7 @@ class ClickableIcon extends StatelessWidget {
         child: Center(
           child: iconItem.iconBuilder(
             context,
-            iconViewProvider.iconSize,
+            iconSize,
           ),
         ),
       ),
