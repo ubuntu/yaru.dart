@@ -78,7 +78,8 @@ class _CodeDialog extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  YaruAnimatedNoNetworkIcon(
+                  YaruAnimatedIcon(
+                    const YaruAnimatedNoNetworkIcon(),
                     size: 200,
                     color: Theme.of(context).colorScheme.error,
                   ),
