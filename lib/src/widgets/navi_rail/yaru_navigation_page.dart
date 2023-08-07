@@ -143,7 +143,9 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruNavigationPageTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.sideBarColor,
       body: widget.length == 0 || widget.controller?.length == 0
           ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
           : LayoutBuilder(
@@ -153,7 +155,8 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     _buildNavigationRail(context, constraint),
-                    _buildVerticalSeparator(),
+                    if (theme.includeSeparator != false)
+                      _buildVerticalSeparator(),
                     _buildPageView(context),
                   ],
                 );

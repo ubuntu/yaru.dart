@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/src/widgets/navi_rail/yaru_navigation_page_theme.dart';
 
 /// Defines the look of a [YaruNavigationRailItem]
 enum YaruNavigationRailStyle {
@@ -73,9 +74,11 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruNavigationPageTheme.of(context);
     return _buildSizedContainer(
       _maybeBuildTooltip(
         Material(
+          color: theme.sideBarColor,
           child: InkWell(
             onTap: () {
               final scope = YaruNavigationRailItemScope.maybeOf(context);
