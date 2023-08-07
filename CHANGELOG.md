@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.7.0 (2023-08-07)
+
+## What's Changed
+* fix: relax yaru version constraint; update example by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/748
+* feat: change sidebar color, improve YMD theme by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/750
+* feat: adapt navigationpage sidebarcolor to YMD by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/751
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v2.6.1...v2.7.0
+
 ## 2.6.1 (2023-08-07)
 
 ## What's Changed
