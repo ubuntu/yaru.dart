@@ -15,15 +15,24 @@ class YaruMasterDetailThemeData
     this.listPadding,
     this.portraitTransitions,
     this.landscapeTransitions,
+    this.includeSeparator,
+    this.sideBarColor,
   });
 
-  factory YaruMasterDetailThemeData.fallback() {
-    return const YaruMasterDetailThemeData(
+  factory YaruMasterDetailThemeData.fallback(BuildContext context) {
+    final materialTheme = Theme.of(context);
+    final light = materialTheme.brightness == Brightness.light;
+
+    return YaruMasterDetailThemeData(
       breakpoint: kYaruMasterDetailBreakpoint,
       tileSpacing: 6,
-      listPadding: EdgeInsets.symmetric(vertical: 8),
+      listPadding: const EdgeInsets.symmetric(vertical: 8),
       portraitTransitions: YaruPageTransitionsTheme.horizontal,
       landscapeTransitions: YaruPageTransitionsTheme.vertical,
+      includeSeparator: true,
+      sideBarColor: light
+          ? materialTheme.colorScheme.background.scale(lightness: -0.029)
+          : materialTheme.colorScheme.surface,
     );
   }
 
@@ -43,6 +52,14 @@ class YaruMasterDetailThemeData
   /// The page transitions to use when in landscape mode.
   final PageTransitionsTheme? landscapeTransitions;
 
+  /// Controls whether a separator should be included between the content and the sidebar.
+  /// Defaults to `true`
+  final bool? includeSeparator;
+
+  /// The color of the sidebar. Defaults to `Theme.of(context).colorScheme.surface`,
+  /// where `Theme` is the material theme.
+  final Color? sideBarColor;
+
   /// Creates a copy of this object but with the given fields replaced with the
   /// new values.
   @override
@@ -52,6 +69,8 @@ class YaruMasterDetailThemeData
     EdgeInsetsGeometry? listPadding,
     PageTransitionsTheme? portraitTransitions,
     PageTransitionsTheme? landscapeTransitions,
+    bool? includeSeparator,
+    Color? sideBarColor,
   }) {
     return YaruMasterDetailThemeData(
       breakpoint: breakpoint ?? this.breakpoint,
@@ -59,6 +78,8 @@ class YaruMasterDetailThemeData
       listPadding: listPadding ?? this.listPadding,
       portraitTransitions: portraitTransitions ?? this.portraitTransitions,
       landscapeTransitions: landscapeTransitions ?? this.landscapeTransitions,
+      includeSeparator: includeSeparator ?? this.includeSeparator,
+      sideBarColor: sideBarColor ?? this.sideBarColor,
     );
   }
 
@@ -129,7 +150,7 @@ class YaruMasterDetailTheme extends InheritedTheme {
         context.dependOnInheritedWidgetOfExactType<YaruMasterDetailTheme>();
     return theme?.data ??
         Theme.of(context).extension<YaruMasterDetailThemeData>() ??
-        YaruMasterDetailThemeData.fallback();
+        YaruMasterDetailThemeData.fallback(context);
   }
 
   @override

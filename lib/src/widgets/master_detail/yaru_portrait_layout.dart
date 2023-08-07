@@ -118,6 +118,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                       : YaruTitleBarStyle.normal,
                 ),
                 child: Scaffold(
+                  backgroundColor: theme.sideBarColor,
                   appBar: widget.appBar,
                   body: LayoutBuilder(
                     builder: (context, constraints) => YaruMasterListView(
@@ -128,7 +129,12 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                       availableWidth: constraints.maxWidth,
                     ),
                   ),
-                  bottomNavigationBar: widget.bottomBar,
+                  bottomNavigationBar: widget.bottomBar == null
+                      ? null
+                      : Material(
+                          color: theme.sideBarColor,
+                          child: widget.bottomBar,
+                        ),
                 ),
               ),
             ),
