@@ -115,6 +115,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruMasterDetailTheme.of(context);
     return _maybeBuildGlobalMouseRegion(
       LayoutBuilder(
         builder: (context, boxConstraints) {
@@ -128,8 +129,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildLeftPane(),
-              _buildVerticalSeparator(),
+              _buildLeftPane(theme.sideBarColor),
+              if (theme.includeSeparator != false) _buildVerticalSeparator(),
               Expanded(
                 child: widget.layoutDelegate.allowPaneResizing
                     ? Stack(
@@ -160,7 +161,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     return child;
   }
 
-  Widget _buildLeftPane() {
+  Widget _buildLeftPane(Color? color) {
     return SizedBox(
       width: _paneWidth,
       child: YaruTitleBarTheme(
@@ -168,6 +169,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           style: YaruTitleBarStyle.undecorated,
         ),
         child: Scaffold(
+          backgroundColor: color,
           appBar: widget.appBar,
           body: YaruMasterListView(
             length: widget.controller.length,
@@ -176,7 +178,12 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             builder: widget.tileBuilder,
             availableWidth: _paneWidth!,
           ),
-          bottomNavigationBar: widget.bottomBar,
+          bottomNavigationBar: widget.bottomBar == null
+              ? null
+              : Material(
+                  color: color,
+                  child: widget.bottomBar,
+                ),
         ),
       ),
     );
