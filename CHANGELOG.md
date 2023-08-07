@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.6.1 (2023-08-07)
+
+## What's Changed
+* fix: add the missing optional icon parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/740
+* chore!: update yaru icons by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/746
+* chore: relax yaru_icons version constraint by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/747
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v2.6.0...v2.6.1
+
 ## 2.6.0 (2023-07-27)
 
 ## What's Changed
