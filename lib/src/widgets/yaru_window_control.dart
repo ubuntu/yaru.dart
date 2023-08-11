@@ -120,7 +120,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   }
 
   Color _getColor(BuildContext context, [Color? color]) {
-    final onSurface = Theme.of(context).colorScheme.onSurface;
+    final onSurface = color ?? Theme.of(context).colorScheme.onSurface;
 
     if (!interactive) {
       return onSurface.withOpacity(_kWindowControlBackgroundOpacityDisabled);
@@ -154,7 +154,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
         child: AnimatedContainer(
           duration: _kWindowControlBackgroundAnimationDuration,
           decoration: BoxDecoration(
-            color: _getColor(context, widget.backgroundColor),
+            color: _getColor(context, widget.foregroundColor),
             border: colorScheme.isHighContrast
                 ? Border.all(
                     color: colorScheme.outlineVariant,
