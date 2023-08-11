@@ -134,6 +134,7 @@ void main() {
       await tester.pumpScaffold(
         builder(
           isActive: state.isActive,
+          isMaximized: state.isMaximized,
           windowControlLayout: windowControlLayout,
           isDraggable: false,
           title: Text(state.title!),
