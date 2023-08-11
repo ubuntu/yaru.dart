@@ -13,6 +13,11 @@ import 'yaru_master_list_view.dart';
 class YaruLandscapeLayout extends StatefulWidget {
   const YaruLandscapeLayout({
     super.key,
+    required this.navigatorKey,
+    this.navigatorObservers = const <NavigatorObserver>[],
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.onUnknownRoute,
     required this.tileBuilder,
     required this.pageBuilder,
     this.onSelected,
@@ -24,6 +29,11 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.controller,
   });
 
+  final GlobalKey<NavigatorState> navigatorKey;
+  final List<NavigatorObserver> navigatorObservers;
+  final String? initialRoute;
+  final RouteFactory? onGenerateRoute;
+  final RouteFactory? onUnknownRoute;
   final YaruMasterTileBuilder tileBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int>? onSelected;
@@ -43,7 +53,6 @@ const _kLeftPaneResizingRegionAnimationDuration = Duration(milliseconds: 250);
 
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
-  final _navigatorKey = GlobalKey<NavigatorState>();
 
   double? _paneWidth;
   double? _initialPaneWidth;
@@ -85,7 +94,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   void _onTap(int index) {
     widget.controller.index = index;
     widget.onSelected?.call(_selectedIndex);
-    _navigatorKey.currentState?.popUntil((route) => route.isFirst);
+    widget.navigatorKey.currentState?.popUntil((route) => route.isFirst);
   }
 
   void updatePaneWidth({
@@ -106,6 +115,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruMasterDetailTheme.of(context);
     return _maybeBuildGlobalMouseRegion(
       LayoutBuilder(
         builder: (context, boxConstraints) {
@@ -119,8 +129,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildLeftPane(),
-              _buildVerticalSeparator(),
+              _buildLeftPane(theme.sideBarColor),
+              if (theme.includeSeparator != false) _buildVerticalSeparator(),
               Expanded(
                 child: widget.layoutDelegate.allowPaneResizing
                     ? Stack(
@@ -151,7 +161,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     return child;
   }
 
-  Widget _buildLeftPane() {
+  Widget _buildLeftPane(Color? color) {
     return SizedBox(
       width: _paneWidth,
       child: YaruTitleBarTheme(
@@ -159,6 +169,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           style: YaruTitleBarStyle.undecorated,
         ),
         child: Scaffold(
+          backgroundColor: color,
           appBar: widget.appBar,
           body: YaruMasterListView(
             length: widget.controller.length,
@@ -167,7 +178,12 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             builder: widget.tileBuilder,
             availableWidth: _paneWidth!,
           ),
-          bottomNavigationBar: widget.bottomBar,
+          bottomNavigationBar: widget.bottomBar == null
+              ? null
+              : Material(
+                  color: color,
+                  child: widget.bottomBar,
+                ),
         ),
       ),
     );
@@ -189,17 +205,22 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       ),
       child: ScaffoldMessenger(
         child: Navigator(
-          key: _navigatorKey,
+          key: widget.navigatorKey,
+          initialRoute: widget.initialRoute,
+          onGenerateRoute: widget.onGenerateRoute,
+          onUnknownRoute: widget.onUnknownRoute,
           pages: [
             MaterialPage(
               key: ValueKey(_selectedIndex),
-              child: widget.controller.length > _selectedIndex
-                  ? widget.pageBuilder(context, _selectedIndex)
-                  : widget.pageBuilder(context, 0),
+              child: Builder(
+                builder: (context) => widget.controller.length > _selectedIndex
+                    ? widget.pageBuilder(context, _selectedIndex)
+                    : widget.pageBuilder(context, 0),
+              ),
             ),
           ],
           onPopPage: (route, result) => route.didPop(result),
-          observers: [HeroController()],
+          observers: [...widget.navigatorObservers, HeroController()],
         ),
       ),
     );

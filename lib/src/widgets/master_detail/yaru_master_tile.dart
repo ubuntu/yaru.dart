@@ -35,13 +35,15 @@ class YaruMasterTile extends StatelessWidget {
   /// See [ListTile.trailing].
   final Widget? trailing;
 
-  /// See [ListTile.onTap].
+  /// An optional [VoidCallback] forwarded to the internal [ListTile]
+  /// If not provided [YaruMasterTileScope] `onTap` will be called.
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scope = YaruMasterTileScope.maybeOf(context);
+
     final isSelected = selected ?? scope?.selected ?? false;
     final scrollbarThicknessWithTrack =
         _calcScrollbarThicknessWithTrack(context);
@@ -76,8 +78,11 @@ class YaruMasterTile extends StatelessWidget {
           trailing: trailing,
           selected: isSelected,
           onTap: () {
-            scope?.onTap();
-            onTap?.call();
+            if (onTap != null) {
+              onTap!.call();
+            } else {
+              scope?.onTap();
+            }
           },
         ),
       ),

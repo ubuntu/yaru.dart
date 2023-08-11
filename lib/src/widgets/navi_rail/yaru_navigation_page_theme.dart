@@ -9,11 +9,19 @@ class YaruNavigationPageThemeData
   const YaruNavigationPageThemeData({
     this.railPadding,
     this.pageTransitions,
+    this.includeSeparator,
+    this.sideBarColor,
   });
 
-  factory YaruNavigationPageThemeData.fallback() {
-    return const YaruNavigationPageThemeData(
+  factory YaruNavigationPageThemeData.fallback(BuildContext context) {
+    final materialTheme = Theme.of(context);
+    final light = materialTheme.brightness == Brightness.light;
+    return YaruNavigationPageThemeData(
       pageTransitions: YaruPageTransitionsTheme.vertical,
+      includeSeparator: true,
+      sideBarColor: light
+          ? materialTheme.colorScheme.background.scale(lightness: -0.029)
+          : materialTheme.colorScheme.surface,
     );
   }
 
@@ -23,16 +31,28 @@ class YaruNavigationPageThemeData
   /// The page transitions to use.
   final PageTransitionsTheme? pageTransitions;
 
+  /// Controls whether a separator should be included between the content and the sidebar.
+  /// Defaults to `true`
+  final bool? includeSeparator;
+
+  /// The color of the sidebar. Defaults to `Theme.of(context).colorScheme.surface`,
+  /// where `Theme` is the material theme.
+  final Color? sideBarColor;
+
   /// Creates a copy of this object but with the given fields replaced with the
   /// new values.
   @override
   YaruNavigationPageThemeData copyWith({
     EdgeInsetsGeometry? railPadding,
     PageTransitionsTheme? pageTransitions,
+    bool? includeSeparator,
+    Color? sideBarColor,
   }) {
     return YaruNavigationPageThemeData(
       railPadding: railPadding ?? this.railPadding,
       pageTransitions: pageTransitions ?? this.pageTransitions,
+      includeSeparator: includeSeparator ?? this.includeSeparator,
+      sideBarColor: sideBarColor ?? this.sideBarColor,
     );
   }
 
@@ -86,7 +106,7 @@ class YaruNavigationPageTheme extends InheritedTheme {
         context.dependOnInheritedWidgetOfExactType<YaruNavigationPageTheme>();
     return theme?.data ??
         Theme.of(context).extension<YaruNavigationPageThemeData>() ??
-        YaruNavigationPageThemeData.fallback();
+        YaruNavigationPageThemeData.fallback(context);
   }
 
   @override

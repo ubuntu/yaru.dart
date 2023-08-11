@@ -58,12 +58,18 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.emptyBuilder,
     this.layoutDelegate =
         const YaruMasterFixedPaneDelegate(paneWidth: _kDefaultPaneWidth),
+    this.breakpoint,
     this.appBar,
     this.appBarBuilder,
     this.bottomBar,
     this.initialIndex,
     this.onSelected,
     this.controller,
+    this.navigatorKey,
+    this.navigatorObservers = const <NavigatorObserver>[],
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.onUnknownRoute,
   })  : assert(initialIndex == null || controller == null),
         assert((length == null) != (controller == null));
 
@@ -87,6 +93,15 @@ class YaruMasterDetailPage extends StatefulWidget {
 
   /// Controls the width and resizing capacity of the left pane.
   final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
+
+  /// The breakpoint at which `YaruMasterDetailPage` switches between portrait
+  /// and landscape layouts.
+  ///
+  /// Set to `0` to force the landscape layout or `double.infinity` to force the
+  /// portrait layout regardless of the page size.
+  ///
+  /// Defaults to [YaruMasterDetailThemeData.breakpoint].
+  final double? breakpoint;
 
   /// An optional custom AppBar for the left pane.
   ///
@@ -115,6 +130,33 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// An optional controller that can be used to navigate to a specific index.
   final YaruPageController? controller;
 
+  /// A key to use when building the [Navigator] widget.
+  final GlobalKey<NavigatorState>? navigatorKey;
+
+  /// A list of observers for the [Navigator] widget.
+  ///
+  /// See also:
+  ///  * [Navigator.observers]
+  final List<NavigatorObserver> navigatorObservers;
+
+  /// The route name for the initial route.
+  ///
+  /// See also:
+  ///  * [Navigator.initialRoute]
+  final String? initialRoute;
+
+  /// Called to generate a route for a given [RouteSettings].
+  ///
+  /// See also:
+  ///  * [Navigator.onGenerateRoute]
+  final RouteFactory? onGenerateRoute;
+
+  /// Called when [onGenerateRoute] fails to generate a route.
+  ///
+  /// See also:
+  ///  * [Navigator.onUnknownRoute]
+  final RouteFactory? onUnknownRoute;
+
   /// Returns the orientation of the [YaruMasterDetailPage] that most tightly
   /// encloses the given context.
   static Orientation orientationOf(BuildContext context) {
@@ -136,6 +178,7 @@ class YaruMasterDetailPage extends StatefulWidget {
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   double? _previousPaneWidth;
   late YaruPageController _controller;
+  late final GlobalKey<NavigatorState> _navigatorKey;
 
   void _updateController() => _controller = widget.controller ??
       YaruPageController(
@@ -147,6 +190,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   void initState() {
     super.initState();
     _updateController();
+    _navigatorKey = widget.navigatorKey ?? GlobalKey<NavigatorState>();
   }
 
   @override
@@ -167,11 +211,20 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final breakpoint = widget.breakpoint ??
+        YaruMasterDetailTheme.of(context).breakpoint ??
+        YaruMasterDetailThemeData.fallback(context).breakpoint!;
     return Scaffold(
       body: widget.length == 0 || widget.controller?.length == 0
           ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
           : _YaruMasterDetailLayoutBuilder(
+              breakpoint: breakpoint,
               portrait: (context) => YaruPortraitLayout(
+                navigatorKey: _navigatorKey,
+                navigatorObservers: widget.navigatorObservers,
+                initialRoute: widget.initialRoute,
+                onGenerateRoute: widget.onGenerateRoute,
+                onUnknownRoute: widget.onUnknownRoute,
                 tileBuilder: widget.tileBuilder,
                 pageBuilder: widget.pageBuilder,
                 onSelected: widget.onSelected,
@@ -180,6 +233,11 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
                 controller: _controller,
               ),
               landscape: (context) => YaruLandscapeLayout(
+                navigatorKey: _navigatorKey,
+                navigatorObservers: widget.navigatorObservers,
+                initialRoute: widget.initialRoute,
+                onGenerateRoute: widget.onGenerateRoute,
+                onUnknownRoute: widget.onUnknownRoute,
                 tileBuilder: widget.tileBuilder,
                 pageBuilder: widget.pageBuilder,
                 onSelected: widget.onSelected,
@@ -197,17 +255,17 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
 class _YaruMasterDetailLayoutBuilder extends StatelessWidget {
   const _YaruMasterDetailLayoutBuilder({
+    required this.breakpoint,
     required this.portrait,
     required this.landscape,
   });
 
+  final double breakpoint;
   final WidgetBuilder portrait;
   final WidgetBuilder landscape;
 
   @override
   Widget build(BuildContext context) {
-    final breakpoint = YaruMasterDetailTheme.of(context).breakpoint ??
-        YaruMasterDetailThemeData.fallback().breakpoint!;
     return LayoutBuilder(
       builder: (context, constraints) {
         final orientation = constraints.maxWidth < breakpoint

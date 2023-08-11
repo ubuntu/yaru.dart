@@ -27,6 +27,11 @@ class YaruNavigationPage extends StatefulWidget {
     this.controller,
     this.leading,
     this.trailing,
+    this.navigatorKey,
+    this.navigatorObservers = const <NavigatorObserver>[],
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.onUnknownRoute,
   })  : assert(initialIndex == null || controller == null),
         assert((length == null) != (controller == null));
 
@@ -60,6 +65,33 @@ class YaruNavigationPage extends StatefulWidget {
   /// The trailing widget in the rail that is placed below the destinations.
   final Widget? trailing;
 
+  /// A key to use when building the [Navigator] widget.
+  final GlobalKey<NavigatorState>? navigatorKey;
+
+  /// A list of observers for the [Navigator] widget.
+  ///
+  /// See also:
+  ///  * [Navigator.observers]
+  final List<NavigatorObserver> navigatorObservers;
+
+  /// The route name for the initial route.
+  ///
+  /// See also:
+  ///  * [Navigator.initialRoute]
+  final String? initialRoute;
+
+  /// Called to generate a route for a given [RouteSettings].
+  ///
+  /// See also:
+  ///  * [Navigator.onGenerateRoute]
+  final RouteFactory? onGenerateRoute;
+
+  /// Called when [onGenerateRoute] fails to generate a route.
+  ///
+  /// See also:
+  ///  * [Navigator.onUnknownRoute]
+  final RouteFactory? onUnknownRoute;
+
   @override
   State<YaruNavigationPage> createState() => _YaruNavigationPageState();
 }
@@ -67,12 +99,13 @@ class YaruNavigationPage extends StatefulWidget {
 class _YaruNavigationPageState extends State<YaruNavigationPage> {
   late final ScrollController _scrollController;
   late YaruPageController _pageController;
-  final _navigatorKey = GlobalKey<NavigatorState>();
+  late final GlobalKey<NavigatorState> _navigatorKey;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    _navigatorKey = widget.navigatorKey ?? GlobalKey<NavigatorState>();
     _updatePageController();
   }
 
@@ -110,7 +143,9 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = YaruNavigationPageTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.sideBarColor,
       body: widget.length == 0 || widget.controller?.length == 0
           ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
           : Row(
@@ -118,7 +153,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _buildNavigationRail(context),
-                _buildVerticalSeparator(),
+                if (theme.includeSeparator != false) _buildVerticalSeparator(),
                 _buildPageView(context),
               ],
             ),
@@ -172,8 +207,11 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
                   : widget.pageBuilder(context, 0),
             ),
           ],
+          initialRoute: widget.initialRoute,
+          onGenerateRoute: widget.onGenerateRoute,
+          onUnknownRoute: widget.onUnknownRoute,
           onPopPage: (route, result) => route.didPop(result),
-          observers: [HeroController()],
+          observers: [...widget.navigatorObservers, HeroController()],
         ),
       ),
     );

@@ -36,6 +36,7 @@ export 'src/widgets/yaru_radio.dart';
 export 'src/widgets/yaru_radio_button.dart';
 export 'src/widgets/yaru_radio_list_tile.dart';
 export 'src/widgets/yaru_radio_theme.dart';
+export 'src/widgets/yaru_search_field.dart';
 export 'src/widgets/yaru_section.dart';
 export 'src/widgets/yaru_selectable_container.dart';
 export 'src/widgets/yaru_switch.dart';

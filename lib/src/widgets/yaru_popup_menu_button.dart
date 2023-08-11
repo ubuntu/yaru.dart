@@ -24,6 +24,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.elevation,
     this.style,
     this.mouseCursor,
+    this.icon,
   });
 
   final T? initialValue;
@@ -42,6 +43,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final double? elevation;
   final ButtonStyle? style;
   final MouseCursor? mouseCursor;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +98,13 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                         padding: childPadding,
                         child: child,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 40,
-                        child: Icon(
-                          YaruIcons.pan_down,
-                          size: 20,
-                        ),
+                        child: icon ??
+                            const Icon(
+                              YaruIcons.pan_down,
+                              size: 20,
+                            ),
                       ),
                     ],
                   ),

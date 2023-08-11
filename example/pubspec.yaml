@@ -8,18 +8,18 @@ environment:
   flutter: ">=3.10.0"
 
 dependencies:
-  collection: ^1.16.0
-  connectivity_plus: ^3.0.2
+  collection: ^1.17.0
+  connectivity_plus: ^4.0.2
   flutter:
     sdk: flutter
   flutter_highlight: ^0.7.0
-  handy_window: ^0.3.0
-  http: ^0.13.5
+  handy_window: ^0.3.1
+  http: ^1.1.0
   provider: ^6.0.2
-  safe_change_notifier: ^0.2.0
-  ubuntu_service: ^0.2.0
-  yaru: ^0.8.0
-  yaru_icons: ^1.0.0
+  safe_change_notifier: ^0.3.1
+  ubuntu_service: ^0.2.4
+  yaru: ">=0.10.0 <1.0.0"
+  yaru_icons: ">=1.0.0 <3.0.0"
   yaru_widgets:
     path: ../
 
