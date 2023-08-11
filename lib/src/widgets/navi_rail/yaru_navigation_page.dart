@@ -113,18 +113,14 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
     return Scaffold(
       body: widget.length == 0 || widget.controller?.length == 0
           ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
-          : LayoutBuilder(
-              builder: (context, constraint) {
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _buildNavigationRail(context, constraint),
-                    _buildVerticalSeparator(),
-                    _buildPageView(context),
-                  ],
-                );
-              },
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildNavigationRail(context),
+                _buildVerticalSeparator(),
+                _buildPageView(context),
+              ],
             ),
     );
   }
@@ -135,26 +131,20 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
     _navigatorKey.currentState?.popUntil((route) => route.isFirst);
   }
 
-  Widget _buildNavigationRail(BuildContext context, BoxConstraints constraint) {
+  Widget _buildNavigationRail(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
         scrollbarTheme: ScrollbarTheme.of(context).copyWith(
           thickness: MaterialStateProperty.all(_kScrollbarThickness),
         ),
       ),
-      child: SingleChildScrollView(
-        controller: _scrollController,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: constraint.maxHeight),
-          child: YaruNavigationRail(
-            selectedIndex: max(_pageController.index, 0),
-            onDestinationSelected: _onTap,
-            length: _pageController.length,
-            itemBuilder: widget.itemBuilder,
-            leading: widget.leading,
-            trailing: widget.trailing,
-          ),
-        ),
+      child: YaruNavigationRail(
+        selectedIndex: max(_pageController.index, 0),
+        onDestinationSelected: _onTap,
+        length: _pageController.length,
+        itemBuilder: widget.itemBuilder,
+        leading: widget.leading,
+        trailing: widget.trailing,
       ),
     );
   }
