@@ -235,6 +235,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                           children: [
                             if (isMinimizable == true)
                               YaruWindowControl(
+                                foregroundColor: foregroundColor,
+                                backgroundColor: backgroundColor,
                                 type: YaruWindowControlType.minimize,
                                 onTap: onMinimize != null
                                     ? () => onMinimize!(context)
@@ -242,6 +244,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                               ),
                             if (isRestorable == true)
                               YaruWindowControl(
+                                foregroundColor: foregroundColor,
+                                backgroundColor: backgroundColor,
                                 type: YaruWindowControlType.restore,
                                 onTap: onRestore != null
                                     ? () => onRestore!(context)
@@ -249,6 +253,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                               ),
                             if (isMaximizable == true)
                               YaruWindowControl(
+                                foregroundColor: foregroundColor,
+                                backgroundColor: backgroundColor,
                                 type: YaruWindowControlType.maximize,
                                 onTap: onMaximize != null
                                     ? () => onMaximize!(context)
@@ -256,6 +262,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                               ),
                             if (isClosable == true)
                               YaruWindowControl(
+                                foregroundColor: foregroundColor,
+                                backgroundColor: backgroundColor,
                                 type: YaruWindowControlType.close,
                                 onTap: onClose != null
                                     ? () => onClose!(context)

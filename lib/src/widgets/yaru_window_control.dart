@@ -28,11 +28,17 @@ class YaruWindowControl extends StatefulWidget {
     super.key,
     required this.type,
     required this.onTap,
+    this.foregroundColor,
+    this.backgroundColor,
   });
 
   final YaruWindowControlType type;
 
   final GestureTapCallback? onTap;
+
+  final Color? foregroundColor;
+
+  final Color? backgroundColor;
 
   @override
   State<YaruWindowControl> createState() {
@@ -113,7 +119,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     });
   }
 
-  Color _getColor(BuildContext context) {
+  Color _getColor(BuildContext context, [Color? color]) {
     final onSurface = Theme.of(context).colorScheme.onSurface;
 
     if (!interactive) {
@@ -148,7 +154,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
         child: AnimatedContainer(
           duration: _kWindowControlBackgroundAnimationDuration,
           decoration: BoxDecoration(
-            color: _getColor(context),
+            color: _getColor(context, widget.backgroundColor),
             border: colorScheme.isHighContrast
                 ? Border.all(
                     color: colorScheme.outlineVariant,
@@ -167,7 +173,8 @@ class _YaruWindowControlState extends State<YaruWindowControl>
                   painter: _YaruWindowControlPainter(
                     type: widget.type,
                     oldType: oldType,
-                    iconColor: Theme.of(context).colorScheme.onSurface,
+                    iconColor: widget.foregroundColor ??
+                        Theme.of(context).colorScheme.onSurface,
                     position: _position.value,
                     interactive: interactive,
                   ),
