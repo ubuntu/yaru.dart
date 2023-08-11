@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/src/widgets/navi_rail/yaru_navigation_page_theme.dart';
 
+import '../../../constants.dart';
+
 /// Defines the look of a [YaruNavigationRailItem]
 enum YaruNavigationRailStyle {
   /// Will only show icons.
@@ -29,6 +31,8 @@ class YaruNavigationRailItem extends StatefulWidget {
     this.tooltip,
     this.onTap,
     required this.style,
+    this.extendedSelectedIndicator = false,
+    this.borderRadius,
     this.width,
   }) : assert(style == YaruNavigationRailStyle.compact || label != null);
 
@@ -53,6 +57,13 @@ class YaruNavigationRailItem extends StatefulWidget {
   /// Style of this tile, see [YaruNavigationRailStyle].
   final YaruNavigationRailStyle style;
 
+  /// If true, the selected background indicator will wrap the [icon] and the [label].
+  /// If false, it will only wrap the [icon].
+  final bool extendedSelectedIndicator;
+
+  /// Border radius of the selected background indicator.
+  final BorderRadiusGeometry? borderRadius;
+
   /// Defines the width of this tile.
   /// If null, it will use default values, see [YaruNavigationRailStyle].
   final double? width;
@@ -75,37 +86,20 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
   @override
   Widget build(BuildContext context) {
     final theme = YaruNavigationPageTheme.of(context);
-    return _buildSizedContainer(
-      _maybeBuildTooltip(
-        Material(
-          color: theme.sideBarColor,
-          child: InkWell(
-            onTap: () {
-              final scope = YaruNavigationRailItemScope.maybeOf(context);
-              scope?.onTap();
-              widget.onTap?.call();
-            },
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical:
-                      widget.style == YaruNavigationRailStyle.labelledExtended
-                          ? 10
-                          : 5,
-                  horizontal:
-                      widget.style == YaruNavigationRailStyle.labelledExtended
-                          ? 8
-                          : 5,
-                ),
-                child: _buildColumnOrRow([
-                  _buildIcon(context),
-                  if (widget.style != YaruNavigationRailStyle.compact) ...[
-                    _buildGap(),
-                    _buildLabel(context),
-                  ]
-                ]),
-              ),
-            ),
+
+    return _buildSizedBox(
+      child: _maybeBuildTooltip(
+        child: _buildContainer(
+          context: context,
+          theme: theme,
+          child: _buildColumnOrRow(
+            children: [
+              _buildIcon(context),
+              if (widget.style != YaruNavigationRailStyle.compact) ...[
+                _buildGap(),
+                _buildLabel(context),
+              ]
+            ],
           ),
         ),
       ),
@@ -117,8 +111,16 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
         YaruNavigationRailItemScope.maybeOf(context)?.selected == true;
   }
 
+  bool get _labelledExtended =>
+      widget.style == YaruNavigationRailStyle.labelledExtended;
+
+  bool get _extendedSelectedIndicator {
+    return widget.extendedSelectedIndicator &&
+        widget.style != YaruNavigationRailStyle.compact;
+  }
+
   Alignment get _alignment {
-    return widget.style == YaruNavigationRailStyle.labelledExtended ||
+    return _labelledExtended ||
             oldStyle == YaruNavigationRailStyle.labelledExtended
         ? Alignment.centerLeft
         : Alignment.topCenter;
@@ -139,7 +141,11 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
     }
   }
 
-  Widget _buildSizedContainer(Widget child) {
+  Color _selectedIndicatorColor(ThemeData theme) {
+    return theme.colorScheme.onSurface.withOpacity(.1);
+  }
+
+  Widget _buildSizedBox({required Widget child}) {
     return AnimatedSize(
       duration: _kSizeAnimationDuration,
       alignment: _alignment,
@@ -153,7 +159,7 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
     );
   }
 
-  Widget _maybeBuildTooltip(Widget child) {
+  Widget _maybeBuildTooltip({required Widget child}) {
     if (widget.tooltip != null) {
       return Tooltip(
         message: widget.tooltip!,
@@ -165,10 +171,57 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
     return child;
   }
 
-  Widget _buildColumnOrRow(List<Widget> children) {
+  Widget _buildContainer({
+    required BuildContext context,
+    required YaruNavigationPageThemeData theme,
+    required Widget child,
+  }) {
+    if (_extendedSelectedIndicator) {
+      child = AnimatedContainer(
+        duration: _kSelectedIconAnimationDuration,
+        decoration: BoxDecoration(
+          borderRadius: widget.borderRadius ??
+              const BorderRadius.all(
+                Radius.circular(kYaruButtonRadius),
+              ),
+          color: _selected ? _selectedIndicatorColor(Theme.of(context)) : null,
+        ),
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: _labelledExtended ? 5 : 2,
+              horizontal: 2,
+            ),
+            child: child,
+          ),
+        ),
+      );
+    }
+
+    return Material(
+      color: theme.sideBarColor,
+      child: InkWell(
+        onTap: () {
+          final scope = YaruNavigationRailItemScope.maybeOf(context);
+          scope?.onTap();
+          widget.onTap?.call();
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: _labelledExtended && !_extendedSelectedIndicator ? 10 : 5,
+            horizontal:
+                _labelledExtended && !_extendedSelectedIndicator ? 8 : 5,
+          ),
+          child: child,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildColumnOrRow({required List<Widget> children}) {
     const mainAxisAlignment = MainAxisAlignment.start;
 
-    if (widget.style == YaruNavigationRailStyle.labelledExtended) {
+    if (_labelledExtended) {
       return Row(
         mainAxisAlignment: mainAxisAlignment,
         children: children,
@@ -182,26 +235,30 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
   }
 
   Widget _buildIcon(BuildContext context) {
-    return AnimatedContainer(
-      duration: _kSelectedIconAnimationDuration,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        color: _selected
-            ? Theme.of(context).colorScheme.onSurface.withOpacity(.1)
-            : null,
+    final icon = Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 2,
+        horizontal: 10,
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 2,
-          horizontal: 10,
-        ),
-        child: widget.icon,
-      ),
+      child: widget.icon,
     );
+
+    if (!_extendedSelectedIndicator) {
+      return AnimatedContainer(
+        duration: _kSelectedIconAnimationDuration,
+        decoration: BoxDecoration(
+          borderRadius: widget.borderRadius ?? BorderRadius.circular(100),
+          color: _selected ? _selectedIndicatorColor(Theme.of(context)) : null,
+        ),
+        child: icon,
+      );
+    } else {
+      return icon;
+    }
   }
 
   Widget _buildGap() {
-    if (widget.style == YaruNavigationRailStyle.labelledExtended) {
+    if (_labelledExtended) {
       return const SizedBox(width: 10);
     }
 
@@ -212,21 +269,16 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
     final label = DefaultTextStyle.merge(
       child: widget.label!,
       style: TextStyle(
-        fontSize:
-            widget.style == YaruNavigationRailStyle.labelledExtended ? 13 : 12,
+        fontSize: _labelledExtended ? 13 : 12,
         fontWeight: FontWeight.w500,
       ),
       overflow: TextOverflow.ellipsis,
       softWrap: true,
-      textAlign: widget.style == YaruNavigationRailStyle.labelledExtended
-          ? null
-          : TextAlign.center,
+      textAlign: _labelledExtended ? null : TextAlign.center,
       maxLines: 1,
     );
 
-    return widget.style == YaruNavigationRailStyle.labelledExtended
-        ? Expanded(child: label)
-        : label;
+    return _labelledExtended ? Expanded(child: label) : label;
   }
 }
 
