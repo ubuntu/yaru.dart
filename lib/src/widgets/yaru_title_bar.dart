@@ -510,6 +510,7 @@ class YaruWindowTitleBar extends StatelessWidget
           centerTitle: centerTitle,
           titleSpacing: titleSpacing,
           backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
           shape: shape,
           border: border,
           style: style,
