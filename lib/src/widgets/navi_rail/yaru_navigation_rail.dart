@@ -44,30 +44,59 @@ class YaruNavigationRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = YaruNavigationPageTheme.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
+    final navigationPageTheme = YaruNavigationPageTheme.of(context);
+
     return Padding(
-      padding: theme.railPadding ?? EdgeInsets.zero,
-      child: IntrinsicHeight(
-        child: Column(
-          children: <Widget>[
-            if (leading != null) leading!,
-            for (int i = 0; i < length; i += 1)
-              YaruNavigationRailItemScope(
-                index: i,
-                selected: i == selectedIndex,
-                onTap: () => onDestinationSelected?.call(i),
-                child: Builder(
-                  builder: (context) => itemBuilder(
-                    context,
-                    i,
-                    i == selectedIndex,
+      padding: navigationPageTheme.railPadding ?? EdgeInsets.zero,
+      child: Column(
+        children: [
+          if (leading != null)
+            Container(
+              margin: const EdgeInsets.only(bottom: 1.0),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: colorScheme.outline,
                   ),
                 ),
               ),
-            const Spacer(),
-            if (trailing != null) trailing!,
-          ],
-        ),
+              child: leading!,
+            ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  for (int i = 0; i < length; i += 1)
+                    YaruNavigationRailItemScope(
+                      index: i,
+                      selected: i == selectedIndex,
+                      onTap: () => onDestinationSelected?.call(i),
+                      child: Builder(
+                        builder: (context) => itemBuilder(
+                          context,
+                          i,
+                          i == selectedIndex,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          if (trailing != null)
+            Container(
+              margin: const EdgeInsets.only(top: 1.0),
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: colorScheme.outline,
+                  ),
+                ),
+              ),
+              child: trailing!,
+            ),
+        ],
       ),
     );
   }
