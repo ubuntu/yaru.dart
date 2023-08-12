@@ -1,6 +1,10 @@
 import 'yaru_window_control.dart';
 
 /// Defines the order and position in which [YaruWindowControl] items are presented.
+///
+/// YaruWindowControlType.maximize and YaruWindowControlType.restore are treated as the same button.
+/// Only put one of these types in your YaruWindowControlLayout, otherwise the button will appear twice.
+
 class YaruWindowControlLayout {
   const YaruWindowControlLayout(this.leftItems, this.rightItems);
 
@@ -42,7 +46,6 @@ class YaruWindowControlLayout {
             break;
           case 'maximize':
             decorations.add(YaruWindowControlType.maximize);
-            decorations.add(YaruWindowControlType.restore);
             break;
           default: // anything else is not supported, including "icon" and "menu"
         }
