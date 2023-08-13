@@ -52,3 +52,4 @@ export 'src/widgets/yaru_toggle_button.dart';
 export 'src/widgets/yaru_toggle_button_theme.dart';
 export 'src/widgets/yaru_watermark.dart';
 export 'src/widgets/yaru_window_control.dart';
+export 'src/widgets/yaru_window_control_layout.dart';

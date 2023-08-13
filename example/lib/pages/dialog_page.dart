@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
@@ -49,7 +51,17 @@ class _DialogPageState extends State<DialogPage> {
                           ),
                         ),
                         title: const Text('The Title'),
-                        isClosable: isCloseable,
+                        windowControlLayout: isCloseable
+                            ? ((Platform.isMacOS)
+                                ? const YaruWindowControlLayout(
+                                    [YaruWindowControlType.close],
+                                    [],
+                                  )
+                                : const YaruWindowControlLayout(
+                                    [],
+                                    [YaruWindowControlType.close],
+                                  ))
+                            : const YaruWindowControlLayout([], []),
                       ),
                       content: SizedBox(
                         height: 100,
