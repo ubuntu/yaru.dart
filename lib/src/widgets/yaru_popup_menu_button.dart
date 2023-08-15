@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru_widgets/constants.dart';
 
 import 'yaru_check_button.dart';
 
@@ -18,7 +19,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
     this.childPadding = const EdgeInsets.symmetric(horizontal: 5),
     this.enabled = true,
-    this.offset = const Offset(0, 40),
+    this.offset = const Offset(0, kYaruTitleBarItemHeight),
     this.enableFeedback,
     this.constraints,
     this.elevation,
@@ -99,11 +100,10 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                         child: child,
                       ),
                       SizedBox(
-                        height: 40,
+                        height: kYaruTitleBarItemHeight,
                         child: icon ??
                             const Icon(
                               YaruIcons.pan_down,
-                              size: 20,
                             ),
                       ),
                     ],
