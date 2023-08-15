@@ -18,10 +18,7 @@ dependencies:
   provider: ^6.0.2
   safe_change_notifier: ^0.3.1
   ubuntu_service: ^0.2.4
-  yaru:
-     git:
-      url: https://github.com/ubuntu/yaru.dart
-      ref: main
+  yaru: ^1.0.0
   yaru_icons: ">=1.0.0 <3.0.0"
   yaru_widgets:
     path: ../
