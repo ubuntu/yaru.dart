@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 typedef CanvasCallback = void Function(Canvas canvas);
 
-extension YaruCanvasExtention on Canvas {
+extension YaruCanvasExtension on Canvas {
   void paintScaled({
     required Offset origin,
     required Size scale,
