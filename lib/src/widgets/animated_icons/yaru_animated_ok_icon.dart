@@ -114,8 +114,12 @@ class _YaruAnimatedOkIconPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    canvas.saveLayer(null, Paint());
+
     _paintOuterCirclePath(canvas);
     _paintCheckmark(canvas);
+
+    canvas.restore();
   }
 
   void _paintOuterCirclePath(Canvas canvas) {
