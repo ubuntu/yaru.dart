@@ -4,8 +4,8 @@ import '../../../yaru_icons.dart';
 import '../../constants.dart';
 import '../../foundation/local_progress_mixin.dart';
 
-const _kAnimationCurve = Curves.easeInQuart;
-const _kAnimationDuration = Duration(milliseconds: 600);
+const _kAnimationCurve = Curves.easeInQuad;
+const _kAnimationDuration = Duration(milliseconds: 400);
 
 /// An animated Yaru no network icon, similar to [YaruIcons.network_wireless] and [YaruIcons.network_wireless_disabled].
 ///
@@ -103,160 +103,182 @@ class _YaruAnimatedNoNetworkIconPainter extends CustomPainter
   void paint(Canvas canvas, Size size) {
     canvas.saveLayer(null, Paint());
 
-    _drawExtractedPathMetric(canvas, _getWave1Path(), 0, .4);
-    _drawExtractedPathMetric(canvas, _getWave2Path(), 0.1, .5);
-    _drawExtractedPathMetric(canvas, _getWave3Path(), 0.2, .6);
-    _drawExtractedPathMetric(canvas, _getWave4Path(), 0.3, .7);
-    _drawExtractedPathMetric(canvas, _getStripe1Path(), .4, .6);
+    // Waves
+    _drawExtractedPathMetric(
+      canvas: canvas,
+      path: _getWave1Path(),
+      start: 0.0,
+      duration: 0.4,
+      paint: _getStrokePaint(),
+    );
+    _drawExtractedPathMetric(
+      canvas: canvas,
+      path: _getWave2Path(),
+      start: 0.1,
+      duration: 0.5,
+      paint: _getStrokePaint(),
+    );
+    _drawExtractedPathMetric(
+      canvas: canvas,
+      path: _getWave3Path(),
+      start: 0.2,
+      duration: 0.6,
+      paint: _getStrokePaint(),
+    );
+    _drawExtractedPathMetric(
+      canvas: canvas,
+      path: _getWave4Path(),
+      start: 0.3,
+      duration: 0.7,
+      paint: _getStrokePaint(),
+    );
 
-    _drawStripe2Diff(canvas);
+    // Stripes
+    _drawExtractedPathMetric(
+      canvas: canvas,
+      path: _getStripe1Path(),
+      start: 0.4,
+      duration: 0.6,
+      paint: _getStrokePaint(),
+    );
+    _drawExtractedPathMetric(
+      canvas: canvas,
+      path: _getStripe2Path(),
+      start: 0.4,
+      duration: 0.6,
+      paint: _getDiffStrokePaint(),
+    );
 
-    _drawDot(canvas);
+    // Dot
+    _drawDot(
+      canvas: canvas,
+      start: 0.0,
+      duration: 0.5,
+    );
 
     canvas.restore();
   }
 
   Path _getWave1Path() {
-    final wave = Path();
-    wave.moveTo(size * 0.6466471, size * 0.6155599);
-    wave.cubicTo(
-      size * 0.6054710,
-      size * 0.5812731,
-      size * 0.5535823,
-      size * 0.5624987,
-      size * 0.5000000,
-      size * 0.5625000,
-    );
-    wave.cubicTo(
-      size * 0.4464713,
-      size * 0.5626250,
-      size * 0.3946749,
-      size * 0.5814829,
-      size * 0.3535970,
-      size * 0.6158040,
-    );
-
-    return wave;
+    return Path()
+      ..moveTo(size * 0.6466471, size * 0.6155599)
+      ..cubicTo(
+        size * 0.6054710,
+        size * 0.5812731,
+        size * 0.5535823,
+        size * 0.5624987,
+        size * 0.5000000,
+        size * 0.5625000,
+      )
+      ..cubicTo(
+        size * 0.4464713,
+        size * 0.5626250,
+        size * 0.3946749,
+        size * 0.5814829,
+        size * 0.3535970,
+        size * 0.6158040,
+      );
   }
 
   Path _getWave2Path() {
-    final wave = Path();
-    wave.moveTo(size * 0.7352702, size * 0.5269368);
-    wave.cubicTo(
-      size * 0.6704428,
-      size * 0.4693235,
-      size * 0.5867288,
-      size * 0.4375000,
-      size * 0.5000000,
-      size * 0.4375000,
-    );
-    wave.cubicTo(
-      size * 0.4133234,
-      size * 0.4376250,
-      size * 0.3297026,
-      size * 0.4695350,
-      size * 0.2649740,
-      size * 0.5271810,
-    );
-
-    return wave;
+    return Path()
+      ..moveTo(size * 0.7352702, size * 0.5269368)
+      ..cubicTo(
+        size * 0.6704428,
+        size * 0.4693235,
+        size * 0.5867288,
+        size * 0.4375000,
+        size * 0.5000000,
+        size * 0.4375000,
+      )
+      ..cubicTo(
+        size * 0.4133234,
+        size * 0.4376250,
+        size * 0.3297026,
+        size * 0.4695350,
+        size * 0.2649740,
+        size * 0.5271810,
+      );
   }
 
   Path _getWave3Path() {
-    final wave = Path();
-    wave.moveTo(size * 0.8237305, size * 0.4384766);
-    wave.cubicTo(
-      size * 0.7353761,
-      size * 0.3574702,
-      size * 0.6198688,
-      size * 0.3125217,
-      size * 0.5000000,
-      size * 0.3125000,
-    );
-    wave.cubicTo(
-      size * 0.3802343,
-      size * 0.3127771,
-      size * 0.2649141,
-      size * 0.3578946,
-      size * 0.1767578,
-      size * 0.4389648,
-    );
-
-    return wave;
+    return Path()
+      ..moveTo(size * 0.8237305, size * 0.4384766)
+      ..cubicTo(
+        size * 0.7353761,
+        size * 0.3574702,
+        size * 0.6198688,
+        size * 0.3125217,
+        size * 0.5000000,
+        size * 0.3125000,
+      )
+      ..cubicTo(
+        size * 0.3802343,
+        size * 0.3127771,
+        size * 0.2649141,
+        size * 0.3578946,
+        size * 0.1767578,
+        size * 0.4389648,
+      );
   }
 
   Path _getWave4Path() {
-    final wave = Path();
-    wave.moveTo(size * 0.9121094, size * 0.3500977);
-    wave.cubicTo(
-      size * 0.8002838,
-      size * 0.2456712,
-      size * 0.6530028,
-      size * 0.1875615,
-      size * 0.5000000,
-      size * 0.1875000,
-    );
-    wave.cubicTo(
-      size * 0.3471336,
-      size * 0.1879029,
-      size * 0.2001027,
-      size * 0.2462382,
-      size * 0.08854167,
-      size * 0.3507487,
-    );
-
-    return wave;
+    return Path()
+      ..moveTo(size * 0.9121094, size * 0.3500977)
+      ..cubicTo(
+        size * 0.8002838,
+        size * 0.2456712,
+        size * 0.6530028,
+        size * 0.1875615,
+        size * 0.5000000,
+        size * 0.1875000,
+      )
+      ..cubicTo(
+        size * 0.3471336,
+        size * 0.1879029,
+        size * 0.2001027,
+        size * 0.2462382,
+        size * 0.08854167,
+        size * 0.3507487,
+      );
   }
 
   Path _getStripe1Path() {
-    final stripe = Path();
-    stripe.moveTo(size * 0.1666667, size * 0.1250000);
-    stripe.lineTo(size * 0.7916667, size * 0.7500000);
-
-    return stripe;
+    return Path()
+      ..moveTo(size * 0.1666667, size * 0.1250000)
+      ..lineTo(size * 0.7916667, size * 0.7500000);
   }
 
   Path _getStripe2Path() {
-    final start = Offset(size * 0.19614, size * 0.09552);
-    final end = Offset(size * 0.82116, size * 0.72055);
-
-    final localProgress = computeLocalProgress(.4, .6);
-
-    final drawEnd = Offset.lerp(start, end, localProgress)!;
-
-    final stripe2 = Path();
-    stripe2.moveTo(start.dx, start.dy);
-    stripe2.lineTo(drawEnd.dx, drawEnd.dy);
-
-    return stripe2;
+    return Path()
+      ..moveTo(size * 0.19614, size * 0.09552)
+      ..lineTo(size * 0.82116, size * 0.72055);
   }
 
-  void _drawExtractedPathMetric(
-    Canvas canvas,
-    Path path,
-    double start,
-    double duration,
-  ) {
+  void _drawExtractedPathMetric({
+    required Canvas canvas,
+    required Path path,
+    required double start,
+    required double duration,
+    required Paint paint,
+  }) {
     final metric = path.computeMetrics().single;
     final drawPath = metric.extractPath(
       0,
       metric.length * computeLocalProgress(start, duration),
     );
 
-    canvas.drawPath(drawPath, _getStrokePaint());
+    canvas.drawPath(drawPath, paint);
   }
 
-  void _drawStripe2Diff(Canvas canvas) {
-    canvas.drawPath(
-      _getStripe2Path(),
-      _getDiffStrokePaint(),
-    );
-  }
-
-  void _drawDot(Canvas canvas) {
+  void _drawDot({
+    required Canvas canvas,
+    required double start,
+    required double duration,
+  }) {
     canvas.drawCircle(
       Offset(size * 0.5, size * 0.7916667),
-      (size * 0.08333333) * computeLocalProgress(0, .1),
+      (size * 0.08333333) * computeLocalProgress(start, duration),
       _getFillPaint(),
     );
   }
