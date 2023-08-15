@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru_widgets/constants.dart';
 
 /// A list of [ChoiceChipBar]s wrapped either in a controllable [ListView] or [Wrap].
 class YaruChoiceChipBar extends StatefulWidget {
@@ -13,8 +14,8 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 300),
     this.navigationStep = 100.0,
     this.animationCurve = Curves.bounceIn,
-    this.radius = 34.0,
-    this.chipHeight = 34.0,
+    this.radius = kYaruTitleBarItemHeight,
+    this.chipHeight = kYaruTitleBarItemHeight,
     this.wrapScrollDirection = Axis.horizontal,
     this.wrapAlignment = WrapAlignment.start,
     this.wrapRunAlignment = WrapAlignment.start,

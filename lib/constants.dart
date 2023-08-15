@@ -2,7 +2,7 @@
 const kYaruPagePadding = 20.0;
 
 /// The default height of [YaruTitleBar].
-const kYaruTitleBarHeight = 47.0;
+const kYaruTitleBarHeight = 46.0;
 
 /// The default border radius for Yaru-style banners.
 const kYaruBannerRadius = 10.0;
@@ -18,7 +18,7 @@ const kYaruButtonRadius = 6.0;
 const kYaruMasterDetailBreakpoint = 620.0;
 
 /// The best height for any item inside a [YaruTitleBar]
-const kYaruTitleBarItemHeight = 35.0;
+const kYaruTitleBarItemHeight = 34.0;
 
 /// The default icon size
-const kYaruIconSize = 16.0;
+const kYaruIconSize = 20.0;
