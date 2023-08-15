@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/constants.dart';
 
 /// An [IconButton] with a default fixed size of 40x40.
 class YaruIconButton extends StatelessWidget {
@@ -9,11 +10,11 @@ class YaruIconButton extends StatelessWidget {
     this.constraints,
     this.enableFeedback = true,
     this.focusNode,
-    this.iconSize = 40.0,
+    this.iconSize = kYaruIconSize,
     this.isSelected,
     this.mouseCursor,
     this.onPressed,
-    this.padding = const EdgeInsets.all(8.0),
+    this.padding,
     this.selectedIcon,
     this.splashRadius,
     this.style,
@@ -32,7 +33,7 @@ class YaruIconButton extends StatelessWidget {
   final bool? isSelected;
   final MouseCursor? mouseCursor;
   final VoidCallback? onPressed;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
   final Widget? selectedIcon;
   final double? splashRadius;
   final ButtonStyle? style;
@@ -99,7 +100,7 @@ class YaruIconButton extends StatelessWidget {
       isSelected: isSelected,
       mouseCursor: mouseCursor,
       onPressed: onPressed,
-      padding: padding,
+      padding: padding ?? EdgeInsets.zero,
       selectedIcon: selectedIcon,
       splashRadius: splashRadius,
       style: defaultStyleOf(context).merge(style),

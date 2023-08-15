@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/constants.dart';
 
 /// An [OutlinedButton] with a default size of 40x40.
 ///
@@ -28,10 +29,7 @@ class YaruOptionButton extends OutlinedButton {
     required Widget child,
   }) : super(
           style: _styleFrom(padding: EdgeInsets.zero).merge(style),
-          child: IconTheme.merge(
-            data: const IconThemeData(size: 24),
-            child: child,
-          ),
+          child: child,
         );
 
   /// Creates a [YaruOptionButton] with a color disk.
@@ -53,8 +51,9 @@ class YaruOptionButton extends OutlinedButton {
 
   static ButtonStyle _styleFrom({EdgeInsetsGeometry? padding}) {
     return OutlinedButton.styleFrom(
-      minimumSize: const Size.square(40),
-      maximumSize: const Size.square(40),
+      minimumSize: const Size.square(kYaruTitleBarItemHeight),
+      maximumSize: const Size.square(kYaruTitleBarItemHeight),
+      fixedSize: const Size.square(kYaruTitleBarItemHeight),
       padding: padding,
     );
   }
