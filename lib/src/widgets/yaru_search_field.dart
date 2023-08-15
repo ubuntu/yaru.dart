@@ -386,13 +386,14 @@ class YaruSearchButton extends StatelessWidget {
                 YaruIcons.search,
                 // Note: Center is needed for when the button is leading
                 // This increases the iconsize, thus this adjustment is needed
-                size: kYaruIconSize - 2,
+                //
+                size: kYaruIconSize - 4,
                 color: theme.colorScheme.onSurface,
               ),
           icon: icon ??
               Icon(
                 YaruIcons.search,
-                size: kYaruIconSize - 2,
+                size: kYaruIconSize - 4,
                 color: theme.colorScheme.onSurface,
               ),
           onPressed: onPressed,
