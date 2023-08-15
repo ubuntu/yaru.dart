@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.0.1 (2023-08-15)
+
+## What's Changed
+* fix: adjust search icon size by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/765
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.0.0...v3.0.1
+
 ## 3.0.0 (2023-08-15)
 
 ## What's Changed
