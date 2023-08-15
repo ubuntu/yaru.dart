@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.0.0 (2023-08-15)
+
+## What's Changed
+* feat: remove IntrinsicHeight from navigation rail  by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/754
+* feat: improve YaruNavigationRailItem by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/756
+* fix(YaruTitleBar): foreground color is not forwarded to YaruTitleBar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/758
+* fix(YaruWindowControl): colors are not exposed by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/760
+* fix(YaruWindowControl): use foreground color for disk background by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/761
+* feat!: adapt to yaru compact sizes by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/763
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v2.7.0...v3.0.0
+
 ## 2.7.0 (2023-08-07)
 
 ## What's Changed
