@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.2.0 (2023-08-16)
+
+## What's Changed
+* fix: automatize viewBox trick in build script by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/168
+* feat: refresh example app by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/170
+* fix: change publish action branch to main by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/171
+* fix: typo in YaruCanvasExtension class name by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/174
+* fix: YaruAnimatedOkIcon diff paint glitch by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/173
+* feat: rework YaruAnimatedNoNetworkIcon by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/172
+* fix: use icon_font_generator 4.0 to fix font problems by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/175
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_icons.dart/compare/v2.1.0...v2.2.0
+
 ## 2.1.0 (2023-07-30)
 
 ## What's Changed
