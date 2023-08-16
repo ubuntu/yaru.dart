@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg8" sodipodi:docname="skip-forward.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs12" />
-   <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="16" inkscape:cx="1.90625" inkscape:cy="2.46875" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg8">
-      <inkscape:grid type="xygrid" id="grid889" />
-   </sodipodi:namedview>
-   <path id="path2-1" style="fill:#808080;fill-opacity:1;stroke-width:1;marker:none" d="m 11.748047,6.527344 c 1.749677,0.784053 5.003227,2.353928 9.251953,4.99414 v -4.521484 h 1 v 10 h -1 v -4.517578 c -4.128285,2.589964 -7.469724,4.191588 -9.251953,4.990234 v -4.699218 c -3.87625,2.391249 -7.045547,3.936718 -8.748047,4.699218 v -10.945312 c 1.675,0.75 4.766797,2.260469 8.748047,4.699218 z" />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path style="fill:gray;fill-opacity:1;stroke-width:1;marker:none" d="M11.748 6.527c1.75.784 5.003 2.354 9.252 4.994V7h1v10h-1v-4.518c-4.128 2.59-7.47 4.192-9.252 4.99v-4.699C7.872 15.165 4.703 16.71 3 17.473V6.527c1.675.75 4.767 2.26 8.748 4.7z"/></svg>

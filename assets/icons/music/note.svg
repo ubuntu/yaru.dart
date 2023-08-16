@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg4" sodipodi:docname="audio.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs8" />
-   <sodipodi:namedview id="namedview6" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="16" inkscape:cx="36.90625" inkscape:cy="12.6875" inkscape:window-width="1920" inkscape:window-height="1043" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg4">
-      <inkscape:grid type="xygrid" id="grid6" />
-      <inkscape:grid type="xygrid" id="grid823" dotted="true" spacingx="0.5" spacingy="0.5" empspacing="10" />
-   </sodipodi:namedview>
-   <path id="path847" style="fill:#808080;fill-rule:evenodd;stroke-linecap:square;stroke-linejoin:round;fill-opacity:1" d="m 18.339844,2 -10.0000002,1.9999996 c -0.1880537,0 -0.3398438,0.223 -0.3398438,0.5 v 12.0019534 c -0.4324959,-0.325252 -0.9588516,-0.50139 -1.5,-0.501953 -1.3807119,0 -2.5,1.119288 -2.5,2.5 0,1.380712 1.1192881,2.5 2.5,2.5 1.3389764,-0.0031 2.4377952,-1.060563 2.4921875,-2.398438 0.00451,-0.03261 0.00781,-0.06694 0.00781,-0.101562 v -10.5898442 l 8.9999995,-1.8007812 v 9.3925784 c -0.432496,-0.325252 -0.958852,-0.50139 -1.5,-0.501953 -1.380711,0 -2.5,1.119288 -2.5,2.5 0,1.380712 1.119289,2.5 2.5,2.5 1.338977,-0.0031 2.437796,-1.060563 2.492188,-2.398438 0.0045,-0.03261 0.0078,-0.06694 0.0078,-0.101562 v -15.0000004 c 0,-0.277 -0.15179,-0.5 -0.339844,-0.5 z" sodipodi:nodetypes="ccsccsccsccccsccsssc" />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path style="fill:gray;stroke-linecap:square;stroke-linejoin:round;fill-opacity:1" d="m18.34 2-10 2c-.188 0-.34.223-.34.5v12.002A2.5 2.5 0 1 0 6.5 21a2.5 2.5 0 0 0 2.492-2.398A.744.744 0 0 0 9 18.5V7.91l9-1.8v9.392A2.5 2.5 0 1 0 16.5 20a2.5 2.5 0 0 0 2.492-2.398A.746.746 0 0 0 19 17.5v-15c0-.277-.152-.5-.34-.5z"/></svg>

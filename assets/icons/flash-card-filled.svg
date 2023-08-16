@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg8" sodipodi:docname="flash-filled.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs12" />
-   <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="28" inkscape:cx="9.8392857" inkscape:cy="9.125" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg8">
-      <inkscape:grid type="xygrid" id="grid829" />
-   </sodipodi:namedview>
-   <path id="path859" style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none" d="M 7.7871094 3 C 7.1101644 3.00559 6.5365068 3.048153 6.0273438 3.3027344 C 5.6879017 3.4724556 5.3973378 3.765168 5.2304688 4.140625 C 5.0635987 4.516082 5 4.9583339 5 5.5 L 5 18.5 C 5 19.041666 5.0635997 19.483918 5.2304688 19.859375 C 5.3973378 20.234832 5.6879017 20.527544 6.0273438 20.697266 C 6.7062288 21.036708 7.500001 21 8.5 21 L 15.5 21 C 16.499999 21 17.293771 21.03671 17.972656 20.697266 C 18.312099 20.527544 18.602661 20.234832 18.769531 19.859375 C 18.936401 19.483918 19 19.041666 19 18.5 L 19 10.382812 L 18 8.3828125 L 18 5.5 C 18 4.9583339 17.9364 4.516082 17.769531 4.140625 C 17.602661 3.765168 17.312099 3.4724556 16.972656 3.3027344 C 16.293771 2.963292 15.499999 3 14.5 3 L 8.5 3 C 8.25 3 8.0127584 2.99814 7.7871094 3 z M 8 6 L 9 6 L 9 8 L 8 8 L 8 6 z M 11 6 L 12 6 L 12 8 L 11 8 L 11 6 z M 14 6 L 15 6 L 15 8 L 14 8 L 14 6 z " />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path style="color:#000;fill:gray;fill-opacity:1;-inkscape-stroke:none" d="M7.787 3c-.677.006-1.25.048-1.76.303-.34.17-.63.462-.797.838C5.064 4.516 5 4.958 5 5.5v13c0 .542.064.984.23 1.36.167.375.458.668.797.837.68.34 1.473.303 2.473.303h7c1 0 1.794.037 2.473-.303.34-.17.63-.462.797-.838.166-.375.23-.817.23-1.359v-8.117l-1-2V5.5c0-.542-.064-.984-.23-1.36a1.72 1.72 0 0 0-.797-.837C16.293 2.963 15.5 3 14.5 3h-6c-.25 0-.487-.002-.713 0zM8 6h1v2H8V6zm3 0h1v2h-1V6zm3 0h1v2h-1V6z"/></svg>

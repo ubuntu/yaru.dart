@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg8" sodipodi:docname="tablet.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs12" />
-   <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="28" inkscape:cx="8.6964286" inkscape:cy="9.5535714" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg8">
-      <inkscape:grid type="xygrid" id="grid6" />
-   </sodipodi:namedview>
-   <path id="path860" style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none" d="m 1.9999999,16.212891 c 0.0056,0.676945 0.04815,1.250602 0.302734,1.759765 0.169722,0.339442 0.462434,0.630006 0.837891,0.796875 0.375457,0.16687 0.817709,0.230469 1.359375,0.230469 h 15.0000001 c 0.541666,0 0.983918,-0.0636 1.359375,-0.230469 0.375457,-0.166869 0.668169,-0.457433 0.837891,-0.796875 0.339442,-0.678885 0.302734,-1.472657 0.302734,-2.472656 v -7 c 0,-0.999999 0.03671,-1.793771 -0.302734,-2.472656 -0.169722,-0.339443 -0.462434,-0.630005 -0.837891,-0.796875 -0.375457,-0.16687 -0.817709,-0.230469 -1.359375,-0.230469 h -15.0000001 c -0.541666,0 -0.983918,0.0636 -1.359375,0.230469 -0.375457,0.16687 -0.668169,0.457432 -0.837891,0.796875 -0.339442,0.678885 -0.302734,1.472657 -0.302734,2.472656 v 7 c 0,0.25 -0.0019,0.487242 0,0.712891 z m 3,1.787109 v -12 h 14.0000001 v 12 z" sodipodi:nodetypes="csssssssssssssssscccccc" />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path style="color:#000;fill:gray;fill-opacity:1;-inkscape-stroke:none" d="M2 16.213c.006.677.048 1.25.303 1.76.17.34.462.63.838.797.375.166.817.23 1.359.23h15c.542 0 .984-.064 1.36-.23a1.72 1.72 0 0 0 .837-.797c.34-.68.303-1.473.303-2.473v-7c0-1 .037-1.794-.303-2.473a1.72 1.72 0 0 0-.838-.797C20.484 5.064 20.042 5 19.5 5h-15c-.542 0-.984.064-1.36.23a1.72 1.72 0 0 0-.837.797C1.963 6.707 2 7.5 2 8.5v7c0 .25-.002.487 0 .713zM5 18V6h14v12z"/></svg>

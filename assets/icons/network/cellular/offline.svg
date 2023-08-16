@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg4" sodipodi:docname="offline.svg" inkscape:version="1.1.1 (eb90963e84, 2021-10-02)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs8" />
-   <sodipodi:namedview id="namedview6" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="28" inkscape:cx="15.446429" inkscape:cy="13.642857" inkscape:window-width="1920" inkscape:window-height="1043" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg4">
-      <inkscape:grid type="xygrid" id="grid825" />
-      <inkscape:grid type="xygrid" id="grid827" dotted="true" spacingx="0.5" spacingy="0.5" empspacing="10" />
-   </sodipodi:namedview>
-   <path style="color:#000000;fill:#808080;-inkscape-stroke:none" d="m 20.75,2.8964844 -0.427734,0.4257812 -17.4257816,17.4277344 h 17.8535156 z m -0.5,1.2089843 v 16.1445313 h -16.1445313 z" id="path862" />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path style="color:#000;fill:gray;-inkscape-stroke:none" d="m20.75 2.896-.428.426L2.896 20.75H20.75zm-.5 1.21V20.25H4.105z"/></svg>

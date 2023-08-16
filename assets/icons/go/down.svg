@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg4" sodipodi:docname="down.svg" inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs8" />
-   <sodipodi:namedview id="namedview6" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="false" inkscape:snap-page="true" inkscape:zoom="28" inkscape:cx="6.2857143" inkscape:cy="9.1607143" inkscape:window-width="1850" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg4" inkscape:showpageshadow="2" inkscape:deskcolor="#d1d1d1" />
-   <path d="m 22,10 c -1.0925,0.8625 -2.19625,1.74625 -3.32,2.51 -1.25,0.84875 -2.465,1.60875 -3.64,2.28125 C 13.955,15.4125 12.8225,15.87875 12,16.25 11.1775,15.87875 10.045,15.4125 8.96,14.79125 A 56.02375,56.02375 0 0 1 5.32,12.51 C 4.195,11.7475 3.0925,10.86375 2,10 h 1.8625 c 0.655,0.5 1.3275,1.04625 2.03125,1.5275 0.8875,0.6075 1.79625,1.1775 2.725,1.7125 0.94375,0.54125 2.24,1.1875 3.125,1.60625 h 0.0012 l 0.255,0.12 0.25375,-0.12 c 0.8875,-0.4175 2.18375,-1.065 3.12625,-1.60625 A 41.475,41.475 0 0 0 18.1062,11.5275 C 18.8087,11.04625 19.4812,10.5 20.13745,10 Z" fill="#808080" id="path2" style="stroke-width:1" />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M22 10c-1.093.863-2.196 1.746-3.32 2.51a56.146 56.146 0 0 1-3.64 2.281c-1.085.621-2.217 1.088-3.04 1.459-.822-.371-1.955-.838-3.04-1.459a56.024 56.024 0 0 1-3.64-2.281C4.195 11.748 3.092 10.864 2 10h1.863c.654.5 1.327 1.046 2.03 1.528A41.449 41.449 0 0 0 8.62 13.24c.944.541 2.24 1.188 3.125 1.606h.001l.255.12.254-.12a48.473 48.473 0 0 0 3.126-1.606 41.475 41.475 0 0 0 2.726-1.713c.703-.48 1.375-1.027 2.031-1.527z" fill="gray" style="stroke-width:1"/></svg>

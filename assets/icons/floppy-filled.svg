@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg8" sodipodi:docname="floppy-filled.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs12" />
-   <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="28" inkscape:cx="6.7678571" inkscape:cy="15.357143" inkscape:window-width="1920" inkscape:window-height="1043" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg8" inkscape:snap-bbox="true" inkscape:bbox-paths="true" inkscape:bbox-nodes="true" inkscape:snap-bbox-edge-midpoints="true" inkscape:snap-bbox-midpoints="true" inkscape:snap-grids="true">
-      <inkscape:grid type="xygrid" id="grid909" />
-   </sodipodi:namedview>
-   <path id="rect1321" style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round" d="M 5.7871094 3 C 5.1101644 3.0056 4.5365068 3.04815 4.0273438 3.3027344 C 3.6879017 3.4724554 3.3973378 3.765167 3.2304688 4.140625 C 3.0635987 4.516082 3 4.958333 3 5.5 L 3 16.707031 L 7.2929688 21 L 17.5 21 C 18.499999 21 19.293771 21.03671 19.972656 20.697266 C 20.312099 20.527544 20.602661 20.234832 20.769531 19.859375 C 20.936401 19.483918 21 19.041666 21 18.5 L 21 5.5 C 21 4.958333 20.9364 4.516082 20.769531 4.140625 C 20.602661 3.765167 20.312099 3.4724554 19.972656 3.3027344 C 19.293771 2.9632914 18.499999 3 17.5 3 L 6.5 3 C 6.25 3 6.0127584 2.9981 5.7871094 3 z M 7 13 L 17 13 L 17 20 L 7.7070312 20 L 7 19.292969 L 7 13 z M 10 14 L 10 19 L 12 19 L 12 14 L 10 14 z " />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path style="fill:gray;fill-opacity:1;stroke-width:.5;stroke-linecap:round;stroke-linejoin:round" d="M5.787 3c-.677.006-1.25.048-1.76.303-.34.17-.63.462-.797.838C3.064 4.516 3 4.958 3 5.5v11.207L7.293 21H17.5c1 0 1.794.037 2.473-.303.34-.17.63-.462.797-.838.166-.375.23-.817.23-1.359v-13c0-.542-.064-.984-.23-1.36a1.72 1.72 0 0 0-.797-.837C19.293 2.963 18.5 3 17.5 3h-11c-.25 0-.487-.002-.713 0zM7 13h10v7H7.707L7 19.293V13zm3 1v5h2v-5h-2z"/></svg>

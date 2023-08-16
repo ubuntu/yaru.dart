@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg8" sodipodi:docname="skip-backward.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs12" />
-   <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="28" inkscape:cx="10.839286" inkscape:cy="11.017857" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg8">
-      <inkscape:grid type="xygrid" id="grid821" />
-   </sodipodi:namedview>
-   <path id="path2-1" style="fill:#808080;stroke-width:1;marker:none;fill-opacity:1" d="M 12.251953 6.5273438 C 10.502276 7.3113972 7.2487263 8.8812719 3 11.521484 L 3 7 L 2 7 L 2 17 L 3 17 L 3 12.482422 C 7.1282853 15.072386 10.469724 16.67401 12.251953 17.472656 L 12.251953 12.773438 C 16.128203 15.164687 19.2975 16.710156 21 17.472656 L 21 6.5273438 C 19.325 7.2773438 16.233203 8.7878125 12.251953 11.226562 L 12.251953 6.5273438 z " />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path style="fill:gray;stroke-width:1;marker:none;fill-opacity:1" d="M12.252 6.527c-1.75.784-5.003 2.354-9.252 4.994V7H2v10h1v-4.518c4.128 2.59 7.47 4.192 9.252 4.99v-4.699c3.876 2.392 7.045 3.937 8.748 4.7V6.527c-1.675.75-4.767 2.26-8.748 4.7v-4.7z"/></svg>

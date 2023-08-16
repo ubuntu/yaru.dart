@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg835" sodipodi:docname="wireless-signal-weak.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs839" />
-   <sodipodi:namedview id="namedview837" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:zoom="28" inkscape:cx="6.125" inkscape:cy="14.464286" inkscape:window-width="1920" inkscape:window-height="1043" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg835">
-      <inkscape:grid type="xygrid" id="grid821" />
-   </sodipodi:namedview>
-   <path id="path1857" style="color:#000000;fill:#808080;fill-opacity:1;-inkscape-stroke:none" d="M 12 5 C 5.8055615 5 2.6210937 8.6738281 2.6210938 8.6738281 L 2.3476562 8.9921875 L 12 20.789062 L 12.386719 20.316406 L 21.652344 8.9921875 L 21.378906 8.6738281 C 21.378906 8.6738281 18.194438 5 12 5 z M 12 6 C 17.362262 6 19.896941 8.6390295 20.294922 9.0722656 L 15.167969 15.339844 C 14.246915 15.131744 13.193661 15 12 15 C 10.806339 15 9.7530854 15.131744 8.8320312 15.339844 L 3.7050781 9.0722656 C 4.1030586 8.6390295 6.6377379 6 12 6 z " />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path style="color:#000;fill:gray;fill-opacity:1;-inkscape-stroke:none" d="M12 5C5.806 5 2.621 8.674 2.621 8.674l-.273.318L12 20.79l.387-.473 9.265-11.324-.273-.318S18.194 5 12 5zm0 1c5.362 0 7.897 2.639 8.295 3.072l-5.127 6.268A14.334 14.334 0 0 0 12 15c-1.194 0-2.247.132-3.168.34L3.705 9.072C4.103 8.64 6.638 6 12 6z"/></svg>

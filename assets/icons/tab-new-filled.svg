@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg8" sodipodi:docname="tab-new-filled.svg" inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs12" />
-   <sodipodi:namedview id="namedview10" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="9.8994951" inkscape:cx="-37.527167" inkscape:cy="2.2728432" inkscape:window-width="1920" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg8">
-      <inkscape:grid type="xygrid" id="grid1013" />
-   </sodipodi:namedview>
-   <path id="path972" style="color:#000000;fill:#808080;fill-opacity:1;stroke-linecap:square;-inkscape-stroke:none" d="M 16.212891 6 C 15.987242 5.9981376 15.75 6.0019531 15.5 6.0019531 L 7.5 6.0019531 C 7.2500003 6.0019531 7.012758 6.0000531 6.7871094 6.0019531 C 6.1101636 6.0075531 5.5365074 6.0501035 5.0273438 6.3046875 C 4.6879015 6.4744095 4.3973385 6.7671211 4.2304688 7.1425781 C 4.063599 7.5180351 4 7.9602871 4 8.5019531 L 4 17.001953 L 2.5 17.001953 L 2 17.001953 L 2 18.001953 L 21 18.001953 L 21 17.001953 L 20.5 17.001953 L 19 17.001953 L 19 8.5019531 C 19 7.9602871 18.9364 7.5180351 18.769531 7.1425781 C 18.602661 6.7671211 18.312099 6.4744095 17.972656 6.3046875 C 17.463493 6.050106 16.889836 6.0055872 16.212891 6 z M 11 10.001953 L 12 10.001953 L 12 12.001953 L 14 12.001953 L 14 13.001953 L 12 13.001953 L 12 15.001953 L 11 15.001953 L 11 13.001953 L 9 13.001953 L 9 12.001953 L 11 12.001953 L 11 10.001953 z " />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path style="color:#000;fill:gray;fill-opacity:1;stroke-linecap:square;-inkscape-stroke:none" d="M16.213 6c-.226-.002-.463.002-.713.002h-8c-.25 0-.487-.002-.713 0-.677.006-1.25.048-1.76.303-.34.17-.63.462-.797.838-.166.375-.23.817-.23 1.359v8.5H2v1h19v-1h-2v-8.5c0-.542-.064-.984-.23-1.36a1.72 1.72 0 0 0-.797-.837c-.51-.255-1.083-.3-1.76-.305zM11 10.002h1v2h2v1h-2v2h-1v-2H9v-1h2v-2z"/></svg>

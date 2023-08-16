@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg viewBox="0 0 24 24" height="24" width="24" version="1.1" id="svg4" sodipodi:docname="top.svg" inkscape:version="1.2 (1:1.2.1+202207142221+cd75a1ee6d)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-   <defs id="defs8" />
-   <sodipodi:namedview id="namedview6" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="true" inkscape:snap-page="true" inkscape:zoom="28" inkscape:cx="7.6785714" inkscape:cy="8.625" inkscape:window-width="1850" inkscape:window-height="1016" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg4" inkscape:showpageshadow="2" inkscape:deskcolor="#d1d1d1">
-      <inkscape:grid type="xygrid" id="grid129" />
-   </sodipodi:namedview>
-   <path d="M 22,14 C 20.9075,13.1375 19.80375,12.25375 18.68,11.49 17.43,10.64 16.215,9.88 15.04,9.2075 13.955,8.5875 12.8225,8.12 12,7.75 11.1775,8.12125 10.045,8.5875 8.96,9.2075 7.7179402,9.9215313 6.503715,10.682924 5.32,11.49 4.195,12.2525 3.0925,13.13625 2,14 H 3.8625 C 4.51875,13.5 5.19125,12.955 5.89375,12.475 6.78125,11.86625 7.69,11.29375 8.61875,10.76 9.6417551,10.187447 10.684923,9.6516871 11.74625,9.15375 L 12,9.03375 l 0.25375,0.12 c 0.8875,0.41875 2.185,1.065 3.1275,1.60625 0.92875,0.53375 1.8375,1.10625 2.725,1.71375 0.7025,0.48125 1.375,1.025 2.03125,1.52625 z" fill="#808080" id="path2" style="stroke-width:1" sodipodi:nodetypes="ccccccccccccccccc" />
-   <circle style="fill:#808080;stroke-width:4;stroke-linejoin:round" id="path388" cx="12" cy="4" r="1" />
-</svg>
+<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M22 14c-1.093-.863-2.196-1.746-3.32-2.51a55.645 55.645 0 0 0-3.64-2.283C13.955 8.588 12.823 8.12 12 7.75c-.822.371-1.955.838-3.04 1.457a56.048 56.048 0 0 0-3.64 2.283C4.195 12.252 3.092 13.136 2 14h1.862c.657-.5 1.33-1.045 2.032-1.525a40.458 40.458 0 0 1 2.725-1.715 49.138 49.138 0 0 1 3.127-1.606l.254-.12.254.12c.887.418 2.185 1.065 3.127 1.606a40.947 40.947 0 0 1 2.725 1.714c.703.481 1.375 1.025 2.031 1.526z" fill="gray" style="stroke-width:1"/><circle style="fill:gray;stroke-width:4;stroke-linejoin:round" cx="12" cy="4" r="1"/></svg>

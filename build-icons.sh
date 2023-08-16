@@ -26,16 +26,4 @@ then
     exit 1
 fi
 
-tempdir=$(mktemp -d)
-
-cp -RT ./assets/icons $tempdir
-
-find $tempdir -name '*.svg' -exec bash -c '\
-    grep -q "viewBox=\"0 0 24 24\"" $0 \
-    && sed -i "s/viewBox=\"0 0 24 24\"/viewBox=\"0 1 24 24\"/g" $0 \
-    || echo "Warning: cannot find correct viewBox in file $0" \
-' {} \;
-
-icon_font_generator --from=$tempdir --symlinks-map=assets/symlinks.json --class-name=YaruIcons --out-font=assets/yaru_icons.ttf --out-flutter=lib/src/yaru_icons.dart --package=yaru_icons --naming-strategy=snake --normalize
-
-rm -r $tempdir
+dart pub global run icon_font_generator:generator
