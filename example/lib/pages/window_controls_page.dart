@@ -16,7 +16,7 @@ class _WindowControlsPageState extends State<WindowControlsPage> {
     return ListView(
       padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
-        for (var interactive in [true, false]) ...[
+        for (final interactive in [true, false]) ...[
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -40,7 +40,7 @@ class _WindowControlsPageState extends State<WindowControlsPage> {
               ),
             ],
           ),
-          const SizedBox(height: 10)
+          const SizedBox(height: 10),
         ],
         YaruTile(
           title: const Text('Maximized'),

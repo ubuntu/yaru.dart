@@ -138,7 +138,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                 ),
               ),
             ),
-            if (_selectedIndex != -1) page(_selectedIndex)
+            if (_selectedIndex != -1) page(_selectedIndex),
           ],
           observers: [...widget.navigatorObservers, HeroController()],
         ),

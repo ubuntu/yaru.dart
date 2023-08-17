@@ -31,7 +31,7 @@ class ExpandablePage extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           child: Text(_lorem),
-        )
+        ),
       ],
     );
   }

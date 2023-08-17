@@ -60,9 +60,9 @@ class _CarouselPageState extends State<CarouselPage> {
                 length >= 2 ? length-- : length = length;
               }),
               child: const Icon(YaruIcons.minus),
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }

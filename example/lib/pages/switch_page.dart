@@ -29,7 +29,7 @@ class _SwitchPageState extends State<SwitchPage> {
               YaruSwitch(
                 value: _switchValues[i],
                 onChanged: null,
-              )
+              ),
             ],
           ),
           const SizedBox(height: 10),

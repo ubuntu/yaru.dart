@@ -88,9 +88,9 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
                     child: Divider(
                       height: 0.0,
                     ),
-                  )
+                  ),
               ],
-            )
+            ),
         ],
       ),
     );

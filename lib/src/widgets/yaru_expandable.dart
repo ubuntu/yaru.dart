@@ -129,7 +129,7 @@ class _YaruExpandableState extends State<YaruExpandable> {
               : CrossFadeState.showSecond,
           sizeCurve: _kAnimationCurve,
           duration: _kAnimationDuration,
-        )
+        ),
       ],
     );
   }
