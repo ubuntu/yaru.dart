@@ -50,7 +50,7 @@ class YaruPlaceholderIcon extends StatelessWidget {
     }
 
     return ClipRRect(
-      borderRadius: borderRadius,
+      borderRadius: borderRadius ?? BorderRadius.zero,
       child: child,
     );
   }
