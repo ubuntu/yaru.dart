@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.1 (2023-08-16)
+
+## What's Changed
+* fix: broken publish CI by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/176
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_icons.dart/compare/v2.2.0...v2.2.1
+
 ## 2.2.0 (2023-08-16)
 
 ## What's Changed
