@@ -30,11 +30,8 @@ part of 'yaru_toggle_button.dart';
 
 enum _YaruToggleButtonSlot { leading, title, subtitle }
 
-class _YaruToggleButtonLayout extends RenderObjectWidget
-    with
-        // ignore: deprecated_member_use
-        SlottedMultiChildRenderObjectWidgetMixin<_YaruToggleButtonSlot,
-            RenderBox> {
+class _YaruToggleButtonLayout extends SlottedMultiChildRenderObjectWidget<
+    _YaruToggleButtonSlot, RenderBox> {
   const _YaruToggleButtonLayout({
     required this.leading,
     required this.title,
