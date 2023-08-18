@@ -244,7 +244,7 @@ class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
       colors: [
         color.withAlpha(0),
         color.withAlpha(20 + (230 * speed).toInt()),
-        color.withAlpha(150 + (100 * speed).toInt())
+        color.withAlpha(150 + (100 * speed).toInt()),
       ],
       stops: const [0.15, 0.75, 1],
     );

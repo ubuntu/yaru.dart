@@ -166,7 +166,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
       for (int index = 0; index < widget.labels.length; index++)
         if (widget.isSelected[index]) themedChip(index),
       for (int index = 0; index < widget.labels.length; index++)
-        if (!widget.isSelected[index]) themedChip(index)
+        if (!widget.isSelected[index]) themedChip(index),
     ];
 
     final listView = ListView(
@@ -261,7 +261,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
                 opacity: _enableGoNextButton ? 1.0 : 0.0,
                 child: goNextButton,
               ),
-            )
+            ),
           ],
         ),
       );

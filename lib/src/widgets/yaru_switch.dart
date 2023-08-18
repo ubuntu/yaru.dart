@@ -166,7 +166,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
     const disabledState = {MaterialState.disabled};
     const selectedDisabledState = {
       MaterialState.selected,
-      MaterialState.disabled
+      MaterialState.disabled,
     };
 
     final defaultBorderColor = colorScheme.isHighContrast

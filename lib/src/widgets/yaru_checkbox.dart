@@ -199,7 +199,7 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
     const disabledState = {MaterialState.disabled};
     const selectedDisabledState = {
       MaterialState.selected,
-      MaterialState.disabled
+      MaterialState.disabled,
     };
 
     // Normal colors
