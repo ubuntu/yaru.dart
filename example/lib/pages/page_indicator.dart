@@ -66,7 +66,7 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
                 _page = _length - 1 < _page ? _length - 1 : _page;
               }),
               child: const Icon(YaruIcons.minus),
-            )
+            ),
           ],
         ),
         Slider(

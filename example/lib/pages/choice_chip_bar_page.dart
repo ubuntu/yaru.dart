@@ -48,10 +48,10 @@ class _ChoiceChipBarPageState extends State<ChoiceChipBarPage> {
                         style: const TextStyle(
                           fontSize: 30,
                         ),
-                      )
+                      ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

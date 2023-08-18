@@ -51,7 +51,7 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                     _titleText,
                   ),
                 ),
-              )
+              ),
             ],
           ),
           SimpleDialog(
@@ -82,7 +82,7 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                 child: Center(
                   child: Text(_fieldText),
                 ),
-              )
+              ),
             ],
           ),
         ],

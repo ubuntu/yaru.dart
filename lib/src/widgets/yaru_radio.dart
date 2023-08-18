@@ -200,7 +200,7 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
     const disabledState = {MaterialState.disabled};
     const selectedDisabledState = {
       MaterialState.selected,
-      MaterialState.disabled
+      MaterialState.disabled,
     };
 
     // Normal colors

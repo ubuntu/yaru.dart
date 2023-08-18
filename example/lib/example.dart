@@ -189,7 +189,7 @@ Future<void> showSettingsDialog(BuildContext context) {
               OutlinedButton(
                 onPressed: Navigator.of(context).pop,
                 child: const Text('Close'),
-              )
+              ),
             ],
           );
         },

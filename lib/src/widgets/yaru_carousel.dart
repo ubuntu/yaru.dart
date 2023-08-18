@@ -126,8 +126,8 @@ class _YaruCarouselState extends State<YaruCarousel> {
                 animationDuration: _controller.scrollAnimationDuration,
                 animationCurve: _controller.scrollAnimationCurve,
               ),
-            )
-          ]
+            ),
+          ],
         ],
       ),
     );

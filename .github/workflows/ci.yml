@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  FLUTTER_VERSION: 3.10.x
+  FLUTTER_VERSION: 3.13.x
 
 jobs:
   analyze:
