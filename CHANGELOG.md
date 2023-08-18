@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.0.2 (2023-08-18)
+
+## What's Changed
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/766
+* fix: update to flutter 3.13 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/768
+* fix: publish CI flutter version by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/770
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.0.1...v3.0.2
+
 ## 3.0.1 (2023-08-15)
 
 ## What's Changed
