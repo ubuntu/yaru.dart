@@ -38,7 +38,7 @@ class _DialogPageState extends State<DialogPage> {
                                 color: Theme.of(context).colorScheme.error,
                               ),
                             ),
-                          )
+                          ),
                       ],
                       titlePadding: EdgeInsets.zero,
                       title: YaruDialogTitleBar(

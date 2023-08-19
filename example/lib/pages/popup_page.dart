@@ -36,7 +36,7 @@ class _PopupPageState extends State<PopupPage> {
                     child: Text(
                       value.name,
                     ),
-                  )
+                  ),
               ];
             },
           ),
@@ -56,7 +56,7 @@ class _PopupPageState extends State<PopupPage> {
                     value: value,
                     checked: enumSet.contains(value),
                     child: Text(value.name),
-                  )
+                  ),
               ];
             },
           ),
@@ -75,10 +75,10 @@ class _PopupPageState extends State<PopupPage> {
                       });
                     },
                     child: Text(value.name),
-                  )
+                  ),
               ];
             },
-          )
+          ),
         ],
       ),
     );

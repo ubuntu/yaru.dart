@@ -155,6 +155,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
             .merge(titleBarTheme.titleTextStyle);
 
     final defaultBorder = BorderSide(
+      strokeAlign: -1,
       color: light
           ? Colors.black.withOpacity(highContrast ? 1 : 0.1)
           : Colors.white.withOpacity(highContrast ? 1 : 0.06),

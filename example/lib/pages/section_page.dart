@@ -32,7 +32,7 @@ class _SectionPageState extends State<SectionPage> {
                 ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -53,7 +53,7 @@ class DummySection extends StatelessWidget {
             height: 20,
             width: 20,
             child: YaruCircularProgressIndicator(strokeWidth: 3),
-          )
+          ),
         ],
       ),
       width: width,

@@ -82,7 +82,7 @@ class _SelectableContainerPageState extends State<SelectableContainerPage> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

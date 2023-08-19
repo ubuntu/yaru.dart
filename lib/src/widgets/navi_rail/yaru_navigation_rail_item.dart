@@ -98,7 +98,7 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
               if (widget.style != YaruNavigationRailStyle.compact) ...[
                 _buildGap(),
                 _buildLabel(context),
-              ]
+              ],
             ],
           ),
         ),

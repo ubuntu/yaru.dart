@@ -173,7 +173,7 @@ class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
       colors: [
         color.withAlpha(0),
         color.withAlpha(20 + (230 * speed).toInt()),
-        color.withAlpha(250)
+        color.withAlpha(250),
       ],
       stops: const [0.15, 0.75, 1],
     );

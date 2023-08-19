@@ -31,7 +31,7 @@ class _CheckboxPageState extends State<CheckboxPage> {
                 value: _checkboxValues[i],
                 onChanged: null,
                 tristate: true,
-              )
+              ),
             ],
           ),
           const SizedBox(height: 10),

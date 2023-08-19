@@ -27,7 +27,7 @@ class BannerPage extends StatelessWidget {
               size: 100,
             ),
             child: _Banner(i: i),
-          )
+          ),
       ],
     );
   }
@@ -89,7 +89,7 @@ class _BannerState extends State<_Banner> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: description,
-            )
+            ),
           ],
         ),
       ),

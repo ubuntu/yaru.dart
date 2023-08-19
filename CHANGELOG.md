@@ -1,5 +1,36 @@
 # Changelog
 
+## 3.0.2 (2023-08-18)
+
+## What's Changed
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/766
+* fix: update to flutter 3.13 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/768
+* fix: publish CI flutter version by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/770
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.0.1...v3.0.2
+
+## 3.0.1 (2023-08-15)
+
+## What's Changed
+* fix: adjust search icon size by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/765
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.0.0...v3.0.1
+
+## 3.0.0 (2023-08-15)
+
+## What's Changed
+* feat: remove IntrinsicHeight from navigation rail  by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/754
+* feat: improve YaruNavigationRailItem by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/756
+* fix(YaruTitleBar): foreground color is not forwarded to YaruTitleBar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/758
+* fix(YaruWindowControl): colors are not exposed by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/760
+* fix(YaruWindowControl): use foreground color for disk background by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/761
+* feat!: adapt to yaru compact sizes by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/763
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v2.7.0...v3.0.0
+
 ## 2.7.0 (2023-08-07)
 
 ## What's Changed
