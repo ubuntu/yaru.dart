@@ -26,6 +26,7 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.wrapTextDirection,
     this.goPreviousIcon,
     this.goNextIcon,
+    this.clearOnSelect = true,
   }) : assert(labels.length == isSelected.length);
 
   /// The [List] of [Widget]'s used to generate a [List] of [ChoiceChip]s
@@ -92,9 +93,15 @@ class YaruChoiceChipBar extends StatefulWidget {
   /// The [VerticalDirection] of the [ChoiceChip]s with `YaruChoiceChipStyle.wrap`
   final VerticalDirection wrapVerticalDirection;
 
+  /// The [Widget] shown inside the left navigation button.
   final Widget? goPreviousIcon;
 
+  /// The [Widget] shown inside the right navigation button.
   final Widget? goNextIcon;
+
+  /// Flag to select if the scroll view should to back to the start on selection.
+  /// Defaults to `true`.
+  final bool clearOnSelect;
 
   @override
   State<YaruChoiceChipBar> createState() => _YaruChoiceChipBarState();
@@ -157,7 +164,14 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
           selected: widget.isSelected[index],
           onSelected: widget.onSelected == null
               ? null
-              : (v) => widget.onSelected!(index),
+              : (v) {
+                  widget.onSelected!(index);
+                  if (widget.clearOnSelect) {
+                    _controller.jumpTo(
+                      _controller.position.minScrollExtent - widget.chipHeight,
+                    );
+                  }
+                },
         ),
       );
     }
