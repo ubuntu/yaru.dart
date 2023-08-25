@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.1.0 (2023-08-25)
+
+## What's Changed
+* feat: add clear on select flag to choice chip bar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/771
+* Update yaru to 1.1.0 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/773
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.0.2...v3.1.0
+
 ## 3.0.2 (2023-08-18)
 
 ## What's Changed
