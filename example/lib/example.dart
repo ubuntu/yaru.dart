@@ -67,6 +67,8 @@ class _MasterDetailPage extends StatelessWidget {
       ),
       pageBuilder: (context, index) => YaruDetailPage(
         appBar: YaruWindowTitleBar(
+          backgroundColor: Colors.transparent,
+          border: BorderSide.none,
           leading:
               Navigator.of(context).canPop() ? const YaruBackButton() : null,
           title: buildTitle(context, pageItems[index]),
@@ -78,6 +80,8 @@ class _MasterDetailPage extends StatelessWidget {
       ),
       appBar: const YaruWindowTitleBar(
         title: Text('Yaru Widgets'),
+        backgroundColor: Colors.transparent,
+        border: BorderSide.none,
       ),
       bottomBar: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
