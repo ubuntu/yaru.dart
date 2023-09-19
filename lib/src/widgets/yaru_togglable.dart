@@ -10,7 +10,7 @@ const _kTogglableSizeAnimationDuration = Duration(milliseconds: 100);
 const _kIndicatorAnimationDuration = Duration(milliseconds: 200);
 const _kIndicatorRadius = 20.0;
 // Used to resize the canvas on active state. Must be an even number.
-const _kTogglableActiveResizeFactor = 2;
+const _kTogglableActiveResizeFactor = .1;
 
 /// A generic class to create a togglable widget
 ///
@@ -411,7 +411,7 @@ abstract class YaruTogglablePainter extends ChangeNotifier
     notifyListeners();
   }
 
-  void drawStateIndicator(Canvas canvas, Size canvasSize, Offset? offset) {
+  void drawStateIndicator(Canvas canvas, Size canvasSize, [Offset? offset]) {
     if (interactive) {
       final defaultOffset = Offset(canvasSize.width / 2, canvasSize.height / 2);
       final color = focused ? focusIndicatorColor : hoverIndicatorColor;
@@ -426,25 +426,22 @@ abstract class YaruTogglablePainter extends ChangeNotifier
 
   @override
   void paint(Canvas canvas, Size size) {
-    final canvasSize = size;
-    final t = position.value;
-    final drawingOrigin = Offset(
-      _kTogglableActiveResizeFactor / 2 * sizePosition.value,
-      _kTogglableActiveResizeFactor / 2 * sizePosition.value,
-    );
-    final drawingSize = Size(
-      canvasSize.width - _kTogglableActiveResizeFactor * sizePosition.value,
-      canvasSize.height - _kTogglableActiveResizeFactor * sizePosition.value,
-    );
+    final origin = (Offset.zero & size).center;
+    final scale = 1 - _kTogglableActiveResizeFactor * sizePosition.value;
 
-    paintTogglable(canvas, size, drawingSize, drawingOrigin, t);
+    canvas.save();
+    canvas.translate(origin.dx, origin.dy);
+    canvas.scale(scale);
+    canvas.translate(-origin.dx, -origin.dy);
+
+    paintTogglable(canvas, size, position.value);
+
+    canvas.restore();
   }
 
   void paintTogglable(
     Canvas canvas,
-    Size realSize,
     Size size,
-    Offset origin,
     double t,
   );
 
