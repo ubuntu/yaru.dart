@@ -260,24 +260,17 @@ class _YaruRadioPainter extends YaruTogglablePainter {
   @override
   void paintTogglable(
     Canvas canvas,
-    Size realSize,
     Size size,
-    Offset origin,
     double t,
   ) {
-    drawStateIndicator(canvas, realSize, null);
-    _drawBox(canvas, size, origin, t);
-    _drawDot(canvas, size, origin, t);
+    drawStateIndicator(canvas, size);
+    _drawBox(canvas, size, t);
+    _drawDot(canvas, size, t);
   }
 
-  void _drawBox(Canvas canvas, Size size, Offset origin, double t) {
+  void _drawBox(Canvas canvas, Size size, double t) {
     canvas.drawOval(
-      Rect.fromLTWH(
-        origin.dx,
-        origin.dy,
-        size.width,
-        size.height,
-      ),
+      Offset.zero & size,
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedColor, checkedColor, t)!
@@ -286,12 +279,7 @@ class _YaruRadioPainter extends YaruTogglablePainter {
     );
 
     canvas.drawOval(
-      Rect.fromLTWH(
-        origin.dx + 0.5,
-        origin.dy + 0.5,
-        size.width - 1.0,
-        size.height - 1.0,
-      ),
+      Rect.fromLTWH(0.5, 0.5, size.width - 1.0, size.height - 1.0),
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedBorderColor, checkedBorderColor, t)!
@@ -304,8 +292,8 @@ class _YaruRadioPainter extends YaruTogglablePainter {
     );
   }
 
-  void _drawDot(Canvas canvas, Size size, Offset origin, double t) {
-    final center = (Offset.zero & size).center + origin;
+  void _drawDot(Canvas canvas, Size size, double t) {
+    final center = (Offset.zero & size).center;
     final dotSize = size * _kDotSizeFactor;
 
     canvas.drawOval(

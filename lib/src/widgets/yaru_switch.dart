@@ -312,19 +312,17 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
   @override
   void paintTogglable(
     Canvas canvas,
-    Size realSize,
     Size size,
-    Offset origin,
     double t,
   ) {
-    _drawBox(canvas, size, origin, t);
-    _drawThumb(canvas, size, origin, t);
+    _drawBox(canvas, size, t);
+    _drawThumb(canvas, size, t);
   }
 
-  void _drawBox(Canvas canvas, Size size, Offset origin, double t) {
+  void _drawBox(Canvas canvas, Size size, double t) {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
-        Rect.fromLTWH(origin.dx, origin.dy, size.width, size.height),
+        Offset.zero & size,
         Radius.circular(size.height),
       ),
       Paint()
@@ -337,8 +335,8 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromLTWH(
-          origin.dx + 0.5,
-          origin.dy + 0.5,
+          0.5,
+          0.5,
           size.width - 1.0,
           size.height - 1.0,
         ),
@@ -356,7 +354,7 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
     );
   }
 
-  void _drawThumb(Canvas canvas, Size size, Offset origin, double t) {
+  void _drawThumb(Canvas canvas, Size size, double t) {
     final margin = (size.height - size.height * _kSwitchThumbSizeFactor) / 2;
     final innerSize = Size(
       size.width - margin * 2,
@@ -366,7 +364,7 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
 
     final start = Offset(radius + margin, radius + margin);
     final end = Offset(innerSize.width + margin - radius, radius + margin);
-    final center = Offset.lerp(start, end, t)! + origin;
+    final center = Offset.lerp(start, end, t)!;
 
     final paint = Paint()
       ..color = interactive
