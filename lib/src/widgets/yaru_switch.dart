@@ -144,6 +144,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
   Size get togglableSize => _kSwitchSize;
 
   bool isDragging = false;
+  double gestureDeltaDx = 0.0;
 
   @override
   void handleTap([Intent? _]) {
@@ -244,37 +245,27 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
       return child;
     }
 
+    final thumbSize = _kSwitchSize.height * _kSwitchThumbSizeFactor;
+    final thumbGap = (_kSwitchSize.height - thumbSize) / 2;
+    final innerWidth = _kSwitchSize.width - thumbGap * 2;
+
     return GestureDetector(
       onPanStart: (details) {
-        final thumbSize = _kSwitchSize.height * _kSwitchThumbSizeFactor;
-        final thumbGap = (_kSwitchSize.height - thumbSize) / 2;
-
-        final minDragX = widget.value
-            ? _kSwitchSize.width - (thumbGap + thumbSize)
-            : thumbGap;
-        final maxDragX =
-            widget.value ? _kSwitchSize.width - thumbGap : thumbGap + thumbSize;
-
-        if (details.localPosition.dx >= minDragX &&
-            details.localPosition.dx <= maxDragX) {
-          setState(() {
-            isDragging = true;
-            handleActiveChange(true);
-          });
-        }
+        setState(() {
+          gestureDeltaDx = positionController.value * (innerWidth - thumbSize);
+          isDragging = true;
+          handleActiveChange(true);
+          handleHoverChange(true);
+        });
       },
       onPanUpdate: (details) {
         if (!isDragging) {
           return;
         }
-
-        final thumbSize = _kSwitchSize.height * _kSwitchThumbSizeFactor;
-        final thumbGap = (_kSwitchSize.height - thumbSize) / 2;
-        final dragGap = thumbGap + thumbSize / 2;
-        final innerWidth = _kSwitchSize.width - dragGap * 2;
-
-        positionController.value =
-            (details.localPosition.dx - dragGap) / innerWidth;
+        gestureDeltaDx += details.delta.dx;
+        positionController.value = gestureDeltaDx / (innerWidth - thumbSize);
+        handleActiveChange(true);
+        handleHoverChange(true);
       },
       onPanEnd: (details) {
         if (!isDragging) {
@@ -284,6 +275,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
         setState(() {
           isDragging = false;
           handleActiveChange(false);
+          handleHoverChange(false);
 
           if (positionController.value < .5) {
             if (widget.value != false) {
