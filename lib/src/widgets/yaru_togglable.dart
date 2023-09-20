@@ -10,7 +10,7 @@ const _kTogglableSizeAnimationDuration = Duration(milliseconds: 100);
 const _kIndicatorAnimationDuration = Duration(milliseconds: 200);
 const _kIndicatorRadius = 20.0;
 // Used to resize the canvas on active state. Must be an even number.
-const _kTogglableActiveResizeFactor = .1;
+const _kTogglableActiveResizeFactor = 2;
 
 /// A generic class to create a togglable widget
 ///
@@ -427,7 +427,14 @@ abstract class YaruTogglablePainter extends ChangeNotifier
   @override
   void paint(Canvas canvas, Size size) {
     final origin = (Offset.zero & size).center;
-    final scale = 1 - _kTogglableActiveResizeFactor * sizePosition.value;
+
+    final activeScaleX =
+        1 - (size.width - _kTogglableActiveResizeFactor) / size.width;
+    final activeScaleY =
+        1 - (size.height - _kTogglableActiveResizeFactor) / size.height;
+    final activeScale =
+        activeScaleX > activeScaleY ? activeScaleX : activeScaleY;
+    final scale = 1 - activeScale * sizePosition.value;
 
     canvas.save();
     canvas.translate(origin.dx, origin.dy);
