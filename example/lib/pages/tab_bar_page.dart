@@ -53,10 +53,18 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
             ),
           ),
         ),
-        children: const [
+        children: [
           SizedBox(
             width: 600,
             height: 400,
+            child: TabBarView(
+              controller: tabController,
+              children: const [
+                Icon(YaruIcons.game_controller),
+                Icon(YaruIcons.keyboard),
+                Icon(YaruIcons.address_book),
+              ],
+            ),
           ),
         ],
       ),
