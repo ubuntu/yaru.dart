@@ -25,6 +25,7 @@ import 'pages/search_field_page.dart';
 import 'pages/section_page.dart';
 import 'pages/selectable_container_page.dart';
 import 'pages/switch_page.dart';
+import 'pages/tab_bar_page.dart';
 import 'pages/tile_page.dart';
 import 'pages/window_controls_page.dart';
 
@@ -216,6 +217,13 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.switchbox_checked_filled)
         : const Icon(YaruIcons.switchbox),
+  ),
+  PageItem(
+    title: 'YaruTabBar',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/tab_bar_page.dart',
+    iconBuilder: (context, selected) => const Icon(YaruIcons.tab_new),
+    pageBuilder: (_) => const TabBarPage(),
   ),
   PageItem(
     title: 'YaruTile',
