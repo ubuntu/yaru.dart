@@ -5,12 +5,14 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 class YaruTabBar extends StatelessWidget {
   const YaruTabBar({
     super.key,
-    required this.tabController,
+    this.tabController,
+    this.onTap,
     required this.tabs,
     this.height,
   });
 
-  final TabController tabController;
+  final TabController? tabController;
+  final void Function(int)? onTap;
   final List<Widget> tabs;
   final double? height;
 
@@ -19,19 +21,17 @@ class YaruTabBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(5),
       height: height ?? kYaruTitleBarItemHeight + 10,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kYaruContainerRadius),
-      ),
       child: TabBar(
+        onTap: onTap,
         dividerColor: Colors.transparent,
         controller: tabController,
         labelColor: Theme.of(context).colorScheme.onSurface,
         indicatorSize: TabBarIndicatorSize.tab,
         indicator: BoxDecoration(
-          borderRadius: BorderRadius.circular(kYaruContainerRadius),
+          borderRadius: BorderRadius.circular(kYaruButtonRadius),
           color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
         ),
-        splashBorderRadius: BorderRadius.circular(kYaruContainerRadius),
+        splashBorderRadius: BorderRadius.circular(kYaruButtonRadius),
         tabs: [for (final tab in tabs) tab],
       ),
     );
