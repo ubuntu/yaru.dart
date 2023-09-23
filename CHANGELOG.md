@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.2.0 (2023-09-23)
+
+## What's Changed
+* chore: Remove generated macos file from example by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/775
+* feat: togglable canvas scale by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/777
+* chore: update example with the new paned style by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/778
+* fix: natural switch thumb grab by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/779
+* fix: reduce switch active scale by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/780
+* feat: add YaruTabBar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/781
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.1.0...v3.2.0
+
 ## 3.1.0 (2023-08-25)
 
 ## What's Changed
