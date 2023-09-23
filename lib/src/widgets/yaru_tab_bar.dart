@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
+/// A pre-styled replacement for material [TabBar]
 class YaruTabBar extends StatelessWidget {
   const YaruTabBar({
     super.key,
     required this.tabController,
     required this.tabs,
+    this.height = kYaruTitleBarItemHeight + 10,
   });
 
   final TabController tabController;
   final List<Widget> tabs;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(5),
-      height: kYaruTitleBarItemHeight + 10,
+      height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kYaruContainerRadius),
       ),
