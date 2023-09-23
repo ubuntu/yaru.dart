@@ -5,13 +5,11 @@ class YaruTabBar extends StatelessWidget {
   const YaruTabBar({
     super.key,
     required this.tabController,
-    this.icons,
-    required this.labels,
-  }) : assert(icons == null || icons.length == labels.length);
+    required this.tabs,
+  });
 
   final TabController tabController;
-  final List<Widget>? icons;
-  final List<String> labels;
+  final List<Widget> tabs;
 
   @override
   Widget build(BuildContext context) {
@@ -31,34 +29,53 @@ class YaruTabBar extends StatelessWidget {
           color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
         ),
         splashBorderRadius: BorderRadius.circular(kYaruContainerRadius),
-        tabs: [
-          for (int i = 0; i < labels.length; i++)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Tab(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (icons != null)
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: icons![i],
-                        ),
-                      ),
-                    Flexible(
-                      child: Text(
-                        labels[i],
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
+        tabs: [for (final tab in tabs) tab],
+      ),
+    );
+  }
+}
+
+class YaruTab extends StatelessWidget {
+  const YaruTab({
+    super.key,
+    required this.label,
+    this.icon,
+    this.padding,
+  });
+
+  final String label;
+  final Widget? icon;
+  final EdgeInsetsGeometry? padding;
+
+  @override
+  Widget build(BuildContext context) {
+    final tab = Tab(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (icon != null)
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: icon,
               ),
             ),
+          Flexible(
+            child: Text(
+              label,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
     );
+
+    return padding != null
+        ? Padding(
+            padding: padding!,
+            child: tab,
+          )
+        : tab;
   }
 }

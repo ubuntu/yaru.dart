@@ -44,12 +44,20 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
             width: 500,
             child: YaruTabBar(
               tabController: tabController,
-              icons: const [
-                Icon(YaruIcons.game_controller),
-                Icon(YaruIcons.keyboard),
-                Icon(YaruIcons.address_book),
+              tabs: const [
+                YaruTab(
+                  label: 'Gaming',
+                  icon: Icon(YaruIcons.game_controller),
+                ),
+                YaruTab(
+                  label: 'Keyboard',
+                  icon: Icon(YaruIcons.keyboard),
+                ),
+                YaruTab(
+                  label: 'Contacts',
+                  icon: Icon(YaruIcons.address_book),
+                ),
               ],
-              labels: const ['Gaming', 'Keyboard', 'Contacts'],
             ),
           ),
         ),
