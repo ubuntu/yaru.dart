@@ -7,18 +7,18 @@ class YaruTabBar extends StatelessWidget {
     super.key,
     required this.tabController,
     required this.tabs,
-    this.height = kYaruTitleBarItemHeight + 10,
+    this.height,
   });
 
   final TabController tabController;
   final List<Widget> tabs;
-  final double height;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(5),
-      height: height,
+      height: height ?? kYaruTitleBarItemHeight + 10,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kYaruContainerRadius),
       ),
