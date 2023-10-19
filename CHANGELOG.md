@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.2.1 (2023-10-19)
+
+## What's Changed
+* fix(YaruTabBar): make TabController nullable, add onTap by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/782
+* fix: overflow in left pane of `YaruMasterDetailPage` by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/787
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.2.0...v3.2.1
+
 ## 3.2.0 (2023-09-23)
 
 ## What's Changed
