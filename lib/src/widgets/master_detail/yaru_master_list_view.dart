@@ -25,45 +25,31 @@ class YaruMasterListView extends StatefulWidget {
 }
 
 class _YaruMasterListViewState extends State<YaruMasterListView> {
-  final _controller = ScrollController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
-    return CustomScrollView(
-      controller: _controller,
-      slivers: [
-        SliverFillRemaining(
-          hasScrollBody: false,
-          child: Padding(
-            padding: theme.listPadding ?? EdgeInsets.zero,
-            child: Column(
-              children: List.generate(
-                widget.length,
-                (index) => YaruMasterTileScope(
-                  index: index,
-                  selected: index == widget.selectedIndex,
-                  onTap: () => widget.onTap(index),
-                  child: Builder(
-                    builder: (context) => widget.builder(
-                      context,
-                      index,
-                      index == widget.selectedIndex,
-                      widget.availableWidth,
-                    ),
-                  ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: theme.listPadding ?? EdgeInsets.zero,
+        child: Column(
+          children: List.generate(
+            widget.length,
+            (index) => YaruMasterTileScope(
+              index: index,
+              selected: index == widget.selectedIndex,
+              onTap: () => widget.onTap(index),
+              child: Builder(
+                builder: (context) => widget.builder(
+                  context,
+                  index,
+                  index == widget.selectedIndex,
+                  widget.availableWidth,
                 ),
-              ).withSpacing(theme.tileSpacing ?? 0),
+              ),
             ),
-          ),
+          ).withSpacing(theme.tileSpacing ?? 0),
         ),
-      ],
+      ),
     );
   }
 }
