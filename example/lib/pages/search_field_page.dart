@@ -39,7 +39,8 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                         setState(() => _titleText = value ?? ''),
                     searchActive: _titleSearchActive,
                     onSearchActive: () => setState(
-                        () => _titleSearchActive = !_titleSearchActive),
+                      () => _titleSearchActive = !_titleSearchActive,
+                    ),
                     title: const Text(
                       'Any Widget Here',
                     ),
@@ -75,7 +76,8 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                   leading: YaruSearchButton(
                     searchActive: _fieldSearchActive,
                     onPressed: () => setState(
-                        () => _fieldSearchActive = !_fieldSearchActive),
+                      () => _fieldSearchActive = !_fieldSearchActive,
+                    ),
                   ),
                 ),
                 children: [
