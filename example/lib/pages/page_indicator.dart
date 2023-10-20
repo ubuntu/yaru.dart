@@ -17,71 +17,84 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(kYaruPagePadding),
-      children: [
-        YaruPageIndicator.builder(
-          length: _length,
-          page: _page,
-          onTap: (page) => setState(() => _page = page),
-          itemSizeBuilder: (_, __, ___) => Size.square(_dotSize + 8),
-          layoutDelegate:
-              YaruPageIndicatorSteppedDelegate(baseItemSpacing: _dotSpacing),
-          itemBuilder: (index, selectedIndex, length) => YaruPageIndicatorItem(
-            selected: index == selectedIndex,
-            size: Size.square(index == selectedIndex ? _dotSize + 8 : _dotSize),
-            animationDuration: const Duration(milliseconds: 250),
-          ),
-        ),
-        const SizedBox(height: 15),
-        YaruPageIndicator.builder(
-          length: _length,
-          page: _page,
-          onTap: (page) => setState(() => _page = page),
-          itemSizeBuilder: (_, __, ___) => Size.square(_dotSize + 8),
-          layoutDelegate:
-              YaruPageIndicatorSteppedDelegate(baseItemSpacing: _dotSpacing),
-          itemBuilder: (index, selectedIndex, length) => YaruPageIndicatorItem(
-            selected: index <= selectedIndex,
-            size: Size.square(index <= selectedIndex ? _dotSize + 8 : _dotSize),
-            animationDuration: const Duration(milliseconds: 250),
-          ),
-        ),
-        const SizedBox(height: 15),
-        ButtonBar(
-          buttonPadding: EdgeInsets.zero,
+    return YaruScrollViewUndershoot.builder(
+      builder: (context, controller) {
+        return ListView(
+          controller: controller,
+          padding: const EdgeInsets.all(kYaruPagePadding),
           children: [
-            YaruOptionButton(
-              onPressed: () => setState(() {
-                _length++;
-              }),
-              child: const Icon(YaruIcons.plus),
+            YaruPageIndicator.builder(
+              length: _length,
+              page: _page,
+              onTap: (page) => setState(() => _page = page),
+              itemSizeBuilder: (_, __, ___) => Size.square(_dotSize + 8),
+              layoutDelegate: YaruPageIndicatorSteppedDelegate(
+                baseItemSpacing: _dotSpacing,
+              ),
+              itemBuilder: (index, selectedIndex, length) =>
+                  YaruPageIndicatorItem(
+                selected: index == selectedIndex,
+                size: Size.square(
+                  index == selectedIndex ? _dotSize + 8 : _dotSize,
+                ),
+                animationDuration: const Duration(milliseconds: 250),
+              ),
             ),
-            const SizedBox(
-              width: 10,
+            const SizedBox(height: 15),
+            YaruPageIndicator.builder(
+              length: _length,
+              page: _page,
+              onTap: (page) => setState(() => _page = page),
+              itemSizeBuilder: (_, __, ___) => Size.square(_dotSize + 8),
+              layoutDelegate: YaruPageIndicatorSteppedDelegate(
+                baseItemSpacing: _dotSpacing,
+              ),
+              itemBuilder: (index, selectedIndex, length) =>
+                  YaruPageIndicatorItem(
+                selected: index <= selectedIndex,
+                size: Size.square(
+                  index <= selectedIndex ? _dotSize + 8 : _dotSize,
+                ),
+                animationDuration: const Duration(milliseconds: 250),
+              ),
             ),
-            YaruOptionButton(
-              onPressed: () => setState(() {
-                _length = _length > 1 ? _length - 1 : _length;
-                _page = _length - 1 < _page ? _length - 1 : _page;
-              }),
-              child: const Icon(YaruIcons.minus),
+            const SizedBox(height: 15),
+            ButtonBar(
+              buttonPadding: EdgeInsets.zero,
+              children: [
+                YaruOptionButton(
+                  onPressed: () => setState(() {
+                    _length++;
+                  }),
+                  child: const Icon(YaruIcons.plus),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                YaruOptionButton(
+                  onPressed: () => setState(() {
+                    _length = _length > 1 ? _length - 1 : _length;
+                    _page = _length - 1 < _page ? _length - 1 : _page;
+                  }),
+                  child: const Icon(YaruIcons.minus),
+                ),
+              ],
+            ),
+            Slider(
+              min: 6.0,
+              max: 24.0,
+              value: _dotSize,
+              onChanged: (scale) => setState(() => _dotSize = scale),
+            ),
+            Slider(
+              min: 12.0,
+              max: 96.0,
+              value: _dotSpacing,
+              onChanged: (scale) => setState(() => _dotSpacing = scale),
             ),
           ],
-        ),
-        Slider(
-          min: 6.0,
-          max: 24.0,
-          value: _dotSize,
-          onChanged: (scale) => setState(() => _dotSize = scale),
-        ),
-        Slider(
-          min: 12.0,
-          max: 96.0,
-          value: _dotSpacing,
-          onChanged: (scale) => setState(() => _dotSpacing = scale),
-        ),
-      ],
+        );
+      },
     );
   }
 }

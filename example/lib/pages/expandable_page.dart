@@ -9,30 +9,35 @@ class ExpandablePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(kYaruPagePadding),
-      children: const [
-        YaruExpandable(
-          header: Text(
-            'Lorem ipsum dolor sit amet',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          child: Text(_lorem),
-        ),
-        YaruExpandable(
-          isExpanded: true,
-          collapsedChild: Text(
-            _lorem,
-            maxLines: 5,
-            overflow: TextOverflow.fade,
-          ),
-          header: Text(
-            'Lorem ipsum dolor sit amet',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          child: Text(_lorem),
-        ),
-      ],
+    return YaruScrollViewUndershoot.builder(
+      builder: (context, controller) {
+        return ListView(
+          controller: controller,
+          padding: const EdgeInsets.all(kYaruPagePadding),
+          children: const [
+            YaruExpandable(
+              header: Text(
+                'Lorem ipsum dolor sit amet',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              child: Text(_lorem),
+            ),
+            YaruExpandable(
+              isExpanded: true,
+              collapsedChild: Text(
+                _lorem,
+                maxLines: 5,
+                overflow: TextOverflow.fade,
+              ),
+              header: Text(
+                'Lorem ipsum dolor sit amet',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              child: Text(_lorem),
+            ),
+          ],
+        );
+      },
     );
   }
 }
