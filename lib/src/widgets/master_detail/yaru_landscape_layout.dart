@@ -177,6 +177,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
             onTap: _onTap,
             builder: widget.tileBuilder,
             availableWidth: _paneWidth!,
+            startUndershoot: widget.appBar != null,
+            endUndershoot: widget.bottomBar != null,
           ),
           bottomNavigationBar: widget.bottomBar == null
               ? null

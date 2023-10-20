@@ -127,6 +127,8 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                       onTap: _onTap,
                       builder: widget.tileBuilder,
                       availableWidth: constraints.maxWidth,
+                      startUndershoot: widget.appBar != null,
+                      endUndershoot: widget.bottomBar != null,
                     ),
                   ),
                   bottomNavigationBar: widget.bottomBar == null
