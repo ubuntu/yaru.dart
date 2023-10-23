@@ -10,25 +10,31 @@ class BannerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView(
-      padding: const EdgeInsets.all(kYaruPagePadding),
-      shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        mainAxisExtent: 200,
-        mainAxisSpacing: 15,
-        crossAxisSpacing: 15,
-        maxCrossAxisExtent: 550,
-      ),
-      children: [
-        for (int i = 0; i < 20; i++)
-          YaruWatermark(
-            watermark: const Icon(
-              Icons.cloud,
-              size: 100,
-            ),
-            child: _Banner(i: i),
+    return YaruScrollViewUndershoot.builder(
+      endUndershoot: false,
+      builder: (context, controller) {
+        return GridView(
+          controller: controller,
+          padding: const EdgeInsets.all(kYaruPagePadding),
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            mainAxisExtent: 200,
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 15,
+            maxCrossAxisExtent: 550,
           ),
-      ],
+          children: [
+            for (int i = 0; i < 20; i++)
+              YaruWatermark(
+                watermark: const Icon(
+                  Icons.cloud,
+                  size: 100,
+                ),
+                child: _Banner(i: i),
+              ),
+          ],
+        );
+      },
     );
   }
 }

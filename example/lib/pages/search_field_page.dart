@@ -21,71 +21,78 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
     final light = theme.brightness == Brightness.light;
 
     return Center(
-      child: ListView(
-        children: [
-          SimpleDialog(
-            shadowColor: light ? Colors.black : null,
-            titlePadding: EdgeInsets.zero,
-            title: YaruDialogTitleBar(
-              titleSpacing: 0,
-              centerTitle: true,
-              title: YaruSearchTitleField(
-                text: _titleText,
-                onClear: () => setState(() => _titleText = ''),
-                onSubmitted: (value) =>
-                    setState(() => _titleText = value ?? ''),
-                searchActive: _titleSearchActive,
-                onSearchActive: () =>
-                    setState(() => _titleSearchActive = !_titleSearchActive),
-                title: const Text(
-                  'Any Widget Here',
-                ),
-              ),
-            ),
+      child: YaruScrollViewUndershoot.builder(
+        builder: (context, controller) {
+          return ListView(
+            controller: controller,
             children: [
-              SizedBox(
-                height: 300,
-                width: 450,
-                child: Center(
-                  child: Text(
-                    _titleText,
+              SimpleDialog(
+                shadowColor: light ? Colors.black : null,
+                titlePadding: EdgeInsets.zero,
+                title: YaruDialogTitleBar(
+                  titleSpacing: 0,
+                  centerTitle: true,
+                  title: YaruSearchTitleField(
+                    text: _titleText,
+                    onClear: () => setState(() => _titleText = ''),
+                    onSubmitted: (value) =>
+                        setState(() => _titleText = value ?? ''),
+                    searchActive: _titleSearchActive,
+                    onSearchActive: () => setState(
+                      () => _titleSearchActive = !_titleSearchActive,
+                    ),
+                    title: const Text(
+                      'Any Widget Here',
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          SimpleDialog(
-            shadowColor: light ? Colors.black : null,
-            titlePadding: EdgeInsets.zero,
-            title: YaruDialogTitleBar(
-              heroTag: 'bar2',
-              titleSpacing: 0,
-              centerTitle: true,
-              title: _fieldSearchActive
-                  ? YaruSearchField(
-                      onClear: () {},
-                      onChanged: (value) => setState(
-                        () => _fieldText = value,
+                children: [
+                  SizedBox(
+                    height: 300,
+                    width: 450,
+                    child: Center(
+                      child: Text(
+                        _titleText,
                       ),
-                    )
-                  : const Text('Title'),
-              leading: YaruSearchButton(
-                searchActive: _fieldSearchActive,
-                onPressed: () =>
-                    setState(() => _fieldSearchActive = !_fieldSearchActive),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            children: [
-              SizedBox(
-                height: 300,
-                width: 450,
-                child: Center(
-                  child: Text(_fieldText),
+              SimpleDialog(
+                shadowColor: light ? Colors.black : null,
+                titlePadding: EdgeInsets.zero,
+                title: YaruDialogTitleBar(
+                  heroTag: 'bar2',
+                  titleSpacing: 0,
+                  centerTitle: true,
+                  title: _fieldSearchActive
+                      ? YaruSearchField(
+                          onClear: () {},
+                          onChanged: (value) => setState(
+                            () => _fieldText = value,
+                          ),
+                        )
+                      : const Text('Title'),
+                  leading: YaruSearchButton(
+                    searchActive: _fieldSearchActive,
+                    onPressed: () => setState(
+                      () => _fieldSearchActive = !_fieldSearchActive,
+                    ),
+                  ),
                 ),
+                children: [
+                  SizedBox(
+                    height: 300,
+                    width: 450,
+                    child: Center(
+                      child: Text(_fieldText),
+                    ),
+                  ),
+                ],
               ),
             ],
-          ),
-        ],
+          );
+        },
       ),
     );
   }

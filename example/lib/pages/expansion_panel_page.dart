@@ -6,27 +6,32 @@ class ExpansionPanelPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(kYaruPagePadding),
-        child: YaruExpansionPanel(
-          width: 500,
-          headers: List.generate(
-            10,
-            (index) => Text(
-              'Header $index',
-              style: Theme.of(context).textTheme.bodyLarge,
+    return YaruScrollViewUndershoot.builder(
+      builder: (context, controller) {
+        return SingleChildScrollView(
+          controller: controller,
+          child: Padding(
+            padding: const EdgeInsets.all(kYaruPagePadding),
+            child: YaruExpansionPanel(
+              width: 500,
+              headers: List.generate(
+                10,
+                (index) => Text(
+                  'Header $index',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+              children: List.generate(
+                10,
+                (index) => Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: Text('Child $index'),
+                ),
+              ),
             ),
           ),
-          children: List.generate(
-            10,
-            (index) => Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: Text('Child $index'),
-            ),
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
