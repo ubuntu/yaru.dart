@@ -22,7 +22,7 @@ final List<IconItem> _staticIconItems = [
         YaruIcons.all[iconName]!,
         size: iconSize,
       ),
-    )
+    ),
 ];
 
 final List<IconItem> _animatedIconItems = [

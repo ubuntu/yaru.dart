@@ -23,6 +23,7 @@ import 'package:flutter/widgets.dart';
 ///       fonts:
 ///         - asset: fonts/yaru_icons.otf
 /// ```
+@staticIconProvider
 class YaruIcons {
   const YaruIcons._();
 
