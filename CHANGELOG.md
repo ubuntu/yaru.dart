@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.2.2 (2023-10-23)
+
+## What's Changed
+* fix: overflow in left pane of `YaruMasterDetailPage` by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/790
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.2.1...v3.2.2
+
 ## 3.2.1 (2023-10-19)
 
 ## What's Changed
