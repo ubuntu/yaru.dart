@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.2.2 (2023-10-23)
+
+## What's Changed
+* chore: update example app yaru package versions by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/180
+* chore: fix github pages flutter version by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/181
+* feat: add thumb icons by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/183
+* chore: add "chore(deps)" prefix to dependabot commit message by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/185
+* chore: better dependabot.yaml commit message prefix by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/186
+* fix: enable icon tree-shaking by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/187
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_icons.dart/compare/v2.2.1...v2.2.2
+
 ## 2.2.1 (2023-08-16)
 
 ## What's Changed
