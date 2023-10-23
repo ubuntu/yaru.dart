@@ -10,18 +10,26 @@ void main() {
     'golden images',
     (tester) async {
       final variant = goldenVariant.currentValue!;
+      final withSubtitle = variant.value!.withSubtitle;
+      final withSpacer = variant.value!.withSpacer;
 
       await tester.pumpScaffold(
         YaruMasterDetailPage(
           layoutDelegate: const YaruMasterFixedPaneDelegate(
             paneWidth: kYaruMasterDetailBreakpoint / 3,
           ),
-          length: 8,
+          length: withSpacer ? 3 : 8,
           appBar: AppBar(title: const Text('Master')),
-          tileBuilder: (context, index, selected, maxWidth) => YaruMasterTile(
-            leading: const Icon(YaruIcons.menu),
-            title: Text('Tile $index'),
-          ),
+          tileBuilder: (context, index, selected, maxWidth) {
+            if (withSpacer && index == 1) {
+              return const Spacer();
+            }
+            return YaruMasterTile(
+              leading: const Icon(YaruIcons.menu),
+              title: Text('Tile $index'),
+              subtitle: withSubtitle ? Text('Subtitle $index') : null,
+            );
+          },
           pageBuilder: (context, index) => YaruDetailPage(
             appBar: AppBar(
               title: Text('Detail $index'),
@@ -30,10 +38,9 @@ void main() {
           ),
         ),
         themeMode: variant.themeMode,
-        size: Size(variant.value!.width, 480),
+        size: Size(variant.value!.orientation.width, 480),
       );
       await tester.pumpAndSettle();
-
       await expectLater(
         find.byType(YaruMasterDetailPage),
         matchesGoldenFile(
@@ -113,8 +120,46 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('portrait', Orientation.portrait),
-  ...goldenThemeVariants('landscape', Orientation.landscape),
+  ...goldenThemeVariants(
+    'portrait',
+    YaruMasterDetailGoldenVariant(
+      orientation: Orientation.portrait,
+    ),
+  ),
+  ...goldenThemeVariants(
+    'landscape',
+    YaruMasterDetailGoldenVariant(
+      orientation: Orientation.landscape,
+    ),
+  ),
+  ...goldenThemeVariants(
+    'portrait-subtitle',
+    YaruMasterDetailGoldenVariant(
+      orientation: Orientation.portrait,
+      withSubtitle: true,
+    ),
+  ),
+  ...goldenThemeVariants(
+    'landscape-subtitle',
+    YaruMasterDetailGoldenVariant(
+      orientation: Orientation.landscape,
+      withSubtitle: true,
+    ),
+  ),
+  ...goldenThemeVariants(
+    'portrait-spacer',
+    YaruMasterDetailGoldenVariant(
+      orientation: Orientation.portrait,
+      withSpacer: true,
+    ),
+  ),
+  ...goldenThemeVariants(
+    'landscape-spacer',
+    YaruMasterDetailGoldenVariant(
+      orientation: Orientation.landscape,
+      withSpacer: true,
+    ),
+  ),
 });
 
 final orientationVariant = ValueVariant(Orientation.values.toSet());
@@ -128,4 +173,16 @@ extension OrientationX on Orientation {
         return kYaruMasterDetailBreakpoint;
     }
   }
+}
+
+class YaruMasterDetailGoldenVariant {
+  YaruMasterDetailGoldenVariant({
+    required this.orientation,
+    this.withSubtitle = false,
+    this.withSpacer = false,
+  });
+
+  final Orientation orientation;
+  final bool withSubtitle;
+  final bool withSpacer;
 }
