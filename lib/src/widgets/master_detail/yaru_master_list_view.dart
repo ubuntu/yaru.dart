@@ -39,6 +39,8 @@ class _YaruMasterListViewState extends State<YaruMasterListView> {
     final theme = YaruMasterDetailTheme.of(context);
     return YaruScrollViewUndershoot(
       controller: _controller,
+      startUndershoot: widget.startUndershoot,
+      endUndershoot: widget.endUndershoot,
       child: CustomScrollView(
         controller: _controller,
         slivers: [
