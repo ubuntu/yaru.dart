@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
-class YaruMasterListView extends StatelessWidget {
+class YaruMasterListView extends StatefulWidget {
   const YaruMasterListView({
     super.key,
     required this.length,
@@ -22,35 +22,52 @@ class YaruMasterListView extends StatelessWidget {
   final bool endUndershoot;
 
   @override
+  State<YaruMasterListView> createState() => _YaruMasterListViewState();
+}
+
+class _YaruMasterListViewState extends State<YaruMasterListView> {
+  final _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
-    return YaruScrollViewUndershoot.builder(
-      builder: (context, controller) {
-        return SingleChildScrollView(
-          controller: controller,
-          child: Padding(
-            padding: theme.listPadding ?? EdgeInsets.zero,
-            child: Column(
-              children: List.generate(
-                length,
-                (index) => YaruMasterTileScope(
-                  index: index,
-                  selected: index == selectedIndex,
-                  onTap: () => onTap(index),
-                  child: Builder(
-                    builder: (context) => builder(
-                      context,
-                      index,
-                      index == selectedIndex,
-                      availableWidth,
+    return YaruScrollViewUndershoot(
+      controller: _controller,
+      child: CustomScrollView(
+        controller: _controller,
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
+              padding: theme.listPadding ?? EdgeInsets.zero,
+              child: Column(
+                children: List.generate(
+                  widget.length,
+                  (index) => YaruMasterTileScope(
+                    index: index,
+                    selected: index == widget.selectedIndex,
+                    onTap: () => widget.onTap(index),
+                    child: Builder(
+                      builder: (context) => widget.builder(
+                        context,
+                        index,
+                        index == widget.selectedIndex,
+                        widget.availableWidth,
+                      ),
                     ),
                   ),
-                ),
-              ).withSpacing(theme.tileSpacing ?? 0),
+                ).withSpacing(theme.tileSpacing ?? 0),
+              ),
             ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
