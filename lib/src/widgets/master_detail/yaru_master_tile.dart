@@ -58,34 +58,33 @@ class YaruMasterTile extends StatelessWidget {
           color:
               isSelected ? theme.colorScheme.onSurface.withOpacity(0.07) : null,
         ),
-        child: IntrinsicHeight(
-          child: ListTile(
-            selectedColor: theme.colorScheme.onSurface,
-            iconColor: theme.colorScheme.onSurface.withOpacity(0.8),
-            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-            shape: RoundedRectangleBorder(
-              borderRadius:
-                  const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
-              side: theme.colorScheme.isHighContrast && isSelected
-                  ? BorderSide(
-                      color: theme.colorScheme.outlineVariant,
-                      strokeAlign: BorderSide.strokeAlignOutside,
-                    )
-                  : BorderSide.none,
-            ),
-            leading: leading,
-            title: _titleStyle(context, title),
-            subtitle: _subTitleStyle(context, subtitle),
-            trailing: trailing,
-            selected: isSelected,
-            onTap: () {
-              if (onTap != null) {
-                onTap!.call();
-              } else {
-                scope?.onTap();
-              }
-            },
+        child: ListTile(
+          selectedColor: theme.colorScheme.onSurface,
+          iconColor: theme.colorScheme.onSurface.withOpacity(0.8),
+          minVerticalPadding: 6,
+          visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
+            side: theme.colorScheme.isHighContrast && isSelected
+                ? BorderSide(
+                    color: theme.colorScheme.outlineVariant,
+                    strokeAlign: BorderSide.strokeAlignOutside,
+                  )
+                : BorderSide.none,
           ),
+          leading: leading,
+          title: _titleStyle(context, title),
+          subtitle: _subTitleStyle(context, subtitle),
+          trailing: trailing,
+          selected: isSelected,
+          onTap: () {
+            if (onTap != null) {
+              onTap!.call();
+            } else {
+              scope?.onTap();
+            }
+          },
         ),
       ),
     );
