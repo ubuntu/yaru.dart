@@ -44,15 +44,30 @@ void main() {
       );
 
       if (defaultTargetPlatform == TargetPlatform.macOS) {
-        expect(titleBar.isClosable, isFalse);
-        expect(titleBar.isMaximizable, isFalse);
-        expect(titleBar.isMinimizable, isFalse);
-        expect(titleBar.isRestorable, isFalse);
+        expect(titleBar.windowControlLayout?.leftItems ?? [], isEmpty);
+        expect(titleBar.windowControlLayout?.rightItems ?? [], isEmpty);
       } else {
-        expect(titleBar.isClosable, isTrue);
-        expect(titleBar.isMaximizable, isTrue);
-        expect(titleBar.isMinimizable, isTrue);
-        expect(titleBar.isRestorable, isTrue);
+        expect(
+          titleBar.windowControlLayout?.rightItems
+                  .contains(YaruWindowControlType.close) ??
+              false,
+          isTrue,
+        );
+        expect(
+          (titleBar.windowControlLayout?.rightItems
+                      .contains(YaruWindowControlType.maximize) ??
+                  false) ||
+              (titleBar.windowControlLayout?.rightItems
+                      .contains(YaruWindowControlType.restore) ??
+                  false),
+          isTrue,
+        );
+        expect(
+          titleBar.windowControlLayout?.rightItems
+                  .contains(YaruWindowControlType.minimize) ??
+              false,
+          isTrue,
+        );
       }
     },
     variant: TargetPlatformVariant.desktop(),
@@ -77,10 +92,7 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             appBar: YaruWindowTitleBar(
-              isClosable: false,
-              isMinimizable: false,
-              isMaximizable: false,
-              isRestorable: false,
+              windowControlLayout: YaruWindowControlLayout([], []),
             ),
           ),
         ),
@@ -93,10 +105,8 @@ void main() {
         find.byType(YaruTitleBar),
       );
 
-      expect(titleBar.isClosable, isFalse);
-      expect(titleBar.isMaximizable, isFalse);
-      expect(titleBar.isMinimizable, isFalse);
-      expect(titleBar.isRestorable, isFalse);
+      expect(titleBar.windowControlLayout?.leftItems, isEmpty);
+      expect(titleBar.windowControlLayout?.rightItems, isEmpty);
     },
     variant: TargetPlatformVariant.desktop(),
   );
@@ -106,7 +116,9 @@ void main() {
     (tester) async {
       final variant = goldenVariant.currentValue!;
 
-      final state = variant.value!;
+      final state = variant.value!.first as YaruWindowState;
+      final windowControlLayout =
+          variant.value!.last as YaruWindowControlLayout;
       final builder = variant.label.contains('dialog')
           ? YaruDialogTitleBar.new
           : YaruTitleBar.new;
@@ -114,11 +126,9 @@ void main() {
       await tester.pumpScaffold(
         builder(
           isActive: state.isActive,
-          isClosable: state.isClosable,
+          isMaximized: state.isMaximized,
+          windowControlLayout: windowControlLayout,
           isDraggable: false,
-          isMaximizable: state.isMaximizable,
-          isMinimizable: state.isMinimizable,
-          isRestorable: state.isRestorable,
           title: Text(state.title!),
           onClose: (_) {},
           onMaximize: (_) {},
@@ -144,69 +154,74 @@ void main() {
 final goldenVariant = ValueVariant({
   ...goldenThemeVariants(
     'empty',
-    const YaruWindowState(
-      isActive: true,
-      title: 'empty',
-    ),
+    [
+      const YaruWindowState(
+        isActive: true,
+        title: 'empty',
+      ),
+      const YaruWindowControlLayout([], [])
+    ],
   ),
   ...goldenThemeVariants(
     'closable',
-    const YaruWindowState(
-      isActive: true,
-      isClosable: true,
-      title: 'closable',
-    ),
+    [
+      const YaruWindowState(
+        isActive: true,
+        title: 'closable',
+      ),
+      const YaruWindowControlLayout([], [YaruWindowControlType.close])
+    ],
   ),
   ...goldenThemeVariants(
     'maximizable',
-    const YaruWindowState(
-      isActive: true,
-      isMinimizable: true,
-      isMaximizable: true,
-      isClosable: true,
-      title: 'maximizable',
-    ),
+    [
+      const YaruWindowState(
+        isActive: true,
+        isMaximized: false,
+        title: 'maximizable',
+      ),
+      const YaruWindowControlLayout([], [
+        YaruWindowControlType.minimize,
+        YaruWindowControlType.maximize,
+        YaruWindowControlType.close
+      ])
+    ],
   ),
-  ...goldenThemeVariants(
-    'restorable',
+  ...goldenThemeVariants('restorable', [
     const YaruWindowState(
       isActive: true,
-      isMinimizable: true,
-      isRestorable: true,
-      isClosable: true,
+      isMaximized: true,
       title: 'restorable',
     ),
-  ),
-  ...goldenThemeVariants(
-    'inactive',
+    const YaruWindowControlLayout([], [
+      YaruWindowControlType.minimize,
+      YaruWindowControlType.maximize,
+      YaruWindowControlType.close
+    ])
+  ]),
+  ...goldenThemeVariants('inactive', [
     const YaruWindowState(
       isActive: false,
-      isMinimizable: true,
-      isMaximizable: true,
-      isClosable: true,
       title: 'inactive',
     ),
-  ),
-  ...goldenThemeVariants(
-    'dialog',
+    const YaruWindowControlLayout([], [
+      YaruWindowControlType.minimize,
+      YaruWindowControlType.maximize,
+      YaruWindowControlType.close
+    ])
+  ]),
+  ...goldenThemeVariants('dialog', [
     const YaruWindowState(
       isActive: true,
-      isMinimizable: false,
-      isMaximizable: false,
-      isRestorable: false,
-      isClosable: true,
       title: 'dialog',
     ),
-  ),
-  ...goldenThemeVariants(
-    'dialog-red',
+    const YaruWindowControlLayout([], [YaruWindowControlType.close])
+  ]),
+  ...goldenThemeVariants('dialog-red', [
     const YaruWindowState(
       isActive: true,
-      isClosable: true,
-      isMinimizable: false,
-      isMaximizable: false,
-      isRestorable: false,
       title: 'red dialog',
     ),
-  ),
+    const YaruWindowControlLayout([], [YaruWindowControlType.close])
+  ]),
 });

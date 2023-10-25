@@ -4,11 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/constants.dart';
+import 'package:yaru_widgets/src/widgets/yaru_window_control_layout.dart';
 import 'package:yaru_window/yaru_window.dart';
 
 import 'yaru_title_bar_gesture_detector.dart';
 import 'yaru_title_bar_theme.dart';
 import 'yaru_window_control.dart';
+import 'yaru_window_control_row.dart';
 
 const _kYaruTitleBarHeroTag = '<YaruTitleBar hero tag>';
 
@@ -31,12 +33,10 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.shape,
     this.border,
     this.style,
+    this.windowControlLayout,
     this.isActive,
-    this.isClosable,
+    this.isMaximized,
     this.isDraggable,
-    this.isMaximizable,
-    this.isMinimizable,
-    this.isRestorable,
     this.onClose,
     this.onDrag,
     this.onMaximize,
@@ -76,29 +76,20 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   /// The style.
   final YaruTitleBarStyle? style;
 
+  /// The order and position of window controls
+  final YaruWindowControlLayout? windowControlLayout;
+
   /// Whether the title bar visualized as active.
   final bool? isActive;
 
-  /// Whether the title bar shows a close button.
-  final bool? isClosable;
+  /// Whether to show the restore rather than the maximize button.
+  final bool? isMaximized;
 
   /// Whether the title bar can be dragged.
   final bool? isDraggable;
 
-  /// Whether the title bar shows a maximize button.
-  final bool? isMaximizable;
-
-  /// Whether the title bar shows a minimize button.
-  final bool? isMinimizable;
-
-  /// Whether the title bar shows a restore button.
-  final bool? isRestorable;
-
   /// Called when the close button is pressed.
   final FutureOr<void> Function(BuildContext)? onClose;
-
-  /// Called when the title bar is dragged to move the window.
-  final FutureOr<void> Function(BuildContext)? onDrag;
 
   /// Called when the maximize button is pressed or the title bar is
   /// double-clicked while the window is not maximized.
@@ -110,6 +101,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   /// Called when the restore button is pressed or the title bar is
   /// double-clicked while the window is maximized.
   final FutureOr<void> Function(BuildContext)? onRestore;
+
+  /// Called when the title bar is dragged to move the window.
+  final FutureOr<void> Function(BuildContext)? onDrag;
 
   /// Called when the secondary mouse button is pressed.
   final FutureOr<void> Function(BuildContext)? onShowMenu;
@@ -200,11 +194,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     return TextFieldTapRegion(
       child: YaruTitleBarGestureDetector(
         onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
-        onDoubleTap: () => isMaximizable == true
-            ? onMaximize?.call(context)
-            : isRestorable == true
-                ? onRestore?.call(context)
-                : null,
+        onDoubleTap: () => isMaximized == true
+            ? onRestore?.call(context)
+            : onMaximize?.call(context),
         onSecondaryTap: onShowMenu != null ? () => onShowMenu!(context) : null,
         child: AppBar(
           elevation: titleBarTheme.elevation,
@@ -224,54 +216,32 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    if (style == YaruTitleBarStyle.normal &&
+                        windowControlLayout?.leftItems != null &&
+                        windowControlLayout!.leftItems.isNotEmpty)
+                      YaruWindowControlRow(
+                        windowControls: windowControlLayout!.leftItems,
+                        isMaximized: isMaximized ?? false,
+                        buttonPadding: buttonPadding,
+                        buttonSpacing: buttonSpacing,
+                        onClose: onClose,
+                        onMaximize: onMaximize,
+                        onRestore: onRestore,
+                        onMinimize: onMinimize,
+                      ),
                     ...?actions,
                     if (style == YaruTitleBarStyle.normal &&
-                        (isMinimizable == true ||
-                            isRestorable == true ||
-                            isMaximizable == true ||
-                            isClosable == true))
-                      Padding(
-                        padding: buttonPadding,
-                        child: Row(
-                          children: [
-                            if (isMinimizable == true)
-                              YaruWindowControl(
-                                foregroundColor: foregroundColor,
-                                backgroundColor: backgroundColor,
-                                type: YaruWindowControlType.minimize,
-                                onTap: onMinimize != null
-                                    ? () => onMinimize!(context)
-                                    : null,
-                              ),
-                            if (isRestorable == true)
-                              YaruWindowControl(
-                                foregroundColor: foregroundColor,
-                                backgroundColor: backgroundColor,
-                                type: YaruWindowControlType.restore,
-                                onTap: onRestore != null
-                                    ? () => onRestore!(context)
-                                    : null,
-                              ),
-                            if (isMaximizable == true)
-                              YaruWindowControl(
-                                foregroundColor: foregroundColor,
-                                backgroundColor: backgroundColor,
-                                type: YaruWindowControlType.maximize,
-                                onTap: onMaximize != null
-                                    ? () => onMaximize!(context)
-                                    : null,
-                              ),
-                            if (isClosable == true)
-                              YaruWindowControl(
-                                foregroundColor: foregroundColor,
-                                backgroundColor: backgroundColor,
-                                type: YaruWindowControlType.close,
-                                onTap: onClose != null
-                                    ? () => onClose!(context)
-                                    : null,
-                              ),
-                          ].withSpacing(buttonSpacing),
-                        ),
+                        windowControlLayout?.rightItems != null &&
+                        windowControlLayout!.rightItems.isNotEmpty)
+                      YaruWindowControlRow(
+                        windowControls: windowControlLayout!.rightItems,
+                        isMaximized: isMaximized ?? false,
+                        buttonPadding: buttonPadding,
+                        buttonSpacing: buttonSpacing,
+                        onClose: onClose,
+                        onMaximize: onMaximize,
+                        onRestore: onRestore,
+                        onMinimize: onMinimize,
                       ),
                   ],
                 ),
@@ -281,15 +251,6 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
-  }
-}
-
-extension _ListSpacing on List<Widget> {
-  List<Widget> withSpacing(double spacing) {
-    return expand((item) sync* {
-      yield SizedBox(width: spacing);
-      yield item;
-    }).skip(1).toList();
   }
 }
 
@@ -395,12 +356,10 @@ class YaruWindowTitleBar extends StatelessWidget
     this.shape,
     this.border,
     this.style,
+    this.windowControlLayout,
     this.isActive,
-    this.isClosable,
     this.isDraggable,
-    this.isMaximizable,
-    this.isMinimizable,
-    this.isRestorable,
+    this.isMaximized,
     this.onClose = YaruWindow.close,
     this.onDrag = YaruWindow.drag,
     this.onMaximize = YaruWindow.maximize,
@@ -443,20 +402,14 @@ class YaruWindowTitleBar extends StatelessWidget
   /// Whether the title bar visualized as active.
   final bool? isActive;
 
-  /// Whether the title bar shows a close button.
-  final bool? isClosable;
-
   /// Whether the title bar can be dragged to move the window.
   final bool? isDraggable;
 
-  /// Whether the title bar shows a maximize button.
-  final bool? isMaximizable;
+  /// Whether to show the restore rather than the maximize button.
+  final bool? isMaximized;
 
-  /// Whether the title bar shows a minimize button.
-  final bool? isMinimizable;
-
-  /// Whether the title bar shows a restore button.
-  final bool? isRestorable;
+  /// The order and position of window controls
+  final YaruWindowControlLayout? windowControlLayout;
 
   /// Called when the close button is pressed.
   final FutureOr<void> Function(BuildContext)? onClose;
@@ -524,14 +477,16 @@ class YaruWindowTitleBar extends StatelessWidget
           border: border,
           style: style,
           isActive: isActive ?? state?.isActive,
-          isClosable: isClosable ?? state?.isClosable?.exceptMacOS(context),
           isDraggable: isDraggable ?? state?.isMovable,
-          isMaximizable:
-              isMaximizable ?? state?.isMaximizable?.exceptMacOS(context),
-          isMinimizable:
-              isMinimizable ?? state?.isMinimizable?.exceptMacOS(context),
-          isRestorable:
-              isRestorable ?? state?.isRestorable?.exceptMacOS(context),
+          isMaximized: isMaximized ?? state?.isMaximized,
+          windowControlLayout: windowControlLayout ??
+              (_onMacOS(context)
+                  ? const YaruWindowControlLayout([], [])
+                  : const YaruWindowControlLayout([], [
+                      YaruWindowControlType.minimize,
+                      YaruWindowControlType.maximize,
+                      YaruWindowControlType.close
+                    ])),
           onClose: onClose,
           onDrag: onDrag,
           onMaximize: onMaximize,
@@ -542,6 +497,11 @@ class YaruWindowTitleBar extends StatelessWidget
         );
       },
     );
+  }
+
+  bool _onMacOS(BuildContext context) {
+    final platform = Theme.of(context).platform;
+    return !kIsWeb && platform == TargetPlatform.macOS;
   }
 }
 
@@ -565,11 +525,10 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.border,
     super.style = YaruTitleBarStyle.normal,
     super.isActive,
-    super.isClosable = true,
     super.isDraggable,
-    super.isMaximizable = false,
-    super.isMinimizable = false,
-    super.isRestorable = false,
+    super.windowControlLayout =
+        const YaruWindowControlLayout([], [YaruWindowControlType.close]),
+    super.isMaximized = false,
     super.onClose = _maybePop,
     super.onDrag = YaruWindow.drag,
     super.onMaximize = null,
@@ -587,12 +546,5 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
 
   static Future<void> _maybePop(BuildContext context) {
     return Navigator.maybePop(context);
-  }
-}
-
-extension on bool? {
-  bool? exceptMacOS(BuildContext context) {
-    final platform = Theme.of(context).platform;
-    return !kIsWeb && platform == TargetPlatform.macOS ? false : this;
   }
 }
