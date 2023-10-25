@@ -85,9 +85,7 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
                 if (index != widget.children.length - 1 && widget.placeDividers)
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 1),
-                    child: Divider(
-                      height: 0.0,
-                    ),
+                    child: Divider(),
                   ),
               ],
             ),
