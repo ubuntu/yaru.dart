@@ -19,35 +19,48 @@ class _WindowControlsPageState extends State<WindowControlsPage> {
           controller: controller,
           padding: const EdgeInsets.all(kYaruPagePadding),
           children: [
-            for (final interactive in [true, false]) ...[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  YaruWindowControl(
-                    type: YaruWindowControlType.minimize,
-                    onTap: interactive ? () {} : null,
-                  ),
-                  const SizedBox(width: 10),
-                  YaruWindowControl(
-                    type: _maximized
-                        ? YaruWindowControlType.maximize
-                        : YaruWindowControlType.restore,
-                    onTap: interactive
-                        ? () => setState(() => _maximized = !_maximized)
-                        : null,
-                  ),
-                  const SizedBox(width: 10),
-                  YaruWindowControl(
-                    type: YaruWindowControlType.close,
-                    onTap: interactive ? () {} : null,
-                  ),
-                ],
+            for (final platform in YaruWindowControlPlatform.values) ...[
+              Text(
+                '${platform.name.capitalize()}:',
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
+              for (final interactive in [true, false]) ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    YaruWindowControl(
+                      type: YaruWindowControlType.minimize,
+                      platform: platform,
+                      onTap: interactive ? () {} : null,
+                    ),
+                    if (platform == YaruWindowControlPlatform.yaru)
+                      const SizedBox(width: 10),
+                    YaruWindowControl(
+                      type: _maximized
+                          ? YaruWindowControlType.restore
+                          : YaruWindowControlType.maximize,
+                      platform: platform,
+                      onTap: interactive
+                          ? () => setState(() => _maximized = !_maximized)
+                          : null,
+                    ),
+                    if (platform == YaruWindowControlPlatform.yaru)
+                      const SizedBox(width: 10),
+                    YaruWindowControl(
+                      type: YaruWindowControlType.close,
+                      platform: platform,
+                      onTap: interactive ? () {} : null,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+              ],
+              const SizedBox(height: 25),
             ],
-            YaruTile(
-              title: const Text('Maximized'),
-              trailing: YaruSwitch(
+            Center(
+              child: YaruSwitchButton(
+                title: const Text('Maximized'),
                 value: _maximized,
                 onChanged: (v) => setState(() => _maximized = v),
               ),
@@ -56,5 +69,11 @@ class _WindowControlsPageState extends State<WindowControlsPage> {
         );
       },
     );
+  }
+}
+
+extension StringExtension on String {
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 }
