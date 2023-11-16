@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.3.0 (2023-11-15)
+
+## What's Changed
+* feat: add `YaruScrollViewUndershoot` by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/789
+* fix: final fix for left pane overflow by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/793
+* fix(YaruExpansionPanel): use hairline dividers by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/794
+* feat(YaruWindowControl): pimp up YaruWindowControl by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/795
+* chore: update yaru.dart dependency by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/796
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.2.2...v3.3.0
+
 ## 3.2.2 (2023-10-23)
 
 ## What's Changed
