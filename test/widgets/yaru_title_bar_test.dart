@@ -224,5 +224,5 @@ final goldenVariant = ValueVariant({
           ),
         ),
       };
-    }()
+    }(),
 });
