@@ -619,6 +619,9 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.onRestore = null,
     super.onShowMenu = YaruWindow.showMenu,
     super.heroTag = _kYaruTitleBarHeroTag,
+    super.platform,
+    super.buttonPadding,
+    super.buttonSpacing,
   });
 
   static const defaultShape = RoundedRectangleBorder(

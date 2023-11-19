@@ -106,6 +106,14 @@ void main() {
     (tester) async {
       final variant = goldenVariant.currentValue!;
 
+      late YaruWindowControlPlatform platform;
+
+      if (variant.label.startsWith('windows')) {
+        platform = YaruWindowControlPlatform.windows;
+      } else {
+        platform = YaruWindowControlPlatform.yaru;
+      }
+
       final state = variant.value!;
       final builder = variant.label.contains('dialog')
           ? YaruDialogTitleBar.new
@@ -125,6 +133,7 @@ void main() {
           onMinimize: (_) {},
           onRestore: (_) {},
           backgroundColor: variant.label.contains('red') ? Colors.red : null,
+          platform: platform,
         ),
         themeMode: variant.themeMode,
         size: const Size(480, kYaruTitleBarHeight),
@@ -142,71 +151,78 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants(
-    'empty',
-    const YaruWindowState(
-      isActive: true,
-      title: 'empty',
-    ),
-  ),
-  ...goldenThemeVariants(
-    'closable',
-    const YaruWindowState(
-      isActive: true,
-      isClosable: true,
-      title: 'closable',
-    ),
-  ),
-  ...goldenThemeVariants(
-    'maximizable',
-    const YaruWindowState(
-      isActive: true,
-      isMinimizable: true,
-      isMaximizable: true,
-      isClosable: true,
-      title: 'maximizable',
-    ),
-  ),
-  ...goldenThemeVariants(
-    'restorable',
-    const YaruWindowState(
-      isActive: true,
-      isMinimizable: true,
-      isRestorable: true,
-      isClosable: true,
-      title: 'restorable',
-    ),
-  ),
-  ...goldenThemeVariants(
-    'inactive',
-    const YaruWindowState(
-      isActive: false,
-      isMinimizable: true,
-      isMaximizable: true,
-      isClosable: true,
-      title: 'inactive',
-    ),
-  ),
-  ...goldenThemeVariants(
-    'dialog',
-    const YaruWindowState(
-      isActive: true,
-      isMinimizable: false,
-      isMaximizable: false,
-      isRestorable: false,
-      isClosable: true,
-      title: 'dialog',
-    ),
-  ),
-  ...goldenThemeVariants(
-    'dialog-red',
-    const YaruWindowState(
-      isActive: true,
-      isClosable: true,
-      isMinimizable: false,
-      isMaximizable: false,
-      isRestorable: false,
-      title: 'red dialog',
-    ),
-  ),
+  for (final platform in YaruWindowControlPlatform.values)
+    ...() {
+      final platformPrefix =
+          platform == YaruWindowControlPlatform.windows ? 'windows-' : '';
+      return {
+        ...goldenThemeVariants(
+          '${platformPrefix}empty',
+          const YaruWindowState(
+            isActive: true,
+            title: 'empty',
+          ),
+        ),
+        ...goldenThemeVariants(
+          '${platformPrefix}closable',
+          const YaruWindowState(
+            isActive: true,
+            isClosable: true,
+            title: 'closable',
+          ),
+        ),
+        ...goldenThemeVariants(
+          '${platformPrefix}maximizable',
+          const YaruWindowState(
+            isActive: true,
+            isMinimizable: true,
+            isMaximizable: true,
+            isClosable: true,
+            title: 'maximizable',
+          ),
+        ),
+        ...goldenThemeVariants(
+          '${platformPrefix}restorable',
+          const YaruWindowState(
+            isActive: true,
+            isMinimizable: true,
+            isRestorable: true,
+            isClosable: true,
+            title: 'restorable',
+          ),
+        ),
+        ...goldenThemeVariants(
+          '${platformPrefix}inactive',
+          const YaruWindowState(
+            isActive: false,
+            isMinimizable: true,
+            isMaximizable: true,
+            isClosable: true,
+            title: 'inactive',
+          ),
+        ),
+        ...goldenThemeVariants(
+          '${platformPrefix}dialog',
+          const YaruWindowState(
+            isActive: true,
+            isMinimizable: false,
+            isMaximizable: false,
+            isRestorable: false,
+            isClosable: true,
+            title: 'dialog',
+          ),
+        ),
+        ...goldenThemeVariants(
+          '${platformPrefix}dialog-red',
+          const YaruWindowState(
+            isActive: true,
+            isClosable: true,
+            isMinimizable: false,
+            isMaximizable: false,
+            isRestorable: false,
+            title: 'red dialog',
+          ),
+        ),
+      };
+    }()
 });
