@@ -193,14 +193,14 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     final bSpacing = buttonSpacing ??
         titleBarTheme.buttonSpacing ??
-        (Platform.isWindows ? 0 : 14);
+        (!kIsWeb && Platform.isWindows ? 0 : 14);
     final bPadding = buttonPadding ??
         titleBarTheme.buttonPadding ??
-        (Platform.isWindows
+        (!kIsWeb && Platform.isWindows
             ? const EdgeInsets.only(bottom: 17)
             : const EdgeInsets.symmetric(horizontal: 10));
     final windowControlPlatform = platform ??
-        (Platform.isWindows
+        (!kIsWeb && Platform.isWindows
             ? YaruWindowControlPlatform.windows
             : YaruWindowControlPlatform.yaru);
 
