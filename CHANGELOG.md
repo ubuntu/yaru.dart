@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.3.1 (2023-11-20)
+
+## What's Changed
+* fix(YaruTitleBar): improve parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/798
+* fix(YaruTitleBar): add golden tests windows variant by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/801
+* fix: Grey web title bar: check kisweb by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/803
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.3.0...v3.3.1
+
 ## 3.3.0 (2023-11-15)
 
 ## What's Changed
