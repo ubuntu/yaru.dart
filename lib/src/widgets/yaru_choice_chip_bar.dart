@@ -27,6 +27,8 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.goPreviousIcon,
     this.goNextIcon,
     this.clearOnSelect = true,
+    this.shrinkWrap = true,
+    this.showCheckMarks = true,
   }) : assert(labels.length == isSelected.length);
 
   /// The [List] of [Widget]'s used to generate a [List] of [ChoiceChip]s
@@ -103,6 +105,14 @@ class YaruChoiceChipBar extends StatefulWidget {
   /// Defaults to `true`.
   final bool clearOnSelect;
 
+  /// Forwards this to the internal [ListView] if [YaruChoiceChipBarStyle.row]
+  /// or [YaruChoiceChipBarStyle.wrap] are used. The default is `false`
+  final bool shrinkWrap;
+
+  /// Defines if the [ChoiceChip]s inside should show the checkmark.
+  /// The default is `true`.
+  final bool showCheckMarks;
+
   @override
   State<YaruChoiceChipBar> createState() => _YaruChoiceChipBarState();
 }
@@ -160,6 +170,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
           ),
         ),
         child: ChoiceChip(
+          showCheckmark: widget.showCheckMarks,
           label: widget.labels[index],
           selected: widget.isSelected[index],
           onSelected: widget.onSelected == null
@@ -184,6 +195,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     ];
 
     final listView = ListView(
+      shrinkWrap: widget.shrinkWrap,
       scrollDirection: Axis.horizontal,
       controller: _controller,
       children: children
