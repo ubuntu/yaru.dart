@@ -197,7 +197,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final bPadding = buttonPadding ??
         titleBarTheme.buttonPadding ??
         (!kIsWeb && Platform.isWindows
-            ? const EdgeInsets.only(bottom: 17)
+            ? const EdgeInsets.only(bottom: 18)
             : const EdgeInsets.symmetric(horizontal: 10));
     final windowControlPlatform = platform ??
         (!kIsWeb && Platform.isWindows
@@ -227,7 +227,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    return TextFieldTapRegion(
+    final textFieldTapRegion = TextFieldTapRegion(
       child: YaruTitleBarGestureDetector(
         onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
         onDoubleTap: () => isMaximizable == true
@@ -294,7 +294,10 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isClosable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                foregroundColor: foregroundColor,
+                                foregroundColor: windowControlPlatform ==
+                                        YaruWindowControlPlatform.windows
+                                    ? null
+                                    : foregroundColor,
                                 type: YaruWindowControlType.close,
                                 onTap: onClose != null
                                     ? () => onClose!(context)
@@ -311,6 +314,17 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
+
+    if (windowControlPlatform == YaruWindowControlPlatform.windows &&
+        isMaximizable == false) {
+      return ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(6),
+        ),
+        child: textFieldTapRegion,
+      );
+    }
+    return textFieldTapRegion;
   }
 }
 
