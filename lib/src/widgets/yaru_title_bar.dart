@@ -300,7 +300,15 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                                     ? () => onMaximize!(context)
                                     : null,
                               ),
-                            if (isClosable == true) closeButton,
+                            if (isClosable == true)
+                              isMaximizable == true
+                                  ? closeButton
+                                  : ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(6),
+                                      ),
+                                      child: closeButton,
+                                    ),
                           ].withSpacing(bSpacing),
                         ),
                       ),
