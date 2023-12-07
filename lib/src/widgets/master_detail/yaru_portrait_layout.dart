@@ -93,8 +93,8 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   @override
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
-    return WillPopScope(
-      onWillPop: () async => !await _navigator.maybePop(),
+    return PopScope(
+      onPopInvoked: (v) async => await _navigator.maybePop(),
       child: Theme(
         data: Theme.of(context).copyWith(
           pageTransitionsTheme: theme.portraitTransitions,
