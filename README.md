@@ -1,4 +1,4 @@
-# Flutter Yaru Widgets
+# Flutter Yaru Widgets 
 
 [![Pub Package](https://img.shields.io/pub/v/yaru_widgets.svg)](https://pub.dev/packages/yaru_widgets)
 
