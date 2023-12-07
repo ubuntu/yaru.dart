@@ -227,7 +227,16 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    final textFieldTapRegion = TextFieldTapRegion(
+    final closeButton = YaruWindowControl(
+      platform: windowControlPlatform,
+      foregroundColor:
+          windowControlPlatform == YaruWindowControlPlatform.windows
+              ? null
+              : foregroundColor,
+      type: YaruWindowControlType.close,
+      onTap: onClose != null ? () => onClose!(context) : null,
+    );
+    return TextFieldTapRegion(
       child: YaruTitleBarGestureDetector(
         onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
         onDoubleTap: () => isMaximizable == true
@@ -292,17 +301,14 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                                     : null,
                               ),
                             if (isClosable == true)
-                              YaruWindowControl(
-                                platform: windowControlPlatform,
-                                foregroundColor: windowControlPlatform ==
-                                        YaruWindowControlPlatform.windows
-                                    ? null
-                                    : foregroundColor,
-                                type: YaruWindowControlType.close,
-                                onTap: onClose != null
-                                    ? () => onClose!(context)
-                                    : null,
-                              ),
+                              isMaximizable == true
+                                  ? closeButton
+                                  : ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(6),
+                                      ),
+                                      child: closeButton,
+                                    ),
                           ].withSpacing(bSpacing),
                         ),
                       ),
@@ -314,17 +320,6 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
-
-    if (windowControlPlatform == YaruWindowControlPlatform.windows &&
-        isMaximizable == false) {
-      return ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(6),
-        ),
-        child: textFieldTapRegion,
-      );
-    }
-    return textFieldTapRegion;
   }
 }
 
