@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:yaru_widgets/constants.dart';
 import 'package:yaru_widgets/foundation.dart' show YaruPageController;
 import 'package:yaru_widgets/widgets.dart'
     show YaruTitleBarTheme, YaruTitleBarThemeData, YaruTitleBarStyle;
@@ -40,7 +41,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
   final double? previousPaneWidth;
   final ValueChanged<double>? onLeftPaneWidthChange;
-  final PreferredSizeWidget? appBar;
+  final Widget? appBar;
   final Widget? bottomBar;
   final YaruPageController controller;
 
@@ -168,24 +169,30 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
         data: const YaruTitleBarThemeData(
           style: YaruTitleBarStyle.undecorated,
         ),
-        child: Scaffold(
-          backgroundColor: color,
-          appBar: widget.appBar,
-          body: YaruMasterListView(
-            length: widget.controller.length,
-            selectedIndex: _selectedIndex,
-            onTap: _onTap,
-            builder: widget.tileBuilder,
-            availableWidth: _paneWidth!,
-            startUndershoot: widget.appBar != null,
-            endUndershoot: widget.bottomBar != null,
-          ),
-          bottomNavigationBar: widget.bottomBar == null
-              ? null
-              : Material(
-                  color: color,
-                  child: widget.bottomBar,
-                ),
+        child: Column(
+          children: [
+            if (widget.appBar != null)
+              SizedBox(
+                height: kYaruTitleBarHeight,
+                child: widget.appBar!,
+              ),
+            Expanded(
+              child: YaruMasterListView(
+                length: widget.controller.length,
+                selectedIndex: _selectedIndex,
+                onTap: _onTap,
+                builder: widget.tileBuilder,
+                availableWidth: _paneWidth!,
+                startUndershoot: widget.appBar != null,
+                endUndershoot: widget.bottomBar != null,
+              ),
+            ),
+            if (widget.bottomBar != null)
+              Material(
+                color: color,
+                child: widget.bottomBar,
+              ),
+          ],
         ),
       ),
     );
