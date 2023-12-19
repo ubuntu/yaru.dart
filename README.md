@@ -23,7 +23,7 @@ Icon(YaruIcons.folder)
 To work on the icons and then build the font, you need to install the [icon_font_generator](https://github.com/rbcprolabs/icon_font_generator) tool:
 
 ```console
-pub global activate icon_font_generator
+dart pub global activate -sgit https://github.com/Jupi007/icon_font_generator.git --git-ref yaru
 ```
 
 Source SVGs files are located inside `./icons`. The final icon name is determined by **subfolder_name** + **icon_name** (Ex: `icons/mimetype/text-plain.svg` will be named `mimetype_text_plain`).

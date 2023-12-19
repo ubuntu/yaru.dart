@@ -20,10 +20,15 @@
 
 # Build icon font
 
-if ! command -v icon_font_generator >/dev/null
+if ! command -v yaru_icon_font_generator >/dev/null
 then
-    echo  -e "\nPlease install icon_font_generator (see README.md)\n"
-    exit 1
+    echo
+    read -p "yaru_icon_font_generator is required, do you want to install it right now? (y/n)" -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        dart pub global activate -sgit https://github.com/Jupi007/icon_font_generator.git --git-ref yaru
+    fi
 fi
 
-dart pub global run icon_font_generator:generator
+yaru_icon_font_generator
