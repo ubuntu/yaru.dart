@@ -18,6 +18,8 @@ class YaruExpansionPanel extends StatefulWidget {
     this.color,
     this.placeDividers = true,
     this.expandIcon,
+    this.scrollable = true,
+    this.shrinkWrap = true,
   });
 
   final List<Widget> children;
@@ -31,6 +33,8 @@ class YaruExpansionPanel extends StatefulWidget {
   final Color? color;
   final bool placeDividers;
   final Widget? expandIcon;
+  final bool scrollable;
+  final bool shrinkWrap;
 
   @override
   State<YaruExpansionPanel> createState() => _YaruExpansionPanelState();
@@ -47,6 +51,15 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
   }
 
   @override
+  void didUpdateWidget(covariant YaruExpansionPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.children.length != widget.children.length) {
+      _expandedStore =
+          List<bool>.generate(widget.children.length, (index) => false);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     assert(widget.children.length == widget.headers.length);
 
@@ -55,42 +68,79 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
       width: widget.width,
       height: widget.height,
       padding: widget.padding,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (int index = 0; index < widget.children.length; index++)
-            Column(
-              children: [
-                YaruExpandable(
-                  expandIcon: widget.expandIcon,
-                  expandIconPadding: widget.expandIconPadding,
-                  isExpanded: _expandedStore[index],
-                  onChange: (_) {
-                    setState(() {
-                      _expandedStore[index] = !_expandedStore[index];
-
-                      for (var n = 0; n < _expandedStore.length; n++) {
-                        if (n != index && _expandedStore[index] == true) {
-                          _expandedStore[n] = false;
-                        }
-                      }
-                    });
-                  },
-                  header: Padding(
-                    padding: widget.headerPadding,
-                    child: widget.headers[index],
-                  ),
-                  child: widget.children[index],
-                ),
-                if (index != widget.children.length - 1 && widget.placeDividers)
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 1),
-                    child: Divider(),
-                  ),
-              ],
+      child: ListView.builder(
+        shrinkWrap: widget.shrinkWrap,
+        physics:
+            widget.scrollable ? null : const NeverScrollableScrollPhysics(),
+        itemCount: widget.children.length,
+        itemBuilder: (context, index) {
+          return _Expandable(
+            expandIcon: widget.expandIcon,
+            expandIconPadding: widget.expandIconPadding,
+            isExpanded: _expandedStore[index],
+            onChange: (_) {
+              setState(() {
+                _expandedStore[index] = !_expandedStore[index];
+              });
+              for (var n = 0; n < _expandedStore.length; n++) {
+                if (n != index && _expandedStore[index] == true) {
+                  setState(() {
+                    _expandedStore[n] = false;
+                  });
+                }
+              }
+            },
+            header: Padding(
+              padding: widget.headerPadding,
+              child: widget.headers[index],
             ),
-        ],
+            placeDivider:
+                index != widget.children.length - 1 && widget.placeDividers,
+            child: widget.children[index],
+          );
+        },
       ),
     );
   }
+}
+
+class _Expandable extends StatelessWidget {
+  const _Expandable({
+    required this.expandIcon,
+    required this.expandIconPadding,
+    required this.isExpanded,
+    required this.onChange,
+    required this.header,
+    required this.child,
+    required this.placeDivider,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        YaruExpandable(
+          expandIcon: expandIcon,
+          expandIconPadding: expandIconPadding,
+          isExpanded: isExpanded,
+          onChange: onChange,
+          header: header,
+          child: child,
+        ),
+        if (placeDivider)
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 1),
+            child: Divider(),
+          ),
+      ],
+    );
+  }
+
+  final Widget? expandIcon;
+  final EdgeInsetsGeometry expandIconPadding;
+  final bool isExpanded;
+  final void Function(bool)? onChange;
+  final Widget header;
+  final Widget child;
+  final bool placeDivider;
 }
