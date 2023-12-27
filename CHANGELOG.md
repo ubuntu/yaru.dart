@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.4.0 (2023-12-27)
+
+## What's Changed
+* feat(YaruChoiceChipBar): add more parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/804
+* chore: update nightly CI flutter version by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/812
+* fix: reduce number of used scaffolds by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/811
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/813
+* chore: update to flutter 3.16 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/816
+* fix(YaruTitleBar): windows close button color and clipping by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/820
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/821
+* chore: update yaru.dart by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/822
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.3.1...v3.4.0
+
 ## 3.3.1 (2023-11-20)
 
 ## What's Changed
