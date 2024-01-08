@@ -197,7 +197,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final bPadding = buttonPadding ??
         titleBarTheme.buttonPadding ??
         (!kIsWeb && Platform.isWindows
-            ? const EdgeInsets.only(bottom: 17)
+            ? const EdgeInsets.only(bottom: 18)
             : const EdgeInsets.symmetric(horizontal: 10));
     final windowControlPlatform = platform ??
         (!kIsWeb && Platform.isWindows
@@ -227,6 +227,15 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
+    final closeButton = YaruWindowControl(
+      platform: windowControlPlatform,
+      foregroundColor:
+          windowControlPlatform == YaruWindowControlPlatform.windows
+              ? null
+              : foregroundColor,
+      type: YaruWindowControlType.close,
+      onTap: onClose != null ? () => onClose!(context) : null,
+    );
     return TextFieldTapRegion(
       child: YaruTitleBarGestureDetector(
         onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
@@ -292,14 +301,14 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                                     : null,
                               ),
                             if (isClosable == true)
-                              YaruWindowControl(
-                                platform: windowControlPlatform,
-                                foregroundColor: foregroundColor,
-                                type: YaruWindowControlType.close,
-                                onTap: onClose != null
-                                    ? () => onClose!(context)
-                                    : null,
-                              ),
+                              isMaximizable == true
+                                  ? closeButton
+                                  : ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(6),
+                                      ),
+                                      child: closeButton,
+                                    ),
                           ].withSpacing(bSpacing),
                         ),
                       ),
