@@ -10,6 +10,7 @@ import 'pages/checkbox_page.dart';
 import 'pages/choice_chip_bar_page.dart';
 import 'pages/clip_page.dart';
 import 'pages/color_disk_page.dart';
+import 'pages/date_time_entry_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
@@ -105,6 +106,11 @@ final examplePageItems = <PageItem>[
         'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/color_disk_page.dart',
     pageBuilder: (context) => const ColorDiskPage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
+  ),
+  PageItem(
+    title: 'YaruDateTimeEntry',
+    pageBuilder: (context) => const DateTimePage(),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.calendar),
   ),
   PageItem(
     title: 'YaruDraggable',
