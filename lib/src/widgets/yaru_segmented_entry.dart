@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:yaru_widgets/src/widgets/yaru_edge_focus_interceptor.dart';
 import 'package:yaru_widgets/widgets.dart';
 
-/// An entry, splited into multiple segments, which each represents a selectable editable part of the value.
+/// An entry, split into multiple segments, which each represents a selectable editable part of the value.
 /// This widget provides keyboard navigation, and numeric value manipulation, using keyboard arrow and tab keys.
 ///
 /// See [YaruDateTimeEntry] for a good demo of how this widget works.
