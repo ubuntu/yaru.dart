@@ -13,7 +13,7 @@ class YaruDateTimeEntry extends StatefulWidget {
   const YaruDateTimeEntry({
     super.key,
     this.focusNode,
-    required this.initialDate,
+    this.initialDate,
     required this.firstDate,
     required this.lastDate,
     this.onFieldSubmitted,
@@ -30,7 +30,7 @@ class YaruDateTimeEntry extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// If provided, it will be used as the default value of the field.
-  final DateTime initialDate;
+  final DateTime? initialDate;
 
   /// The earliest allowable [DateTime] that the user can input.
   final DateTime firstDate;
@@ -99,6 +99,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     super.initState();
 
     _daySegment = YaruEntrySegment.fixed(
+      intialInput: widget.initialDate?.day.toString(),
       length: 2,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('d'),
@@ -106,6 +107,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _daySegment.addListener(_dateTimeSegmentListener(_daySegment, 3, 31));
 
     _monthSegment = YaruEntrySegment.fixed(
+      intialInput: widget.initialDate?.month.toString(),
       length: 2,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('m'),
@@ -113,6 +115,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _monthSegment.addListener(_dateTimeSegmentListener(_monthSegment, 1, 12));
 
     _yearSegment = YaruEntrySegment(
+      intialInput: widget.initialDate?.year.toString(),
       minLength: widget.firstDate.year.toString().length,
       maxLength: widget.lastDate.year.toString().length,
       isNumeric: true,
@@ -120,6 +123,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     );
 
     _hourSegment = YaruEntrySegment.fixed(
+      intialInput: widget.initialDate?.hour.toString(),
       length: 2,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('h'),
@@ -127,6 +131,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _hourSegment.addListener(_dateTimeSegmentListener(_hourSegment, 2, 23));
 
     _minuteSegment = YaruEntrySegment.fixed(
+      intialInput: widget.initialDate?.minute.toString(),
       length: 2,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('m'),

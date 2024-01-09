@@ -411,19 +411,21 @@ class YaruEntrySegment extends ChangeNotifier {
   YaruEntrySegment({
     required this.minLength,
     required this.maxLength,
+    String? intialInput,
     required this.inputFormatter,
     this.isNumeric = false,
   })  : assert(minLength > 0),
         assert(maxLength >= minLength),
-        _value = inputFormatter(null, minLength, maxLength);
+        _value = inputFormatter(intialInput, minLength, maxLength);
 
   /// Creates a [YaruEntrySegment] with a fixed length.
   YaruEntrySegment.fixed({
     required int length,
+    String? intialInput,
     required this.inputFormatter,
     this.isNumeric = false,
   })  : assert(length > 0),
-        _value = inputFormatter(null, length, length),
+        _value = inputFormatter(intialInput, length, length),
         minLength = length,
         maxLength = length;
 
