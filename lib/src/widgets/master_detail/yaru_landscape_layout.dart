@@ -177,7 +177,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                 child: widget.appBar!,
               ),
             Expanded(
-              child: Material(
+              child: Container(
                 color: color,
                 child: YaruMasterListView(
                   length: widget.controller.length,
