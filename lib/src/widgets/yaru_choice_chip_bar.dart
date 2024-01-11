@@ -29,6 +29,7 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.clearOnSelect = true,
     this.shrinkWrap = true,
     this.showCheckMarks = true,
+    this.selectedFirst = true,
   }) : assert(labels.length == isSelected.length);
 
   /// The [List] of [Widget]'s used to generate a [List] of [ChoiceChip]s
@@ -113,6 +114,9 @@ class YaruChoiceChipBar extends StatefulWidget {
   /// The default is `true`.
   final bool showCheckMarks;
 
+  /// Defines if the selected [ChoiceChip]s should be always placed first.
+  final bool selectedFirst;
+
   @override
   State<YaruChoiceChipBar> createState() => _YaruChoiceChipBarState();
 }
@@ -187,12 +191,17 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
       );
     }
 
-    final children = [
-      for (int index = 0; index < widget.labels.length; index++)
-        if (widget.isSelected[index]) themedChip(index),
-      for (int index = 0; index < widget.labels.length; index++)
-        if (!widget.isSelected[index]) themedChip(index),
-    ];
+    final children = widget.selectedFirst
+        ? [
+            for (int index = 0; index < widget.labels.length; index++)
+              if (widget.isSelected[index]) themedChip(index),
+            for (int index = 0; index < widget.labels.length; index++)
+              if (!widget.isSelected[index]) themedChip(index),
+          ]
+        : [
+            for (int index = 0; index < widget.labels.length; index++)
+              themedChip(index),
+          ];
 
     final listView = ListView(
       shrinkWrap: widget.shrinkWrap,
