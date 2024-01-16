@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/constants.dart';
 
@@ -33,6 +34,7 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.borderColor,
     this.chipBackgroundColor,
     this.selectedChipBackgroundColor,
+    this.navigationButtonElevation,
   }) : assert(labels.length == isSelected.length);
 
   /// The [List] of [Widget]'s used to generate a [List] of [ChoiceChip]s
@@ -78,6 +80,9 @@ class YaruChoiceChipBar extends StatefulWidget {
   /// The optional [Color] of the [ShapeBorder] of the [ChoiceChips] if selected.
   /// Defaults to `Theme.of(context).chipTheme.selectedColor`
   final Color? selectedChipBackgroundColor;
+
+  /// The optional elevation of the navigation buttons. Defaults to 0.
+  final double? navigationButtonElevation;
 
   /// Sets how high the whole bar is.
   final double chipHeight;
@@ -239,6 +244,9 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     );
 
     final goPreviousButton = _NavigationButton(
+      elevation: widget.navigationButtonElevation,
+      borderColor: widget.borderColor,
+      chipBackgroundColor: widget.chipBackgroundColor,
       radius: widget.radius,
       chipHeight: widget.chipHeight,
       icon: widget.goPreviousIcon ?? const Icon(YaruIcons.go_previous),
@@ -252,6 +260,9 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     );
 
     final goNextButton = _NavigationButton(
+      elevation: widget.navigationButtonElevation,
+      borderColor: widget.borderColor,
+      chipBackgroundColor: widget.chipBackgroundColor,
       chipHeight: widget.chipHeight,
       radius: widget.radius,
       icon: widget.goNextIcon ?? const Icon(YaruIcons.go_next),
@@ -342,12 +353,18 @@ class _NavigationButton extends StatelessWidget {
     required this.icon,
     required this.radius,
     required this.chipHeight,
+    this.borderColor,
+    this.chipBackgroundColor,
+    this.elevation,
   });
 
   final Function()? onTap;
   final Widget icon;
   final double radius;
   final double chipHeight;
+  final Color? borderColor;
+  final Color? chipBackgroundColor;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -355,7 +372,7 @@ class _NavigationButton extends StatelessWidget {
     final roundedRectangleBorder = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(radius),
       side: BorderSide(
-        color: theme.colorScheme.outline,
+        color: borderColor ?? theme.colorScheme.outline,
         width: 1,
       ),
     );
@@ -365,6 +382,8 @@ class _NavigationButton extends StatelessWidget {
       width: chipHeight,
       child: Material(
         shape: roundedRectangleBorder,
+        color: chipBackgroundColor?.scale(lightness: 0.1),
+        elevation: elevation ?? 0.0,
         child: InkWell(
           customBorder: roundedRectangleBorder,
           onTap: onTap,
