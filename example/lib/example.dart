@@ -78,10 +78,10 @@ class _MasterDetailPage extends StatelessWidget {
           pageItem: pageItems[index],
         ),
       ),
-      appBar: const YaruWindowTitleBar(
-        title: Text('Yaru Widgets'),
-        backgroundColor: Colors.transparent,
+      appBar: YaruWindowTitleBar(
+        title: const Text('Yaru Widgets'),
         border: BorderSide.none,
+        backgroundColor: YaruMasterDetailTheme.of(context).sideBarColor,
       ),
       bottomBar: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
