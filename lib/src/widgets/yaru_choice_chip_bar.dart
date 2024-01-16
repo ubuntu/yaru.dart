@@ -30,6 +30,9 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.shrinkWrap = true,
     this.showCheckMarks = true,
     this.selectedFirst = true,
+    this.borderColor,
+    this.chipBackgroundColor,
+    this.selectedChipBackgroundColor,
   }) : assert(labels.length == isSelected.length);
 
   /// The [List] of [Widget]'s used to generate a [List] of [ChoiceChip]s
@@ -63,6 +66,18 @@ class YaruChoiceChipBar extends StatefulWidget {
 
   /// Sets how round the [ChoiceChips] and scrolling control buttons are.
   final double radius;
+
+  /// The optional [Color] of the [BorderSide] of the [ChoiceChips]
+  /// Defaults to `Theme.of(context).chipTheme.shape?.side.color ?? Theme.of(context).colorScheme.outline`
+  final Color? borderColor;
+
+  /// The optional [Color] of the [ShapeBorder] of the [ChoiceChips]
+  /// Defaults to `Theme.of(context).chipTheme.backgroundColor`
+  final Color? chipBackgroundColor;
+
+  /// The optional [Color] of the [ShapeBorder] of the [ChoiceChips] if selected.
+  /// Defaults to `Theme.of(context).chipTheme.selectedColor`
+  final Color? selectedChipBackgroundColor;
 
   /// Sets how high the whole bar is.
   final double chipHeight;
@@ -165,10 +180,14 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     Widget themedChip(int index) {
       return ChipTheme(
         data: theme.chipTheme.copyWith(
+          backgroundColor: widget.chipBackgroundColor,
+          selectedColor: widget.selectedChipBackgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.radius),
             side: BorderSide(
-              color: theme.colorScheme.outline,
+              color: widget.borderColor ??
+                  theme.chipTheme.shape?.side.color ??
+                  theme.colorScheme.outline,
               width: 1,
             ),
           ),
