@@ -83,6 +83,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   late final YaruEntrySegment _yearSegment;
   late final YaruEntrySegment _hourSegment;
   late final YaruEntrySegment _minuteSegment;
+  late final YaruEntrySegment _secondSegment;
 
   final _segments = <YaruEntrySegment>[];
 
@@ -93,6 +94,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   int? get _day => _daySegment.value.maybeToInt;
   int? get _hour => _hourSegment.value.maybeToInt;
   int? get _minute => _minuteSegment.value.maybeToInt;
+  int? get _second => _secondSegment.value.maybeToInt;
 
   @override
   void initState() {
@@ -138,12 +140,21 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     );
     _minuteSegment.addListener(_dateTimeSegmentListener(_minuteSegment, 5, 59));
 
+    _secondSegment = YaruEntrySegment.fixed(
+      intialInput: widget.initialDate?.second.toString(),
+      length: 2,
+      isNumeric: true,
+      inputFormatter: _dateTimeSegmentFormatter('s'),
+    );
+    _secondSegment.addListener(_dateTimeSegmentListener(_secondSegment, 5, 59));
+
     _segments.addAll([
       _yearSegment,
       _monthSegment,
       _daySegment,
       _hourSegment,
       _minuteSegment,
+      _secondSegment,
     ]);
 
     for (final segment in _segments) {
@@ -167,6 +178,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _yearSegment.dispose();
     _hourSegment.dispose();
     _minuteSegment.dispose();
+    _secondSegment.dispose();
 
     super.dispose();
   }
@@ -243,6 +255,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
       _segments.addAll([
         _hourSegment,
         _minuteSegment,
+        _secondSegment,
       ]);
     });
   }
@@ -260,11 +273,12 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
         _month == null ||
         _day == null ||
         _hour == null ||
-        _minute == null) {
+        _minute == null ||
+        _second == null) {
       return null;
     }
 
-    return DateTime(_year!, _month!, _day!, _hour!, _minute!);
+    return DateTime(_year!, _month!, _day!, _hour!, _minute!, _second!);
   }
 
   String? _validateDate(String? text) {
@@ -277,6 +291,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
           _day == null &&
           _hour == null &&
           _minute == null &&
+          _second == null &&
           widget.acceptEmptyDate) {
         return null;
       }
@@ -307,7 +322,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     final dateSeparator = localizations.dateSeparator;
     final labelText = localizations.dateInputLabel;
 
-    final delimiters = [dateSeparator, dateSeparator, ' ', ':'];
+    final delimiters = [dateSeparator, dateSeparator, ' ', ':', ':'];
 
     return YaruSegmentedEntry(
       focusNode: widget.focusNode,
