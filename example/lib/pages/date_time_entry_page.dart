@@ -9,7 +9,8 @@ class DateTimePage extends StatefulWidget {
 }
 
 class _DateTimePageState extends State<DateTimePage> {
-  DateTime? _dateTime;
+  final YaruDateTimeEntryController _controller =
+      YaruDateTimeEntryController.now();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -24,18 +25,18 @@ class _DateTimePageState extends State<DateTimePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               YaruDateTimeEntry(
-                initialDate: DateTime.now(),
+                controller: _controller,
                 firstDate: DateTime(1900),
                 lastDate: DateTime(2050),
                 onChanged: (dateTime) {
                   setState(() {
                     _formKey.currentState?.validate();
-                    _dateTime = dateTime;
                   });
                 },
               ),
               const SizedBox(height: 25),
               Text(_dateTime.toString()),
+              Text(_controller.value.toString()),
             ],
           ),
         ),

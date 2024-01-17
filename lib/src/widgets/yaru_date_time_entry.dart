@@ -12,8 +12,9 @@ class YaruDateTimeEntry extends StatefulWidget {
   /// Creates a [YaruDateTimeEntry].
   const YaruDateTimeEntry({
     super.key,
+    this.controller,
     this.focusNode,
-    this.initialDate,
+    this.initialDateTime,
     required this.firstDate,
     required this.lastDate,
     this.onFieldSubmitted,
@@ -24,13 +25,16 @@ class YaruDateTimeEntry extends StatefulWidget {
     this.errorInvalidText,
     this.autofocus = false,
     this.acceptEmptyDate = true,
-  });
+  })  : assert(initialDateTime == null || controller == null),
+        assert((initialDateTime == null) != (controller == null));
+
+  final YaruDateTimeEntryController? controller;
 
   /// Defines the keyboard focus for this widget.
   final FocusNode? focusNode;
 
   /// If provided, it will be used as the default value of the field.
-  final DateTime? initialDate;
+  final DateTime? initialDateTime;
 
   /// The earliest allowable [DateTime] that the user can input.
   final DateTime firstDate;
@@ -76,7 +80,8 @@ class YaruDateTimeEntry extends StatefulWidget {
 }
 
 class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
-  late final YaruSegmentedEntryController _controller;
+  late YaruDateTimeEntryController _controller;
+  late final YaruSegmentedEntryController _entryController;
 
   late final YaruEntrySegment _daySegment;
   late final YaruEntrySegment _monthSegment;
@@ -100,8 +105,11 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   void initState() {
     super.initState();
 
+    _updateController();
+    _controller.addListener(_controllerCallback);
+
     _daySegment = YaruEntrySegment.fixed(
-      intialInput: widget.initialDate?.day.toString(),
+      intialInput: _controller.dateTime?.day.toString(),
       length: 2,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('d'),
@@ -109,7 +117,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _daySegment.addListener(_dateTimeSegmentListener(_daySegment, 3, 31));
 
     _monthSegment = YaruEntrySegment.fixed(
-      intialInput: widget.initialDate?.month.toString(),
+      intialInput: _controller.dateTime?.month.toString(),
       length: 2,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('m'),
@@ -117,7 +125,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _monthSegment.addListener(_dateTimeSegmentListener(_monthSegment, 1, 12));
 
     _yearSegment = YaruEntrySegment(
-      intialInput: widget.initialDate?.year.toString(),
+      intialInput: _controller.dateTime?.year.toString(),
       minLength: widget.firstDate.year.toString().length,
       maxLength: widget.lastDate.year.toString().length,
       isNumeric: true,
@@ -125,7 +133,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     );
 
     _hourSegment = YaruEntrySegment.fixed(
-      intialInput: widget.initialDate?.hour.toString(),
+      intialInput: _controller.dateTime?.hour.toString(),
       length: 2,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('h'),
@@ -133,7 +141,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _hourSegment.addListener(_dateTimeSegmentListener(_hourSegment, 2, 23));
 
     _minuteSegment = YaruEntrySegment.fixed(
-      intialInput: widget.initialDate?.minute.toString(),
+      intialInput: _controller.dateTime?.minute.toString(),
       length: 2,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('m'),
@@ -141,7 +149,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _minuteSegment.addListener(_dateTimeSegmentListener(_minuteSegment, 5, 59));
 
     _secondSegment = YaruEntrySegment.fixed(
-      intialInput: widget.initialDate?.second.toString(),
+      intialInput: _controller.dateTime?.second.toString(),
       length: 2,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('s'),
@@ -161,7 +169,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
       _previousSegmentsValue.addAll({segment: segment.value.maybeToInt});
     }
 
-    _controller = YaruSegmentedEntryController(
+    _entryController = YaruSegmentedEntryController(
       length: _segments.length,
     );
 
@@ -171,8 +179,19 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   }
 
   @override
+  void didUpdateWidget(covariant YaruDateTimeEntry oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.controller != oldWidget.controller) {
+      _controller.removeListener(_controllerCallback);
+      _updateController();
+      _controller.addListener(_controllerCallback);
+    }
+  }
+
+  @override
   void dispose() {
-    _controller.dispose();
+    _entryController.dispose();
     _daySegment.dispose();
     _monthSegment.dispose();
     _yearSegment.dispose();
@@ -181,6 +200,22 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _secondSegment.dispose();
 
     super.dispose();
+  }
+
+  void _updateController() {
+    _controller = widget.controller ??
+        YaruDateTimeEntryController(
+          dateTime: widget.initialDateTime,
+        );
+  }
+
+  void _controllerCallback() {
+    _daySegment.input = _controller.dateTime?.day.toString();
+    _monthSegment.input = _controller.dateTime?.month.toString();
+    _yearSegment.input = _controller.dateTime?.year.toString();
+    _hourSegment.input = _controller.dateTime?.hour.toString();
+    _minuteSegment.input = _controller.dateTime?.minute.toString();
+    _secondSegment.input = _controller.dateTime?.second.toString();
   }
 
   YaruEntrySegmentInputFormatter _dateTimeSegmentFormatter(
@@ -210,7 +245,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
           if (previousSegmentValue == null ||
               !(previousSegmentValue + 1 == segmentIntValue ||
                   previousSegmentValue - 1 == segmentIntValue)) {
-            _controller.maybeSelectNextSegment();
+            _entryController.maybeSelectNextSegment();
           }
         }
 
@@ -307,10 +342,12 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   Widget _clearInputButton() {
     return IconButton(
       onPressed: () {
+        _controller.value = null;
         for (final segment in _segments) {
           segment.input = null;
         }
-        _controller.selectFirstSegment();
+
+        _entryController.selectFirstSegment();
       },
       icon: const Icon(YaruIcons.edit_clear),
     );
@@ -326,11 +363,15 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
 
     return YaruSegmentedEntry(
       focusNode: widget.focusNode,
-      controller: _controller,
+      controller: _entryController,
       segments: _segments,
       delimiters: delimiters,
       validator: _validateDate,
-      onChanged: (_) => widget.onChanged?.call(_tryParseSegments()),
+      onChanged: (_) {
+        final dateTime = _tryParseSegments();
+        _controller.value = dateTime;
+        widget.onChanged?.call(dateTime);
+      },
       onSaved: (_) => widget.onSaved?.call(_tryParseSegments()),
       onFieldSubmitted: (_) =>
           widget.onFieldSubmitted?.call(_tryParseSegments()),
@@ -341,6 +382,14 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
       keyboardType: TextInputType.datetime,
     );
   }
+}
+
+class YaruDateTimeEntryController extends ValueNotifier<DateTime?> {
+  YaruDateTimeEntryController({DateTime? dateTime}) : super(dateTime);
+
+  YaruDateTimeEntryController.now() : super(DateTime.now());
+
+  DateTime? get dateTime => value;
 }
 
 extension _StringX on String {
