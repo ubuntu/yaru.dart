@@ -22,8 +22,11 @@ class YaruSegmentedEntry extends StatefulWidget {
     this.onChanged,
     this.onSaved,
     this.onFieldSubmitted,
-  })  : assert(segments.length > 0),
-        assert(delimiters.length == segments.length - 1);
+  })  : assert(segments.length >= 0),
+        assert(
+          delimiters.length == segments.length - 1 ||
+              segments.length == 0 && delimiters.length == 0,
+        );
 
   /// A list of [YaruEntrySegment] which represent each selectable and editable part of this entry.
   final List<YaruEntrySegment> segments;
@@ -199,7 +202,8 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   KeyEventResult _onKey(FocusNode node, RawKeyEvent event) {
-    if (event is RawKeyDownEvent || event.repeat) {
+    if (widget.segments.isNotEmpty &&
+        (event is RawKeyDownEvent || event.repeat)) {
       final ltr = Directionality.of(context) == TextDirection.ltr;
       final tab =
           event.logicalKey == LogicalKeyboardKey.tab && !event.isShiftPressed;
@@ -314,7 +318,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   int _getBaseOffsetOfIndex(int index) {
-    if (index == 0) {
+    if (index == 0 || widget.segments.isEmpty) {
       return 0;
     }
 
@@ -328,13 +332,19 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   int _getExtentOffsetOfIndex(int index) {
-    return _getBaseOffsetOfIndex(index) + widget.segments[index].length;
+    return widget.segments.isNotEmpty
+        ? _getBaseOffsetOfIndex(index) + widget.segments[index].length
+        : 0;
   }
 
   TextEditingValue _valueFormatter(
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
+    if (widget.segments.isEmpty) {
+      return TextEditingValue.empty;
+    }
+
     final prefix = _getPrefixOfIndex(_controller.index);
     final suffix = _getSuffixOfIndex(_controller.index);
 
@@ -469,8 +479,8 @@ class YaruSegmentedEntryController extends ChangeNotifier {
   YaruSegmentedEntryController({
     required this.length,
     int initialIndex = 0,
-  })  : assert(initialIndex >= 0 && initialIndex < length),
-        assert(length > 0),
+  })  : assert(initialIndex >= 0 && initialIndex < length || length == 0),
+        assert(length >= 0),
         _index = initialIndex;
 
   /// Number of segments. Must correspond to [YaruSegmentedEntry.segments.length].
