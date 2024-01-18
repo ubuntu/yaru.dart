@@ -81,16 +81,17 @@ class YaruDateTimeEntry extends StatefulWidget {
 
 class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   late YaruDateTimeEntryController _controller;
-  late final YaruSegmentedEntryController _entryController;
+  YaruSegmentedEntryController? _entryController;
 
-  late final YaruEntrySegment _daySegment;
-  late final YaruEntrySegment _monthSegment;
-  late final YaruEntrySegment _yearSegment;
-  late final YaruEntrySegment _hourSegment;
-  late final YaruEntrySegment _minuteSegment;
-  late final YaruEntrySegment _secondSegment;
+  late YaruEntrySegment _daySegment;
+  late YaruEntrySegment _monthSegment;
+  late YaruEntrySegment _yearSegment;
+  late YaruEntrySegment _hourSegment;
+  late YaruEntrySegment _minuteSegment;
+  late YaruEntrySegment _secondSegment;
 
   final _segments = <YaruEntrySegment>[];
+  final _delimiters = <String>[];
 
   final _previousSegmentsValue = <YaruEntrySegment, int?>{};
 
@@ -107,75 +108,17 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
 
     _updateController();
     _controller.addListener(_controllerCallback);
+  }
 
-    _daySegment = YaruEntrySegment.fixed(
-      intialInput: _controller.dateTime?.day.toString(),
-      length: 2,
-      isNumeric: true,
-      inputFormatter: _dateTimeSegmentFormatter('d'),
-    );
-    _daySegment.addListener(_dateTimeSegmentListener(_daySegment, 3, 31));
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
-    _monthSegment = YaruEntrySegment.fixed(
-      intialInput: _controller.dateTime?.month.toString(),
-      length: 2,
-      isNumeric: true,
-      inputFormatter: _dateTimeSegmentFormatter('m'),
-    );
-    _monthSegment.addListener(_dateTimeSegmentListener(_monthSegment, 1, 12));
-
-    _yearSegment = YaruEntrySegment(
-      intialInput: _controller.dateTime?.year.toString(),
-      minLength: widget.firstDate.year.toString().length,
-      maxLength: widget.lastDate.year.toString().length,
-      isNumeric: true,
-      inputFormatter: _dateTimeSegmentFormatter('y'),
-    );
-
-    _hourSegment = YaruEntrySegment.fixed(
-      intialInput: _controller.dateTime?.hour.toString(),
-      length: 2,
-      isNumeric: true,
-      inputFormatter: _dateTimeSegmentFormatter('h'),
-    );
-    _hourSegment.addListener(_dateTimeSegmentListener(_hourSegment, 2, 23));
-
-    _minuteSegment = YaruEntrySegment.fixed(
-      intialInput: _controller.dateTime?.minute.toString(),
-      length: 2,
-      isNumeric: true,
-      inputFormatter: _dateTimeSegmentFormatter('m'),
-    );
-    _minuteSegment.addListener(_dateTimeSegmentListener(_minuteSegment, 5, 59));
-
-    _secondSegment = YaruEntrySegment.fixed(
-      intialInput: _controller.dateTime?.second.toString(),
-      length: 2,
-      isNumeric: true,
-      inputFormatter: _dateTimeSegmentFormatter('s'),
-    );
-    _secondSegment.addListener(_dateTimeSegmentListener(_secondSegment, 5, 59));
-
-    _segments.addAll([
-      _yearSegment,
-      _monthSegment,
-      _daySegment,
-      _hourSegment,
-      _minuteSegment,
-      _secondSegment,
-    ]);
-
-    for (final segment in _segments) {
-      _previousSegmentsValue.addAll({segment: segment.value.maybeToInt});
-    }
-
+    _updateSegmentsAndDelimiters();
     _entryController = YaruSegmentedEntryController(
       length: _segments.length,
+      initialIndex: _entryController?.index.clamp(0, _segments.length - 1) ?? 0,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _updateSegmentsOrder();
-    });
   }
 
   @override
@@ -191,7 +134,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
 
   @override
   void dispose() {
-    _entryController.dispose();
+    _entryController?.dispose();
     _daySegment.dispose();
     _monthSegment.dispose();
     _yearSegment.dispose();
@@ -245,7 +188,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
           if (previousSegmentValue == null ||
               !(previousSegmentValue + 1 == segmentIntValue ||
                   previousSegmentValue - 1 == segmentIntValue)) {
-            _entryController.maybeSelectNextSegment();
+            _entryController?.maybeSelectNextSegment();
           }
         }
 
@@ -259,40 +202,118 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     };
   }
 
-  void _updateSegmentsOrder() {
-    setState(() {
-      _segments.clear();
+  void _updateSegmentsAndDelimiters() {
+    for (final segment in _segments) {
+      segment.dispose();
+    }
 
-      const year = 2001;
-      const month = 12;
-      const day = 31;
+    _segments.clear();
+    _delimiters.clear();
 
-      final localizations = MaterialLocalizations.of(context);
-      final dateSeparator = localizations.dateSeparator;
-      final formattedDateTime =
-          localizations.formatCompactDate(DateTime(year, month, day));
-      final dateParts = formattedDateTime.split(dateSeparator);
+    const year = 2001;
+    const month = 12;
+    const day = 31;
 
-      for (final datePart in dateParts) {
-        switch (datePart) {
-          case '$year':
-            _segments.add(_yearSegment);
-            break;
-          case '$month':
-            _segments.add(_monthSegment);
-            break;
-          case '$day':
-            _segments.add(_daySegment);
-            break;
-        }
+    late final String yearPlaceholder;
+    late final String monthPlaceholder;
+    late final String dayPlaceholder;
+
+    final localizations = MaterialLocalizations.of(context);
+    final dateSeparator = localizations.dateSeparator;
+    final formattedDateTime =
+        localizations.formatCompactDate(DateTime(year, month, day));
+    final dateParts = formattedDateTime.split(dateSeparator);
+    final dateHelpTextParts = localizations.dateHelpText.split(dateSeparator);
+
+    for (var i = 0; i < dateParts.length; i++) {
+      final datePart = dateParts[i];
+      final placeholder = dateHelpTextParts[i].firstCharacter;
+      switch (datePart) {
+        case '$year':
+          yearPlaceholder = placeholder;
+          break;
+        case '$month':
+          monthPlaceholder = placeholder;
+          break;
+        case '$day':
+          dayPlaceholder = placeholder;
+          break;
       }
+    }
 
-      _segments.addAll([
-        _hourSegment,
-        _minuteSegment,
-        _secondSegment,
-      ]);
-    });
+    _daySegment = YaruEntrySegment.fixed(
+      intialInput: _controller.dateTime?.day.toString(),
+      length: 2,
+      isNumeric: true,
+      inputFormatter: _dateTimeSegmentFormatter(dayPlaceholder),
+    );
+    _daySegment.addListener(_dateTimeSegmentListener(_daySegment, 3, 31));
+
+    _monthSegment = YaruEntrySegment.fixed(
+      intialInput: _controller.dateTime?.month.toString(),
+      length: 2,
+      isNumeric: true,
+      inputFormatter: _dateTimeSegmentFormatter(monthPlaceholder),
+    );
+    _monthSegment.addListener(_dateTimeSegmentListener(_monthSegment, 1, 12));
+
+    _yearSegment = YaruEntrySegment(
+      intialInput: _controller.dateTime?.year.toString(),
+      minLength: widget.firstDate.year.toString().length,
+      maxLength: widget.lastDate.year.toString().length,
+      isNumeric: true,
+      inputFormatter: _dateTimeSegmentFormatter(yearPlaceholder),
+    );
+
+    _hourSegment = YaruEntrySegment.fixed(
+      intialInput: _controller.dateTime?.hour.toString(),
+      length: 2,
+      isNumeric: true,
+      inputFormatter: _dateTimeSegmentFormatter('-'),
+    );
+    _hourSegment.addListener(_dateTimeSegmentListener(_hourSegment, 2, 23));
+
+    _minuteSegment = YaruEntrySegment.fixed(
+      intialInput: _controller.dateTime?.minute.toString(),
+      length: 2,
+      isNumeric: true,
+      inputFormatter: _dateTimeSegmentFormatter('-'),
+    );
+    _minuteSegment.addListener(_dateTimeSegmentListener(_minuteSegment, 5, 59));
+
+    _secondSegment = YaruEntrySegment.fixed(
+      intialInput: _controller.dateTime?.second.toString(),
+      length: 2,
+      isNumeric: true,
+      inputFormatter: _dateTimeSegmentFormatter('-'),
+    );
+    _secondSegment.addListener(_dateTimeSegmentListener(_secondSegment, 5, 59));
+
+    for (final segment in _segments) {
+      _previousSegmentsValue.addAll({segment: segment.value.maybeToInt});
+    }
+
+    for (final datePart in dateParts) {
+      switch (datePart) {
+        case '$year':
+          _segments.add(_yearSegment);
+          break;
+        case '$month':
+          _segments.add(_monthSegment);
+          break;
+        case '$day':
+          _segments.add(_daySegment);
+          break;
+      }
+    }
+
+    _segments.addAll([
+      _hourSegment,
+      _minuteSegment,
+      _secondSegment,
+    ]);
+
+    _delimiters.addAll([dateSeparator, dateSeparator, ' ', ':', ':']);
   }
 
   bool _isValidAcceptableDate(DateTime? date) {
@@ -347,7 +368,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
           segment.input = null;
         }
 
-        _entryController.selectFirstSegment();
+        _entryController?.selectFirstSegment();
       },
       icon: const Icon(YaruIcons.edit_clear),
     );
@@ -355,17 +376,13 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = MaterialLocalizations.of(context);
-    final dateSeparator = localizations.dateSeparator;
-    final labelText = localizations.dateInputLabel;
-
-    final delimiters = [dateSeparator, dateSeparator, ' ', ':', ':'];
+    final labelText = MaterialLocalizations.of(context).dateInputLabel;
 
     return YaruSegmentedEntry(
       focusNode: widget.focusNode,
       controller: _entryController,
       segments: _segments,
-      delimiters: delimiters,
+      delimiters: _delimiters,
       validator: _validateDate,
       onChanged: (_) {
         final dateTime = _tryParseSegments();
@@ -395,5 +412,9 @@ class YaruDateTimeEntryController extends ValueNotifier<DateTime?> {
 extension _StringX on String {
   int? get maybeToInt {
     return int.tryParse(this);
+  }
+
+  String get firstCharacter {
+    return length > 1 ? substring(0, 1) : this;
   }
 }
