@@ -162,8 +162,12 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   void _updateTextEditingValue() {
+    final oldText = _textEditingController.value.text;
     _textEditingController.value = _getTextEditingValue();
-    widget.onChanged?.call(_textEditingController.value.text);
+
+    if (_textEditingController.value.text != oldText) {
+      widget.onChanged?.call(_textEditingController.value.text);
+    }
   }
 
   void _initialFocusCallback() {
