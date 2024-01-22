@@ -2,45 +2,221 @@ import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/src/widgets/yaru_segmented_entry.dart';
 
+typedef SelectableDateTimePredicate = bool Function(DateTime dateTime);
+typedef SelectableTimeOfDayPredicate = bool Function(TimeOfDay timeOfDay);
+
 /// A [YaruSegmentedEntry] configured to accepts and validates a datetime entered by a user.
 ///
-/// [firstDate], [lastDate], and [selectableDayPredicate] provide constraints on
+/// [firstDateTime], [lastDateTime], and [selectableDateTimePredicate] provide constraints on
+/// what days are valid. If the input datetime isn't in the datetime range or doesn't pass
+/// the given predicate, then the [errorInvalidText] message will be displayed
+/// under the field.
+///
+/// See also:
+/// - [YaruTimeEntry], a similar widget which only accepts time input.
+class YaruDateTimeEntry extends _YaruDateTimeEntry {
+  /// Creates a [YaruDateTimeEntry].
+  ///
+  /// A [YaruSegmentedEntry] configured to accepts and validates a datetime entered by a user.
+  ///
+  /// [firstDateTime], [lastDateTime], and [selectableDateTimePredicate] provide constraints on
+  /// what days are valid. If the input datetime isn't in the datetime range or doesn't pass
+  /// the given predicate, then the [errorInvalidText] message will be displayed
+  /// under the field.
+  const YaruDateTimeEntry({
+    super.key,
+    YaruDateTimeEntryController? controller,
+    bool includeTime = true,
+    super.focusNode,
+    super.initialDateTime,
+    required super.firstDateTime,
+    required super.lastDateTime,
+    super.onFieldSubmitted,
+    super.onSaved,
+    super.onChanged,
+    super.selectableDateTimePredicate,
+    super.errorFormatText,
+    super.errorInvalidText,
+    super.autofocus = false,
+    super.acceptEmpty = true,
+  }) : super(
+          controller: controller,
+          type: includeTime
+              ? _YaruDateTimeEntryType.dateTime
+              : _YaruDateTimeEntryType.date,
+        );
+}
+
+/// A [YaruSegmentedEntry] configured to accepts and validates a time entered by a user.
+///
+/// [firstTime], [lastTime], and [selectableTimeOfDayPredicate] provide constraints on
 /// what days are valid. If the input date isn't in the date range or doesn't pass
 /// the given predicate, then the [errorInvalidText] message will be displayed
 /// under the field.
-class YaruDateTimeEntry extends StatefulWidget {
-  /// Creates a [YaruDateTimeEntry].
-  const YaruDateTimeEntry({
+///
+/// Under the hood, this widget is a simple adapter that converts [TimeOfDay] objects into [DateTime].
+///
+/// See also:
+/// - [YaruDateTimeEntry], a similar widget which accepts date and time input.
+class YaruTimeEntry extends StatelessWidget {
+  /// Creates a [YaruTimeEntry].
+  ///
+  /// A [YaruSegmentedEntry] configured to accepts and validates a time entered by a user.
+  ///
+  /// [firstTime], [lastTime], and [selectableTimeOfDayPredicate] provide constraints on
+  /// what days are valid. If the input date isn't in the date range or doesn't pass
+  /// the given predicate, then the [errorInvalidText] message will be displayed
+  /// under the field.
+  const YaruTimeEntry({
     super.key,
     this.controller,
     this.focusNode,
-    this.initialDateTime,
-    required this.firstDate,
-    required this.lastDate,
+    this.initialTimeOfDay,
+    this.firstTime,
+    this.lastTime,
     this.onFieldSubmitted,
     this.onSaved,
     this.onChanged,
-    this.selectableDayPredicate,
+    this.selectableTimeOfDayPredicate,
     this.errorFormatText,
     this.errorInvalidText,
-    this.autofocus = false,
-    this.acceptEmptyDate = true,
-  })  : assert(initialDateTime == null || controller == null),
-        assert((initialDateTime == null) != (controller == null));
+    this.autofocus,
+    this.acceptEmpty,
+  });
 
-  final YaruDateTimeEntryController? controller;
+  /// A controller that can retrieve parsed [TimeOfDay] from the input and modify its value.
+  final YaruTimeEntryController? controller;
 
   /// Defines the keyboard focus for this widget.
   final FocusNode? focusNode;
 
   /// If provided, it will be used as the default value of the field.
+  /// If null, we must provide a [controller].
+  final TimeOfDay? initialTimeOfDay;
+
+  /// The earliest allowable [TimeOfDay] that the user can input.
+  final TimeOfDay? firstTime;
+
+  /// The latest allowable [TimeOfDay] that the user can input.
+  final TimeOfDay? lastTime;
+
+  /// An optional method to call when the user indicates they are done editing
+  /// the text in the field.
+  final ValueChanged<TimeOfDay?>? onFieldSubmitted;
+
+  /// An optional method to call with the final date when the form is
+  /// saved via [FormState.save].
+  final ValueChanged<TimeOfDay?>? onSaved;
+
+  /// An optional method to call when the user is changing a value in the field.
+  final ValueChanged<TimeOfDay?>? onChanged;
+
+  /// Function to provide full control over which [TimeOfDay] can be selected.
+  final SelectableTimeOfDayPredicate? selectableTimeOfDayPredicate;
+
+  /// The error text displayed if the entered date is not in the correct format.
+  final String? errorFormatText;
+
+  /// The error text displayed if the date is not valid.
+  ///
+  /// A date is not valid if it is earlier than [firstTime], later than
+  /// [lastTime], or doesn't pass the [selectableTimeOfDayPredicate].
+  final String? errorInvalidText;
+
+  /// {@macro flutter.widgets.editableText.autofocus}
+  final bool? autofocus;
+
+  /// Determines if an empty date would show [errorFormatText] or not.
+  ///
+  /// Defaults to false.
+  ///
+  /// If true, [errorFormatText] is not shown when the date input field is empty.
+  final bool? acceptEmpty;
+
+  static ValueChanged<DateTime?>? _valueChangedCallbackAdapter(
+    ValueChanged<TimeOfDay?>? callback,
+  ) {
+    return (dateTime) => callback?.call(dateTime?.toTimeOfDay());
+  }
+
+  static SelectableDateTimePredicate? _predicateCallbackAdapter(
+    SelectableTimeOfDayPredicate? callback,
+  ) {
+    return callback != null
+        ? (dateTime) => callback.call(dateTime.toTimeOfDay())
+        : null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _YaruDateTimeEntry(
+      controller: controller,
+      focusNode: focusNode,
+      initialDateTime: initialTimeOfDay?.toDateTime(),
+      firstDateTime:
+          (firstTime ?? const TimeOfDay(hour: 0, minute: 0)).toDateTime(),
+      lastDateTime:
+          (lastTime ?? const TimeOfDay(hour: 23, minute: 59)).toDateTime(),
+      onFieldSubmitted: _valueChangedCallbackAdapter(onFieldSubmitted),
+      onSaved: _valueChangedCallbackAdapter(onSaved),
+      onChanged: _valueChangedCallbackAdapter(onChanged),
+      selectableDateTimePredicate:
+          _predicateCallbackAdapter(selectableTimeOfDayPredicate),
+      errorFormatText: errorFormatText,
+      errorInvalidText: errorInvalidText,
+      autofocus: autofocus,
+      acceptEmpty: acceptEmpty,
+      type: _YaruDateTimeEntryType.time,
+    );
+  }
+}
+
+enum _YaruDateTimeEntryType {
+  date,
+  time,
+  dateTime;
+
+  bool get hasDate => this == date || this == dateTime;
+  bool get hasTime => this == time || this == dateTime;
+}
+
+class _YaruDateTimeEntry extends StatefulWidget {
+  const _YaruDateTimeEntry({
+    super.key,
+    required this.type,
+    this.controller,
+    this.focusNode,
+    this.initialDateTime,
+    required this.firstDateTime,
+    required this.lastDateTime,
+    this.onFieldSubmitted,
+    this.onSaved,
+    this.onChanged,
+    this.selectableDateTimePredicate,
+    this.errorFormatText,
+    this.errorInvalidText,
+    this.autofocus,
+    this.acceptEmpty,
+  })  : assert(initialDateTime == null || controller == null),
+        assert((initialDateTime == null) != (controller == null));
+
+  final _YaruDateTimeEntryType type;
+
+  /// A controller that can retrieve parsed [DateTime] from the input and modify its value.
+  final YaruDateTimeEntryControllerInterface? controller;
+
+  /// Defines the keyboard focus for this widget.
+  final FocusNode? focusNode;
+
+  /// If provided, it will be used as the default value of the field.
+  /// If null, we must provide a [controller].
   final DateTime? initialDateTime;
 
   /// The earliest allowable [DateTime] that the user can input.
-  final DateTime firstDate;
+  final DateTime firstDateTime;
 
   /// The latest allowable [DateTime] that the user can input.
-  final DateTime lastDate;
+  final DateTime lastDateTime;
 
   /// An optional method to call when the user indicates they are done editing
   /// the text in the field.
@@ -54,33 +230,35 @@ class YaruDateTimeEntry extends StatefulWidget {
   final ValueChanged<DateTime?>? onChanged;
 
   /// Function to provide full control over which [DateTime] can be selected.
-  final SelectableDayPredicate? selectableDayPredicate;
+  final SelectableDateTimePredicate? selectableDateTimePredicate;
 
   /// The error text displayed if the entered date is not in the correct format.
   final String? errorFormatText;
 
   /// The error text displayed if the date is not valid.
   ///
-  /// A date is not valid if it is earlier than [firstDate], later than
-  /// [lastDate], or doesn't pass the [selectableDayPredicate].
+  /// A date is not valid if it is earlier than [firstDateTime], later than
+  /// [lastDateTime], or doesn't pass the [selectableDateTimePredicate].
   final String? errorInvalidText;
 
   /// {@macro flutter.widgets.editableText.autofocus}
-  final bool autofocus;
+  ///
+  /// If null, defaults to false.
+  final bool? autofocus;
 
   /// Determines if an empty date would show [errorFormatText] or not.
   ///
-  /// Defaults to false.
-  ///
   /// If true, [errorFormatText] is not shown when the date input field is empty.
-  final bool acceptEmptyDate;
+  ///
+  /// If null, defaults to true.
+  final bool? acceptEmpty;
 
   @override
-  State<YaruDateTimeEntry> createState() => _YaruDateTimeEntryState();
+  State<_YaruDateTimeEntry> createState() => _YaruDateTimeEntryState();
 }
 
-class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
-  late YaruDateTimeEntryController _controller;
+class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
+  late YaruDateTimeEntryControllerInterface _controller;
   YaruSegmentedEntryController? _entryController;
 
   late YaruEntrySegment _daySegment;
@@ -88,7 +266,6 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   late YaruEntrySegment _yearSegment;
   late YaruEntrySegment _hourSegment;
   late YaruEntrySegment _minuteSegment;
-  late YaruEntrySegment _secondSegment;
 
   final _segments = <YaruEntrySegment>[];
   final _delimiters = <String>[];
@@ -100,14 +277,14 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   int? get _day => _daySegment.value.maybeToInt;
   int? get _hour => _hourSegment.value.maybeToInt;
   int? get _minute => _minuteSegment.value.maybeToInt;
-  int? get _second => _secondSegment.value.maybeToInt;
+
+  bool get acceptEmpty => widget.acceptEmpty ?? true;
 
   @override
   void initState() {
     super.initState();
 
     _updateController();
-    _controller.addListener(_controllerCallback);
   }
 
   @override
@@ -115,32 +292,41 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     super.didChangeDependencies();
 
     _updateSegmentsAndDelimiters();
-    _entryController = YaruSegmentedEntryController(
-      length: _segments.length,
-      initialIndex: _entryController?.index.clamp(0, _segments.length - 1) ?? 0,
-    );
+    _updateEntryController();
   }
 
   @override
-  void didUpdateWidget(covariant YaruDateTimeEntry oldWidget) {
+  void didUpdateWidget(covariant _YaruDateTimeEntry oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.controller != oldWidget.controller) {
       _controller.removeListener(_controllerCallback);
       _updateController();
-      _controller.addListener(_controllerCallback);
+    }
+
+    if (widget.type != oldWidget.type) {
+      for (final segment in _segments) {
+        segment.dispose();
+      }
+      _updateSegmentsAndDelimiters();
+
+      _entryController?.dispose();
+      _updateEntryController();
     }
   }
 
   @override
   void dispose() {
+    if (widget.controller != null) {
+      _controller.dispose();
+    }
+
     _entryController?.dispose();
     _daySegment.dispose();
     _monthSegment.dispose();
     _yearSegment.dispose();
     _hourSegment.dispose();
     _minuteSegment.dispose();
-    _secondSegment.dispose();
 
     super.dispose();
   }
@@ -150,6 +336,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
         YaruDateTimeEntryController(
           dateTime: widget.initialDateTime,
         );
+    _controller.addListener(_controllerCallback);
   }
 
   void _controllerCallback() {
@@ -158,7 +345,6 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     _yearSegment.input = _controller.dateTime?.year.toString();
     _hourSegment.input = _controller.dateTime?.hour.toString();
     _minuteSegment.input = _controller.dateTime?.minute.toString();
-    _secondSegment.input = _controller.dateTime?.second.toString();
   }
 
   YaruEntrySegmentInputFormatter _dateTimeSegmentFormatter(
@@ -183,6 +369,10 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
       var segmentIntValue = segment.value.maybeToInt;
       final previousSegmentValue = _previousSegmentsValue[segment];
 
+      if (segmentIntValue == previousSegmentValue) {
+        return;
+      }
+
       if (segmentIntValue != null) {
         if (segmentIntValue > maxFirstValue && segmentIntValue < 10) {
           if (previousSegmentValue == null ||
@@ -203,10 +393,6 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   }
 
   void _updateSegmentsAndDelimiters() {
-    for (final segment in _segments) {
-      segment.dispose();
-    }
-
     _segments.clear();
     _delimiters.clear();
 
@@ -259,8 +445,8 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
 
     _yearSegment = YaruEntrySegment(
       intialInput: _controller.dateTime?.year.toString(),
-      minLength: widget.firstDate.year.toString().length,
-      maxLength: widget.lastDate.year.toString().length,
+      minLength: widget.firstDateTime.year.toString().length,
+      maxLength: widget.lastDateTime.year.toString().length,
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter(yearPlaceholder),
     );
@@ -281,63 +467,75 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
     );
     _minuteSegment.addListener(_dateTimeSegmentListener(_minuteSegment, 5, 59));
 
-    _secondSegment = YaruEntrySegment.fixed(
-      intialInput: _controller.dateTime?.second.toString(),
-      length: 2,
-      isNumeric: true,
-      inputFormatter: _dateTimeSegmentFormatter('-'),
-    );
-    _secondSegment.addListener(_dateTimeSegmentListener(_secondSegment, 5, 59));
-
     for (final segment in _segments) {
       _previousSegmentsValue.addAll({segment: segment.value.maybeToInt});
     }
 
-    for (final datePart in dateParts) {
-      switch (datePart) {
-        case '$year':
-          _segments.add(_yearSegment);
-          break;
-        case '$month':
-          _segments.add(_monthSegment);
-          break;
-        case '$day':
-          _segments.add(_daySegment);
-          break;
+    if (widget.type.hasDate) {
+      for (final datePart in dateParts) {
+        switch (datePart) {
+          case '$year':
+            _segments.add(_yearSegment);
+            break;
+          case '$month':
+            _segments.add(_monthSegment);
+            break;
+          case '$day':
+            _segments.add(_daySegment);
+            break;
+        }
       }
+      _delimiters.addAll([dateSeparator, dateSeparator]);
     }
 
-    _segments.addAll([
-      _hourSegment,
-      _minuteSegment,
-      _secondSegment,
-    ]);
+    if (widget.type.hasTime) {
+      _segments.addAll([
+        _hourSegment,
+        _minuteSegment,
+      ]);
 
-    _delimiters.addAll([dateSeparator, dateSeparator, ' ', ':', ':']);
+      if (widget.type.hasDate) {
+        _delimiters.add(' ');
+      }
+      _delimiters.add(':');
+    }
+  }
+
+  void _updateEntryController() {
+    _entryController = YaruSegmentedEntryController(
+      length: _segments.length,
+      initialIndex: _entryController?.index.clamp(0, _segments.length - 1) ?? 0,
+    );
   }
 
   bool _isValidAcceptableDate(DateTime? date) {
     return date != null &&
-        !date.isBefore(widget.firstDate) &&
-        !date.isAfter(widget.lastDate) &&
-        (widget.selectableDayPredicate == null ||
-            widget.selectableDayPredicate!(date));
+        !date.isBefore(widget.firstDateTime) &&
+        !date.isAfter(widget.lastDateTime) &&
+        (widget.selectableDateTimePredicate == null ||
+            widget.selectableDateTimePredicate!(date));
   }
 
   DateTime? _tryParseSegments() {
-    if (_year == null ||
-        _month == null ||
-        _day == null ||
-        _hour == null ||
-        _minute == null ||
-        _second == null) {
+    if (widget.type.hasDate &&
+        (_year == null || _month == null || _day == null)) {
       return null;
     }
 
-    return DateTime(_year!, _month!, _day!, _hour!, _minute!, _second!);
+    if (widget.type.hasTime && (_hour == null || _minute == null)) {
+      return null;
+    }
+
+    return DateTime(
+      _year ?? 0,
+      _month ?? 0,
+      _day ?? 0,
+      _hour ?? 0,
+      _minute ?? 0,
+    );
   }
 
-  String? _validateDate(String? text) {
+  String? _validateDateTime(String? text) {
     final dateTime = _tryParseSegments();
     final localizations = MaterialLocalizations.of(context);
 
@@ -347,8 +545,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
           _day == null &&
           _hour == null &&
           _minute == null &&
-          _second == null &&
-          widget.acceptEmptyDate) {
+          acceptEmpty) {
         return null;
       }
 
@@ -363,7 +560,7 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   Widget _clearInputButton() {
     return IconButton(
       onPressed: () {
-        _controller.value = null;
+        _controller.dateTime = null;
         for (final segment in _segments) {
           segment.input = null;
         }
@@ -376,17 +573,20 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
 
   @override
   Widget build(BuildContext context) {
-    final labelText = MaterialLocalizations.of(context).dateInputLabel;
+    final localizations = MaterialLocalizations.of(context);
+    final labelText = widget.type == _YaruDateTimeEntryType.time
+        ? localizations.timePickerInputHelpText
+        : localizations.dateInputLabel;
 
     return YaruSegmentedEntry(
       focusNode: widget.focusNode,
       controller: _entryController,
       segments: _segments,
       delimiters: _delimiters,
-      validator: _validateDate,
+      validator: _validateDateTime,
       onChanged: (_) {
         final dateTime = _tryParseSegments();
-        _controller.value = dateTime;
+        _controller.dateTime = dateTime;
         widget.onChanged?.call(dateTime);
       },
       onSaved: (_) => widget.onSaved?.call(_tryParseSegments()),
@@ -401,12 +601,52 @@ class _YaruDateTimeEntryState extends State<YaruDateTimeEntry> {
   }
 }
 
-class YaruDateTimeEntryController extends ValueNotifier<DateTime?> {
+/// Common interface for a YaruDateTimeEntry controller.
+/// See also :
+/// - [YaruDateTimeEntryController], a controller for a [YaruDateTimeEntry].
+/// - [YaruTimeEntryController], a controller for a [YaruTimeEntry].
+abstract class YaruDateTimeEntryControllerInterface extends ChangeNotifier {
+  DateTime? dateTime;
+}
+
+/// A controller for a [YaruDateTimeEntry].
+/// See also :
+/// - [YaruTimeEntryController], a controller for a [YaruTimeEntry].
+class YaruDateTimeEntryController extends ValueNotifier<DateTime?>
+    implements YaruDateTimeEntryControllerInterface {
+  /// Creates a [YaruDateTimeEntryController].
   YaruDateTimeEntryController({DateTime? dateTime}) : super(dateTime);
 
+  /// Creates a [YaruDateTimeEntryController], with the current datetime as initial value.
   YaruDateTimeEntryController.now() : super(DateTime.now());
 
+  @override
   DateTime? get dateTime => value;
+  @override
+  set dateTime(DateTime? dateTime) => value = dateTime;
+}
+
+/// A controller for a [YaruTimeEntry].
+/// See also :
+/// - [YaruDateTimeEntryController], a controller for a [YaruDateTimeEntry].
+class YaruTimeEntryController extends ValueNotifier<TimeOfDay?>
+    implements YaruDateTimeEntryControllerInterface {
+  /// Creates a [YaruTimeEntryController].
+  YaruTimeEntryController({TimeOfDay? timeOfDay}) : super(timeOfDay);
+
+  /// Creates a [YaruTimeEntryController], with the current time as initial value.
+  YaruTimeEntryController.now() : super(TimeOfDay.now());
+
+  @override
+  @protected
+  DateTime? get dateTime => value?.toDateTime();
+
+  @override
+  @protected
+  set dateTime(DateTime? dateTime) => value = dateTime?.toTimeOfDay();
+
+  TimeOfDay? get timeOfDay => value;
+  set timeOfDay(TimeOfDay? timeOfDay) => value = timeOfDay;
 }
 
 extension _StringX on String {
@@ -416,5 +656,23 @@ extension _StringX on String {
 
   String get firstCharacter {
     return length > 1 ? substring(0, 1) : this;
+  }
+}
+
+extension _TimeOfDayX on TimeOfDay {
+  DateTime toDateTime() {
+    return DateTime(
+      0,
+      0,
+      0,
+      hour,
+      minute,
+    );
+  }
+}
+
+extension _DateTimeX on DateTime {
+  TimeOfDay toTimeOfDay() {
+    return TimeOfDay.fromDateTime(this);
   }
 }

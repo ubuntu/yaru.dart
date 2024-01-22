@@ -9,8 +9,9 @@ class DateTimePage extends StatefulWidget {
 }
 
 class _DateTimePageState extends State<DateTimePage> {
-  final YaruDateTimeEntryController _controller =
-      YaruDateTimeEntryController.now();
+  final _dateController = YaruDateTimeEntryController.now();
+  final _dateTimeController = YaruDateTimeEntryController.now();
+  final _timeController = YaruTimeEntryController.now();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -25,22 +26,51 @@ class _DateTimePageState extends State<DateTimePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               YaruDateTimeEntry(
-                controller: _controller,
-                firstDate: DateTime(1900),
-                lastDate: DateTime(2050),
+                controller: _dateController,
+                includeTime: false,
+                firstDateTime: DateTime(1900),
+                lastDateTime: DateTime(2050),
                 onChanged: (dateTime) {
                   setState(() {
                     _formKey.currentState?.validate();
                   });
                 },
               ),
-              const SizedBox(height: 25),
-              Text(_dateTime.toString()),
-              Text(_controller.value.toString()),
-            ],
+              Text(_dateTimeController.dateTime.toString()),
+              YaruTimeEntry(
+                controller: _timeController,
+                onChanged: (time) {
+                  setState(() {
+                    _formKey.currentState?.validate();
+                  });
+                },
+              ),
+              Text(_timeController.timeOfDay.toString()),
+              YaruDateTimeEntry(
+                controller: _dateTimeController,
+                includeTime: true,
+                firstDateTime: DateTime(1900),
+                lastDateTime: DateTime(2050),
+                onChanged: (dateTime) {
+                  setState(() {
+                    _formKey.currentState?.validate();
+                  });
+                },
+              ),
+              Text(_dateTimeController.dateTime.toString()),
+            ].withSpacing(25),
           ),
         ),
       ),
     );
+  }
+}
+
+extension _ListSpacing on List<Widget> {
+  List<Widget> withSpacing(double spacing) {
+    return expand((item) sync* {
+      yield SizedBox(height: spacing);
+      yield item;
+    }).skip(1).toList();
   }
 }

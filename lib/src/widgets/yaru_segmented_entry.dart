@@ -15,6 +15,7 @@ class YaruSegmentedEntry extends StatefulWidget {
     required this.segments,
     required this.delimiters,
     this.focusNode,
+    this.autofocus,
     this.controller,
     this.decoration,
     this.validator,
@@ -40,6 +41,11 @@ class YaruSegmentedEntry extends StatefulWidget {
 
   /// Defines the keyboard focus for this widget.
   final FocusNode? focusNode;
+
+  /// {@macro flutter.widgets.editableText.autofocus}
+  ///
+  /// If null, defaults to false.
+  final bool? autofocus;
 
   /// A controller for this segmented entry.
   final YaruSegmentedEntryController? controller;
@@ -396,6 +402,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
       ),
       child: TextFormField(
         focusNode: _focusNode,
+        autofocus: widget.autofocus ?? false,
         controller: _textEditingController,
         onSaved: widget.onSaved,
         onFieldSubmitted: widget.onFieldSubmitted,
