@@ -177,14 +177,17 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                 child: widget.appBar!,
               ),
             Expanded(
-              child: YaruMasterListView(
-                length: widget.controller.length,
-                selectedIndex: _selectedIndex,
-                onTap: _onTap,
-                builder: widget.tileBuilder,
-                availableWidth: _paneWidth!,
-                startUndershoot: widget.appBar != null,
-                endUndershoot: widget.bottomBar != null,
+              child: Container(
+                color: color,
+                child: YaruMasterListView(
+                  length: widget.controller.length,
+                  selectedIndex: _selectedIndex,
+                  onTap: _onTap,
+                  builder: widget.tileBuilder,
+                  availableWidth: _paneWidth!,
+                  startUndershoot: widget.appBar != null,
+                  endUndershoot: widget.bottomBar != null,
+                ),
               ),
             ),
             if (widget.bottomBar != null)
