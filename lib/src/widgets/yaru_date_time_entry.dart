@@ -280,6 +280,8 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
 
   bool get acceptEmpty => widget.acceptEmpty ?? true;
 
+  bool _dirty = false;
+
   @override
   void initState() {
     super.initState();
@@ -340,11 +342,15 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   }
 
   void _controllerCallback() {
+    _dirty = true;
     _daySegment.input = _controller.dateTime?.day.toString();
     _monthSegment.input = _controller.dateTime?.month.toString();
     _yearSegment.input = _controller.dateTime?.year.toString();
     _hourSegment.input = _controller.dateTime?.hour.toString();
     _minuteSegment.input = _controller.dateTime?.minute.toString();
+    _dirty = false;
+
+    widget.onChanged?.call(_tryParseSegments());
   }
 
   YaruEntrySegmentInputFormatter _dateTimeSegmentFormatter(
@@ -352,7 +358,13 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   ) {
     return (input, minLength, _) {
       if (input != null) {
+        final intInput = input.maybeToInt;
         final remainCharactersLength = minLength - input.length;
+
+        if (intInput != null && intInput < 0) {
+          return '-${'0' * (minLength - 2)}1';
+        }
+
         return '0' * remainCharactersLength + input;
       }
 
@@ -362,19 +374,27 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
 
   void Function() _dateTimeSegmentListener(
     YaruEntrySegment segment,
-    int maxFirstValue,
     int maxValue,
   ) {
     return () {
       var segmentIntValue = segment.value.maybeToInt;
       final previousSegmentValue = _previousSegmentsValue[segment];
+      final effectiveMaxValue =
+          _controller.dateTime == null ? maxValue : maxValue + 1;
 
       if (segmentIntValue == previousSegmentValue) {
         return;
       }
 
+      if (_controller.dateTime == null &&
+          segmentIntValue != null &&
+          segmentIntValue < 0) {
+        segmentIntValue = 0;
+        segment.input = segmentIntValue.toString();
+      }
+
       if (segmentIntValue != null) {
-        if (segmentIntValue > maxFirstValue && segmentIntValue < 10) {
+        if (segmentIntValue > maxValue.firstNumber && segmentIntValue < 10) {
           if (previousSegmentValue == null ||
               !(previousSegmentValue + 1 == segmentIntValue ||
                   previousSegmentValue - 1 == segmentIntValue)) {
@@ -382,9 +402,9 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
           }
         }
 
-        if (segmentIntValue > maxValue) {
-          segment.input = maxValue.toString();
-          segmentIntValue = maxValue;
+        if (segmentIntValue > effectiveMaxValue) {
+          segment.input = effectiveMaxValue.toString();
+          segmentIntValue = effectiveMaxValue;
         }
       }
 
@@ -433,7 +453,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter(dayPlaceholder),
     );
-    _daySegment.addListener(_dateTimeSegmentListener(_daySegment, 3, 31));
+    _daySegment.addListener(_dateTimeSegmentListener(_daySegment, 31));
 
     _monthSegment = YaruEntrySegment.fixed(
       intialInput: _controller.dateTime?.month.toString(),
@@ -441,7 +461,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter(monthPlaceholder),
     );
-    _monthSegment.addListener(_dateTimeSegmentListener(_monthSegment, 1, 12));
+    _monthSegment.addListener(_dateTimeSegmentListener(_monthSegment, 12));
 
     _yearSegment = YaruEntrySegment(
       intialInput: _controller.dateTime?.year.toString(),
@@ -450,6 +470,13 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter(yearPlaceholder),
     );
+    _yearSegment.addListener(_dateTimeSegmentListener(_yearSegment, 9999));
+    _yearSegment.addListener(() {
+      final intValue = _yearSegment.value.maybeToInt;
+      if (_controller.dateTime != null && intValue != null && intValue < 0) {
+        _yearSegment.input = '0';
+      }
+    });
 
     _hourSegment = YaruEntrySegment.fixed(
       intialInput: _controller.dateTime?.hour.toString(),
@@ -457,7 +484,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('-'),
     );
-    _hourSegment.addListener(_dateTimeSegmentListener(_hourSegment, 2, 23));
+    _hourSegment.addListener(_dateTimeSegmentListener(_hourSegment, 23));
 
     _minuteSegment = YaruEntrySegment.fixed(
       intialInput: _controller.dateTime?.minute.toString(),
@@ -465,7 +492,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('-'),
     );
-    _minuteSegment.addListener(_dateTimeSegmentListener(_minuteSegment, 5, 59));
+    _minuteSegment.addListener(_dateTimeSegmentListener(_minuteSegment, 59));
 
     for (final segment in _segments) {
       _previousSegmentsValue.addAll({segment: segment.value.maybeToInt});
@@ -585,6 +612,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       delimiters: _delimiters,
       validator: _validateDateTime,
       onChanged: (_) {
+        if (_dirty) return;
         final dateTime = _tryParseSegments();
         _controller.dateTime = dateTime;
         widget.onChanged?.call(dateTime);
@@ -647,6 +675,12 @@ class YaruTimeEntryController extends ValueNotifier<TimeOfDay?>
 
   TimeOfDay? get timeOfDay => value;
   set timeOfDay(TimeOfDay? timeOfDay) => value = timeOfDay;
+}
+
+extension _IntX on int {
+  int get firstNumber {
+    return int.parse(toString()[0]);
+  }
 }
 
 extension _StringX on String {
