@@ -239,9 +239,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
       } else if (_selectedSegment.isNumeric && (up || down)) {
         final numericValue = int.tryParse(_selectedSegment.value) ?? 0;
         final input = numericValue + (up ? 1 : -1);
-        if (input >= 0) {
-          _selectedSegment.input = input.toString();
-        }
+        _selectedSegment.input = input.toString();
       } else if (backspace) {
         if (_selectedSegment.input != null) {
           _selectedSegment.input = _selectedSegment.input!.dropLastCharacter;
