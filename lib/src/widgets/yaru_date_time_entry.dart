@@ -5,6 +5,14 @@ import 'package:yaru_widgets/src/widgets/yaru_segmented_entry.dart';
 typedef SelectableDateTimePredicate = bool Function(DateTime dateTime);
 typedef SelectableTimeOfDayPredicate = bool Function(TimeOfDay timeOfDay);
 
+const maxMonthValue = 12;
+const maxDayValue = 31;
+const maxHourValue = 23;
+const maxMinuteValue = 59;
+
+const timePlaceholder = '-';
+const timeDelimiter = ':';
+
 /// A [YaruSegmentedEntry] configured to accepts and validates a datetime entered by a user.
 ///
 /// [firstDateTime], [lastDateTime], and [selectableDateTimePredicate] provide constraints on
@@ -280,6 +288,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
 
   bool get acceptEmpty => widget.acceptEmpty ?? true;
 
+  // Used to avoid any controller value change while updating segments
   bool _dirty = false;
 
   @override
@@ -453,7 +462,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter(dayPlaceholder),
     );
-    _daySegment.addListener(_dateTimeSegmentListener(_daySegment, 31));
+    _daySegment.addListener(_dateTimeSegmentListener(_daySegment, maxDayValue));
 
     _monthSegment = YaruEntrySegment.fixed(
       intialInput: _controller.dateTime?.month.toString(),
@@ -461,7 +470,8 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter(monthPlaceholder),
     );
-    _monthSegment.addListener(_dateTimeSegmentListener(_monthSegment, 12));
+    _monthSegment
+        .addListener(_dateTimeSegmentListener(_monthSegment, maxMonthValue));
 
     _yearSegment = YaruEntrySegment(
       intialInput: _controller.dateTime?.year.toString(),
@@ -470,7 +480,6 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter(yearPlaceholder),
     );
-    _yearSegment.addListener(_dateTimeSegmentListener(_yearSegment, 9999));
     _yearSegment.addListener(() {
       final intValue = _yearSegment.value.maybeToInt;
       if (_controller.dateTime != null && intValue != null && intValue < 0) {
@@ -484,7 +493,8 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('-'),
     );
-    _hourSegment.addListener(_dateTimeSegmentListener(_hourSegment, 23));
+    _hourSegment
+        .addListener(_dateTimeSegmentListener(_hourSegment, maxHourValue));
 
     _minuteSegment = YaruEntrySegment.fixed(
       intialInput: _controller.dateTime?.minute.toString(),
@@ -492,7 +502,8 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       isNumeric: true,
       inputFormatter: _dateTimeSegmentFormatter('-'),
     );
-    _minuteSegment.addListener(_dateTimeSegmentListener(_minuteSegment, 59));
+    _minuteSegment
+        .addListener(_dateTimeSegmentListener(_minuteSegment, maxMinuteValue));
 
     for (final segment in _segments) {
       _previousSegmentsValue.addAll({segment: segment.value.maybeToInt});
@@ -524,7 +535,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       if (widget.type.hasDate) {
         _delimiters.add(' ');
       }
-      _delimiters.add(':');
+      _delimiters.add(timeDelimiter);
     }
   }
 
