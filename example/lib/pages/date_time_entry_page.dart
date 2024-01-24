@@ -36,7 +36,7 @@ class _DateTimePageState extends State<DateTimePage> {
                   });
                 },
               ),
-              Text(_dateTimeController.dateTime.toString()),
+              Text(_dateController.dateTime.toString()),
               YaruTimeEntry(
                 controller: _timeController,
                 onChanged: (time) {
