@@ -459,7 +459,7 @@ class YaruEntrySegment extends ChangeNotifier {
   /// using the up/down arrows keys of the keyboard.
   final bool isNumeric;
 
-  /// Format teh given user input into the real segment value.
+  /// Format the given user input into the real segment value.
   /// The returned string length have to be clamped between [minLength] and [maxLength].
   /// A null input will be given for an empty input, (ex: to display a placeholder).
   final YaruEntrySegmentInputFormatter inputFormatter;
