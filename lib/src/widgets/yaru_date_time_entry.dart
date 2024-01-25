@@ -491,7 +491,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       intialInput: _controller.dateTime?.hour.toString(),
       length: 2,
       isNumeric: true,
-      inputFormatter: _dateTimeSegmentFormatter('-'),
+      inputFormatter: _dateTimeSegmentFormatter(timePlaceholder),
     );
     _hourSegment
         .addListener(_dateTimeSegmentListener(_hourSegment, maxHourValue));
@@ -500,7 +500,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       intialInput: _controller.dateTime?.minute.toString(),
       length: 2,
       isNumeric: true,
-      inputFormatter: _dateTimeSegmentFormatter('-'),
+      inputFormatter: _dateTimeSegmentFormatter(timePlaceholder),
     );
     _minuteSegment
         .addListener(_dateTimeSegmentListener(_minuteSegment, maxMinuteValue));
@@ -708,8 +708,8 @@ extension _TimeOfDayX on TimeOfDay {
   DateTime toDateTime() {
     return DateTime(
       0,
-      0,
-      0,
+      1,
+      1,
       hour,
       minute,
     );
