@@ -238,15 +238,15 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
           return KeyEventResult.ignored;
         }
       } else if (up) {
-        if (_selectedSegment.onArrowKeyUp == null) {
+        if (_selectedSegment.onUpArrowKey == null) {
           return KeyEventResult.ignored;
         }
-        _selectedSegment.onArrowKeyUp!();
+        _selectedSegment.onUpArrowKey!();
       } else if (down) {
-        if (_selectedSegment.onArrowKeyDown == null) {
+        if (_selectedSegment.onDownArrowKey == null) {
           return KeyEventResult.ignored;
         }
-        _selectedSegment.onArrowKeyDown!();
+        _selectedSegment.onDownArrowKey!();
       } else if (backspace) {
         if (_selectedSegment.input != null) {
           _selectedSegment.input = _selectedSegment.input!.dropLastCharacter;
@@ -435,8 +435,8 @@ abstract interface class IYaruEntrySegment implements Listenable {
   String? get input;
   String get text;
 
-  VoidCallback? get onArrowKeyUp;
-  VoidCallback? get onArrowKeyDown;
+  VoidCallback? get onUpArrowKey;
+  VoidCallback? get onDownArrowKey;
 }
 
 typedef YaruEntrySegmentInputFormatter = String Function(
@@ -454,8 +454,8 @@ class YaruEntrySegment extends ChangeNotifier implements IYaruEntrySegment {
     required this.maxLength,
     String? intialInput,
     required this.inputFormatter,
-    this.onArrowKeyUp,
-    this.onArrowKeyDown,
+    this.onUpArrowKey,
+    this.onDownArrowKey,
   })  : assert(minLength > 0),
         assert(maxLength >= minLength);
 
@@ -464,8 +464,8 @@ class YaruEntrySegment extends ChangeNotifier implements IYaruEntrySegment {
     required int length,
     String? intialInput,
     required this.inputFormatter,
-    this.onArrowKeyUp,
-    this.onArrowKeyDown,
+    this.onUpArrowKey,
+    this.onDownArrowKey,
   })  : assert(length > 0),
         minLength = length,
         maxLength = length;
@@ -488,10 +488,10 @@ class YaruEntrySegment extends ChangeNotifier implements IYaruEntrySegment {
   final YaruEntrySegmentInputFormatter inputFormatter;
 
   @override
-  final VoidCallback? onArrowKeyUp;
+  final VoidCallback? onUpArrowKey;
 
   @override
-  final VoidCallback? onArrowKeyDown;
+  final VoidCallback? onDownArrowKey;
 
   String? _input;
   @override
@@ -547,14 +547,14 @@ class YaruNumericEntrySegment extends ChangeNotifier
   int get length => text.length;
 
   @override
-  VoidCallback get onArrowKeyUp => () {
+  VoidCallback get onUpArrowKey => () {
         final numericValue = int.tryParse(text) ?? 0;
         final input = numericValue + 1;
         this.input = input.toString();
       };
 
   @override
-  VoidCallback get onArrowKeyDown => () {
+  VoidCallback get onDownArrowKey => () {
         final numericValue = int.tryParse(text) ?? 0;
         final input = numericValue - 1;
         this.input = input.toString();
