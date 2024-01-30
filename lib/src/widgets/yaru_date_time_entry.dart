@@ -546,11 +546,11 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     }
 
     return DateTime(
-      _year ?? 0,
-      _month ?? 0,
-      _day ?? 0,
-      _hour ?? 0,
-      _minute ?? 0,
+      (widget.type.hasDate && _year != null) ? _year! : 0,
+      (widget.type.hasDate && _month != null) ? _month! : 0,
+      (widget.type.hasDate && _day != null) ? _day! : 0,
+      (widget.type.hasTime && _hour != null) ? _hour! : 0,
+      (widget.type.hasTime && _minute != null) ? _minute! : 0,
     );
   }
 
@@ -616,7 +616,18 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
           widget.onFieldSubmitted?.call(_tryParseSegments()),
       decoration: InputDecoration(
         labelText: labelText,
-        suffixIcon: _clearInputButton(),
+        suffixIcon: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              onPressed: () {
+                _controller.dateTime = DateTime(2001, 12, 31);
+              },
+              icon: const Icon(YaruIcons.calendar),
+            ),
+            _clearInputButton(),
+          ],
+        ),
       ),
       keyboardType: TextInputType.datetime,
     );
