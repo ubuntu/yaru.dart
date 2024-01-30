@@ -109,6 +109,8 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruDateTimeEntry',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/date_time_entry_page.dart',
     pageBuilder: (context) => const DateTimePage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.calendar),
   ),
