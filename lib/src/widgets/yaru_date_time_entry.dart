@@ -352,11 +352,16 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
 
   void _controllerCallback() {
     _cancelOnChanged = true;
-    _daySegment.input = _controller.dateTime?.day.toString();
-    _monthSegment.input = _controller.dateTime?.month.toString();
-    _yearSegment.input = _controller.dateTime?.year.toString();
-    _hourSegment.input = _controller.dateTime?.hour.toString();
-    _minuteSegment.input = _controller.dateTime?.minute.toString();
+    _daySegment.input =
+        _controller.dateTime?.day.toString() ?? _daySegment.input;
+    _monthSegment.input =
+        _controller.dateTime?.month.toString() ?? _monthSegment.input;
+    _yearSegment.input =
+        _controller.dateTime?.year.toString() ?? _yearSegment.input;
+    _hourSegment.input =
+        _controller.dateTime?.hour.toString() ?? _hourSegment.input;
+    _minuteSegment.input =
+        _controller.dateTime?.minute.toString() ?? _minuteSegment.input;
     _cancelOnChanged = false;
 
     _onChanged();
