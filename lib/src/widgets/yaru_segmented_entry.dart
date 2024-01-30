@@ -29,8 +29,8 @@ class YaruSegmentedEntry extends StatefulWidget {
               segments.length == 0 && delimiters.length == 0,
         );
 
-  /// A list of [YaruEntrySegment] which represent each selectable and editable part of this entry.
-  final List<YaruEntrySegment> segments;
+  /// A list of [IYaruEntrySegment] which represent each selectable and editable part of this entry.
+  final List<IYaruEntrySegment> segments;
 
   /// A list of string, used to delimit segments.
   /// This list length have to be equal to [segments.length] - 1.
@@ -80,8 +80,9 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   late YaruSegmentedEntryController _controller;
   final _textEditingController = TextEditingController();
 
-  YaruEntrySegment get _selectedSegment => widget.segments[_controller.index];
-  String _selectedSegmentInput = '';
+  IYaruEntrySegment get _selectedSegment => widget.segments[_controller.index];
+
+  bool _clearSegmentInput = false;
 
   @override
   void initState() {
@@ -189,7 +190,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
 
   void _controllerCallback() {
     _updateTextEditingValue();
-    _selectedSegmentInput = '';
+    _clearSegmentInput = true;
   }
 
   void _textEditingControllerCallback() {
@@ -229,22 +230,27 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
       final backspace = event.logicalKey == LogicalKeyboardKey.backspace;
 
       if (left) {
-        if (!_controller.maybeSelectPreviousSegment() && (tab || shiftTab)) {
+        if (!_controller.maybeSelectPreviousSegment()) {
           return KeyEventResult.ignored;
         }
       } else if (right) {
-        if (!_controller.maybeSelectNextSegment() && (tab || shiftTab)) {
+        if (!_controller.maybeSelectNextSegment()) {
           return KeyEventResult.ignored;
         }
-      } else if (_selectedSegment.isNumeric && (up || down)) {
-        final numericValue = int.tryParse(_selectedSegment.value) ?? 0;
-        final input = numericValue + (up ? 1 : -1);
-        _selectedSegment.input = input.toString();
+      } else if (up) {
+        if (_selectedSegment.onArrowKeyUp == null) {
+          return KeyEventResult.ignored;
+        }
+        _selectedSegment.onArrowKeyUp!();
+      } else if (down) {
+        if (_selectedSegment.onArrowKeyDown == null) {
+          return KeyEventResult.ignored;
+        }
+        _selectedSegment.onArrowKeyDown!();
       } else if (backspace) {
         if (_selectedSegment.input != null) {
           _selectedSegment.input = _selectedSegment.input!.dropLastCharacter;
-          if (_selectedSegment.input!.isEmpty) {
-            _selectedSegment.input = null;
+          if (_selectedSegment.input == null) {
             ltr
                 ? _controller.maybeSelectPreviousSegment()
                 : _controller.maybeSelectNextSegment();
@@ -257,7 +263,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
       }
 
       if (right || left || up || down || backspace) {
-        _selectedSegmentInput = '';
+        _clearSegmentInput = true;
         _focusNode.requestFocus();
         return KeyEventResult.handled;
       }
@@ -271,7 +277,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
 
     for (var i = 0; i < widget.segments.length; i++) {
       final segment = widget.segments[i];
-      text += segment.value + _getDelimiterOfIndex(i);
+      text += segment.text + _getDelimiterOfIndex(i);
     }
 
     return TextEditingValue(
@@ -304,7 +310,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
 
     for (var i = 0; i < index; i++) {
       final segment = widget.segments[i];
-      prefix += segment.value + _getDelimiterOfIndex(i);
+      prefix += segment.text + _getDelimiterOfIndex(i);
     }
 
     return prefix;
@@ -319,7 +325,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
 
     for (var i = index + 1; i < widget.segments.length; i++) {
       final segment = widget.segments[i];
-      prefix += segment.value + _getDelimiterOfIndex(i);
+      prefix += segment.text + _getDelimiterOfIndex(i);
     }
 
     return prefix;
@@ -361,19 +367,22 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
         .replaceFirst(suffix, '')
         .getNbFirstCharacter(_selectedSegment.maxLength);
 
-    if (_selectedSegment.isNumeric && !input.isNumeric) {
-      return _textEditingController.value;
+    late final String newSegmentInput;
+
+    if (_clearSegmentInput) {
+      newSegmentInput = input;
+      _clearSegmentInput = false;
+    } else {
+      newSegmentInput = (_selectedSegment.input ?? '') + input;
     }
 
-    _selectedSegmentInput += input;
-    _selectedSegment.input =
-        _selectedSegmentInput.getNbFirstCharacter(_selectedSegment.maxLength);
+    _selectedSegment.input = newSegmentInput;
 
-    if (_selectedSegmentInput.length >= _selectedSegment.maxLength) {
+    if (newSegmentInput.length >= _selectedSegment.maxLength) {
       if (!_controller.maybeSelectNextSegment()) {
         _focusNode.nextFocus();
       }
-      _selectedSegmentInput = '';
+      _clearSegmentInput = true;
     }
 
     return _getTextEditingValue();
@@ -417,6 +426,19 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 }
 
+abstract interface class IYaruEntrySegment implements Listenable {
+  int get minLength;
+  int get maxLength;
+  int get length;
+
+  set input(String? input);
+  String? get input;
+  String get text;
+
+  VoidCallback? get onArrowKeyUp;
+  VoidCallback? get onArrowKeyDown;
+}
+
 typedef YaruEntrySegmentInputFormatter = String Function(
   String? segmentInput,
   int minLength,
@@ -424,62 +446,157 @@ typedef YaruEntrySegmentInputFormatter = String Function(
 );
 
 /// Represents a single segment of a [YaruSegmentedEntry].
-/// You can listen for [value] and [input] change using [addListener].
-class YaruEntrySegment extends ChangeNotifier {
+/// You can listen for [text] and [input] change using [addListener].
+class YaruEntrySegment extends ChangeNotifier implements IYaruEntrySegment {
   /// Creates a [YaruEntrySegment].
   YaruEntrySegment({
     required this.minLength,
     required this.maxLength,
     String? intialInput,
     required this.inputFormatter,
-    this.isNumeric = false,
+    this.onArrowKeyUp,
+    this.onArrowKeyDown,
   })  : assert(minLength > 0),
-        assert(maxLength >= minLength),
-        _value = inputFormatter(intialInput, minLength, maxLength);
+        assert(maxLength >= minLength);
 
   /// Creates a [YaruEntrySegment] with a fixed length.
   YaruEntrySegment.fixed({
     required int length,
     String? intialInput,
     required this.inputFormatter,
-    this.isNumeric = false,
+    this.onArrowKeyUp,
+    this.onArrowKeyDown,
   })  : assert(length > 0),
-        _value = inputFormatter(intialInput, length, length),
         minLength = length,
         maxLength = length;
 
   /// Minimal length of this segment.
+  @override
   final int minLength;
 
   /// Maximal length of this segment.
+  @override
   final int maxLength;
 
-  /// If true, this segment will only accepts numeric values.
-  /// This option also allows the value to be increased/decreased,
-  /// using the up/down arrows keys of the keyboard.
-  final bool isNumeric;
+  /// Length of the value of this segment.
+  @override
+  int get length => text.length;
 
   /// Format the given user input into the real segment value.
   /// The returned string length have to be clamped between [minLength] and [maxLength].
   /// A null input will be given for an empty input, (ex: to display a placeholder).
   final YaruEntrySegmentInputFormatter inputFormatter;
 
-  /// Length of the value of this segment.
-  int get length => value.length;
+  @override
+  final VoidCallback? onArrowKeyUp;
+
+  @override
+  final VoidCallback? onArrowKeyDown;
 
   String? _input;
+  @override
   String? get input => _input;
+  @override
   set input(String? input) {
-    final value = inputFormatter(input, minLength, maxLength);
-    assert(value.length >= minLength);
-    assert(value.length <= maxLength);
-    _value = value;
     _input = input;
     notifyListeners();
   }
 
-  String _value = '';
-  String get value => _value;
+  @override
+  String get text {
+    final text = inputFormatter(input, minLength, maxLength);
+    assert(text.length >= minLength);
+    assert(text.length <= maxLength);
+    return text;
+  }
+}
+
+class YaruNumericEntrySegment extends ChangeNotifier
+    implements IYaruEntrySegment {
+  /// Creates a [YaruNumericEntrySegment].
+  YaruNumericEntrySegment({
+    required this.minLength,
+    required this.maxLength,
+    int? initialValue,
+    required this.placeholderLetter,
+  }) : value = initialValue;
+
+  /// Creates a [YaruNumericEntrySegment] with a fixed length.
+  YaruNumericEntrySegment.fixed({
+    required int length,
+    int? initialValue,
+    required this.placeholderLetter,
+  })  : assert(length > 0),
+        value = initialValue,
+        minLength = length,
+        maxLength = length;
+
+  int? value;
+
+  final String placeholderLetter;
+
+  /// Minimal length of this segment.
+  @override
+  final int minLength;
+
+  /// Maximal length of this segment.
+  @override
+  final int maxLength;
+
+  @override
+  int get length => text.length;
+
+  @override
+  VoidCallback get onArrowKeyUp => () {
+        final numericValue = int.tryParse(text) ?? 0;
+        final input = numericValue + 1;
+        this.input = input.toString();
+      };
+
+  @override
+  VoidCallback get onArrowKeyDown => () {
+        final numericValue = int.tryParse(text) ?? 0;
+        final input = numericValue - 1;
+        this.input = input.toString();
+      };
+
+  @override
+  String? get input => value?.toString();
+
+  @override
+  set input(String? input) {
+    final intInput = input?.maybeToInt;
+
+    if (input != null && input.isNotEmpty && intInput == null) {
+      return;
+    }
+
+    value = intInput;
+    notifyListeners();
+  }
+
+  @override
+  String get text {
+    final text = _formatValue();
+    assert(text.length >= minLength);
+    assert(text.length <= maxLength);
+    return text;
+  }
+
+  String _formatValue() {
+    if (value != null) {
+      final stringValue = value!.toString();
+      final remainCharactersLength = minLength - stringValue.length;
+
+      if (value != null && value! < 0) {
+        return '-${'0' * (minLength - 2)}1';
+      }
+
+      return '0' * remainCharactersLength + stringValue;
+    }
+
+    return placeholderLetter * minLength;
+  }
 }
 
 /// A controller for a [YaruSegmentedEntry].
@@ -540,8 +657,8 @@ class YaruSegmentedEntryController extends ChangeNotifier {
 }
 
 extension _StringX on String {
-  bool get isNumeric {
-    return double.tryParse(this) != null;
+  int? get maybeToInt {
+    return int.tryParse(this);
   }
 
   String getNbFirstCharacter(int count) {
