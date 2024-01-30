@@ -249,13 +249,8 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
         _selectedSegment.onDownArrowKey!();
       } else if (backspace) {
         if (_selectedSegment.input != null) {
-          _selectedSegment.input = _selectedSegment.input!.dropLastCharacter;
-          if (_selectedSegment.input == null) {
-            ltr
-                ? _controller.maybeSelectPreviousSegment()
-                : _controller.maybeSelectNextSegment();
-          }
-        } else {
+          _selectedSegment.input = null;
+        } else if (_selectedSegment.input == null) {
           ltr
               ? _controller.maybeSelectPreviousSegment()
               : _controller.maybeSelectNextSegment();
@@ -663,9 +658,5 @@ extension _StringX on String {
 
   String getNbFirstCharacter(int count) {
     return length > count ? substring(0, count) : this;
-  }
-
-  String get dropLastCharacter {
-    return substring(0, length - 1);
   }
 }
