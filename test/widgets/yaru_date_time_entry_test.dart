@@ -87,4 +87,67 @@ void main() {
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
     expect(controller.dateTime, DateTime(2000, 01, 01, 00, 00));
   });
+
+  testWidgets('out of bound date time are invalided', (tester) async {
+    final formKey = GlobalKey<FormState>();
+    final controller = YaruDateTimeEntryController();
+    var predicate = true;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Form(
+            key: formKey,
+            child: YaruDateTimeEntry(
+              controller: controller,
+              firstDateTime: DateTime(2000),
+              lastDateTime: DateTime(2050),
+              selectableDateTimePredicate: (dateTime) => predicate,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final finder = find.byType(YaruDateTimeEntry);
+    await tester.tap(finder);
+
+    controller.dateTime = DateTime(2001);
+    expect(formKey.currentState?.validate(), true);
+
+    controller.dateTime = DateTime(1900);
+    expect(formKey.currentState?.validate(), false);
+
+    controller.dateTime = DateTime(2060);
+    expect(formKey.currentState?.validate(), false);
+
+    predicate = false;
+    controller.dateTime = DateTime(2001);
+    expect(formKey.currentState?.validate(), false);
+  });
+
+  testWidgets('partial fill is invalided', (tester) async {
+    final formKey = GlobalKey<FormState>();
+    final controller = YaruDateTimeEntryController();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Form(
+            key: formKey,
+            child: YaruDateTimeEntry(
+              controller: controller,
+              firstDateTime: DateTime(2000),
+              lastDateTime: DateTime(2050),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final finder = find.byType(YaruDateTimeEntry);
+    await tester.tap(finder);
+    await tester.enterText(finder, '01');
+    expect(formKey.currentState?.validate(), false);
+  });
 }
