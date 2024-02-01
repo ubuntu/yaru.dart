@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.4.0 (2024-02-01)
+
+## What's Changed
+* feat: add accessibility icons by @Jupi007 in https://github.com/ubuntu/yaru_icons.dart/pull/194
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_icons.dart/compare/v2.3.0...v2.4.0
+
 ## 2.3.0 (2023-12-19)
 
 ## What's Changed
