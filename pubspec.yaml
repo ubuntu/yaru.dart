@@ -4,21 +4,25 @@ homepage: https://github.com/ubuntu/yaru_icons.dart
 description: Ubuntu Yaru Icon theme
 
 environment:
-  sdk: ">=2.17.0 <4.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=2.2.0"
 
 dependencies:
+  animated_vector: ^0.2.0
+  animated_vector_annotations: ^0.2.0
   flutter:
     sdk: flutter
+
+dev_dependencies:
+  animated_vector_gen: ^0.2.1
+  build_runner: ^2.4.6
+  flutter_lints: ">=2.0.1 <4.0.0"
 
 flutter:
   fonts:
     - family: YaruIcons
       fonts:
         - asset: assets/yaru_icons.otf
-
-dev_dependencies:
-  flutter_lints: ">=2.0.1 <4.0.0"
 
 icon_font:
   input_svg_dir: "assets/icons/"

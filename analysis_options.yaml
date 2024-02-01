@@ -36,3 +36,4 @@ linter:
 analyzer:
   exclude:
     - lib/src/yaru_icons.dart
+    - lib/src/**/*.g.dart

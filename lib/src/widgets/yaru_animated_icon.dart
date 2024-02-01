@@ -1,3 +1,4 @@
+import 'package:animated_vector/animated_vector.dart';
 import 'package:flutter/material.dart';
 
 /// Describes how a [YaruAnimatedIcon] will run.
@@ -10,12 +11,11 @@ enum YaruAnimationMode {
 }
 
 /// A runner widget for all Yaru animated icons.
-class YaruAnimatedIcon extends StatefulWidget {
+class YaruAnimatedVectorIcon extends StatefulWidget {
   /// Create a Yaru animated icon runner.
-  const YaruAnimatedIcon(
+  const YaruAnimatedVectorIcon(
     this.data, {
     this.duration,
-    this.curve,
     this.size,
     this.color,
     this.mode = YaruAnimationMode.once,
@@ -24,15 +24,11 @@ class YaruAnimatedIcon extends StatefulWidget {
   });
 
   /// Describe which animation will be played.
-  final YaruAnimatedIconData data;
+  final AnimatedVectorData data;
 
   /// Duration of the animation.
-  /// If null, defaults to [data.defaultDuration].
+  /// If null, defaults to [data.duration].
   final Duration? duration;
-
-  /// Curve used to play the animation.
-  /// If null, defaults to [data.defaultCurve].
-  final Curve? curve;
 
   /// Size of the canvas used to draw the icon.
   /// If null, the default value of the related [data.build] widget will be used.
@@ -51,10 +47,10 @@ class YaruAnimatedIcon extends StatefulWidget {
   final double? initialProgress;
 
   @override
-  State<YaruAnimatedIcon> createState() => _YaruAnimatedIconState();
+  State<YaruAnimatedVectorIcon> createState() => _YaruAnimatedVectorIconState();
 }
 
-class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
+class _YaruAnimatedVectorIconState extends State<YaruAnimatedVectorIcon>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -65,18 +61,18 @@ class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
     _controller = AnimationController(
       value: widget.initialProgress,
       vsync: this,
-      duration: widget.duration ?? widget.data.defaultDuration,
+      duration: widget.data.duration,
     );
     _runAnimationController();
   }
 
   @override
-  void didUpdateWidget(YaruAnimatedIcon old) {
+  void didUpdateWidget(YaruAnimatedVectorIcon old) {
     if (widget.data != old.data) {
       _controller.value = 0.0;
     }
     if (widget.duration != old.duration) {
-      _controller.duration = widget.duration ?? widget.data.defaultDuration;
+      _controller.duration = widget.duration ?? widget.data.duration;
     }
     if (widget.mode != old.mode || widget.data != old.data) {
       _runAnimationController();
@@ -107,31 +103,14 @@ class _YaruAnimatedIconState extends State<YaruAnimatedIcon>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, _) {
-        return widget.data.build(
-          context,
-          CurvedAnimation(
-            parent: _controller,
-            curve: widget.curve ?? widget.data.defaultCurve,
-          ),
-          widget.size,
-          widget.color,
+        return AnimatedVector(
+          vector: widget.data,
+          progress: _controller,
+          size: widget.size != null ? Size.square(widget.size!) : null,
+          applyTheme: true,
+          color: widget.color,
         );
       },
     );
   }
-}
-
-/// Interface class for a Yaru animated icon.
-abstract class YaruAnimatedIconData {
-  const YaruAnimatedIconData();
-
-  Duration get defaultDuration;
-  Curve get defaultCurve => Curves.linear;
-
-  Widget build(
-    BuildContext context,
-    Animation<double> progress,
-    double? size,
-    Color? color,
-  );
 }
