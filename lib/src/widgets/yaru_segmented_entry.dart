@@ -425,7 +425,6 @@ enum YaruSegmentEventReturnAction {
 
 abstract interface class YaruEntrySegment implements Listenable {
   String? get input;
-  set input(String? input);
   String get text;
   int get length;
 
@@ -488,11 +487,6 @@ class YaruStringSegment extends ChangeNotifier implements YaruEntrySegment {
   String? _input;
   @override
   String? get input => _input;
-  @override
-  set input(String? input) {
-    _input = input;
-    notifyListeners();
-  }
 
   bool _selected = false;
   bool _squashOnNextInput = false;
@@ -508,26 +502,29 @@ class YaruStringSegment extends ChangeNotifier implements YaruEntrySegment {
   @override
   YaruSegmentEventReturnAction onInput(String input) {
     var action = YaruSegmentEventReturnAction.handled;
+    final previousInput = _input;
 
     if (_squashOnNextInput) {
-      this.input = null;
+      _input = null;
       _squashOnNextInput = false;
     }
 
-    this.input = (this.input ?? '') + input;
+    _input = (_input ?? '') + input;
 
-    if (maxLength != null && this.input!.length >= maxLength!) {
-      this.input = this.input!.getNbFirstCharacter(maxLength!);
+    if (maxLength != null && _input!.length >= maxLength!) {
+      _input = _input!.getNbFirstCharacter(maxLength!);
       action = YaruSegmentEventReturnAction.selectNextSegment;
     }
 
+    if (_input != previousInput) notifyListeners();
     return action;
   }
 
   @override
   YaruSegmentEventReturnAction onBackspaceKey() {
-    if (input != null) {
-      input = null;
+    if (_input != null) {
+      _input = null;
+      notifyListeners();
       return YaruSegmentEventReturnAction.handled;
     }
 
@@ -574,11 +571,6 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
   String? _input;
   @override
   String? get input => _input;
-  @override
-  set input(String? input) {
-    _input = input;
-    notifyListeners();
-  }
 
   final String placeholderLetter;
 
@@ -628,14 +620,15 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
   @override
   YaruSegmentEventReturnAction onInput(String input) {
     var action = YaruSegmentEventReturnAction.handled;
+    final previousValue = _value;
 
     if (_squashOnNextInput) {
-      value = null;
+      _value = null;
       _input = null;
       _squashOnNextInput = false;
     }
 
-    var candidateInput = (this.input ?? '') + input;
+    var candidateInput = (_input ?? '') + input;
     final intCandidateInput = candidateInput.maybeToInt;
 
     if (intCandidateInput == null) {
@@ -645,18 +638,20 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
         candidateInput = candidateInput.getNbFirstCharacter(maxLength!);
         action = YaruSegmentEventReturnAction.selectNextSegment;
       }
-      this.input = candidateInput;
-      value = candidateInput.toInt;
+      _input = candidateInput;
+      _value = candidateInput.toInt;
     }
 
+    if (_value != previousValue) notifyListeners();
     return action;
   }
 
   @override
   YaruSegmentEventReturnAction onBackspaceKey() {
-    if (value != null) {
-      value = null;
+    if (_value != null) {
+      _value = null;
       _input = null;
+      notifyListeners();
       return YaruSegmentEventReturnAction.handled;
     }
     return YaruSegmentEventReturnAction.selectPreviousSegment;
@@ -664,23 +659,25 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
 
   @override
   YaruSegmentEventReturnAction onUpArrowKey() {
-    if (value != null) {
-      value = value! + 1;
+    if (_value != null) {
+      _value = value! + 1;
     } else {
-      value = 1;
+      _value = 1;
     }
-    _input = value.toString();
+    _input = null;
+    notifyListeners();
     return YaruSegmentEventReturnAction.handled;
   }
 
   @override
   YaruSegmentEventReturnAction onDownArrowKey() {
-    if (value != null) {
-      value = value! - 1;
+    if (_value != null) {
+      _value = _value! - 1;
     } else {
-      value = 0;
+      _value = 0;
     }
-    _input = value.toString();
+    _input = null;
+    notifyListeners();
     return YaruSegmentEventReturnAction.handled;
   }
 }
@@ -696,9 +693,6 @@ class YaruEnumSegment<T extends Enum> extends ChangeNotifier
 
   @override
   String? get input => null;
-
-  @override
-  set input(String? input) {}
 
   int get _valueIndex => values.indexOf(value);
 

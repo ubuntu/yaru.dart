@@ -150,4 +150,30 @@ void main() {
     await tester.enterText(finder, '01');
     expect(formKey.currentState?.validate(), false);
   });
+
+  testWidgets('out of bound first character selects next segment',
+      (tester) async {
+    final controller = YaruDateTimeEntryController();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruDateTimeEntry(
+            controller: controller,
+            firstDateTime: DateTime(2000),
+            lastDateTime: DateTime(2050),
+          ),
+        ),
+      ),
+    );
+
+    final finder = find.byType(YaruDateTimeEntry);
+    await tester.tap(finder);
+    await tester.enterText(finder, '2');
+    await tester.enterText(finder, '4');
+    await tester.enterText(finder, '2000');
+    await tester.enterText(finder, '3');
+    await tester.enterText(finder, '6');
+    expect(controller.dateTime, DateTime(2000, 2, 4, 3, 6));
+  });
 }
