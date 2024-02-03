@@ -551,7 +551,7 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
     required this.placeholderLetter,
   })  : assert(minLength > 0),
         assert(maxLength == null || maxLength >= minLength),
-        value = initialValue;
+        _value = initialValue;
 
   /// Creates a [YaruNumericSegment] with a fixed length.
   YaruNumericSegment.fixed({
@@ -559,13 +559,19 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
     int? initialValue,
     required this.placeholderLetter,
   })  : assert(length > 0),
-        value = initialValue,
+        _value = initialValue,
         minLength = length,
         maxLength = length;
 
-  int? value;
+  int? _value;
+  int? get value => _value;
+  set value(int? value) {
+    _value = value;
+    notifyListeners();
+  }
 
-  String? get input => value?.toString();
+  String? _input;
+  String? get input => _input;
 
   final String placeholderLetter;
 
@@ -616,7 +622,6 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
   YaruSegmentEventReturnAction onInput(String? input, {bool squash = false}) {
     // TODO: take every letters in account (0)
     var action = YaruSegmentEventReturnAction.handled;
-    final oldValue = value;
 
     if (_squashOnNextInput || squash) {
       value = null;
@@ -638,7 +643,6 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
       }
     }
 
-    if (value != oldValue) notifyListeners();
     return action;
   }
 
@@ -646,7 +650,6 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
   YaruSegmentEventReturnAction onBackspaceKey() {
     if (value != null) {
       value = null;
-      notifyListeners();
       return YaruSegmentEventReturnAction.handled;
     }
 

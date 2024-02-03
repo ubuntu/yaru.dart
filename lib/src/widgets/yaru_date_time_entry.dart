@@ -352,26 +352,11 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
 
   void _controllerCallback() {
     _cancelOnChanged = true;
-    _daySegment.onInput(
-      _controller.dateTime?.day.toString() ?? _daySegment.input,
-      squash: true,
-    );
-    _monthSegment.onInput(
-      _controller.dateTime?.month.toString() ?? _monthSegment.input,
-      squash: true,
-    );
-    _yearSegment.onInput(
-      _controller.dateTime?.year.toString() ?? _yearSegment.input,
-      squash: true,
-    );
-    _hourSegment.onInput(
-      _controller.dateTime?.hour.toString() ?? _hourSegment.input,
-      squash: true,
-    );
-    _minuteSegment.onInput(
-      _controller.dateTime?.minute.toString() ?? _minuteSegment.input,
-      squash: true,
-    );
+    _daySegment.value = _controller.dateTime?.day ?? _daySegment.value;
+    _monthSegment.value = _controller.dateTime?.month ?? _monthSegment.value;
+    _yearSegment.value = _controller.dateTime?.year ?? _yearSegment.value;
+    _hourSegment.value = _controller.dateTime?.hour ?? _hourSegment.value;
+    _minuteSegment.value = _controller.dateTime?.minute ?? _minuteSegment.value;
     _cancelOnChanged = false;
 
     _onChanged();
@@ -394,10 +379,6 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
           segment.value != null &&
           segment.value! < 0) {
         segment.value = 0;
-        segment.onInput(
-          segment.value.toString(),
-          squash: true,
-        );
       }
 
       if (segment.value != null) {
@@ -410,10 +391,6 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
         }
 
         if (segment.value! > effectiveMaxValue) {
-          segment.onInput(
-            effectiveMaxValue.toString(),
-            squash: true,
-          );
           segment.value = effectiveMaxValue;
         }
       }
@@ -480,7 +457,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     );
     _yearSegment.addListener(() {
       if (_yearSegment.value != null && _yearSegment.value! < 0) {
-        _yearSegment.onInput('0', squash: true);
+        _yearSegment.value = 0;
       }
     });
 
@@ -602,7 +579,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       onPressed: () {
         _controller.dateTime = null;
         for (final segment in _segments) {
-          segment.onInput(null);
+          segment.value = null;
         }
 
         _entryController?.selectFirstSegment();
