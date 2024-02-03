@@ -19,7 +19,7 @@ class _DateTimePageState extends State<DateTimePage> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: 250,
+        width: 275,
         child: Form(
           key: _formKey,
           child: Column(

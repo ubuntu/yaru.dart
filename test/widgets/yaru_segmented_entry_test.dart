@@ -4,6 +4,43 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 void main() {
+  testWidgets(
+      'previous segment input is cleared when navigating to other segment',
+      (tester) async {
+    final controller = YaruSegmentedEntryController(length: 2);
+    final segment1 = YaruStringSegment.fixed(
+      length: 4,
+      inputFormatter: (_, __, ___) => 'abcd',
+    );
+    final segment2 = YaruStringSegment.fixed(
+      length: 4,
+      inputFormatter: (_, __, ___) => 'efgh',
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruSegmentedEntry(
+            controller: controller,
+            segments: [
+              segment1,
+              segment2,
+            ],
+            delimiters: const ['/'],
+          ),
+        ),
+      ),
+    );
+
+    final finder = find.byType(YaruSegmentedEntry);
+    await tester.tap(finder);
+    await tester.enterText(finder, '12');
+    controller.maybeSelectNextSegment();
+    controller.maybeSelectPreviousSegment();
+    await tester.enterText(finder, '34');
+    expect(segment1.input, '34');
+  });
+
   testWidgets('next segment is selected when current segment input is full',
       (tester) async {
     final controller = YaruSegmentedEntryController(length: 3);
@@ -13,16 +50,16 @@ void main() {
           body: YaruSegmentedEntry(
             controller: controller,
             segments: [
-              YaruEntrySegment.fixed(
+              YaruStringSegment.fixed(
                 length: 2,
                 inputFormatter: (_, __, ___) => 'aa',
               ),
-              YaruEntrySegment(
+              YaruStringSegment(
                 minLength: 2,
                 maxLength: 4,
                 inputFormatter: (_, __, ___) => 'bb',
               ),
-              YaruEntrySegment.fixed(
+              YaruStringSegment.fixed(
                 length: 2,
                 inputFormatter: (_, __, ___) => 'cc',
               ),
@@ -41,6 +78,7 @@ void main() {
     await tester.enterText(finder, 'abcd');
     expect(controller.index, 2);
   });
+
   testWidgets('entry is navigable using arrow/tab keyboard keys',
       (tester) async {
     final controller = YaruSegmentedEntryController(length: 3);
@@ -51,15 +89,15 @@ void main() {
           body: YaruSegmentedEntry(
             controller: controller,
             segments: [
-              YaruEntrySegment.fixed(
+              YaruStringSegment.fixed(
                 length: 2,
                 inputFormatter: (_, __, ___) => 'aa',
               ),
-              YaruEntrySegment.fixed(
+              YaruStringSegment.fixed(
                 length: 2,
                 inputFormatter: (_, __, ___) => 'bb',
               ),
-              YaruEntrySegment.fixed(
+              YaruStringSegment.fixed(
                 length: 4,
                 inputFormatter: (_, __, ___) => 'cccc',
               ),
@@ -110,7 +148,7 @@ void main() {
               ),
               YaruSegmentedEntry(
                 segments: [
-                  YaruEntrySegment.fixed(
+                  YaruStringSegment.fixed(
                     length: 1,
                     inputFormatter: (_, __, ___) => 'a',
                   ),
@@ -144,7 +182,7 @@ void main() {
 
   testWidgets('numeric value is modified using up/down keyboard keys',
       (tester) async {
-    final segment = YaruNumericEntrySegment.fixed(
+    final segment = YaruNumericSegment.fixed(
       length: 2,
       initialValue: 0,
       placeholderLetter: 'a',
@@ -173,12 +211,12 @@ void main() {
   testWidgets('segment value is cleared using backspace keyboard key',
       (tester) async {
     final controller = YaruSegmentedEntryController(length: 2);
-    final segment1 = YaruNumericEntrySegment.fixed(
+    final segment1 = YaruNumericSegment.fixed(
       length: 2,
       initialValue: 12,
       placeholderLetter: 'a',
     );
-    final segment2 = YaruNumericEntrySegment.fixed(
+    final segment2 = YaruNumericSegment.fixed(
       length: 2,
       initialValue: 12,
       placeholderLetter: 'a',

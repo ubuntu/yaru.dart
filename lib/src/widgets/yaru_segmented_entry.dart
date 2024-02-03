@@ -29,8 +29,8 @@ class YaruSegmentedEntry extends StatefulWidget {
               segments.length == 0 && delimiters.length == 0,
         );
 
-  /// A list of [IYaruEntrySegment] which represent each selectable and editable part of this entry.
-  final List<IYaruEntrySegment> segments;
+  /// A list of [YaruEntrySegment] which represent each selectable and editable part of this entry.
+  final List<YaruEntrySegment> segments;
 
   /// A list of string, used to delimit segments.
   /// This list length have to be equal to [segments.length] - 1.
@@ -80,9 +80,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   late YaruSegmentedEntryController _controller;
   final _textEditingController = TextEditingController();
 
-  IYaruEntrySegment get _selectedSegment => widget.segments[_controller.index];
-
-  bool _clearSegmentInput = false;
+  YaruEntrySegment get _selectedSegment => widget.segments[_controller.index];
 
   @override
   void initState() {
@@ -190,7 +188,10 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
 
   void _controllerCallback() {
     _updateTextEditingValue();
-    _clearSegmentInput = true;
+    for (final segment in widget.segments) {
+      segment.onSelect(false);
+    }
+    _selectedSegment.onSelect(true);
   }
 
   void _textEditingControllerCallback() {
@@ -213,58 +214,60 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   KeyEventResult _onKey(FocusNode node, RawKeyEvent event) {
-    if (widget.segments.isNotEmpty &&
-        (event is RawKeyDownEvent || event.repeat)) {
-      final ltr = Directionality.of(context) == TextDirection.ltr;
-      final tab =
-          event.logicalKey == LogicalKeyboardKey.tab && !event.isShiftPressed;
-      final shiftTab =
-          event.logicalKey == LogicalKeyboardKey.tab && event.isShiftPressed;
-      final arrowLeft = event.logicalKey == LogicalKeyboardKey.arrowLeft;
-      final arrowRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
-
-      final left = (ltr ? shiftTab : tab) || arrowLeft;
-      final right = (ltr ? tab : shiftTab) || arrowRight;
-      final up = event.logicalKey == LogicalKeyboardKey.arrowUp;
-      final down = event.logicalKey == LogicalKeyboardKey.arrowDown;
-      final backspace = event.logicalKey == LogicalKeyboardKey.backspace;
-
-      if (left) {
-        if (!_controller.maybeSelectPreviousSegment()) {
-          return KeyEventResult.ignored;
-        }
-      } else if (right) {
-        if (!_controller.maybeSelectNextSegment()) {
-          return KeyEventResult.ignored;
-        }
-      } else if (up) {
-        if (_selectedSegment.onUpArrowKey == null) {
-          return KeyEventResult.ignored;
-        }
-        _selectedSegment.onUpArrowKey!();
-      } else if (down) {
-        if (_selectedSegment.onDownArrowKey == null) {
-          return KeyEventResult.ignored;
-        }
-        _selectedSegment.onDownArrowKey!();
-      } else if (backspace) {
-        if (_selectedSegment.input != null) {
-          _selectedSegment.input = null;
-        } else if (_selectedSegment.input == null) {
-          ltr
-              ? _controller.maybeSelectPreviousSegment()
-              : _controller.maybeSelectNextSegment();
-        }
-      }
-
-      if (right || left || up || down || backspace) {
-        _clearSegmentInput = true;
-        _focusNode.requestFocus();
-        return KeyEventResult.handled;
-      }
+    if (widget.segments.isEmpty ||
+        !(event is RawKeyDownEvent || event.repeat)) {
+      return KeyEventResult.ignored;
     }
 
-    return KeyEventResult.ignored;
+    final ltr = Directionality.of(context) == TextDirection.ltr;
+    final tab =
+        event.logicalKey == LogicalKeyboardKey.tab && !event.isShiftPressed;
+    final shiftTab =
+        event.logicalKey == LogicalKeyboardKey.tab && event.isShiftPressed;
+    final arrowLeft = event.logicalKey == LogicalKeyboardKey.arrowLeft;
+    final arrowRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
+
+    final left = (ltr ? shiftTab : tab) || arrowLeft;
+    final right = (ltr ? tab : shiftTab) || arrowRight;
+    final up = event.logicalKey == LogicalKeyboardKey.arrowUp;
+    final down = event.logicalKey == LogicalKeyboardKey.arrowDown;
+    final backspace = event.logicalKey == LogicalKeyboardKey.backspace;
+
+    late final YaruSegmentEventReturnAction action;
+
+    if (left) {
+      action = _controller.maybeSelectPreviousSegment()
+          ? YaruSegmentEventReturnAction.handled
+          : YaruSegmentEventReturnAction.ignored;
+    } else if (right) {
+      action = _controller.maybeSelectNextSegment()
+          ? YaruSegmentEventReturnAction.handled
+          : YaruSegmentEventReturnAction.ignored;
+    } else if (up) {
+      action = _selectedSegment.onUpArrowKey();
+    } else if (down) {
+      action = _selectedSegment.onDownArrowKey();
+    } else if (backspace) {
+      action = _selectedSegment.onBackspaceKey();
+    } else {
+      action = YaruSegmentEventReturnAction.ignored;
+    }
+
+    switch (action) {
+      case YaruSegmentEventReturnAction.selectPreviousSegment:
+        _controller.maybeSelectPreviousSegment();
+        break;
+      case YaruSegmentEventReturnAction.selectNextSegment:
+        _controller.maybeSelectNextSegment();
+        break;
+      case YaruSegmentEventReturnAction.handled:
+        break;
+      case YaruSegmentEventReturnAction.ignored:
+        return KeyEventResult.ignored;
+    }
+
+    _focusNode.requestFocus();
+    return KeyEventResult.handled;
   }
 
   TextEditingValue _getTextEditingValue() {
@@ -357,27 +360,19 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
     final prefix = _getPrefixOfIndex(_controller.index);
     final suffix = _getSuffixOfIndex(_controller.index);
 
-    final input = newValue.text
-        .replaceFirst(prefix, '')
-        .replaceFirst(suffix, '')
-        .getNbFirstCharacter(_selectedSegment.maxLength);
+    final input =
+        newValue.text.replaceFirst(prefix, '').replaceFirst(suffix, '');
 
-    late final String newSegmentInput;
+    final action = _selectedSegment.onInput(input);
 
-    if (_clearSegmentInput) {
-      newSegmentInput = input;
-      _clearSegmentInput = false;
-    } else {
-      newSegmentInput = (_selectedSegment.input ?? '') + input;
-    }
-
-    _selectedSegment.input = newSegmentInput;
-
-    if (newSegmentInput.length >= _selectedSegment.maxLength) {
-      if (!_controller.maybeSelectNextSegment()) {
-        _focusNode.nextFocus();
-      }
-      _clearSegmentInput = true;
+    switch (action) {
+      case YaruSegmentEventReturnAction.selectPreviousSegment:
+        _controller.maybeSelectPreviousSegment();
+        break;
+      case YaruSegmentEventReturnAction.selectNextSegment:
+        _controller.maybeSelectNextSegment();
+        break;
+      default:
     }
 
     return _getTextEditingValue();
@@ -421,103 +416,145 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 }
 
-abstract interface class IYaruEntrySegment implements Listenable {
-  int get minLength;
-  int get maxLength;
-  int get length;
-
-  set input(String? input);
-  String? get input;
-  String get text;
-
-  VoidCallback? get onUpArrowKey;
-  VoidCallback? get onDownArrowKey;
+enum YaruSegmentEventReturnAction {
+  selectPreviousSegment,
+  selectNextSegment,
+  handled,
+  ignored,
 }
 
-typedef YaruEntrySegmentInputFormatter = String Function(
+abstract interface class YaruEntrySegment implements Listenable {
+  String get text;
+  int get length;
+
+  void onSelect(bool selected);
+  YaruSegmentEventReturnAction onInput(String? input);
+  YaruSegmentEventReturnAction onUpArrowKey();
+  YaruSegmentEventReturnAction onDownArrowKey();
+  YaruSegmentEventReturnAction onBackspaceKey();
+}
+
+typedef YaruSegmentInputFormatter = String Function(
   String? segmentInput,
   int minLength,
-  int maxLength,
+  int? maxLength,
 );
 
 /// Represents a single segment of a [YaruSegmentedEntry].
 /// You can listen for [text] and [input] change using [addListener].
-class YaruEntrySegment extends ChangeNotifier implements IYaruEntrySegment {
-  /// Creates a [YaruEntrySegment].
-  YaruEntrySegment({
-    required this.minLength,
+class YaruStringSegment extends ChangeNotifier implements YaruEntrySegment {
+  /// Creates a [YaruStringSegment].
+  YaruStringSegment({
+    this.minLength = 1,
     required this.maxLength,
     String? intialInput,
     required this.inputFormatter,
-    this.onUpArrowKey,
-    this.onDownArrowKey,
   })  : assert(minLength > 0),
-        assert(maxLength >= minLength);
+        assert(maxLength == null || maxLength >= minLength);
 
-  /// Creates a [YaruEntrySegment] with a fixed length.
-  YaruEntrySegment.fixed({
+  /// Creates a [YaruStringSegment] with a fixed length.
+  YaruStringSegment.fixed({
     required int length,
     String? intialInput,
     required this.inputFormatter,
-    this.onUpArrowKey,
-    this.onDownArrowKey,
   })  : assert(length > 0),
         minLength = length,
         maxLength = length;
 
   /// Minimal length of this segment.
-  @override
   final int minLength;
 
   /// Maximal length of this segment.
-  @override
-  final int maxLength;
-
-  /// Length of the value of this segment.
-  @override
-  int get length => text.length;
+  final int? maxLength;
 
   /// Format the given user input into the real segment value.
   /// The returned string length have to be clamped between [minLength] and [maxLength].
   /// A null input will be given for an empty input, (ex: to display a placeholder).
-  final YaruEntrySegmentInputFormatter inputFormatter;
-
-  @override
-  final VoidCallback? onUpArrowKey;
-
-  @override
-  final VoidCallback? onDownArrowKey;
-
-  String? _input;
-  @override
-  String? get input => _input;
-  @override
-  set input(String? input) {
-    _input = input;
-    notifyListeners();
-  }
+  final YaruSegmentInputFormatter inputFormatter;
 
   @override
   String get text {
-    final text = inputFormatter(input, minLength, maxLength);
+    final text = inputFormatter(_input, minLength, maxLength);
     assert(text.length >= minLength);
-    assert(text.length <= maxLength);
+    assert(maxLength == null || text.length <= maxLength!);
     return text;
   }
+
+  @override
+  int get length => text.length;
+
+  String? _input;
+  String? get input => _input;
+
+  bool _selected = false;
+  bool _squashOnNextInput = false;
+
+  @override
+  void onSelect(bool selected) {
+    if (_selected == false && selected == true) {
+      _squashOnNextInput = true;
+    }
+    _selected = selected;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onInput(String? input, {bool squash = false}) {
+    var action = YaruSegmentEventReturnAction.handled;
+    final oldInput = _input;
+
+    if (_squashOnNextInput || squash) {
+      _input = null;
+      _squashOnNextInput = false;
+    }
+
+    if (input == null) {
+      _input = null;
+    } else {
+      _input = (_input ?? '') + input;
+
+      if (maxLength != null && _input!.length >= maxLength!) {
+        _input = _input!.getNbFirstCharacter(maxLength!);
+        action = YaruSegmentEventReturnAction.selectNextSegment;
+      }
+    }
+
+    if (_input != oldInput) notifyListeners();
+    return action;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onBackspaceKey() {
+    if (_input != null) {
+      _input = null;
+      notifyListeners();
+      return YaruSegmentEventReturnAction.handled;
+    }
+
+    return YaruSegmentEventReturnAction.selectPreviousSegment;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onDownArrowKey() =>
+      YaruSegmentEventReturnAction.ignored;
+
+  @override
+  YaruSegmentEventReturnAction onUpArrowKey() =>
+      YaruSegmentEventReturnAction.ignored;
 }
 
-class YaruNumericEntrySegment extends ChangeNotifier
-    implements IYaruEntrySegment {
-  /// Creates a [YaruNumericEntrySegment].
-  YaruNumericEntrySegment({
+class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
+  /// Creates a [YaruNumericSegment].
+  YaruNumericSegment({
     required this.minLength,
     required this.maxLength,
     int? initialValue,
     required this.placeholderLetter,
-  }) : value = initialValue;
+  })  : assert(minLength > 0),
+        assert(maxLength == null || maxLength >= minLength),
+        value = initialValue;
 
-  /// Creates a [YaruNumericEntrySegment] with a fixed length.
-  YaruNumericEntrySegment.fixed({
+  /// Creates a [YaruNumericSegment] with a fixed length.
+  YaruNumericSegment.fixed({
     required int length,
     int? initialValue,
     required this.placeholderLetter,
@@ -528,53 +565,24 @@ class YaruNumericEntrySegment extends ChangeNotifier
 
   int? value;
 
+  String? get input => value?.toString();
+
   final String placeholderLetter;
 
   /// Minimal length of this segment.
-  @override
   final int minLength;
 
   /// Maximal length of this segment.
-  @override
-  final int maxLength;
+  final int? maxLength;
 
-  @override
-  int get length => text.length;
-
-  @override
-  VoidCallback get onUpArrowKey => () {
-        final numericValue = int.tryParse(text) ?? 0;
-        final input = numericValue + 1;
-        this.input = input.toString();
-      };
-
-  @override
-  VoidCallback get onDownArrowKey => () {
-        final numericValue = int.tryParse(text) ?? 0;
-        final input = numericValue - 1;
-        this.input = input.toString();
-      };
-
-  @override
-  String? get input => value?.toString();
-
-  @override
-  set input(String? input) {
-    final intInput = input?.maybeToInt;
-
-    if (input != null && input.isNotEmpty && intInput == null) {
-      return;
-    }
-
-    value = intInput;
-    notifyListeners();
-  }
+  bool _selected = false;
+  bool _squashOnNextInput = false;
 
   @override
   String get text {
     final text = _formatValue();
     assert(text.length >= minLength);
-    assert(text.length <= maxLength);
+    assert(maxLength == null || text.length <= maxLength!);
     return text;
   }
 
@@ -592,6 +600,144 @@ class YaruNumericEntrySegment extends ChangeNotifier
 
     return placeholderLetter * minLength;
   }
+
+  @override
+  int get length => text.length;
+
+  @override
+  void onSelect(bool selected) {
+    if (_selected == false && selected == true) {
+      _squashOnNextInput = true;
+    }
+    _selected = selected;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onInput(String? input, {bool squash = false}) {
+    // TODO: take every letters in account (0)
+    var action = YaruSegmentEventReturnAction.handled;
+    final oldValue = value;
+
+    if (_squashOnNextInput || squash) {
+      value = null;
+      _squashOnNextInput = false;
+    }
+
+    final intInput = input?.maybeToInt;
+
+    if (input != null && intInput == null) {
+      return YaruSegmentEventReturnAction.handled;
+    } else if (intInput == null) {
+      value = null;
+    } else {
+      value = value != null ? value!.concatenate(intInput) : intInput;
+
+      if (maxLength != null && value!.length >= maxLength!) {
+        value = value!.getNbFirstNumber(maxLength!);
+        action = YaruSegmentEventReturnAction.selectNextSegment;
+      }
+    }
+
+    if (value != oldValue) notifyListeners();
+    return action;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onBackspaceKey() {
+    if (value != null) {
+      value = null;
+      notifyListeners();
+      return YaruSegmentEventReturnAction.handled;
+    }
+
+    return YaruSegmentEventReturnAction.selectPreviousSegment;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onUpArrowKey() {
+    if (value != null) {
+      value = value! + 1;
+    } else {
+      value = 1;
+    }
+    notifyListeners();
+    return YaruSegmentEventReturnAction.handled;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onDownArrowKey() {
+    if (value != null) {
+      value = value! - 1;
+    } else {
+      value = 0;
+    }
+    notifyListeners();
+    return YaruSegmentEventReturnAction.handled;
+  }
+}
+
+class YaruEnumSegment<T extends Enum> extends ChangeNotifier
+    implements YaruEntrySegment {
+  YaruEnumSegment({
+    T? initialValue,
+    required this.values,
+  }) : value = initialValue ?? values.first;
+
+  T value;
+
+  int get _valueIndex => values.indexOf(value);
+
+  final List<T> values;
+
+  @override
+  String get text => value.name.toString();
+
+  @override
+  int get length => text.length;
+
+  @override
+  YaruSegmentEventReturnAction onInput(String? input) {
+    if (input == null) {
+      return YaruSegmentEventReturnAction.handled;
+    }
+
+    value = values.firstWhere(
+      (e) => e.name.toString().startsWith(input),
+      orElse: () => value,
+    );
+    notifyListeners();
+    return YaruSegmentEventReturnAction.handled;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onUpArrowKey() {
+    if (_valueIndex + 1 < values.length) {
+      value = values[_valueIndex + 1];
+    } else {
+      value = values[0];
+    }
+    notifyListeners();
+    return YaruSegmentEventReturnAction.handled;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onDownArrowKey() {
+    if (_valueIndex - 1 >= 0) {
+      value = values[_valueIndex - 1];
+    } else {
+      value = values[values.length - 1];
+    }
+    notifyListeners();
+    return YaruSegmentEventReturnAction.handled;
+  }
+
+  @override
+  YaruSegmentEventReturnAction onBackspaceKey() {
+    return YaruSegmentEventReturnAction.selectPreviousSegment;
+  }
+
+  @override
+  void onSelect(bool selected) {}
 }
 
 /// A controller for a [YaruSegmentedEntry].
@@ -651,9 +797,28 @@ class YaruSegmentedEntryController extends ChangeNotifier {
   }
 }
 
+extension _IntX on int {
+  int concatenate(int other) {
+    return (toString() + other.toString()).toInt;
+  }
+
+  int getNbFirstNumber(int count) {
+    final string = toString();
+    return string.length > count ? string.substring(0, count).toInt : this;
+  }
+
+  int get length {
+    return toString().length;
+  }
+}
+
 extension _StringX on String {
   int? get maybeToInt {
     return int.tryParse(this);
+  }
+
+  int get toInt {
+    return int.parse(this);
   }
 
   String getNbFirstCharacter(int count) {
