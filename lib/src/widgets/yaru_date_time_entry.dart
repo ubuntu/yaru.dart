@@ -538,8 +538,8 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
 
     return DateTime(
       (widget.type.hasDate && _year != null) ? _year! : 0,
-      (widget.type.hasDate && _month != null) ? _month! : 0,
-      (widget.type.hasDate && _day != null) ? _day! : 0,
+      (widget.type.hasDate && _month != null) ? _month! : 1,
+      (widget.type.hasDate && _day != null) ? _day! : 1,
       (widget.type.hasTime && _hour != null) ? _hour! : 0,
       (widget.type.hasTime && _minute != null) ? _minute! : 0,
     );
