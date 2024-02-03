@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.5.0 (2024-01-21)
+
+## What's Changed
+* fix: choice chip nav buttons block mouse by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/823
+* feat(YaruChoiceChipBar): add selectedFirst parameter by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/827
+* fix(YaruChoiceChipBar): allow more parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/828
+* fix(YaruChoiceChipBar): forward parameters to buttons by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/829
+* fix(YaruMasterDetailPage): bring back sidebar color option by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/826
+* fix: fix snippetUrl for popup_page in example by @Timo-Schroeder in https://github.com/ubuntu/yaru_widgets.dart/pull/830
+
+## New Contributors
+* @Timo-Schroeder made their first contribution in https://github.com/ubuntu/yaru_widgets.dart/pull/830
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.4.0...v3.5.0
+
 ## 3.4.0 (2023-12-27)
 
 ## What's Changed
