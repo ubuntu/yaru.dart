@@ -96,7 +96,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   @override
   void didUpdateWidget(covariant YaruSegmentedEntry oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (!listEquals(widget.segments, oldWidget.segments) && _initialized) {
+    if (_initialized) {
       for (final segment in oldWidget.segments) {
         segment.removeListener(_segmentCallback);
       }
