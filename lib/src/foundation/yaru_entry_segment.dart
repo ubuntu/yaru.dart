@@ -215,7 +215,7 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
       final remainCharactersLength = minLength - stringValue.length;
 
       if (value != null && value! < 0) {
-        return '-${'0' * (minLength - 2)}1';
+        return '-${'0' * (remainCharactersLength - 2)}$stringValue';
       }
 
       return '0' * remainCharactersLength + stringValue;
