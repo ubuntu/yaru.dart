@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/src/widgets/yaru_segmented_entry.dart';
 
+import '../foundation/yaru_entry_segment.dart';
+
 typedef SelectableDateTimePredicate = bool Function(DateTime dateTime);
 typedef SelectableTimeOfDayPredicate = bool Function(TimeOfDay timeOfDay);
 
@@ -278,8 +280,6 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   final _segments = <YaruNumericSegment>[];
   final _delimiters = <String>[];
 
-  final _previousSegmentsValue = <YaruNumericSegment, int?>{};
-
   int? get _year => _yearSegment.value;
   int? get _month => _monthSegment.value;
   int? get _day => _daySegment.value;
@@ -362,40 +362,46 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     _onChanged();
   }
 
-  void Function() _dateTimeSegmentListener(
-    YaruNumericSegment segment,
+  YaruNumericSegmentCallback _dateTimeSegmentOnValueChange(
     int maxValue,
   ) {
-    return () {
-      final previousSegmentValue = _previousSegmentsValue[segment];
+    return (_, value, __) {
+      if (value == null) {
+        return value;
+      }
+
       final effectiveMaxValue =
           _controller.dateTime == null ? maxValue : maxValue + 1;
 
-      if (segment.value == previousSegmentValue) {
-        return;
+      if (value > effectiveMaxValue) {
+        return effectiveMaxValue;
       }
 
-      if (_controller.dateTime == null &&
-          segment.value != null &&
-          segment.value! < 0) {
-        segment.value = 0;
+      return value;
+    };
+  }
+
+  YaruNumericSegmentCallback _dateTimeSegmentOnInput(int maxValue) {
+    return (input, value, oldValue) {
+      if (_controller.dateTime == null && value != null && value < 0) {
+        return 0;
       }
 
-      if (segment.value != null) {
-        if (segment.value! > maxValue.firstNumber && segment.value! < 10) {
-          if (previousSegmentValue == null ||
-              !(previousSegmentValue + 1 == segment.value ||
-                  previousSegmentValue - 1 == segment.value)) {
-            _entryController?.maybeSelectNextSegment();
-          }
+      if (value != null) {
+        if (input?.length == 1 && value > maxValue.firstNumber && value < 10) {
+          _entryController?.maybeSelectNextSegment();
         }
 
-        if (segment.value! > effectiveMaxValue) {
-          segment.value = effectiveMaxValue;
+        if (_controller.dateTime == null && value < 0) {
+          return 0;
+        }
+
+        if (_controller.dateTime != null && value == 0) {
+          return oldValue;
         }
       }
 
-      _previousSegmentsValue[segment] = segment.value;
+      return value;
     };
   }
 
@@ -438,48 +444,46 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       initialValue: _controller.dateTime?.day,
       length: 2,
       placeholderLetter: dayPlaceholder,
+      onValueChange: _dateTimeSegmentOnValueChange(maxDayValue),
+      onInputCallback: _dateTimeSegmentOnInput(maxDayValue),
     );
-    _daySegment.addListener(_dateTimeSegmentListener(_daySegment, maxDayValue));
 
     _monthSegment = YaruNumericSegment.fixed(
       initialValue: _controller.dateTime?.month,
       length: 2,
       placeholderLetter: monthPlaceholder,
+      onValueChange: _dateTimeSegmentOnValueChange(maxMonthValue),
+      onInputCallback: _dateTimeSegmentOnInput(maxMonthValue),
     );
-    _monthSegment
-        .addListener(_dateTimeSegmentListener(_monthSegment, maxMonthValue));
 
     _yearSegment = YaruNumericSegment(
       initialValue: _controller.dateTime?.year,
       minLength: widget.firstDateTime.year.toString().length,
       maxLength: widget.lastDateTime.year.toString().length,
       placeholderLetter: yearPlaceholder,
+      onValueChange: (_, value, __) {
+        if (value != null && value < 0) {
+          return 0;
+        }
+        return value;
+      },
     );
-    _yearSegment.addListener(() {
-      if (_yearSegment.value != null && _yearSegment.value! < 0) {
-        _yearSegment.value = 0;
-      }
-    });
 
     _hourSegment = YaruNumericSegment.fixed(
       initialValue: _controller.dateTime?.hour,
       length: 2,
       placeholderLetter: timePlaceholder,
+      onValueChange: _dateTimeSegmentOnValueChange(maxHourValue),
+      onInputCallback: _dateTimeSegmentOnInput(maxHourValue),
     );
-    _hourSegment
-        .addListener(_dateTimeSegmentListener(_hourSegment, maxHourValue));
 
     _minuteSegment = YaruNumericSegment.fixed(
       initialValue: _controller.dateTime?.minute,
       length: 2,
       placeholderLetter: timePlaceholder,
+      onValueChange: _dateTimeSegmentOnValueChange(maxMinuteValue),
+      onInputCallback: _dateTimeSegmentOnInput(maxMinuteValue),
     );
-    _minuteSegment
-        .addListener(_dateTimeSegmentListener(_minuteSegment, maxMinuteValue));
-
-    for (final segment in _segments) {
-      _previousSegmentsValue.addAll({segment: segment.value});
-    }
 
     if (widget.type.hasDate) {
       for (final datePart in dateParts) {
@@ -581,8 +585,6 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
         for (final segment in _segments) {
           segment.value = null;
         }
-
-        _entryController?.selectFirstSegment();
       },
       icon: const Icon(YaruIcons.edit_clear),
     );
