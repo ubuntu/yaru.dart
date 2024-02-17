@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.6.0 (2024-02-17)
+
+## What's Changed
+* feat: rounded rectangle page indicator and size transition by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/831
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.5.0...v3.6.0
+
 ## 3.5.0 (2024-01-21)
 
 ## What's Changed
