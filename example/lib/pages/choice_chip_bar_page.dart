@@ -29,6 +29,7 @@ class _ChoiceChipBarPageState extends State<ChoiceChipBarPage> {
         child: Column(
           children: [
             YaruChoiceChipBar(
+              selectedFirst: false,
               showCheckMarks: false,
               shrinkWrap: true,
               clearOnSelect: false,

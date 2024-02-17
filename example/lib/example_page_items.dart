@@ -162,7 +162,7 @@ final examplePageItems = <PageItem>[
   PageItem(
     title: 'YaruPopupMenuButton',
     snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/option_button_page.dart',
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/popup_page.dart',
     iconBuilder: (context, selected) => const Icon(YaruIcons.stop),
     pageBuilder: (_) => const PopupPage(),
   ),
