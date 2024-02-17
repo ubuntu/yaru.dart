@@ -717,18 +717,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
           widget.onFieldSubmitted?.call(_tryParseSegments()),
       decoration: InputDecoration(
         labelText: labelText,
-        suffixIcon: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              onPressed: () {
-                _controller.dateTime = DateTime(2001, 12, 31);
-              },
-              icon: const Icon(YaruIcons.calendar),
-            ),
-            _clearInputButton(),
-          ],
-        ),
+        suffixIcon: _clearInputButton(),
       ),
       keyboardType: TextInputType.datetime,
     );
