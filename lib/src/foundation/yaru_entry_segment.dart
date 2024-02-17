@@ -211,7 +211,7 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
 
   String _formatValue() {
     if (value != null) {
-      final stringValue = value!.toString();
+      final stringValue = value!.abs().toString();
       final remainCharactersLength = minLength - stringValue.length;
 
       if (value != null && value! < 0) {
@@ -305,8 +305,8 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
     }
 
     input = null;
-    value = onInputCallback != null
-        ? onInputCallback!(_input, candidateValue, oldValue)
+    value = callback != null
+        ? callback(_input, candidateValue, oldValue)
         : candidateValue;
 
     return YaruSegmentEventReturnAction.handled;

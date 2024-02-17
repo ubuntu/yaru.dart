@@ -9,7 +9,8 @@ typedef SelectableTimeOfDayPredicate = bool Function(TimeOfDay timeOfDay);
 
 const maxMonthValue = 12;
 const maxDayValue = 31;
-const maxHourValue = 23;
+const max24HourValue = 23;
+const max12HourValue = 12;
 const maxMinuteValue = 59;
 
 const timePlaceholder = '-';
@@ -41,6 +42,7 @@ class YaruDateTimeEntry extends _YaruDateTimeEntry {
     super.initialDateTime,
     required super.firstDateTime,
     required super.lastDateTime,
+    super.force24HourFormat,
     super.onFieldSubmitted,
     super.onSaved,
     super.onChanged,
@@ -84,6 +86,7 @@ class YaruTimeEntry extends StatelessWidget {
     this.initialTimeOfDay,
     this.firstTime,
     this.lastTime,
+    this.force24HourFormat,
     this.onFieldSubmitted,
     this.onSaved,
     this.onChanged,
@@ -109,6 +112,8 @@ class YaruTimeEntry extends StatelessWidget {
 
   /// The latest allowable [TimeOfDay] that the user can input.
   final TimeOfDay? lastTime;
+
+  final bool? force24HourFormat;
 
   /// An optional method to call when the user indicates they are done editing
   /// the text in the field.
@@ -167,6 +172,7 @@ class YaruTimeEntry extends StatelessWidget {
           (firstTime ?? const TimeOfDay(hour: 0, minute: 0)).toDateTime(),
       lastDateTime:
           (lastTime ?? const TimeOfDay(hour: 23, minute: 59)).toDateTime(),
+      force24HourFormat: force24HourFormat,
       onFieldSubmitted: _valueChangedCallbackAdapter(onFieldSubmitted),
       onSaved: _valueChangedCallbackAdapter(onSaved),
       onChanged: _valueChangedCallbackAdapter(onChanged),
@@ -199,6 +205,7 @@ class _YaruDateTimeEntry extends StatefulWidget {
     this.initialDateTime,
     required this.firstDateTime,
     required this.lastDateTime,
+    this.force24HourFormat,
     this.onFieldSubmitted,
     this.onSaved,
     this.onChanged,
@@ -227,6 +234,8 @@ class _YaruDateTimeEntry extends StatefulWidget {
 
   /// The latest allowable [DateTime] that the user can input.
   final DateTime lastDateTime;
+
+  final bool? force24HourFormat;
 
   /// An optional method to call when the user indicates they are done editing
   /// the text in the field.
@@ -271,13 +280,17 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   late IYaruDateTimeEntryController _controller;
   YaruSegmentedEntryController? _entryController;
 
+  late bool _is24HourLocalized;
+  bool get _use24HourFormat => widget.force24HourFormat ?? _is24HourLocalized;
+
   late YaruNumericSegment _daySegment;
   late YaruNumericSegment _monthSegment;
   late YaruNumericSegment _yearSegment;
   late YaruNumericSegment _hourSegment;
   late YaruNumericSegment _minuteSegment;
+  late YaruEnumSegment<DayPeriod> _periodSegment;
 
-  final _segments = <YaruNumericSegment>[];
+  final _segments = <YaruEntrySegment>[];
   final _delimiters = <String>[];
 
   int? get _year => _yearSegment.value;
@@ -285,6 +298,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   int? get _day => _daySegment.value;
   int? get _hour => _hourSegment.value;
   int? get _minute => _minuteSegment.value;
+  DayPeriod get _period => _periodSegment.value;
 
   bool get acceptEmpty => widget.acceptEmpty ?? true;
 
@@ -316,9 +330,12 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     }
 
     if (widget.type != oldWidget.type) {
-      for (final segment in _segments) {
-        segment.dispose();
-      }
+      _daySegment.dispose();
+      _monthSegment.dispose();
+      _yearSegment.dispose();
+      _hourSegment.dispose();
+      _minuteSegment.dispose();
+      _periodSegment.dispose();
       _updateSegmentsAndDelimiters();
 
       _entryController?.dispose();
@@ -338,6 +355,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     _yearSegment.dispose();
     _hourSegment.dispose();
     _minuteSegment.dispose();
+    _periodSegment.dispose();
 
     super.dispose();
   }
@@ -355,8 +373,15 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     _daySegment.value = _controller.dateTime?.day ?? _daySegment.value;
     _monthSegment.value = _controller.dateTime?.month ?? _monthSegment.value;
     _yearSegment.value = _controller.dateTime?.year ?? _yearSegment.value;
-    _hourSegment.value = _controller.dateTime?.hour ?? _hourSegment.value;
+    _hourSegment.value = _controller.dateTime != null
+        ? _use24HourFormat
+            ? _controller.dateTime!.hour
+            : _controller.dateTime!.toTimeOfDay().hourOfPeriod
+        : _hourSegment.value;
     _minuteSegment.value = _controller.dateTime?.minute ?? _minuteSegment.value;
+    _periodSegment.value = _controller.dateTime != null
+        ? _controller.dateTime!.toTimeOfDay().period
+        : _periodSegment.value;
     _cancelOnChanged = false;
 
     _onChanged();
@@ -392,6 +417,10 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
           _entryController?.maybeSelectNextSegment();
         }
 
+        if (value > maxValue) {
+          return maxValue;
+        }
+
         if (_controller.dateTime == null && value < 0) {
           return 0;
         }
@@ -405,6 +434,43 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     };
   }
 
+  int? onYearValueChange(_, int? value, __) {
+    if (value != null && value < 0) {
+      return 0;
+    }
+    return value;
+  }
+
+  int? onHourUpArrowKey(_, int? value, int? oldValue) {
+    if (_use24HourFormat) {
+      return value;
+    } else if (oldValue == 11) {
+      if (_period.isPm && _daySegment.value != null) {
+        _daySegment.value = _daySegment.value! + 1;
+      }
+      _periodSegment.value = _period.invert;
+      return 12;
+    } else if (oldValue == 12) {
+      return 1;
+    }
+    return value;
+  }
+
+  int? onHourDownArrowKey(_, int? value, int? oldValue) {
+    if (_use24HourFormat) {
+      return value;
+    } else if (oldValue == 12) {
+      if (_period.isAm && _daySegment.value != null) {
+        _daySegment.value = _daySegment.value! - 1;
+      }
+      _periodSegment.value = _period.invert;
+      return 11;
+    } else if (oldValue == 1) {
+      return 12;
+    }
+    return value;
+  }
+
   void _updateSegmentsAndDelimiters() {
     _segments.clear();
     _delimiters.clear();
@@ -413,16 +479,19 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     const month = 12;
     const day = 31;
 
+    final localizations = MaterialLocalizations.of(context);
+    _is24HourLocalized =
+        hourFormat(of: localizations.timeOfDayFormat()) != HourFormat.h;
+    final formattedDateTime =
+        localizations.formatCompactDate(DateTime(year, month, day));
+
     late final String yearPlaceholder;
     late final String monthPlaceholder;
     late final String dayPlaceholder;
+    final dateDelimiter = localizations.dateSeparator;
 
-    final localizations = MaterialLocalizations.of(context);
-    final dateSeparator = localizations.dateSeparator;
-    final formattedDateTime =
-        localizations.formatCompactDate(DateTime(year, month, day));
-    final dateParts = formattedDateTime.split(dateSeparator);
-    final dateHelpTextParts = localizations.dateHelpText.split(dateSeparator);
+    final dateParts = formattedDateTime.split(dateDelimiter);
+    final dateHelpTextParts = localizations.dateHelpText.split(dateDelimiter);
 
     for (var i = 0; i < dateParts.length; i++) {
       final datePart = dateParts[i];
@@ -461,20 +530,32 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       minLength: widget.firstDateTime.year.toString().length,
       maxLength: widget.lastDateTime.year.toString().length,
       placeholderLetter: yearPlaceholder,
-      onValueChange: (_, value, __) {
-        if (value != null && value < 0) {
-          return 0;
-        }
-        return value;
-      },
+      onValueChange: onYearValueChange,
+    );
+
+    _periodSegment = YaruEnumSegment<DayPeriod>(
+      initialValue: _controller.dateTime != null
+          ? _controller.dateTime!.toTimeOfDay().period
+          : DayPeriod.am,
+      values: DayPeriod.values,
     );
 
     _hourSegment = YaruNumericSegment.fixed(
-      initialValue: _controller.dateTime?.hour,
+      initialValue: _controller.dateTime != null
+          ? _use24HourFormat
+              ? _controller.dateTime!.hour
+              : _controller.dateTime!.toTimeOfDay().hourOfPeriod
+          : null,
       length: 2,
       placeholderLetter: timePlaceholder,
-      onValueChange: _dateTimeSegmentOnValueChange(maxHourValue),
-      onInputCallback: _dateTimeSegmentOnInput(maxHourValue),
+      onValueChange: _dateTimeSegmentOnValueChange(
+        _use24HourFormat ? max24HourValue : max12HourValue,
+      ),
+      onInputCallback: _dateTimeSegmentOnInput(
+        _use24HourFormat ? max24HourValue : max12HourValue,
+      ),
+      onUpArrowKeyCallback: onHourUpArrowKey,
+      onDownArrowKeyCallback: onHourDownArrowKey,
     );
 
     _minuteSegment = YaruNumericSegment.fixed(
@@ -499,7 +580,7 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
             break;
         }
       }
-      _delimiters.addAll([dateSeparator, dateSeparator]);
+      _delimiters.addAll([dateDelimiter, dateDelimiter]);
     }
 
     if (widget.type.hasTime) {
@@ -512,6 +593,11 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
         _delimiters.add(' ');
       }
       _delimiters.add(timeDelimiter);
+
+      if (!_use24HourFormat) {
+        _segments.add(_periodSegment);
+        _delimiters.add(' ');
+      }
     }
   }
 
@@ -530,6 +616,22 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
             widget.selectableDateTimePredicate!(date));
   }
 
+  int _to24hour(int hour) {
+    if (_period.isPm) {
+      if (_hour! != 12) {
+        return _hour! + 12;
+      } else {
+        return 12;
+      }
+    } else {
+      if (_hour! != 12) {
+        return _hour!;
+      } else {
+        return 0;
+      }
+    }
+  }
+
   DateTime? _tryParseSegments() {
     if (widget.type.hasDate &&
         (_year == null || _month == null || _day == null)) {
@@ -544,7 +646,11 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       (widget.type.hasDate && _year != null) ? _year! : 0,
       (widget.type.hasDate && _month != null) ? _month! : 1,
       (widget.type.hasDate && _day != null) ? _day! : 1,
-      (widget.type.hasTime && _hour != null) ? _hour! : 0,
+      (widget.type.hasTime && _hour != null)
+          ? _use24HourFormat
+              ? _hour!
+              : _to24hour(_hour!)
+          : 0,
       (widget.type.hasTime && _minute != null) ? _minute! : 0,
     );
   }
@@ -582,9 +688,11 @@ class _YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     return IconButton(
       onPressed: () {
         _controller.dateTime = null;
-        for (final segment in _segments) {
-          segment.value = null;
-        }
+        _daySegment.value = null;
+        _monthSegment.value = null;
+        _yearSegment.value = null;
+        _hourSegment.value = null;
+        _minuteSegment.value = null;
       },
       icon: const Icon(YaruIcons.edit_clear),
     );
@@ -703,4 +811,10 @@ extension _DateTimeX on DateTime {
   TimeOfDay toTimeOfDay() {
     return TimeOfDay.fromDateTime(this);
   }
+}
+
+extension _DayPeriodX on DayPeriod {
+  bool get isAm => this == DayPeriod.am;
+  bool get isPm => this == DayPeriod.pm;
+  DayPeriod get invert => this == DayPeriod.pm ? DayPeriod.am : DayPeriod.pm;
 }
