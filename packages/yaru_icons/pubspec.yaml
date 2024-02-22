@@ -1,0 +1,43 @@
+name: yaru_icons
+version: 2.4.0
+homepage: https://github.com/ubuntu/yaru_icons.dart
+description: Ubuntu Yaru Icon theme
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=2.2.0"
+
+dependencies:
+  animated_vector: ^0.2.0
+  animated_vector_annotations: ^0.2.0
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  animated_vector_gen: ^0.2.1
+  build_runner: ^2.4.6
+  flutter_lints: ">=2.0.1 <4.0.0"
+
+flutter:
+  fonts:
+    - family: YaruIcons
+      fonts:
+        - asset: assets/yaru_icons.otf
+
+icon_font:
+  input_svg_dir: "assets/icons/"
+  output_font_file: "assets/yaru_icons.otf"
+
+  output_class_file: "lib/src/yaru_icons.dart"
+  symlink_map_file: "assets/symlinks.json"
+  class_name: "YaruIcons"
+  package: yaru_icons
+  format: false
+  naming_strategy: "snake"
+
+  font_name: "YaruIcons"
+  normalize: false
+  ignore_shapes: false
+
+  recursive: true
+  verbose: true
