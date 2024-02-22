@@ -41,22 +41,36 @@ class CodeSnippedButton extends StatelessWidget {
   }
 }
 
-class _CodeDialog extends StatelessWidget {
-  // ignore: unused_element
-  const _CodeDialog({super.key, required this.pageItem});
+class _CodeDialog extends StatefulWidget {
+  const _CodeDialog({required this.pageItem});
 
   final PageItem pageItem;
+
+  @override
+  State<_CodeDialog> createState() => _CodeDialogState();
+}
+
+class _CodeDialogState extends State<_CodeDialog> {
+  late Future<String> _snippet;
+
+  @override
+  void initState() {
+    super.initState();
+    _snippet = widget.pageItem.snippetUrl?.isNotEmpty == false
+        ? Future.value('')
+        : context.read<ExampleModel>().getCodeSnippet(
+              widget.pageItem.snippetUrl!,
+            );
+  }
 
   @override
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
 
-    var snippet = '';
-
     return AlertDialog(
       titlePadding: EdgeInsets.zero,
       title: YaruDialogTitleBar(
-        title: Text(!model.appIsOnline ? 'Offline' : pageItem.title),
+        title: Text(!model.appIsOnline ? 'Offline' : widget.pageItem.title),
         leading: !model.appIsOnline
             ? null
             : Center(
@@ -64,14 +78,16 @@ class _CodeDialog extends StatelessWidget {
                   icon: const Icon(YaruIcons.copy),
                   tooltip: 'Copy',
                   onPressed: () async {
-                    await Clipboard.setData(
-                      ClipboardData(text: snippet),
+                    await _snippet.then(
+                      (value) => Clipboard.setData(
+                        ClipboardData(text: value),
+                      ),
                     );
                   },
                 ),
               ),
       ),
-      contentPadding: const EdgeInsets.only(top: 10, bottom: 10),
+      contentPadding: EdgeInsets.zero,
       content: !model.appIsOnline
           ? Center(
               child: Column(
@@ -92,9 +108,7 @@ class _CodeDialog extends StatelessWidget {
               ),
             )
           : FutureBuilder<String>(
-              future: model.getCodeSnippet(
-                pageItem.snippetUrl ?? '',
-              ),
+              future: _snippet,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(
@@ -104,31 +118,19 @@ class _CodeDialog extends StatelessWidget {
                   );
                 }
 
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.waiting:
-                  case ConnectionState.active:
-                    return const Center(
-                      child: YaruCircularProgressIndicator(
-                        strokeWidth: 3,
-                      ),
-                    );
-                  case ConnectionState.done:
-                    snippet = snapshot.data!;
-                    return SingleChildScrollView(
-                      child: HighlightView(
-                        snippet,
-                        language: 'dart',
-                        theme: Theme.of(context).brightness == Brightness.dark
-                            ? vs2015Theme
-                            : vsTheme,
-                        padding: const EdgeInsets.all(12),
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    );
-                }
+                return SingleChildScrollView(
+                  child: HighlightView(
+                    snapshot.data!,
+                    language: 'dart',
+                    theme: Theme.of(context).brightness == Brightness.dark
+                        ? vs2015Theme
+                        : vsTheme,
+                    padding: const EdgeInsets.all(12),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                );
               },
             ),
     );

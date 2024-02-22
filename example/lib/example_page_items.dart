@@ -84,7 +84,7 @@ final examplePageItems = <PageItem>[
   PageItem(
     title: 'YaruChoiceChipBar',
     snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/filter_pills_page.dart',
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/choice_chip_bar_page.dart',
     iconBuilder: (context, selected) => const Icon(YaruIcons.paper_clip),
     pageBuilder: (_) => const ChoiceChipBarPage(),
   ),
