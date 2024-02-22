@@ -1,0 +1,33 @@
+name: yaru_widgets_example
+description: Demonstrate yaru_widgets
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  collection: ^1.17.0
+  connectivity_plus: ^4.0.2
+  flutter:
+    sdk: flutter
+  flutter_highlight: ^0.7.0
+  handy_window: ^0.3.1
+  http: ^1.1.0
+  provider: ^6.0.2
+  safe_change_notifier: ^0.3.1
+  ubuntu_service: ^0.2.4
+  yaru_widgets:
+    path: ../
+
+dev_dependencies:
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
