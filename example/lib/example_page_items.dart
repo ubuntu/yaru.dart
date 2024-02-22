@@ -26,6 +26,7 @@ import 'pages/section_page.dart';
 import 'pages/selectable_container_page.dart';
 import 'pages/switch_page.dart';
 import 'pages/tab_bar_page.dart';
+import 'pages/theme_page/theme_page.dart';
 import 'pages/tile_page.dart';
 import 'pages/window_controls_page.dart';
 
@@ -256,5 +257,14 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.placeholder_icon_filled)
         : const Icon(YaruIcons.placeholder_icon),
+  ),
+  PageItem(
+    title: 'YaruTheme',
+    pageBuilder: (context) {
+      return const ThemePage();
+    },
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.colors_filled)
+        : const Icon(YaruIcons.colors),
   ),
 ].sortedBy((page) => page.title);
