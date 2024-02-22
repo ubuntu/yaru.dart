@@ -41,7 +41,7 @@ icon_font:
   output_class_file: "lib/src/yaru_icons.dart"
   symlink_map_file: "assets/symlinks.json"
   class_name: "YaruIcons"
-  package: yaru_icons
+  package: yaru_widgets
   format: false
   naming_strategy: "snake"
 
