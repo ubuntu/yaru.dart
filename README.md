@@ -65,6 +65,12 @@ After modifying or adding icons, you must run the build script, which will gener
 ./build-icons.sh
 ```
 
+or run
+
+```bash
+yaru_icon_font_generator assets/icons assets/yaru_icons.otf --output-class-file=lib/src/yaru_icons.dart -r
+```
+
 # Copying or Reusing
 
 The theme and widgets are licensed under Mozilla Public License Version 2.0.
