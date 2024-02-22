@@ -1,0 +1,22 @@
+{
+    "name": "yaru.dart theme demo",
+    "short_name": "yaru theme demo",
+    "start_url": ".",
+    "display": "standalone",
+    "description": "Demo app of yaru.dart Flutter theme.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "icons/icon-maskable.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "maskable"
+        }
+    ]
+}
