@@ -30,3 +30,47 @@ So `yaru_widgets.dart` uses the completeness and the level of polish `material.d
 ## Tested themes
 
 Themes inside [`yaru.dart`](https://github.com/ubuntu/yaru.dart) are the only Material themes tested with yaru_widgets and we do not currently recommend to use any other themes.
+
+## Icons
+
+Yaru comes with a set of icons for your Flutter application.
+
+For an overview of all availables icons, please look at the [web Example GitHub Page](https://ubuntu.github.io/yaru_icons.dart/)
+
+![example](.github/images/icons.png)
+
+# Usage
+
+```dart
+import 'package:yaru_icons/widgets/yaru_icons.dart';
+
+...
+
+Icon(YaruIcons.folder)
+```
+
+# Contributing
+
+To work on the icons and then build the font, you need to install the [icon_font_generator](https://github.com/rbcprolabs/icon_font_generator) tool:
+
+```console
+dart pub global activate -sgit https://github.com/Jupi007/icon_font_generator.git --git-ref yaru
+```
+
+Source SVGs files are located inside `./icons`. The final icon name is determined by **subfolder_name** + **icon_name** (Ex: `icons/mimetype/text-plain.svg` will be named `mimetype_text_plain`).
+
+After modifying or adding icons, you must run the build script, which will generate the icon font:
+
+``` console
+./build-icons.sh
+```
+
+# Copying or Reusing
+
+The theme and widgets are licensed under Mozilla Public License Version 2.0.
+
+The icons have mixed licencing. You are free to copy, redistribute and/or modify aspects of this work under the terms of each licence accordingly (unless otherwise specified).
+
+The icon assets (any and all source .svg files or rendered .ttf font) are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0 License.
+
+Included scripts are free software licensed under the terms of the GNU General Public License, version 3.
