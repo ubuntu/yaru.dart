@@ -14,6 +14,7 @@ This repository and package contains:
 
 ![screenshot](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/.github/images/screenshot.png)
 ![screenshot](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/.github/images/icons.png)
+![screenshot](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/.github/images/theme.png)
 
 
 # Contributing
