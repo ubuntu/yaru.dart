@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/constants.dart';
-import 'package:yaru_widgets/foundation.dart' show YaruPageController;
-import 'package:yaru_widgets/widgets.dart'
+import 'package:yaru/constants.dart';
+import 'package:yaru/foundation.dart' show YaruPageController;
+import 'package:yaru/widgets.dart'
     show YaruTitleBarTheme, YaruTitleBarThemeData, YaruTitleBarStyle;
 
 import 'yaru_master_detail_layout_delegate.dart';

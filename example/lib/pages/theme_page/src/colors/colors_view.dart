@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/theme.dart';
+import 'package:yaru/theme.dart';
 
 const _gridDelegate = SliverGridDelegateWithMaxCrossAxisExtent(
   maxCrossAxisExtent: 300,

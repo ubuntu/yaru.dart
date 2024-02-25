@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yaru_widgets/theme.dart';
+import 'package:yaru/theme.dart';
 
 import '../text/text_theme.dart';
 import 'constants.dart';

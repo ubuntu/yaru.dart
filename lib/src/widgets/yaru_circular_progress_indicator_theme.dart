@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/widgets/yaru_progress_indicator.dart';
+import 'package:yaru/src/widgets/yaru_progress_indicator.dart';
 
 class YaruCircularProgressIndicatorThemeData
     extends YaruProgressIndicatorThemeData<

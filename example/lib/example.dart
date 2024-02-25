@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import 'code_snippet_button.dart';
 import 'example_model.dart';
@@ -78,7 +78,7 @@ class _MasterDetailPage extends StatelessWidget {
         ),
       ),
       appBar: YaruWindowTitleBar(
-        title: const Text('Yaru Widgets'),
+        title: const Text('Yaru'),
         border: BorderSide.none,
         backgroundColor: YaruMasterDetailTheme.of(context).sideBarColor,
       ),

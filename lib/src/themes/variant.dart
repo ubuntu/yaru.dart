@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/themes/ubuntu_butterfly.dart';
+import 'package:yaru/src/themes/ubuntu_butterfly.dart';
 import '../../theme.dart';
 
 /// Describes a Yaru variant and its primary color.

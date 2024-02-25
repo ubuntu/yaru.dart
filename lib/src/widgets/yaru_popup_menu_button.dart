@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/constants.dart';
-import 'package:yaru_widgets/icons.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/icons.dart';
 
 import 'yaru_check_button.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/foundation.dart' show YaruPageController;
+import 'package:yaru/foundation.dart' show YaruPageController;
 
 import 'yaru_detail_page.dart';
 import 'yaru_landscape_layout.dart';
@@ -43,7 +43,7 @@ typedef YaruAppBarBuilder = PreferredSizeWidget? Function(BuildContext context);
 ///
 /// | Portrait | Landscape |
 /// |---|---|
-/// | ![portrait](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_master_detail_page-portrait.png) | ![landscape](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_master_detail_page-landscape.png) |
+/// | ![portrait](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_master_detail_page-portrait.png) | ![landscape](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_master_detail_page-landscape.png) |
 ///
 /// See also:
 ///  * [YaruMasterTile] - provides the recommended layout for [tileBuilder].

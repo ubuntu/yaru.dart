@@ -30,7 +30,7 @@ abstract final class YaruIcons {
   const YaruIcons._();
 
   static const iconFontFamily = 'YaruIcons';
-  static const iconFontPackage = 'yaru_widgets';
+  static const iconFontPackage = 'yaru';
 
   /// Font icon named "__underline__"
   ///

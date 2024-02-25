@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:yaru_widgets/constants.dart';
-import 'package:yaru_widgets/widgets.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/widgets.dart';
 
 class YaruExpansionPanel extends StatefulWidget {
   const YaruExpansionPanel({

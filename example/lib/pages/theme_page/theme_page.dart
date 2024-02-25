@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/theme.dart';
+import 'package:yaru/theme.dart';
 
 import 'home.dart';
 

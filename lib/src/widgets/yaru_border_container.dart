@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/constants.dart';
+import 'package:yaru/constants.dart';
 
 /// A container with a rounded Yaru-style border.
 class YaruBorderContainer extends StatelessWidget {

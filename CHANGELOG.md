@@ -3,218 +3,218 @@
 ## 3.6.0 (2024-02-17)
 
 ## What's Changed
-* feat: rounded rectangle page indicator and size transition by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/831
+* feat: rounded rectangle page indicator and size transition by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/831
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.5.0...v3.6.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.5.0...v3.6.0
 
 ## 3.5.0 (2024-01-21)
 
 ## What's Changed
-* fix: choice chip nav buttons block mouse by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/823
-* feat(YaruChoiceChipBar): add selectedFirst parameter by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/827
-* fix(YaruChoiceChipBar): allow more parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/828
-* fix(YaruChoiceChipBar): forward parameters to buttons by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/829
-* fix(YaruMasterDetailPage): bring back sidebar color option by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/826
-* fix: fix snippetUrl for popup_page in example by @Timo-Schroeder in https://github.com/ubuntu/yaru_widgets.dart/pull/830
+* fix: choice chip nav buttons block mouse by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/823
+* feat(YaruChoiceChipBar): add selectedFirst parameter by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/827
+* fix(YaruChoiceChipBar): allow more parameters by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/828
+* fix(YaruChoiceChipBar): forward parameters to buttons by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/829
+* fix(YaruMasterDetailPage): bring back sidebar color option by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/826
+* fix: fix snippetUrl for popup_page in example by @Timo-Schroeder in https://github.com/ubuntu/yaru.dart/pull/830
 
 ## New Contributors
-* @Timo-Schroeder made their first contribution in https://github.com/ubuntu/yaru_widgets.dart/pull/830
+* @Timo-Schroeder made their first contribution in https://github.com/ubuntu/yaru.dart/pull/830
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.4.0...v3.5.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.4.0...v3.5.0
 
 ## 3.4.0 (2023-12-27)
 
 ## What's Changed
-* feat(YaruChoiceChipBar): add more parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/804
-* chore: update nightly CI flutter version by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/812
-* fix: reduce number of used scaffolds by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/811
-* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/813
-* chore: update to flutter 3.16 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/816
-* fix(YaruTitleBar): windows close button color and clipping by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/820
-* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/821
-* chore: update yaru.dart by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/822
+* feat(YaruChoiceChipBar): add more parameters by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/804
+* chore: update nightly CI flutter version by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/812
+* fix: reduce number of used scaffolds by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/811
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru.dart/pull/813
+* chore: update to flutter 3.16 by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/816
+* fix(YaruTitleBar): windows close button color and clipping by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/820
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru.dart/pull/821
+* chore: update yaru.dart by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/822
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.3.1...v3.4.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.3.1...v3.4.0
 
 ## 3.3.1 (2023-11-20)
 
 ## What's Changed
-* fix(YaruTitleBar): improve parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/798
-* fix(YaruTitleBar): add golden tests windows variant by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/801
-* fix: Grey web title bar: check kisweb by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/803
+* fix(YaruTitleBar): improve parameters by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/798
+* fix(YaruTitleBar): add golden tests windows variant by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/801
+* fix: Grey web title bar: check kisweb by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/803
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.3.0...v3.3.1
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.3.0...v3.3.1
 
 ## 3.3.0 (2023-11-15)
 
 ## What's Changed
-* feat: add `YaruScrollViewUndershoot` by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/789
-* fix: final fix for left pane overflow by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/793
-* fix(YaruExpansionPanel): use hairline dividers by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/794
-* feat(YaruWindowControl): pimp up YaruWindowControl by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/795
-* chore: update yaru.dart dependency by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/796
+* feat: add `YaruScrollViewUndershoot` by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/789
+* fix: final fix for left pane overflow by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/793
+* fix(YaruExpansionPanel): use hairline dividers by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/794
+* feat(YaruWindowControl): pimp up YaruWindowControl by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/795
+* chore: update yaru.dart dependency by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/796
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.2.2...v3.3.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.2.2...v3.3.0
 
 ## 3.2.2 (2023-10-23)
 
 ## What's Changed
-* fix: overflow in left pane of `YaruMasterDetailPage` by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/790
+* fix: overflow in left pane of `YaruMasterDetailPage` by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/790
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.2.1...v3.2.2
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.2.1...v3.2.2
 
 ## 3.2.1 (2023-10-19)
 
 ## What's Changed
-* fix(YaruTabBar): make TabController nullable, add onTap by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/782
-* fix: overflow in left pane of `YaruMasterDetailPage` by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/787
+* fix(YaruTabBar): make TabController nullable, add onTap by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/782
+* fix: overflow in left pane of `YaruMasterDetailPage` by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/787
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.2.0...v3.2.1
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.2.0...v3.2.1
 
 ## 3.2.0 (2023-09-23)
 
 ## What's Changed
-* chore: Remove generated macos file from example by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/775
-* feat: togglable canvas scale by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/777
-* chore: update example with the new paned style by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/778
-* fix: natural switch thumb grab by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/779
-* fix: reduce switch active scale by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/780
-* feat: add YaruTabBar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/781
+* chore: Remove generated macos file from example by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/775
+* feat: togglable canvas scale by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/777
+* chore: update example with the new paned style by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/778
+* fix: natural switch thumb grab by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/779
+* fix: reduce switch active scale by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/780
+* feat: add YaruTabBar by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/781
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.1.0...v3.2.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.1.0...v3.2.0
 
 ## 3.1.0 (2023-08-25)
 
 ## What's Changed
-* feat: add clear on select flag to choice chip bar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/771
-* Update yaru to 1.1.0 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/773
+* feat: add clear on select flag to choice chip bar by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/771
+* Update yaru to 1.1.0 by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/773
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.0.2...v3.1.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.0.2...v3.1.0
 
 ## 3.0.2 (2023-08-18)
 
 ## What's Changed
-* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/766
-* fix: update to flutter 3.13 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/768
-* fix: publish CI flutter version by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/770
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru.dart/pull/766
+* fix: update to flutter 3.13 by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/768
+* fix: publish CI flutter version by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/770
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.0.1...v3.0.2
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.0.1...v3.0.2
 
 ## 3.0.1 (2023-08-15)
 
 ## What's Changed
-* fix: adjust search icon size by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/765
+* fix: adjust search icon size by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/765
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.0.0...v3.0.1
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.0.0...v3.0.1
 
 ## 3.0.0 (2023-08-15)
 
 ## What's Changed
-* feat: remove IntrinsicHeight from navigation rail  by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/754
-* feat: improve YaruNavigationRailItem by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/756
-* fix(YaruTitleBar): foreground color is not forwarded to YaruTitleBar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/758
-* fix(YaruWindowControl): colors are not exposed by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/760
-* fix(YaruWindowControl): use foreground color for disk background by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/761
-* feat!: adapt to yaru compact sizes by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/763
+* feat: remove IntrinsicHeight from navigation rail  by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/754
+* feat: improve YaruNavigationRailItem by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/756
+* fix(YaruTitleBar): foreground color is not forwarded to YaruTitleBar by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/758
+* fix(YaruWindowControl): colors are not exposed by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/760
+* fix(YaruWindowControl): use foreground color for disk background by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/761
+* feat!: adapt to yaru compact sizes by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/763
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v2.7.0...v3.0.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v2.7.0...v3.0.0
 
 ## 2.7.0 (2023-08-07)
 
 ## What's Changed
-* fix: relax yaru version constraint; update example by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/748
-* feat: change sidebar color, improve YMD theme by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/750
-* feat: adapt navigationpage sidebarcolor to YMD by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/751
+* fix: relax yaru version constraint; update example by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/748
+* feat: change sidebar color, improve YMD theme by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/750
+* feat: adapt navigationpage sidebarcolor to YMD by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/751
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v2.6.1...v2.7.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v2.6.1...v2.7.0
 
 ## 2.6.1 (2023-08-07)
 
 ## What's Changed
-* fix: add the missing optional icon parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/740
-* chore!: update yaru icons by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/746
-* chore: relax yaru_icons version constraint by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/747
+* fix: add the missing optional icon parameters by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/740
+* chore!: update yaru icons by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/746
+* chore: relax yaru_icons version constraint by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/747
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v2.6.0...v2.6.1
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v2.6.0...v2.6.1
 
 ## 2.6.0 (2023-07-27)
 
 ## What's Changed
-* chore: dependabot by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/724
-* chore(dependabot): configure semantic commits by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/727
-* feat: expose YaruNavigationPage.navigatorKey and onGenerateRoute by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/730
-* ci: reuse pr title & release actions from ufc/actions by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/729
-* feat: expose YaruNavigationPage.initialRoute and onUnknownRoute by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/731
-* feat: expose NavigationPage navigator observers by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/732
-* fix(master-detail): retain state when switching orientation by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/733
-* feat(master-detail): expose Navigator properties by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/735
-* feat(master-detail): allow inserting spacers and dividers by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/736
-* feat(master-detail): expose breakpoint as widget property by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/737
-* feat: add YaruSearchField and YaruSearchTitleField by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/734
-* fix(YaruMasterTile): let onTap override scope ontap by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/738
+* chore: dependabot by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/724
+* chore(dependabot): configure semantic commits by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/727
+* feat: expose YaruNavigationPage.navigatorKey and onGenerateRoute by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/730
+* ci: reuse pr title & release actions from ufc/actions by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/729
+* feat: expose YaruNavigationPage.initialRoute and onUnknownRoute by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/731
+* feat: expose NavigationPage navigator observers by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/732
+* fix(master-detail): retain state when switching orientation by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/733
+* feat(master-detail): expose Navigator properties by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/735
+* feat(master-detail): allow inserting spacers and dividers by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/736
+* feat(master-detail): expose breakpoint as widget property by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/737
+* feat: add YaruSearchField and YaruSearchTitleField by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/734
+* fix(YaruMasterTile): let onTap override scope ontap by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/738
 
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v2.5.0...v2.6.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v2.5.0...v2.6.0
 
 ## 2.5.0 (2023-06-29)
 
 ## What's Changed
-* Upgrade to `flutter_lints` 2.0 by @pablojimpas in https://github.com/ubuntu/yaru_widgets.dart/pull/698
-* chore: migrate to Flutter 3.10 and Dart 3.0 by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/702
-* Update YaruMasterDetailPage comments by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/705
-* Remove useless YaruMasterListView.materialTiles by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/707
-* Pass available width to YaruMasterDetailBuilder by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/708
-* Rename `YaruMasterDetailBuilder` into `YaruMasterTileBuilder` by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/710
-* Drop double `YaruMasterTileScope` retrieval by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/712
-* Add YaruChoiceChipBar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/713
-* feat: add a stack option to YaruChoiceChipBar by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/714
-* chore: add example/macos/Podfile.lock to gitignore by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/715
-* feat: improve YaruChipChoice parameters by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/716
-* feat: add progress indicator themes by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/717
-* chore: bump yaru ^0.9.0 by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/719
-* ci: merge workflows with same triggers & specify FLUTTER_VERSION by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/720
-* ci: let release-please maintain the changelog by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/721
-* chore: fix up the changelog for release-please by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/723
+* Upgrade to `flutter_lints` 2.0 by @pablojimpas in https://github.com/ubuntu/yaru.dart/pull/698
+* chore: migrate to Flutter 3.10 and Dart 3.0 by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/702
+* Update YaruMasterDetailPage comments by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/705
+* Remove useless YaruMasterListView.materialTiles by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/707
+* Pass available width to YaruMasterDetailBuilder by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/708
+* Rename `YaruMasterDetailBuilder` into `YaruMasterTileBuilder` by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/710
+* Drop double `YaruMasterTileScope` retrieval by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/712
+* Add YaruChoiceChipBar by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/713
+* feat: add a stack option to YaruChoiceChipBar by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/714
+* chore: add example/macos/Podfile.lock to gitignore by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/715
+* feat: improve YaruChipChoice parameters by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/716
+* feat: add progress indicator themes by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/717
+* chore: bump yaru ^0.9.0 by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/719
+* ci: merge workflows with same triggers & specify FLUTTER_VERSION by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/720
+* ci: let release-please maintain the changelog by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/721
+* chore: fix up the changelog for release-please by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/723
 
 ## New Contributors
-* @pablojimpas made their first contribution in https://github.com/ubuntu/yaru_widgets.dart/pull/698
+* @pablojimpas made their first contribution in https://github.com/ubuntu/yaru.dart/pull/698
 
-**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/2.4.1...v2.5.0
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/2.4.1...v2.5.0
 
 ## 2.4.1
 
-* YaruCheckbox/Radio/Switch: fix high-contrast borders by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/696
+* YaruCheckbox/Radio/Switch: fix high-contrast borders by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/696
 
 ## 2.4.0
 
-* YaruExpandable: update isExpanded property by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/691
-* Expansion_panel by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/692
-* Update yaru, drop yaru_colors & update goldens by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/693
+* YaruExpandable: update isExpanded property by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/691
+* Expansion_panel by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/692
+* Update yaru, drop yaru_colors & update goldens by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/693
 
 ## 2.3.1
 
-* YaruTitleBarTheme: fix border side lerp by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/688
+* YaruTitleBarTheme: fix border side lerp by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/688
 
 ## 2.3.0
 
-* Add `emptyBuilder` by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/676
-* Update golden images by @github-actions in https://github.com/ubuntu/yaru_widgets.dart/pull/681
-* Add support for high contrast theme by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/682
-* YaruPageIndicator: fix RTL layout by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/684
-* YaruWindowTitleBar.ensureInitialized(): clear cached window states by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/685
+* Add `emptyBuilder` by @d-loose in https://github.com/ubuntu/yaru.dart/pull/676
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru.dart/pull/681
+* Add support for high contrast theme by @d-loose in https://github.com/ubuntu/yaru.dart/pull/682
+* YaruPageIndicator: fix RTL layout by @d-loose in https://github.com/ubuntu/yaru.dart/pull/684
+* YaruWindowTitleBar.ensureInitialized(): clear cached window states by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/685
 
 ## 2.2.2
 
@@ -222,200 +222,200 @@
 
 ## 2.2.1
 
-* YaruAutocomplete: calculate matching options width by default by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/673
-* Example: add autocomplete by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/674
+* YaruAutocomplete: calculate matching options width by default by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/673
+* Example: add autocomplete by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/674
 
 ## 2.2.0
 
-* Update goldens with new dependencies by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/630
-* Drop YaruSwitch.checkmarkColor earlier (2.2.0) by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/629
-* Introduce YaruPageIndicatorTheme by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/632
-* Update PR template by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/640
-* Example: upgrade handy_window to ^0.3.0 by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/637
-* Example: add macOS by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/635
-* Update PR template for the new branch organization by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/646
-* Cherry pick 2.2-dev into main by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/647
-* Check/Radio/Switch/Button/ListTile: allow customizing mouse cursor by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/648
-* Add docs for YaruWindowTitleBar & friends by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/639
-* `YaruPortraitLayout`: add missing hero controller by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/643
-* Add `YaruBanner.mouseCursor` by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/649
-* CI: add nightly job to update golden images (PR) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/638
-* Example: add Windows by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/636
-* Add YaruSelectableContainer.mouseCursor by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/652
-* widgets.dart: add missing export yaru_page_indicator_theme.dart by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/653
-* Merge `release` into `main` by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/655
-* Add YaruPageIndicator(ThemeData).mouseCursor by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/654
-* Add YaruPopupMenuButton.mouseCursor by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/656
-* YaruColorDisk: add subtle hover & focus highlight by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/657
-* Resolve mouse cursor widget properties by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/658
-* YaruTogglable: add states controller by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/660
-* Make YaruToggleButton subclasses stateful by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/661
-* YaruWatermark: ignore pointer for the watermark by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/662
-* YaruCheck/Radio/SwitchButton: add hover & press effects by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/663
-* Add `YaruMasterDetailPage.orientationOf()` and `appBarBuilder` by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/642
-* Improve YaruPageIndicator by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/666
-* Add YaruAutocomplete by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/668
-* Increase contrast of togglables unchecked border by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/667
-* YaruPageIndicator: restore compatibility by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/672
+* Update goldens with new dependencies by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/630
+* Drop YaruSwitch.checkmarkColor earlier (2.2.0) by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/629
+* Introduce YaruPageIndicatorTheme by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/632
+* Update PR template by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/640
+* Example: upgrade handy_window to ^0.3.0 by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/637
+* Example: add macOS by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/635
+* Update PR template for the new branch organization by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/646
+* Cherry pick 2.2-dev into main by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/647
+* Check/Radio/Switch/Button/ListTile: allow customizing mouse cursor by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/648
+* Add docs for YaruWindowTitleBar & friends by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/639
+* `YaruPortraitLayout`: add missing hero controller by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/643
+* Add `YaruBanner.mouseCursor` by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/649
+* CI: add nightly job to update golden images (PR) by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/638
+* Example: add Windows by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/636
+* Add YaruSelectableContainer.mouseCursor by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/652
+* widgets.dart: add missing export yaru_page_indicator_theme.dart by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/653
+* Merge `release` into `main` by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/655
+* Add YaruPageIndicator(ThemeData).mouseCursor by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/654
+* Add YaruPopupMenuButton.mouseCursor by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/656
+* YaruColorDisk: add subtle hover & focus highlight by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/657
+* Resolve mouse cursor widget properties by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/658
+* YaruTogglable: add states controller by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/660
+* Make YaruToggleButton subclasses stateful by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/661
+* YaruWatermark: ignore pointer for the watermark by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/662
+* YaruCheck/Radio/SwitchButton: add hover & press effects by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/663
+* Add `YaruMasterDetailPage.orientationOf()` and `appBarBuilder` by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/642
+* Improve YaruPageIndicator by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/666
+* Add YaruAutocomplete by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/668
+* Increase contrast of togglables unchecked border by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/667
+* YaruPageIndicator: restore compatibility by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/672
 
 ## 2.1.1
 
-* YaruPageIndicator: add custom scale parameters by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/624
-* YaruPopupMenuButton: use outline color by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/626
+* YaruPageIndicator: add custom scale parameters by @d-loose in https://github.com/ubuntu/yaru.dart/pull/624
+* YaruPopupMenuButton: use outline color by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/626
 
 ## 2.1.0
 
-* Switch to yaru_window by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/618
-* YaruPopupMenuButton: replace borderRadius with style by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/620
+* Switch to yaru_window by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/618
+* YaruPopupMenuButton: replace borderRadius with style by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/620
 
 ## 2.0.3
 
-* Add themes and various enhancements to togglables by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/613
-* YaruPopupMenuButton: make radius changeable by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/616
+* Add themes and various enhancements to togglables by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/613
+* YaruPopupMenuButton: make radius changeable by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/616
 
 ## 2.0.2
 
-* Add diagnosticable properties to togglable widgets by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/579
-* YaruSection: fix unbounded height by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/584
-* pubspec: add missing issue tracker link by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/590
-* Restructure by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/586
-* Update screenshot by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/589
-* Introduce YaruClip.diagonal() by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/591
-* Allow null YaruNavigationRailItem label with compact style by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/592
-* Introduce YaruPageIndicator by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/593
-* Add YaruBanner.selected property by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/596
-* YaruCarousel: fix laggy animation on multiple clicks by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/597
-* YaruTitleBar: set an opaque background when the window is inactive by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/599
-* Expose `kYaruBannerRadius` constant by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/601
-* Example: remove generated files to fix pub.dev warnings by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/600
-* Use Flutter's callback typedefs by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/598
-* Improve YaruCarousel comments by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/594
-* YaruExpandable: leave iconbutton padding indvidually from widget padding by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/605
-* Missing mixed->checked checkbox animation by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/606
-* Pass curve parameter to next/previousPage methods by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/602
-* pubspec.yaml: clean up `uses-material-design: true` by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/608
+* Add diagnosticable properties to togglable widgets by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/579
+* YaruSection: fix unbounded height by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/584
+* pubspec: add missing issue tracker link by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/590
+* Restructure by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/586
+* Update screenshot by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/589
+* Introduce YaruClip.diagonal() by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/591
+* Allow null YaruNavigationRailItem label with compact style by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/592
+* Introduce YaruPageIndicator by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/593
+* Add YaruBanner.selected property by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/596
+* YaruCarousel: fix laggy animation on multiple clicks by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/597
+* YaruTitleBar: set an opaque background when the window is inactive by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/599
+* Expose `kYaruBannerRadius` constant by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/601
+* Example: remove generated files to fix pub.dev warnings by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/600
+* Use Flutter's callback typedefs by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/598
+* Improve YaruCarousel comments by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/594
+* YaruExpandable: leave iconbutton padding indvidually from widget padding by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/605
+* Missing mixed->checked checkbox animation by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/606
+* Pass curve parameter to next/previousPage methods by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/602
+* pubspec.yaml: clean up `uses-material-design: true` by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/608
 
 ## 2.0.1
 
-* Fix: YaruBanners bg color with upgrading yaru to 0.5.1 by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/575 
+* Fix: YaruBanners bg color with upgrading yaru to 0.5.1 by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/575 
 
 ## 2.0.0
 
-* Fix YaruTile wrong text color by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/560
-* YaruWindowTitleBar: allow notifying window state changes by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/561
-* Expose YaruWindow API by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/562
-* Update goldens with Flutter 3.7.0 & latest yaru by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/564
-* CI: no need to run tests when publishing to GH pages by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/563
-* Fix YaruNavigationPageThemeData class name by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/565
-* Prevent YaruTitleBar from reseting input focus by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/566
-* YaruBorderRadiusExtension by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/567
+* Fix YaruTile wrong text color by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/560
+* YaruWindowTitleBar: allow notifying window state changes by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/561
+* Expose YaruWindow API by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/562
+* Update goldens with Flutter 3.7.0 & latest yaru by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/564
+* CI: no need to run tests when publishing to GH pages by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/563
+* Fix YaruNavigationPageThemeData class name by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/565
+* Prevent YaruTitleBar from reseting input focus by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/566
+* YaruBorderRadiusExtension by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/567
 
 ## 2.0.0-beta-5
 
-* Landscape: remove separator fix for web, not needed anymore by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/529
-* Remove YaruTabbedPage by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/530
-* YaruTile: make title optional by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/533
-* YaruTitleBar: use TextTheme.titleLarge as a fallback by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/535
-* Revert "Remove all RepaintBoundary widgets" by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/537
-* Update goldens by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/538
-* YaruPopupMenuButton: sync border with OutlinedButton by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/539
-* YaruPopupMenuButton: fix styling issues by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/541
-* YaruNavigationPage: add HeroController to support YaruDetailPage by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/545
-* Add YaruBackButtonTheme & YaruBackButtonStyle (rounded vs. square) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/531
-* YaruPopupMenuButton: remove default tooltip by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/543
-* YaruTitleBarThemeData: fix buttonPadding type by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/544
-* Add missing RepaintBoundary on painter widgets by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/547
-* Fix use of deprecated members (beta channel) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/551
-* Example: fix the settings bottom bar look sensible with Flutter beta by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/552
-* YaruDetailPage: allow specifying the hero tag by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/553
-* YaruTitleBar: allow specifying the hero tag by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/554
+* Landscape: remove separator fix for web, not needed anymore by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/529
+* Remove YaruTabbedPage by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/530
+* YaruTile: make title optional by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/533
+* YaruTitleBar: use TextTheme.titleLarge as a fallback by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/535
+* Revert "Remove all RepaintBoundary widgets" by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/537
+* Update goldens by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/538
+* YaruPopupMenuButton: sync border with OutlinedButton by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/539
+* YaruPopupMenuButton: fix styling issues by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/541
+* YaruNavigationPage: add HeroController to support YaruDetailPage by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/545
+* Add YaruBackButtonTheme & YaruBackButtonStyle (rounded vs. square) by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/531
+* YaruPopupMenuButton: remove default tooltip by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/543
+* YaruTitleBarThemeData: fix buttonPadding type by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/544
+* Add missing RepaintBoundary on painter widgets by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/547
+* Fix use of deprecated members (beta channel) by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/551
+* Example: fix the settings bottom bar look sensible with Flutter beta by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/552
+* YaruDetailPage: allow specifying the hero tag by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/553
+* YaruTitleBar: allow specifying the hero tag by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/554
 
 ## 2.0.0-beta-4
 
-* MD: wrap detail page with ScaffoldMessenger in landscape layout by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/463
-* Add YaruNavigationPageTheme.railPadding by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/466
-* YaruTitleBar: make themable and use window controls by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/464
-* YaruTitleBar: adjust callbacks by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/467
-* MD: fix page controller updates by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/468
-* NavigationPage: fix controller updates by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/469
-* Update goldens for yaru.dart border changes by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/472
-* YaruPopupMenuButton: align drop indicator to the end by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/471
-* Example: update yaru and handy_window by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/470
-* Navigation/MD pages: pop all but first on select by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/473
-* Introduce YaruWindowTitleBar & YaruDialogTitleBar by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/455
-* Example: change YaruDialogTitleBar menu entry name by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/476
-* YaruTitleBar: small styling changes by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/478
-* add NavigationPage by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/474
-* CI: add missing apt update by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/491
-* Use new filled icons in sidebar navigation by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/488
-* Fix stretched yaru togglables by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/490
-* Fix title bar corners by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/487
-* Fix the example to respect the system theme variant by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/485
-* Expose title bar / window control metrics by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/486
-* YaruTitleBar: consider active by default by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/482
-* example: sort page items in alphabetical order by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/479
-* Hide `kTogglableActiveResizeFactor` out of the public API by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/494
-* Move `kCheckboxRadio*` constants out of the public API by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/495
-* Use title bar colors from yaru_colors by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/496
-* YaruTitleBar: remove empty padding when there are no window controls by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/497
-* YaruExpandable: expand button position control by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/499
-* Example: eliminate duplicate page titles/tooltips by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/504
-* YaruDetailPage: fix app/title bar height by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/501
-* YaruWindowTitleBar: fix slow window state init by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/506
-* YaruWindowTitleBar: fix state init by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/507
-* YaruTitleBar: fix hero conflict by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/509
-* Add YaruTitleBarStyle (hidden, background, normal) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/510
-* MD: specify the desired title bar style in landscape and portrait modes by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/511
-* YaruWindowTitleBar: improve defaults for web by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/514
-* YaruTitleBar: trailing -> actions by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/517
-* Example: move code snippet button out of the app bar by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/519
-* Remove all RepaintBoundary widgets by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/520
-* Example: make better use of YaruWindowTitleBar by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/521
-* YaruTitleBar: fix single-click delay by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/524
-* Add scaffold to yaru-master-detail page by @whiskeyPeak in https://github.com/ubuntu/yaru_widgets.dart/pull/525
-* Allow color customization of single togglable by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/527
+* MD: wrap detail page with ScaffoldMessenger in landscape layout by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/463
+* Add YaruNavigationPageTheme.railPadding by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/466
+* YaruTitleBar: make themable and use window controls by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/464
+* YaruTitleBar: adjust callbacks by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/467
+* MD: fix page controller updates by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/468
+* NavigationPage: fix controller updates by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/469
+* Update goldens for yaru.dart border changes by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/472
+* YaruPopupMenuButton: align drop indicator to the end by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/471
+* Example: update yaru and handy_window by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/470
+* Navigation/MD pages: pop all but first on select by @d-loose in https://github.com/ubuntu/yaru.dart/pull/473
+* Introduce YaruWindowTitleBar & YaruDialogTitleBar by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/455
+* Example: change YaruDialogTitleBar menu entry name by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/476
+* YaruTitleBar: small styling changes by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/478
+* add NavigationPage by @d-loose in https://github.com/ubuntu/yaru.dart/pull/474
+* CI: add missing apt update by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/491
+* Use new filled icons in sidebar navigation by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/488
+* Fix stretched yaru togglables by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/490
+* Fix title bar corners by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/487
+* Fix the example to respect the system theme variant by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/485
+* Expose title bar / window control metrics by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/486
+* YaruTitleBar: consider active by default by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/482
+* example: sort page items in alphabetical order by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/479
+* Hide `kTogglableActiveResizeFactor` out of the public API by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/494
+* Move `kCheckboxRadio*` constants out of the public API by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/495
+* Use title bar colors from yaru_colors by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/496
+* YaruTitleBar: remove empty padding when there are no window controls by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/497
+* YaruExpandable: expand button position control by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/499
+* Example: eliminate duplicate page titles/tooltips by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/504
+* YaruDetailPage: fix app/title bar height by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/501
+* YaruWindowTitleBar: fix slow window state init by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/506
+* YaruWindowTitleBar: fix state init by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/507
+* YaruTitleBar: fix hero conflict by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/509
+* Add YaruTitleBarStyle (hidden, background, normal) by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/510
+* MD: specify the desired title bar style in landscape and portrait modes by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/511
+* YaruWindowTitleBar: improve defaults for web by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/514
+* YaruTitleBar: trailing -> actions by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/517
+* Example: move code snippet button out of the app bar by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/519
+* Remove all RepaintBoundary widgets by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/520
+* Example: make better use of YaruWindowTitleBar by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/521
+* YaruTitleBar: fix single-click delay by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/524
+* Add scaffold to yaru-master-detail page by @whiskeyPeak in https://github.com/ubuntu/yaru.dart/pull/525
+* Allow color customization of single togglable by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/527
 
 ## 2.0.0-beta-3
 
-* YaruTitleBar: expose background color by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/412
-* Toggle buttons: themable title and subtitle text style by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/413
-* Toggle buttons: don't expand horizontally by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/415
-* YaruCheck/RadioButton: remove extra padding by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/417
-* Add missing comments in YaruNavigationRailItem by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/418
-* Fix typo in _YaruToggleButtonLayout name by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/419
-* YaruBanner: remove unused bannerWidth property by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/421
-* Remove YaruBanner.thirdTitle by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/423
-* Introduce YaruTileStyle by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/424
-* YaruBanner: don't ignore the surface tint color when no watermark is set by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/425
-* YaruBanner: align tint/elevation with and without watermark by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/426
-* YaruBanner: remove effectively unused copyIconAsWatermark by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/428
-* Yaru layout index controller by @d-loose in https://github.com/ubuntu/yaru_widgets.dart/pull/414
-* Fix "paneWidth" typo by @larsb24 in https://github.com/ubuntu/yaru_widgets.dart/pull/420
-* YaruBanner: clean up unused internal mouse cursor property by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/427
-* Extract YaruWatermark from YaruBanner by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/430
-* YaruLandscapeLayout: remove docs from an internal helper class by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/431
-* YaruBanner: generalize padding & fix RTL by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/432
-* Fix RTL support for paddings and margins by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/433
-* YaruBanner: allow arbitrary child & offer tile for convenience by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/434
-* Fix YaruIconButton.alignment type by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/435
-* Fix typo: "alignement" by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/436
-* Rename YaruCompactLayout to YaruNavigationPage by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/437
-* Reduce repetitive Theme.of() calls by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/438
-* Add MasterDetailPage.bottomBar by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/441
-* YaruBanner: give full control over the colors by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/439
-* Add YaruNavigationPage.leading/trailing by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/442
-* Example: settings dialog by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/443
-* YaruTitleBar: implement PreferredSizeWidget by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/444
-* YaruBanner: add onHover callback by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/445
-* YaruBanner: forward onHover to .tile constructor by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/446
-* YaruBanner: more sane default colors by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/449
-* Rename YaruCompactLayoutTheme(Data) to YaruNavigationPageTheme(Data) by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/452
-* YaruMasterDetailThemeData: implement ThemeExtension interface by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/450
-* YaruToggleButtonThemeData: implement ThemeExtension by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/451
-* Example: reorganize checkboxes, radios, and switches by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/453
-* NavigationPageThemeData: implement ThemeExtension by @jpnurmi in https://github.com/ubuntu/yaru_widgets.dart/pull/454
-* Forward initialIndex to default YaruPageController by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/457
-* Adapt to yaru_icons 1.0 by @Jupi007 in https://github.com/ubuntu/yaru_widgets.dart/pull/461
+* YaruTitleBar: expose background color by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/412
+* Toggle buttons: themable title and subtitle text style by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/413
+* Toggle buttons: don't expand horizontally by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/415
+* YaruCheck/RadioButton: remove extra padding by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/417
+* Add missing comments in YaruNavigationRailItem by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/418
+* Fix typo in _YaruToggleButtonLayout name by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/419
+* YaruBanner: remove unused bannerWidth property by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/421
+* Remove YaruBanner.thirdTitle by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/423
+* Introduce YaruTileStyle by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/424
+* YaruBanner: don't ignore the surface tint color when no watermark is set by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/425
+* YaruBanner: align tint/elevation with and without watermark by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/426
+* YaruBanner: remove effectively unused copyIconAsWatermark by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/428
+* Yaru layout index controller by @d-loose in https://github.com/ubuntu/yaru.dart/pull/414
+* Fix "paneWidth" typo by @larsb24 in https://github.com/ubuntu/yaru.dart/pull/420
+* YaruBanner: clean up unused internal mouse cursor property by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/427
+* Extract YaruWatermark from YaruBanner by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/430
+* YaruLandscapeLayout: remove docs from an internal helper class by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/431
+* YaruBanner: generalize padding & fix RTL by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/432
+* Fix RTL support for paddings and margins by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/433
+* YaruBanner: allow arbitrary child & offer tile for convenience by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/434
+* Fix YaruIconButton.alignment type by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/435
+* Fix typo: "alignement" by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/436
+* Rename YaruCompactLayout to YaruNavigationPage by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/437
+* Reduce repetitive Theme.of() calls by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/438
+* Add MasterDetailPage.bottomBar by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/441
+* YaruBanner: give full control over the colors by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/439
+* Add YaruNavigationPage.leading/trailing by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/442
+* Example: settings dialog by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/443
+* YaruTitleBar: implement PreferredSizeWidget by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/444
+* YaruBanner: add onHover callback by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/445
+* YaruBanner: forward onHover to .tile constructor by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/446
+* YaruBanner: more sane default colors by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/449
+* Rename YaruCompactLayoutTheme(Data) to YaruNavigationPageTheme(Data) by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/452
+* YaruMasterDetailThemeData: implement ThemeExtension interface by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/450
+* YaruToggleButtonThemeData: implement ThemeExtension by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/451
+* Example: reorganize checkboxes, radios, and switches by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/453
+* NavigationPageThemeData: implement ThemeExtension by @jpnurmi in https://github.com/ubuntu/yaru.dart/pull/454
+* Forward initialIndex to default YaruPageController by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/457
+* Adapt to yaru_icons 1.0 by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/461
 
 ## 2.0.0-beta-2
 
@@ -618,7 +618,7 @@
   - Move tests to subfolders
   - Flutter 3.1 deprecations
   - Improve BorderRadius extension
-  - Order yaru_widgets exports
+  - Order yaru exports
 
 ## 1.1.1
 
@@ -759,7 +759,7 @@
 
 ## 1.0.0
 
-- this is the initial release of yaru_widgets.dart 🎉, it adds:
+- this is the initial release of yaru.dart 🎉, it adds:
   - YaruRow
   - YaruSection
   - YaruPageItem

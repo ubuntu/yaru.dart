@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/widgets/navi_rail/yaru_navigation_page_theme.dart';
+import 'package:yaru/src/widgets/navi_rail/yaru_navigation_page_theme.dart';
 
 import '../../../constants.dart';
 
