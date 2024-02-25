@@ -6,7 +6,7 @@
 This repository and package contains:
 
 - flutter widgets useful for building desktop and web applications, following but also expanding the yaru theme for the gnome desktop in Ubuntu 22.04+.
-- a theme for widgets from material.dart and from this repository here
+- a theme for widgets from material.dart and from this repository
 - a complete icon set for flutter apps following the yaru design language
 
 [LIVE DEMO IN YOUR BROWSER](https://ubuntu.github.io/yaru_widgets.dart/)
