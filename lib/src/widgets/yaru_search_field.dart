@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yaru/yaru.dart';
-import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/constants.dart';
+import 'package:yaru_widgets/icons.dart';
 import 'package:yaru_widgets/src/widgets/yaru_icon_button.dart';
+import 'package:yaru_widgets/theme.dart';
 
 /// A [TextField] to with fully rounded corners,
 /// ideally in a [YaruWindowTitleBar] or [YaruDialogTitleBar]

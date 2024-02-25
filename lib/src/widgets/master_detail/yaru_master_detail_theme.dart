@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/constants.dart';
+import 'package:yaru_widgets/theme.dart';
 
 /// Holds theme data for [YaruMasterDetailTheme].
 @immutable

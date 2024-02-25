@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'pages/autocomplete_page.dart';
@@ -15,6 +14,7 @@ import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
 import 'pages/expansion_panel_page.dart';
 import 'pages/icon_button_page.dart';
+import 'pages/icons_page/icons_page.dart';
 import 'pages/navigation_page.dart';
 import 'pages/option_button_page.dart';
 import 'pages/page_indicator.dart';
@@ -26,6 +26,7 @@ import 'pages/section_page.dart';
 import 'pages/selectable_container_page.dart';
 import 'pages/switch_page.dart';
 import 'pages/tab_bar_page.dart';
+import 'pages/theme_page/theme_page.dart';
 import 'pages/tile_page.dart';
 import 'pages/window_controls_page.dart';
 
@@ -83,7 +84,7 @@ final examplePageItems = <PageItem>[
   PageItem(
     title: 'YaruChoiceChipBar',
     snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/filter_pills_page.dart',
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/choice_chip_bar_page.dart',
     iconBuilder: (context, selected) => const Icon(YaruIcons.paper_clip),
     pageBuilder: (_) => const ChoiceChipBarPage(),
   ),
@@ -247,5 +248,23 @@ final examplePageItems = <PageItem>[
         ? const Icon(YaruIcons.window_top_bar_filled)
         : const Icon(YaruIcons.window_top_bar),
     pageBuilder: (_) => const WindowControlsPage(),
+  ),
+  PageItem(
+    title: 'YaruIcons',
+    pageBuilder: (context) {
+      return IconsPage.create(context: context);
+    },
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.placeholder_icon_filled)
+        : const Icon(YaruIcons.placeholder_icon),
+  ),
+  PageItem(
+    title: 'YaruTheme',
+    pageBuilder: (context) {
+      return const ThemePage();
+    },
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.colors_filled)
+        : const Icon(YaruIcons.colors),
   ),
 ].sortedBy((page) => page.title);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
+import 'package:yaru_widgets/theme.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';

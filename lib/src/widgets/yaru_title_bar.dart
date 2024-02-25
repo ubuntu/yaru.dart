@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/constants.dart';
+import 'package:yaru_widgets/theme.dart';
 import 'package:yaru_window/yaru_window.dart';
 
 import 'yaru_title_bar_gesture_detector.dart';
