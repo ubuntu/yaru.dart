@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/src/widgets/yaru_circular_progress_indicator_theme.dart';
+import 'package:yaru/src/widgets/yaru_circular_progress_indicator_theme.dart';
 
 import 'yaru_progress_indicator.dart';
 

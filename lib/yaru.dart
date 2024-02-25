@@ -1,4 +1,4 @@
-library yaru_widgets;
+library yaru;
 
 export 'constants.dart';
 export 'foundation.dart';

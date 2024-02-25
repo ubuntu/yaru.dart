@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/constants.dart';
-import 'package:yaru_widgets/theme.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/theme.dart';
 import 'package:yaru_window/yaru_window.dart';
 
 import 'yaru_title_bar_gesture_detector.dart';
@@ -340,7 +340,7 @@ extension _ListSpacing on List<Widget> {
 /// maximizing, restoring, and closing the window, as well as a context menu,
 /// and double-click-to-maximize and drag-to-move functionality.
 ///
-/// ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar.png)
+/// ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar.png)
 ///
 /// ### Initialization
 ///
@@ -393,7 +393,7 @@ extension _ListSpacing on List<Widget> {
 ///
 /// | Home | Builder |
 /// |---|---|
-/// | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-home.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-builder.png) |
+/// | ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar-home.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar-builder.png) |
 ///
 /// ### Debug banner
 ///
@@ -419,7 +419,7 @@ extension _ListSpacing on List<Widget> {
 ///
 /// | `MaterialApp` | `CheckedModeBanner` |
 /// |---|---|
-/// | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-debug.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-banner.png) |
+/// | ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar-debug.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar-banner.png) |
 class YaruWindowTitleBar extends StatelessWidget
     implements PreferredSizeWidget {
   const YaruWindowTitleBar({

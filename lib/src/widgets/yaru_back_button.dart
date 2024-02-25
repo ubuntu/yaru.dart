@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/icons.dart';
+import 'package:yaru/icons.dart';
 
 import 'yaru_back_button_theme.dart';
 import 'yaru_icon_button.dart';

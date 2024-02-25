@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+
+import '../../constants.dart';
 
 /// A pre-styled replacement for material [TabBar]
 class YaruTabBar extends StatelessWidget {

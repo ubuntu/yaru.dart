@@ -20,5 +20,5 @@ jobs:
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
           workingDir: example
-          baseHref: /yaru_widgets.dart/
+          baseHref: /yaru.dart/
           webRenderer: canvaskit

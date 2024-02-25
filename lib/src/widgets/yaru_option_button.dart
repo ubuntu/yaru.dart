@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/constants.dart';
+import 'package:yaru/constants.dart';
 
 /// An [OutlinedButton] with a default size of 40x40.
 ///

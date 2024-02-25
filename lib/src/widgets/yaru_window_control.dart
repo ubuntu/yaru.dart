@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/theme.dart';
+import 'package:yaru/theme.dart';
 
 /// The size of a [YaruWindowControl] on the [YaruWindowControlPlatform.yaru] platform.
 const kYaruWindowControlSize = 24.0;

@@ -1,6 +1,6 @@
 # The official Flutter Yaru Theme and Widgets Suite
 
-[![Pub Package](https://img.shields.io/pub/v/yaru_widgets.svg)](https://pub.dev/packages/yaru)
+[![Pub Package](https://img.shields.io/pub/v/yaru.svg)](https://pub.dev/packages/yaru)
 
 
 This repository and package contains:
@@ -9,12 +9,12 @@ This repository and package contains:
 - a theme for widgets from material.dart and from this repository
 - a complete icon set for flutter apps following the yaru design language
 
-[LIVE DEMO IN YOUR BROWSER](https://ubuntu.github.io/yaru_widgets.dart/)
+[LIVE DEMO IN YOUR BROWSER](https://ubuntu.github.io/yaru.dart/)
 
 
-![screenshot](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/.github/images/screenshot.png)
-![screenshot](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/.github/images/icons.png)
-![screenshot](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/.github/images/theme.png)
+![screenshot](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/.github/images/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/.github/images/icons.png)
+![screenshot](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/.github/images/theme.png)
 
 
 # Contributing

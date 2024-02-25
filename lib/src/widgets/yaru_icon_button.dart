@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/constants.dart';
+import 'package:yaru/constants.dart';
 
 /// An [IconButton] with a default fixed size of 40x40.
 class YaruIconButton extends StatelessWidget {

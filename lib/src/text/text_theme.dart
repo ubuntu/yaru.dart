@@ -88,7 +88,7 @@ class _UbuntuTextStyle extends TextStyle {
   }) : super(
           fontFamily: 'Ubuntu',
           // TODO: careful not not miss this when we migrate the name to yaru again
-          package: 'yaru_widgets',
+          package: 'yaru',
           color: textColor,
         );
   final Color textColor;

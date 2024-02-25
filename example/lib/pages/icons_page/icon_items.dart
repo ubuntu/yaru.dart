@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/icons.dart';
+import 'package:yaru/icons.dart';
 
 class IconItem {
   const IconItem({

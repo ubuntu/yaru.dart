@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/foundation.dart' show YaruPageController;
-import 'package:yaru_widgets/widgets.dart'
+import 'package:yaru/foundation.dart' show YaruPageController;
+import 'package:yaru/widgets.dart'
     show YaruTitleBarTheme, YaruTitleBarThemeData, YaruTitleBarStyle;
 
 import 'yaru_master_detail_page.dart';

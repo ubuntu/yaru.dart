@@ -1,5 +1,5 @@
-name: yaru_widgets_example
-description: Demonstrate yaru_widgets
+name: yaru_example
+description: Demonstrate yaru
 publish_to: "none"
 version: 1.0.0+1
 
@@ -18,7 +18,7 @@ dependencies:
   provider: ^6.0.2
   safe_change_notifier: ^0.3.1
   ubuntu_service: ^0.2.4
-  yaru_widgets:
+  yaru:
     path: ../
 
 dev_dependencies:

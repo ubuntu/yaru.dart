@@ -49,7 +49,7 @@ parts:
 
 apps:
   yaru-widgets-example:
-    command: bin/yaru_widgets_example
+    command: bin/yaru_example
     desktop: snap/gui/yaru-widgets-example.desktop
     extensions: [gnome]
     plugs:

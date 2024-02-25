@@ -1,7 +1,7 @@
-name: yaru_widgets
+name: yaru
 description: Common flutter widgets useful for building desktop and web applications.
-homepage: https://github.com/ubuntu/yaru_widgets.dart
-issue_tracker: https://github.com/ubuntu/yaru_widgets.dart/issues
+homepage: https://github.com/ubuntu/yaru.dart
+issue_tracker: https://github.com/ubuntu/yaru.dart/issues
 version: 3.6.0
 
 environment:
@@ -63,7 +63,7 @@ icon_font:
   output_class_file: "lib/src/yaru_icons.dart"
   symlink_map_file: "assets/symlinks.json"
   class_name: "YaruIcons"
-  package: yaru_widgets
+  package: yaru
   format: false
   naming_strategy: "snake"
 
