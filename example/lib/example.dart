@@ -78,7 +78,7 @@ class _MasterDetailPage extends StatelessWidget {
         ),
       ),
       appBar: YaruWindowTitleBar(
-        title: const Text('Yaru Widgets'),
+        title: const Text('Yaru'),
         border: BorderSide.none,
         backgroundColor: YaruMasterDetailTheme.of(context).sideBarColor,
       ),

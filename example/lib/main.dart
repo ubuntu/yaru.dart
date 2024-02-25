@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
       ),
       builder: (context, yaru, child) {
         return MaterialApp(
-          title: 'Yaru Widgets',
+          title: 'Yaru',
           debugShowCheckedModeBanner: false,
           theme: yaru.theme,
           darkTheme: yaru.darkTheme,
