@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.6.1 (2024-02-25)
+
+## What's Changed
+* chore!: migrate yaru.dart and yaru_icons.dart into yaru_widgets.dart by @Feichtmeier in https://github.com/ubuntu/yaru_widgets.dart/pull/839
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru_widgets.dart/compare/v3.6.0...v3.6.1
+
 ## 3.6.0 (2024-02-17)
 
 ## What's Changed
