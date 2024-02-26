@@ -19,6 +19,8 @@ dependencies:
   yaru_window: ^0.2.0
 
 dev_dependencies:
+  animated_vector_gen: ^0.2.1
+  build_runner: ^2.4.6
   flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
