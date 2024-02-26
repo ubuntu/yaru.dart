@@ -1,7 +1,11 @@
 name: Publish to GitHub Pages
 
 on:
-  push:
+  # JUST FOR TESTING
+  # push:
+  #   branches:
+  #     - main
+  pull_request:
     branches:
       - main
   workflow_dispatch:
@@ -11,12 +15,13 @@ env:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{env.FLUTTER_VERSION}}
+      - run: flutter pub get
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
           workingDir: example
