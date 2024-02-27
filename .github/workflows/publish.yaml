@@ -21,6 +21,8 @@ jobs:
         with:
           flutter-version: ${{env.FLUTTER_VERSION}}
       - run: flutter pub get
+      - run: dart pub global activate -sgit https://github.com/Jupi007/icon_font_generator.git --git-ref yaru
+      - run: yaru_icon_font_generator assets/icons assets/yaru_icons.otf --output-class-file=lib/src/yaru_icons.dart -r
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
           workingDir: example
