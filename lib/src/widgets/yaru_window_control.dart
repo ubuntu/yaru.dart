@@ -41,7 +41,7 @@ class YaruWindowControl extends StatefulWidget {
     required this.type,
     this.platform = YaruWindowControlPlatform.yaru,
     required this.onTap,
-    this.foregroundColor,
+    this.iconColor,
     this.backgroundColor,
   });
 
@@ -61,14 +61,12 @@ class YaruWindowControl extends StatefulWidget {
   final GestureTapCallback? onTap;
 
   /// Color used to draw the control icon.
-  /// Leave to null to use the default value.
-  // TODO - V3.0: use MaterialStateProperty, rename to iconColor
-  final Color? foregroundColor;
+  /// Leave to null, or return null, to use the default value.
+  final MaterialStateProperty<Color?>? iconColor;
 
   /// Color used to draw the control background decoration.
-  /// Leave to null to use the default value.
-  // TODO - V3.0: use MaterialStateProperty
-  final Color? backgroundColor;
+  /// Leave to null, or return null, to use the default value.
+  final MaterialStateProperty<Color?>? backgroundColor;
 
   @override
   State<YaruWindowControl> createState() {
@@ -96,6 +94,22 @@ class _YaruWindowControlState extends State<YaruWindowControl>
 
   late CurvedAnimation _animationProgress;
   late AnimationController _animationController;
+
+  Set<MaterialState> get _states {
+    final states = <MaterialState>{};
+
+    if (_hovered) {
+      states.add(MaterialState.hovered);
+    }
+    if (_active) {
+      states.add(MaterialState.pressed);
+    }
+    if (!interactive) {
+      states.add(MaterialState.disabled);
+    }
+
+    return states;
+  }
 
   @override
   void initState() {
@@ -179,9 +193,8 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   }
 
   Color _getBackgoundColor(ColorScheme colorScheme) {
-    if (widget.backgroundColor != null) {
-      return widget.backgroundColor!;
-    }
+    final backgroundColor = widget.backgroundColor?.resolve(_states);
+    if (backgroundColor != null) return backgroundColor;
 
     switch (style) {
       case YaruWindowControlPlatform.yaru:
@@ -231,9 +244,8 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   }
 
   Color _getIconColor(ColorScheme colorScheme) {
-    if (widget.foregroundColor != null) {
-      return widget.foregroundColor!;
-    }
+    final iconColor = widget.iconColor?.resolve(_states);
+    if (iconColor != null) return iconColor;
 
     switch (style) {
       case YaruWindowControlPlatform.yaru:
@@ -258,7 +270,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
 
   Color _getWindowsIconColor(ColorScheme colorScheme) {
     if (_hovered && interactive && widget.type == YaruWindowControlType.close) {
-      return widget.foregroundColor ?? Colors.white;
+      return widget.iconColor?.resolve(_states) ?? Colors.white;
     }
 
     return colorScheme.onSurface.withOpacity(interactive ? 1.0 : 0.5);
