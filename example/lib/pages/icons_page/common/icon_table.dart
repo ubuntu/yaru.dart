@@ -19,40 +19,41 @@ class IconTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
       itemCount: iconItems.length,
-      itemBuilder: (context, index) => Column(
-        children: [
-          Row(
-            children: [
-              SizedBox.square(
-                dimension: iconSize * 1.5,
-                child: ClickableIcon(
-                  iconItem: iconItems[index],
-                  iconSize: iconSize,
+      itemBuilder: (context, index) {
+        return Column(
+          children: [
+            Row(
+              children: [
+                SizedBox.square(
+                  dimension: iconSize * 1.5,
+                  child: ClickableIcon(
+                    iconItem: iconItems[index],
+                    iconSize: iconSize,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: SelectableText(
-                  beautifyIconName(iconItems[index].name),
-                  style: Theme.of(context).textTheme.bodySmall,
+                const SizedBox(
+                  width: 16,
                 ),
-              ),
-              Expanded(
-                child: IconUsage(
-                  usage: iconItems[index].usage,
-                  label: false,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                Expanded(
+                  child: SelectableText(
+                    beautifyIconName(iconItems[index].name),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          if (index < iconItems.length - 1) const Divider(),
-        ],
-      ),
+                Expanded(
+                  child: IconUsage(
+                    usage: iconItems[index].usage,
+                    label: false,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                  ),
+                ),
+              ],
+            ),
+            if (index < iconItems.length - 1) const Divider(),
+          ],
+        );
+      },
     );
   }
 }

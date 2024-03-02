@@ -18,10 +18,17 @@ final List<IconItem> _staticIconItems = [
     IconItem(
       name: iconName,
       usage: 'YaruIcons.$iconName',
-      iconBuilder: (context, iconSize) => Icon(
-        YaruIcons.all[iconName]!,
-        size: iconSize,
-      ),
+      iconBuilder: (context, iconSize) {
+        final data = YaruIcons.all[iconName];
+
+        if (data == null) {
+          return const Placeholder();
+        }
+        return Icon(
+          data,
+          size: iconSize,
+        );
+      },
     ),
 ];
 

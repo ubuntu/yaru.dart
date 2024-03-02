@@ -30,15 +30,20 @@ class IconUsage extends StatelessWidget {
             width: 8,
           ),
         ],
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            color: Theme.of(context).highlightColor,
-          ),
-          child: SelectableText(
-            usage,
-            style: usageTextStyle,
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: Theme.of(context).highlightColor,
+              ),
+              child: SelectableText(
+                usage,
+                style: usageTextStyle,
+              ),
+            ),
           ),
         ),
       ],

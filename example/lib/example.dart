@@ -7,14 +7,22 @@ import 'package:yaru/yaru.dart';
 import 'code_snippet_button.dart';
 import 'example_model.dart';
 import 'example_page_items.dart';
+import 'pages/icons_page/provider/icon_view_model.dart';
 
 class Example extends StatefulWidget {
   // ignore: unused_element
   const Example({super.key});
 
   static Widget create(BuildContext context) {
-    return ChangeNotifierProvider<ExampleModel>(
-      create: (_) => ExampleModel(getService<Connectivity>()),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ExampleModel>(
+          create: (_) => ExampleModel(getService<Connectivity>()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => IconViewModel(),
+        ),
+      ],
       child: const Example(),
     );
   }
@@ -62,7 +70,7 @@ class _MasterDetailPage extends StatelessWidget {
       length: pageItems.length,
       tileBuilder: (context, index, selected, availableWidth) => YaruMasterTile(
         leading: pageItems[index].iconBuilder(context, selected),
-        title: buildTitle(context, pageItems[index]),
+        title: Text(pageItems[index].title),
       ),
       pageBuilder: (context, index) => YaruDetailPage(
         appBar: YaruWindowTitleBar(
