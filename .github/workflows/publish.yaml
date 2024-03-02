@@ -1,11 +1,7 @@
 name: Publish to GitHub Pages
 
 on:
-  # JUST FOR TESTING
-  # push:
-  #   branches:
-  #     - main
-  pull_request:
+  push:
     branches:
       - main
 

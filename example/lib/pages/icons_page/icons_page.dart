@@ -38,19 +38,22 @@ class _IconsPageState extends State<IconsPage>
               right: kYaruPagePadding,
               top: 10,
             ),
-            child: YaruTabBar(
-              onTap: (value) => setState(() => index = value),
-              tabs: const [
-                Tab(
-                  text: 'Static',
-                ),
-                Tab(
-                  text: 'Animated',
-                ),
-                Tab(
-                  text: 'Widgets',
-                ),
-              ],
+            child: SizedBox(
+              width: 700,
+              child: YaruTabBar(
+                onTap: (value) => setState(() => index = value),
+                tabs: const [
+                  Tab(
+                    text: 'Static',
+                  ),
+                  Tab(
+                    text: 'Animated',
+                  ),
+                  Tab(
+                    text: 'Widgets',
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
