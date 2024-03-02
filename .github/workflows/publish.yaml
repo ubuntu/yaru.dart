@@ -10,7 +10,7 @@ on:
       - main
 
 env:
-  FLUTTER_VERSION: 3.16.X
+  FLUTTER_VERSION: 3.16.9
 
 jobs:
   publish:
