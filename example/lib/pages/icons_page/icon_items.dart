@@ -20,14 +20,13 @@ final List<IconItem> _staticIconItems = [
       usage: 'YaruIcons.$iconName',
       iconBuilder: (context, iconSize) {
         final data = YaruIcons.all[iconName];
-        // TODO: testing, change this back
-        // ignore: avoid_print
-        print(data.toString());
+
         if (data == null) {
           return const Placeholder();
         }
         return Icon(
-          data,
+          // TODO: testing, change this back
+          IconData(data.codePoint, fontFamilyFallback: const ['YaruIcons']),
           size: iconSize,
         );
       },
