@@ -26,7 +26,7 @@ class BannerPage extends StatelessWidget {
             for (int i = 0; i < 20; i++)
               YaruWatermark(
                 watermark: const Icon(
-                  Icons.cloud,
+                  YaruIcons.cloud,
                   size: 100,
                 ),
                 child: _Banner(i: i),

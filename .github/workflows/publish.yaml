@@ -22,3 +22,4 @@ jobs:
           workingDir: example
           baseHref: /yaru.dart/
           webRenderer: canvaskit
+          customArgs: --no-tree-shake-icons
