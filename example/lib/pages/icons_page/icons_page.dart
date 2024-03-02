@@ -25,6 +25,7 @@ class IconsPage extends StatefulWidget {
 class _IconsPageState extends State<IconsPage> {
   @override
   Widget build(BuildContext context) {
+    final model = context.read<IconViewModel>();
     final iconSize = context.select<IconViewModel, double>((m) => m.iconSize);
     final isMinIconSize =
         context.select<IconViewModel, bool>((m) => m.isMinIconSize);
@@ -42,15 +43,15 @@ class _IconsPageState extends State<IconsPage> {
           title: const Text(
             'Flutter Yaru Icons Demo',
           ),
-          onSearchActive: context.read<IconViewModel>().toggleSearch,
-          onClear: context.read<IconViewModel>().toggleSearch,
-          onChanged: context.read<IconViewModel>().onSearchChanged,
+          onSearchActive: model.toggleSearch,
+          onClear: model.toggleSearch,
+          onChanged: model.onSearchChanged,
         ),
         actions: [
           Tooltip(
             message: gridView ? 'Toggle list view' : 'Toggle grid view',
             child: IconButton(
-              onPressed: context.read<IconViewModel>().toggleGridView,
+              onPressed: model.toggleGridView,
               icon: gridView
                   ? const Icon(YaruIcons.unordered_list)
                   : const Icon(YaruIcons.app_grid),
@@ -59,9 +60,7 @@ class _IconsPageState extends State<IconsPage> {
           Tooltip(
             message: 'Decrease icon size',
             child: IconButton(
-              onPressed: isMinIconSize
-                  ? null
-                  : context.read<IconViewModel>().decreaseIconSize,
+              onPressed: isMinIconSize ? null : model.decreaseIconSize,
               icon: const Icon(YaruIcons.minus),
             ),
           ),
@@ -69,9 +68,7 @@ class _IconsPageState extends State<IconsPage> {
           Tooltip(
             message: 'Increase icon size',
             child: IconButton(
-              onPressed: isMaxIconSize
-                  ? null
-                  : context.read<IconViewModel>().increaseIconSize,
+              onPressed: isMaxIconSize ? null : model.increaseIconSize,
               icon: const Icon(YaruIcons.plus),
             ),
           ),

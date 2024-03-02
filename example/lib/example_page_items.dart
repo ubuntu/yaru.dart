@@ -252,7 +252,7 @@ final examplePageItems = <PageItem>[
   PageItem(
     title: 'YaruIcons',
     pageBuilder: (context) {
-      return IconsPage.create(context: context);
+      return const IconsPage();
     },
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.placeholder_icon_filled)

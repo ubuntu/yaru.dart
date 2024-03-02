@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
-import 'pages/icons_page/icons_page.dart';
+import 'example.dart';
 import 'theme.dart';
 
 Future<void> main() async {
@@ -35,8 +35,7 @@ class Home extends StatelessWidget {
           darkTheme: yaru.darkTheme,
           highContrastTheme: yaruHighContrastLight,
           highContrastDarkTheme: yaruHighContrastDark,
-          // TODO: CHANGE THIS BACK
-          home: IconsPage.create(context: context),
+          home: Example.create(context),
           scrollBehavior: const MaterialScrollBehavior().copyWith(
             dragDevices: {
               PointerDeviceKind.mouse,
