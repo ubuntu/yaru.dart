@@ -30,3 +30,7 @@ flutter:
 
   assets:
     - assets/
+  fonts:
+    - family: YaruIcons
+      fonts:
+        - asset: ../assets/yaru_icons.otf

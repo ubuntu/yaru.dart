@@ -25,8 +25,7 @@ final List<IconItem> _staticIconItems = [
           return const Placeholder();
         }
         return Icon(
-          // TODO: testing, change this back
-          IconData(data.codePoint, fontFamilyFallback: const ['YaruIcons']),
+          data,
           size: iconSize,
         );
       },
