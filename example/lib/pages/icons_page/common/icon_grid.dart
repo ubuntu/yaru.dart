@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../icon_items.dart';
-import '../utils.dart';
-import 'clickable_icon.dart';
+// import '../utils.dart';
+// import 'clickable_icon.dart';
 
 class IconGrid extends StatelessWidget {
   const IconGrid({
@@ -28,15 +28,8 @@ class IconGrid extends StatelessWidget {
       ),
       itemCount: iconItems.length,
       itemBuilder: (context, index) {
-        return Tooltip(
-          verticalOffset: iconSize / 2,
-          waitDuration: const Duration(milliseconds: 250),
-          message: beautifyIconName(iconItems[index].name),
-          child: ClickableIcon(
-            iconItem: iconItems[index],
-            iconSize: iconSize,
-          ),
-        );
+        //TODO: change this back, testing
+        return iconItems[index].iconBuilder(context, 30);
       },
     );
   }
