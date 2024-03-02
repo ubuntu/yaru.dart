@@ -251,6 +251,7 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruIcons',
+    titleBuilder: createIconsPageAppBar,
     pageBuilder: (context) {
       return const IconsPage();
     },

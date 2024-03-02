@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
 import '../icon_items.dart';
 import 'icon_dialog.dart';
@@ -18,6 +19,7 @@ class ClickableIcon extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 1,
       child: InkWell(
+        borderRadius: BorderRadius.circular(kYaruButtonRadius),
         onTap: () => showDialog(
           context: context,
           builder: (context) => IconDialog(

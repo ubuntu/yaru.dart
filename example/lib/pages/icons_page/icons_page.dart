@@ -22,109 +22,102 @@ class IconsPage extends StatefulWidget {
   State<IconsPage> createState() => _IconsPageState();
 }
 
-class _IconsPageState extends State<IconsPage> {
+class _IconsPageState extends State<IconsPage>
+    with SingleTickerProviderStateMixin {
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
-    final model = context.read<IconViewModel>();
-    final iconSize = context.select<IconViewModel, double>((m) => m.iconSize);
-    final isMinIconSize =
-        context.select<IconViewModel, bool>((m) => m.isMinIconSize);
-    final isMaxIconSize =
-        context.select<IconViewModel, bool>((m) => m.isMaxIconSize);
-    final gridView = context.select<IconViewModel, bool>((m) => m.gridView);
-    final searchActive =
-        context.select<IconViewModel, bool>((m) => m.searchActive);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: YaruSearchTitleField(
-          searchActive: searchActive,
-          width: 250,
-          title: const Text(
-            'Flutter Yaru Icons Demo',
-          ),
-          onSearchActive: model.toggleSearch,
-          onClear: model.toggleSearch,
-          onChanged: model.onSearchChanged,
-        ),
-        actions: [
-          Tooltip(
-            message: gridView ? 'Toggle list view' : 'Toggle grid view',
-            child: IconButton(
-              onPressed: model.toggleGridView,
-              icon: gridView
-                  ? const Icon(YaruIcons.unordered_list)
-                  : const Icon(YaruIcons.app_grid),
+    return DefaultTabController(
+      length: 3,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: kYaruPagePadding,
+              right: kYaruPagePadding,
+              top: 10,
+            ),
+            child: YaruTabBar(
+              onTap: (value) => setState(() => index = value),
+              tabs: const [
+                Tab(
+                  text: 'Static',
+                ),
+                Tab(
+                  text: 'Animated',
+                ),
+                Tab(
+                  text: 'Widgets',
+                ),
+              ],
             ),
           ),
-          Tooltip(
-            message: 'Decrease icon size',
-            child: IconButton(
-              onPressed: isMinIconSize ? null : model.decreaseIconSize,
-              icon: const Icon(YaruIcons.minus),
-            ),
-          ),
-          Text('${iconSize.truncate()}px'),
-          Tooltip(
-            message: 'Increase icon size',
-            child: IconButton(
-              onPressed: isMaxIconSize ? null : model.increaseIconSize,
-              icon: const Icon(YaruIcons.plus),
+          Expanded(
+            child: IconView(
+              iconItems: switch (index) {
+                0 => IconItems.static,
+                1 => IconItems.animated,
+                2 => IconItems.widget,
+                _ => throw 'Invalid index'
+              },
             ),
           ),
         ],
       ),
-      body: YaruNavigationPage(
-        length: 3,
-        itemBuilder: (context, index, selected) {
-          const style = YaruNavigationRailStyle.labelled;
-
-          switch (index) {
-            case 0:
-              return const YaruNavigationRailItem(
-                icon: Icon(YaruIcons.image),
-                label: Text('Static icons'),
-                tooltip: 'Static icons',
-                style: style,
-              );
-            case 1:
-              return const YaruNavigationRailItem(
-                icon: Icon(YaruIcons.video),
-                label: Text('Animated icons'),
-                tooltip: 'Animated icons',
-                style: style,
-              );
-            case 2:
-              return const YaruNavigationRailItem(
-                icon: Icon(YaruIcons.rule_and_pen),
-                label: Text('Widget icons'),
-                tooltip: 'Widget icons',
-                style: style,
-              );
-            default:
-              throw 'Invalid index';
-          }
-        },
-        pageBuilder: (context, index) {
-          List<IconItem> iconItems;
-
-          switch (index) {
-            case 0:
-              iconItems = IconItems.static;
-              break;
-            case 1:
-              iconItems = IconItems.animated;
-              break;
-            case 2:
-              iconItems = IconItems.widget;
-              break;
-            default:
-              throw 'Invalid index';
-          }
-
-          return IconView(iconItems: iconItems);
-        },
-      ),
     );
   }
+}
+
+YaruWindowTitleBar createIconsPageAppBar(BuildContext context) {
+  final model = context.read<IconViewModel>();
+  final iconSize = context.select<IconViewModel, double>((m) => m.iconSize);
+  final isMinIconSize =
+      context.select<IconViewModel, bool>((m) => m.isMinIconSize);
+  final isMaxIconSize =
+      context.select<IconViewModel, bool>((m) => m.isMaxIconSize);
+  final gridView = context.select<IconViewModel, bool>((m) => m.gridView);
+  final searchActive =
+      context.select<IconViewModel, bool>((m) => m.searchActive);
+
+  return YaruWindowTitleBar(
+    backgroundColor: Colors.transparent,
+    border: BorderSide.none,
+    leading: YaruSearchButton(
+      searchActive: searchActive,
+      onPressed: model.toggleSearch,
+    ),
+    title: searchActive
+        ? YaruSearchField(
+            onClear: model.toggleSearch,
+            onChanged: model.onSearchChanged,
+          )
+        : const Text('YaruIcons'),
+    actions: [
+      Tooltip(
+        message: gridView ? 'Toggle list view' : 'Toggle grid view',
+        child: IconButton(
+          onPressed: model.toggleGridView,
+          icon: gridView
+              ? const Icon(YaruIcons.unordered_list)
+              : const Icon(YaruIcons.app_grid),
+        ),
+      ),
+      Tooltip(
+        message: 'Decrease icon size',
+        child: IconButton(
+          onPressed: isMinIconSize ? null : model.decreaseIconSize,
+          icon: const Icon(YaruIcons.minus),
+        ),
+      ),
+      Text('${iconSize.truncate()}px'),
+      Tooltip(
+        message: 'Increase icon size',
+        child: IconButton(
+          onPressed: isMaxIconSize ? null : model.increaseIconSize,
+          icon: const Icon(YaruIcons.plus),
+        ),
+      ),
+    ],
+  );
 }

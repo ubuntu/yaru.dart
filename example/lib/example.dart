@@ -70,7 +70,7 @@ class _MasterDetailPage extends StatelessWidget {
       length: pageItems.length,
       tileBuilder: (context, index, selected, availableWidth) => YaruMasterTile(
         leading: pageItems[index].iconBuilder(context, selected),
-        title: buildTitle(context, pageItems[index]),
+        title: Text(pageItems[index].title),
       ),
       pageBuilder: (context, index) => YaruDetailPage(
         appBar: YaruWindowTitleBar(
