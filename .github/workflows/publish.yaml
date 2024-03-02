@@ -25,4 +25,4 @@ jobs:
         with:
           workingDir: example
           baseHref: /yaru.dart/
-          webRenderer: auto
+          webRenderer: html

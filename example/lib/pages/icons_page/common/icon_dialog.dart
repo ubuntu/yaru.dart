@@ -33,9 +33,8 @@ class IconDialog extends StatelessWidget {
         title: Text(beautifyIconName(iconItem.name)),
       ),
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             for (final size in _iconDialogSizes)
               Padding(
