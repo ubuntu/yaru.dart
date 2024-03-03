@@ -76,9 +76,15 @@ class _MasterDetailPage extends StatelessWidget {
         appBar: YaruWindowTitleBar(
           backgroundColor: Colors.transparent,
           border: BorderSide.none,
-          leading:
-              Navigator.of(context).canPop() ? const YaruBackButton() : null,
+          leading: Row(
+            children: [
+              if (Navigator.of(context).canPop()) const YaruBackButton(),
+              buildLeading(context, pageItems[index]) ??
+                  const SizedBox.shrink(),
+            ],
+          ),
           title: buildTitle(context, pageItems[index]),
+          actions: buildActions(context, pageItems[index]),
         ),
         body: pageItems[index].pageBuilder(context),
         floatingActionButton: CodeSnippedButton(
@@ -129,11 +135,16 @@ class _CompactPageState extends State<_CompactPage> {
             : YaruNavigationRailStyle.compact;
 
     return Scaffold(
-      appBar: YaruWindowTitleBar(
-        title: ValueListenableBuilder<int>(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kYaruTitleBarHeight),
+        child: ValueListenableBuilder<int>(
           valueListenable: _selectedPage,
           builder: (context, value, child) {
-            return buildTitle(context, widget.pageItems[value]);
+            return YaruWindowTitleBar(
+              leading: buildLeading(context, widget.pageItems[value]),
+              title: buildTitle(context, widget.pageItems[value]),
+              actions: buildActions(context, widget.pageItems[value]),
+            );
           },
         ),
       ),
@@ -142,7 +153,7 @@ class _CompactPageState extends State<_CompactPage> {
         length: widget.pageItems.length,
         itemBuilder: (context, index, selected) => YaruNavigationRailItem(
           icon: widget.pageItems[index].iconBuilder(context, selected),
-          label: buildTitle(context, widget.pageItems[index]),
+          label: Text(widget.pageItems[index].title),
           tooltip: widget.pageItems[index].title,
           style: style,
         ),
@@ -165,8 +176,16 @@ class _CompactPageState extends State<_CompactPage> {
   }
 }
 
+Widget? buildLeading(BuildContext context, PageItem item) {
+  return item.leadingBuilder?.call(context);
+}
+
 Widget buildTitle(BuildContext context, PageItem item) {
   return item.titleBuilder?.call(context) ?? Text(item.title);
+}
+
+List<Widget>? buildActions(BuildContext context, PageItem item) {
+  return item.actionsBuilder?.call(context);
 }
 
 Future<void> showSettingsDialog(BuildContext context) {

@@ -33,7 +33,9 @@ import 'pages/window_controls_page.dart';
 class PageItem {
   const PageItem({
     required this.title,
+    this.leadingBuilder,
     this.titleBuilder,
+    this.actionsBuilder,
     required this.pageBuilder,
     required this.iconBuilder,
     this.snippetUrl,
@@ -41,7 +43,9 @@ class PageItem {
   });
 
   final String title;
+  final WidgetBuilder? leadingBuilder;
   final WidgetBuilder? titleBuilder;
+  final List<Widget> Function(BuildContext context)? actionsBuilder;
   final WidgetBuilder pageBuilder;
   final String? snippetUrl;
   final Widget Function(BuildContext context, bool selected) iconBuilder;
@@ -251,7 +255,9 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruIcons',
-    titleBuilder: createIconsPageAppBar,
+    leadingBuilder: createIconsPageAppBarLeading,
+    titleBuilder: createIconsPageAppBarTitle,
+    actionsBuilder: createIconsPageAppBarActions,
     pageBuilder: (context) {
       return const IconsPage();
     },
