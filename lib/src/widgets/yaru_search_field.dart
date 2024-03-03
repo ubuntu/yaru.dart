@@ -92,6 +92,15 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
     super.initState();
     _controller = widget.controller ?? TextEditingController(text: widget.text);
     _focusNode = widget.focusNode ?? FocusNode();
+
+    var isInputEmpty = _controller.text.isEmpty;
+    _controller.addListener(() {
+      if (isInputEmpty != _controller.text.isEmpty) {
+        setState(() {
+          isInputEmpty = _controller.text.isEmpty;
+        });
+      }
+    });
   }
 
   @override
