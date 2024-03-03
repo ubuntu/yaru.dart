@@ -204,7 +204,6 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
             ? YaruWindowControlPlatform.windows
             : YaruWindowControlPlatform.yaru);
 
-    // TODO: backdrop effect
     Widget? backdropEffect(Widget? child) {
       if (child == null) return null;
       return AnimatedOpacity(
