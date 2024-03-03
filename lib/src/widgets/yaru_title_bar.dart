@@ -229,10 +229,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     final closeButton = YaruWindowControl(
       platform: windowControlPlatform,
-      foregroundColor:
-          windowControlPlatform == YaruWindowControlPlatform.windows
-              ? null
-              : foregroundColor,
+      iconColor: windowControlPlatform == YaruWindowControlPlatform.windows
+          ? null
+          : MaterialStatePropertyAll(foregroundColor),
       type: YaruWindowControlType.close,
       onTap: onClose != null ? () => onClose!(context) : null,
     );
@@ -276,7 +275,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isMinimizable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                foregroundColor: foregroundColor,
+                                iconColor:
+                                    MaterialStatePropertyAll(foregroundColor),
                                 type: YaruWindowControlType.minimize,
                                 onTap: onMinimize != null
                                     ? () => onMinimize!(context)
@@ -285,7 +285,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isRestorable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                foregroundColor: foregroundColor,
+                                iconColor:
+                                    MaterialStatePropertyAll(foregroundColor),
                                 type: YaruWindowControlType.restore,
                                 onTap: onRestore != null
                                     ? () => onRestore!(context)
@@ -294,7 +295,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isMaximizable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                foregroundColor: foregroundColor,
+                                iconColor:
+                                    MaterialStatePropertyAll(foregroundColor),
                                 type: YaruWindowControlType.maximize,
                                 onTap: onMaximize != null
                                     ? () => onMaximize!(context)
