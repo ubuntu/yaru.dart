@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
 import '../constants.dart';
 
@@ -90,6 +91,8 @@ class _TextFieldsViewState extends State<TextFieldsView> {
         maxLines: 5,
       ),
       const DropdownMenu(
+        trailingIcon: Icon(YaruIcons.pan_down),
+        selectedTrailingIcon: Icon(YaruIcons.pan_down),
         dropdownMenuEntries: [
           DropdownMenuEntry(value: 1, label: '1'),
           DropdownMenuEntry(value: 2, label: '2'),
