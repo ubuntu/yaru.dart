@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
-import 'code_snippet_button.dart';
 import 'example_model.dart';
 import 'example_page_items.dart';
 import 'pages/icons_page/provider/icon_view_model.dart';
@@ -76,20 +75,14 @@ class _MasterDetailPage extends StatelessWidget {
         appBar: YaruWindowTitleBar(
           backgroundColor: Colors.transparent,
           border: BorderSide.none,
-          leading: Row(
-            children: [
-              if (Navigator.of(context).canPop()) const YaruBackButton(),
-              buildLeading(context, pageItems[index]) ??
-                  const SizedBox.shrink(),
-            ],
-          ),
+          leading:
+              Navigator.of(context).canPop() ? const YaruBackButton() : null,
           title: buildTitle(context, pageItems[index]),
           actions: buildActions(context, pageItems[index]),
         ),
         body: pageItems[index].pageBuilder(context),
-        floatingActionButton: CodeSnippedButton(
-          pageItem: pageItems[index],
-        ),
+        floatingActionButton:
+            buildFloatingActionButton(context, pageItems[index]),
       ),
       appBar: YaruWindowTitleBar(
         title: const Text('Yaru'),
@@ -159,9 +152,8 @@ class _CompactPageState extends State<_CompactPage> {
         ),
         pageBuilder: (context, index) => Scaffold(
           body: widget.pageItems[index].pageBuilder(context),
-          floatingActionButton: CodeSnippedButton(
-            pageItem: widget.pageItems[index],
-          ),
+          floatingActionButton:
+              buildFloatingActionButton(context, widget.pageItems[index]),
         ),
         trailing: YaruNavigationRailItem(
           icon: const Icon(YaruIcons.gear),
@@ -186,6 +178,10 @@ Widget buildTitle(BuildContext context, PageItem item) {
 
 List<Widget>? buildActions(BuildContext context, PageItem item) {
   return item.actionsBuilder?.call(context);
+}
+
+Widget? buildFloatingActionButton(BuildContext context, PageItem item) {
+  return item.floatingActionButtonBuilder?.call(context);
 }
 
 Future<void> showSettingsDialog(BuildContext context) {
