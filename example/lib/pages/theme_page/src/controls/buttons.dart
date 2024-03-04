@@ -3,9 +3,15 @@ import 'package:yaru/yaru.dart';
 
 import '../constants.dart';
 
-class Buttons extends StatelessWidget {
+class Buttons extends StatefulWidget {
   const Buttons({super.key});
 
+  @override
+  State<Buttons> createState() => _ButtonsState();
+}
+
+class _ButtonsState extends State<Buttons> {
+  bool _selected = false;
   @override
   Widget build(BuildContext context) {
     const icon = Icon(YaruIcons.notification_filled);
@@ -95,7 +101,8 @@ class Buttons extends StatelessWidget {
       ),
       (
         IconButton(
-          onPressed: () {},
+          isSelected: _selected,
+          onPressed: () => setState(() => _selected = !_selected),
           icon: icon,
         ),
         const IconButton(
