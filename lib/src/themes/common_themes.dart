@@ -143,10 +143,27 @@ const _tooltipThemeData = TooltipThemeData(
 
 // Buttons
 
-const _commonButtonStyle = ButtonStyle(
-  padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
-  iconSize: MaterialStatePropertyAll(kCompactButtonIconSize),
-);
+MaterialStateColor _createCommonButtonIconColor({
+  required ColorScheme colorScheme,
+  required Color disabledColor,
+}) =>
+    MaterialStateColor.resolveWith(
+      (states) {
+        if (states.contains(MaterialState.disabled)) {
+          return disabledColor;
+        }
+        return states.contains(MaterialState.selected)
+            ? colorScheme.primary
+            : colorScheme.onSurface;
+      },
+    );
+
+ButtonStyle _createCommonButtonStyle() {
+  return const ButtonStyle(
+    padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
+    iconSize: MaterialStatePropertyAll(kCompactButtonIconSize),
+  );
+}
 
 final _buttonThemeData = ButtonThemeData(
   shape: RoundedRectangleBorder(
@@ -154,9 +171,10 @@ final _buttonThemeData = ButtonThemeData(
   ),
 );
 
-OutlinedButtonThemeData _createOutlinedButtonTheme(
-  ColorScheme colorScheme,
-) {
+OutlinedButtonThemeData _createOutlinedButtonTheme({
+  required ColorScheme colorScheme,
+  required Color disabledColor,
+}) {
   return OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       side: BorderSide(
@@ -169,13 +187,16 @@ OutlinedButtonThemeData _createOutlinedButtonTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(kButtonRadius),
       ),
-    ).merge(_commonButtonStyle),
+    ).merge(
+      _createCommonButtonStyle(),
+    ),
   );
 }
 
-TextButtonThemeData _createTextButtonTheme(
-  ColorScheme colorScheme,
-) {
+TextButtonThemeData _createTextButtonTheme({
+  required ColorScheme colorScheme,
+  required Color disabledColor,
+}) {
   return TextButtonThemeData(
     style: TextButton.styleFrom(
       iconColor: colorScheme.primary,
@@ -183,7 +204,9 @@ TextButtonThemeData _createTextButtonTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(kButtonRadius),
       ),
-    ).merge(_commonButtonStyle),
+    ).merge(
+      _createCommonButtonStyle(),
+    ),
   );
 }
 
@@ -191,6 +214,7 @@ ElevatedButtonThemeData _createElevatedButtonTheme({
   required Color color,
   required ColorScheme colorScheme,
   Color? textColor,
+  required Color disabledColor,
 }) {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -204,13 +228,16 @@ ElevatedButtonThemeData _createElevatedButtonTheme({
             : BorderSide.none,
         borderRadius: BorderRadius.circular(kButtonRadius),
       ),
-    ).merge(_commonButtonStyle),
+    ).merge(
+      _createCommonButtonStyle(),
+    ),
   );
 }
 
-FilledButtonThemeData _createFilledButtonTheme(
-  ColorScheme colorScheme,
-) {
+FilledButtonThemeData _createFilledButtonTheme({
+  required ColorScheme colorScheme,
+  required Color disabledColor,
+}) {
   return FilledButtonThemeData(
     style: FilledButton.styleFrom(
       disabledBackgroundColor: colorScheme.onSurface.withOpacity(0.12),
@@ -225,11 +252,16 @@ FilledButtonThemeData _createFilledButtonTheme(
             : BorderSide.none,
         borderRadius: BorderRadius.circular(kButtonRadius),
       ),
-    ).merge(_commonButtonStyle),
+    ).merge(
+      _createCommonButtonStyle(),
+    ),
   );
 }
 
-IconButtonThemeData _createIconButtonTheme(ColorScheme colorScheme) {
+IconButtonThemeData _createIconButtonTheme({
+  required ColorScheme colorScheme,
+  required Color disabledColor,
+}) {
   return IconButtonThemeData(
     style: IconButton.styleFrom(
       padding: EdgeInsets.zero,
@@ -241,6 +273,13 @@ IconButtonThemeData _createIconButtonTheme(ColorScheme colorScheme) {
       maximumSize: const Size(kCompactButtonHeight, kCompactButtonHeight),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       iconSize: kCompactIconSize,
+    ).merge(
+      _createCommonButtonStyle().copyWith(
+        iconColor: _createCommonButtonIconColor(
+          colorScheme: colorScheme,
+          disabledColor: disabledColor,
+        ),
+      ),
     ),
   );
 }
@@ -641,10 +680,12 @@ ThemeData createYaruTheme({
     );
   }
 
-  return ThemeData.from(
+  final themeData = ThemeData.from(
     useMaterial3: useMaterial3,
     colorScheme: colorScheme,
-  ).copyWith(
+  );
+
+  return themeData.copyWith(
     iconTheme: IconThemeData(
       color: colorScheme.onSurface,
       size: kCompactIconSize,
@@ -665,17 +706,28 @@ ThemeData createYaruTheme({
     indicatorColor: colorScheme.primary,
     applyElevationOverlayColor: colorScheme.isDark,
     buttonTheme: _buttonThemeData,
-    outlinedButtonTheme: _createOutlinedButtonTheme(colorScheme),
+    outlinedButtonTheme: _createOutlinedButtonTheme(
+      colorScheme: colorScheme,
+      disabledColor: themeData.disabledColor,
+    ),
     elevatedButtonTheme: _createElevatedButtonTheme(
       color: elevatedButtonColor ?? colorScheme.primary,
       colorScheme: colorScheme,
       textColor: elevatedButtonTextColor,
+      disabledColor: themeData.disabledColor,
     ),
     filledButtonTheme: _createFilledButtonTheme(
-      colorScheme,
+      colorScheme: colorScheme,
+      disabledColor: themeData.disabledColor,
     ),
-    textButtonTheme: _createTextButtonTheme(colorScheme),
-    iconButtonTheme: _createIconButtonTheme(colorScheme),
+    textButtonTheme: _createTextButtonTheme(
+      colorScheme: colorScheme,
+      disabledColor: themeData.disabledColor,
+    ),
+    iconButtonTheme: _createIconButtonTheme(
+      colorScheme: colorScheme,
+      disabledColor: themeData.disabledColor,
+    ),
     menuButtonTheme: _createMenuItemTheme(colorScheme, textTheme),
     switchTheme: _createSwitchTheme(colorScheme),
     checkboxTheme: _createCheckBoxTheme(colorScheme),
