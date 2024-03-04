@@ -5,20 +5,20 @@ import 'package:flutter_highlight/themes/vs.dart';
 import 'package:flutter_highlight/themes/vs2015.dart';
 import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
+
 import 'example_model.dart';
-import 'example_page_items.dart';
 
 class CodeSnippedButton extends StatelessWidget {
-  const CodeSnippedButton({super.key, required this.pageItem});
+  const CodeSnippedButton({
+    super.key,
+    required this.snippetUrl,
+  });
 
-  final PageItem pageItem;
+  final String snippetUrl;
 
   @override
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
-    if (pageItem.snippetUrl == null) {
-      return const SizedBox.shrink();
-    }
     return FloatingActionButton(
       onPressed: () => showDialog(
         barrierDismissible: true,
@@ -27,7 +27,7 @@ class CodeSnippedButton extends StatelessWidget {
           return ChangeNotifierProvider.value(
             value: model,
             child: _CodeDialog(
-              pageItem: pageItem,
+              snippetUrl: snippetUrl,
             ),
           );
         },
@@ -42,9 +42,11 @@ class CodeSnippedButton extends StatelessWidget {
 }
 
 class _CodeDialog extends StatefulWidget {
-  const _CodeDialog({required this.pageItem});
+  const _CodeDialog({
+    required this.snippetUrl,
+  });
 
-  final PageItem pageItem;
+  final String snippetUrl;
 
   @override
   State<_CodeDialog> createState() => _CodeDialogState();
@@ -56,11 +58,9 @@ class _CodeDialogState extends State<_CodeDialog> {
   @override
   void initState() {
     super.initState();
-    _snippet = widget.pageItem.snippetUrl?.isNotEmpty == false
-        ? Future.value('')
-        : context.read<ExampleModel>().getCodeSnippet(
-              widget.pageItem.snippetUrl!,
-            );
+    _snippet = context.read<ExampleModel>().getCodeSnippet(
+          widget.snippetUrl,
+        );
   }
 
   @override
@@ -70,7 +70,7 @@ class _CodeDialogState extends State<_CodeDialog> {
     return AlertDialog(
       titlePadding: EdgeInsets.zero,
       title: YaruDialogTitleBar(
-        title: Text(!model.appIsOnline ? 'Offline' : widget.pageItem.title),
+        title: Text(!model.appIsOnline ? 'Offline' : 'Source code'),
         leading: !model.appIsOnline
             ? null
             : Center(

@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
+import 'code_snippet_button.dart';
 import 'pages/autocomplete_page.dart';
 import 'pages/banner_page.dart';
 import 'pages/carousel_page.dart';
@@ -38,7 +39,7 @@ class PageItem {
     this.actionsBuilder,
     required this.pageBuilder,
     required this.iconBuilder,
-    this.snippetUrl,
+    this.floatingActionButtonBuilder,
     this.supportedLayouts = const {YaruMasterDetailPage, YaruNavigationPage},
   });
 
@@ -47,7 +48,7 @@ class PageItem {
   final WidgetBuilder? titleBuilder;
   final List<Widget> Function(BuildContext context)? actionsBuilder;
   final WidgetBuilder pageBuilder;
-  final String? snippetUrl;
+  final WidgetBuilder? floatingActionButtonBuilder;
   final Widget Function(BuildContext context, bool selected) iconBuilder;
   final Set<Type> supportedLayouts;
 }
@@ -55,15 +56,19 @@ class PageItem {
 final examplePageItems = <PageItem>[
   PageItem(
     title: 'YaruAutocomplete',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/autocomplete_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/autocomplete_page.dart',
+    ),
     pageBuilder: (context) => const AutocompletePage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.question),
   ),
   PageItem(
     title: 'YaruBanner',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/banner_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/banner_page.dart',
+    ),
     pageBuilder: (context) => const BannerPage(),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.image_filled)
@@ -71,15 +76,19 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruCarousel',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/carousel_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/carousel_page.dart',
+    ),
     pageBuilder: (_) => const CarouselPage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.refresh),
   ),
   PageItem(
     title: 'YaruCheckbox',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/checkbox_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/checkbox_page.dart',
+    ),
     pageBuilder: (context) => const CheckboxPage(),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.checkbox_checked_filled)
@@ -87,15 +96,19 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruChoiceChipBar',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/choice_chip_bar_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/choice_chip_bar_page.dart',
+    ),
     iconBuilder: (context, selected) => const Icon(YaruIcons.paper_clip),
     pageBuilder: (_) => const ChoiceChipBarPage(),
   ),
   PageItem(
     title: 'YaruClip',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/clip_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/clip_page.dart',
+    ),
     pageBuilder: (context) => const ClipPage(),
     iconBuilder: (context, selected) => Transform.scale(
       scaleX: -1,
@@ -106,36 +119,46 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruColorDisk',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/color_disk_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/color_disk_page.dart',
+    ),
     pageBuilder: (context) => const ColorDiskPage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
   ),
   PageItem(
     title: 'YaruDraggable',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/draffable_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/draffable_page.dart',
+    ),
     pageBuilder: (context) => const DraggablePage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.drag_handle),
   ),
   PageItem(
     title: 'YaruExpandable',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/expandable_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/expandable_page.dart',
+    ),
     iconBuilder: (context, selected) => const Icon(YaruIcons.pan_down),
     pageBuilder: (_) => const ExpandablePage(),
   ),
   PageItem(
     title: 'YaruExpansionPanel',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/expansion_panel_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/expansion_panel_page.dart',
+    ),
     iconBuilder: (context, selected) => const Icon(YaruIcons.ordered_list_new),
     pageBuilder: (_) => const ExpansionPanelPage(),
   ),
   PageItem(
     title: 'YaruIconButton',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/icon_button_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/icon_button_page.dart',
+    ),
     iconBuilder: (context, selected) => const Icon(YaruIcons.app_grid),
     pageBuilder: (_) => const IconButtonPage(),
   ),
@@ -149,8 +172,10 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruOptionButton',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/option_button_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/option_button_page.dart',
+    ),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.gear_filled)
         : const Icon(YaruIcons.gear),
@@ -158,23 +183,29 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruPageIndicator',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/page_indicator.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/page_indicator.dart',
+    ),
     iconBuilder: (context, selected) =>
         const Icon(YaruIcons.view_more_horizontal),
     pageBuilder: (_) => const PageIndicatorPage(),
   ),
   PageItem(
     title: 'YaruPopupMenuButton',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/popup_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/popup_page.dart',
+    ),
     iconBuilder: (context, selected) => const Icon(YaruIcons.stop),
     pageBuilder: (_) => const PopupPage(),
   ),
   PageItem(
     title: 'YaruProgressIndicator',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/progress_indicator_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/progress_indicator_page.dart',
+    ),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.download_filled)
         : const Icon(YaruIcons.download),
@@ -182,8 +213,10 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruRadio',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/radio_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/radio_page.dart',
+    ),
     pageBuilder: (context) => const RadioPage(),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.radiobox_checked_filled)
@@ -191,8 +224,10 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruSearchField',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/search_field_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/search_field_page.dart',
+    ),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.search_filled)
         : const Icon(YaruIcons.search),
@@ -200,8 +235,10 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruSection',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/section_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/section_page.dart',
+    ),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.window_filled)
         : const Icon(YaruIcons.window),
@@ -209,15 +246,19 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruSelectableContainer',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/selectable_container_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/selectable_container_page.dart',
+    ),
     iconBuilder: (context, selected) => const Icon(YaruIcons.selection),
     pageBuilder: (_) => const SelectableContainerPage(),
   ),
   PageItem(
     title: 'YaruSwitch',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/switch_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/switch_page.dart',
+    ),
     pageBuilder: (context) => const SwitchPage(),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.switchbox_checked_filled)
@@ -225,22 +266,28 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruTabBar',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/tab_bar_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/tab_bar_page.dart',
+    ),
     iconBuilder: (context, selected) => const Icon(YaruIcons.tab_new),
     pageBuilder: (_) => const TabBarPage(),
   ),
   PageItem(
     title: 'YaruTile',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/tile_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/tile_page.dart',
+    ),
     iconBuilder: (context, selected) => const Icon(YaruIcons.unordered_list),
     pageBuilder: (_) => const TilePage(),
   ),
   PageItem(
     title: 'YaruDialogTitleBar',
-    snippetUrl:
-        'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/dialog_page.dart',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/dialog_page.dart',
+    ),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.information_filled)
         : const Icon(YaruIcons.information),
@@ -255,9 +302,9 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruIcons',
-    leadingBuilder: createIconsPageAppBarLeading,
     titleBuilder: createIconsPageAppBarTitle,
     actionsBuilder: createIconsPageAppBarActions,
+    floatingActionButtonBuilder: createIconsPageFloatingActionButton,
     pageBuilder: (context) {
       return const IconsPage();
     },

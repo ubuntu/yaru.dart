@@ -72,15 +72,17 @@ class _IconsPageState extends State<IconsPage>
   }
 }
 
-Widget createIconsPageAppBarLeading(BuildContext context) {
+List<Widget> createIconsPageAppBarActions(BuildContext context) {
   final model = context.read<IconViewModel>();
   final searchActive =
       context.select<IconViewModel, bool>((m) => m.searchActive);
 
-  return YaruSearchButton(
-    searchActive: searchActive,
-    onPressed: model.toggleSearch,
-  );
+  return [
+    YaruSearchButton(
+      searchActive: searchActive,
+      onPressed: model.toggleSearch,
+    ),
+  ];
 }
 
 Widget createIconsPageAppBarTitle(BuildContext context) {
@@ -89,14 +91,17 @@ Widget createIconsPageAppBarTitle(BuildContext context) {
       context.select<IconViewModel, bool>((m) => m.searchActive);
 
   return searchActive
-      ? YaruSearchField(
-          onClear: model.toggleSearch,
-          onChanged: model.onSearchChanged,
+      ? SizedBox(
+          width: 250,
+          child: YaruSearchField(
+            onClear: model.toggleSearch,
+            onChanged: model.onSearchChanged,
+          ),
         )
       : const Text('YaruIcons');
 }
 
-List<Widget> createIconsPageAppBarActions(BuildContext context) {
+Widget createIconsPageFloatingActionButton(BuildContext context) {
   final model = context.read<IconViewModel>();
   final iconSize = context.select<IconViewModel, double>((m) => m.iconSize);
   final isMinIconSize =
@@ -105,30 +110,41 @@ List<Widget> createIconsPageAppBarActions(BuildContext context) {
       context.select<IconViewModel, bool>((m) => m.isMaxIconSize);
   final gridView = context.select<IconViewModel, bool>((m) => m.gridView);
 
-  return [
-    Tooltip(
-      message: gridView ? 'Toggle list view' : 'Toggle grid view',
-      child: IconButton(
-        onPressed: model.toggleGridView,
-        icon: gridView
-            ? const Icon(YaruIcons.unordered_list)
-            : const Icon(YaruIcons.app_grid),
+  return Material(
+    elevation: 2,
+    borderRadius: BorderRadius.circular(kYaruContainerRadius),
+    child: YaruBorderContainer(
+      padding: const EdgeInsets.all(10),
+      color: Theme.of(context).colorScheme.background,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Tooltip(
+            message: gridView ? 'Toggle list view' : 'Toggle grid view',
+            child: IconButton(
+              onPressed: model.toggleGridView,
+              icon: gridView
+                  ? const Icon(YaruIcons.unordered_list)
+                  : const Icon(YaruIcons.app_grid),
+            ),
+          ),
+          Tooltip(
+            message: 'Decrease icon size',
+            child: IconButton(
+              onPressed: isMinIconSize ? null : model.decreaseIconSize,
+              icon: const Icon(YaruIcons.minus),
+            ),
+          ),
+          Text('${iconSize.truncate()}px'),
+          Tooltip(
+            message: 'Increase icon size',
+            child: IconButton(
+              onPressed: isMaxIconSize ? null : model.increaseIconSize,
+              icon: const Icon(YaruIcons.plus),
+            ),
+          ),
+        ],
       ),
     ),
-    Tooltip(
-      message: 'Decrease icon size',
-      child: IconButton(
-        onPressed: isMinIconSize ? null : model.decreaseIconSize,
-        icon: const Icon(YaruIcons.minus),
-      ),
-    ),
-    Text('${iconSize.truncate()}px'),
-    Tooltip(
-      message: 'Increase icon size',
-      child: IconButton(
-        onPressed: isMaxIconSize ? null : model.increaseIconSize,
-        icon: const Icon(YaruIcons.plus),
-      ),
-    ),
-  ];
+  );
 }
