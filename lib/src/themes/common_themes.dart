@@ -398,12 +398,16 @@ Color _getSwitchTrackColor(Set<MaterialState> states, ColorScheme colorScheme) {
 
 // Checks & Radios
 
-Color _getCheckFillColor(Set<MaterialState> states, ColorScheme colorScheme) {
+Color _getToggleFillColor({
+  required Set<MaterialState> states,
+  required ColorScheme colorScheme,
+  required bool radio,
+}) {
   if (!states.contains(MaterialState.disabled)) {
     if (states.contains(MaterialState.selected)) {
       return colorScheme.primary;
     }
-    return colorScheme.onSurface.withOpacity(0.75);
+    return colorScheme.onSurface.withOpacity(radio ? 0.5 : 0.14);
   }
   if (states.contains(MaterialState.selected)) {
     return colorScheme.onSurface.withOpacity(0.2);
@@ -426,8 +430,16 @@ CheckboxThemeData _createCheckBoxTheme(ColorScheme colorScheme) {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(kCheckRadius),
     ),
+    side: BorderSide(
+      color: colorScheme.outline
+          .scale(lightness: colorScheme.isLight ? -0.6 : 0.5),
+    ),
     fillColor: MaterialStateProperty.resolveWith(
-      (states) => _getCheckFillColor(states, colorScheme),
+      (states) => _getToggleFillColor(
+        states: states,
+        colorScheme: colorScheme,
+        radio: false,
+      ),
     ),
     checkColor: MaterialStateProperty.resolveWith(
       (states) => _getCheckColor(states, colorScheme),
@@ -438,7 +450,11 @@ CheckboxThemeData _createCheckBoxTheme(ColorScheme colorScheme) {
 RadioThemeData _createRadioTheme(ColorScheme colorScheme) {
   return RadioThemeData(
     fillColor: MaterialStateProperty.resolveWith(
-      (states) => _getCheckFillColor(states, colorScheme),
+      (states) => _getToggleFillColor(
+        states: states,
+        colorScheme: colorScheme,
+        radio: true,
+      ),
     ),
   );
 }

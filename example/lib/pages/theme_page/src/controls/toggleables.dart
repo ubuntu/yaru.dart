@@ -2,8 +2,37 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class Toggleables extends StatelessWidget {
+class Toggleables extends StatefulWidget {
   const Toggleables({super.key});
+
+  @override
+  State<Toggleables> createState() => _ToggleablesState();
+}
+
+class _ToggleablesState extends State<Toggleables> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ScaffoldMessenger.of(context).showMaterialBanner(
+        MaterialBanner(
+          content: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Info: those are just Fallback toggleables. Please use YaruCheckBox and YaruRadio instead',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () =>
+                  ScaffoldMessenger.of(context).clearMaterialBanners(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
