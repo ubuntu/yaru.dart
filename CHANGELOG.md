@@ -1,5 +1,28 @@
 # Changelog
 
+## 4.0.0 (2024-03-05)
+
+## What's Changed
+* chore!: migrate yaru.dart and yaru_icons.dart into yaru_widgets.dart by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/839
+* chore!: rename yaru_widgets.dart to yaru.dart by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/852
+* fix: pin flutter version for actions on 3.16.5 for now by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/854
+* chore: Update golden images by @github-actions in https://github.com/ubuntu/yaru.dart/pull/855
+* feat(example): improve icon page by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/856
+* fix: make the icon page work in the github pages web page build by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/858
+* feat(YaruWindowControl)!: use material state properties for colors by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/859
+* chore(YaruTitleBar): backdrop effect is already implemented by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/861
+* chore: fix icons page title bar by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/864
+* fix(YaruSearchField): display clear button on _controller text change by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/866
+* chore: move actions to floating button by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/868
+* fix(IconButton): selected color needs to be different to onSurface by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/869
+* fix(theme): Material Check/Radio color by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/871
+* chore: Update golden images by @github-actions in https://github.com/ubuntu/yaru.dart/pull/872
+* fix: Styling issue with YaruPopupMenuButton by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/873
+* fix(YaruPopupMenuButton): Wrong background color by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/876
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v3.6.0...v4.0.0
+
 ## 3.6.0 (2024-02-17)
 
 ## What's Changed
