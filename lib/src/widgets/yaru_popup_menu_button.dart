@@ -68,7 +68,6 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         shape: shape,
         child: PopupMenuButton(
-          color: style?.foregroundColor?.resolve({}),
           iconColor: style?.foregroundColor?.resolve({}),
           enabled: enabled,
           elevation: elevation,
