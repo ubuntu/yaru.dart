@@ -72,7 +72,8 @@ class _ToggleablesState extends State<Toggleables> {
             ),
           ],
         ),
-        Row(
+        Wrap(
+          spacing: 10,
           children: [
             Switch(onChanged: (value) {}, value: true),
             Switch(onChanged: (value) {}, value: false),
@@ -80,7 +81,9 @@ class _ToggleablesState extends State<Toggleables> {
             const Switch(value: false, onChanged: null),
           ],
         ),
-        Row(
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
           children: [
             ToggleButtons(
               isSelected: const [true, false, false],
