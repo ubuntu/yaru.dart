@@ -314,7 +314,7 @@ final examplePageItems = <PageItem>[
         : const Icon(YaruIcons.placeholder_icon),
   ),
   PageItem(
-    title: 'Full color YaruIcons',
+    title: 'YaruIcons, FullColor',
     titleBuilder: (context) => const Text('Full Color Free Desktop Yaru Icons'),
     pageBuilder: (context) {
       return const FullColorIconsPage();

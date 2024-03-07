@@ -19,6 +19,8 @@ dependencies:
   provider: ^6.0.2
   safe_change_notifier: ^0.3.1
   ubuntu_service: ^0.2.4
+  universal_html: ^2.2.4
+  url_launcher: ^6.2.5
   yaru:
     path: ../
 
