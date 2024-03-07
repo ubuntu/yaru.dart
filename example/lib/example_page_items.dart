@@ -14,6 +14,7 @@ import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
 import 'pages/expansion_panel_page.dart';
+import 'pages/full_color_icons_page.dart';
 import 'pages/icon_button_page.dart';
 import 'pages/icons_page/icons_page.dart';
 import 'pages/navigation_page.dart';
@@ -311,6 +312,16 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.placeholder_icon_filled)
         : const Icon(YaruIcons.placeholder_icon),
+  ),
+  PageItem(
+    title: 'Full color YaruIcons',
+    titleBuilder: (context) => const Text('Full Color Free Desktop Yaru Icons'),
+    pageBuilder: (context) {
+      return const FullColorIconsPage();
+    },
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.ubuntu_logo_simple)
+        : const Icon(YaruIcons.ubuntu_logo_simple),
   ),
   PageItem(
     title: 'YaruTheme',
