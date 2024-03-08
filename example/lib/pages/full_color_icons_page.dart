@@ -228,6 +228,7 @@ const iconDirsToIconNames = <String, Set<String>>{
     'nvidia-settings',
     'org.gnome.Calls',
     'org.gnome.Software.Create',
+    'org.gnome.Software.Develop',
     'org.gnome.Software.Socialize',
     'org.gnome.Software',
     'org.gnome.SoundRecorder',
