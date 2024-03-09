@@ -31,16 +31,20 @@ class YaruInfoBadge extends StatelessWidget {
     this.padding,
     super.key,
     required this.yaruInfoType,
+    this.color,
+    this.style,
   });
 
-  final String title;
+  final Widget title;
   final EdgeInsets? padding;
   final YaruInfoType yaruInfoType;
+  final Color? color;
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final baseColor = yaruInfoType.getColor(context);
+    final baseColor = color ?? yaruInfoType.getColor(context);
 
     return YaruTranslucentContainer(
       color: baseColor,
@@ -48,7 +52,15 @@ class YaruInfoBadge extends StatelessWidget {
       child: Padding(
         padding: padding ??
             const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-        child: Text(title, style: theme.textTheme.bodySmall),
+        child: DefaultTextStyle(
+          style: style ??
+              theme.textTheme.bodySmall ??
+              const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.normal,
+              ),
+          child: title,
+        ),
       ),
     );
   }
@@ -66,19 +78,25 @@ class YaruInfoBox extends StatelessWidget {
         const BorderRadius.all(Radius.circular(kYaruContainerRadius)),
     this.icon,
     this.color,
+    this.titleTextStyle,
+    this.subTitleTextStyle,
+    this.trailing,
   }) : assert(
           (subtitle != null) ^ (child != null),
           'Either a subtitle or a child must be provided',
         );
 
-  final String? title;
-  final String? subtitle;
+  final Widget? title;
+  final Widget? subtitle;
   final Widget? child;
+  final Widget? trailing;
   final bool isThreeLine;
   final YaruInfoType yaruInfoType;
   final BorderRadiusGeometry borderRadius;
   final Icon? icon;
   final Color? color;
+  final TextStyle? titleTextStyle;
+  final TextStyle? subTitleTextStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -99,21 +117,35 @@ class YaruInfoBox extends StatelessWidget {
                 ),
                 child: icon ?? Icon(yaruInfoType.iconData),
               ),
+              trailing: trailing,
               iconColor: baseColor,
               title: title != null
-                  ? Text(
-                      title!,
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        height: 1.8,
-                      ),
+                  ? DefaultTextStyle(
+                      style: titleTextStyle ??
+                          theme.textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                            height: 1.8,
+                          ) ??
+                          TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                            height: 1.8,
+                            color: theme.colorScheme.onSurface,
+                          ),
+                      child: title!,
                     )
                   : null,
               subtitle: child ??
-                  Text(
-                    subtitle!,
-                    style: theme.textTheme.bodyMedium,
+                  DefaultTextStyle(
+                    style: subTitleTextStyle ??
+                        theme.textTheme.bodyMedium ??
+                        TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: theme.colorScheme.onSurface,
+                        ),
+                    child: subtitle!,
                   ),
               // contentPadding: kWizardTilePadding,
               isThreeLine: isThreeLine,

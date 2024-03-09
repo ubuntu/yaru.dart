@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:yaru/yaru.dart';
 
 class InfoPage extends StatefulWidget {
@@ -48,41 +49,80 @@ class _InfoPageState extends State<InfoPage> {
           ),
         ),
         Expanded(
-          child: ListView.separated(
+          child: ListView.builder(
             padding: const EdgeInsets.all(kYaruPagePadding),
             itemCount: YaruInfoType.values.length,
             itemBuilder: (context, index) {
               final info = YaruInfoType.values[index];
-              return YaruInfoBox(
-                icon: info == YaruInfoType.information && _idea
-                    ? const Icon(YaruIcons.light_bulb_on)
-                    : null,
-                color: info == YaruInfoType.information && _idea
-                    ? YaruColors.magenta
-                    : null,
-                yaruInfoType: info,
-                title: info.name.capitalize(),
-                subtitle: _lorem.characters.take(_take).toString(),
-              );
-            },
-            separatorBuilder: (context, index) {
-              final info = YaruInfoType.values[index];
-
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: kYaruPagePadding),
-                child: Row(
-                  children: [
-                    YaruInfoBadge(
-                      yaruInfoType: info,
-                      title: info.name.capitalize(),
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  YaruInfoBox(
+                    icon: info == YaruInfoType.information && _idea
+                        ? const Icon(YaruIcons.light_bulb_on)
+                        : null,
+                    color: info == YaruInfoType.information && _idea
+                        ? YaruColors.magenta
+                        : null,
+                    yaruInfoType: info,
+                    title: Text(info.name.capitalize()),
+                    subtitle: Text(_lorem.characters.take(_take).toString()),
+                    trailing: info == YaruInfoType.information && _idea
+                        ? const _CopyButton(
+                            text: _lorem,
+                          )
+                        : null,
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: kYaruPagePadding),
+                    child: Row(
+                      children: [
+                        YaruInfoBadge(
+                          yaruInfoType: info,
+                          title: Text(info.name.capitalize()),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               );
             },
           ),
         ),
       ],
+    );
+  }
+}
+
+class _CopyButton extends StatelessWidget {
+  const _CopyButton({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        minimumSize: const Size.square(kYaruTitleBarItemHeight),
+        maximumSize: const Size.square(kYaruTitleBarItemHeight),
+        fixedSize: const Size.square(kYaruTitleBarItemHeight),
+        side: BorderSide(
+          width: 1,
+          color: YaruColors.magenta.withOpacity(0.5),
+        ),
+        padding: EdgeInsets.zero,
+      ),
+      onPressed: () {
+        Clipboard.setData(ClipboardData(text: text));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Copied')),
+        );
+      },
+      child: const Icon(
+        YaruIcons.copy,
+        color: YaruColors.magenta,
+      ),
     );
   }
 }
