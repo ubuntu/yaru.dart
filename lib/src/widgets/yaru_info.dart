@@ -65,6 +65,7 @@ class YaruInfoBox extends StatelessWidget {
     this.borderRadius =
         const BorderRadius.all(Radius.circular(kYaruContainerRadius)),
     this.icon,
+    this.color,
   }) : assert(
           (subtitle != null) ^ (child != null),
           'Either a subtitle or a child must be provided',
@@ -77,11 +78,12 @@ class YaruInfoBox extends StatelessWidget {
   final YaruInfoType yaruInfoType;
   final BorderRadiusGeometry borderRadius;
   final Icon? icon;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final baseColor = yaruInfoType.getColor(context);
+    final baseColor = color ?? yaruInfoType.getColor(context);
 
     return Row(
       children: [
@@ -90,11 +92,13 @@ class YaruInfoBox extends StatelessWidget {
             color: baseColor,
             borderRadius: borderRadius,
             child: ListTile(
-              leading: icon ??
-                  Icon(
-                    yaruInfoType.iconData,
-                    size: 30,
-                  ),
+              leading: IconTheme(
+                data: IconTheme.of(context).copyWith(
+                  size: 30,
+                  color: baseColor,
+                ),
+                child: icon ?? Icon(yaruInfoType.iconData),
+              ),
               iconColor: baseColor,
               title: title != null
                   ? Text(
