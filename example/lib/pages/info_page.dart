@@ -10,6 +10,7 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPageState extends State<InfoPage> {
   int _take = 80;
+  bool _idea = false;
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +18,33 @@ class _InfoPageState extends State<InfoPage> {
       children: [
         Padding(
           padding: const EdgeInsets.all(kYaruPagePadding),
-          child: Slider(
-            value: _take.toDouble(),
-            min: 1,
-            max: _lorem.characters.length.toDouble(),
-            onChanged: (v) => setState(() => _take = v.toInt()),
+          child: Row(
+            children: [
+              IconButton(
+                tooltip: 'Custom icons and colors are possible',
+                isSelected: _idea,
+                onPressed: () => setState(() => _idea = !_idea),
+                icon: const Icon(
+                  YaruIcons.light_bulb_off,
+                  size: 30,
+                ),
+                selectedIcon: const Icon(
+                  YaruIcons.light_bulb_on,
+                  size: 30,
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Expanded(
+                child: Slider(
+                  value: _take.toDouble(),
+                  min: 1,
+                  max: _lorem.characters.length.toDouble(),
+                  onChanged: (v) => setState(() => _take = v.toInt()),
+                ),
+              ),
+            ],
           ),
         ),
         Expanded(
@@ -31,6 +54,12 @@ class _InfoPageState extends State<InfoPage> {
             itemBuilder: (context, index) {
               final info = YaruInfoType.values[index];
               return YaruInfoBox(
+                icon: info == YaruInfoType.information && _idea
+                    ? const Icon(YaruIcons.light_bulb_on)
+                    : null,
+                color: info == YaruInfoType.information && _idea
+                    ? YaruColors.magenta
+                    : null,
                 yaruInfoType: info,
                 title: info.name.capitalize(),
                 subtitle: _lorem.characters.take(_take).toString(),
