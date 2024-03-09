@@ -112,8 +112,8 @@ class YaruInfoBox extends StatelessWidget {
             child: ListTile(
               leading: IconTheme(
                 data: IconTheme.of(context).copyWith(
-                  size: 30,
-                  color: baseColor,
+                  size: icon?.size ?? 30,
+                  color: icon?.color ?? baseColor,
                 ),
                 child: icon ?? Icon(yaruInfoType.iconData),
               ),
