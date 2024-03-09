@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../colors.dart';
 
+// TODO: remove this for 5.0 release.
 @Deprecated('Use YaruColorSchemeExtension instead.')
 extension YaruThemeDataExtension on ThemeData {
   @Deprecated('Use ColorScheme.success instead.')
