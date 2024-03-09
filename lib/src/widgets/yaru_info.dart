@@ -42,9 +42,8 @@ class YaruInfoBadge extends StatelessWidget {
     final theme = Theme.of(context);
     final baseColor = yaruInfoType.getColor(context);
 
-    return YaruBorderContainer(
-      color: baseColor.withOpacity(0.1),
-      border: Border.all(color: baseColor),
+    return YaruTranslucentContainer(
+      color: baseColor,
       borderRadius: BorderRadius.circular(20),
       child: Padding(
         padding: padding ??
@@ -65,6 +64,7 @@ class YaruInfoBox extends StatelessWidget {
     required this.yaruInfoType,
     this.borderRadius =
         const BorderRadius.all(Radius.circular(kYaruContainerRadius)),
+    this.icon,
   }) : assert(
           (subtitle != null) ^ (child != null),
           'Either a subtitle or a child must be provided',
@@ -76,6 +76,7 @@ class YaruInfoBox extends StatelessWidget {
   final bool isThreeLine;
   final YaruInfoType yaruInfoType;
   final BorderRadiusGeometry borderRadius;
+  final Icon? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -85,12 +86,15 @@ class YaruInfoBox extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: YaruBorderContainer(
-            color: baseColor.withOpacity(0.1),
-            border: Border.all(color: baseColor),
+          child: YaruTranslucentContainer(
+            color: baseColor,
             borderRadius: borderRadius,
             child: ListTile(
-              leading: Icon(yaruInfoType.iconData, size: 30),
+              leading: icon ??
+                  Icon(
+                    yaruInfoType.iconData,
+                    size: 30,
+                  ),
               iconColor: baseColor,
               title: title != null
                   ? Text(

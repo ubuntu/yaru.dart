@@ -5,6 +5,7 @@ import 'package:yaru/yaru.dart';
 import 'code_snippet_button.dart';
 import 'pages/autocomplete_page.dart';
 import 'pages/banner_page.dart';
+import 'pages/border_container_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/checkbox_page.dart';
 import 'pages/choice_chip_bar_page.dart';
@@ -17,6 +18,7 @@ import 'pages/expansion_panel_page.dart';
 import 'pages/full_color_icons_page.dart';
 import 'pages/icon_button_page.dart';
 import 'pages/icons_page/icons_page.dart';
+import 'pages/info_page.dart';
 import 'pages/navigation_page.dart';
 import 'pages/option_button_page.dart';
 import 'pages/page_indicator.dart';
@@ -31,7 +33,6 @@ import 'pages/tab_bar_page.dart';
 import 'pages/theme_page/theme_page.dart';
 import 'pages/tile_page.dart';
 import 'pages/window_controls_page.dart';
-import 'pages/yaru_info_page.dart';
 
 class PageItem {
   const PageItem({
@@ -341,5 +342,22 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.information_filled)
         : const Icon(YaruIcons.information),
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/info_page.dart',
+    ),
+  ),
+  PageItem(
+    title: 'YaruBorderContainer',
+    pageBuilder: (context) {
+      return const BorderContainerPage();
+    },
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.cloud_filled)
+        : const Icon(YaruIcons.cloud),
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/border_container_page.dart',
+    ),
   ),
 ].sortedBy((page) => page.title);
