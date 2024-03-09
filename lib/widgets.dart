@@ -26,6 +26,7 @@ export 'src/widgets/yaru_expandable.dart';
 export 'src/widgets/yaru_expansion_panel.dart';
 export 'src/widgets/yaru_expansion_panel_list.dart';
 export 'src/widgets/yaru_icon_button.dart';
+export 'src/widgets/yaru_info.dart';
 export 'src/widgets/yaru_linear_progress_indicator.dart';
 export 'src/widgets/yaru_option_button.dart';
 export 'src/widgets/yaru_page_indicator.dart';
