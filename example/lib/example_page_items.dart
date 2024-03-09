@@ -31,6 +31,7 @@ import 'pages/tab_bar_page.dart';
 import 'pages/theme_page/theme_page.dart';
 import 'pages/tile_page.dart';
 import 'pages/window_controls_page.dart';
+import 'pages/yaru_info_page.dart';
 
 class PageItem {
   const PageItem({
@@ -331,5 +332,14 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.colors_filled)
         : const Icon(YaruIcons.colors),
+  ),
+  PageItem(
+    title: 'YaruInfo',
+    pageBuilder: (context) {
+      return const InfoPage();
+    },
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.information_filled)
+        : const Icon(YaruIcons.information),
   ),
 ].sortedBy((page) => page.title);
