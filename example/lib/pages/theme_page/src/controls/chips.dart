@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
 import '../constants.dart';
 
@@ -13,6 +14,7 @@ class Chips extends StatelessWidget {
       children: [
         const Chip(label: Text('Ch-ch-ch-Chip n Dale')),
         Chip(
+          deleteIcon: const Icon(YaruIcons.window_close),
           label: const Text('Rescue Rangers'),
           onDeleted: () {},
         ),

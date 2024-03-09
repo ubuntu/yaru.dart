@@ -64,10 +64,11 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
       child: Material(
-        color: Colors.transparent,
+        color: style?.backgroundColor?.resolve({}) ?? Colors.transparent,
         clipBehavior: Clip.antiAlias,
         shape: shape,
         child: PopupMenuButton(
+          iconColor: style?.foregroundColor?.resolve({}),
           enabled: enabled,
           elevation: elevation,
           position: position,
@@ -88,7 +89,8 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                 padding: padding,
                 child: DefaultTextStyle(
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: style?.foregroundColor?.resolve({}) ??
+                        Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w500,
                   ),
                   child: Row(
@@ -102,8 +104,9 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                       SizedBox(
                         height: kYaruTitleBarItemHeight,
                         child: icon ??
-                            const Icon(
+                            Icon(
                               YaruIcons.pan_down,
+                              color: style?.foregroundColor?.resolve({}),
                             ),
                       ),
                     ],
