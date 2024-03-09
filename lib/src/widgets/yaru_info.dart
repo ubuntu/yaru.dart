@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
 enum YaruInfoType {
-  note,
-  tip,
+  information,
+  success,
   important,
   warning,
-  caution;
+  danger;
 
   Color getColor(BuildContext context) => switch (this) {
-        note => YaruColors.of(context).link,
-        tip => YaruColors.of(context).success,
+        information => YaruColors.of(context).link,
+        success => YaruColors.of(context).success,
         important => YaruColors.purple,
         warning => YaruColors.of(context).warning,
-        caution => YaruColors.of(context).error,
+        danger => YaruColors.of(context).error,
       };
 
   IconData get iconData => switch (this) {
-        note => YaruIcons.information,
-        tip => YaruIcons.ok,
+        information => YaruIcons.information,
+        success => YaruIcons.ok,
         important => YaruIcons.important,
         warning => YaruIcons.warning,
-        caution => YaruIcons.error,
+        danger => YaruIcons.error,
       };
 }
 
