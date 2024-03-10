@@ -12,31 +12,31 @@ class Chips extends StatelessWidget {
       spacing: kWrapSpacing,
       runSpacing: kWrapSpacing,
       children: [
-        const Chip(label: Text('Ch-ch-ch-Chip n Dale')),
+        const Chip(label: Text('Chip')),
         Chip(
           deleteIcon: const Icon(YaruIcons.window_close),
-          label: const Text('Rescue Rangers'),
+          label: const Text('Deletable Chip'),
           onDeleted: () {},
         ),
         const ChoiceChip(
-          label: Text('Ch-ch-ch-Chip n Dale'),
+          label: Text('Disabled Chip'),
           selected: false,
           onSelected: null,
         ),
         ChoiceChip(
-          label: const Text("When there's danger"),
+          label: const Text('Selected ChoiceChip'),
           selected: true,
+          onSelected: (value) {},
+        ),
+        ChoiceChip(
+          label: const Text('ChoiceChip'),
+          selected: false,
           onSelected: (value) {},
         ),
         const ChoiceChip(
-          label: Text('No, no, it never fails'),
+          label: Text('Selected, disabled ChoiceChip'),
           selected: true,
           onSelected: null,
-        ),
-        ChoiceChip(
-          label: const Text('Once they re involved'),
-          selected: false,
-          onSelected: (value) {},
         ),
       ],
     );

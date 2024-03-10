@@ -1,38 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
 import '../constants.dart';
 
-class Toggleables extends StatefulWidget {
+class Toggleables extends StatelessWidget {
   const Toggleables({super.key});
-
-  @override
-  State<Toggleables> createState() => _ToggleablesState();
-}
-
-class _ToggleablesState extends State<Toggleables> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ScaffoldMessenger.of(context).showMaterialBanner(
-        MaterialBanner(
-          content: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Info: those are just Fallback toggleables. Please use YaruCheckBox and YaruRadio instead',
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () =>
-                  ScaffoldMessenger.of(context).clearMaterialBanners(),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +12,36 @@ class _ToggleablesState extends State<Toggleables> {
       spacing: 10,
       runSpacing: 10,
       children: [
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            const Text('ToggleButtons:'),
+            ToggleButtons(
+              isSelected: const [true, false, false],
+              onPressed: (v) {},
+              children: const [Text('Off'), Text('Off'), Text('Off')],
+            ),
+            ToggleButtons(
+              isSelected: const [true, false, false],
+              children: const [Text('Off'), Text('Off'), Text('Off')],
+            ),
+            const Divider(
+              height: 2 * kWrapSpacing,
+            ),
+          ],
+        ),
+        const Padding(
+          padding: EdgeInsets.only(
+            bottom: 10,
+          ),
+          child: YaruInfoBox(
+            yaruInfoType: YaruInfoType.information,
+            subtitle: Text(
+              'The following material Checks/Radios are only fallbacks, due to insufficient styling capabilities. Please use YaruCheckBox and YaruRadio instead.',
+            ),
+          ),
+        ),
         Row(
           children: [
             Checkbox(value: true, onChanged: (_) {}),
@@ -79,24 +81,6 @@ class _ToggleablesState extends State<Toggleables> {
             Switch(onChanged: (value) {}, value: false),
             const Switch(value: true, onChanged: null),
             const Switch(value: false, onChanged: null),
-          ],
-        ),
-        Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children: [
-            ToggleButtons(
-              isSelected: const [true, false, false],
-              onPressed: (v) {},
-              children: const [Text('Off'), Text('Off'), Text('Off')],
-            ),
-            const SizedBox(
-              width: kWrapSpacing,
-            ),
-            ToggleButtons(
-              isSelected: const [true, false, false],
-              children: const [Text('Off'), Text('Off'), Text('Off')],
-            ),
           ],
         ),
       ],

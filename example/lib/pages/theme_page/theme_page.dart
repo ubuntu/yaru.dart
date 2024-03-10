@@ -8,14 +8,11 @@ class ThemePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Builder(
-        builder: (context) => YaruTheme(
-          data: AppTheme.of(context),
-          child: const HomePage(),
-        ),
+    return Builder(
+      builder: (context) => YaruTheme(
+        data: AppTheme.of(context),
+        child: const HomePage(),
       ),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

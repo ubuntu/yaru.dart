@@ -326,7 +326,7 @@ final examplePageItems = <PageItem>[
         : const Icon(YaruIcons.ubuntu_logo_simple),
   ),
   PageItem(
-    title: 'YaruTheme',
+    title: 'Material Components, using Yaru Material Themes',
     pageBuilder: (context) {
       return const ThemePage();
     },
