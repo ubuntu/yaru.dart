@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.1.0 (2024-03-10)
+
+## What's Changed
+* chore(example): add a full color icons page for designers by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/877
+* chore(example): add missing icon by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/879
+* feat(YaruIcons): add light bulb on/off icons by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/881
+* chore: add todo comments on deprecated features by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/883
+* feat: add YaruInfoBadge, YaruInfoBox, YaruTranslucentBorderContainer by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/880
+* chore(example): improve wording, placement and info by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/884
+* fix(YaruMasterDetailPage): has too many nested Scaffolds by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/885
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v4.0.0...v4.1.0
+
 ## 4.0.0 (2024-03-05)
 
 ## What's Changed
