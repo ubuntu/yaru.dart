@@ -11,7 +11,7 @@ import '../constants.dart';
 import '../utils.dart';
 import 'color_disk.dart';
 
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+final GlobalKey<ScaffoldState> themePageScaffoldKey = GlobalKey();
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -62,7 +62,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: themePageScaffoldKey,
       drawer: _Drawer(
         selectedIndex: _selectedIndex,
         onSelected: (index) {
@@ -75,7 +75,7 @@ class HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         leading: Center(
           child: IconButton(
-            onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+            onPressed: () => themePageScaffoldKey.currentState?.openDrawer(),
             icon: const Icon(YaruIcons.menu),
           ),
         ),
