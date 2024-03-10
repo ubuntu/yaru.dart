@@ -214,8 +214,8 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
     final breakpoint = widget.breakpoint ??
         YaruMasterDetailTheme.of(context).breakpoint ??
         YaruMasterDetailThemeData.fallback(context).breakpoint!;
-    return Scaffold(
-      body: widget.length == 0 || widget.controller?.length == 0
+    return Material(
+      child: widget.length == 0 || widget.controller?.length == 0
           ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
           : _YaruMasterDetailLayoutBuilder(
               breakpoint: breakpoint,
