@@ -11,6 +11,7 @@ import 'pages/checkbox_page.dart';
 import 'pages/choice_chip_bar_page.dart';
 import 'pages/clip_page.dart';
 import 'pages/color_disk_page.dart';
+import 'pages/date_time_entry_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
 import 'pages/expandable_page.dart';
@@ -128,6 +129,15 @@ final examplePageItems = <PageItem>[
     ),
     pageBuilder: (context) => const ColorDiskPage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.color_select),
+  ),
+  PageItem(
+    title: 'YaruDateTimeEntry',
+    snippetUrl:
+        'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/date_time_entry_page.dart',
+    pageBuilder: (context) => const DateTimePage(),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.calendar_month_filled)
+        : const Icon(YaruIcons.calendar_month),
   ),
   PageItem(
     title: 'YaruDraggable',
