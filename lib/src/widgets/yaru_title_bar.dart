@@ -228,9 +228,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     final closeButton = YaruWindowControl(
       platform: windowControlPlatform,
-      iconColor: windowControlPlatform == YaruWindowControlPlatform.windows
-          ? null
-          : MaterialStatePropertyAll(foregroundColor),
+      iconColor: MaterialStatePropertyAll(foregroundColor),
       type: YaruWindowControlType.close,
       onTap: onClose != null ? () => onClose!(context) : null,
     );
