@@ -257,9 +257,9 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   }
 
   Color _getWindowsIconColor(ColorScheme colorScheme) {
-    var color = widget.iconColor?.resolve(_states) ?? colorScheme.onSurface;
+    final color = widget.iconColor?.resolve(_states) ?? colorScheme.onSurface;
     if (interactive && _hovered && widget.type == YaruWindowControlType.close) {
-      color = Colors.white;
+      return Colors.white;
     }
     return color;
   }
