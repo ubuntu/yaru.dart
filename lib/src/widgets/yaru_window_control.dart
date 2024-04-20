@@ -244,15 +244,24 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   }
 
   Color _getIconColor(ColorScheme colorScheme) {
-    final iconColor = widget.iconColor?.resolve(_states);
-    if (iconColor != null) return iconColor;
+    final color = switch (style) {
+      YaruWindowControlPlatform.yaru => _getYaruIconColor(colorScheme),
+      YaruWindowControlPlatform.windows => _getWindowsIconColor(colorScheme)
+    };
 
-    switch (style) {
-      case YaruWindowControlPlatform.yaru:
-        return _getYaruIconColor(colorScheme);
-      case YaruWindowControlPlatform.windows:
-        return _getWindowsIconColor(colorScheme);
+    return color.withOpacity(interactive ? 1.0 : 0.5);
+  }
+
+  Color _getYaruIconColor(ColorScheme colorScheme) {
+    return widget.iconColor?.resolve(_states) ?? colorScheme.onSurface;
+  }
+
+  Color _getWindowsIconColor(ColorScheme colorScheme) {
+    final color = widget.iconColor?.resolve(_states) ?? colorScheme.onSurface;
+    if (interactive && _hovered && widget.type == YaruWindowControlType.close) {
+      return Colors.white;
     }
+    return color;
   }
 
   double get _iconSize {
@@ -262,18 +271,6 @@ class _YaruWindowControlState extends State<YaruWindowControl>
       case YaruWindowControlPlatform.windows:
         return 10.0;
     }
-  }
-
-  Color _getYaruIconColor(ColorScheme colorScheme) {
-    return colorScheme.onSurface.withOpacity(interactive ? 1.0 : 0.5);
-  }
-
-  Color _getWindowsIconColor(ColorScheme colorScheme) {
-    if (_hovered && interactive && widget.type == YaruWindowControlType.close) {
-      return widget.iconColor?.resolve(_states) ?? Colors.white;
-    }
-
-    return colorScheme.onSurface.withOpacity(interactive ? 1.0 : 0.5);
   }
 
   Widget _buildBoxDecoration({
