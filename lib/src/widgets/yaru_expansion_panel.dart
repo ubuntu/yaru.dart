@@ -142,15 +142,12 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
       isExpanded: _expandedStore[index],
       onChange: widget.collapseOnExpand
           ? (_) {
-              setState(() {
-                _expandedStore[index] = !_expandedStore[index];
-
-                for (var n = 0; n < _expandedStore.length; n++) {
-                  if (n != index && _expandedStore[index] == true) {
-                    _expandedStore[n] = false;
-                  }
+              _expandedStore[index] = !_expandedStore[index];
+              for (var n = 0; n < _expandedStore.length; n++) {
+                if (n != index && _expandedStore[index]) {
+                  setState(() => _expandedStore[n] = false);
                 }
-              });
+              }
             }
           : null,
       header: Padding(
