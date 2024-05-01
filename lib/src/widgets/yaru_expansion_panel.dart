@@ -25,7 +25,7 @@ class YaruExpansionPanel extends StatefulWidget {
     this.expandIcon,
     this.shrinkWrap = false,
     this.scrollPhysics = const ClampingScrollPhysics(),
-    this.collapsOnExpand = true,
+    this.collapseOnExpand = true,
   }) : assert(headers.length == children.length);
 
   /// A list of [Widget]s
@@ -81,7 +81,7 @@ class YaruExpansionPanel extends StatefulWidget {
 
   /// Defines if all other [YaruExpandable]s should collapse
   /// if one expands.
-  final bool collapsOnExpand;
+  final bool collapseOnExpand;
 
   @override
   State<YaruExpansionPanel> createState() => _YaruExpansionPanelState();
@@ -140,7 +140,7 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
       expandIcon: widget.expandIcon,
       expandIconPadding: widget.expandIconPadding,
       isExpanded: _expandedStore[index],
-      onChange: widget.collapsOnExpand
+      onChange: widget.collapseOnExpand
           ? (_) {
               setState(() {
                 _expandedStore[index] = !_expandedStore[index];
