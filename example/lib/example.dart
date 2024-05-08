@@ -41,9 +41,12 @@ class _ExampleState extends State<Example> {
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
 
-    return model.compactMode
-        ? _CompactPage(pageItems: examplePageItems)
-        : _MasterDetailPage(pageItems: examplePageItems);
+    return Directionality(
+      textDirection: !model.rtl ? TextDirection.ltr : TextDirection.rtl,
+      child: model.compactMode
+          ? _CompactPage(pageItems: examplePageItems)
+          : _MasterDetailPage(pageItems: examplePageItems),
+    );
   }
 }
 
@@ -206,6 +209,13 @@ Future<void> showSettingsDialog(BuildContext context) {
                   trailing: YaruSwitch(
                     value: model.compactMode,
                     onChanged: (v) => model.compactMode = v,
+                  ),
+                ),
+                YaruTile(
+                  title: const Text('RTL mode'),
+                  trailing: YaruSwitch(
+                    value: model.rtl,
+                    onChanged: (v) => model.rtl = v,
                   ),
                 ),
               ],
