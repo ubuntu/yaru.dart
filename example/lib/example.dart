@@ -63,10 +63,10 @@ class _MasterDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruMasterDetailPage(
-      layoutDelegate: const YaruMasterResizablePaneDelegate(
-        initialPaneWidth: 280,
-        minPageWidth: kYaruMasterDetailBreakpoint / 2,
-        minPaneWidth: 175,
+      paneLayoutDelegate: const YaruResizablePaneDelegate(
+        initialPaneSize: 280,
+        minPageSize: kYaruMasterDetailBreakpoint / 2,
+        minPaneSize: 175,
       ),
       length: pageItems.length,
       tileBuilder: (context, index, selected, availableWidth) => YaruMasterTile(

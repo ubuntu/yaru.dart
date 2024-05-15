@@ -1,5 +1,4 @@
 export 'src/widgets/master_detail/yaru_detail_page.dart';
-export 'src/widgets/master_detail/yaru_master_detail_layout_delegate.dart';
 export 'src/widgets/master_detail/yaru_master_detail_page.dart';
 export 'src/widgets/master_detail/yaru_master_detail_theme.dart';
 export 'src/widgets/master_detail/yaru_master_tile.dart';
@@ -31,6 +30,8 @@ export 'src/widgets/yaru_option_button.dart';
 export 'src/widgets/yaru_page_indicator.dart';
 export 'src/widgets/yaru_page_indicator_layout_delegate.dart';
 export 'src/widgets/yaru_page_indicator_theme.dart';
+export 'src/widgets/yaru_paned_view.dart';
+export 'src/widgets/yaru_paned_view_layout_delegate.dart';
 export 'src/widgets/yaru_popup_menu_button.dart';
 export 'src/widgets/yaru_radio.dart';
 export 'src/widgets/yaru_radio_button.dart';
