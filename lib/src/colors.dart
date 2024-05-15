@@ -68,14 +68,6 @@ class YaruColors {
   /// Error
   final Color error;
 
-  // TODO: remove this for 5.0 release.
-  @Deprecated('Use YaruColors.dark.error instead.')
-  static const Color errorLight = Color(0xFFE86581); // YaruColors.red[300]
-
-  // TODO: remove this for 5.0 release.
-  @Deprecated('Use YaruColors.light.error instead.')
-  static const Color errorDark = Color(0xFFB52A4A); // YaruColors.red[700]
-
   /// Warning
   final Color warning;
 
@@ -102,14 +94,6 @@ class YaruColors {
 
   /// Link
   final Color link;
-
-  // TODO: remove this for 5.0 release.
-  @Deprecated('Use YaruColors.dark.link instead.')
-  static const Color linkLight = Color(0xFF0094FF); // YaruColors.blue[500]
-
-  // TODO: remove this for 5.0 release.
-  @Deprecated('Use YaruColors.light.link instead.')
-  static const Color linkDark = Color(0xFF0073E5); // YaruColors.blue[700]
 
   /// Olive
   static const Color olive = Color(0xFF4B8501);

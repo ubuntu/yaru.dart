@@ -2,16 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../colors.dart';
 
-// TODO: remove this for 5.0 release.
-@Deprecated('Use YaruColorSchemeExtension instead.')
-extension YaruThemeDataExtension on ThemeData {
-  @Deprecated('Use ColorScheme.success instead.')
-  Color get successColor => colorScheme.success;
-
-  @Deprecated('Use ColorScheme.warning instead.')
-  Color get warningColor => colorScheme.warning;
-}
-
 /// Yaru-specific color scheme extensions.
 extension YaruColorSchemeExtension on ColorScheme {
   /// Whether the brightness is dark.
