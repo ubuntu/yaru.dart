@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/foundation.dart' show YaruPageController;
+import 'package:yaru/src/widgets/yaru_paned_view_layout_delegate.dart';
 
 import 'yaru_detail_page.dart';
 import 'yaru_landscape_layout.dart';
-import 'yaru_master_detail_layout_delegate.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_tile.dart';
 import 'yaru_portrait_layout.dart';
@@ -22,7 +22,7 @@ typedef YaruAppBarBuilder = PreferredSizeWidget? Function(BuildContext context);
 /// A responsive master-detail page.
 ///
 /// [YaruMasterDetailPage] automatically switches between portrait and landscape
-/// mode depending on [layoutDelegate].
+/// mode depending on [breakpoint].
 ///
 /// ```dart
 /// YaruMasterDetailPage(
@@ -56,8 +56,10 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.tileBuilder,
     required this.pageBuilder,
     this.emptyBuilder,
-    this.layoutDelegate =
-        const YaruMasterFixedPaneDelegate(paneWidth: _kDefaultPaneWidth),
+    this.paneLayoutDelegate = const YaruFixedPaneDelegate(
+      paneSize: _kDefaultPaneWidth,
+      paneSide: YaruPaneSide.start,
+    ),
     this.breakpoint,
     this.appBar,
     this.appBarBuilder,
@@ -91,8 +93,9 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// A builder that is called if there are no pages to display.
   final WidgetBuilder? emptyBuilder;
 
-  /// Controls the width and resizing capacity of the left pane.
-  final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
+  /// Controls the width, side and resizing capacity of the pane.
+  /// [YaruPanedViewLayoutDelegate.paneSide] need to be horizontal (see: [YaruPaneSide.isHorizontal]).
+  final YaruPanedViewLayoutDelegate paneLayoutDelegate;
 
   /// The breakpoint at which `YaruMasterDetailPage` switches between portrait
   /// and landscape layouts.
@@ -176,7 +179,6 @@ class YaruMasterDetailPage extends StatefulWidget {
 }
 
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
-  double? _previousPaneWidth;
   late YaruPageController _controller;
   late final GlobalKey<NavigatorState> _navigatorKey;
 
@@ -241,9 +243,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
                 tileBuilder: widget.tileBuilder,
                 pageBuilder: widget.pageBuilder,
                 onSelected: widget.onSelected,
-                layoutDelegate: widget.layoutDelegate,
-                previousPaneWidth: _previousPaneWidth,
-                onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
+                paneLayoutDelegate: widget.paneLayoutDelegate,
                 appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
                 bottomBar: widget.bottomBar,
                 controller: _controller,

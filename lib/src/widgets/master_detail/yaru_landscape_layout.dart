@@ -1,14 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
-import 'package:yaru/foundation.dart' show YaruPageController;
-import 'package:yaru/widgets.dart'
-    show YaruTitleBarTheme, YaruTitleBarThemeData, YaruTitleBarStyle;
+import 'package:yaru/yaru.dart';
 
-import 'yaru_master_detail_layout_delegate.dart';
-import 'yaru_master_detail_page.dart';
-import 'yaru_master_detail_theme.dart';
 import 'yaru_master_list_view.dart';
 
 class YaruLandscapeLayout extends StatefulWidget {
@@ -22,9 +16,7 @@ class YaruLandscapeLayout extends StatefulWidget {
     required this.tileBuilder,
     required this.pageBuilder,
     this.onSelected,
-    required this.layoutDelegate,
-    this.previousPaneWidth,
-    this.onLeftPaneWidthChange,
+    required this.paneLayoutDelegate,
     this.appBar,
     this.bottomBar,
     required this.controller,
@@ -38,9 +30,7 @@ class YaruLandscapeLayout extends StatefulWidget {
   final YaruMasterTileBuilder tileBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int>? onSelected;
-  final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
-  final double? previousPaneWidth;
-  final ValueChanged<double>? onLeftPaneWidthChange;
+  final YaruPanedViewLayoutDelegate paneLayoutDelegate;
   final Widget? appBar;
   final Widget? bottomBar;
   final YaruPageController controller;
@@ -49,23 +39,14 @@ class YaruLandscapeLayout extends StatefulWidget {
   State<YaruLandscapeLayout> createState() => _YaruLandscapeLayoutState();
 }
 
-const _kLeftPaneResizingRegionWidth = 4.0;
-const _kLeftPaneResizingRegionAnimationDuration = Duration(milliseconds: 250);
-
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
-
   double? _paneWidth;
-  double? _initialPaneWidth;
-  double _paneWidthMove = 0.0;
-
-  bool _isDragging = false;
-  bool _isHovering = false;
 
   @override
   void initState() {
     super.initState();
-    _paneWidth = widget.previousPaneWidth;
+    assert(widget.paneLayoutDelegate.paneSide.isHorizontal);
     widget.controller.addListener(_controllerCallback);
     _selectedIndex = max(widget.controller.index, 0);
   }
@@ -98,113 +79,55 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     widget.navigatorKey.currentState?.popUntil((route) => route.isFirst);
   }
 
-  void updatePaneWidth({
-    required double availableWidth,
-    required double? candidatePaneWidth,
-  }) {
-    final oldPaneWidth = _paneWidth;
-
-    _paneWidth = widget.layoutDelegate.calculatePaneWidth(
-      availableWidth: availableWidth,
-      candidatePaneWidth: candidatePaneWidth,
-    );
-
-    if (_paneWidth != oldPaneWidth) {
-      widget.onLeftPaneWidthChange?.call(_paneWidth!);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
-    return _maybeBuildGlobalMouseRegion(
-      LayoutBuilder(
-        builder: (context, boxConstraints) {
-          // Avoid left pane to overflow when resizing the window
-          updatePaneWidth(
-            availableWidth: boxConstraints.maxWidth,
-            candidatePaneWidth: _paneWidth,
-          );
-
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildLeftPane(theme.sideBarColor),
-              if (theme.includeSeparator != false) _buildVerticalSeparator(),
-              Expanded(
-                child: widget.layoutDelegate.allowPaneResizing
-                    ? Stack(
-                        children: [
-                          _buildPage(context),
-                          _buildLeftPaneResizer(context, boxConstraints),
-                        ],
-                      )
-                    : _buildPage(context),
-              ),
-            ],
-          );
-        },
-      ),
+    return YaruPanedView(
+      pane: _buildLeftPane(theme),
+      page: _buildPage(context),
+      layoutDelegate: widget.paneLayoutDelegate,
+      includeSeparator: theme.includeSeparator ?? true,
+      onPaneSizeChange: (size) => _paneWidth = size,
     );
   }
 
-  Widget _maybeBuildGlobalMouseRegion(Widget child) {
-    if (widget.layoutDelegate.allowPaneResizing) {
-      return MouseRegion(
-        cursor: _isHovering || _isDragging
-            ? SystemMouseCursors.resizeColumn
-            : MouseCursor.defer,
-        child: child,
-      );
-    }
-
-    return child;
-  }
-
-  Widget _buildLeftPane(Color? color) {
-    return SizedBox(
-      width: _paneWidth,
-      child: YaruTitleBarTheme(
-        data: const YaruTitleBarThemeData(
-          style: YaruTitleBarStyle.undecorated,
-        ),
-        child: Column(
-          children: [
-            if (widget.appBar != null)
-              SizedBox(
-                height: kYaruTitleBarHeight,
-                child: widget.appBar!,
-              ),
-            Expanded(
-              child: Container(
-                color: color,
-                child: YaruMasterListView(
-                  length: widget.controller.length,
-                  selectedIndex: _selectedIndex,
-                  onTap: _onTap,
-                  builder: widget.tileBuilder,
-                  availableWidth: _paneWidth!,
-                  startUndershoot: widget.appBar != null,
-                  endUndershoot: widget.bottomBar != null,
+  Widget _buildLeftPane(YaruMasterDetailThemeData theme) {
+    return Builder(
+      builder: (context) {
+        return YaruTitleBarTheme(
+          data: const YaruTitleBarThemeData(
+            style: YaruTitleBarStyle.undecorated,
+          ),
+          child: Column(
+            children: [
+              if (widget.appBar != null)
+                SizedBox(
+                  height: kYaruTitleBarHeight,
+                  child: widget.appBar!,
+                ),
+              Expanded(
+                child: Container(
+                  color: theme.sideBarColor,
+                  child: YaruMasterListView(
+                    length: widget.controller.length,
+                    selectedIndex: _selectedIndex,
+                    onTap: _onTap,
+                    builder: widget.tileBuilder,
+                    availableWidth: _paneWidth!,
+                    startUndershoot: widget.appBar != null,
+                    endUndershoot: widget.bottomBar != null,
+                  ),
                 ),
               ),
-            ),
-            if (widget.bottomBar != null)
-              Material(
-                color: color,
-                child: widget.bottomBar,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildVerticalSeparator() {
-    return const VerticalDivider(
-      thickness: 1,
-      width: 1,
+              if (widget.bottomBar != null)
+                Material(
+                  color: theme.sideBarColor,
+                  child: widget.bottomBar,
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -233,53 +156,6 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           ],
           onPopPage: (route, result) => route.didPop(result),
           observers: [...widget.navigatorObservers, HeroController()],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLeftPaneResizer(
-    BuildContext context,
-    BoxConstraints boxConstraints,
-  ) {
-    final isRtl = Directionality.of(context) == TextDirection.rtl;
-
-    return Positioned(
-      width: _kLeftPaneResizingRegionWidth,
-      top: 0,
-      bottom: 0,
-      left: isRtl ? null : 0,
-      right: isRtl ? 0 : null,
-      child: AnimatedContainer(
-        duration: _kLeftPaneResizingRegionAnimationDuration,
-        color: _isHovering || _isDragging
-            ? Theme.of(context).dividerColor
-            : Colors.transparent,
-        child: MouseRegion(
-          cursor: SystemMouseCursors.resizeColumn,
-          onEnter: (event) => setState(() {
-            _isHovering = true;
-          }),
-          onExit: (event) => setState(() {
-            _isHovering = false;
-          }),
-          child: GestureDetector(
-            onPanStart: (details) => setState(() {
-              _isDragging = true;
-              _initialPaneWidth = _paneWidth;
-            }),
-            onPanUpdate: (details) => setState(() {
-              _paneWidthMove += isRtl ? -details.delta.dx : details.delta.dx;
-              updatePaneWidth(
-                availableWidth: boxConstraints.maxWidth,
-                candidatePaneWidth: _initialPaneWidth! + _paneWidthMove,
-              );
-            }),
-            onPanEnd: (details) => setState(() {
-              _isDragging = false;
-              _paneWidthMove = 0.0;
-            }),
-          ),
         ),
       ),
     );

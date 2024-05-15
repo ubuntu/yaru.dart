@@ -22,6 +22,7 @@ import 'pages/info_page.dart';
 import 'pages/navigation_page.dart';
 import 'pages/option_button_page.dart';
 import 'pages/page_indicator.dart';
+import 'pages/paned_view.dart';
 import 'pages/popup_page.dart';
 import 'pages/progress_indicator_page.dart';
 import 'pages/radio_page.dart';
@@ -193,6 +194,14 @@ final examplePageItems = <PageItem>[
     iconBuilder: (context, selected) =>
         const Icon(YaruIcons.view_more_horizontal),
     pageBuilder: (_) => const PageIndicatorPage(),
+  ),
+  PageItem(
+    title: 'YaruPanedView',
+    floatingActionButtonBuilder: null,
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.sidebar_filled)
+        : const Icon(YaruIcons.sidebar),
+    pageBuilder: (_) => const PanedPage(),
   ),
   PageItem(
     title: 'YaruPopupMenuButton',
