@@ -140,7 +140,7 @@ class _YaruAutocompleteOptions<T extends Object> extends StatelessWidget {
         width: optionsWidth,
         clipBehavior: Clip.antiAlias,
         color: colorScheme.brightness == Brightness.dark
-            ? colorScheme.surfaceVariant
+            ? colorScheme.surfaceContainerHighest
             : colorScheme.surface,
         constraints: BoxConstraints(maxHeight: maxOptionsHeight),
         child: ListView.builder(

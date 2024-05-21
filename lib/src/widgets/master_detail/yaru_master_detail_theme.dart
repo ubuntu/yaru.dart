@@ -31,7 +31,7 @@ class YaruMasterDetailThemeData
       landscapeTransitions: YaruPageTransitionsTheme.vertical,
       includeSeparator: true,
       sideBarColor: light
-          ? materialTheme.colorScheme.background.scale(lightness: -0.029)
+          ? materialTheme.colorScheme.surface.scale(lightness: -0.029)
           : materialTheme.colorScheme.surface,
     );
   }

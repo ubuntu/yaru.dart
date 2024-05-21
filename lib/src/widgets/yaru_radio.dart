@@ -141,7 +141,7 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
   final MouseCursor? mouseCursor;
 
   @override
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -195,12 +195,12 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
     final painter = _YaruRadioPainter();
     fillPainterDefaults(painter);
 
-    const unselectedState = <MaterialState>{};
-    const selectedState = {MaterialState.selected};
-    const disabledState = {MaterialState.disabled};
+    const unselectedState = <WidgetState>{};
+    const selectedState = {WidgetState.selected};
+    const disabledState = {WidgetState.disabled};
     const selectedDisabledState = {
-      MaterialState.selected,
-      MaterialState.disabled,
+      WidgetState.selected,
+      WidgetState.disabled,
     };
 
     // Normal colors
@@ -231,10 +231,10 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
 
     // Indicator colors
     final hoverIndicatorColor =
-        radioTheme.indicatorColor?.resolve({MaterialState.hovered}) ??
+        radioTheme.indicatorColor?.resolve({WidgetState.hovered}) ??
             painter.hoverIndicatorColor;
     final focusIndicatorColor =
-        radioTheme.indicatorColor?.resolve({MaterialState.focused}) ??
+        radioTheme.indicatorColor?.resolve({WidgetState.focused}) ??
             painter.focusIndicatorColor;
 
     return buildToggleable(
@@ -251,7 +251,7 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
         ..focusIndicatorColor = focusIndicatorColor,
       mouseCursor: widget.mouseCursor ??
           radioTheme.mouseCursor
-              ?.resolve({if (!widget.interactive) MaterialState.disabled}),
+              ?.resolve({if (!widget.interactive) WidgetState.disabled}),
     );
   }
 }

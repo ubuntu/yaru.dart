@@ -57,8 +57,8 @@ void main() {
 
       await tester.pumpScaffold(
         YaruOptionButton(
-          autofocus: variant.hasState(MaterialState.focused),
-          onPressed: variant.hasState(MaterialState.disabled) ? null : () {},
+          autofocus: variant.hasState(WidgetState.focused),
+          onPressed: variant.hasState(WidgetState.disabled) ? null : () {},
           child: const Icon(YaruIcons.gear),
         ),
         themeMode: variant.themeMode,
@@ -66,10 +66,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruOptionButton));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruOptionButton));
         await tester.pumpAndSettle();
       }
@@ -85,9 +85,9 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('normal', <MaterialState>{}),
-  ...goldenThemeVariants('disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('focused', {MaterialState.focused}),
-  ...goldenThemeVariants('hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('pressed', {MaterialState.pressed}),
+  ...goldenThemeVariants('normal', <WidgetState>{}),
+  ...goldenThemeVariants('disabled', {WidgetState.disabled}),
+  ...goldenThemeVariants('focused', {WidgetState.focused}),
+  ...goldenThemeVariants('hovered', {WidgetState.hovered}),
+  ...goldenThemeVariants('pressed', {WidgetState.pressed}),
 });

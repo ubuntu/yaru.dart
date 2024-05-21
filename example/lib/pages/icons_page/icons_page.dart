@@ -115,7 +115,7 @@ Widget createIconsPageFloatingActionButton(BuildContext context) {
     borderRadius: BorderRadius.circular(kYaruContainerRadius),
     child: YaruBorderContainer(
       padding: const EdgeInsets.all(10),
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.surface,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

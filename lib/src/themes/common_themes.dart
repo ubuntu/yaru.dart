@@ -143,16 +143,16 @@ const _tooltipThemeData = TooltipThemeData(
 
 // Buttons
 
-MaterialStateColor _createCommonButtonIconColor({
+WidgetStateColor _createCommonButtonIconColor({
   required ColorScheme colorScheme,
   required Color disabledColor,
 }) =>
-    MaterialStateColor.resolveWith(
+    WidgetStateColor.resolveWith(
       (states) {
-        if (states.contains(MaterialState.disabled)) {
+        if (states.contains(WidgetState.disabled)) {
           return disabledColor;
         }
-        return states.contains(MaterialState.selected)
+        return states.contains(WidgetState.selected)
             ? colorScheme.primary
             : colorScheme.onSurface;
       },
@@ -160,8 +160,8 @@ MaterialStateColor _createCommonButtonIconColor({
 
 ButtonStyle _createCommonButtonStyle() {
   return const ButtonStyle(
-    padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
-    iconSize: MaterialStatePropertyAll(kCompactButtonIconSize),
+    padding: WidgetStatePropertyAll(EdgeInsets.all(16)),
+    iconSize: WidgetStatePropertyAll(kCompactButtonIconSize),
   );
 }
 
@@ -267,7 +267,7 @@ IconButtonThemeData _createIconButtonTheme({
       padding: EdgeInsets.zero,
       foregroundColor: colorScheme.onSurface,
       highlightColor: colorScheme.onSurface.withOpacity(0.05),
-      surfaceTintColor: colorScheme.background,
+      surfaceTintColor: colorScheme.surface,
       fixedSize: const Size(kCompactButtonHeight, kCompactButtonHeight),
       minimumSize: const Size(kCompactButtonHeight, kCompactButtonHeight),
       maximumSize: const Size(kCompactButtonHeight, kCompactButtonHeight),
@@ -292,14 +292,14 @@ MenuButtonThemeData _createMenuItemTheme(
     style: ButtonStyle(
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       alignment: Alignment.center,
-      textStyle: MaterialStatePropertyAll(textTheme.bodyMedium),
-      maximumSize: const MaterialStatePropertyAll(
+      textStyle: WidgetStatePropertyAll(textTheme.bodyMedium),
+      maximumSize: const WidgetStatePropertyAll(
         Size(
           999,
           kCompactButtonHeight + 10,
         ),
       ),
-      minimumSize: const MaterialStatePropertyAll(
+      minimumSize: const WidgetStatePropertyAll(
         Size(
           20,
           kCompactButtonHeight + 10,
@@ -354,21 +354,21 @@ DialogTheme _createDialogTheme(ColorScheme colorScheme) {
 
 SwitchThemeData _createSwitchTheme(ColorScheme colorScheme) {
   return SwitchThemeData(
-    trackOutlineColor: MaterialStateColor.resolveWith(
+    trackOutlineColor: WidgetStateColor.resolveWith(
       (states) => Colors.transparent,
     ),
-    thumbColor: MaterialStateProperty.resolveWith(
+    thumbColor: WidgetStateProperty.resolveWith(
       (states) => _getSwitchThumbColor(states, colorScheme),
     ),
-    trackColor: MaterialStateProperty.resolveWith(
+    trackColor: WidgetStateProperty.resolveWith(
       (states) => _getSwitchTrackColor(states, colorScheme),
     ),
   );
 }
 
-Color _getSwitchThumbColor(Set<MaterialState> states, ColorScheme colorScheme) {
-  if (states.contains(MaterialState.disabled)) {
-    if (states.contains(MaterialState.selected)) {
+Color _getSwitchThumbColor(Set<WidgetState> states, ColorScheme colorScheme) {
+  if (states.contains(WidgetState.disabled)) {
+    if (states.contains(WidgetState.selected)) {
       return colorScheme.onSurface.withOpacity(0.5);
     }
     return colorScheme.onSurface.withOpacity(0.5);
@@ -377,18 +377,18 @@ Color _getSwitchThumbColor(Set<MaterialState> states, ColorScheme colorScheme) {
   }
 }
 
-Color _getSwitchTrackColor(Set<MaterialState> states, ColorScheme colorScheme) {
+Color _getSwitchTrackColor(Set<WidgetState> states, ColorScheme colorScheme) {
   final uncheckedColor = colorScheme.onSurface.withOpacity(.25);
   final disabledUncheckedColor = colorScheme.onSurface.withOpacity(.15);
   final disabledCheckedColor = colorScheme.onSurface.withOpacity(.18);
 
-  if (states.contains(MaterialState.disabled)) {
-    if (states.contains(MaterialState.selected)) {
+  if (states.contains(WidgetState.disabled)) {
+    if (states.contains(WidgetState.selected)) {
       return disabledCheckedColor;
     }
     return disabledUncheckedColor;
   } else {
-    if (states.contains(MaterialState.selected)) {
+    if (states.contains(WidgetState.selected)) {
       return colorScheme.primary;
     } else {
       return uncheckedColor;
@@ -399,24 +399,24 @@ Color _getSwitchTrackColor(Set<MaterialState> states, ColorScheme colorScheme) {
 // Checks & Radios
 
 Color _getToggleFillColor({
-  required Set<MaterialState> states,
+  required Set<WidgetState> states,
   required ColorScheme colorScheme,
   required bool radio,
 }) {
-  if (!states.contains(MaterialState.disabled)) {
-    if (states.contains(MaterialState.selected)) {
+  if (!states.contains(WidgetState.disabled)) {
+    if (states.contains(WidgetState.selected)) {
       return colorScheme.primary;
     }
     return colorScheme.onSurface.withOpacity(radio ? 0.5 : 0.14);
   }
-  if (states.contains(MaterialState.selected)) {
+  if (states.contains(WidgetState.selected)) {
     return colorScheme.onSurface.withOpacity(0.2);
   }
   return colorScheme.onSurface.withOpacity(0.2);
 }
 
-Color _getCheckColor(Set<MaterialState> states, ColorScheme colorScheme) {
-  if (!states.contains(MaterialState.disabled)) {
+Color _getCheckColor(Set<WidgetState> states, ColorScheme colorScheme) {
+  if (!states.contains(WidgetState.disabled)) {
     return ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
             Brightness.light
         ? Colors.black
@@ -434,14 +434,14 @@ CheckboxThemeData _createCheckBoxTheme(ColorScheme colorScheme) {
       color: colorScheme.outline
           .scale(lightness: colorScheme.isLight ? -0.6 : 0.5),
     ),
-    fillColor: MaterialStateProperty.resolveWith(
+    fillColor: WidgetStateProperty.resolveWith(
       (states) => _getToggleFillColor(
         states: states,
         colorScheme: colorScheme,
         radio: false,
       ),
     ),
-    checkColor: MaterialStateProperty.resolveWith(
+    checkColor: WidgetStateProperty.resolveWith(
       (states) => _getCheckColor(states, colorScheme),
     ),
   );
@@ -449,7 +449,7 @@ CheckboxThemeData _createCheckBoxTheme(ColorScheme colorScheme) {
 
 RadioThemeData _createRadioTheme(ColorScheme colorScheme) {
   return RadioThemeData(
-    fillColor: MaterialStateProperty.resolveWith(
+    fillColor: WidgetStateProperty.resolveWith(
       (states) => _getToggleFillColor(
         states: states,
         colorScheme: colorScheme,
@@ -466,7 +466,7 @@ TabBarTheme _createTabBarTheme(ColorScheme colorScheme, Color dividerColor) {
         : Colors.white.withOpacity(0.8),
     indicatorColor: colorScheme.primary,
     dividerColor: dividerColor,
-    overlayColor: MaterialStateColor.resolveWith(
+    overlayColor: WidgetStateColor.resolveWith(
       (states) => colorScheme.onSurface.withOpacity(0.05),
     ),
   );
@@ -527,8 +527,9 @@ Color contrastColor(Color color) => ThemeData.estimateBrightnessForColor(
     : Colors.white;
 
 PopupMenuThemeData _createPopupMenuTheme(ColorScheme colorScheme) {
-  final bgColor =
-      colorScheme.isDark ? colorScheme.surfaceVariant : colorScheme.surface;
+  final bgColor = colorScheme.isDark
+      ? colorScheme.surfaceContainerHighest
+      : colorScheme.surface;
   return PopupMenuThemeData(
     color: bgColor,
     surfaceTintColor: bgColor,
@@ -547,11 +548,12 @@ PopupMenuThemeData _createPopupMenuTheme(ColorScheme colorScheme) {
 }
 
 MenuStyle _createMenuStyle(ColorScheme colorScheme) {
-  final bgColor =
-      colorScheme.isDark ? colorScheme.surfaceVariant : colorScheme.surface;
+  final bgColor = colorScheme.isDark
+      ? colorScheme.surfaceContainerHighest
+      : colorScheme.surface;
   return MenuStyle(
-    surfaceTintColor: MaterialStateColor.resolveWith((states) => bgColor),
-    shape: MaterialStateProperty.resolveWith(
+    surfaceTintColor: WidgetStateColor.resolveWith((states) => bgColor),
+    shape: WidgetStateProperty.resolveWith(
       (states) => RoundedRectangleBorder(
         side: BorderSide(
           color: colorScheme.isHighContrast
@@ -564,7 +566,7 @@ MenuStyle _createMenuStyle(ColorScheme colorScheme) {
         borderRadius: BorderRadius.circular(8),
       ),
     ),
-    side: MaterialStateBorderSide.resolveWith(
+    side: WidgetStateBorderSide.resolveWith(
       (states) => BorderSide(
         color: colorScheme.isHighContrast
             ? colorScheme.outlineVariant
@@ -574,8 +576,8 @@ MenuStyle _createMenuStyle(ColorScheme colorScheme) {
         width: 1,
       ),
     ),
-    elevation: MaterialStateProperty.resolveWith((states) => 1),
-    backgroundColor: MaterialStateProperty.resolveWith((states) => bgColor),
+    elevation: WidgetStateProperty.resolveWith((states) => 1),
+    backgroundColor: WidgetStateProperty.resolveWith((states) => bgColor),
   );
 }
 
@@ -603,8 +605,8 @@ NavigationBarThemeData _createNavigationBarTheme(ColorScheme colorScheme) {
     backgroundColor: colorScheme.surface,
     surfaceTintColor: colorScheme.surface,
     indicatorColor: colorScheme.onSurface.withOpacity(0.1),
-    iconTheme: MaterialStateProperty.resolveWith(
-      (states) => states.contains(MaterialState.selected)
+    iconTheme: WidgetStateProperty.resolveWith(
+      (states) => states.contains(WidgetState.selected)
           ? IconThemeData(color: colorScheme.onSurface)
           : IconThemeData(color: colorScheme.onSurface.withOpacity(0.8)),
     ),
@@ -637,7 +639,7 @@ DrawerThemeData _createDrawerTheme(ColorScheme colorScheme) {
         color: colorScheme.isLight ? Colors.transparent : kDividerColorDark,
       ),
     ),
-    backgroundColor: colorScheme.background,
+    backgroundColor: colorScheme.surface,
   );
 }
 
@@ -713,11 +715,12 @@ ThemeData createYaruTheme({
     dialogTheme: _createDialogTheme(colorScheme),
     brightness: colorScheme.brightness,
     primaryColor: colorScheme.primary,
-    canvasColor: colorScheme.background,
-    scaffoldBackgroundColor: colorScheme.background,
+    canvasColor: colorScheme.surface,
+    scaffoldBackgroundColor: colorScheme.surface,
     cardColor: colorScheme.surface,
+    cardTheme: _createCardTheme(colorScheme),
     dividerColor: dividerColor,
-    dialogBackgroundColor: colorScheme.background,
+    dialogBackgroundColor: colorScheme.surface,
     textTheme: textTheme,
     indicatorColor: colorScheme.primary,
     applyElevationOverlayColor: colorScheme.isDark,
@@ -790,6 +793,13 @@ ThemeData createYaruTheme({
   );
 }
 
+CardTheme _createCardTheme(ColorScheme colorScheme) {
+  return CardTheme(
+    color:
+        colorScheme.surface.scale(lightness: colorScheme.isLight ? -0.1 : 0.1),
+  );
+}
+
 /// Helper function to create a new Yaru light theme
 ThemeData createYaruLightTheme({
   required Color primaryColor,
@@ -818,14 +828,11 @@ ThemeData createYaruLightTheme({
     onSecondary: contrastColor(secondary),
     secondaryContainer: secondaryContainer,
     onSecondaryContainer: contrastColor(secondaryContainer),
-    background: Colors.white,
-    onBackground: YaruColors.jet,
     surface: Colors.white,
     onSurface: YaruColors.jet,
     inverseSurface: YaruColors.jet,
     onInverseSurface: YaruColors.porcelain,
     surfaceTint: YaruColors.warmGrey,
-    surfaceVariant: YaruColors.warmGrey,
     tertiary: tertiary,
     onTertiary: contrastColor(tertiary),
     tertiaryContainer: tertiaryContainer,
@@ -875,14 +882,11 @@ ThemeData createYaruDarkTheme({
     onSecondary: contrastColor(primaryColor.scale(lightness: -0.25)),
     secondaryContainer: secondaryContainer,
     onSecondaryContainer: Colors.white,
-    background: YaruColors.darkJet,
-    onBackground: YaruColors.porcelain,
     surface: YaruColors.jet,
     onSurface: YaruColors.porcelain,
     inverseSurface: YaruColors.porcelain,
     onInverseSurface: YaruColors.inkstone,
     surfaceTint: YaruColors.coolGrey,
-    surfaceVariant: const Color.fromARGB(255, 34, 34, 34),
     tertiary: tertiary,
     onTertiary: YaruColors.porcelain,
     tertiaryContainer: tertiaryContainer,

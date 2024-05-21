@@ -153,21 +153,21 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
     final light = theme.colorScheme.isLight;
     final highContrast = theme.colorScheme.isHighContrast;
-    final states = <MaterialState>{
-      if (isActive != false) MaterialState.focused,
+    final states = <WidgetState>{
+      if (isActive != false) WidgetState.focused,
     };
-    final defaultBackgroundColor = MaterialStateProperty.resolveWith((states) {
-      if (!states.contains(MaterialState.focused)) {
-        return theme.colorScheme.background;
+    final defaultBackgroundColor = WidgetStateProperty.resolveWith((states) {
+      if (!states.contains(WidgetState.focused)) {
+        return theme.colorScheme.surface;
       }
       return light ? YaruColors.titleBarLight : YaruColors.titleBarDark;
     });
     final backgroundColor =
-        MaterialStateProperty.resolveAs(this.backgroundColor, states) ??
+        WidgetStateProperty.resolveAs(this.backgroundColor, states) ??
             titleBarTheme.backgroundColor?.resolve(states) ??
             defaultBackgroundColor.resolve(states);
     final foregroundColor =
-        MaterialStateProperty.resolveAs(this.foregroundColor, states) ??
+        WidgetStateProperty.resolveAs(this.foregroundColor, states) ??
             titleBarTheme.foregroundColor?.resolve(states) ??
             theme.colorScheme.onSurface;
 
@@ -228,7 +228,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     final closeButton = YaruWindowControl(
       platform: windowControlPlatform,
-      iconColor: MaterialStatePropertyAll(foregroundColor),
+      iconColor: WidgetStatePropertyAll(foregroundColor),
       type: YaruWindowControlType.close,
       onTap: onClose != null ? () => onClose!(context) : null,
     );
@@ -273,7 +273,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                               YaruWindowControl(
                                 platform: windowControlPlatform,
                                 iconColor:
-                                    MaterialStatePropertyAll(foregroundColor),
+                                    WidgetStatePropertyAll(foregroundColor),
                                 type: YaruWindowControlType.minimize,
                                 onTap: onMinimize != null
                                     ? () => onMinimize!(context)
@@ -283,7 +283,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                               YaruWindowControl(
                                 platform: windowControlPlatform,
                                 iconColor:
-                                    MaterialStatePropertyAll(foregroundColor),
+                                    WidgetStatePropertyAll(foregroundColor),
                                 type: YaruWindowControlType.restore,
                                 onTap: onRestore != null
                                     ? () => onRestore!(context)
@@ -293,7 +293,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                               YaruWindowControl(
                                 platform: windowControlPlatform,
                                 iconColor:
-                                    MaterialStatePropertyAll(foregroundColor),
+                                    WidgetStatePropertyAll(foregroundColor),
                                 type: YaruWindowControlType.maximize,
                                 onTap: onMaximize != null
                                     ? () => onMaximize!(context)

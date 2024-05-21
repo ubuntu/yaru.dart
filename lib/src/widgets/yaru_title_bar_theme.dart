@@ -37,8 +37,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
   final double? titleSpacing;
   final double? buttonSpacing;
   final EdgeInsetsGeometry? buttonPadding;
-  final MaterialStateProperty<Color?>? foregroundColor;
-  final MaterialStateProperty<Color?>? backgroundColor;
+  final WidgetStateProperty<Color?>? foregroundColor;
+  final WidgetStateProperty<Color?>? backgroundColor;
   final TextStyle? titleTextStyle;
   final ShapeBorder? shape;
   final BorderSide? border;
@@ -51,8 +51,8 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
     double? titleSpacing,
     double? buttonSpacing,
     EdgeInsetsGeometry? buttonPadding,
-    MaterialStateProperty<Color?>? foregroundColor,
-    MaterialStateProperty<Color?>? backgroundColor,
+    WidgetStateProperty<Color?>? foregroundColor,
+    WidgetStateProperty<Color?>? backgroundColor,
     TextStyle? titleTextStyle,
     ShapeBorder? shape,
     BorderSide? border,
@@ -86,13 +86,13 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
       buttonSpacing: lerpDouble(buttonSpacing, o?.buttonSpacing, t),
       buttonPadding:
           EdgeInsetsGeometry.lerp(buttonPadding, o?.buttonPadding, t),
-      foregroundColor: MaterialStateProperty.lerp<Color?>(
+      foregroundColor: WidgetStateProperty.lerp<Color?>(
         foregroundColor,
         o?.foregroundColor,
         t,
         Color.lerp,
       ),
-      backgroundColor: MaterialStateProperty.lerp<Color?>(
+      backgroundColor: WidgetStateProperty.lerp<Color?>(
         backgroundColor,
         o?.backgroundColor,
         t,

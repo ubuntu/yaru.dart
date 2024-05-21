@@ -170,7 +170,7 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
     return Theme(
       data: Theme.of(context).copyWith(
         scrollbarTheme: ScrollbarTheme.of(context).copyWith(
-          thickness: MaterialStateProperty.all(_kScrollbarThickness),
+          thickness: WidgetStateProperty.all(_kScrollbarThickness),
         ),
       ),
       child: YaruNavigationRail(

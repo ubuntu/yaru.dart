@@ -19,21 +19,21 @@ class YaruColorDisk extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextButton(
-          statesController: MaterialStatesController({
-            if (selected) MaterialState.selected,
+          statesController: WidgetStatesController({
+            if (selected) WidgetState.selected,
           }),
           style: ButtonStyle(
-            overlayColor: MaterialStateProperty.all(Colors.transparent),
+            overlayColor: WidgetStateProperty.all(Colors.transparent),
             padding: ButtonStyleButton.allOrNull(EdgeInsets.zero),
-            shape: MaterialStateProperty.resolveWith<OutlinedBorder?>((states) {
+            shape: WidgetStateProperty.resolveWith<OutlinedBorder?>((states) {
               return CircleBorder(
                 side: BorderSide(
                   color: color.withOpacity(
-                    states.contains(MaterialState.selected) ||
-                            states.contains(MaterialState.pressed)
+                    states.contains(WidgetState.selected) ||
+                            states.contains(WidgetState.pressed)
                         ? 1.0
-                        : states.contains(MaterialState.hovered) ||
-                                states.contains(MaterialState.focused)
+                        : states.contains(WidgetState.hovered) ||
+                                states.contains(WidgetState.focused)
                             ? 0.5
                             : 0,
                   ),

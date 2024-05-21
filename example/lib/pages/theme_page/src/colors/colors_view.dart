@@ -186,12 +186,12 @@ Map<String, (Color, Color?)> _getBaseColors(ThemeData theme) {
   final s = theme.colorScheme;
 
   final colors = <String, (Color, Color?)>{
-    'background': (s.background, s.onBackground),
-    'onBackground': (s.onBackground, null),
+    'background': (s.surface, s.onSurface),
+    'onBackground': (s.onSurface, null),
     'surface': (s.surface, s.onSurface),
     'onSurface': (s.onSurface, null),
     'surfaceTint': (s.surfaceTint, null),
-    'surfaceVariant': (s.surfaceVariant, s.onSurfaceVariant),
+    'surfaceVariant': (s.surfaceContainerHighest, s.onSurfaceVariant),
     'onSurfaceVariant': (s.onSurfaceVariant, null),
     'inverseSurface': (s.inverseSurface, s.onInverseSurface),
     'onInverseSurface': (s.onInverseSurface, null),

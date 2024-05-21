@@ -131,7 +131,7 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
   final MouseCursor? mouseCursor;
 
   @override
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -194,12 +194,12 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
     final painter = _YaruCheckboxPainter();
     fillPainterDefaults(painter);
 
-    const unselectedState = <MaterialState>{};
-    const selectedState = {MaterialState.selected};
-    const disabledState = {MaterialState.disabled};
+    const unselectedState = <WidgetState>{};
+    const selectedState = {WidgetState.selected};
+    const disabledState = {WidgetState.disabled};
     const selectedDisabledState = {
-      MaterialState.selected,
-      MaterialState.disabled,
+      WidgetState.selected,
+      WidgetState.disabled,
     };
 
     // Normal colors
@@ -237,10 +237,10 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
 
     // Indicator colors
     final hoverIndicatorColor =
-        checkboxTheme.indicatorColor?.resolve({MaterialState.hovered}) ??
+        checkboxTheme.indicatorColor?.resolve({WidgetState.hovered}) ??
             painter.hoverIndicatorColor;
     final focusIndicatorColor =
-        checkboxTheme.indicatorColor?.resolve({MaterialState.focused}) ??
+        checkboxTheme.indicatorColor?.resolve({WidgetState.focused}) ??
             painter.focusIndicatorColor;
 
     return buildToggleable(
@@ -259,7 +259,7 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
         ..focusIndicatorColor = focusIndicatorColor,
       mouseCursor: widget.mouseCursor ??
           checkboxTheme.mouseCursor
-              ?.resolve({if (!widget.interactive) MaterialState.disabled}),
+              ?.resolve({if (!widget.interactive) WidgetState.disabled}),
     );
   }
 }

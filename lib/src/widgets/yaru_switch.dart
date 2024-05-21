@@ -108,7 +108,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   final MouseCursor? mouseCursor;
 
   @override
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -162,12 +162,12 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
     final painter = _YaruSwitchPainter();
     fillPainterDefaults(painter);
 
-    const unselectedState = <MaterialState>{};
-    const selectedState = {MaterialState.selected};
-    const disabledState = {MaterialState.disabled};
+    const unselectedState = <WidgetState>{};
+    const selectedState = {WidgetState.selected};
+    const disabledState = {WidgetState.disabled};
     const selectedDisabledState = {
-      MaterialState.selected,
-      MaterialState.disabled,
+      WidgetState.selected,
+      WidgetState.disabled,
     };
 
     final defaultBorderColor = colorScheme.isHighContrast
@@ -210,10 +210,10 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 
     // Indicator colors
     final hoverIndicatorColor =
-        switchTheme.indicatorColor?.resolve({MaterialState.hovered}) ??
+        switchTheme.indicatorColor?.resolve({WidgetState.hovered}) ??
             painter.hoverIndicatorColor;
     final focusIndicatorColor =
-        switchTheme.indicatorColor?.resolve({MaterialState.focused}) ??
+        switchTheme.indicatorColor?.resolve({WidgetState.focused}) ??
             painter.focusIndicatorColor;
 
     return _maybeBuildGestureDetector(
@@ -235,7 +235,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
           ..focusIndicatorColor = focusIndicatorColor,
         mouseCursor: widget.mouseCursor ??
             switchTheme.mouseCursor
-                ?.resolve({if (!widget.interactive) MaterialState.disabled}),
+                ?.resolve({if (!widget.interactive) WidgetState.disabled}),
       ),
     );
   }

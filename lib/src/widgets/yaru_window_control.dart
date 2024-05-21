@@ -62,11 +62,11 @@ class YaruWindowControl extends StatefulWidget {
 
   /// Color used to draw the control icon.
   /// Leave to null, or return null, to use the default value.
-  final MaterialStateProperty<Color?>? iconColor;
+  final WidgetStateProperty<Color?>? iconColor;
 
   /// Color used to draw the control background decoration.
   /// Leave to null, or return null, to use the default value.
-  final MaterialStateProperty<Color?>? backgroundColor;
+  final WidgetStateProperty<Color?>? backgroundColor;
 
   @override
   State<YaruWindowControl> createState() {
@@ -95,17 +95,17 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   late CurvedAnimation _animationProgress;
   late AnimationController _animationController;
 
-  Set<MaterialState> get _states {
-    final states = <MaterialState>{};
+  Set<WidgetState> get _states {
+    final states = <WidgetState>{};
 
     if (_hovered) {
-      states.add(MaterialState.hovered);
+      states.add(WidgetState.hovered);
     }
     if (_active) {
-      states.add(MaterialState.pressed);
+      states.add(WidgetState.pressed);
     }
     if (!interactive) {
-      states.add(MaterialState.disabled);
+      states.add(WidgetState.disabled);
     }
 
     return states;
