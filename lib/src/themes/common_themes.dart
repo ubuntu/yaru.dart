@@ -717,7 +717,7 @@ ThemeData createYaruTheme({
     primaryColor: colorScheme.primary,
     canvasColor: colorScheme.surface,
     scaffoldBackgroundColor: colorScheme.surface,
-    cardColor: colorScheme.surface,
+    cardColor: _cardColor(colorScheme),
     cardTheme: _createCardTheme(colorScheme),
     dividerColor: dividerColor,
     dialogBackgroundColor: colorScheme.surface,
@@ -795,10 +795,12 @@ ThemeData createYaruTheme({
 
 CardTheme _createCardTheme(ColorScheme colorScheme) {
   return CardTheme(
-    color:
-        colorScheme.surface.scale(lightness: colorScheme.isLight ? -0.1 : 0.1),
+    color: _cardColor(colorScheme),
   );
 }
+
+Color _cardColor(ColorScheme colorScheme) =>
+    colorScheme.surface.scale(lightness: colorScheme.isLight ? -0.1 : 0.08);
 
 /// Helper function to create a new Yaru light theme
 ThemeData createYaruLightTheme({
