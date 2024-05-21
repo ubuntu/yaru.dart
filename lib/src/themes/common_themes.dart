@@ -332,9 +332,7 @@ ToggleButtonsThemeData _createToggleButtonsTheme(ColorScheme colorScheme) {
 // Dialogs
 
 DialogTheme _createDialogTheme(ColorScheme colorScheme) {
-  final bgColor = colorScheme.brightness == Brightness.dark
-      ? YaruColors.darkJet
-      : YaruColors.porcelain;
+  final bgColor = _createMenuBg(colorScheme);
   return DialogTheme(
     backgroundColor: bgColor,
     surfaceTintColor: bgColor,
@@ -526,10 +524,11 @@ Color contrastColor(Color color) => ThemeData.estimateBrightnessForColor(
     ? Colors.black
     : Colors.white;
 
+Color _createMenuBg(ColorScheme colorScheme) =>
+    colorScheme.surface.scale(lightness: colorScheme.isLight ? 0 : -0.2);
+
 PopupMenuThemeData _createPopupMenuTheme(ColorScheme colorScheme) {
-  final bgColor = colorScheme.isDark
-      ? colorScheme.surfaceContainerHighest
-      : colorScheme.surface;
+  final bgColor = _createMenuBg(colorScheme);
   return PopupMenuThemeData(
     color: bgColor,
     surfaceTintColor: bgColor,
@@ -548,9 +547,7 @@ PopupMenuThemeData _createPopupMenuTheme(ColorScheme colorScheme) {
 }
 
 MenuStyle _createMenuStyle(ColorScheme colorScheme) {
-  final bgColor = colorScheme.isDark
-      ? colorScheme.surfaceContainerHighest
-      : colorScheme.surface;
+  final bgColor = _createMenuBg(colorScheme);
   return MenuStyle(
     surfaceTintColor: WidgetStateColor.resolveWith((states) => bgColor),
     shape: WidgetStateProperty.resolveWith(
