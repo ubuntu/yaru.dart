@@ -12,19 +12,19 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
     this.mouseCursor,
   });
 
-  final MaterialStateProperty<Color?>? color;
-  final MaterialStateProperty<Color?>? borderColor;
-  final MaterialStateProperty<Color?>? thumbColor;
-  final MaterialStateProperty<Color?>? indicatorColor;
-  final MaterialStateProperty<MouseCursor?>? mouseCursor;
+  final WidgetStateProperty<Color?>? color;
+  final WidgetStateProperty<Color?>? borderColor;
+  final WidgetStateProperty<Color?>? thumbColor;
+  final WidgetStateProperty<Color?>? indicatorColor;
+  final WidgetStateProperty<MouseCursor?>? mouseCursor;
 
   @override
   YaruSwitchThemeData copyWith({
-    MaterialStateProperty<Color?>? color,
-    MaterialStateProperty<Color?>? borderColor,
-    MaterialStateProperty<Color?>? thumbColor,
-    MaterialStateProperty<Color?>? indicatorColor,
-    MaterialStateProperty<MouseCursor?>? mouseCursor,
+    WidgetStateProperty<Color?>? color,
+    WidgetStateProperty<Color?>? borderColor,
+    WidgetStateProperty<Color?>? thumbColor,
+    WidgetStateProperty<Color?>? indicatorColor,
+    WidgetStateProperty<MouseCursor?>? mouseCursor,
   }) {
     return YaruSwitchThemeData(
       color: color ?? this.color,
@@ -42,31 +42,31 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
   ) {
     final o = other as YaruSwitchThemeData?;
     return YaruSwitchThemeData(
-      color: MaterialStateProperty.lerp<Color?>(
+      color: WidgetStateProperty.lerp<Color?>(
         color,
         o?.color,
         t,
         Color.lerp,
       ),
-      borderColor: MaterialStateProperty.lerp<Color?>(
+      borderColor: WidgetStateProperty.lerp<Color?>(
         borderColor,
         o?.borderColor,
         t,
         Color.lerp,
       ),
-      thumbColor: MaterialStateProperty.lerp<Color?>(
+      thumbColor: WidgetStateProperty.lerp<Color?>(
         thumbColor,
         o?.thumbColor,
         t,
         Color.lerp,
       ),
-      indicatorColor: MaterialStateProperty.lerp<Color?>(
+      indicatorColor: WidgetStateProperty.lerp<Color?>(
         indicatorColor,
         o?.indicatorColor,
         t,
         Color.lerp,
       ),
-      mouseCursor: MaterialStateProperty.lerp<MouseCursor?>(
+      mouseCursor: WidgetStateProperty.lerp<MouseCursor?>(
         mouseCursor,
         o?.mouseCursor,
         t,

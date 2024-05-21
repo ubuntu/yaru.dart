@@ -33,7 +33,7 @@ class YaruToggleButtonThemeData
   final TextStyle? subtitleStyle;
 
   /// The mouse cursor.
-  final MaterialStateProperty<MouseCursor?>? mouseCursor;
+  final WidgetStateProperty<MouseCursor?>? mouseCursor;
 
   /// Creates a copy with the given fields replaced with new values.
   @override
@@ -42,7 +42,7 @@ class YaruToggleButtonThemeData
     double? verticalSpacing,
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
-    MaterialStateProperty<MouseCursor?>? mouseCursor,
+    WidgetStateProperty<MouseCursor?>? mouseCursor,
   }) {
     return YaruToggleButtonThemeData(
       horizontalSpacing: horizontalSpacing ?? this.horizontalSpacing,

@@ -41,37 +41,33 @@ class YaruToggleButton extends StatelessWidget {
   /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor? mouseCursor;
 
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 
   @override
   Widget build(BuildContext context) {
     final theme = YaruToggleButtonTheme.of(context);
     final textTheme = Theme.of(context).textTheme;
     final states = statesController?.value ??
-        {if (onToggled == null) MaterialState.disabled};
-    final enabled = !states.contains(MaterialState.disabled);
+        {if (onToggled == null) WidgetState.disabled};
+    final enabled = !states.contains(WidgetState.disabled);
     final mouseCursor =
-        MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
-            MaterialStateMouseCursor.clickable.resolve(states);
+        WidgetStateProperty.resolveAs(this.mouseCursor, states) ??
+            WidgetStateMouseCursor.clickable.resolve(states);
 
     return MergeSemantics(
       child: Semantics(
         child: GestureDetector(
           onTap: onToggled,
           onTapDown: (_) =>
-              statesController?.update(MaterialState.pressed, enabled),
-          onTapUp: (_) =>
-              statesController?.update(MaterialState.pressed, false),
+              statesController?.update(WidgetState.pressed, enabled),
+          onTapUp: (_) => statesController?.update(WidgetState.pressed, false),
           onTapCancel: () =>
-              statesController?.update(MaterialState.pressed, false),
+              statesController?.update(WidgetState.pressed, false),
           child: MouseRegion(
             cursor: mouseCursor,
-            onEnter: (_) =>
-                statesController?.update(MaterialState.hovered, true),
-            onHover: (_) =>
-                statesController?.update(MaterialState.hovered, true),
-            onExit: (_) =>
-                statesController?.update(MaterialState.hovered, false),
+            onEnter: (_) => statesController?.update(WidgetState.hovered, true),
+            onHover: (_) => statesController?.update(WidgetState.hovered, true),
+            onExit: (_) => statesController?.update(WidgetState.hovered, false),
             child: Padding(
               padding: contentPadding ?? EdgeInsets.zero,
               child: _YaruToggleButtonLayout(

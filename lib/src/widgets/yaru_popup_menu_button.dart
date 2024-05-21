@@ -49,7 +49,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? OutlinedButtonTheme.of(context).style;
-    final state = <MaterialState>{if (!enabled) MaterialState.disabled};
+    final state = <WidgetState>{if (!enabled) WidgetState.disabled};
     final side = style?.side?.resolve(state);
     final shape = style?.shape?.resolve(state) ??
         RoundedRectangleBorder(
@@ -58,9 +58,9 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
           ),
         );
     final mouseCursor =
-        MaterialStateProperty.resolveAs(this.mouseCursor, state) ??
+        WidgetStateProperty.resolveAs(this.mouseCursor, state) ??
             style?.mouseCursor?.resolve(state) ??
-            MaterialStateMouseCursor.clickable.resolve(state);
+            WidgetStateMouseCursor.clickable.resolve(state);
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
       child: Material(

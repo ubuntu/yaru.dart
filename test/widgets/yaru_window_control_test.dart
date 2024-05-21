@@ -60,17 +60,17 @@ void main() {
         YaruWindowControl(
           type: type,
           platform: platform,
-          onTap: variant.hasState(MaterialState.disabled) ? null : () {},
+          onTap: variant.hasState(WidgetState.disabled) ? null : () {},
         ),
         themeMode: variant.themeMode,
         size: size,
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruWindowControl));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruWindowControl));
         await tester.pumpAndSettle();
       }
@@ -94,19 +94,19 @@ final goldenVariant = ValueVariant({
         return {
           ...goldenThemeVariants(
             '$platformPrefix${type.name}',
-            <MaterialState>{},
+            <WidgetState>{},
           ),
           ...goldenThemeVariants(
             '$platformPrefix${type.name}-disabled',
-            {MaterialState.disabled},
+            {WidgetState.disabled},
           ),
           ...goldenThemeVariants(
             '$platformPrefix${type.name}-hovered',
-            {MaterialState.hovered},
+            {WidgetState.hovered},
           ),
           ...goldenThemeVariants(
             '$platformPrefix${type.name}-pressed',
-            {MaterialState.pressed},
+            {WidgetState.pressed},
           ),
         };
       }(),

@@ -56,18 +56,18 @@ class YaruRadioButton<T> extends StatefulWidget {
 }
 
 class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
-  final _statesController = MaterialStatesController();
+  final _statesController = WidgetStatesController();
 
   @override
   void initState() {
     super.initState();
-    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+    _statesController.update(WidgetState.disabled, widget.onChanged == null);
   }
 
   @override
   void didUpdateWidget(YaruRadioButton<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+    _statesController.update(WidgetState.disabled, widget.onChanged == null);
   }
 
   @override
@@ -80,7 +80,7 @@ class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
   Widget build(BuildContext context) {
     final states = _statesController.value;
     final mouseCursor =
-        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
+        WidgetStateProperty.resolveAs(widget.mouseCursor, states) ??
             YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
 
     return YaruToggleButton(
@@ -98,7 +98,7 @@ class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
         statesController: _statesController,
       ),
       mouseCursor:
-          mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
+          mouseCursor ?? WidgetStateMouseCursor.clickable.resolve(states),
       statesController: _statesController,
       onToggled: widget.onChanged == null ? null : _onToggled,
     );

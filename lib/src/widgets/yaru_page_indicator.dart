@@ -134,12 +134,12 @@ class YaruPageIndicator extends StatelessWidget {
         (index, selectedIndex, _) =>
             YaruPageIndicatorItem(selected: selectedIndex == index);
     final states = {
-      if (onTap == null) MaterialState.disabled,
+      if (onTap == null) WidgetState.disabled,
     };
     final mouseCursor =
-        MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
+        WidgetStateProperty.resolveAs(this.mouseCursor, states) ??
             indicatorTheme?.mouseCursor?.resolve(states) ??
-            MaterialStateMouseCursor.clickable.resolve(states);
+            WidgetStateMouseCursor.clickable.resolve(states);
     final textStyle = this.textStyle ??
         indicatorTheme?.textStyle ??
         theme.textTheme.bodySmall;

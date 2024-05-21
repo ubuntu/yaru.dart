@@ -199,7 +199,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
               shape: const CircleBorder(),
-              backgroundColor: Theme.of(context).colorScheme.background,
+              backgroundColor: Theme.of(context).colorScheme.surface,
             ),
             onPressed: onPressed,
             child: icon,

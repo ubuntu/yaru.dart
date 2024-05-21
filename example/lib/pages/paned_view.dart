@@ -7,7 +7,7 @@ class PanedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pane = Container(
-      color: Theme.of(context).colorScheme.onBackground.withOpacity(.025),
+      color: Theme.of(context).colorScheme.onSurface.withOpacity(.025),
       child: const Center(
         child: Text('pane'),
       ),

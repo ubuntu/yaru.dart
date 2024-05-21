@@ -30,9 +30,8 @@ class YaruMasterDetailThemeData
       portraitTransitions: YaruPageTransitionsTheme.horizontal,
       landscapeTransitions: YaruPageTransitionsTheme.vertical,
       includeSeparator: true,
-      sideBarColor: light
-          ? materialTheme.colorScheme.background.scale(lightness: -0.029)
-          : materialTheme.colorScheme.surface,
+      sideBarColor: materialTheme.colorScheme.surface
+          .scale(lightness: light ? -0.029 : 0.029),
     );
   }
 

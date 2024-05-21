@@ -124,7 +124,7 @@ class YaruMasterTile extends StatelessWidget {
         : _kScrollbarMargin * 2;
 
     final scrollBarThumbThikness =
-        scrollbarTheme.thickness?.resolve({MaterialState.hovered}) ??
+        scrollbarTheme.thickness?.resolve({WidgetState.hovered}) ??
             _kScrollbarThickness;
 
     return doubleMarginWidth + scrollBarThumbThikness;
