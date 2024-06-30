@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
-import 'package:yaru_widgets/constants.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/theme.dart';
 
 /// Holds theme data for [YaruMasterDetailTheme].
 @immutable
@@ -30,9 +30,8 @@ class YaruMasterDetailThemeData
       portraitTransitions: YaruPageTransitionsTheme.horizontal,
       landscapeTransitions: YaruPageTransitionsTheme.vertical,
       includeSeparator: true,
-      sideBarColor: light
-          ? materialTheme.colorScheme.background.scale(lightness: -0.029)
-          : materialTheme.colorScheme.surface,
+      sideBarColor: materialTheme.colorScheme.surface
+          .scale(lightness: light ? -0.029 : 0.029),
     );
   }
 

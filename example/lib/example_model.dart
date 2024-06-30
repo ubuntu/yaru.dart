@@ -22,6 +22,14 @@ class ExampleModel extends SafeChangeNotifier {
     notifyListeners();
   }
 
+  bool _rtl = false;
+  bool get rtl => _rtl;
+  set rtl(bool value) {
+    if (value == _rtl) return;
+    _rtl = value;
+    notifyListeners();
+  }
+
   Future<void> init() async {
     await initConnectivity();
   }

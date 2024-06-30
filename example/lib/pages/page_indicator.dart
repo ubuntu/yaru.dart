@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 class PageIndicatorPage extends StatefulWidget {
   const PageIndicatorPage({super.key});
@@ -17,6 +16,8 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
 
   @override
   Widget build(BuildContext context) {
+    const duration = Duration(milliseconds: 250);
+
     return YaruScrollViewUndershoot.builder(
       builder: (context, controller) {
         return ListView(
@@ -37,7 +38,7 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
                 size: Size.square(
                   index == selectedIndex ? _dotSize + 8 : _dotSize,
                 ),
-                animationDuration: const Duration(milliseconds: 250),
+                animationDuration: duration,
               ),
             ),
             const SizedBox(height: 15),
@@ -55,7 +56,30 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
                 size: Size.square(
                   index <= selectedIndex ? _dotSize + 8 : _dotSize,
                 ),
-                animationDuration: const Duration(milliseconds: 250),
+                animationDuration: duration,
+              ),
+            ),
+            const SizedBox(height: 20),
+            YaruPageIndicator.builder(
+              length: _length,
+              page: _page,
+              onTap: (page) => setState(() => _page = page),
+              itemSizeBuilder: (index, selectedIndex, length) =>
+                  index == selectedIndex
+                      ? Size(_dotSize * 3, _dotSize)
+                      : Size.square(_dotSize),
+              layoutDelegate: YaruPageIndicatorSteppedDelegate(
+                baseItemSpacing: _dotSpacing,
+              ),
+              animationDuration: duration,
+              itemBuilder: (index, selectedIndex, length) =>
+                  YaruPageIndicatorItem(
+                selected: index == selectedIndex,
+                size: index == selectedIndex
+                    ? Size(_dotSize * 3, _dotSize)
+                    : Size.square(_dotSize),
+                animationDuration: duration,
+                borderRadius: BorderRadius.circular(24),
               ),
             ),
             const SizedBox(height: 15),

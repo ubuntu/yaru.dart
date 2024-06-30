@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
+import 'package:yaru/theme.dart';
 
 @immutable
 class YaruNavigationPageThemeData
@@ -20,7 +20,7 @@ class YaruNavigationPageThemeData
       pageTransitions: YaruPageTransitionsTheme.vertical,
       includeSeparator: true,
       sideBarColor: light
-          ? materialTheme.colorScheme.background.scale(lightness: -0.029)
+          ? materialTheme.colorScheme.surface.scale(lightness: -0.029)
           : materialTheme.colorScheme.surface,
     );
   }

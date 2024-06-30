@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+
+import '../../../widgets.dart';
 
 class YaruMasterListView extends StatefulWidget {
   const YaruMasterListView({

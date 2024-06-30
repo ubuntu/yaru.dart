@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 class ProgressIndicatorPage extends StatelessWidget {
   const ProgressIndicatorPage({super.key});

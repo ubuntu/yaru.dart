@@ -35,6 +35,8 @@ class YaruPageIndicator extends StatelessWidget {
     this.textStyle,
     double? dotSize,
     double? dotSpacing,
+    this.animationDuration,
+    this.animationCurve,
   })  : assert(page >= 0 && page <= length - 1),
         itemBuilder = null {
     itemSizeBuilder =
@@ -57,6 +59,8 @@ class YaruPageIndicator extends StatelessWidget {
     this.textBuilder,
     this.textStyle,
     this.layoutDelegate,
+    this.animationDuration,
+    this.animationCurve,
   }) : assert(page >= 0 && page <= length - 1);
 
   /// Determine the number of pages.
@@ -103,6 +107,17 @@ class YaruPageIndicator extends StatelessWidget {
   /// Defaults to [YaruPageIndicatorSteppedDelegate].
   late final YaruPageIndicatorLayoutDelegate? layoutDelegate;
 
+  /// Duration of a size transition between two items.
+  /// Use [Duration.zero] to disable transition.
+  ///
+  /// Defaults to [Duration.zero].
+  final Duration? animationDuration;
+
+  /// Curve used in a size transition between two items.
+  ///
+  /// Defaults to [Curves.linear].
+  final Curve? animationCurve;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -119,12 +134,12 @@ class YaruPageIndicator extends StatelessWidget {
         (index, selectedIndex, _) =>
             YaruPageIndicatorItem(selected: selectedIndex == index);
     final states = {
-      if (onTap == null) MaterialState.disabled,
+      if (onTap == null) WidgetState.disabled,
     };
     final mouseCursor =
-        MaterialStateProperty.resolveAs(this.mouseCursor, states) ??
+        WidgetStateProperty.resolveAs(this.mouseCursor, states) ??
             indicatorTheme?.mouseCursor?.resolve(states) ??
-            MaterialStateMouseCursor.clickable.resolve(states);
+            WidgetStateMouseCursor.clickable.resolve(states);
     final textStyle = this.textStyle ??
         indicatorTheme?.textStyle ??
         theme.textTheme.bodySmall;
@@ -168,7 +183,7 @@ class YaruPageIndicator extends StatelessWidget {
               padding: EdgeInsetsDirectional.only(
                 start: index != 0 ? itemSpacing : 0,
               ),
-              child: SizedBox(
+              child: _buildSizedContainer(
                 width: itemSizes[index].width,
                 height: itemSizes[index].height,
                 child: Center(
@@ -187,6 +202,28 @@ class YaruPageIndicator extends StatelessWidget {
       },
     );
   }
+
+  Widget _buildSizedContainer({
+    required double width,
+    required double height,
+    required Widget child,
+  }) {
+    final animationDuration = this.animationDuration ?? Duration.zero;
+    final animationCurve = this.animationCurve ?? Curves.linear;
+    return animationDuration != Duration.zero
+        ? AnimatedContainer(
+            duration: animationDuration,
+            curve: animationCurve,
+            width: width,
+            height: height,
+            child: child,
+          )
+        : SizedBox(
+            width: width,
+            height: height,
+            child: child,
+          );
+  }
 }
 
 /// Default item used in [YaruPageIndicator.itemBuilder].
@@ -200,6 +237,7 @@ class YaruPageIndicatorItem extends StatelessWidget {
     this.size,
     this.animationDuration,
     this.animationCurve,
+    this.borderRadius,
   });
 
   /// Define if this is a selected item.
@@ -219,6 +257,8 @@ class YaruPageIndicatorItem extends StatelessWidget {
   /// Defaults to [Curves.linear].
   final Curve? animationCurve;
 
+  final BorderRadiusGeometry? borderRadius;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -227,7 +267,8 @@ class YaruPageIndicatorItem extends StatelessWidget {
       color: selected
           ? theme.colorScheme.primary
           : theme.colorScheme.onSurface.withOpacity(.3),
-      shape: BoxShape.circle,
+      shape: borderRadius == null ? BoxShape.circle : BoxShape.rectangle,
+      borderRadius: borderRadius,
     );
     final animationDuration = this.animationDuration ?? Duration.zero;
     final animationCurve = this.animationCurve ?? Curves.linear;

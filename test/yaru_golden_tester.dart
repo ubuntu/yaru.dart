@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru/yaru.dart';
+import 'package:yaru/theme.dart';
 
 extension YaruGoldenTester on WidgetTester {
   Future<void> pumpScaffold(
@@ -78,13 +78,13 @@ class YaruGoldenVariant<T> {
   String toString() => '$label: themeMode: $themeMode, value: $value';
 }
 
-extension YaruGoldenVariantStateSet on YaruGoldenVariant<Set<MaterialState>> {
-  bool hasState(MaterialState state) => value?.contains(state) == true;
+extension YaruGoldenVariantStateSet on YaruGoldenVariant<Set<WidgetState>> {
+  bool hasState(WidgetState state) => value?.contains(state) == true;
 }
 
 extension YaruGoldenVariantStateMap
-    on YaruGoldenVariant<Map<MaterialState, bool>> {
-  bool hasState(MaterialState state) => value?[state] == true;
+    on YaruGoldenVariant<Map<WidgetState, bool>> {
+  bool hasState(WidgetState state) => value?[state] == true;
 }
 
 List<YaruGoldenVariant<T>> goldenThemeVariants<T>(String label, [T? value]) {

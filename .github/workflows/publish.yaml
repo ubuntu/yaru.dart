@@ -4,21 +4,22 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 env:
-  FLUTTER_VERSION: 3.16.x
+  FLUTTER_VERSION: 3.22.0
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v1
         with:
+          channel: 'stable'
           flutter-version: ${{env.FLUTTER_VERSION}}
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
           workingDir: example
-          baseHref: /yaru_widgets.dart/
+          baseHref: /yaru.dart/
           webRenderer: canvaskit
+          customArgs: --no-tree-shake-icons

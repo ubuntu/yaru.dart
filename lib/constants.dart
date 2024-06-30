@@ -22,3 +22,6 @@ const kYaruTitleBarItemHeight = 34.0;
 
 /// The default icon size
 const kYaruIconSize = 20.0;
+
+const kTargetCanvasSize = 24.0;
+const kTargetIconSize = 20.0;

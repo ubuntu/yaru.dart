@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
+import 'package:yaru/theme.dart';
 
 /// The size of a [YaruWindowControl] on the [YaruWindowControlPlatform.yaru] platform.
 const kYaruWindowControlSize = 24.0;
@@ -41,7 +41,7 @@ class YaruWindowControl extends StatefulWidget {
     required this.type,
     this.platform = YaruWindowControlPlatform.yaru,
     required this.onTap,
-    this.foregroundColor,
+    this.iconColor,
     this.backgroundColor,
   });
 
@@ -61,14 +61,12 @@ class YaruWindowControl extends StatefulWidget {
   final GestureTapCallback? onTap;
 
   /// Color used to draw the control icon.
-  /// Leave to null to use the default value.
-  // TODO - V3.0: use MaterialStateProperty, rename to iconColor
-  final Color? foregroundColor;
+  /// Leave to null, or return null, to use the default value.
+  final WidgetStateProperty<Color?>? iconColor;
 
   /// Color used to draw the control background decoration.
-  /// Leave to null to use the default value.
-  // TODO - V3.0: use MaterialStateProperty
-  final Color? backgroundColor;
+  /// Leave to null, or return null, to use the default value.
+  final WidgetStateProperty<Color?>? backgroundColor;
 
   @override
   State<YaruWindowControl> createState() {
@@ -96,6 +94,22 @@ class _YaruWindowControlState extends State<YaruWindowControl>
 
   late CurvedAnimation _animationProgress;
   late AnimationController _animationController;
+
+  Set<WidgetState> get _states {
+    final states = <WidgetState>{};
+
+    if (_hovered) {
+      states.add(WidgetState.hovered);
+    }
+    if (_active) {
+      states.add(WidgetState.pressed);
+    }
+    if (!interactive) {
+      states.add(WidgetState.disabled);
+    }
+
+    return states;
+  }
 
   @override
   void initState() {
@@ -179,9 +193,8 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   }
 
   Color _getBackgoundColor(ColorScheme colorScheme) {
-    if (widget.backgroundColor != null) {
-      return widget.backgroundColor!;
-    }
+    final backgroundColor = widget.backgroundColor?.resolve(_states);
+    if (backgroundColor != null) return backgroundColor;
 
     switch (style) {
       case YaruWindowControlPlatform.yaru:
@@ -231,16 +244,24 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   }
 
   Color _getIconColor(ColorScheme colorScheme) {
-    if (widget.foregroundColor != null) {
-      return widget.foregroundColor!;
-    }
+    final color = switch (style) {
+      YaruWindowControlPlatform.yaru => _getYaruIconColor(colorScheme),
+      YaruWindowControlPlatform.windows => _getWindowsIconColor(colorScheme)
+    };
 
-    switch (style) {
-      case YaruWindowControlPlatform.yaru:
-        return _getYaruIconColor(colorScheme);
-      case YaruWindowControlPlatform.windows:
-        return _getWindowsIconColor(colorScheme);
+    return color.withOpacity(interactive ? 1.0 : 0.5);
+  }
+
+  Color _getYaruIconColor(ColorScheme colorScheme) {
+    return widget.iconColor?.resolve(_states) ?? colorScheme.onSurface;
+  }
+
+  Color _getWindowsIconColor(ColorScheme colorScheme) {
+    final color = widget.iconColor?.resolve(_states) ?? colorScheme.onSurface;
+    if (interactive && _hovered && widget.type == YaruWindowControlType.close) {
+      return Colors.white;
     }
+    return color;
   }
 
   double get _iconSize {
@@ -250,18 +271,6 @@ class _YaruWindowControlState extends State<YaruWindowControl>
       case YaruWindowControlPlatform.windows:
         return 10.0;
     }
-  }
-
-  Color _getYaruIconColor(ColorScheme colorScheme) {
-    return colorScheme.onSurface.withOpacity(interactive ? 1.0 : 0.5);
-  }
-
-  Color _getWindowsIconColor(ColorScheme colorScheme) {
-    if (_hovered && interactive && widget.type == YaruWindowControlType.close) {
-      return widget.foregroundColor ?? Colors.white;
-    }
-
-    return colorScheme.onSurface.withOpacity(interactive ? 1.0 : 0.5);
   }
 
   Widget _buildBoxDecoration({

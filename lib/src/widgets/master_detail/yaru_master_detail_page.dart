@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/foundation.dart' show YaruPageController;
+import 'package:yaru/foundation.dart' show YaruPageController;
+import 'package:yaru/src/widgets/yaru_paned_view_layout_delegate.dart';
 
 import 'yaru_detail_page.dart';
 import 'yaru_landscape_layout.dart';
-import 'yaru_master_detail_layout_delegate.dart';
 import 'yaru_master_detail_theme.dart';
 import 'yaru_master_tile.dart';
 import 'yaru_portrait_layout.dart';
@@ -22,7 +22,7 @@ typedef YaruAppBarBuilder = PreferredSizeWidget? Function(BuildContext context);
 /// A responsive master-detail page.
 ///
 /// [YaruMasterDetailPage] automatically switches between portrait and landscape
-/// mode depending on [layoutDelegate].
+/// mode depending on [breakpoint].
 ///
 /// ```dart
 /// YaruMasterDetailPage(
@@ -43,7 +43,7 @@ typedef YaruAppBarBuilder = PreferredSizeWidget? Function(BuildContext context);
 ///
 /// | Portrait | Landscape |
 /// |---|---|
-/// | ![portrait](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_master_detail_page-portrait.png) | ![landscape](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_master_detail_page-landscape.png) |
+/// | ![portrait](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_master_detail_page-portrait.png) | ![landscape](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_master_detail_page-landscape.png) |
 ///
 /// See also:
 ///  * [YaruMasterTile] - provides the recommended layout for [tileBuilder].
@@ -56,8 +56,10 @@ class YaruMasterDetailPage extends StatefulWidget {
     required this.tileBuilder,
     required this.pageBuilder,
     this.emptyBuilder,
-    this.layoutDelegate =
-        const YaruMasterFixedPaneDelegate(paneWidth: _kDefaultPaneWidth),
+    this.paneLayoutDelegate = const YaruFixedPaneDelegate(
+      paneSize: _kDefaultPaneWidth,
+      paneSide: YaruPaneSide.start,
+    ),
     this.breakpoint,
     this.appBar,
     this.appBarBuilder,
@@ -91,8 +93,9 @@ class YaruMasterDetailPage extends StatefulWidget {
   /// A builder that is called if there are no pages to display.
   final WidgetBuilder? emptyBuilder;
 
-  /// Controls the width and resizing capacity of the left pane.
-  final YaruMasterDetailPaneLayoutDelegate layoutDelegate;
+  /// Controls the width, side and resizing capacity of the pane.
+  /// [YaruPanedViewLayoutDelegate.paneSide] need to be horizontal (see: [YaruPaneSide.isHorizontal]).
+  final YaruPanedViewLayoutDelegate paneLayoutDelegate;
 
   /// The breakpoint at which `YaruMasterDetailPage` switches between portrait
   /// and landscape layouts.
@@ -176,7 +179,6 @@ class YaruMasterDetailPage extends StatefulWidget {
 }
 
 class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
-  double? _previousPaneWidth;
   late YaruPageController _controller;
   late final GlobalKey<NavigatorState> _navigatorKey;
 
@@ -214,8 +216,8 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
     final breakpoint = widget.breakpoint ??
         YaruMasterDetailTheme.of(context).breakpoint ??
         YaruMasterDetailThemeData.fallback(context).breakpoint!;
-    return Scaffold(
-      body: widget.length == 0 || widget.controller?.length == 0
+    return Material(
+      child: widget.length == 0 || widget.controller?.length == 0
           ? widget.emptyBuilder?.call(context) ?? const SizedBox.shrink()
           : _YaruMasterDetailLayoutBuilder(
               breakpoint: breakpoint,
@@ -241,9 +243,7 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
                 tileBuilder: widget.tileBuilder,
                 pageBuilder: widget.pageBuilder,
                 onSelected: widget.onSelected,
-                layoutDelegate: widget.layoutDelegate,
-                previousPaneWidth: _previousPaneWidth,
-                onLeftPaneWidthChange: (width) => _previousPaneWidth = width,
+                paneLayoutDelegate: widget.paneLayoutDelegate,
                 appBar: widget.appBar ?? widget.appBarBuilder?.call(context),
                 bottomBar: widget.bottomBar,
                 controller: _controller,

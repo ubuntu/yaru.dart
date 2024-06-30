@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru/icons.dart';
 
 import 'yaru_page_indicator.dart';
 
@@ -199,7 +199,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
               shape: const CircleBorder(),
-              backgroundColor: Theme.of(context).colorScheme.background,
+              backgroundColor: Theme.of(context).colorScheme.surface,
             ),
             onPressed: onPressed,
             child: icon,

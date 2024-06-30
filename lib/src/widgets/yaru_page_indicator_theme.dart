@@ -30,7 +30,7 @@ class YaruPageIndicatorThemeData
   final YaruPageIndicatorItemBuilder<Widget>? itemBuilder;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the widget.
-  final MaterialStateProperty<MouseCursor?>? mouseCursor;
+  final WidgetStateProperty<MouseCursor?>? mouseCursor;
 
   /// Returns the [Widget] of the text based indicator.
   /// Be careful to use something small enough to fit in a small vertical constraints.
@@ -52,7 +52,7 @@ class YaruPageIndicatorThemeData
   YaruPageIndicatorThemeData copyWith({
     YaruPageIndicatorItemBuilder<Size>? itemSizeBuilder,
     YaruPageIndicatorItemBuilder<Widget>? itemBuilder,
-    MaterialStateProperty<MouseCursor?>? mouseCursor,
+    WidgetStateProperty<MouseCursor?>? mouseCursor,
     YaruPageIndicatorTextBuilder? textBuilder,
     TextStyle? textStyle,
     YaruPageIndicatorLayoutDelegate? layoutDelegate,

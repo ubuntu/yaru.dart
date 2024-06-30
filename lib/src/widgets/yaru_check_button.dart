@@ -52,18 +52,18 @@ class YaruCheckButton extends StatefulWidget {
 }
 
 class _YaruCheckButtonState extends State<YaruCheckButton> {
-  final _statesController = MaterialStatesController();
+  final _statesController = WidgetStatesController();
 
   @override
   void initState() {
     super.initState();
-    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+    _statesController.update(WidgetState.disabled, widget.onChanged == null);
   }
 
   @override
   void didUpdateWidget(YaruCheckButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+    _statesController.update(WidgetState.disabled, widget.onChanged == null);
   }
 
   @override
@@ -76,7 +76,7 @@ class _YaruCheckButtonState extends State<YaruCheckButton> {
   Widget build(BuildContext context) {
     final states = _statesController.value;
     final mouseCursor =
-        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
+        WidgetStateProperty.resolveAs(widget.mouseCursor, states) ??
             YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
 
     return YaruToggleButton(
@@ -93,7 +93,7 @@ class _YaruCheckButtonState extends State<YaruCheckButton> {
         statesController: _statesController,
       ),
       mouseCursor:
-          mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
+          mouseCursor ?? WidgetStateMouseCursor.clickable.resolve(states),
       statesController: _statesController,
       onToggled: widget.onChanged == null ? null : _onToggled,
     );

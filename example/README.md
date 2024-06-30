@@ -1,4 +1,4 @@
-# yaru_widgets_example
+# yaru_example
 
 A new Flutter project.
 

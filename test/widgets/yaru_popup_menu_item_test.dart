@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
 
@@ -16,8 +16,8 @@ void main() {
           itemBuilder: (context) => [
             for (var i = 0; i < 3; ++i)
               YaruCheckedPopupMenuItem(
-                checked: variant.hasState(MaterialState.selected),
-                enabled: !variant.hasState(MaterialState.disabled),
+                checked: variant.hasState(WidgetState.selected),
+                enabled: !variant.hasState(WidgetState.disabled),
                 child: Text('YaruPopupMenuItem $i'),
               ),
           ],
@@ -30,10 +30,10 @@ void main() {
       await tester.tap(find.byType(YaruPopupMenuButton));
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.text('YaruPopupMenuItem 0'));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.text('YaruPopupMenuItem 0'));
         await tester.pumpAndSettle();
       }
@@ -51,21 +51,21 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('unchecked', <MaterialState>{}),
-  ...goldenThemeVariants('unchecked-disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('unchecked-hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('unchecked-pressed', {MaterialState.pressed}),
-  ...goldenThemeVariants('checked', {MaterialState.selected}),
+  ...goldenThemeVariants('unchecked', <WidgetState>{}),
+  ...goldenThemeVariants('unchecked-disabled', {WidgetState.disabled}),
+  ...goldenThemeVariants('unchecked-hovered', {WidgetState.hovered}),
+  ...goldenThemeVariants('unchecked-pressed', {WidgetState.pressed}),
+  ...goldenThemeVariants('checked', {WidgetState.selected}),
   ...goldenThemeVariants('checked-disabled', {
-    MaterialState.selected,
-    MaterialState.disabled,
+    WidgetState.selected,
+    WidgetState.disabled,
   }),
   ...goldenThemeVariants('checked-hovered', {
-    MaterialState.selected,
-    MaterialState.hovered,
+    WidgetState.selected,
+    WidgetState.hovered,
   }),
   ...goldenThemeVariants('checked-pressed', {
-    MaterialState.selected,
-    MaterialState.pressed,
+    WidgetState.selected,
+    WidgetState.pressed,
   }),
 });

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/constants.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/icons.dart';
+import 'package:yaru/theme.dart';
 
 /// A list of [ChoiceChipBar]s wrapped either in a controllable [ListView] or [Wrap].
 class YaruChoiceChipBar extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yaru/yaru.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/constants.dart';
-import 'package:yaru_widgets/src/widgets/yaru_icon_button.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/icons.dart';
+import 'package:yaru/src/widgets/yaru_icon_button.dart';
+import 'package:yaru/theme.dart';
 
 /// A [TextField] to with fully rounded corners,
 /// ideally in a [YaruWindowTitleBar] or [YaruDialogTitleBar]
@@ -92,6 +92,15 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
     super.initState();
     _controller = widget.controller ?? TextEditingController(text: widget.text);
     _focusNode = widget.focusNode ?? FocusNode();
+
+    var isInputEmpty = _controller.text.isEmpty;
+    _controller.addListener(() {
+      if (isInputEmpty != _controller.text.isEmpty) {
+        setState(() {
+          isInputEmpty = _controller.text.isEmpty;
+        });
+      }
+    });
   }
 
   @override

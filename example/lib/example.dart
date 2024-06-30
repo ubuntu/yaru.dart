@@ -2,20 +2,26 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
-import 'code_snippet_button.dart';
 import 'example_model.dart';
 import 'example_page_items.dart';
+import 'pages/icons_page/provider/icon_view_model.dart';
 
 class Example extends StatefulWidget {
   // ignore: unused_element
   const Example({super.key});
 
   static Widget create(BuildContext context) {
-    return ChangeNotifierProvider<ExampleModel>(
-      create: (_) => ExampleModel(getService<Connectivity>()),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ExampleModel>(
+          create: (_) => ExampleModel(getService<Connectivity>()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => IconViewModel(),
+        ),
+      ],
       child: const Example(),
     );
   }
@@ -35,9 +41,12 @@ class _ExampleState extends State<Example> {
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
 
-    return model.compactMode
-        ? _CompactPage(pageItems: examplePageItems)
-        : _MasterDetailPage(pageItems: examplePageItems);
+    return Directionality(
+      textDirection: !model.rtl ? TextDirection.ltr : TextDirection.rtl,
+      child: model.compactMode
+          ? _CompactPage(pageItems: examplePageItems)
+          : _MasterDetailPage(pageItems: examplePageItems),
+    );
   }
 }
 
@@ -54,16 +63,15 @@ class _MasterDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruMasterDetailPage(
-      initialIndex: 1,
-      layoutDelegate: const YaruMasterResizablePaneDelegate(
-        initialPaneWidth: 280,
-        minPageWidth: kYaruMasterDetailBreakpoint / 2,
-        minPaneWidth: 175,
+      paneLayoutDelegate: const YaruResizablePaneDelegate(
+        initialPaneSize: 280,
+        minPageSize: kYaruMasterDetailBreakpoint / 2,
+        minPaneSize: 175,
       ),
       length: pageItems.length,
       tileBuilder: (context, index, selected, availableWidth) => YaruMasterTile(
         leading: pageItems[index].iconBuilder(context, selected),
-        title: buildTitle(context, pageItems[index]),
+        title: Text(pageItems[index].title),
       ),
       pageBuilder: (context, index) => YaruDetailPage(
         appBar: YaruWindowTitleBar(
@@ -72,14 +80,14 @@ class _MasterDetailPage extends StatelessWidget {
           leading:
               Navigator.of(context).canPop() ? const YaruBackButton() : null,
           title: buildTitle(context, pageItems[index]),
+          actions: buildActions(context, pageItems[index]),
         ),
         body: pageItems[index].pageBuilder(context),
-        floatingActionButton: CodeSnippedButton(
-          pageItem: pageItems[index],
-        ),
+        floatingActionButton:
+            buildFloatingActionButton(context, pageItems[index]),
       ),
       appBar: YaruWindowTitleBar(
-        title: const Text('Yaru Widgets'),
+        title: const Text('Yaru'),
         border: BorderSide.none,
         backgroundColor: YaruMasterDetailTheme.of(context).sideBarColor,
       ),
@@ -122,11 +130,16 @@ class _CompactPageState extends State<_CompactPage> {
             : YaruNavigationRailStyle.compact;
 
     return Scaffold(
-      appBar: YaruWindowTitleBar(
-        title: ValueListenableBuilder<int>(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kYaruTitleBarHeight),
+        child: ValueListenableBuilder<int>(
           valueListenable: _selectedPage,
           builder: (context, value, child) {
-            return buildTitle(context, widget.pageItems[value]);
+            return YaruWindowTitleBar(
+              leading: buildLeading(context, widget.pageItems[value]),
+              title: buildTitle(context, widget.pageItems[value]),
+              actions: buildActions(context, widget.pageItems[value]),
+            );
           },
         ),
       ),
@@ -135,15 +148,14 @@ class _CompactPageState extends State<_CompactPage> {
         length: widget.pageItems.length,
         itemBuilder: (context, index, selected) => YaruNavigationRailItem(
           icon: widget.pageItems[index].iconBuilder(context, selected),
-          label: buildTitle(context, widget.pageItems[index]),
+          label: Text(widget.pageItems[index].title),
           tooltip: widget.pageItems[index].title,
           style: style,
         ),
         pageBuilder: (context, index) => Scaffold(
           body: widget.pageItems[index].pageBuilder(context),
-          floatingActionButton: CodeSnippedButton(
-            pageItem: widget.pageItems[index],
-          ),
+          floatingActionButton:
+              buildFloatingActionButton(context, widget.pageItems[index]),
         ),
         trailing: YaruNavigationRailItem(
           icon: const Icon(YaruIcons.gear),
@@ -158,8 +170,20 @@ class _CompactPageState extends State<_CompactPage> {
   }
 }
 
+Widget? buildLeading(BuildContext context, PageItem item) {
+  return item.leadingBuilder?.call(context);
+}
+
 Widget buildTitle(BuildContext context, PageItem item) {
   return item.titleBuilder?.call(context) ?? Text(item.title);
+}
+
+List<Widget>? buildActions(BuildContext context, PageItem item) {
+  return item.actionsBuilder?.call(context);
+}
+
+Widget? buildFloatingActionButton(BuildContext context, PageItem item) {
+  return item.floatingActionButtonBuilder?.call(context);
 }
 
 Future<void> showSettingsDialog(BuildContext context) {
@@ -185,6 +209,13 @@ Future<void> showSettingsDialog(BuildContext context) {
                   trailing: YaruSwitch(
                     value: model.compactMode,
                     onChanged: (v) => model.compactMode = v,
+                  ),
+                ),
+                YaruTile(
+                  title: const Text('RTL mode'),
+                  trailing: YaruSwitch(
+                    value: model.rtl,
+                    onChanged: (v) => model.rtl = v,
                   ),
                 ),
               ],

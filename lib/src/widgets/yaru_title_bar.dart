@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
-import 'package:yaru_widgets/constants.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/theme.dart';
 import 'package:yaru_window/yaru_window.dart';
 
 import 'yaru_title_bar_gesture_detector.dart';
@@ -153,21 +153,21 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
     final light = theme.colorScheme.isLight;
     final highContrast = theme.colorScheme.isHighContrast;
-    final states = <MaterialState>{
-      if (isActive != false) MaterialState.focused,
+    final states = <WidgetState>{
+      if (isActive != false) WidgetState.focused,
     };
-    final defaultBackgroundColor = MaterialStateProperty.resolveWith((states) {
-      if (!states.contains(MaterialState.focused)) {
-        return theme.colorScheme.background;
+    final defaultBackgroundColor = WidgetStateProperty.resolveWith((states) {
+      if (!states.contains(WidgetState.focused)) {
+        return theme.colorScheme.surface;
       }
       return light ? YaruColors.titleBarLight : YaruColors.titleBarDark;
     });
     final backgroundColor =
-        MaterialStateProperty.resolveAs(this.backgroundColor, states) ??
+        WidgetStateProperty.resolveAs(this.backgroundColor, states) ??
             titleBarTheme.backgroundColor?.resolve(states) ??
             defaultBackgroundColor.resolve(states);
     final foregroundColor =
-        MaterialStateProperty.resolveAs(this.foregroundColor, states) ??
+        WidgetStateProperty.resolveAs(this.foregroundColor, states) ??
             titleBarTheme.foregroundColor?.resolve(states) ??
             theme.colorScheme.onSurface;
 
@@ -204,7 +204,6 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
             ? YaruWindowControlPlatform.windows
             : YaruWindowControlPlatform.yaru);
 
-    // TODO: backdrop effect
     Widget? backdropEffect(Widget? child) {
       if (child == null) return null;
       return AnimatedOpacity(
@@ -229,10 +228,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     final closeButton = YaruWindowControl(
       platform: windowControlPlatform,
-      foregroundColor:
-          windowControlPlatform == YaruWindowControlPlatform.windows
-              ? null
-              : foregroundColor,
+      iconColor: WidgetStatePropertyAll(foregroundColor),
       type: YaruWindowControlType.close,
       onTap: onClose != null ? () => onClose!(context) : null,
     );
@@ -276,7 +272,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isMinimizable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                foregroundColor: foregroundColor,
+                                iconColor:
+                                    WidgetStatePropertyAll(foregroundColor),
                                 type: YaruWindowControlType.minimize,
                                 onTap: onMinimize != null
                                     ? () => onMinimize!(context)
@@ -285,7 +282,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isRestorable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                foregroundColor: foregroundColor,
+                                iconColor:
+                                    WidgetStatePropertyAll(foregroundColor),
                                 type: YaruWindowControlType.restore,
                                 onTap: onRestore != null
                                     ? () => onRestore!(context)
@@ -294,7 +292,8 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isMaximizable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                foregroundColor: foregroundColor,
+                                iconColor:
+                                    WidgetStatePropertyAll(foregroundColor),
                                 type: YaruWindowControlType.maximize,
                                 onTap: onMaximize != null
                                     ? () => onMaximize!(context)
@@ -340,7 +339,7 @@ extension _ListSpacing on List<Widget> {
 /// maximizing, restoring, and closing the window, as well as a context menu,
 /// and double-click-to-maximize and drag-to-move functionality.
 ///
-/// ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar.png)
+/// ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar.png)
 ///
 /// ### Initialization
 ///
@@ -393,7 +392,7 @@ extension _ListSpacing on List<Widget> {
 ///
 /// | Home | Builder |
 /// |---|---|
-/// | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-home.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-builder.png) |
+/// | ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar-home.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar-builder.png) |
 ///
 /// ### Debug banner
 ///
@@ -419,7 +418,7 @@ extension _ListSpacing on List<Widget> {
 ///
 /// | `MaterialApp` | `CheckedModeBanner` |
 /// |---|---|
-/// | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-debug.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/doc/assets/yaru_window_title_bar-banner.png) |
+/// | ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar-debug.png) | ![](https://raw.githubusercontent.com/ubuntu/yaru.dart/main/doc/assets/yaru_window_title_bar-banner.png) |
 class YaruWindowTitleBar extends StatelessWidget
     implements PreferredSizeWidget {
   const YaruWindowTitleBar({

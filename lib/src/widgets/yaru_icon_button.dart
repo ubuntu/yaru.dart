@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/constants.dart';
+import 'package:yaru/constants.dart';
 
 /// An [IconButton] with a default fixed size of 40x40.
 class YaruIconButton extends StatelessWidget {
@@ -43,44 +43,44 @@ class YaruIconButton extends StatelessWidget {
   ButtonStyle defaultStyleOf(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return ButtonStyle(
-      fixedSize: MaterialStateProperty.all(Size(iconSize, iconSize)),
-      foregroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
-          if (states.contains(MaterialState.disabled)) {
+      fixedSize: WidgetStateProperty.all(Size(iconSize, iconSize)),
+      foregroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          if (states.contains(WidgetState.disabled)) {
             return colors.primary.withOpacity(0.38);
           }
           return colors.primary;
         }
-        if (states.contains(MaterialState.disabled)) {
+        if (states.contains(WidgetState.disabled)) {
           return colors.onSurface.withOpacity(0.38);
         }
         return colors.onSurface.withOpacity(0.8);
       }),
-      backgroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      backgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return colors.onSurface.withOpacity(0.1);
         }
         return null;
       }),
-      overlayColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
-          if (states.contains(MaterialState.pressed)) {
+      overlayColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          if (states.contains(WidgetState.pressed)) {
             return colors.onSurface.withOpacity(0.12);
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             return colors.onSurface.withOpacity(0.08);
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             return colors.onSurface.withOpacity(0.12);
           }
         }
-        if (states.contains(MaterialState.pressed)) {
+        if (states.contains(WidgetState.pressed)) {
           return colors.onSurfaceVariant.withOpacity(0.12);
         }
-        if (states.contains(MaterialState.hovered)) {
+        if (states.contains(WidgetState.hovered)) {
           return colors.onSurfaceVariant.withOpacity(0.08);
         }
-        if (states.contains(MaterialState.focused)) {
+        if (states.contains(WidgetState.focused)) {
           return colors.onSurfaceVariant.withOpacity(0.08);
         }
         return null;

@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
 
@@ -170,10 +170,10 @@ void main() {
 
       await tester.pumpScaffold(
         YaruRadioButton<bool>(
-          autofocus: variant.hasState(MaterialState.focused),
-          value: variant.hasState(MaterialState.selected),
+          autofocus: variant.hasState(WidgetState.focused),
+          value: variant.hasState(WidgetState.selected),
           groupValue: true,
-          onChanged: variant.hasState(MaterialState.disabled) ? null : (_) {},
+          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
           title: const Text('YaruRadioButton'),
           subtitle: const Text('Lorem ipsum dolor sit amet'),
         ),
@@ -183,10 +183,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruRadio<bool>));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruRadio<bool>));
         await tester.pumpAndSettle();
       }
@@ -202,26 +202,26 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('unchecked', <MaterialState>{}),
-  ...goldenThemeVariants('unckecked-disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('unckecked-focused', {MaterialState.focused}),
-  ...goldenThemeVariants('unckecked-hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('unckecked-pressed', {MaterialState.pressed}),
-  ...goldenThemeVariants('checked', {MaterialState.selected}),
+  ...goldenThemeVariants('unchecked', <WidgetState>{}),
+  ...goldenThemeVariants('unckecked-disabled', {WidgetState.disabled}),
+  ...goldenThemeVariants('unckecked-focused', {WidgetState.focused}),
+  ...goldenThemeVariants('unckecked-hovered', {WidgetState.hovered}),
+  ...goldenThemeVariants('unckecked-pressed', {WidgetState.pressed}),
+  ...goldenThemeVariants('checked', {WidgetState.selected}),
   ...goldenThemeVariants('checked-disabled', {
-    MaterialState.selected,
-    MaterialState.disabled,
+    WidgetState.selected,
+    WidgetState.disabled,
   }),
   ...goldenThemeVariants('checked-focused', {
-    MaterialState.selected,
-    MaterialState.focused,
+    WidgetState.selected,
+    WidgetState.focused,
   }),
   ...goldenThemeVariants('checked-hovered', {
-    MaterialState.selected,
-    MaterialState.hovered,
+    WidgetState.selected,
+    WidgetState.hovered,
   }),
   ...goldenThemeVariants('checked-pressed', {
-    MaterialState.selected,
-    MaterialState.pressed,
+    WidgetState.selected,
+    WidgetState.pressed,
   }),
 });

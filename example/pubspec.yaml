@@ -1,11 +1,11 @@
-name: yaru_widgets_example
-description: Demonstrate yaru_widgets
+name: yaru_example
+description: Demonstrate yaru
 publish_to: "none"
 version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=3.10.0"
+  flutter: ">=3.22.0"
 
 dependencies:
   collection: ^1.17.0
@@ -15,12 +15,13 @@ dependencies:
   flutter_highlight: ^0.7.0
   handy_window: ^0.3.1
   http: ^1.1.0
+  path: ^1.8.3
   provider: ^6.0.2
   safe_change_notifier: ^0.3.1
   ubuntu_service: ^0.2.4
-  yaru: ^1.2.0
-  yaru_icons: ">=1.0.0 <3.0.0"
-  yaru_widgets:
+  universal_html: ^2.2.4
+  url_launcher: ^6.2.5
+  yaru:
     path: ../
 
 dev_dependencies:
@@ -29,7 +30,9 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  uses-material-design: true
-
   assets:
     - assets/
+  fonts:
+    - family: YaruIcons
+      fonts:
+        - asset: ../assets/yaru_icons.otf

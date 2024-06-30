@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/constants.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/icons.dart';
 
 import 'yaru_check_button.dart';
 
@@ -49,7 +49,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? OutlinedButtonTheme.of(context).style;
-    final state = <MaterialState>{if (!enabled) MaterialState.disabled};
+    final state = <WidgetState>{if (!enabled) WidgetState.disabled};
     final side = style?.side?.resolve(state);
     final shape = style?.shape?.resolve(state) ??
         RoundedRectangleBorder(
@@ -58,16 +58,17 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
           ),
         );
     final mouseCursor =
-        MaterialStateProperty.resolveAs(this.mouseCursor, state) ??
+        WidgetStateProperty.resolveAs(this.mouseCursor, state) ??
             style?.mouseCursor?.resolve(state) ??
-            MaterialStateMouseCursor.clickable.resolve(state);
+            WidgetStateMouseCursor.clickable.resolve(state);
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
       child: Material(
-        color: Colors.transparent,
+        color: style?.backgroundColor?.resolve({}) ?? Colors.transparent,
         clipBehavior: Clip.antiAlias,
         shape: shape,
         child: PopupMenuButton(
+          iconColor: style?.foregroundColor?.resolve({}),
           enabled: enabled,
           elevation: elevation,
           position: position,
@@ -88,7 +89,8 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                 padding: padding,
                 child: DefaultTextStyle(
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: style?.foregroundColor?.resolve({}) ??
+                        Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w500,
                   ),
                   child: Row(
@@ -102,8 +104,9 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                       SizedBox(
                         height: kYaruTitleBarItemHeight,
                         child: icon ??
-                            const Icon(
+                            Icon(
                               YaruIcons.pan_down,
+                              color: style?.foregroundColor?.resolve({}),
                             ),
                       ),
                     ],

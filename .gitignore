@@ -59,3 +59,4 @@ test/**/failures/*.png
 # Example
 example/macos/Podfile.lock
 example/macos/Flutter/GeneratedPluginRegistrant.swift
+.DS_Store

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
 
@@ -15,8 +14,8 @@ void main() {
 
       await tester.pumpScaffold(
         YaruMasterDetailPage(
-          layoutDelegate: const YaruMasterFixedPaneDelegate(
-            paneWidth: kYaruMasterDetailBreakpoint / 3,
+          paneLayoutDelegate: const YaruFixedPaneDelegate(
+            paneSize: kYaruMasterDetailBreakpoint / 3,
           ),
           length: withSpacer ? 3 : 8,
           appBar: AppBar(title: const Text('Master')),
@@ -68,8 +67,8 @@ void main() {
             length: length,
             initialIndex: initialIndex,
             controller: controller,
-            layoutDelegate: const YaruMasterFixedPaneDelegate(
-              paneWidth: kYaruMasterDetailBreakpoint / 3,
+            paneLayoutDelegate: const YaruFixedPaneDelegate(
+              paneSize: kYaruMasterDetailBreakpoint / 3,
             ),
             appBar: AppBar(title: const Text('Master')),
             tileBuilder: (context, index, selected, maxWidth) => YaruMasterTile(

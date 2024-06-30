@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 void main() {
   testWidgets('narrow title', (tester) async {
@@ -8,9 +8,13 @@ void main() {
     const title = Key('title');
 
     await tester.pumpToggleButton(
-      const YaruToggleButton(
-        leading: SizedBox(key: leading, width: 48, height: 48),
-        title: SizedBox(key: title, width: 128, height: 24),
+      const Row(
+        children: [
+          YaruToggleButton(
+            leading: SizedBox(key: leading, width: 48, height: 48),
+            title: SizedBox(key: title, width: 128, height: 24),
+          ),
+        ],
       ),
     );
 
@@ -38,9 +42,13 @@ void main() {
     const title = Key('title');
 
     await tester.pumpToggleButton(
-      const YaruToggleButton(
-        leading: SizedBox(key: leading, width: 24, height: 24),
-        title: SizedBox(key: title, width: 128, height: 48),
+      const Row(
+        children: [
+          YaruToggleButton(
+            leading: SizedBox(key: leading, width: 24, height: 24),
+            title: SizedBox(key: title, width: 128, height: 48),
+          ),
+        ],
       ),
     );
 
@@ -69,10 +77,14 @@ void main() {
     const subtitle = Key('subtitle');
 
     await tester.pumpToggleButton(
-      const YaruToggleButton(
-        leading: SizedBox(key: leading, width: 48, height: 48),
-        title: SizedBox(key: title, width: 128, height: 24),
-        subtitle: SizedBox(key: subtitle, width: 192, height: 16),
+      const Row(
+        children: [
+          YaruToggleButton(
+            leading: SizedBox(key: leading, width: 48, height: 48),
+            title: SizedBox(key: title, width: 128, height: 24),
+            subtitle: SizedBox(key: subtitle, width: 192, height: 16),
+          ),
+        ],
       ),
     );
 
@@ -103,14 +115,94 @@ void main() {
     expect(subtitleRect.height, 16);
   });
 
+  testWidgets('title expanded', (tester) async {
+    const leading = Key('leading');
+    const title = Key('title');
+
+    await tester.pumpToggleButton(
+      const SizedBox(
+        width: 200,
+        child: YaruToggleButton(
+          leading: SizedBox(key: leading, width: 48, height: 48),
+          title: SizedBox(key: title, height: 24),
+        ),
+      ),
+    );
+
+    final buttonRect = tester.getRect(find.byType(YaruToggleButton));
+    final leadingRect = tester.getRect(find.byKey(leading));
+    final titleRect = tester.getRect(find.byKey(title));
+
+    expect(buttonRect.width, 200);
+    expect(buttonRect.height, 48);
+
+    expect(leadingRect.left, buttonRect.left);
+    expect(leadingRect.top, buttonRect.top);
+    expect(leadingRect.width, 48);
+    expect(leadingRect.height, 48);
+
+    expect(titleRect.left, greaterThan(leadingRect.right));
+    expect(titleRect.center.dy, leadingRect.center.dy);
+    expect(titleRect.right, buttonRect.right);
+    expect(titleRect.width, 200 - 8 - 48);
+    expect(titleRect.height, 24);
+  });
+
+  testWidgets('subtitle expanded', (tester) async {
+    const leading = Key('leading');
+    const title = Key('title');
+    const subtitle = Key('subtitle');
+
+    await tester.pumpToggleButton(
+      const SizedBox(
+        width: 200,
+        child: YaruToggleButton(
+          leading: SizedBox(key: leading, width: 48, height: 48),
+          title: SizedBox(key: title, height: 24),
+          subtitle: SizedBox(key: subtitle, height: 16),
+        ),
+      ),
+    );
+
+    final buttonRect = tester.getRect(find.byType(YaruToggleButton));
+    final leadingRect = tester.getRect(find.byKey(leading));
+    final titleRect = tester.getRect(find.byKey(title));
+    final subtitleRect = tester.getRect(find.byKey(subtitle));
+
+    expect(buttonRect.width, 200);
+    expect(buttonRect.height, greaterThan(48));
+
+    expect(leadingRect.left, buttonRect.left);
+    expect(leadingRect.top, buttonRect.top);
+    expect(leadingRect.width, 48);
+    expect(leadingRect.height, 48);
+
+    expect(titleRect.left, greaterThan(leadingRect.right));
+    expect(titleRect.center.dy, leadingRect.center.dy);
+    expect(titleRect.right, buttonRect.right);
+    expect(titleRect.width, 200 - 8 - 48);
+    expect(titleRect.height, 24);
+
+    expect(subtitleRect.left, titleRect.left);
+    expect(subtitleRect.top, greaterThan(titleRect.bottom));
+    expect(subtitleRect.right, buttonRect.right);
+    expect(subtitleRect.bottom, buttonRect.bottom);
+    expect(subtitleRect.width, 200 - 8 - 48);
+    expect(subtitleRect.height, 16);
+  });
+
   testWidgets('narrow rtl title', (tester) async {
     const leading = Key('leading');
     const title = Key('title');
 
     await tester.pumpToggleButton(
-      const YaruToggleButton(
-        leading: SizedBox(key: leading, width: 48, height: 48),
-        title: SizedBox(key: title, width: 128, height: 24),
+      const Row(
+        children: [
+          YaruToggleButton(
+            leading: SizedBox(key: leading, width: 48, height: 48),
+            title: SizedBox(key: title, width: 128, height: 24),
+          ),
+        ],
       ),
       textDirection: TextDirection.rtl,
     );
@@ -139,9 +231,13 @@ void main() {
     const title = Key('title');
 
     await tester.pumpToggleButton(
-      const YaruToggleButton(
-        leading: SizedBox(key: leading, width: 24, height: 24),
-        title: SizedBox(key: title, width: 128, height: 48),
+      const Row(
+        children: [
+          YaruToggleButton(
+            leading: SizedBox(key: leading, width: 24, height: 24),
+            title: SizedBox(key: title, width: 128, height: 48),
+          ),
+        ],
       ),
       textDirection: TextDirection.rtl,
     );
@@ -171,10 +267,14 @@ void main() {
     const subtitle = Key('subtitle');
 
     await tester.pumpToggleButton(
-      const YaruToggleButton(
-        leading: SizedBox(key: leading, width: 48, height: 48),
-        title: SizedBox(key: title, width: 128, height: 24),
-        subtitle: SizedBox(key: subtitle, width: 192, height: 16),
+      const Row(
+        children: [
+          YaruToggleButton(
+            leading: SizedBox(key: leading, width: 48, height: 48),
+            title: SizedBox(key: title, width: 128, height: 24),
+            subtitle: SizedBox(key: subtitle, width: 192, height: 16),
+          ),
+        ],
       ),
       textDirection: TextDirection.rtl,
     );
@@ -206,22 +306,104 @@ void main() {
     expect(subtitleRect.height, 16);
   });
 
+  testWidgets('rtl title expanded', (tester) async {
+    const leading = Key('leading');
+    const title = Key('title');
+
+    await tester.pumpToggleButton(
+      const SizedBox(
+        width: 200,
+        child: YaruToggleButton(
+          leading: SizedBox(key: leading, width: 48, height: 48),
+          title: SizedBox(key: title, height: 24),
+        ),
+      ),
+      textDirection: TextDirection.rtl,
+    );
+
+    final buttonRect = tester.getRect(find.byType(YaruToggleButton));
+    final leadingRect = tester.getRect(find.byKey(leading));
+    final titleRect = tester.getRect(find.byKey(title));
+
+    expect(buttonRect.width, 200);
+    expect(buttonRect.height, 48);
+
+    expect(leadingRect.right, buttonRect.right);
+    expect(leadingRect.top, buttonRect.top);
+    expect(leadingRect.width, 48);
+    expect(leadingRect.height, 48);
+
+    expect(titleRect.right, lessThan(leadingRect.left));
+    expect(titleRect.center.dy, leadingRect.center.dy);
+    expect(titleRect.left, buttonRect.left);
+    expect(titleRect.width, 200 - 8 - 48);
+    expect(titleRect.height, 24);
+  });
+
+  testWidgets('rtl subtitle expanded', (tester) async {
+    const leading = Key('leading');
+    const title = Key('title');
+    const subtitle = Key('subtitle');
+
+    await tester.pumpToggleButton(
+      const SizedBox(
+        width: 200,
+        child: YaruToggleButton(
+          leading: SizedBox(key: leading, width: 48, height: 48),
+          title: SizedBox(key: title, height: 24),
+          subtitle: SizedBox(key: subtitle, height: 16),
+        ),
+      ),
+      textDirection: TextDirection.rtl,
+    );
+
+    final buttonRect = tester.getRect(find.byType(YaruToggleButton));
+    final leadingRect = tester.getRect(find.byKey(leading));
+    final titleRect = tester.getRect(find.byKey(title));
+    final subtitleRect = tester.getRect(find.byKey(subtitle));
+
+    expect(buttonRect.width, 200);
+    expect(buttonRect.height, greaterThan(48));
+
+    expect(leadingRect.right, buttonRect.right);
+    expect(leadingRect.top, buttonRect.top);
+    expect(leadingRect.width, 48);
+    expect(leadingRect.height, 48);
+
+    expect(titleRect.left, buttonRect.left);
+    expect(titleRect.center.dy, leadingRect.center.dy);
+    expect(titleRect.right, lessThan(leadingRect.left));
+    expect(titleRect.width, 200 - 8 - 48);
+    expect(titleRect.height, 24);
+
+    expect(subtitleRect.left, buttonRect.left);
+    expect(subtitleRect.top, greaterThan(titleRect.bottom));
+    expect(subtitleRect.right, lessThan(leadingRect.left));
+    expect(subtitleRect.bottom, buttonRect.bottom);
+    expect(subtitleRect.width, 200 - 8 - 48);
+    expect(subtitleRect.height, 16);
+  });
+
   testWidgets('theme spacing', (tester) async {
     const leading = Key('leading');
     const title = Key('title');
     const subtitle = Key('subtitle');
 
     await tester.pumpToggleButton(
-      const YaruToggleButtonTheme(
-        data: YaruToggleButtonThemeData(
-          horizontalSpacing: 24,
-          verticalSpacing: 12,
-        ),
-        child: YaruToggleButton(
-          leading: SizedBox(key: leading, width: 48, height: 48),
-          title: SizedBox(key: title, width: 128, height: 24),
-          subtitle: SizedBox(key: subtitle, width: 192, height: 16),
-        ),
+      const Row(
+        children: [
+          YaruToggleButtonTheme(
+            data: YaruToggleButtonThemeData(
+              horizontalSpacing: 24,
+              verticalSpacing: 12,
+            ),
+            child: YaruToggleButton(
+              leading: SizedBox(key: leading, width: 48, height: 48),
+              title: SizedBox(key: title, width: 128, height: 24),
+              subtitle: SizedBox(key: subtitle, width: 192, height: 16),
+            ),
+          ),
+        ],
       ),
     );
 
@@ -257,16 +439,24 @@ void main() {
     const title = Key('title');
 
     await tester.pumpToggleButton(
-      const YaruToggleButton(
-        leading: SizedBox(key: leading, width: 24, height: 24),
-        title: SizedBox(key: title, width: 96, height: 48),
+      const Row(
+        children: [
+          YaruToggleButton(
+            leading: SizedBox(key: leading, width: 24, height: 24),
+            title: SizedBox(key: title, width: 96, height: 48),
+          ),
+        ],
       ),
     );
 
     await tester.pumpToggleButton(
-      const YaruToggleButton(
-        leading: SizedBox(key: leading, width: 48, height: 48),
-        title: SizedBox(key: title, width: 128, height: 24),
+      const Row(
+        children: [
+          YaruToggleButton(
+            leading: SizedBox(key: leading, width: 48, height: 48),
+            title: SizedBox(key: title, width: 128, height: 24),
+          ),
+        ],
       ),
     );
 

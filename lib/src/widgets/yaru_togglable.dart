@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
+import 'package:yaru/theme.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
@@ -61,7 +61,7 @@ abstract class YaruTogglable<T> extends StatefulWidget {
   final MouseCursor? mouseCursor;
 
   /// Controls the states of the [YaruTogglable].
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 }
 
 abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
@@ -80,7 +80,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   late CurvedAnimation indicatorPosition;
   late AnimationController indicatorController;
 
-  late MaterialStatesController statesController;
+  late WidgetStatesController statesController;
 
   late final Map<Type, Action<Intent>> _actionMap = <Type, Action<Intent>>{
     ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: handleTap),
@@ -125,7 +125,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       curve: Curves.fastOutSlowIn,
     );
 
-    statesController = widget.statesController ?? MaterialStatesController();
+    statesController = widget.statesController ?? WidgetStatesController();
     statesController.addListener(handleStateChange);
   }
 
@@ -158,7 +158,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
     if (oldWidget.statesController != widget.statesController) {
       statesController.removeListener(handleStateChange);
-      statesController = widget.statesController ?? MaterialStatesController();
+      statesController = widget.statesController ?? WidgetStatesController();
       statesController.addListener(handleStateChange);
     }
   }
@@ -178,12 +178,12 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
   void handleStateChange() {
     final states = statesController.value;
-    handleFocusChange(states.contains(MaterialState.focused));
-    handleHoverChange(states.contains(MaterialState.hovered));
-    handleActiveChange(states.contains(MaterialState.pressed));
+    handleFocusChange(states.contains(WidgetState.focused));
+    handleHoverChange(states.contains(WidgetState.hovered));
+    handleActiveChange(states.contains(WidgetState.pressed));
   }
 
-  void updateState(MaterialState state, bool add) {
+  void updateState(WidgetState state, bool add) {
     statesController.update(state, add);
   }
 
@@ -248,21 +248,18 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       enabled: widget.interactive,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
-      onShowFocusHighlight: (value) =>
-          updateState(MaterialState.focused, value),
-      onShowHoverHighlight: (value) =>
-          updateState(MaterialState.hovered, value),
+      onShowFocusHighlight: (value) => updateState(WidgetState.focused, value),
+      onShowHoverHighlight: (value) => updateState(WidgetState.hovered, value),
       mouseCursor: mouseCursor ??
           (widget.interactive
               ? SystemMouseCursors.click
               : SystemMouseCursors.basic),
       child: GestureDetector(
         excludeFromSemantics: !widget.interactive,
-        onTapDown: (_) =>
-            updateState(MaterialState.pressed, widget.interactive),
+        onTapDown: (_) => updateState(WidgetState.pressed, widget.interactive),
         onTap: handleTap,
-        onTapUp: (_) => updateState(MaterialState.pressed, false),
-        onTapCancel: () => updateState(MaterialState.pressed, false),
+        onTapUp: (_) => updateState(WidgetState.pressed, false),
+        onTapCancel: () => updateState(WidgetState.pressed, false),
         child: AbsorbPointer(
           child: child,
         ),

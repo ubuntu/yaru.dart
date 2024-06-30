@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
 
@@ -157,9 +157,9 @@ void main() {
 
       await tester.pumpScaffold(
         YaruSwitchButton(
-          autofocus: variant.hasState(MaterialState.focused),
-          value: variant.hasState(MaterialState.selected),
-          onChanged: variant.hasState(MaterialState.disabled) ? null : (_) {},
+          autofocus: variant.hasState(WidgetState.focused),
+          value: variant.hasState(WidgetState.selected),
+          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
           title: const Text('YaruSwitchButton'),
           subtitle: const Text('Lorem ipsum dolor sit amet'),
         ),
@@ -169,10 +169,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruSwitch));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruSwitch));
         await tester.pumpAndSettle();
       }
@@ -188,26 +188,26 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('off', <MaterialState>{}),
-  ...goldenThemeVariants('off-disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('off-focused', {MaterialState.focused}),
-  ...goldenThemeVariants('off-hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('off-pressed', {MaterialState.pressed}),
-  ...goldenThemeVariants('on', {MaterialState.selected}),
+  ...goldenThemeVariants('off', <WidgetState>{}),
+  ...goldenThemeVariants('off-disabled', {WidgetState.disabled}),
+  ...goldenThemeVariants('off-focused', {WidgetState.focused}),
+  ...goldenThemeVariants('off-hovered', {WidgetState.hovered}),
+  ...goldenThemeVariants('off-pressed', {WidgetState.pressed}),
+  ...goldenThemeVariants('on', {WidgetState.selected}),
   ...goldenThemeVariants('on-disabled', {
-    MaterialState.selected,
-    MaterialState.disabled,
+    WidgetState.selected,
+    WidgetState.disabled,
   }),
   ...goldenThemeVariants('on-focused', {
-    MaterialState.selected,
-    MaterialState.focused,
+    WidgetState.selected,
+    WidgetState.focused,
   }),
   ...goldenThemeVariants('on-hovered', {
-    MaterialState.selected,
-    MaterialState.hovered,
+    WidgetState.selected,
+    WidgetState.hovered,
   }),
   ...goldenThemeVariants('on-pressed', {
-    MaterialState.selected,
-    MaterialState.pressed,
+    WidgetState.selected,
+    WidgetState.pressed,
   }),
 });

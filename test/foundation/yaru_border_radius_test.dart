@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/test.dart';
-import 'package:yaru_widgets/src/foundation/yaru_border_radius.dart';
+import 'package:yaru/src/foundation/yaru_border_radius.dart';
 
 void main() {
   group('- BorderRadiusExtension.inner() test -', () {

@@ -4,22 +4,21 @@ import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/vs.dart';
 import 'package:flutter_highlight/themes/vs2015.dart';
 import 'package:provider/provider.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
+
 import 'example_model.dart';
-import 'example_page_items.dart';
 
 class CodeSnippedButton extends StatelessWidget {
-  const CodeSnippedButton({super.key, required this.pageItem});
+  const CodeSnippedButton({
+    super.key,
+    required this.snippetUrl,
+  });
 
-  final PageItem pageItem;
+  final String snippetUrl;
 
   @override
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
-    if (pageItem.snippetUrl == null) {
-      return const SizedBox.shrink();
-    }
     return FloatingActionButton(
       onPressed: () => showDialog(
         barrierDismissible: true,
@@ -28,7 +27,7 @@ class CodeSnippedButton extends StatelessWidget {
           return ChangeNotifierProvider.value(
             value: model,
             child: _CodeDialog(
-              pageItem: pageItem,
+              snippetUrl: snippetUrl,
             ),
           );
         },
@@ -42,22 +41,36 @@ class CodeSnippedButton extends StatelessWidget {
   }
 }
 
-class _CodeDialog extends StatelessWidget {
-  // ignore: unused_element
-  const _CodeDialog({super.key, required this.pageItem});
+class _CodeDialog extends StatefulWidget {
+  const _CodeDialog({
+    required this.snippetUrl,
+  });
 
-  final PageItem pageItem;
+  final String snippetUrl;
+
+  @override
+  State<_CodeDialog> createState() => _CodeDialogState();
+}
+
+class _CodeDialogState extends State<_CodeDialog> {
+  late Future<String> _snippet;
+
+  @override
+  void initState() {
+    super.initState();
+    _snippet = context.read<ExampleModel>().getCodeSnippet(
+          widget.snippetUrl,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
     final model = context.watch<ExampleModel>();
 
-    var snippet = '';
-
     return AlertDialog(
       titlePadding: EdgeInsets.zero,
       title: YaruDialogTitleBar(
-        title: Text(!model.appIsOnline ? 'Offline' : pageItem.title),
+        title: Text(!model.appIsOnline ? 'Offline' : 'Source code'),
         leading: !model.appIsOnline
             ? null
             : Center(
@@ -65,24 +78,22 @@ class _CodeDialog extends StatelessWidget {
                   icon: const Icon(YaruIcons.copy),
                   tooltip: 'Copy',
                   onPressed: () async {
-                    await Clipboard.setData(
-                      ClipboardData(text: snippet),
+                    await _snippet.then(
+                      (value) => Clipboard.setData(
+                        ClipboardData(text: value),
+                      ),
                     );
                   },
                 ),
               ),
       ),
-      contentPadding: const EdgeInsets.only(top: 10, bottom: 10),
+      contentPadding: EdgeInsets.zero,
       content: !model.appIsOnline
           ? Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  YaruAnimatedIcon(
-                    const YaruAnimatedNoNetworkIcon(),
-                    size: 200,
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  const YaruAnimatedVectorIcon(YaruAnimatedIcons.no_network),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: kYaruPagePadding,
@@ -97,9 +108,7 @@ class _CodeDialog extends StatelessWidget {
               ),
             )
           : FutureBuilder<String>(
-              future: model.getCodeSnippet(
-                pageItem.snippetUrl ?? '',
-              ),
+              future: _snippet,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(
@@ -109,31 +118,19 @@ class _CodeDialog extends StatelessWidget {
                   );
                 }
 
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.waiting:
-                  case ConnectionState.active:
-                    return const Center(
-                      child: YaruCircularProgressIndicator(
-                        strokeWidth: 3,
-                      ),
-                    );
-                  case ConnectionState.done:
-                    snippet = snapshot.data!;
-                    return SingleChildScrollView(
-                      child: HighlightView(
-                        snippet,
-                        language: 'dart',
-                        theme: Theme.of(context).brightness == Brightness.dark
-                            ? vs2015Theme
-                            : vsTheme,
-                        padding: const EdgeInsets.all(12),
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    );
-                }
+                return SingleChildScrollView(
+                  child: HighlightView(
+                    snapshot.data!,
+                    language: 'dart',
+                    theme: Theme.of(context).brightness == Brightness.dark
+                        ? vs2015Theme
+                        : vsTheme,
+                    padding: const EdgeInsets.all(12),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                );
               },
             ),
     );

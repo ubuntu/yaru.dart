@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
-set(BINARY_NAME "yaru_widgets_example")
-set(APPLICATION_ID "com.ubuntu.yaru_widgets_example")
+set(BINARY_NAME "yaru_example")
+set(APPLICATION_ID "com.ubuntu.yaru_example")
 
 cmake_policy(SET CMP0063 NEW)
 

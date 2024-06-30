@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
-import 'package:yaru_widgets/constants.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/theme.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
@@ -124,7 +124,7 @@ class YaruMasterTile extends StatelessWidget {
         : _kScrollbarMargin * 2;
 
     final scrollBarThumbThikness =
-        scrollbarTheme.thickness?.resolve({MaterialState.hovered}) ??
+        scrollbarTheme.thickness?.resolve({WidgetState.hovered}) ??
             _kScrollbarThickness;
 
     return doubleMarginWidth + scrollBarThumbThikness;
