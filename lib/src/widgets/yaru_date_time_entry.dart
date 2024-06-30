@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/src/widgets/yaru_segmented_entry.dart';
+import 'package:yaru/src/widgets/yaru_segmented_entry.dart';
+import 'package:yaru/src/yaru_icons.dart';
 
 import '../foundation/yaru_entry_segment.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yaru_widgets/src/widgets/yaru_edge_focus_interceptor.dart';
-import 'package:yaru_widgets/widgets.dart';
+import 'package:yaru/src/widgets/yaru_edge_focus_interceptor.dart';
+import 'package:yaru/widgets.dart';
 
 import '../foundation/yaru_entry_segment.dart';
 
