@@ -26,9 +26,9 @@ void main() {
     await tester.enterText(finder, '2001');
 
     if (time) {
-      await tester.enterText(finder, '14');
+      await tester.enterText(finder, '11');
       await tester.enterText(finder, '30');
-      expect(controller.dateTime, DateTime(2001, 12, 31, 14, 30));
+      expect(controller.dateTime, DateTime(2001, 12, 31, 11, 30));
     } else {
       expect(controller.dateTime, DateTime(2001, 12, 31));
     }
@@ -56,9 +56,11 @@ void main() {
 
     final finder = find.byType(YaruTimeEntry);
     await tester.tap(finder);
-    await tester.enterText(finder, '14');
+    await tester.enterText(finder, '11');
+    await tester.pump();
     await tester.enterText(finder, '30');
-    expect(controller.timeOfDay, const TimeOfDay(hour: 14, minute: 30));
+    await tester.pump();
+    expect(controller.timeOfDay, const TimeOfDay(hour: 11, minute: 30));
   });
 
   testWidgets('overflow bound segment value update other segments',
