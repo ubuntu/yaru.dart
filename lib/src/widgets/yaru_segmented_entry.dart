@@ -149,16 +149,16 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   void _updateEntryFocusNode() {
-    final widgetOnKey = widget.focusNode?.onKey;
+    final widgetOnKey = widget.focusNode?.onKeyEvent;
     _focusNode = widget.focusNode ?? FocusNode();
 
     if (widgetOnKey != null) {
-      _focusNode.onKey = (node, event) =>
+      _focusNode.onKeyEvent = (node, event) =>
           widgetOnKey(node, event) == KeyEventResult.handled
               ? KeyEventResult.handled
-              : _onKey(node, event);
+              : _onKeyEvent(node, event);
     } else {
-      _focusNode.onKey = _onKey;
+      _focusNode.onKeyEvent = _onKeyEvent;
     }
   }
 
@@ -216,17 +216,19 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
     }
   }
 
-  KeyEventResult _onKey(FocusNode node, RawKeyEvent event) {
+  KeyEventResult _onKeyEvent(FocusNode node, KeyEvent event) {
+    
     if (widget.segments.isEmpty ||
-        !(event is RawKeyDownEvent || event.repeat)) {
+        !(event is KeyDownEvent || event is KeyRepeatEvent)) {
       return KeyEventResult.ignored;
     }
 
     final ltr = Directionality.of(context) == TextDirection.ltr;
+    final isShiftPressed = HardwareKeyboard.instance.isShiftPressed;
     final tab =
-        event.logicalKey == LogicalKeyboardKey.tab && !event.isShiftPressed;
+        event.logicalKey == LogicalKeyboardKey.tab && !isShiftPressed;
     final shiftTab =
-        event.logicalKey == LogicalKeyboardKey.tab && event.isShiftPressed;
+        event.logicalKey == LogicalKeyboardKey.tab && isShiftPressed;
     final arrowLeft = event.logicalKey == LogicalKeyboardKey.arrowLeft;
     final arrowRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
 
