@@ -205,4 +205,26 @@ void main() {
     await tester.enterText(finder, '6');
     expect(controller.dateTime, DateTime(2000, 2, 4, 3, 6));
   });
+
+  testWidgets('segments can\'t go below 0 using keyboard arrow',
+      (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruDateTimeEntry(
+            controller: YaruDateTimeEntryController(),
+            firstDateTime: DateTime(1900),
+            lastDateTime: DateTime(2050),
+          ),
+        ),
+      ),
+    );
+
+    final finder = find.byType(YaruDateTimeEntry);
+    final state = tester.state<YaruDateTimeEntryState>(finder);
+    await tester.tap(finder);
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    expect(state.monthSegment.value, 0);
+  });
 }
