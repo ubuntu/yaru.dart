@@ -153,6 +153,33 @@ void main() {
     expect(formKey.currentState?.validate(), false);
   });
 
+  testWidgets('accept empty', (tester) async {
+    final formKey = GlobalKey<FormState>();
+    final controller = YaruDateTimeEntryController();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Form(
+            key: formKey,
+            child: YaruDateTimeEntry(
+              controller: controller,
+              acceptEmpty: true,
+              firstDateTime: DateTime(2000),
+              lastDateTime: DateTime(2050),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final finder = find.byType(YaruDateTimeEntry);
+    await tester.tap(finder);
+    expect(formKey.currentState?.validate(), true);
+    await tester.enterText(finder, '01');
+    expect(formKey.currentState?.validate(), false);
+  });
+
   testWidgets('out of bound first character selects next segment',
       (tester) async {
     final controller = YaruDateTimeEntryController();
