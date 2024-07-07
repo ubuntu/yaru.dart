@@ -322,6 +322,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   }
 
   @override
+  // ignore: library_private_types_in_public_api
   void didUpdateWidget(covariant _YaruDateTimeEntry oldWidget) {
     super.didUpdateWidget(oldWidget);
 
@@ -372,14 +373,16 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   void _controllerCallback() {
     _cancelOnChanged = true;
     daySegment.value = dateTimeController.dateTime?.day ?? daySegment.value;
-    monthSegment.value = dateTimeController.dateTime?.month ?? monthSegment.value;
+    monthSegment.value =
+        dateTimeController.dateTime?.month ?? monthSegment.value;
     yearSegment.value = dateTimeController.dateTime?.year ?? yearSegment.value;
     hourSegment.value = dateTimeController.dateTime != null
         ? use24HourFormat
             ? dateTimeController.dateTime!.hour
             : dateTimeController.dateTime!.toTimeOfDay().hourOfPeriod
         : hourSegment.value;
-    minuteSegment.value = dateTimeController.dateTime?.minute ?? minuteSegment.value;
+    minuteSegment.value =
+        dateTimeController.dateTime?.minute ?? minuteSegment.value;
     periodSegment.value = dateTimeController.dateTime != null
         ? dateTimeController.dateTime!.toTimeOfDay().period
         : periodSegment.value;
@@ -609,7 +612,8 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   void _updateEntryController() {
     segmentedEntryController = YaruSegmentedEntryController(
       length: segments.length,
-      initialIndex: segmentedEntryController?.index.clamp(0, segments.length - 1) ?? 0,
+      initialIndex:
+          segmentedEntryController?.index.clamp(0, segments.length - 1) ?? 0,
     );
   }
 
@@ -622,8 +626,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   }
 
   DateTime? _tryParseSegments() {
-    if (widget.type.hasDate &&
-        (year == null || month == null || day == null)) {
+    if (widget.type.hasDate && (year == null || month == null || day == null)) {
       return null;
     }
 
@@ -692,12 +695,16 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   Widget _clearInputButton() {
     return IconButton(
       onPressed: () {
-        dateTimeController.dateTime = null;
+        _cancelOnChanged = true;
         daySegment.value = null;
         monthSegment.value = null;
         yearSegment.value = null;
         hourSegment.value = null;
         minuteSegment.value = null;
+        dateTimeController.dateTime = null;
+        _cancelOnChanged = false;
+
+        _onChanged();
       },
       icon: const Icon(YaruIcons.edit_clear),
     );
