@@ -113,6 +113,7 @@ class YaruTimeEntry extends StatelessWidget {
   /// The latest allowable [TimeOfDay] that the user can input.
   final TimeOfDay? lastTime;
 
+  /// If true, the hour will use the 24-hour format regardless of the ambient format.
   final bool? force24HourFormat;
 
   /// An optional method to call when the user indicates they are done editing
