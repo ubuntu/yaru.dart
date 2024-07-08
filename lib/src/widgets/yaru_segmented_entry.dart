@@ -217,7 +217,6 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   KeyEventResult _onKeyEvent(FocusNode node, KeyEvent event) {
-    
     if (widget.segments.isEmpty ||
         !(event is KeyDownEvent || event is KeyRepeatEvent)) {
       return KeyEventResult.ignored;
@@ -225,8 +224,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
 
     final ltr = Directionality.of(context) == TextDirection.ltr;
     final isShiftPressed = HardwareKeyboard.instance.isShiftPressed;
-    final tab =
-        event.logicalKey == LogicalKeyboardKey.tab && !isShiftPressed;
+    final tab = event.logicalKey == LogicalKeyboardKey.tab && !isShiftPressed;
     final shiftTab =
         event.logicalKey == LogicalKeyboardKey.tab && isShiftPressed;
     final arrowLeft = event.logicalKey == LogicalKeyboardKey.arrowLeft;
