@@ -400,7 +400,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
         return value;
       }
 
-      if (value < 0) {
+      if (dateTimeController.dateTime == null && value < 0) {
         return 0;
       }
 

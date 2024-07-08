@@ -88,6 +88,8 @@ void main() {
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
     expect(controller.dateTime, DateTime(2000, 01, 01, 00, 00));
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    expect(controller.dateTime, DateTime(1999, 12, 31, 23, 59));
   });
 
   testWidgets('out of bound date time are invalided', (tester) async {
