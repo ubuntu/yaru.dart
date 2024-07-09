@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
@@ -9,6 +10,9 @@ import 'theme.dart';
 
 Future<void> main() async {
   await YaruWindowTitleBar.ensureInitialized();
+
+  WidgetsFlutterBinding.ensureInitialized();
+  SemanticsBinding.instance.ensureSemantics();
 
   registerService<Connectivity>(Connectivity.new);
   runApp(
