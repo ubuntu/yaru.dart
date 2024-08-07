@@ -154,6 +154,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
               ),
             ),
           ],
+          // TODO: implement replacement if we keep YaruMasterDetailPage
+          // ignore: deprecated_member_use
           onPopPage: (route, result) => route.didPop(result),
           observers: [...widget.navigatorObservers, HeroController()],
         ),

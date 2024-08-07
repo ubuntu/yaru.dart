@@ -182,6 +182,7 @@ const iconDirsToIconNames = <String, Set<String>>{
     'accessories-dictionary',
     'accessories-text-editor',
     'address-book-app',
+    'app-center',
     'applications-multimedia',
     'applications-office',
     'backups-app',

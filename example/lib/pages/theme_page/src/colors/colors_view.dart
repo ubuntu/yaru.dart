@@ -9,7 +9,7 @@ const _gridDelegate = SliverGridDelegateWithMaxCrossAxisExtent(
 );
 
 class ColorsView extends StatelessWidget {
-  const ColorsView({Key? key}) : super(key: key);
+  const ColorsView({super.key});
 
   @override
   Widget build(BuildContext context) {

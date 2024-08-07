@@ -39,10 +39,7 @@ class BannerPage extends StatelessWidget {
 }
 
 class _Banner extends StatefulWidget {
-  const _Banner({
-    Key? key,
-    required this.i,
-  }) : super(key: key);
+  const _Banner({required this.i});
 
   final int i;
 

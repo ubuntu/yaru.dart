@@ -14,7 +14,7 @@ import 'color_disk.dart';
 final GlobalKey<ScaffoldState> themePageScaffoldKey = GlobalKey();
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   HomePageState createState() => HomePageState();
