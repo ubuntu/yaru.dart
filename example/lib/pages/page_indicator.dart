@@ -83,8 +83,7 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
               ),
             ),
             const SizedBox(height: 15),
-            ButtonBar(
-              buttonPadding: EdgeInsets.zero,
+            OverflowBar(
               children: [
                 YaruOptionButton(
                   onPressed: () => setState(() {

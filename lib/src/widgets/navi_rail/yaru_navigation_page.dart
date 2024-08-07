@@ -210,6 +210,8 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
           initialRoute: widget.initialRoute,
           onGenerateRoute: widget.onGenerateRoute,
           onUnknownRoute: widget.onUnknownRoute,
+          // TODO: implement replacement if we keep YaruMasterDetailPage
+          // ignore: deprecated_member_use
           onPopPage: (route, result) => route.didPop(result),
           observers: [...widget.navigatorObservers, HeroController()],
         ),

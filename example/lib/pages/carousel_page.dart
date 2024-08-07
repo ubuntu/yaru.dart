@@ -45,8 +45,7 @@ class _CarouselPageState extends State<CarouselPage> {
                 children: _getCarouselChildren(),
               ),
             ),
-            ButtonBar(
-              buttonPadding: EdgeInsets.zero,
+            OverflowBar(
               children: [
                 YaruOptionButton(
                   onPressed: () => setState(() {

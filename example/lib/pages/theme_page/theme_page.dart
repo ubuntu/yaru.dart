@@ -4,7 +4,7 @@ import 'package:yaru/theme.dart';
 import 'home.dart';
 
 class ThemePage extends StatelessWidget {
-  const ThemePage({Key? key}) : super(key: key);
+  const ThemePage({super.key});
 
   @override
   Widget build(BuildContext context) {

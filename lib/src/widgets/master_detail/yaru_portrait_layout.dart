@@ -94,6 +94,8 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
     return PopScope(
+      // TODO: implement replacement if we keep YaruMasterDetailPage
+      // ignore: deprecated_member_use
       onPopInvoked: (v) async => await _navigator.maybePop(),
       child: Theme(
         data: Theme.of(context).copyWith(
@@ -104,6 +106,8 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
           initialRoute: widget.initialRoute,
           onGenerateRoute: widget.onGenerateRoute,
           onUnknownRoute: widget.onUnknownRoute,
+          // TODO: implement replacement if we keep YaruMasterDetailPage
+          // ignore: deprecated_member_use
           onPopPage: (route, result) {
             _selectedIndex = -1;
             return route.didPop(result);

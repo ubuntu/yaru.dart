@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class ColorDisk extends StatelessWidget {
   const ColorDisk({
-    Key? key,
+    super.key,
     this.onPressed,
     required this.color,
     required this.selected,
-  }) : super(key: key);
+  });
 
   final VoidCallback? onPressed;
   final Color color;
