@@ -1,5 +1,27 @@
 # Changelog
 
+## 5.0.0 (2024-08-07)
+
+## What's Changed
+* chore!: remove YaruExpansionPanelList by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/887
+* fix: windows window control and titlebar color by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/889
+* fix(YaruIcons): Fix emote_monkey icon broken path by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/890
+* fix: Make YaruExpansionPanel build lazily by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/892
+* chore(Example): add RTL mode settings by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/894
+* fix(YaruToggleButton): rtl and infinite available space by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/896
+* feat!: drop deprecated features for 5.0 by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/898
+* feat!: decouple paned view from master detail by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/897
+* chore!: update project to flutter 3.22 by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/901
+* chore!: update golden images by @github-actions in https://github.com/ubuntu/yaru.dart/pull/902
+* feat: YaruDateTimeEntry, YaruSegmentedEntry, YaruEdgeFocusInterceptor by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/824
+* feat(example): enable semantics by @d-loose in https://github.com/ubuntu/yaru.dart/pull/906
+* feat(YaruBackButton): add backButtonTooltip from MaterialLocalizations by @Jupi007 in https://github.com/ubuntu/yaru.dart/pull/907
+* chore: update flutter version to 3.24 and update dependencies by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/909
+* Update golden images by @github-actions in https://github.com/ubuntu/yaru.dart/pull/910
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v4.1.0...v5.0.0
+
 ## 4.1.0 (2024-03-10)
 
 ## What's Changed
