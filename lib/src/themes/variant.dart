@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/src/themes/ubuntu_butterfly.dart';
+
 import '../../theme.dart';
 
 /// Describes a Yaru variant and its primary color.
@@ -14,6 +14,15 @@ enum YaruVariant {
   purple(YaruColors.purple),
   magenta(YaruColors.magenta),
   red(YaruColors.red),
+  adwaitaBlue(YaruColors.adwaitaBlue),
+  adwaitaTeal(YaruColors.adwaitaTeal),
+  adwaitaGreen(YaruColors.adwaitaGreen),
+  adwaitaYellow(YaruColors.adwaitaYellow),
+  adwaitaOrange(YaruColors.adwaitaOrange),
+  adwaitaRed(YaruColors.adwaitaRed),
+  adwaitaPink(YaruColors.adwaitaPink),
+  adwaitaPurple(YaruColors.adwaitaPurple),
+  adwaitaSlate(YaruColors.adwaitaSlate),
 
   /// Kubuntu
   kubuntuBlue(YaruColors.kubuntuBlue),
@@ -65,49 +74,40 @@ enum YaruVariant {
     purple,
     magenta,
     red,
+    adwaitaBlue,
+    adwaitaTeal,
+    adwaitaGreen,
+    adwaitaYellow,
+    adwaitaOrange,
+    adwaitaRed,
+    adwaitaPink,
+    adwaitaPurple,
+    adwaitaSlate,
   ];
 }
 
-final _yaruLightThemes = <YaruVariant, ThemeData>{
-  YaruVariant.orange: yaruLight,
-  YaruVariant.bark: yaruBarkLight,
-  YaruVariant.sage: yaruSageLight,
-  YaruVariant.olive: yaruOliveLight,
-  YaruVariant.viridian: yaruViridianLight,
-  YaruVariant.prussianGreen: yaruPrussianGreenLight,
-  YaruVariant.blue: yaruBlueLight,
-  YaruVariant.purple: yaruPurpleLight,
-  YaruVariant.magenta: yaruMagentaLight,
-  YaruVariant.red: yaruRedLight,
-  YaruVariant.kubuntuBlue: yaruKubuntuLight,
-  YaruVariant.lubuntuBlue: yaruLubuntuLight,
-  YaruVariant.ubuntuBudgieBlue: yaruUbuntuBudgieLight,
-  YaruVariant.ubuntuButterflyPink: yaruUbuntuButterflyLight,
-  YaruVariant.ubuntuCinnamonBrown: yaruUbuntuCinnamonLight,
-  YaruVariant.ubuntuMateGreen: yaruUbuntuMateLight,
-  YaruVariant.ubuntuStudioBlue: yaruUbuntuStudioLight,
-  YaruVariant.ubuntuUnityPurple: yaruUbuntuUnityLight,
-  YaruVariant.xubuntuBlue: yaruXubuntuLight,
-};
+final _yaruLightThemes = Map<YaruVariant, ThemeData>.fromEntries(
+  YaruVariant.values.map(
+    (e) => MapEntry<YaruVariant, ThemeData>(
+      e,
+      e == YaruVariant.orange
+          ? yaruLight
+          : createYaruLightTheme(
+              primaryColor: e.color,
+            ),
+    ),
+  ),
+);
 
-final _yaruDarkThemes = <YaruVariant, ThemeData>{
-  YaruVariant.orange: yaruDark,
-  YaruVariant.bark: yaruBarkDark,
-  YaruVariant.sage: yaruSageDark,
-  YaruVariant.olive: yaruOliveDark,
-  YaruVariant.viridian: yaruViridianDark,
-  YaruVariant.prussianGreen: yaruPrussianGreenDark,
-  YaruVariant.blue: yaruBlueDark,
-  YaruVariant.purple: yaruPurpleDark,
-  YaruVariant.magenta: yaruMagentaDark,
-  YaruVariant.red: yaruRedDark,
-  YaruVariant.kubuntuBlue: yaruKubuntuDark,
-  YaruVariant.lubuntuBlue: yaruLubuntuDark,
-  YaruVariant.ubuntuBudgieBlue: yaruUbuntuBudgieDark,
-  YaruVariant.ubuntuButterflyPink: yaruUbuntuButterflyDark,
-  YaruVariant.ubuntuCinnamonBrown: yaruUbuntuCinnamonDark,
-  YaruVariant.ubuntuMateGreen: yaruUbuntuMateDark,
-  YaruVariant.ubuntuStudioBlue: yaruUbuntuStudioDark,
-  YaruVariant.ubuntuUnityPurple: yaruUbuntuUnityDark,
-  YaruVariant.xubuntuBlue: yaruXubuntuDark,
-};
+final _yaruDarkThemes = Map<YaruVariant, ThemeData>.fromEntries(
+  YaruVariant.values.map(
+    (e) => MapEntry<YaruVariant, ThemeData>(
+      e,
+      e == YaruVariant.orange
+          ? yaruDark
+          : createYaruDarkTheme(
+              primaryColor: e.color,
+            ),
+    ),
+  ),
+);
