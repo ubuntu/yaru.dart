@@ -104,6 +104,9 @@ class YaruColors {
   /// Sage
   static const Color sage = Color(0xFF657B69);
 
+  /// Warty Brown
+  static const Color wartyBrown = Color(0xFFB39169);
+
   /// Prussian Green
   static const Color prussianGreen = Color(0xFF308280);
 
