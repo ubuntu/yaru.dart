@@ -15,14 +15,10 @@ class YaruGtkSettings extends YaruSettings {
         super._();
 
   final GtkSettings _settings;
+  @override
+  String? getThemeName() => _settings.getProperty(kGtkThemeName) as String?;
 
   @override
-  String? getThemeName() {
-    return _settings.getProperty(kGtkThemeName) as String?;
-  }
-
-  @override
-  Stream<String?> get themeNameChanged {
-    return _settings.notifyProperty(kGtkThemeName).cast<String?>();
-  }
+  Stream<String?> get themeNameChanged =>
+      _settings.notifyProperty(kGtkThemeName).cast<String?>();
 }

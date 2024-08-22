@@ -104,6 +104,9 @@ class YaruColors {
   /// Sage
   static const Color sage = Color(0xFF657B69);
 
+  /// Warty Brown
+  static const Color brown = Color(0xFFB39169);
+
   /// Prussian Green
   static const Color prussianGreen = Color(0xFF308280);
 
@@ -148,6 +151,36 @@ class YaruColors {
 
   /// Xubuntu Blue
   static const Color xubuntuBlue = Color(0xFF0044AA);
+
+  /// Adwaita accents with 24.10+
+  /// https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/enum.AccentColor.html
+
+  /// Adwaita Blue
+  static const Color adwaitaBlue = Color(0xFF3584e4);
+
+  /// Adwaita Teal
+  static const Color adwaitaTeal = Color(0xFF2190a4);
+
+  /// Adwaita Green
+  static const Color adwaitaGreen = Color(0xFF3a944a);
+
+  /// Adwaita Yellow
+  static const Color adwaitaYellow = Color(0xFFc88800);
+
+  /// Adwaita Orange
+  static const Color adwaitaOrange = Color(0xFFed5b00);
+
+  /// Adwaita Red
+  static const Color adwaitaRed = Color(0xFFe62d42);
+
+  /// Adwaita Pink
+  static const Color adwaitaPink = Color(0xFFd56199);
+
+  /// Adwaita Purple
+  static const Color adwaitaPurple = Color(0xFF9141ac);
+
+  /// Adwaita Slate
+  static const Color adwaitaSlate = Color(0xFF6f8396);
 }
 
 /// Set of useful methods when working with [Color]

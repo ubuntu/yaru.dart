@@ -199,6 +199,7 @@ Map<String, (Color, Color?)> _getBaseColors(ThemeData theme) {
   return colors;
 }
 
+// TODO: update example with new adwaita colors
 Map<String, (Color, Color?)> _getYaruPrimaryColors(ThemeData theme) {
   return {
     'orange': (YaruColors.orange, theme.colorScheme.onPrimary),
