@@ -16,6 +16,7 @@ dependencies:
     sdk: flutter
   gtk: ^2.1.0
   platform: ^3.1.5
+  platform_linux: ^0.1.2
   yaru_window: ^0.2.1
 
 dev_dependencies:

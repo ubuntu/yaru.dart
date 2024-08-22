@@ -3,24 +3,26 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:platform/platform.dart';
+import 'package:platform_linux/platform.dart';
 import 'package:yaru/src/settings.dart';
 
 import '../../theme.dart';
 
-YaruVariant? _detectYaruVariant(Platform platform) {
+YaruVariant? _defaultFallBackVariant(Platform platform) {
   final desktop = !kIsWeb
       ? platform.environment['XDG_CURRENT_DESKTOP']?.toUpperCase()
       : null;
+
   if (desktop != null) {
-    if (desktop.contains('BUDGIE')) return YaruVariant.ubuntuBudgieBlue;
-    if (desktop.contains('CINNAMON')) return YaruVariant.ubuntuCinnamonBrown;
-    if (desktop.contains('GNOME')) return YaruVariant.orange;
-    if (desktop.contains('KDE')) return YaruVariant.kubuntuBlue;
-    if (desktop.contains('LXQT')) return YaruVariant.lubuntuBlue;
-    if (desktop.contains('MATE')) return YaruVariant.ubuntuMateGreen;
-    if (desktop.contains('UNITY')) return YaruVariant.ubuntuUnityPurple;
-    if (desktop.contains('XFCE')) return YaruVariant.xubuntuBlue;
+    if (platform.isBudgie) return YaruVariant.ubuntuBudgieBlue;
+    if (platform.isCinnamon) return YaruVariant.ubuntuCinnamonBrown;
+    if (platform.isGNOME && platform.isUbuntu) return YaruVariant.orange;
+    if (platform.isGNOME) return YaruVariant.adwaitaBlue;
+    if (platform.isKDE) return YaruVariant.kubuntuBlue;
+    if (platform.isLXQt) return YaruVariant.lubuntuBlue;
+    if (platform.isMATE) return YaruVariant.ubuntuMateGreen;
+    if (platform.isUnity) return YaruVariant.ubuntuUnityPurple;
+    if (platform.isXfce) return YaruVariant.xubuntuBlue;
   }
   return null;
 }
@@ -153,7 +155,10 @@ class _YaruThemeState extends State<YaruTheme> {
   void initState() {
     super.initState();
     if (widget.data.variant == null && canDetectVariant()) {
-      _settings = widget._settings ?? YaruSettings();
+      _settings = widget._settings ??
+          YaruSettings(
+            platform: widget._platform,
+          );
       _variant = resolveVariant(_settings?.getThemeName());
       _subscription = _settings!.themeNameChanged.listen(updateVariant);
     }
@@ -171,13 +176,19 @@ class _YaruThemeState extends State<YaruTheme> {
         !widget._platform.environment.containsKey('FLUTTER_TEST');
   }
 
+  final _darkSuffix = '-dark';
+  final _yaruPrefix = 'Yaru-';
+  final _adwaitaPrefix = 'Adwaita-';
   // "Yaru-prussiangreen-dark" => YaruAccent.prussianGreen
   YaruVariant? resolveVariant(String? name) {
-    if (name?.endsWith('-dark') == true) {
+    if (name?.endsWith(_darkSuffix) == true) {
       name = name!.substring(0, name.length - 5);
     }
-    if (name?.startsWith('Yaru-') == true) {
-      name = name!.substring(5);
+    if (name?.startsWith(_yaruPrefix) == true) {
+      name = name!.substring(_yaruPrefix.length);
+    }
+    if (name?.startsWith(_adwaitaPrefix) == true) {
+      name = name!.substring(_adwaitaPrefix.length);
     }
     if (name == 'Yaru') {
       return YaruVariant.orange;
@@ -187,7 +198,7 @@ class _YaruThemeState extends State<YaruTheme> {
         return value;
       }
     }
-    return _detectYaruVariant(widget._platform);
+    return _defaultFallBackVariant(widget._platform);
   }
 
   void updateVariant([String? value]) {
