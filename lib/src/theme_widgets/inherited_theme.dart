@@ -155,10 +155,7 @@ class _YaruThemeState extends State<YaruTheme> {
   void initState() {
     super.initState();
     if (widget.data.variant == null && canDetectVariant()) {
-      _settings = widget._settings ??
-          YaruSettings(
-            platform: widget._platform,
-          );
+      _settings = widget._settings ?? YaruSettings();
       _variant = resolveVariant(_settings?.getThemeName());
       _subscription = _settings!.themeNameChanged.listen(updateVariant);
     }
@@ -178,7 +175,6 @@ class _YaruThemeState extends State<YaruTheme> {
 
   final _darkSuffix = '-dark';
   final _yaruPrefix = 'Yaru-';
-  final _adwaitaPrefix = 'Adwaita-';
   // "Yaru-prussiangreen-dark" => YaruAccent.prussianGreen
   YaruVariant? resolveVariant(String? name) {
     if (name?.endsWith(_darkSuffix) == true) {
@@ -187,14 +183,13 @@ class _YaruThemeState extends State<YaruTheme> {
     if (name?.startsWith(_yaruPrefix) == true) {
       name = name!.substring(_yaruPrefix.length);
     }
-    if (name?.startsWith(_adwaitaPrefix) == true) {
-      name = name!.substring(_adwaitaPrefix.length);
-    }
+
     if (name == 'Yaru') {
       return YaruVariant.orange;
     }
     for (final value in YaruVariant.values) {
-      if (value.name.toLowerCase() == name?.toLowerCase()) {
+      if (value.name.replaceAll('adwaita', '').toLowerCase() ==
+          name?.toLowerCase()) {
         return value;
       }
     }
