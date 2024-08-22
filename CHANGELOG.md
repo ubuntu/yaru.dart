@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.1.0 (2024-08-22)
+
+## What's Changed
+* feat: Support GNOME accent colors by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/911
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v5.0.0...v5.1.0
+
 ## 5.0.0 (2024-08-07)
 
 ## What's Changed
