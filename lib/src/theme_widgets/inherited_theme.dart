@@ -190,10 +190,28 @@ class _YaruThemeState extends State<YaruTheme> {
     for (final value in YaruVariant.values) {
       if (value.name.replaceAll('adwaita', '').toLowerCase() ==
           name?.toLowerCase()) {
-        return value;
+        return _mapGnomeColor(value);
       }
     }
     return _defaultFallBackVariant(widget._platform);
+  }
+
+  YaruVariant _mapGnomeColor(YaruVariant variant) {
+    if (widget._platform.isGNOME && widget._platform.isUbuntu) {
+      return variant;
+    }
+    return switch (variant) {
+      YaruVariant.blue => YaruVariant.adwaitaBlue,
+      YaruVariant.red => YaruVariant.adwaitaRed,
+      YaruVariant.orange => YaruVariant.adwaitaOrange,
+      YaruVariant.purple => YaruVariant.adwaitaPurple,
+      YaruVariant.magenta => YaruVariant.adwaitaPink,
+      YaruVariant.prussianGreen ||
+      YaruVariant.ubuntuMateGreen ||
+      YaruVariant.adwaitaSlate =>
+        YaruVariant.adwaitaGreen,
+      _ => variant
+    };
   }
 
   void updateVariant([String? value]) {
