@@ -9,21 +9,14 @@ import 'package:yaru/src/settings.dart';
 import '../../theme.dart';
 
 YaruVariant? _defaultFallBackVariant(Platform platform) {
-  final desktop = !kIsWeb
-      ? platform.environment['XDG_CURRENT_DESKTOP']?.toUpperCase()
-      : null;
-
-  if (desktop != null) {
-    if (platform.isBudgie) return YaruVariant.ubuntuBudgieBlue;
-    if (platform.isCinnamon) return YaruVariant.ubuntuCinnamonBrown;
-    if (platform.isGNOME && platform.isUbuntu) return YaruVariant.orange;
-    if (platform.isGNOME) return YaruVariant.adwaitaBlue;
-    if (platform.isKDE) return YaruVariant.kubuntuBlue;
-    if (platform.isLXQt) return YaruVariant.lubuntuBlue;
-    if (platform.isMATE) return YaruVariant.ubuntuMateGreen;
-    if (platform.isUnity) return YaruVariant.ubuntuUnityPurple;
-    if (platform.isXfce) return YaruVariant.xubuntuBlue;
-  }
+  if (platform.isBudgie) return YaruVariant.ubuntuBudgieBlue;
+  if (platform.isCinnamon) return YaruVariant.ubuntuCinnamonBrown;
+  if (platform.isGNOME) return YaruVariant.orange;
+  if (platform.isKDE) return YaruVariant.kubuntuBlue;
+  if (platform.isLXQt) return YaruVariant.lubuntuBlue;
+  if (platform.isMATE) return YaruVariant.ubuntuMateGreen;
+  if (platform.isUnity) return YaruVariant.ubuntuUnityPurple;
+  if (platform.isXfce) return YaruVariant.xubuntuBlue;
   return null;
 }
 
@@ -190,28 +183,10 @@ class _YaruThemeState extends State<YaruTheme> {
     for (final value in YaruVariant.values) {
       if (value.name.replaceAll('adwaita', '').toLowerCase() ==
           name?.toLowerCase()) {
-        return _mapGnomeColor(value);
+        return value;
       }
     }
     return _defaultFallBackVariant(widget._platform);
-  }
-
-  YaruVariant _mapGnomeColor(YaruVariant variant) {
-    if (widget._platform.isGNOME && widget._platform.isUbuntu) {
-      return variant;
-    }
-    return switch (variant) {
-      YaruVariant.blue => YaruVariant.adwaitaBlue,
-      YaruVariant.red => YaruVariant.adwaitaRed,
-      YaruVariant.orange => YaruVariant.adwaitaOrange,
-      YaruVariant.purple => YaruVariant.adwaitaPurple,
-      YaruVariant.magenta => YaruVariant.adwaitaPink,
-      YaruVariant.prussianGreen ||
-      YaruVariant.ubuntuMateGreen ||
-      YaruVariant.adwaitaSlate =>
-        YaruVariant.adwaitaGreen,
-      _ => variant
-    };
   }
 
   void updateVariant([String? value]) {
