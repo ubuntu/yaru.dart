@@ -183,7 +183,7 @@ class _YaruThemeState extends State<YaruTheme> {
         'Yaru-prussiangreen' => YaruVariant.prussianGreen,
         'Yaru-bark' => YaruVariant.bark,
         'Yaru-blue' => YaruVariant.blue,
-        'Yaru-brown' => YaruVariant.brown,
+        'Yaru-wartybrown' => YaruVariant.wartyBrown,
         'Yaru-magenta' => YaruVariant.magenta,
         'Yaru-olive' => YaruVariant.olive,
         'Yaru-purple' => YaruVariant.purple,
