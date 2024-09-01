@@ -49,6 +49,11 @@ This repository and package contains:
     yaru_icon_font_generator assets/icons assets/yaru_icons.otf --output-class-file=lib/src/yaru_icons.dart -r
     ```
 
+## Contributing new gtk<->Flutter theme mappings
+
+1. Add a new `YaruVariant` in `variant.dart`
+2. Add a new mapping into the `resolveVariant` method inside `inherited_theme.dart`
+
 # Copying or Reusing
 
 The theme and widgets are licensed under Mozilla Public License Version 2.0.

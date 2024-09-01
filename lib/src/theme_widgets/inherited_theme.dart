@@ -166,28 +166,32 @@ class _YaruThemeState extends State<YaruTheme> {
         !widget._platform.environment.containsKey('FLUTTER_TEST');
   }
 
-  final _darkSuffix = '-dark';
-  final _yaruPrefix = 'Yaru-';
-  // "Yaru-prussiangreen-dark" => YaruAccent.prussianGreen
-  YaruVariant? resolveVariant(String? name) {
-    if (name?.endsWith(_darkSuffix) == true) {
-      name = name!.substring(0, name.length - 5);
-    }
-    if (name?.startsWith(_yaruPrefix) == true) {
-      name = name!.substring(_yaruPrefix.length);
-    }
-
-    if (name == 'Yaru') {
-      return YaruVariant.orange;
-    }
-    for (final value in YaruVariant.values) {
-      if (value.name.replaceAll('adwaita', '').toLowerCase() ==
-          name?.toLowerCase()) {
-        return value;
-      }
-    }
-    return _defaultFallBackVariant(widget._platform);
-  }
+  // This very simple but manual solution is the safest approach for now
+  // New theme mappings can be added here easily, after adding them in variant.dart
+  YaruVariant? resolveVariant(String? name) =>
+      switch (name?.replaceAll('-dark', '')) {
+        'Adwaita' => YaruVariant.adwaitaBlue,
+        'Adwaita-green' || 'Yaru-green' => YaruVariant.adwaitaGreen,
+        'Adwaita-orange' => YaruVariant.adwaitaOrange,
+        'Adwaita-pink' || 'Yaru-pink' => YaruVariant.adwaitaPink,
+        'Adwaita-purple' => YaruVariant.adwaitaPurple,
+        'Adwaita-red' => YaruVariant.adwaitaRed,
+        'Adwaita-slate' || 'Yaru-slate' => YaruVariant.adwaitaSlate,
+        'Adwaita-teal' || 'Yaru-teal' => YaruVariant.adwaitaTeal,
+        'Adwaita-yellow' || 'Yaru-yellow' => YaruVariant.adwaitaYellow,
+        'Yaru' => YaruVariant.orange,
+        'Yaru-prussiangreen' => YaruVariant.prussianGreen,
+        'Yaru-bark' => YaruVariant.bark,
+        'Yaru-blue' => YaruVariant.blue,
+        'Yaru-brown' => YaruVariant.brown,
+        'Yaru-magenta' => YaruVariant.magenta,
+        'Yaru-olive' => YaruVariant.olive,
+        'Yaru-purple' => YaruVariant.purple,
+        'Yaru-sage' => YaruVariant.sage,
+        'Yaru-red' => YaruVariant.red,
+        'Yaru-viridian' => YaruVariant.viridian,
+        _ => _defaultFallBackVariant(widget._platform),
+      };
 
   void updateVariant([String? value]) {
     assert(canDetectVariant());
