@@ -4,7 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:platform_linux/platform.dart';
-import 'package:yaru/src/settings.dart';
+import 'package:yaru/src/theme_widgets/yaru_settings.dart';
 
 import '../../theme.dart';
 
@@ -157,6 +157,7 @@ class _YaruThemeState extends State<YaruTheme> {
   @override
   void dispose() {
     _subscription?.cancel();
+    _settings?.dispose();
     super.dispose();
   }
 
