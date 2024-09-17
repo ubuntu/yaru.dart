@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:gtk/gtk.dart';
 import 'package:yaru/src/theme_widgets/gtk_constants.dart';
@@ -8,32 +10,50 @@ abstract class YaruSettings {
   const YaruSettings._();
 
   String? getThemeName();
+  String? getAccentColor();
   Stream<String?> get themeNameChanged;
-  void dispose();
+  Stream<String?> get accentColorChanged;
+  void init();
+  Future<void> dispose();
 }
 
 class YaruGtkSettings extends YaruSettings {
   YaruGtkSettings([
     @visibleForTesting GtkSettings? settings,
     @visibleForTesting GSettingsService? settingsService,
-  ])  : _settings = settings ?? GtkSettings(),
+  ])  : _gtkSettings = settings ?? GtkSettings(),
         _gSettingsService = settingsService ?? GSettingsService(),
         super._();
 
-  final GtkSettings _settings;
+  final GtkSettings _gtkSettings;
   final GSettingsService _gSettingsService;
+  GnomeSettings? _gSettings;
 
   @override
-  String? getThemeName() =>
-      _gSettingsService
-          .lookup(kSchemaInterface)
-          ?.stringValue(kAccentColorKey) ??
-      _settings.getProperty(kGtkThemeName) as String?;
+  String? getThemeName() => _gtkSettings.getProperty(kGtkThemeName) as String?;
 
   @override
   Stream<String?> get themeNameChanged =>
-      _settings.notifyProperty(kGtkThemeName).cast<String?>();
+      _gtkSettings.notifyProperty(kGtkThemeName).cast<String?>();
+
+  final _accentColorController = StreamController<String?>.broadcast();
+  @override
+  Stream<String?> get accentColorChanged => _accentColorController.stream;
 
   @override
-  void dispose() => _gSettingsService.dispose();
+  void init() {
+    _gSettings ??= _gSettingsService.lookup(kSchemaInterface);
+    _gSettings?.addListener(
+      () => _accentColorController.add(getAccentColor()),
+    );
+  }
+
+  @override
+  Future<void> dispose() async {
+    await _accentColorController.close();
+    _gSettingsService.dispose();
+  }
+
+  @override
+  String? getAccentColor() => _gSettings?.stringValue(kAccentColorKey);
 }
