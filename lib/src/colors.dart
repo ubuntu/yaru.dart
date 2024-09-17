@@ -105,7 +105,8 @@ class YaruColors {
   static const Color sage = Color(0xFF657B69);
 
   /// Warty Brown
-  static const Color wartyBrown = Color(0xFFB39169);
+  /// Actually its  Color(0xFFB39169) but for contrast reassons we use this altered version in Flutter
+  static const Color wartyBrown = Color(0xFF92714a);
 
   /// Prussian Green
   static const Color prussianGreen = Color(0xFF308280);
