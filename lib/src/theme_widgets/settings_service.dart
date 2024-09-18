@@ -68,37 +68,26 @@ class GnomeSettings {
   }
 
   Future<void> setValue<T>(String key, T value) async {
-    if (_values[key] == value) {
-      return;
-    }
+    if (_values[key] == value) return;
     _values[key] = value;
-    switch (T) {
-      case const (bool):
-        return _settings.set(key, DBusBoolean(value as bool));
-      case const (int):
-        return _settings.set(key, DBusInt32(value as int));
-      case const (double):
-        return _settings.set(key, DBusDouble(value as double));
-      case const (String):
-        return _settings.set(key, DBusString(value as String));
-      default:
-        break;
-    }
-    if (value is List<String>) {
-      return _settings.set(key, DBusArray.string(value));
-    }
-    throw UnsupportedError('Unsupported type: $T');
+
+    return switch (T) {
+      const (bool) => _settings.set(key, DBusBoolean(value as bool)),
+      const (int) => _settings.set(key, DBusInt32(value as int)),
+      const (double) => _settings.set(key, DBusDouble(value as double)),
+      const (String) => _settings.set(key, DBusString(value as String)),
+      const (List<String>) =>
+        _settings.set(key, DBusArray.string(value as List<String>)),
+      _ => throw UnsupportedError('Unsupported type: $T'),
+    };
   }
 
   Future<void> setUint32Value(String key, int value) async {
-    if (_values[key] == value) {
-      return;
-    }
+    if (_values[key] == value) return;
     _values[key] = value;
     await _settings.set(key, DBusUint32(value));
   }
 
-  Future<void> resetValue(String key) {
-    return _settings.setAll(<String, DBusValue?>{key: null});
-  }
+  Future<void> resetValue(String key) =>
+      _settings.setAll(<String, DBusValue?>{key: null});
 }
