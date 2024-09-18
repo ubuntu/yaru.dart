@@ -1,5 +1,17 @@
 # Changelog
 
+## 5.2.0 (2024-09-18)
+
+## What's Changed
+* fix: use safe picks for ubuntu colors by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/914
+* fix: rename brown to wartyBrown, matching the gtk theme name by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/916
+* chore: renamed the snap back to yaru-widgets-example which is what's published by @kenvandine in https://github.com/ubuntu/yaru.dart/pull/918
+* fix: ensure better contrast for the warty version by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/921
+* feat: follow accent-color gsettings key for 24.10 by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/922
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v5.1.0...v5.2.0
+
 ## 5.1.0 (2024-08-22)
 
 ## What's Changed
