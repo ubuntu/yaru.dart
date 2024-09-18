@@ -4,7 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:platform_linux/platform.dart';
-import 'package:yaru/src/settings.dart';
+import 'package:yaru/src/theme_widgets/yaru_settings.dart';
 
 import '../../theme.dart';
 
@@ -142,21 +142,29 @@ class YaruTheme extends StatefulWidget {
 class _YaruThemeState extends State<YaruTheme> {
   YaruVariant? _variant;
   YaruSettings? _settings;
-  StreamSubscription<String?>? _subscription;
+  StreamSubscription<String?>? _themeNameSubscription;
+  StreamSubscription<String?>? _accentColorSubScription;
 
   @override
   void initState() {
     super.initState();
     if (widget.data.variant == null && canDetectVariant()) {
       _settings = widget._settings ?? YaruSettings();
-      _variant = resolveVariant(_settings?.getThemeName());
-      _subscription = _settings!.themeNameChanged.listen(updateVariant);
+      _settings?.init();
+      _variant = resolveAccentColorVariant(_settings?.getAccentColor()) ??
+          resolveGtkThemeVariant(_settings?.getThemeName());
+      _accentColorSubScription ??=
+          _settings!.accentColorChanged.listen(updateVariant);
+      _themeNameSubscription ??=
+          _settings!.themeNameChanged.listen(updateVariant);
     }
   }
 
   @override
   void dispose() {
-    _subscription?.cancel();
+    _themeNameSubscription?.cancel();
+    _accentColorSubScription?.cancel();
+    _settings?.dispose();
     super.dispose();
   }
 
@@ -168,7 +176,7 @@ class _YaruThemeState extends State<YaruTheme> {
 
   // This very simple but manual solution is the safest approach for now
   // New theme mappings can be added here easily, after adding them in variant.dart
-  YaruVariant? resolveVariant(String? name) =>
+  YaruVariant? resolveGtkThemeVariant(String? name) =>
       switch (name?.replaceAll('-dark', '')) {
         'Adwaita' => YaruVariant.adwaitaBlue,
         'Adwaita-green' || 'Yaru-green' => YaruVariant.adwaitaGreen,
@@ -193,10 +201,33 @@ class _YaruThemeState extends State<YaruTheme> {
         _ => _defaultFallBackVariant(widget._platform),
       };
 
+  // This is the gnome accent-color feature for Ubuntu 24.10+
+  // it is null on older systems.
+  // Previous similar Yaru versions replace their gnome counterpart.
+  // At some point we probably want to check which distribution of gnome is run and use the
+  // upstream colors instead.
+  YaruVariant? resolveAccentColorVariant(String? name) => switch (name) {
+        'blue' => YaruVariant.blue,
+        'teal' || 'Yaru-teal' => YaruVariant.adwaitaTeal,
+        'green' || 'Yaru-green' => YaruVariant.adwaitaGreen,
+        'yellow' || 'Yaru-yellow' => YaruVariant.adwaitaYellow,
+        'orange' => YaruVariant.orange,
+        'red' => YaruVariant.red,
+        'pink' || 'Yaru-pink' => YaruVariant.magenta,
+        'purple' => YaruVariant.purple,
+        'slate' || 'Yaru-slate' => YaruVariant.adwaitaSlate,
+        'brown' => YaruVariant.wartyBrown,
+        _ => null,
+      };
+
   void updateVariant([String? value]) {
     assert(canDetectVariant());
-    final name = value ?? _settings?.getThemeName();
-    setState(() => _variant = resolveVariant(name));
+    final gtkThemeName = value ?? _settings?.getThemeName();
+    final accentColor = value ?? _settings?.getAccentColor();
+    setState(
+      () => _variant = resolveAccentColorVariant(accentColor) ??
+          resolveGtkThemeVariant(gtkThemeName),
+    );
   }
 
   ThemeMode resolveMode() {
@@ -231,7 +262,7 @@ class _YaruThemeState extends State<YaruTheme> {
 
   @override
   Widget build(BuildContext context) {
-    if (_settings != null && _subscription == null) {
+    if (_settings != null && _themeNameSubscription == null) {
       return const SizedBox.shrink(); // #231
     }
     final data = resolveData();
