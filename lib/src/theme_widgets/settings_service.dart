@@ -55,15 +55,15 @@ class GnomeSettings {
 
   T? _updateValue<T>(String key) {
     T? value;
-    try {
-      _settings.get(key).then((v) {
-        value = v.toNative() as T?;
-        if (_values[key] != value) {
-          _values[key] = value;
-          notifyListeners();
-        }
-      });
-    } on GSettingsUnknownKeyException catch (_) {}
+    _settings.get(key).then((v) {
+      value = v.toNative() as T?;
+      if (_values[key] != value) {
+        _values[key] = value;
+        notifyListeners();
+      }
+    }).catchError((_) {
+      value = null;
+    });
     return value;
   }
 

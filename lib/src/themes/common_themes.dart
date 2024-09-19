@@ -797,7 +797,7 @@ CardTheme _createCardTheme(ColorScheme colorScheme) {
 }
 
 Color _cardColor(ColorScheme colorScheme) =>
-    colorScheme.surface.scale(lightness: colorScheme.isLight ? -0.1 : 0.08);
+    colorScheme.surface.scale(lightness: colorScheme.isLight ? -0.05 : 0.05);
 
 /// Helper function to create a new Yaru light theme
 ThemeData createYaruLightTheme({
