@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.2.1 (2024-09-20)
+
+## What's Changed
+* fix: error missing key and fix wrong banner color by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/924
+* chore: update yaru_window dependency by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/926
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v5.2.0...v5.2.1
+
 ## 5.2.0 (2024-09-18)
 
 ## What's Changed
