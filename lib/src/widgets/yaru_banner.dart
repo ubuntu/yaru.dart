@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/constants.dart';
 import 'package:yaru/foundation.dart' show YaruBorderRadiusExtension;
+import 'package:yaru/src/colors.dart';
 
 import 'yaru_tile.dart';
 
@@ -88,10 +89,8 @@ class YaruBanner extends StatelessWidget {
     final theme = Theme.of(context);
     final borderRadius = BorderRadius.circular(kYaruBannerRadius);
 
-    final light = theme.brightness == Brightness.light;
-
-    final defaultSurfaceTintColor =
-        light ? theme.cardColor : const Color.fromARGB(255, 126, 126, 126);
+    final defaultSurfaceTintColor = theme.scaffoldBackgroundColor
+        .scale(lightness: theme.brightness == Brightness.light ? 0 : 0.03);
     return Material(
       color: selected == true
           ? theme.primaryColor.withOpacity(0.8)
@@ -104,7 +103,7 @@ class YaruBanner extends StatelessWidget {
         hoverColor: theme.colorScheme.onSurface.withOpacity(0.1),
         mouseCursor: mouseCursor,
         child: Card(
-          color: color,
+          color: color ?? defaultSurfaceTintColor,
           shadowColor: Colors.transparent,
           surfaceTintColor: surfaceTintColor ?? defaultSurfaceTintColor,
           elevation: elevation ?? 1,
