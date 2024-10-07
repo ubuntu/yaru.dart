@@ -18,7 +18,7 @@ class YaruSplitButton extends StatelessWidget {
 
   const YaruSplitButton.filled({
     super.key,
-    required this.items,
+    this.items,
     this.onPressed,
     this.child,
     this.onOptionsPressed,
@@ -43,7 +43,7 @@ class YaruSplitButton extends StatelessWidget {
   final void Function()? onOptionsPressed;
   final Widget? child;
   final Widget? icon;
-  final List<PopupMenuEntry<Object?>> items;
+  final List<PopupMenuEntry<Object?>>? items;
   final double? radius;
   final double menuWidth;
 
@@ -51,6 +51,11 @@ class YaruSplitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    assert(
+      items?.isNotEmpty == true && onOptionsPressed == null ||
+          items == null && onOptionsPressed != null,
+    );
+
     // TODO: fix common_themes to use a fixed size for buttons instead of fiddling around with padding
     // then we can rely on this size here
     const size = Size.square(36);
@@ -76,19 +81,19 @@ class YaruSplitButton extends StatelessWidget {
         ),
     };
 
-    final onDropdownPressed = onPressed == null
-        ? null
-        : (onOptionsPressed ??
-            () => showMenu(
+    final onDropdownPressed = onOptionsPressed ??
+        (items?.isNotEmpty == true
+            ? () => showMenu(
                   context: context,
                   position: _menuPosition(context),
-                  items: items,
+                  items: items!,
                   menuPadding: EdgeInsets.symmetric(vertical: defaultRadius.x),
                   constraints: BoxConstraints(
                     minWidth: menuWidth,
                     maxWidth: menuWidth,
                   ),
-                ));
+                )
+            : null);
 
     return Row(
       mainAxisSize: MainAxisSize.min,
