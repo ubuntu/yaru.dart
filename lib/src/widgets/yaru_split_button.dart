@@ -7,7 +7,7 @@ enum _YaruSplitButtonVariant { elevated, filled, outlined }
 class YaruSplitButton extends StatelessWidget {
   const YaruSplitButton({
     super.key,
-    required this.items,
+    this.items,
     this.onPressed,
     this.child,
     this.onOptionsPressed,
@@ -29,7 +29,7 @@ class YaruSplitButton extends StatelessWidget {
 
   const YaruSplitButton.outlined({
     super.key,
-    required this.items,
+    this.items,
     this.onPressed,
     this.child,
     this.onOptionsPressed,
@@ -95,6 +95,8 @@ class YaruSplitButton extends StatelessWidget {
                 )
             : null);
 
+    final dropdownIcon = icon ?? const Icon(YaruIcons.pan_down);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -125,7 +127,7 @@ class YaruSplitButton extends StatelessWidget {
                 shape: dropdownShape,
               ),
               onPressed: onDropdownPressed,
-              child: icon ?? const Icon(YaruIcons.pan_down),
+              child: dropdownIcon,
             ),
           _YaruSplitButtonVariant.filled => FilledButton(
               style: FilledButton.styleFrom(
@@ -136,7 +138,7 @@ class YaruSplitButton extends StatelessWidget {
                 shape: dropdownShape,
               ),
               onPressed: onDropdownPressed,
-              child: icon ?? const Icon(YaruIcons.pan_down),
+              child: dropdownIcon,
             ),
           _YaruSplitButtonVariant.outlined => OutlinedButton(
               style: OutlinedButton.styleFrom(
@@ -147,7 +149,7 @@ class YaruSplitButton extends StatelessWidget {
                 shape: dropdownShape,
               ),
               onPressed: onDropdownPressed,
-              child: icon ?? const Icon(YaruIcons.pan_down),
+              child: dropdownIcon,
             ),
         },
       ],
