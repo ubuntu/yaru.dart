@@ -30,6 +30,7 @@ import 'pages/radio_page.dart';
 import 'pages/search_field_page.dart';
 import 'pages/section_page.dart';
 import 'pages/selectable_container_page.dart';
+import 'pages/split_button_page.dart';
 import 'pages/switch_page.dart';
 import 'pages/tab_bar_page.dart';
 import 'pages/theme_page/theme_page.dart';
@@ -380,5 +381,14 @@ final examplePageItems = <PageItem>[
       snippetUrl:
           'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/border_container_page.dart',
     ),
+  ),
+  PageItem(
+    title: 'YaruSplitButton',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl:
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/split_button_page.dart',
+    ),
+    pageBuilder: (context) => const SplitButtonPage(),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.pan_down),
   ),
 ].sortedBy((page) => page.title);
