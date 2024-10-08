@@ -13,7 +13,7 @@ class YaruSplitButton extends StatelessWidget {
     this.onOptionsPressed,
     this.icon,
     this.radius,
-    this.menuWidth = menuDefaultWidth,
+    this.menuWidth,
   }) : _variant = _YaruSplitButtonVariant.elevated;
 
   const YaruSplitButton.filled({
@@ -24,7 +24,7 @@ class YaruSplitButton extends StatelessWidget {
     this.onOptionsPressed,
     this.icon,
     this.radius,
-    this.menuWidth = menuDefaultWidth,
+    this.menuWidth,
   }) : _variant = _YaruSplitButtonVariant.filled;
 
   const YaruSplitButton.outlined({
@@ -35,7 +35,7 @@ class YaruSplitButton extends StatelessWidget {
     this.onOptionsPressed,
     this.icon,
     this.radius,
-    this.menuWidth = menuDefaultWidth,
+    this.menuWidth,
   }) : _variant = _YaruSplitButtonVariant.outlined;
 
   final _YaruSplitButtonVariant _variant;
@@ -45,17 +45,10 @@ class YaruSplitButton extends StatelessWidget {
   final Widget? icon;
   final List<PopupMenuEntry<Object?>>? items;
   final double? radius;
-  final double menuWidth;
-
-  static const menuDefaultWidth = 148.0;
+  final double? menuWidth;
 
   @override
   Widget build(BuildContext context) {
-    assert(
-      items?.isNotEmpty == true && onOptionsPressed == null ||
-          items == null && onOptionsPressed != null,
-    );
-
     // TODO: fix common_themes to use a fixed size for buttons instead of fiddling around with padding
     // then we can rely on this size here
     const size = Size.square(36);
@@ -71,8 +64,12 @@ class YaruSplitButton extends StatelessWidget {
     );
 
     final dropdownShape = switch (_variant) {
-      _YaruSplitButtonVariant.outlined =>
-        const NonUniformRoundedRectangleBorder(hideLeftSide: true),
+      _YaruSplitButtonVariant.outlined => NonUniformRoundedRectangleBorder(
+          hideLeftSide: true,
+          borderRadius: BorderRadius.all(
+            defaultRadius,
+          ),
+        ),
       _ => RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topRight: defaultRadius,
@@ -88,10 +85,12 @@ class YaruSplitButton extends StatelessWidget {
                   position: _menuPosition(context),
                   items: items!,
                   menuPadding: EdgeInsets.symmetric(vertical: defaultRadius.x),
-                  constraints: BoxConstraints(
-                    minWidth: menuWidth,
-                    maxWidth: menuWidth,
-                  ),
+                  constraints: menuWidth == null
+                      ? null
+                      : BoxConstraints(
+                          minWidth: menuWidth!,
+                          maxWidth: menuWidth!,
+                        ),
                 )
             : null);
 
@@ -157,18 +156,18 @@ class YaruSplitButton extends StatelessWidget {
   }
 
   RelativeRect _menuPosition(BuildContext context) {
-    final bar = context.findRenderObject() as RenderBox;
+    final box = context.findRenderObject() as RenderBox;
     final overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
     const offset = Offset.zero;
 
     return RelativeRect.fromRect(
       Rect.fromPoints(
-        bar.localToGlobal(
-          bar.size.bottomCenter(offset),
+        box.localToGlobal(
+          box.size.bottomCenter(offset),
           ancestor: overlay,
         ),
-        bar.localToGlobal(
-          bar.size.bottomLeft(offset),
+        box.localToGlobal(
+          box.size.bottomRight(offset),
           ancestor: overlay,
         ),
       ),
