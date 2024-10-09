@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.3.0 (2024-10-09)
+
+## What's Changed
+* feat: YaruSplitButton by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/928
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v5.2.1...v5.3.0
+
 ## 5.2.1 (2024-09-20)
 
 ## What's Changed
