@@ -77,6 +77,12 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
               menuWidth: width,
               child: const Text('Main Action'),
             ),
+            YaruSplitButton(
+              menuWidth: width,
+              child: const Text('Main Action'),
+              onPressed: () => ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('Main Action'))),
+            ),
           ],
         ),
       ),
