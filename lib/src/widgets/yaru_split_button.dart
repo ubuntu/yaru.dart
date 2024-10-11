@@ -56,13 +56,6 @@ class YaruSplitButton extends StatelessWidget {
 
     final defaultRadius = Radius.circular(radius ?? kYaruButtonRadius);
 
-    final mainActionShape = RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: defaultRadius,
-        bottomLeft: defaultRadius,
-      ),
-    );
-
     final dropdownShape = switch (_variant) {
       _YaruSplitButtonVariant.outlined => NonUniformRoundedRectangleBorder(
           hideLeftSide: true,
@@ -94,6 +87,15 @@ class YaruSplitButton extends StatelessWidget {
                 )
             : null);
 
+    final mainActionShape = RoundedRectangleBorder(
+      borderRadius: onDropdownPressed == null
+          ? BorderRadius.all(defaultRadius)
+          : BorderRadius.only(
+              topLeft: defaultRadius,
+              bottomLeft: defaultRadius,
+            ),
+    );
+
     final dropdownIcon = icon ?? const Icon(YaruIcons.pan_down);
 
     return Row(
@@ -116,41 +118,42 @@ class YaruSplitButton extends StatelessWidget {
               child: child,
             ),
         },
-        switch (_variant) {
-          _YaruSplitButtonVariant.elevated => ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                fixedSize: size,
-                minimumSize: size,
-                maximumSize: size,
-                padding: dropdownPadding,
-                shape: dropdownShape,
+        if (onDropdownPressed != null)
+          switch (_variant) {
+            _YaruSplitButtonVariant.elevated => ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: size,
+                  minimumSize: size,
+                  maximumSize: size,
+                  padding: dropdownPadding,
+                  shape: dropdownShape,
+                ),
+                onPressed: onDropdownPressed,
+                child: dropdownIcon,
               ),
-              onPressed: onDropdownPressed,
-              child: dropdownIcon,
-            ),
-          _YaruSplitButtonVariant.filled => FilledButton(
-              style: FilledButton.styleFrom(
-                fixedSize: size,
-                minimumSize: size,
-                maximumSize: size,
-                padding: dropdownPadding,
-                shape: dropdownShape,
+            _YaruSplitButtonVariant.filled => FilledButton(
+                style: FilledButton.styleFrom(
+                  fixedSize: size,
+                  minimumSize: size,
+                  maximumSize: size,
+                  padding: dropdownPadding,
+                  shape: dropdownShape,
+                ),
+                onPressed: onDropdownPressed,
+                child: dropdownIcon,
               ),
-              onPressed: onDropdownPressed,
-              child: dropdownIcon,
-            ),
-          _YaruSplitButtonVariant.outlined => OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                fixedSize: size,
-                minimumSize: size,
-                maximumSize: size,
-                padding: dropdownPadding,
-                shape: dropdownShape,
+            _YaruSplitButtonVariant.outlined => OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  fixedSize: size,
+                  minimumSize: size,
+                  maximumSize: size,
+                  padding: dropdownPadding,
+                  shape: dropdownShape,
+                ),
+                onPressed: onDropdownPressed,
+                child: dropdownIcon,
               ),
-              onPressed: onDropdownPressed,
-              child: dropdownIcon,
-            ),
-        },
+          },
       ],
     );
   }
