@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.3.0 (2024-10-16)
+
+## What's Changed
+* feat: YaruSplitButton by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/928
+* fix(YaruSplitButton): normal buttons when no option callback by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/930
+* chore(example): add a better YaruSplitButton example by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/931
+* fix: Correct menu alignment for YaruSplitButton by @spydon in https://github.com/ubuntu/yaru.dart/pull/933
+
+## New Contributors
+* @spydon made their first contribution in https://github.com/ubuntu/yaru.dart/pull/933
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v5.2.1...v5.3.0
+
 ## 5.2.1 (2024-09-20)
 
 ## What's Changed
