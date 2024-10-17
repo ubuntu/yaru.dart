@@ -166,7 +166,7 @@ class YaruSplitButton extends StatelessWidget {
     return RelativeRect.fromRect(
       Rect.fromPoints(
         box.localToGlobal(
-          box.size.bottomRight(offset),
+          box.size.bottomLeft(offset),
           ancestor: overlay,
         ),
         box.localToGlobal(
