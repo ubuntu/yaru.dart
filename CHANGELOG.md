@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.3.1 (2024-10-17)
+
+## What's Changed
+* fix(YaruPanedView): do not overwrite the divider theme by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/935
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v5.3.0...v5.3.1
+
 ## 5.3.0 (2024-10-16)
 
 ## What's Changed
