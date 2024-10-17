@@ -140,14 +140,8 @@ class _YaruPanedViewState extends State<YaruPanedView> {
 
   Widget _buildVerticalSeparator() {
     return widget.layoutDelegate.paneSide.isVertical
-        ? const Divider(
-            thickness: 1,
-            height: 1,
-          )
-        : const VerticalDivider(
-            thickness: 1,
-            width: 1,
-          );
+        ? const Divider()
+        : const VerticalDivider();
   }
 
   Widget _buildLeftPaneResizer(
