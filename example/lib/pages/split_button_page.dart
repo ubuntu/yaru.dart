@@ -134,7 +134,6 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const Text('Space between alignment'),
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
-            menuWidth: _width,
             onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Main Action')),
             ),
@@ -150,7 +149,6 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const Text('Center alignment'),
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
-            menuWidth: _width,
             onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Main Action')),
             ),
