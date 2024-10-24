@@ -51,7 +51,7 @@ class YaruGtkSettings extends YaruSettings {
   @override
   Future<void> dispose() async {
     await _accentColorController.close();
-    _gSettingsService.dispose();
+    await _gSettingsService.dispose();
   }
 
   @override

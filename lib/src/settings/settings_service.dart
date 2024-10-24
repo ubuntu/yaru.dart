@@ -13,9 +13,9 @@ class GSettingsService {
     }
   }
 
-  void dispose() {
+  Future<void> dispose() async {
     for (final settings in _settings.values) {
-      settings?.dispose();
+      await settings?.dispose();
     }
   }
 }
@@ -42,7 +42,7 @@ class GnomeSettings {
     }
   }
 
-  void dispose() => _settings.close();
+  Future<void> dispose() async => await _settings.close();
 
   bool? boolValue(String key) => getValue<bool>(key);
   int? intValue(String key) => getValue<int>(key);
