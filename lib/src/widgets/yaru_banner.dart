@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/constants.dart';
 import 'package:yaru/foundation.dart' show YaruBorderRadiusExtension;
-import 'package:yaru/src/colors.dart';
+import 'package:yaru/src/themes/colors.dart';
 
 import 'yaru_tile.dart';
 
