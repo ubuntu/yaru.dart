@@ -1,5 +1,4 @@
-export 'src/colors.dart';
-export 'src/theme_widgets/inherited_theme.dart';
+export 'src/themes/colors.dart';
 export 'src/themes/common_themes.dart';
 export 'src/themes/extensions.dart';
 export 'src/themes/high_contrast.dart';
