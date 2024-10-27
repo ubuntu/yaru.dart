@@ -19,5 +19,5 @@ jobs:
       - run: flutter test --update-goldens
       - uses: peter-evans/create-pull-request@v4
         with:
-          title: 'Update golden images'
+          title: 'chore: update golden images'
           commit-message: 'Update golden images'
