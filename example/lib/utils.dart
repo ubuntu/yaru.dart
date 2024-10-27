@@ -13,3 +13,18 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnack(
     ),
   );
 }
+
+List<Widget> space({
+  double widthGap = 5,
+  double heightGap = 5,
+  required Iterable<Widget> children,
+}) =>
+    children
+        .expand(
+          (item) sync* {
+            yield SizedBox(width: widthGap);
+            yield item;
+          },
+        )
+        .skip(1)
+        .toList();

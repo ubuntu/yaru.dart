@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/vs.dart';
 import 'package:flutter_highlight/themes/vs2015.dart';
-import 'package:provider/provider.dart';
+import 'package:watch_it/watch_it.dart';
 import 'package:yaru/yaru.dart';
 
 import 'example_model.dart';
@@ -18,19 +18,11 @@ class CodeSnippedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<ExampleModel>();
     return FloatingActionButton(
       onPressed: () => showDialog(
         barrierDismissible: true,
         context: context,
-        builder: (context) {
-          return ChangeNotifierProvider.value(
-            value: model,
-            child: _CodeDialog(
-              snippetUrl: snippetUrl,
-            ),
-          );
-        },
+        builder: (context) => _CodeDialog(snippetUrl: snippetUrl),
       ),
       tooltip: 'Example snippet',
       foregroundColor: Theme.of(context).colorScheme.onSurface,
@@ -58,20 +50,20 @@ class _CodeDialogState extends State<_CodeDialog> {
   @override
   void initState() {
     super.initState();
-    _snippet = context.read<ExampleModel>().getCodeSnippet(
-          widget.snippetUrl,
-        );
+    _snippet = di<ExampleModel>().getCodeSnippet(
+      widget.snippetUrl,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<ExampleModel>();
+    final appIsOnline = watchPropertyValue((ExampleModel m) => m.appIsOnline);
 
     return AlertDialog(
       titlePadding: EdgeInsets.zero,
       title: YaruDialogTitleBar(
-        title: Text(!model.appIsOnline ? 'Offline' : 'Source code'),
-        leading: !model.appIsOnline
+        title: Text(!appIsOnline ? 'Offline' : 'Source code'),
+        leading: !appIsOnline
             ? null
             : Center(
                 child: YaruIconButton(
@@ -88,7 +80,7 @@ class _CodeDialogState extends State<_CodeDialog> {
               ),
       ),
       contentPadding: EdgeInsets.zero,
-      content: !model.appIsOnline
+      content: !appIsOnline
           ? Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

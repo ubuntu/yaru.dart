@@ -33,7 +33,7 @@ import 'pages/selectable_container_page.dart';
 import 'pages/split_button_page.dart';
 import 'pages/switch_page.dart';
 import 'pages/tab_bar_page.dart';
-import 'pages/theme_page/theme_page.dart';
+import 'pages/theme_page/home.dart';
 import 'pages/tile_page.dart';
 import 'pages/window_controls_page.dart';
 
@@ -327,12 +327,11 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'YaruIcons',
-    titleBuilder: createIconsPageAppBarTitle,
-    actionsBuilder: createIconsPageAppBarActions,
-    floatingActionButtonBuilder: createIconsPageFloatingActionButton,
-    pageBuilder: (context) {
-      return const IconsPage();
-    },
+    titleBuilder: (context) => const IconsPageAppBarTitle(),
+    actionsBuilder: (context) => [const IconsSearchIcon()],
+    floatingActionButtonBuilder: (context) =>
+        const IconsPageFloatingActionButton(),
+    pageBuilder: (context) => const IconsPage(),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.placeholder_icon_filled)
         : const Icon(YaruIcons.placeholder_icon),
@@ -349,9 +348,7 @@ final examplePageItems = <PageItem>[
   ),
   PageItem(
     title: 'Material Components, using Yaru Material Themes',
-    pageBuilder: (context) {
-      return const ThemePage();
-    },
+    pageBuilder: (context) => const MaterialThemeHomePage(),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.colors_filled)
         : const Icon(YaruIcons.colors),
