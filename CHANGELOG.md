@@ -1,5 +1,15 @@
 # Changelog
 
+## [5.3.1](https://github.com/ubuntu/yaru.dart/compare/v5.3.0...v5.3.1) (2024-10-27)
+
+
+### Bug Fixes
+
+* Align `YaruSplitButton` consistently ([#934](https://github.com/ubuntu/yaru.dart/issues/934)) ([ad4dfe4](https://github.com/ubuntu/yaru.dart/commit/ad4dfe4554eb649bc92677e4ecdac281ec515f63))
+* high contrast themes: ListTile selected state is not distinguishable from non-selected state ([#941](https://github.com/ubuntu/yaru.dart/issues/941)) ([ebddaed](https://github.com/ubuntu/yaru.dart/commit/ebddaed76b2f05ceeef6d1e2299d579fb5388e0a))
+* HighContrast YaruMasterTile, move Example theme buttons to side pane ([#943](https://github.com/ubuntu/yaru.dart/issues/943)) ([5656b32](https://github.com/ubuntu/yaru.dart/commit/5656b3276da90560d998d4dbf66b77fef7f715bc))
+* **YaruPanedView:** do not overwrite the divider theme ([#935](https://github.com/ubuntu/yaru.dart/issues/935)) ([b1d50a6](https://github.com/ubuntu/yaru.dart/commit/b1d50a6d5c4884d2689b93e40a1d0f53ef45f43b))
+
 ## 5.3.1 (2024-10-18)
 
 ## What's Changed
