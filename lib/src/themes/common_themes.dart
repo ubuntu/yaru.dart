@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yaru/constants.dart';
 import 'package:yaru/theme.dart';
 
 import 'constants.dart';
@@ -779,13 +780,29 @@ ThemeData createYaruTheme({
     splashFactory: NoSplash.splashFactory,
     sliderTheme: _createSliderTheme(colorScheme),
     drawerTheme: _createDrawerTheme(colorScheme),
-    listTileTheme: ListTileThemeData(
-      iconColor: colorScheme.onSurface.withOpacity(0.8),
-    ),
+    listTileTheme: _createListTileTheme(colorScheme),
     snackBarTheme: _createSnackBarTheme(colorScheme),
     chipTheme: _createChipTheme(
       selectedColor: elevatedButtonColor ?? colorScheme.primary,
       colorScheme: colorScheme,
+    ),
+  );
+}
+
+ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
+  final isHighContrast = colorScheme.isHighContrast;
+  return ListTileThemeData(
+    selectedColor:
+        isHighContrast ? colorScheme.onInverseSurface : colorScheme.onSurface,
+    iconColor: colorScheme.onSurface.withOpacity(0.8),
+    selectedTileColor: isHighContrast
+        ? colorScheme.inverseSurface
+        : colorScheme.onSurface.withOpacity(0.08),
+    minVerticalPadding: 6,
+    visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),
+      side: BorderSide.none,
     ),
   );
 }

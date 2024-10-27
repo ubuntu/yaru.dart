@@ -1,6 +1,4 @@
-import 'package:animated_vector/animated_vector.dart';
 import 'package:animated_vector_annotations/animated_vector_annotations.dart';
-import 'package:flutter/widgets.dart';
 
 part 'yaru_animated_icons.g.dart';
 
