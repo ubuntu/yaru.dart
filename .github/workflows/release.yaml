@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-  # REMOVE THIS when it works
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -21,4 +16,4 @@ jobs:
       - uses: googleapis/release-please-action@v4
         with:
           release-type: dart
-          
+
