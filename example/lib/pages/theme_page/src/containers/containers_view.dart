@@ -3,6 +3,13 @@ import 'package:yaru/yaru.dart';
 
 import '../constants.dart';
 
+const _icons = [
+  YaruIcons.address_book,
+  YaruIcons.application_bag,
+  YaruIcons.beaker,
+  YaruIcons.calendar_important,
+];
+
 class ContainersView extends StatefulWidget {
   const ContainersView({super.key});
 
@@ -13,12 +20,8 @@ class ContainersView extends StatefulWidget {
 class _ContainersViewState extends State<ContainersView> {
   var _elevation = 2.0;
   var _inDialog = true;
-  final _icons = [
-    YaruIcons.address_book,
-    YaruIcons.application_bag,
-    YaruIcons.beaker,
-    YaruIcons.calendar_important,
-  ];
+
+  final _selected = List.generate(_icons.length, (index) => false);
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +72,8 @@ class _ContainersViewState extends State<ContainersView> {
       containerWithBorder,
       for (var i = 0; i < _icons.length; i++)
         ListTile(
+          selected: _selected[i],
+          onTap: () => setState(() => _selected[i] = !_selected[i]),
           leading: Icon(_icons[i]),
           title: Text('ListTile title $i'),
           subtitle: i.isEven ? null : const Text('Subtitle'),

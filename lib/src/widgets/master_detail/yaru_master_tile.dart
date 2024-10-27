@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/constants.dart';
-import 'package:yaru/theme.dart';
 
 const double _kScrollbarThickness = 8.0;
 const double _kScrollbarMargin = 2.0;
@@ -59,20 +58,6 @@ class YaruMasterTile extends StatelessWidget {
               isSelected ? theme.colorScheme.onSurface.withOpacity(0.07) : null,
         ),
         child: ListTile(
-          selectedColor: theme.colorScheme.onSurface,
-          iconColor: theme.colorScheme.onSurface.withOpacity(0.8),
-          minVerticalPadding: 6,
-          visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-          shape: RoundedRectangleBorder(
-            borderRadius:
-                const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
-            side: theme.colorScheme.isHighContrast && isSelected
-                ? BorderSide(
-                    color: theme.colorScheme.outlineVariant,
-                    strokeAlign: BorderSide.strokeAlignOutside,
-                  )
-                : BorderSide.none,
-          ),
           leading: leading,
           title: _titleStyle(context, title),
           subtitle: _subTitleStyle(context, subtitle),

@@ -9,7 +9,7 @@ environment:
   flutter: ">=3.24.3"
 
 dependencies:
-  animated_vector: ^0.2.0
+  animated_vector: ^0.2.2
   animated_vector_annotations: ^0.2.0
   assorted_layout_widgets: ^9.0.2
   collection: ^1.17.0
