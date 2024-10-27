@@ -16,11 +16,10 @@ dependencies:
   handy_window: ^0.4.0
   http: ^1.2.2
   path: ^1.9.0
-  provider: ^6.1.2
   safe_change_notifier: ^0.3.2
-  ubuntu_service: ^0.3.2
   universal_html: ^2.2.4
   url_launcher: ^6.3.0
+  watch_it: ^1.5.1
   yaru:
     path: ../
 

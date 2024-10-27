@@ -797,7 +797,7 @@ ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
     iconColor: colorScheme.onSurface.withOpacity(0.8),
     selectedTileColor: isHighContrast
         ? colorScheme.inverseSurface
-        : colorScheme.onSurface.withOpacity(0.08),
+        : colorScheme.onSurface.withOpacity(colorScheme.isDark ? 0.035 : 0.04),
     minVerticalPadding: 6,
     visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
     shape: const RoundedRectangleBorder(
