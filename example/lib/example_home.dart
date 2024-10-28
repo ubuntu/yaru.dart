@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
@@ -18,7 +19,7 @@ class ExampleHome extends StatelessWidget with WatchItMixin {
     final forceHighContrast =
         watchPropertyValue((ExampleModel m) => m.forceHighContrast);
 
-    if (Platform.isLinux) {
+    if (!kIsWeb && Platform.isLinux) {
       return YaruTheme(
         builder: (context, yaru, child) => _ExampleHome(
           themeMode: themeMode,
