@@ -14,6 +14,12 @@ class ProgressIndicatorPage extends StatelessWidget {
           children: const [
             Padding(
               padding: EdgeInsets.only(top: 25),
+              child: YaruCircularProgressIndicator(
+                initialIndeterminatedAnimation: true,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 25),
               child: YaruCircularProgressIndicator(),
             ),
             Padding(
