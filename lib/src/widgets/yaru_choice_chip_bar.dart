@@ -10,12 +10,11 @@ class YaruChoiceChipBar extends StatefulWidget {
     required this.labels,
     this.onSelected,
     required this.isSelected,
-    this.yaruChoiceChipBarStyle = YaruChoiceChipBarStyle.row,
+    this.style = YaruChoiceChipBarStyle.row,
     this.spacing = 10.0,
     this.animationDuration = const Duration(milliseconds: 300),
     this.navigationStep = 100.0,
     this.animationCurve = Curves.bounceIn,
-    this.radius = kYaruTitleBarItemHeight,
     this.chipHeight = kYaruTitleBarItemHeight,
     this.wrapScrollDirection = Axis.horizontal,
     this.wrapAlignment = WrapAlignment.start,
@@ -31,9 +30,6 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.shrinkWrap = true,
     this.showCheckMarks = true,
     this.selectedFirst = true,
-    this.borderColor,
-    this.chipBackgroundColor,
-    this.selectedChipBackgroundColor,
     this.navigationButtonElevation,
   }) : assert(labels.length == isSelected.length);
 
@@ -54,7 +50,7 @@ class YaruChoiceChipBar extends StatefulWidget {
   /// Determines weither the [ChoiceChip]s should be put into a [ListView]
   /// or a [Wrap] or a [ListView] but with the scrolling controls
   /// put into a [Stack] on top of the [ListView].
-  final YaruChoiceChipBarStyle yaruChoiceChipBarStyle;
+  final YaruChoiceChipBarStyle style;
 
   /// Sets how long the navigation jumps and fade in and out of
   /// the scrolling controls are animated.
@@ -65,21 +61,6 @@ class YaruChoiceChipBar extends StatefulWidget {
 
   /// Sets the easing [Curve] of the animations.
   final Curve animationCurve;
-
-  /// Sets how round the [ChoiceChips] and scrolling control buttons are.
-  final double radius;
-
-  /// The optional [Color] of the [BorderSide] of the [ChoiceChips]
-  /// Defaults to `Theme.of(context).chipTheme.shape?.side.color ?? Theme.of(context).colorScheme.outline`
-  final Color? borderColor;
-
-  /// The optional [Color] of the [ShapeBorder] of the [ChoiceChips]
-  /// Defaults to `Theme.of(context).chipTheme.backgroundColor`
-  final Color? chipBackgroundColor;
-
-  /// The optional [Color] of the [ShapeBorder] of the [ChoiceChips] if selected.
-  /// Defaults to `Theme.of(context).chipTheme.selectedColor`
-  final Color? selectedChipBackgroundColor;
 
   /// The optional elevation of the navigation buttons. Defaults to 0.
   final double? navigationButtonElevation;
@@ -180,38 +161,21 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     Widget themedChip(int index) {
-      return ChipTheme(
-        data: theme.chipTheme.copyWith(
-          backgroundColor: widget.chipBackgroundColor,
-          selectedColor: widget.selectedChipBackgroundColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(widget.radius),
-            side: BorderSide(
-              color: widget.borderColor ??
-                  theme.chipTheme.shape?.side.color ??
-                  theme.colorScheme.outline,
-              width: 1,
-            ),
-          ),
-        ),
-        child: ChoiceChip(
-          showCheckmark: widget.showCheckMarks,
-          label: widget.labels[index],
-          selected: widget.isSelected[index],
-          onSelected: widget.onSelected == null
-              ? null
-              : (v) {
-                  widget.onSelected!(index);
-                  if (widget.clearOnSelect) {
-                    _controller.jumpTo(
-                      _controller.position.minScrollExtent - widget.chipHeight,
-                    );
-                  }
-                },
-        ),
+      return ChoiceChip(
+        showCheckmark: widget.showCheckMarks,
+        label: widget.labels[index],
+        selected: widget.isSelected[index],
+        onSelected: widget.onSelected == null
+            ? null
+            : (v) {
+                widget.onSelected!(index);
+                if (widget.clearOnSelect) {
+                  _controller.jumpTo(
+                    _controller.position.minScrollExtent - widget.chipHeight,
+                  );
+                }
+              },
       );
     }
 
@@ -245,9 +209,6 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
 
     final goPreviousButton = _NavigationButton(
       elevation: widget.navigationButtonElevation,
-      borderColor: widget.borderColor,
-      chipBackgroundColor: widget.chipBackgroundColor,
-      radius: widget.radius,
       chipHeight: widget.chipHeight,
       icon: widget.goPreviousIcon ?? const Icon(YaruIcons.go_previous),
       onTap: _enableGoPreviousButton
@@ -261,10 +222,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
 
     final goNextButton = _NavigationButton(
       elevation: widget.navigationButtonElevation,
-      borderColor: widget.borderColor,
-      chipBackgroundColor: widget.chipBackgroundColor,
       chipHeight: widget.chipHeight,
-      radius: widget.radius,
       icon: widget.goNextIcon ?? const Icon(YaruIcons.go_next),
       onTap: _enableGoNextButton
           ? () => _controller.animateTo(
@@ -275,7 +233,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
           : null,
     );
 
-    if (widget.yaruChoiceChipBarStyle == YaruChoiceChipBarStyle.wrap) {
+    if (widget.style == YaruChoiceChipBarStyle.wrap) {
       return Wrap(
         alignment: widget.wrapAlignment,
         clipBehavior: widget.wrapClipBehavior,
@@ -288,7 +246,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
         direction: widget.wrapScrollDirection,
         children: children,
       );
-    } else if (widget.yaruChoiceChipBarStyle == YaruChoiceChipBarStyle.stack) {
+    } else if (widget.style == YaruChoiceChipBarStyle.stack) {
       return SizedBox(
         height: widget.chipHeight,
         child: Stack(
@@ -351,38 +309,33 @@ class _NavigationButton extends StatelessWidget {
   const _NavigationButton({
     this.onTap,
     required this.icon,
-    required this.radius,
     required this.chipHeight,
-    this.borderColor,
-    this.chipBackgroundColor,
     this.elevation,
   });
 
   final Function()? onTap;
   final Widget icon;
-  final double radius;
   final double chipHeight;
-  final Color? borderColor;
-  final Color? chipBackgroundColor;
   final double? elevation;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final roundedRectangleBorder = RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(radius),
+      borderRadius: BorderRadius.circular(chipHeight / 2),
       side: BorderSide(
-        color: borderColor ?? theme.colorScheme.outline,
+        strokeAlign: -1,
+        color: (theme.colorScheme.isHighContrast == true
+            ? theme.colorScheme.outlineVariant
+            : theme.colorScheme.outline),
         width: 1,
       ),
     );
 
-    return SizedBox(
-      height: chipHeight,
-      width: chipHeight,
+    return SizedBox.square(
+      dimension: chipHeight - 2,
       child: Material(
         shape: roundedRectangleBorder,
-        color: chipBackgroundColor?.scale(lightness: 0.1),
         elevation: elevation ?? 0.0,
         child: InkWell(
           customBorder: roundedRectangleBorder,

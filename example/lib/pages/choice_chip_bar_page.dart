@@ -33,7 +33,7 @@ class _ChoiceChipBarPageState extends State<ChoiceChipBarPage> {
               showCheckMarks: false,
               shrinkWrap: true,
               clearOnSelect: false,
-              yaruChoiceChipBarStyle: YaruChoiceChipBarStyle.stack,
+              style: YaruChoiceChipBarStyle.stack,
               labels: _labels.map(Text.new).toList(),
               isSelected: _isSelected,
               onSelected: (index) => setState(() {
