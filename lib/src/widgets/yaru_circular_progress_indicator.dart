@@ -171,7 +171,6 @@ class _YaruCircularProgressIndicatorState
               color,
               trackColor,
               strokeWidth,
-              trackStrokeWidth,
               barSizeProgress,
               pointsOpacityProgress,
               rotationProgress,
@@ -189,7 +188,6 @@ class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
     this.color,
     this.trackColor,
     this.strokeWidth,
-    this.trackStrokeWidth,
     this.barSizeProgress,
     this.pointsOpacityProgress,
     this.rotationProgress,
@@ -199,7 +197,6 @@ class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
   final Color color;
   final Color trackColor;
   final double strokeWidth;
-  final double trackStrokeWidth;
   final double barSizeProgress;
   final double pointsOpacityProgress;
   final double rotationProgress;
