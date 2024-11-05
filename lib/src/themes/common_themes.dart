@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yaru/constants.dart';
 import 'package:yaru/theme.dart';
 
-import '../text/text_theme.dart';
 import 'constants.dart';
+import 'text_theme.dart';
 
 const kDividerColorDark = Color.fromARGB(255, 65, 65, 65);
 const kDividerColorLight = Color(0xffdcdcdc);
@@ -662,8 +663,35 @@ ChipThemeData _createChipTheme({
   required Color selectedColor,
   required ColorScheme colorScheme,
 }) {
+  final isHC = colorScheme.isHighContrast == true;
+  final selectedBackgroundColor =
+      isHC ? colorScheme.inverseSurface : selectedColor;
+  final selectedForeGroundColor =
+      isHC ? colorScheme.onInverseSurface : colorScheme.onSurface;
+
   return ChipThemeData(
-    selectedColor: selectedColor.withOpacity(.4),
+    selectedColor: selectedBackgroundColor.withOpacity(isHC ? 1 : 0.4),
+    labelStyle: TextStyle(
+      color: colorScheme.onSurface,
+    ),
+    checkmarkColor: selectedForeGroundColor,
+    secondaryLabelStyle: TextStyle(
+      color: selectedForeGroundColor,
+      fontWeight: isHC ? FontWeight.bold : FontWeight.normal,
+    ),
+    side: WidgetStateBorderSide.resolveWith(
+      (s) => BorderSide(
+        color: s.contains(WidgetState.selected)
+            ? selectedBackgroundColor.withOpacity(isHC ? 1 : 0.1)
+            : (isHC ? colorScheme.outlineVariant : colorScheme.outline)
+                .withOpacity(
+                s.contains(WidgetState.disabled) ? (isHC ? 0.3 : 0.7) : 1,
+              ),
+      ),
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(100),
+    ),
   );
 }
 
@@ -779,13 +807,29 @@ ThemeData createYaruTheme({
     splashFactory: NoSplash.splashFactory,
     sliderTheme: _createSliderTheme(colorScheme),
     drawerTheme: _createDrawerTheme(colorScheme),
-    listTileTheme: ListTileThemeData(
-      iconColor: colorScheme.onSurface.withOpacity(0.8),
-    ),
+    listTileTheme: _createListTileTheme(colorScheme),
     snackBarTheme: _createSnackBarTheme(colorScheme),
     chipTheme: _createChipTheme(
       selectedColor: elevatedButtonColor ?? colorScheme.primary,
       colorScheme: colorScheme,
+    ),
+  );
+}
+
+ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
+  final isHighContrast = colorScheme.isHighContrast;
+  return ListTileThemeData(
+    selectedColor:
+        isHighContrast ? colorScheme.onInverseSurface : colorScheme.onSurface,
+    iconColor: colorScheme.onSurface.withOpacity(0.8),
+    selectedTileColor: isHighContrast
+        ? colorScheme.inverseSurface
+        : colorScheme.onSurface.withOpacity(colorScheme.isDark ? 0.035 : 0.04),
+    minVerticalPadding: 6,
+    visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),
+      side: BorderSide.none,
     ),
   );
 }
@@ -837,10 +881,13 @@ ThemeData createYaruLightTheme({
     tertiaryContainer: tertiaryContainer,
     onTertiaryContainer: contrastColor(tertiaryContainer),
     onSurfaceVariant: YaruColors.coolGrey,
-    outline: const Color.fromARGB(255, 221, 221, 221),
+    outline: primaryColor == Colors.white
+        ? Colors.black
+        : const Color.fromARGB(255, 221, 221, 221),
     outlineVariant: Colors.black,
     scrim: Colors.black,
   );
+
   return createYaruTheme(
     colorScheme: colorScheme,
     dividerColor: colorScheme.isHighContrast ? null : kDividerColorLight,
@@ -891,7 +938,9 @@ ThemeData createYaruDarkTheme({
     tertiaryContainer: tertiaryContainer,
     onTertiaryContainer: YaruColors.porcelain,
     onSurfaceVariant: YaruColors.warmGrey,
-    outline: const Color.fromARGB(255, 68, 68, 68),
+    outline: primaryColor == Colors.black
+        ? Colors.white
+        : const Color.fromARGB(255, 68, 68, 68),
     outlineVariant: Colors.white,
     scrim: Colors.black,
   );

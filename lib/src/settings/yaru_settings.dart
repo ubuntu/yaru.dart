@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:gtk/gtk.dart';
-import 'package:yaru/src/theme_widgets/gtk_constants.dart';
-import 'package:yaru/src/theme_widgets/settings_service.dart';
+import 'package:yaru/src/settings/gtk_constants.dart';
+import 'package:yaru/src/settings/settings_service.dart';
 
 abstract class YaruSettings {
   factory YaruSettings() = YaruGtkSettings;
@@ -51,7 +51,7 @@ class YaruGtkSettings extends YaruSettings {
   @override
   Future<void> dispose() async {
     await _accentColorController.close();
-    _gSettingsService.dispose();
+    await _gSettingsService.dispose();
   }
 
   @override

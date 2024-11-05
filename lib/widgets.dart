@@ -43,6 +43,7 @@ export 'src/widgets/yaru_search_field.dart';
 export 'src/widgets/yaru_section.dart';
 export 'src/widgets/yaru_segmented_entry.dart';
 export 'src/widgets/yaru_selectable_container.dart';
+export 'src/widgets/yaru_split_button.dart';
 export 'src/widgets/yaru_switch.dart';
 export 'src/widgets/yaru_switch_button.dart';
 export 'src/widgets/yaru_switch_list_tile.dart';

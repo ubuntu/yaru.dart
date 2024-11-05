@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../colors.dart';
+import 'colors.dart';
 
 /// Yaru-specific color scheme extensions.
 extension YaruColorSchemeExtension on ColorScheme {

@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:safe_change_notifier/safe_change_notifier.dart';
+import 'package:yaru/yaru.dart';
 
 class ExampleModel extends SafeChangeNotifier {
   ExampleModel(
@@ -13,6 +15,29 @@ class ExampleModel extends SafeChangeNotifier {
   StreamSubscription? _connectivitySub;
   List<ConnectivityResult> _connectivityResult = [ConnectivityResult.wifi];
   List<ConnectivityResult> get state => _connectivityResult;
+
+  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode get themeMode => _themeMode;
+  void setThemeMode(ThemeMode value) {
+    if (value == _themeMode) return;
+    _themeMode = value;
+    notifyListeners();
+  }
+
+  bool _forceHighContrast = false;
+  bool get forceHighContrast => _forceHighContrast;
+  void toggleForceHighContrast() {
+    _forceHighContrast = !_forceHighContrast;
+    notifyListeners();
+  }
+
+  YaruVariant? _yaruVariant;
+  YaruVariant? get yaruVariant => _yaruVariant;
+  void setYaruVariant(YaruVariant value) {
+    if (value == _yaruVariant) return;
+    _yaruVariant = value;
+    notifyListeners();
+  }
 
   bool _compactMode = false;
   bool get compactMode => _compactMode;
@@ -30,9 +55,7 @@ class ExampleModel extends SafeChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> init() async {
-    await initConnectivity();
-  }
+  Future<void> init() async => initConnectivity();
 
   @override
   void dispose() {

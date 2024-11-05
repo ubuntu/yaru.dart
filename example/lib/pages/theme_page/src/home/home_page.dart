@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
+import '../../../../utils.dart';
 import '../../colors.dart';
 import '../../containers.dart';
 import '../../controls.dart';
 import '../../fonts.dart';
 import '../../textfields.dart';
-import '../../theme_page.dart';
-import '../constants.dart';
-import '../utils.dart';
-import 'color_disk.dart';
 
 final GlobalKey<ScaffoldState> themePageScaffoldKey = GlobalKey();
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class MaterialThemeHomePage extends StatefulWidget {
+  const MaterialThemeHomePage({super.key});
 
   @override
-  HomePageState createState() => HomePageState();
+  MaterialThemeHomePageState createState() => MaterialThemeHomePageState();
 }
 
-class HomePageState extends State<HomePage> {
-  HomePageState();
+class MaterialThemeHomePageState extends State<MaterialThemeHomePage> {
+  MaterialThemeHomePageState();
 
   int _selectedIndex = 0;
 
@@ -79,15 +76,11 @@ class HomePageState extends State<HomePage> {
             icon: const Icon(YaruIcons.menu),
           ),
         ),
-        title: const _Title(),
+        title: const Text(''),
         actions: [
           IconButton(
             onPressed: () => showSnack(context),
             icon: const Icon(YaruIcons.plus),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: kWrapSpacing),
-            child: _ThemeButton(),
           ),
         ],
       ),
@@ -154,80 +147,6 @@ class HomePageState extends State<HomePage> {
   }
 }
 
-class _ThemeButton extends StatelessWidget {
-  const _ThemeButton();
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = YaruTheme.of(context);
-    final light = theme.themeMode == ThemeMode.light;
-
-    return PopupMenuButton<Color>(
-      padding: EdgeInsets.zero,
-      icon: Icon(
-        YaruIcons.color_select,
-        color: Theme.of(context).primaryColor,
-      ),
-      itemBuilder: (context) {
-        return [
-          PopupMenuItem(
-            onTap: () => AppTheme.apply(context, highContrast: true),
-            child: Row(
-              children: [
-                ColorDisk(
-                  color: light ? Colors.black : Colors.white,
-                  selected: theme.highContrast == true,
-                ),
-                const Text('highContrast'),
-              ],
-            ),
-          ),
-          for (final variant in YaruVariant.values) // skip flavors
-            PopupMenuItem(
-              onTap: () => AppTheme.apply(
-                context,
-                variant: variant,
-                highContrast: false,
-              ),
-              child: Row(
-                children: [
-                  ColorDisk(
-                    color: variant.color,
-                    selected:
-                        variant == theme.variant && theme.highContrast != true,
-                  ),
-                  Text(variant.name),
-                ],
-              ),
-            ),
-        ];
-      },
-    );
-  }
-}
-
-class _Title extends StatelessWidget {
-  const _Title();
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = YaruTheme.of(context);
-    final light = theme.themeMode == ThemeMode.light;
-
-    return IconButton(
-      onPressed: () {
-        return AppTheme.apply(
-          context,
-          themeMode: light ? ThemeMode.dark : ThemeMode.light,
-        );
-      },
-      icon: Icon(
-        light ? YaruIcons.sun_filled : YaruIcons.clear_night_filled,
-      ),
-    );
-  }
-}
-
 class _Drawer extends StatelessWidget {
   const _Drawer({
     required this.items,
@@ -243,7 +162,7 @@ class _Drawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        padding: EdgeInsets.zero,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         children: [
           const DrawerHeader(
             child: Text('Drawer Header'),

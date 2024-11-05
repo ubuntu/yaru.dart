@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../icons.dart';
+import '../../icons.dart';
 
 /// Binding name enumeration between [YaruIcons] and the Freedesktop Icon Naming Specification
 /// Based on: https://specifications.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html

@@ -162,7 +162,7 @@ void main() {
 
       expect(panedViewRect.width, 500);
       expect(paneRect.width, 200);
-      expect(pageRect.width, 299);
+      expect(pageRect.width, 284);
 
       await binding.setSurfaceSize(const Size(200, 500));
       await tester.pump();
@@ -173,7 +173,7 @@ void main() {
 
       expect(panedViewRect.width, 200);
       expect(paneRect.width, 100);
-      expect(pageRect.width, 99);
+      expect(pageRect.width, 84);
     },
   );
 }
@@ -203,7 +203,7 @@ class FixedPaneTestVariant {
           paneSide: paneSide,
         ),
         expectedPaneSize = const Size(200, 500),
-        expectedPageSize = const Size(299, 500);
+        expectedPageSize = const Size(284, 500);
 
   FixedPaneTestVariant.vertical({
     required YaruPaneSide paneSide,
@@ -214,7 +214,7 @@ class FixedPaneTestVariant {
           paneSide: paneSide,
         ),
         expectedPaneSize = const Size(500, 200),
-        expectedPageSize = const Size(500, 299);
+        expectedPageSize = const Size(500, 284);
 
   final YaruFixedPaneDelegate layoutDelegate;
   final TextDirection textDirection;
@@ -251,12 +251,12 @@ class ResizablePaneTestVariant {
           paneSide: paneSide,
         ),
         expectedInitialPaneSize = const Size(200, 500),
-        expectedInitialPageSize = const Size(299, 500),
+        expectedInitialPageSize = const Size(284, 500),
         offset = Offset(offset, 0),
         expectedResizedPaneSize =
             Size(200 + (expectedSide == Side.left ? offset : -offset), 500),
         expectedResizedPageSize =
-            Size(299 - (expectedSide == Side.left ? offset : -offset), 500);
+            Size(284 - (expectedSide == Side.left ? offset : -offset), 500);
 
   ResizablePaneTestVariant.vertical({
     required YaruPaneSide paneSide,
@@ -270,12 +270,12 @@ class ResizablePaneTestVariant {
           paneSide: paneSide,
         ),
         expectedInitialPaneSize = const Size(500, 200),
-        expectedInitialPageSize = const Size(500, 299),
+        expectedInitialPageSize = const Size(500, 284),
         offset = Offset(0, offset),
         expectedResizedPaneSize =
             Size(500, 200 + (expectedSide == Side.top ? offset : -offset)),
         expectedResizedPageSize =
-            Size(500, 299 - (expectedSide == Side.top ? offset : -offset));
+            Size(500, 284 - (expectedSide == Side.top ? offset : -offset));
 
   final YaruResizablePaneDelegate layoutDelegate;
   final TextDirection textDirection;

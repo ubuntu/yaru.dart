@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:watch_it/watch_it.dart';
 
 import 'common/icon_grid.dart';
 import 'common/icon_table.dart';
 import 'icon_items.dart';
 import 'provider/icon_view_model.dart';
 
-class IconView extends StatelessWidget {
+class IconView extends StatelessWidget with WatchItMixin {
   const IconView({
     super.key,
     required this.iconItems,
@@ -17,11 +17,10 @@ class IconView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final searchActive =
-        context.select<IconViewModel, bool>((m) => m.searchActive);
-    final searchQuery =
-        context.select<IconViewModel, String>((m) => m.searchQuery);
-    final gridView = context.select<IconViewModel, bool>((m) => m.gridView);
-    final iconSize = context.select<IconViewModel, double>((m) => m.iconSize);
+        watchPropertyValue((IconViewModel m) => m.searchActive);
+    final searchQuery = watchPropertyValue((IconViewModel m) => m.searchQuery);
+    final gridView = watchPropertyValue((IconViewModel m) => m.gridView);
+    final iconSize = watchPropertyValue((IconViewModel m) => m.iconSize);
 
     final localIconItems = searchActive
         ? iconItems.where((iconItem) {

@@ -1,49 +1,24 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:watch_it/watch_it.dart';
 import 'package:yaru/yaru.dart';
 
+import 'example_dark_light_toggle_button.dart';
+import 'example_high_contrast_button.dart';
 import 'example_model.dart';
 import 'example_page_items.dart';
-import 'pages/icons_page/provider/icon_view_model.dart';
+import 'example_theme_button.dart';
 
-class Example extends StatefulWidget {
-  // ignore: unused_element
+class Example extends StatelessWidget with WatchItMixin {
   const Example({super.key});
-
-  static Widget create(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<ExampleModel>(
-          create: (_) => ExampleModel(getService<Connectivity>()),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => IconViewModel(),
-        ),
-      ],
-      child: const Example(),
-    );
-  }
-
-  @override
-  State<Example> createState() => _ExampleState();
-}
-
-class _ExampleState extends State<Example> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<ExampleModel>().init();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<ExampleModel>();
+    final compactMode = watchPropertyValue((ExampleModel m) => m.compactMode);
+    final rtl = watchPropertyValue((ExampleModel m) => m.rtl);
 
     return Directionality(
-      textDirection: !model.rtl ? TextDirection.ltr : TextDirection.rtl,
-      child: model.compactMode
+      textDirection: !rtl ? TextDirection.ltr : TextDirection.rtl,
+      child: compactMode
           ? _CompactPage(pageItems: examplePageItems)
           : _MasterDetailPage(pageItems: examplePageItems),
     );
@@ -72,6 +47,7 @@ class _MasterDetailPage extends StatelessWidget {
       tileBuilder: (context, index, selected, availableWidth) => YaruMasterTile(
         leading: pageItems[index].iconBuilder(context, selected),
         title: Text(pageItems[index].title),
+        subtitle: index == 0 ? const Text('Subtitle') : null,
       ),
       pageBuilder: (context, index) => YaruDetailPage(
         appBar: YaruWindowTitleBar(
@@ -90,6 +66,23 @@ class _MasterDetailPage extends StatelessWidget {
         title: const Text('Yaru'),
         border: BorderSide.none,
         backgroundColor: YaruMasterDetailTheme.of(context).sideBarColor,
+        actions: const [
+          SizedBox(
+            width: 5,
+          ),
+          ExampleDarkLightToggleButton(),
+          SizedBox(
+            width: 5,
+          ),
+          ExampleYaruVariantPicker(),
+          SizedBox(
+            width: 5,
+          ),
+          ExampleHighContrastButton(),
+          SizedBox(
+            width: 5,
+          ),
+        ],
       ),
       bottomBar: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -170,6 +163,13 @@ class _CompactPageState extends State<_CompactPage> {
   }
 }
 
+void showSettingsDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) => const SettingsDialog(),
+  );
+}
+
 Widget? buildLeading(BuildContext context, PageItem item) {
   return item.leadingBuilder?.call(context);
 }
@@ -186,49 +186,44 @@ Widget? buildFloatingActionButton(BuildContext context, PageItem item) {
   return item.floatingActionButtonBuilder?.call(context);
 }
 
-Future<void> showSettingsDialog(BuildContext context) {
-  final model = context.read<ExampleModel>();
+class SettingsDialog extends StatelessWidget with WatchItMixin {
+  const SettingsDialog({super.key});
 
-  return showDialog(
-    context: context,
-    builder: (context) {
-      return AnimatedBuilder(
-        animation: model,
-        builder: (context, child) {
-          return AlertDialog(
-            title: const YaruDialogTitleBar(
-              title: Text('Settings'),
+  @override
+  Widget build(BuildContext context) {
+    final model = di<ExampleModel>();
+
+    return AlertDialog(
+      title: const YaruDialogTitleBar(
+        title: Text('Settings'),
+      ),
+      titlePadding: EdgeInsets.zero,
+      contentPadding: const EdgeInsets.all(kYaruPagePadding),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          YaruTile(
+            title: const Text('Compact mode'),
+            trailing: YaruSwitch(
+              value: watchPropertyValue((ExampleModel m) => m.compactMode),
+              onChanged: (v) => model.compactMode = v,
             ),
-            titlePadding: EdgeInsets.zero,
-            contentPadding: const EdgeInsets.all(kYaruPagePadding),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                YaruTile(
-                  title: const Text('Compact mode'),
-                  trailing: YaruSwitch(
-                    value: model.compactMode,
-                    onChanged: (v) => model.compactMode = v,
-                  ),
-                ),
-                YaruTile(
-                  title: const Text('RTL mode'),
-                  trailing: YaruSwitch(
-                    value: model.rtl,
-                    onChanged: (v) => model.rtl = v,
-                  ),
-                ),
-              ],
+          ),
+          YaruTile(
+            title: const Text('RTL mode'),
+            trailing: YaruSwitch(
+              value: watchPropertyValue((ExampleModel m) => m.rtl),
+              onChanged: (v) => model.rtl = v,
             ),
-            actions: [
-              OutlinedButton(
-                onPressed: Navigator.of(context).pop,
-                child: const Text('Close'),
-              ),
-            ],
-          );
-        },
-      );
-    },
-  );
+          ),
+        ],
+      ),
+      actions: [
+        OutlinedButton(
+          onPressed: Navigator.of(context).pop,
+          child: const Text('Close'),
+        ),
+      ],
+    );
+  }
 }

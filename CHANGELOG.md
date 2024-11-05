@@ -1,5 +1,43 @@
 # Changelog
 
+## [5.3.2](https://github.com/ubuntu/yaru.dart/compare/v5.3.0...v5.3.2) (2024-10-28)
+
+
+### Bug Fixes
+
+* Align `YaruSplitButton` consistently ([#934](https://github.com/ubuntu/yaru.dart/issues/934)) ([ad4dfe4](https://github.com/ubuntu/yaru.dart/commit/ad4dfe4554eb649bc92677e4ecdac281ec515f63))
+* high contrast themes: ListTile selected state is not distinguishable from non-selected state ([#941](https://github.com/ubuntu/yaru.dart/issues/941)) ([ebddaed](https://github.com/ubuntu/yaru.dart/commit/ebddaed76b2f05ceeef6d1e2299d579fb5388e0a))
+* HighContrast YaruMasterTile, move Example theme buttons to side pane ([#943](https://github.com/ubuntu/yaru.dart/issues/943)) ([5656b32](https://github.com/ubuntu/yaru.dart/commit/5656b3276da90560d998d4dbf66b77fef7f715bc))
+* **YaruPanedView:** do not overwrite the divider theme ([#935](https://github.com/ubuntu/yaru.dart/issues/935)) ([b1d50a6](https://github.com/ubuntu/yaru.dart/commit/b1d50a6d5c4884d2689b93e40a1d0f53ef45f43b))
+
+
+### Miscellaneous Chores
+
+* **main:** release 5.3.2 ([#949](https://github.com/ubuntu/yaru.dart/issues/949)) ([9112f8d](https://github.com/ubuntu/yaru.dart/commit/9112f8d2c21634311b19b613a0cc9e794c93e082))
+
+## 5.3.1 (2024-10-18)
+
+## What's Changed
+* fix(YaruPanedView): do not overwrite the divider theme by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/935
+* chore: Update goldens and test values for `YaruPanedView` by @spydon in https://github.com/ubuntu/yaru.dart/pull/937
+* fix: Align `YaruSplitButton` consistently by @spydon in https://github.com/ubuntu/yaru.dart/pull/934
+
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v5.3.0...v5.3.1
+
+## 5.3.0 (2024-10-16)
+
+## What's Changed
+* feat: YaruSplitButton by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/928
+* fix(YaruSplitButton): normal buttons when no option callback by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/930
+* chore(example): add a better YaruSplitButton example by @Feichtmeier in https://github.com/ubuntu/yaru.dart/pull/931
+* fix: Correct menu alignment for YaruSplitButton by @spydon in https://github.com/ubuntu/yaru.dart/pull/933
+
+## New Contributors
+* @spydon made their first contribution in https://github.com/ubuntu/yaru.dart/pull/933
+
+**Full Changelog**: https://github.com/ubuntu/yaru.dart/compare/v5.2.1...v5.3.0
+
 ## 5.2.1 (2024-09-20)
 
 ## What's Changed
