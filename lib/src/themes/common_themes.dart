@@ -9,9 +9,6 @@ import 'package:yaru/theme.dart';
 import 'constants.dart';
 import 'text_theme.dart';
 
-const kDividerColorDark = Color.fromARGB(255, 65, 65, 65);
-const kDividerColorLight = Color(0xffdcdcdc);
-
 bool get isMobile =>
     !kIsWeb && (Platform.isAndroid || Platform.isIOS || Platform.isFuchsia);
 
@@ -54,15 +51,12 @@ InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
   final radius = BorderRadius.circular(kButtonRadius);
   const width = 1.0;
   const strokeAlign = 0.0;
-  final fill = colorScheme.isLight
-      ? const Color(0xFFededed)
-      : const Color.fromARGB(255, 40, 40, 40);
+  final fill =
+      colorScheme.surface.scale(lightness: colorScheme.isLight ? -0.05 : -0.1);
   final border = colorScheme.isHighContrast
       ? colorScheme.outlineVariant
       : colorScheme.outline;
-  final disabledBorder = colorScheme.isLight
-      ? const Color.fromARGB(255, 237, 237, 237)
-      : const Color.fromARGB(255, 67, 67, 67);
+  final disabledBorder = border.withOpacity(0.6);
 
   const textStyle = TextStyle(
     fontSize: 14,
@@ -416,12 +410,10 @@ Color _getToggleFillColor({
 
 Color _getCheckColor(Set<WidgetState> states, ColorScheme colorScheme) {
   if (!states.contains(WidgetState.disabled)) {
-    return ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
-            Brightness.light
-        ? Colors.black
-        : Colors.white;
+    return contrastColor(colorScheme.primary);
   }
-  return YaruColors.warmGrey;
+  return colorScheme.onSurface
+      .scale(lightness: colorScheme.isLight ? 0.4 : -0.4);
 }
 
 CheckboxThemeData _createCheckBoxTheme(ColorScheme colorScheme) {
@@ -431,7 +423,7 @@ CheckboxThemeData _createCheckBoxTheme(ColorScheme colorScheme) {
     ),
     side: BorderSide(
       color: colorScheme.outline
-          .scale(lightness: colorScheme.isLight ? -0.6 : 0.5),
+          .scale(lightness: colorScheme.isLight ? -0.2 : 0.1),
     ),
     fillColor: WidgetStateProperty.resolveWith(
       (states) => _getToggleFillColor(
@@ -626,7 +618,10 @@ NavigationRailThemeData _createNavigationRailTheme(ColorScheme colorScheme) {
   );
 }
 
-DrawerThemeData _createDrawerTheme(ColorScheme colorScheme) {
+DrawerThemeData _createDrawerTheme(
+  ColorScheme colorScheme,
+  Color dividerColor,
+) {
   return DrawerThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: const BorderRadiusDirectional.only(
@@ -634,7 +629,7 @@ DrawerThemeData _createDrawerTheme(ColorScheme colorScheme) {
         bottomEnd: Radius.circular(kWindowRadius),
       ),
       side: BorderSide(
-        color: colorScheme.isLight ? Colors.transparent : kDividerColorDark,
+        color: colorScheme.isLight ? Colors.transparent : dividerColor,
       ),
     ),
     backgroundColor: colorScheme.surface,
@@ -643,11 +638,14 @@ DrawerThemeData _createDrawerTheme(ColorScheme colorScheme) {
 
 SnackBarThemeData _createSnackBarTheme(ColorScheme colorScheme) {
   const fg = Colors.white;
+  const bg = Colors.black;
   return SnackBarThemeData(
-    backgroundColor: const Color.fromARGB(250, 20, 20, 20),
+    backgroundColor: bg.withOpacity(0.9),
     closeIconColor: fg,
     actionTextColor: colorScheme.primary,
     contentTextStyle: const TextStyle(color: fg),
+    actionBackgroundColor: bg,
+    disabledActionBackgroundColor: bg.withOpacity(0.8),
     disabledActionTextColor: fg.withOpacity(0.7),
     behavior: SnackBarBehavior.floating,
     elevation: 0,
@@ -698,14 +696,13 @@ ChipThemeData _createChipTheme({
 /// Helper function to create a new Yaru theme
 ThemeData createYaruTheme({
   required ColorScheme colorScheme,
-  Color? dividerColor,
   Color? elevatedButtonColor,
   Color? elevatedButtonTextColor,
   bool? useMaterial3 = true,
 }) {
-  dividerColor ??= colorScheme.isHighContrast
+  final dividerColor = colorScheme.isHighContrast
       ? colorScheme.outlineVariant
-      : colorScheme.outline;
+      : colorScheme.outline.scale(lightness: colorScheme.isLight ? 0.1 : -0.06);
   final textTheme = createTextTheme(colorScheme.onSurface);
 
   if (isMobile) {
@@ -806,7 +803,7 @@ ThemeData createYaruTheme({
     ),
     splashFactory: NoSplash.splashFactory,
     sliderTheme: _createSliderTheme(colorScheme),
-    drawerTheme: _createDrawerTheme(colorScheme),
+    drawerTheme: _createDrawerTheme(colorScheme, dividerColor),
     listTileTheme: _createListTileTheme(colorScheme),
     snackBarTheme: _createSnackBarTheme(colorScheme),
     chipTheme: _createChipTheme(
@@ -846,6 +843,9 @@ Color _cardColor(ColorScheme colorScheme) =>
 /// Helper function to create a new Yaru light theme
 ThemeData createYaruLightTheme({
   required Color primaryColor,
+  Color lightBaseColor = Colors.white,
+  Color darkBaseColor = YaruColors.jet,
+  Color? errorColor,
   Color? elevatedButtonColor,
   Color? elevatedButtonTextColor,
   bool? useMaterial3 = true,
@@ -859,38 +859,37 @@ ThemeData createYaruLightTheme({
 
   final colorScheme = ColorScheme.fromSeed(
     seedColor: primaryColor,
-    error: YaruColors.light.error,
-    onError: Colors.white,
+    error: errorColor ?? YaruColors.light.error,
+    onError: lightBaseColor,
     brightness: Brightness.light,
     primary: primaryColor,
     onPrimary: contrastColor(primaryColor),
-    primaryContainer: YaruColors.porcelain,
-    onPrimaryContainer: YaruColors.jet,
-    inversePrimary: YaruColors.jet,
+    primaryContainer: lightBaseColor,
+    onPrimaryContainer: darkBaseColor,
+    inversePrimary: darkBaseColor,
     secondary: secondary,
     onSecondary: contrastColor(secondary),
     secondaryContainer: secondaryContainer,
     onSecondaryContainer: contrastColor(secondaryContainer),
-    surface: Colors.white,
-    surfaceTint: Colors.white,
-    onSurface: YaruColors.jet,
-    inverseSurface: YaruColors.jet,
-    onInverseSurface: YaruColors.porcelain,
+    surface: lightBaseColor,
+    surfaceTint: lightBaseColor,
+    onSurface: darkBaseColor.scale(lightness: 0.1),
+    inverseSurface: darkBaseColor,
+    onInverseSurface: lightBaseColor,
     tertiary: tertiary,
     onTertiary: contrastColor(tertiary),
     tertiaryContainer: tertiaryContainer,
     onTertiaryContainer: contrastColor(tertiaryContainer),
-    onSurfaceVariant: YaruColors.coolGrey,
+    onSurfaceVariant: darkBaseColor.scale(lightness: 0.2),
     outline: primaryColor == Colors.white
         ? Colors.black
-        : const Color.fromARGB(255, 221, 221, 221),
+        : lightBaseColor.scale(lightness: -0.2),
     outlineVariant: Colors.black,
     scrim: Colors.black,
   );
 
   return createYaruTheme(
     colorScheme: colorScheme,
-    dividerColor: colorScheme.isHighContrast ? null : kDividerColorLight,
     elevatedButtonColor: elevatedButtonColor,
     elevatedButtonTextColor: elevatedButtonTextColor,
     useMaterial3: useMaterial3,
@@ -900,6 +899,9 @@ ThemeData createYaruLightTheme({
 /// Helper function to create a new Yaru dark theme
 ThemeData createYaruDarkTheme({
   required Color primaryColor,
+  Color lightBaseColor = YaruColors.porcelain,
+  Color darkBaseColor = YaruColors.jet,
+  Color? errorColor,
   Color? elevatedButtonColor,
   Color? elevatedButtonTextColor,
   bool? useMaterial3 = true,
@@ -916,37 +918,39 @@ ThemeData createYaruDarkTheme({
 
   final colorScheme = ColorScheme.fromSeed(
     seedColor: primaryColor,
-    error: YaruColors.dark.error,
+    error: errorColor ?? YaruColors.dark.error,
     onError: Colors.white,
     brightness: Brightness.dark,
     primary: primaryColor,
-    primaryContainer: YaruColors.coolGrey,
+    primaryContainer: darkBaseColor.scale(lightness: 0.1),
     onPrimary: contrastColor(primaryColor),
-    onPrimaryContainer: YaruColors.porcelain,
-    inversePrimary: YaruColors.porcelain,
+    onPrimaryContainer: lightBaseColor,
+    inversePrimary: lightBaseColor,
     secondary: secondary,
     onSecondary: contrastColor(primaryColor.scale(lightness: -0.25)),
     secondaryContainer: secondaryContainer,
-    onSecondaryContainer: Colors.white,
-    surface: YaruColors.jet,
-    surfaceTint: YaruColors.jet,
-    onSurface: YaruColors.porcelain,
-    inverseSurface: YaruColors.porcelain,
-    onInverseSurface: YaruColors.inkstone,
+    onSecondaryContainer: contrastColor(secondaryContainer),
+    surface: darkBaseColor,
+    surfaceTint: darkBaseColor,
+    onSurface: lightBaseColor,
+    inverseSurface: lightBaseColor,
+    onInverseSurface: darkBaseColor,
     tertiary: tertiary,
-    onTertiary: YaruColors.porcelain,
+    onTertiary: lightBaseColor,
     tertiaryContainer: tertiaryContainer,
-    onTertiaryContainer: YaruColors.porcelain,
-    onSurfaceVariant: YaruColors.warmGrey,
+    onTertiaryContainer: lightBaseColor,
+    onSurfaceVariant: lightBaseColor.scale(
+      lightness: -0.1,
+      saturation: 0.1,
+    ),
     outline: primaryColor == Colors.black
         ? Colors.white
-        : const Color.fromARGB(255, 68, 68, 68),
+        : darkBaseColor.scale(lightness: 0.14),
     outlineVariant: Colors.white,
     scrim: Colors.black,
   );
   return createYaruTheme(
     colorScheme: colorScheme,
-    dividerColor: colorScheme.isHighContrast ? null : kDividerColorDark,
     elevatedButtonColor: elevatedButtonColor,
     elevatedButtonTextColor: elevatedButtonTextColor,
     useMaterial3: useMaterial3,

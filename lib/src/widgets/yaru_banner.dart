@@ -110,7 +110,7 @@ class YaruBanner extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius
                 .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
-            side: BorderSide(color: theme.dividerColor, width: 1),
+            side: BorderSide(color: theme.dividerColor, width: 0),
           ),
           child: Container(
             width: double.infinity,
