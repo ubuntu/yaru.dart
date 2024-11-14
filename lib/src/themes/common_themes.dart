@@ -660,6 +660,7 @@ SnackBarThemeData _createSnackBarTheme(ColorScheme colorScheme) {
 ChipThemeData _createChipTheme({
   required Color selectedColor,
   required ColorScheme colorScheme,
+  required TextStyle? textStyle,
 }) {
   final isHC = colorScheme.isHighContrast == true;
   final selectedBackgroundColor =
@@ -669,11 +670,9 @@ ChipThemeData _createChipTheme({
 
   return ChipThemeData(
     selectedColor: selectedBackgroundColor.withOpacity(isHC ? 1 : 0.4),
-    labelStyle: TextStyle(
-      color: colorScheme.onSurface,
-    ),
+    labelStyle: textStyle?.copyWith(color: colorScheme.onSurface),
     checkmarkColor: selectedForeGroundColor,
-    secondaryLabelStyle: TextStyle(
+    secondaryLabelStyle: textStyle?.copyWith(
       color: selectedForeGroundColor,
       fontWeight: isHC ? FontWeight.bold : FontWeight.normal,
     ),
@@ -809,6 +808,7 @@ ThemeData createYaruTheme({
     chipTheme: _createChipTheme(
       selectedColor: elevatedButtonColor ?? colorScheme.primary,
       colorScheme: colorScheme,
+      textStyle: textTheme.bodyMedium,
     ),
   );
 }
