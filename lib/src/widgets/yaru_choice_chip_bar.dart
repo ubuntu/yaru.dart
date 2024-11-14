@@ -196,14 +196,15 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
       scrollDirection: Axis.horizontal,
       controller: _controller,
       children: children
-          .map(
-            (e) => Padding(
-              padding: EdgeInsets.only(
-                right: widget.spacing,
-              ),
-              child: e,
-            ),
+          .expand(
+            (item) sync* {
+              yield SizedBox(
+                width: widget.spacing,
+              );
+              yield item;
+            },
           )
+          .skip(1)
           .toList(),
     );
 
