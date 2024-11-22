@@ -33,7 +33,7 @@ class CodeSnippedButton extends StatelessWidget {
   }
 }
 
-class _CodeDialog extends StatefulWidget {
+class _CodeDialog extends WatchingWidget {
   const _CodeDialog({
     required this.snippetUrl,
   });
@@ -41,23 +41,11 @@ class _CodeDialog extends StatefulWidget {
   final String snippetUrl;
 
   @override
-  State<_CodeDialog> createState() => _CodeDialogState();
-}
-
-class _CodeDialogState extends State<_CodeDialog> {
-  late Future<String> _snippet;
-
-  @override
-  void initState() {
-    super.initState();
-    _snippet = di<ExampleModel>().getCodeSnippet(
-      widget.snippetUrl,
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     final appIsOnline = watchPropertyValue((ExampleModel m) => m.appIsOnline);
+    final snippet = di<ExampleModel>().getCodeSnippet(
+      snippetUrl,
+    );
 
     return AlertDialog(
       titlePadding: EdgeInsets.zero,
@@ -70,7 +58,7 @@ class _CodeDialogState extends State<_CodeDialog> {
                   icon: const Icon(YaruIcons.copy),
                   tooltip: 'Copy',
                   onPressed: () async {
-                    await _snippet.then(
+                    await snippet.then(
                       (value) => Clipboard.setData(
                         ClipboardData(text: value),
                       ),
@@ -100,7 +88,7 @@ class _CodeDialogState extends State<_CodeDialog> {
               ),
             )
           : FutureBuilder<String>(
-              future: _snippet,
+              future: snippet,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(
@@ -114,9 +102,7 @@ class _CodeDialogState extends State<_CodeDialog> {
                   child: HighlightView(
                     snapshot.data!,
                     language: 'dart',
-                    theme: Theme.of(context).brightness == Brightness.dark
-                        ? vs2015Theme
-                        : vsTheme,
+                    theme: Theme.of(context).brightness == Brightness.dark ? vs2015Theme : vsTheme,
                     padding: const EdgeInsets.all(12),
                     textStyle: const TextStyle(
                       fontSize: 16,
