@@ -33,7 +33,7 @@ class CodeSnippedButton extends StatelessWidget {
   }
 }
 
-class _CodeDialog extends StatefulWidget {
+class _CodeDialog extends StatefulWidget with WatchItStatefulWidgetMixin {
   const _CodeDialog({
     required this.snippetUrl,
   });
