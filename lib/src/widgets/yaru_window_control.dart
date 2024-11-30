@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru/theme.dart';
@@ -21,7 +22,10 @@ enum YaruWindowControlType {
   close,
   maximize,
   restore,
-  minimize,
+  minimize;
+
+  static YaruWindowControlType? fromName(String name) =>
+      YaruWindowControlType.values.firstWhereOrNull((e) => e.name == name);
 }
 
 /// Defines the style of a [YaruWindowControl].

@@ -11,8 +11,12 @@ enum YaruTitleBarStyle {
   /// The title bar is shown without window controls.
   undecorated,
 
+  onlyRightWindowControls,
+
+  onlyLeftWindowControls,
+
   /// The title bar is shown as normal.
-  normal,
+  normal;
 }
 
 @immutable

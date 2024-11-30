@@ -142,33 +142,51 @@ class YaruTheme extends StatefulWidget {
 class _YaruThemeState extends State<YaruTheme> {
   YaruVariant? _variant;
   YaruSettings? _settings;
-  StreamSubscription<String?>? _themeNameSubscription;
-  StreamSubscription<String?>? _accentColorSubScription;
+  final Map<String, List<String>?> _customTitleButtonLayout = {
+    'left': null,
+    'right': null,
+  };
+  StreamSubscription<String?>? _themeNameSub;
+  StreamSubscription<String?>? _accentColorSub;
+  StreamSubscription<String?>? _buttonLayoutSub;
 
   @override
   void initState() {
     super.initState();
-    if (widget.data.variant == null && canDetectVariant()) {
+    if (canDetectGnome()) {
       _settings = widget._settings ?? YaruSettings();
       _settings?.init();
-      _variant = resolveAccentColorVariant(_settings?.getAccentColor()) ??
-          resolveGtkThemeVariant(_settings?.getThemeName());
-      _accentColorSubScription ??=
-          _settings!.accentColorChanged.listen(updateVariant);
-      _themeNameSubscription ??=
-          _settings!.themeNameChanged.listen(updateVariant);
+      if (widget.data.variant == null) {
+        _variant = resolveAccentColorVariant(_settings?.getAccentColor()) ??
+            resolveGtkThemeVariant(_settings?.getThemeName());
+        _accentColorSub ??= _settings!.accentColorChanged.listen(updateVariant);
+        _themeNameSub ??= _settings!.themeNameChanged.listen(updateVariant);
+
+        _buttonLayoutSub ??=
+            _settings!.buttonLayoutChanged.listen(updateButtonLayout);
+
+        final buttonLayout = _settings?.getButtonLayout();
+
+        final buttons = buttonLayout?.split(':');
+
+        _customTitleButtonLayout['left'] =
+            buttons?.firstOrNull?.split(',') ?? <String>[];
+        _customTitleButtonLayout['right'] =
+            buttons?.lastOrNull?.split(',') ?? [];
+      }
     }
   }
 
   @override
   void dispose() {
-    _themeNameSubscription?.cancel();
-    _accentColorSubScription?.cancel();
+    _themeNameSub?.cancel();
+    _accentColorSub?.cancel();
+    _buttonLayoutSub?.cancel();
     _settings?.dispose();
     super.dispose();
   }
 
-  bool canDetectVariant() {
+  bool canDetectGnome() {
     return !kIsWeb &&
         widget._platform.isLinux &&
         !widget._platform.environment.containsKey('FLUTTER_TEST');
@@ -221,13 +239,31 @@ class _YaruThemeState extends State<YaruTheme> {
       };
 
   void updateVariant([String? value]) {
-    assert(canDetectVariant());
+    assert(canDetectGnome());
     final gtkThemeName = value ?? _settings?.getThemeName();
     final accentColor = value ?? _settings?.getAccentColor();
     setState(
       () => _variant = resolveAccentColorVariant(accentColor) ??
           resolveGtkThemeVariant(gtkThemeName),
     );
+  }
+
+  void updateButtonLayout([String? value]) {
+    assert(canDetectGnome());
+    final buttonLayout = value ?? _settings?.getButtonLayout();
+
+    final buttons = buttonLayout?.split(':');
+
+    setState(() {
+      _customTitleButtonLayout.update(
+        'left',
+        (value) => buttons?.firstOrNull?.split(',') ?? <String>[],
+      );
+      _customTitleButtonLayout.update(
+        'right',
+        (value) => buttons?.lastOrNull?.split(',') ?? [],
+      );
+    });
   }
 
   ThemeMode resolveMode() {
@@ -246,6 +282,8 @@ class _YaruThemeState extends State<YaruTheme> {
       highContrast:
           widget.data.highContrast ?? MediaQuery.highContrastOf(context),
       themeMode: resolveMode(),
+      customTitleButtonLayout:
+          widget.data.customTitleButtonLayout ?? _customTitleButtonLayout,
     );
   }
 
@@ -262,7 +300,7 @@ class _YaruThemeState extends State<YaruTheme> {
 
   @override
   Widget build(BuildContext context) {
-    if (_settings != null && _themeNameSubscription == null) {
+    if (_settings != null && _themeNameSub == null) {
       return const SizedBox.shrink(); // #231
     }
     final data = resolveData();
@@ -287,10 +325,19 @@ class YaruThemeData with Diagnosticable {
     this.pageTransitionsTheme,
     this.useMaterial3,
     this.visualDensity,
+    this.customTitleButtonLayout,
   });
 
   /// Specifies the theme variant.
   final YaruVariant? variant;
+
+  final Map<String, List<String>?>? customTitleButtonLayout;
+
+  bool get hasLeftWindowControls =>
+      customTitleButtonLayout?['left']?.isNotEmpty ?? false;
+
+  bool get hasRightWindowControls =>
+      customTitleButtonLayout?['right']?.isNotEmpty ?? false;
 
   /// Whether to use high contrast colors.
   final bool? highContrast;
@@ -328,6 +375,7 @@ class YaruThemeData with Diagnosticable {
     PageTransitionsTheme? pageTransitionsTheme,
     bool? useMaterial3,
     VisualDensity? visualDensity,
+    Map<String, List<String>?>? customTitleButtonLayout,
   }) {
     return YaruThemeData(
       variant: variant ?? this.variant,
@@ -337,6 +385,8 @@ class YaruThemeData with Diagnosticable {
       pageTransitionsTheme: pageTransitionsTheme ?? this.pageTransitionsTheme,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       visualDensity: visualDensity ?? this.visualDensity,
+      customTitleButtonLayout:
+          customTitleButtonLayout ?? this.customTitleButtonLayout,
     );
   }
 
@@ -351,6 +401,9 @@ class YaruThemeData with Diagnosticable {
         .add(DiagnosticsProperty('pageTransitionsTheme', pageTransitionsTheme));
     properties.add(DiagnosticsProperty('useMaterial3', useMaterial3));
     properties.add(DiagnosticsProperty('visualDensity', visualDensity));
+    properties.add(
+      DiagnosticsProperty('customTitleButtonLayout', customTitleButtonLayout),
+    );
   }
 
   @override
@@ -364,7 +417,8 @@ class YaruThemeData with Diagnosticable {
         iterableEquals(other.extensions, extensions) &&
         other.pageTransitionsTheme == pageTransitionsTheme &&
         other.useMaterial3 == useMaterial3 &&
-        other.visualDensity == visualDensity;
+        other.visualDensity == visualDensity &&
+        other.customTitleButtonLayout == customTitleButtonLayout;
   }
 
   @override
@@ -377,6 +431,7 @@ class YaruThemeData with Diagnosticable {
       pageTransitionsTheme,
       useMaterial3,
       visualDensity,
+      customTitleButtonLayout,
     );
   }
 }
