@@ -50,7 +50,7 @@ void main() {
 
       if (variant.label.startsWith('windows')) {
         platform = YaruWindowControlPlatform.windows;
-        size = kYaruWindowsWindowControlSize;
+        size = const Size.square(kYaruWindowsWindowControlSize);
       } else {
         platform = YaruWindowControlPlatform.yaru;
         size = const Size.square(kYaruWindowControlSize);
