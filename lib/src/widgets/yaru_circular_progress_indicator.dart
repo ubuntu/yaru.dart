@@ -5,7 +5,17 @@ import 'package:yaru/src/widgets/yaru_circular_progress_indicator_theme.dart';
 
 import 'yaru_progress_indicator.dart';
 
-const double _kMinCircularProgressIndicatorSize = 36.0;
+const _turn = math.pi * 2;
+const _kMinCircularProgressIndicatorSize = 36.0;
+const _kIndeterminateInitialAnimationDuration = 1000;
+const _kIndeterminateAnimationDuration = 8000;
+const _kIndeterminateAnimationCurve = Curves.easeInOutSine;
+const _kIndeterminateAnimationTurns = 6;
+const _kDefaultStrokeWidth = 4.0;
+const _kDefaultTrackColorOpacity = 0.25;
+const _kStartAngle = -math.pi / 2;
+const _kMinGap = 0.2;
+const _kMaxGap = 0.5;
 
 class YaruCircularProgressIndicator extends YaruProgressIndicator {
   /// Creates a Yaru circular progress indicator.
@@ -32,25 +42,16 @@ class YaruCircularProgressIndicator extends YaruProgressIndicator {
 class _YaruCircularProgressIndicatorState
     extends State<YaruCircularProgressIndicator>
     with SingleTickerProviderStateMixin {
-  static final Animatable<double> _rotationTween =
-      Tween(begin: 0.0, end: math.pi * 12)
-          .chain(CurveTween(curve: kIndeterminateAnimationCurve));
-  static final Animatable<double> _speedTween = Tween(begin: -1.0, end: 1.0)
-      .chain(CurveTween(curve: kIndeterminateAnimationCurve));
-
   late AnimationController _controller;
+  bool _initialAnimation = true;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: kIndeterminateAnimationDuration),
       vsync: this,
     );
-
-    if (widget.value == null) {
-      _controller.repeat();
-    }
+    _updateControllerState();
   }
 
   @override
@@ -69,6 +70,21 @@ class _YaruCircularProgressIndicatorState
     }
   }
 
+  void _updateControllerState() async {
+    if (widget.value == null) {
+      _controller.duration =
+          const Duration(milliseconds: _kIndeterminateInitialAnimationDuration);
+      await _controller.forward();
+      setState(() {
+        _initialAnimation = false;
+      });
+
+      _controller.duration =
+          const Duration(milliseconds: _kIndeterminateAnimationDuration);
+      await _controller.repeat();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -78,17 +94,16 @@ class _YaruCircularProgressIndicatorState
         widget.color ??
         progressTheme?.color ??
         theme.colorScheme.primary;
-    final defaultTrackColor =
-        widget.value != null ? color.withOpacity(.25) : color.withOpacity(.1);
     final trackColor = widget.trackValueColor?.value ??
         widget.trackColor ??
         progressTheme?.trackColor ??
-        defaultTrackColor;
-    final strokeWidth =
-        widget.strokeWidth ?? progressTheme?.strokeWidth ?? kDefaultStrokeWidth;
+        color.withOpacity(_kDefaultTrackColorOpacity);
+    final strokeWidth = widget.strokeWidth ??
+        progressTheme?.strokeWidth ??
+        _kDefaultStrokeWidth;
     final trackStrokeWidth = widget.trackStrokeWidth ??
         progressTheme?.trackStrokeWidth ??
-        widget.computeDefaultTrackSize(strokeWidth);
+        strokeWidth;
 
     Widget buildContainer(BuildContext context, Widget child) {
       return widget.buildSemanticsWrapper(
@@ -120,20 +135,43 @@ class _YaruCircularProgressIndicatorState
         ),
       );
     }
-
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
+        final progress = _controller.value;
+        late double barSizeProgress;
+        late double spacingProgress;
+        late double rotationProgress;
+
+        if (_initialAnimation) {
+          barSizeProgress =
+              CurveTween(curve: Curves.easeInOut).transform(progress);
+          spacingProgress = 0;
+          rotationProgress = 0;
+        } else {
+          barSizeProgress = 1.0;
+          spacingProgress = 1 -
+              Tween<double>(begin: -1.0, end: 1.0)
+                  .chain(CurveTween(curve: _kIndeterminateAnimationCurve))
+                  .transform(progress)
+                  .abs();
+          rotationProgress = Tween<double>(
+            begin: 0.0,
+            end: _turn * _kIndeterminateAnimationTurns,
+          )
+              .chain(CurveTween(curve: _kIndeterminateAnimationCurve))
+              .transform(progress);
+        }
+
         return buildContainer(
           context,
           CustomPaint(
             painter: _IndeterminateYaruCircularProgressIndicatorPainter(
               color,
-              trackColor,
               strokeWidth,
-              trackStrokeWidth,
-              _rotationTween.evaluate(_controller),
-              _speedTween.evaluate(_controller).abs(),
+              barSizeProgress,
+              spacingProgress,
+              rotationProgress,
               Directionality.of(context),
             ),
           ),
@@ -146,91 +184,62 @@ class _YaruCircularProgressIndicatorState
 class _IndeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
   const _IndeterminateYaruCircularProgressIndicatorPainter(
     this.color,
-    this.trackColor,
     this.strokeWidth,
-    this.trackStrokeWidth,
-    this.rotationAngle,
-    this.speed,
+    this.barSizeProgress,
+    this.gapProgress,
+    this.rotationProgress,
     this.textDirection,
   ) : super();
 
   final Color color;
-  final Color trackColor;
   final double strokeWidth;
-  final double trackStrokeWidth;
-  final double rotationAngle;
-  final double speed;
+  final double barSizeProgress;
+  final double gapProgress;
+  final double rotationProgress;
   final TextDirection textDirection;
 
   @override
   void paint(Canvas canvas, Size size) {
-    const circleThird = math.pi * 2 / 3;
+    canvas.saveLayer(null, Paint());
 
-    final gradient = SweepGradient(
-      startAngle: 0.0 + rotationAngle,
-      endAngle: circleThird + rotationAngle,
-      tileMode: TileMode.repeated,
-      colors: [
-        color.withAlpha(0),
-        color.withAlpha(20 + (230 * speed).toInt()),
-        color.withAlpha(250),
-      ],
-      stops: const [0.15, 0.75, 1],
-    );
+    const circleThird = _turn / 3;
+
+    final strokePaint = Paint()
+      ..color = color
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.stroke;
 
     final center = Offset(size.width / 2, size.height / 2);
     final radius =
         math.min(size.width / 2, size.height / 2) - (strokeWidth / 2);
-    const sweepAngle = circleThird;
+    final gap = _kMinGap + (_kMaxGap - _kMinGap) * gapProgress;
+    const align = 0;
+    final sweepAngle = circleThird - gap;
     final rect = Rect.fromCircle(center: center, radius: radius);
 
-    final gradientStrokePaint = Paint()
-      ..shader = gradient.createShader(rect)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth;
-    final fillPaint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-    final trackStrokePaint = Paint()
-      ..color = trackColor
-      ..strokeWidth = strokeWidth / 2
-      ..style = PaintingStyle.stroke;
-
-    if (textDirection == TextDirection.rtl) {
-      canvas.scale(-1, 1);
-      canvas.translate(-size.width, 0);
-    }
-
-    canvas.drawArc(rect, 0, math.pi * 2, false, trackStrokePaint);
-
     for (var i = 0; i < 3; i++) {
-      final startAngle = rotationAngle + circleThird * i;
-      canvas.drawArc(rect, startAngle, sweepAngle, false, gradientStrokePaint);
-    }
-
-    // Draw circles after arcs, so they look on top
-    for (var i = 0; i < 3; i++) {
-      final startAngle = rotationAngle + circleThird * i;
-      canvas.drawCircle(
-        Offset(
-          math.cos(startAngle) * radius + center.dx,
-          math.sin(startAngle) * radius + center.dy,
-        ),
-        strokeWidth / 2,
-        fillPaint,
+      final realSweepAngle = sweepAngle * barSizeProgress;
+      final startAngle = align +
+          circleThird * i -
+          (realSweepAngle / 2 * barSizeProgress) +
+          rotationProgress;
+      canvas.drawArc(
+        rect,
+        startAngle,
+        realSweepAngle,
+        false,
+        strokePaint,
       );
     }
+
+    canvas.restore();
   }
 
   @override
   bool shouldRepaint(
-    _IndeterminateYaruCircularProgressIndicatorPainter oldDelegate,
+    _IndeterminateYaruCircularProgressIndicatorPainter _,
   ) {
-    return oldDelegate.color != color ||
-        oldDelegate.strokeWidth != strokeWidth ||
-        oldDelegate.rotationAngle != rotationAngle ||
-        oldDelegate.speed != speed ||
-        oldDelegate.textDirection != textDirection;
+    return true;
   }
 }
 
@@ -242,7 +251,7 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
     this.strokeWidth,
     this.trackStrokeWidth,
     this.textDirection,
-  ) : super();
+  );
 
   final double value;
   final Color color;
@@ -261,14 +270,8 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final radius =
         math.min(size.width / 2, size.height / 2) - (strokeWidth / 2);
-    const startAngle = -math.pi / 2;
-    final sweepAngle = math.pi * 2 * revisedValue;
+    final sweepAngle = _turn * revisedValue;
     final rect = Rect.fromCircle(center: center, radius: radius);
-
-    final candidateTrackHeight = (strokeWidth / 3 * 2).truncate();
-    final trackHeight =
-        (candidateTrackHeight + (candidateTrackHeight.isEven ? 0 : 1))
-            .toDouble();
 
     final strokePaint = Paint()
       ..color = color
@@ -276,7 +279,7 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
     final trackStrokePaint = Paint()
       ..color = trackColor
-      ..strokeWidth = trackHeight
+      ..strokeWidth = trackStrokeWidth
       ..style = PaintingStyle.stroke;
 
     if (textDirection == TextDirection.rtl) {
@@ -284,8 +287,8 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
       canvas.translate(-size.width, 0);
     }
 
-    canvas.drawArc(rect, 0, math.pi * 2, false, trackStrokePaint);
-    canvas.drawArc(rect, startAngle, sweepAngle, false, strokePaint);
+    canvas.drawArc(rect, 0, _turn, false, trackStrokePaint);
+    canvas.drawArc(rect, _kStartAngle, sweepAngle, false, strokePaint);
   }
 
   @override
@@ -294,7 +297,9 @@ class _DeterminateYaruCircularProgressIndicatorPainter extends CustomPainter {
   ) {
     return oldDelegate.value != value ||
         oldDelegate.color != color ||
+        oldDelegate.trackColor != trackColor ||
         oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.trackStrokeWidth != trackStrokeWidth ||
         oldDelegate.textDirection != textDirection;
   }
 }
