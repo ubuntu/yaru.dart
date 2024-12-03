@@ -13,7 +13,7 @@ const _kIndeterminateAnimationCurve = Curves.easeInOutSine;
 const _kIndeterminateAnimationTurns = 6;
 const _kDefaultStrokeWidth = 4.0;
 const _kDefaultTrackColorOpacity = 0.25;
-const _kStartAngle = -math.pi / 4;
+const _kStartAngle = -math.pi / 2;
 const _kMinGap = 0.2;
 const _kMaxGap = 0.5;
 
