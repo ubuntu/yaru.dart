@@ -8,7 +8,7 @@ import 'package:yaru/theme.dart';
 const kYaruWindowControlSize = 24.0;
 
 /// The size of a [YaruWindowControl] on the [YaruWindowControlPlatform.windows] platform.
-const kYaruWindowsWindowControlSize = Size(44, 28);
+const kYaruWindowsWindowControlSize = 46.0;
 
 const _kWindowControlIconStrokeWidth = 1.0;
 const _kWindowControlIconStrokeAlign = _kWindowControlIconStrokeWidth / 2;
@@ -322,8 +322,8 @@ class _YaruWindowControlState extends State<YaruWindowControl>
               )
             : null,
       ),
-      child: SizedBox.fromSize(
-        size: kYaruWindowsWindowControlSize,
+      child: SizedBox.square(
+        dimension: kYaruWindowsWindowControlSize,
         child: child,
       ),
     );
