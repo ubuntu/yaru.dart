@@ -3,6 +3,12 @@ import 'package:yaru/src/widgets/yaru_linear_progress_indicator_theme.dart';
 
 import 'yaru_progress_indicator.dart';
 
+const _kIndeterminateAnimationDuration = 8000;
+const _kDefaultStrokeWidth = 4.0;
+const _kIndeterminateAnimationCurve = Curves.easeInOutSine;
+const _kDefaultTrackColorOpacity = 0.25;
+const _kIndeterminateAnimationCycles = 7.0;
+
 class YaruLinearProgressIndicator extends YaruProgressIndicator {
   /// Creates a Yaru linear progress indicator.
   ///
@@ -10,7 +16,6 @@ class YaruLinearProgressIndicator extends YaruProgressIndicator {
   const YaruLinearProgressIndicator({
     super.key,
     super.value,
-    this.minHeight,
     super.strokeWidth,
     super.trackStrokeWidth,
     super.color,
@@ -19,11 +24,7 @@ class YaruLinearProgressIndicator extends YaruProgressIndicator {
     super.trackValueColor,
     super.semanticsLabel,
     super.semanticsValue,
-  }) : assert(minHeight == null || minHeight > 0);
-
-  /// {@macro yaru.widget.YaruProgressIndicator.strokeWidth}
-  @Deprecated('Use [strokeWidth] instead.')
-  final double? minHeight;
+  });
 
   @override
   State<YaruLinearProgressIndicator> createState() =>
@@ -39,7 +40,7 @@ class _YaruLinearProgressIndicatorState
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: kIndeterminateAnimationDuration),
+      duration: const Duration(milliseconds: _kIndeterminateAnimationDuration),
       vsync: this,
     );
 
@@ -73,21 +74,16 @@ class _YaruLinearProgressIndicatorState
         widget.color ??
         progressTheme?.color ??
         theme.colorScheme.primary;
-    final defaultTrackColor =
-        widget.value != null ? color.withOpacity(.25) : color.withOpacity(.1);
     final trackColor = widget.trackValueColor?.value ??
         widget.trackColor ??
         progressTheme?.trackColor ??
-        defaultTrackColor;
+        color.withOpacity(_kDefaultTrackColorOpacity);
     final strokeWidth = widget.strokeWidth ??
-        // ignore: deprecated_member_use_from_same_package
-        widget.minHeight ??
         progressTheme?.strokeWidth ??
-        kDefaultStrokeWidth;
+        _kDefaultStrokeWidth;
     final trackStrokeWidth = widget.trackStrokeWidth ??
         progressTheme?.trackStrokeWidth ??
         strokeWidth;
-    const dotsRadius = 5.0;
 
     Widget buildContainer(BuildContext context, Widget child) {
       return widget.buildSemanticsWrapper(
@@ -126,12 +122,13 @@ class _YaruLinearProgressIndicatorState
         final progress = _controller.value;
         final spacingProgress = 1 -
             Tween<double>(begin: -1.0, end: 1.0)
-                .chain(CurveTween(curve: Curves.easeInOutSine))
+                .chain(CurveTween(curve: _kIndeterminateAnimationCurve))
                 .transform(progress)
                 .abs();
-        final trackProgress = Tween<double>(begin: 0.0, end: 7.0)
-            .chain(CurveTween(curve: Curves.easeInOutSine))
-            .transform(progress);
+        final trackProgress =
+            Tween<double>(begin: 0.0, end: _kIndeterminateAnimationCycles)
+                .chain(CurveTween(curve: _kIndeterminateAnimationCurve))
+                .transform(progress);
 
         return buildContainer(
           context,
@@ -139,9 +136,7 @@ class _YaruLinearProgressIndicatorState
             child: CustomPaint(
               painter: _IndeterminateYaruLinearProgressIndicatorPainter(
                 color,
-                trackColor,
                 strokeWidth,
-                dotsRadius,
                 spacingProgress,
                 trackProgress,
                 Directionality.of(context),
@@ -157,18 +152,14 @@ class _YaruLinearProgressIndicatorState
 class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   const _IndeterminateYaruLinearProgressIndicatorPainter(
     this.color,
-    this.trackColor,
     this.strokeWidth,
-    this.dotsRadius,
     this.spacingProgress,
     this.trackProgress,
     this.textDirection,
   ) : super();
 
   final Color color;
-  final Color trackColor;
   final double strokeWidth;
-  final double dotsRadius;
   final double spacingProgress;
   final double trackProgress;
   final TextDirection textDirection;
@@ -226,9 +217,7 @@ class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   bool shouldRepaint(
     _IndeterminateYaruLinearProgressIndicatorPainter oldDelegate,
   ) {
-    return oldDelegate.color != color ||
-        oldDelegate.trackProgress != trackProgress ||
-        oldDelegate.textDirection != textDirection;
+    return true;
   }
 }
 
@@ -304,6 +293,9 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   ) {
     return oldDelegate.value != value ||
         oldDelegate.color != color ||
+        oldDelegate.trackColor != trackColor ||
+        oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.trackStrokeWidth != trackStrokeWidth ||
         oldDelegate.textDirection != textDirection;
   }
 }

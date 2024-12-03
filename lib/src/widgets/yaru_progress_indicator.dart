@@ -1,12 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
-const int kIndeterminateAnimationDuration = 8000;
-const Curve kIndeterminateAnimationCurve =
-    Cubic(.35, .75, .65, .25); // Kind of `Curves.slowMiddle` curve
-const double kDefaultStrokeWidth = 4;
-
 abstract class YaruProgressIndicator extends StatefulWidget {
   /// Creates a Yaru progress indicator.
   ///
