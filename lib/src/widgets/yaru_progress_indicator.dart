@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
 abstract class YaruProgressIndicator extends StatefulWidget {
   /// Creates a Yaru progress indicator.
   ///
