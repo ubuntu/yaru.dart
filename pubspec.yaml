@@ -25,7 +25,7 @@ dependencies:
 dev_dependencies:
   animated_vector_gen: ^0.2.1
   build_runner: ^2.4.12
-  flutter_lints: ^4.0.0
+  flutter_lints: ">=4.0.0 <6.0.0"
   flutter_test:
     sdk: flutter
   golden_toolkit: ^0.15.0
