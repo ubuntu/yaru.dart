@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/vs.dart';
 import 'package:flutter_highlight/themes/vs2015.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:yaru/yaru.dart';
 
@@ -118,7 +119,7 @@ class _CodeDialogState extends State<_CodeDialog> {
                         ? vs2015Theme
                         : vsTheme,
                     padding: const EdgeInsets.all(12),
-                    textStyle: const TextStyle(
+                    textStyle: GoogleFonts.ubuntuMono(
                       fontSize: 16,
                     ),
                   ),
