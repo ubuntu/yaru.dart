@@ -305,18 +305,18 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       padding: bPadding,
       child: Row(
         children: [
-          if (isMinimizable == true &&
-              leftButtons.contains(YaruWindowControlType.minimize))
-            minimizeButton,
-          if (isRestorable == true &&
-              leftButtons.contains(YaruWindowControlType.maximize))
-            restoreButton,
-          if (isMaximizable == true &&
-              leftButtons.contains(YaruWindowControlType.maximize))
-            maximizeButton,
           if (isClosable == true &&
               leftButtons.contains(YaruWindowControlType.close))
             closeButton,
+          if (isMaximizable == true &&
+              leftButtons.contains(YaruWindowControlType.maximize))
+            maximizeButton,
+          if (isRestorable == true &&
+              leftButtons.contains(YaruWindowControlType.maximize))
+            restoreButton,
+          if (isMinimizable == true &&
+              leftButtons.contains(YaruWindowControlType.minimize))
+            minimizeButton,
         ].withSpacing(bSpacing),
       ),
     );
