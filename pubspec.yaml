@@ -61,6 +61,9 @@ flutter:
     - family: YaruIcons
       fonts:
         - asset: assets/yaru_icons.otf
+    - family: UbuntuMono
+      fonts:
+        - asset: assets/fonts/UbuntuMono-Regular.ttf
 
 icon_font:
   input_svg_dir: "assets/icons/"
