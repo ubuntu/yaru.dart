@@ -11,8 +11,10 @@ abstract class YaruSettings {
 
   String? getThemeName();
   String? getAccentColor();
+  String? getButtonLayout();
   Stream<String?> get themeNameChanged;
   Stream<String?> get accentColorChanged;
+  Stream<String?> get buttonLayoutChanged;
   void init();
   Future<void> dispose();
 }
@@ -27,7 +29,8 @@ class YaruGtkSettings extends YaruSettings {
 
   final GtkSettings _gtkSettings;
   final GSettingsService _gSettingsService;
-  GnomeSettings? _gSettings;
+  GnomeSettings? _interfaceSettings;
+  GnomeSettings? _wmPrefSettings;
 
   @override
   String? getThemeName() => _gtkSettings.getProperty(kGtkThemeName) as String?;
@@ -40,20 +43,39 @@ class YaruGtkSettings extends YaruSettings {
   @override
   Stream<String?> get accentColorChanged => _accentColorController.stream;
 
+  final _buttonLayoutController = StreamController<String?>.broadcast();
+  @override
+  Stream<String?> get buttonLayoutChanged => _buttonLayoutController.stream;
+
   @override
   void init() {
-    _gSettings ??= _gSettingsService.lookup(kSchemaInterface);
-    _gSettings?.addListener(
+    _interfaceSettings ??= _gSettingsService.lookup(kSchemaInterface);
+    _interfaceSettings?.addListener(
       () => _accentColorController.add(getAccentColor()),
+    );
+    _wmPrefSettings ??= _gSettingsService.lookup(kSchemeWmPreferences);
+    _wmPrefSettings?.addListener(
+      () => _buttonLayoutController.add(getButtonLayout()),
     );
   }
 
   @override
   Future<void> dispose() async {
     await _accentColorController.close();
+    await _buttonLayoutController.close();
     await _gSettingsService.dispose();
   }
 
   @override
-  String? getAccentColor() => _gSettings?.stringValue(kAccentColorKey);
+  String? getAccentColor() => _interfaceSettings?.stringValue(kAccentColorKey);
+
+  @override
+  String? getButtonLayout() {
+    final layout = _wmPrefSettings?.stringValue(kButtonLayoutKey);
+    return (layout == null || layout == 'appmenu:close')
+        ? _defaultLayout
+        : layout;
+  }
 }
+
+const _defaultLayout = ':minimize,maximize,close';
