@@ -184,7 +184,7 @@ class _YaruPanedViewState extends State<YaruPanedView> {
         duration: _kLeftPaneResizingRegionAnimationDuration,
         color: _isHovering || _isDragging
             ? theme.dividerColor
-            : theme.dividerColor.withOpacity(0),
+            : theme.dividerColor.withValues(alpha: 0),
         child: MouseRegion(
           onEnter: (event) => setState(() {
             _isHovering = true;

@@ -30,7 +30,7 @@ class YaruTabBar extends StatelessWidget {
         indicatorSize: TabBarIndicatorSize.tab,
         indicator: BoxDecoration(
           borderRadius: BorderRadius.circular(kYaruButtonRadius),
-          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
         ),
         splashBorderRadius: BorderRadius.circular(kYaruButtonRadius),
         tabs: [for (final tab in tabs) tab],

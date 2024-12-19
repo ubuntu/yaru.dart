@@ -109,7 +109,7 @@ class _CopyButton extends StatelessWidget {
         fixedSize: const Size.square(kYaruTitleBarItemHeight),
         side: BorderSide(
           width: 1,
-          color: YaruColors.magenta.withOpacity(0.5),
+          color: YaruColors.magenta.withValues(alpha: 0.5),
         ),
         padding: EdgeInsets.zero,
       ),

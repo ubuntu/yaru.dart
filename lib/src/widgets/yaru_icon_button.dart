@@ -47,41 +47,41 @@ class YaruIconButton extends StatelessWidget {
       foregroundColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
           if (states.contains(WidgetState.disabled)) {
-            return colors.primary.withOpacity(0.38);
+            return colors.primary.withValues(alpha: 0.38);
           }
           return colors.primary;
         }
         if (states.contains(WidgetState.disabled)) {
-          return colors.onSurface.withOpacity(0.38);
+          return colors.onSurface.withValues(alpha: 0.38);
         }
-        return colors.onSurface.withOpacity(0.8);
+        return colors.onSurface.withValues(alpha: 0.8);
       }),
       backgroundColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return colors.onSurface.withOpacity(0.1);
+          return colors.onSurface.withValues(alpha: 0.1);
         }
         return null;
       }),
       overlayColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
           if (states.contains(WidgetState.pressed)) {
-            return colors.onSurface.withOpacity(0.12);
+            return colors.onSurface.withValues(alpha: 0.12);
           }
           if (states.contains(WidgetState.hovered)) {
-            return colors.onSurface.withOpacity(0.08);
+            return colors.onSurface.withValues(alpha: 0.08);
           }
           if (states.contains(WidgetState.focused)) {
-            return colors.onSurface.withOpacity(0.12);
+            return colors.onSurface.withValues(alpha: 0.12);
           }
         }
         if (states.contains(WidgetState.pressed)) {
-          return colors.onSurfaceVariant.withOpacity(0.12);
+          return colors.onSurfaceVariant.withValues(alpha: 0.12);
         }
         if (states.contains(WidgetState.hovered)) {
-          return colors.onSurfaceVariant.withOpacity(0.08);
+          return colors.onSurfaceVariant.withValues(alpha: 0.08);
         }
         if (states.contains(WidgetState.focused)) {
-          return colors.onSurfaceVariant.withOpacity(0.08);
+          return colors.onSurfaceVariant.withValues(alpha: 0.08);
         }
         return null;
       }),

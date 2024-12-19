@@ -77,7 +77,7 @@ class _YaruLinearProgressIndicatorState
     final trackColor = widget.trackValueColor?.value ??
         widget.trackColor ??
         progressTheme?.trackColor ??
-        color.withOpacity(_kDefaultTrackColorOpacity);
+        color.withValues(alpha: _kDefaultTrackColorOpacity);
     final strokeWidth = widget.strokeWidth ??
         progressTheme?.strokeWidth ??
         _kDefaultStrokeWidth;
