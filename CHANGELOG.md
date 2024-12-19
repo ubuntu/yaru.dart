@@ -1,5 +1,16 @@
 # Changelog
 
+## [7.0.0](https://github.com/ubuntu/yaru.dart/compare/v6.0.0...v7.0.0) (2024-12-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to flutter 3.27.1 ([#972](https://github.com/ubuntu/yaru.dart/issues/972))
+
+### Miscellaneous Chores
+
+* upgrade to flutter 3.27.1 ([#972](https://github.com/ubuntu/yaru.dart/issues/972)) ([b1fbe2e](https://github.com/ubuntu/yaru.dart/commit/b1fbe2ee8b92a80f53782c3259b264e6a33b0039))
+
 ## [6.0.0](https://github.com/ubuntu/yaru.dart/compare/v5.3.2...v6.0.0) (2024-12-19)
 
 
