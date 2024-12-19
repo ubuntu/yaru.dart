@@ -21,8 +21,8 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
         strokeAlign: -1,
         color: colorScheme.isHighContrast
             ? colorScheme.outlineVariant
-            : colorScheme.onSurface.withOpacity(
-                colorScheme.isLight ? 0.2 : 0.07,
+            : colorScheme.onSurface.withValues(
+                alpha: colorScheme.isLight ? 0.2 : 0.07,
               ),
       ),
     ),
@@ -56,7 +56,7 @@ InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
   final border = colorScheme.isHighContrast
       ? colorScheme.outlineVariant
       : colorScheme.outline;
-  final disabledBorder = border.withOpacity(0.6);
+  final disabledBorder = border.withValues(alpha: 0.6);
 
   const textStyle = TextStyle(
     fontSize: 14,
@@ -128,7 +128,7 @@ InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
 TextSelectionThemeData _createTextSelectionTheme(ColorScheme colorScheme) {
   return TextSelectionThemeData(
     cursorColor: colorScheme.onSurface,
-    selectionColor: colorScheme.primary.withOpacity(0.40),
+    selectionColor: colorScheme.primary.withValues(alpha: 0.40),
   );
 }
 
@@ -179,6 +179,7 @@ OutlinedButtonThemeData _createOutlinedButtonTheme({
       ),
       // backgroundColor: colorScheme.surface, // defaults to transparent
       foregroundColor: colorScheme.onSurface,
+      iconColor: colorScheme.onSurface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(kButtonRadius),
       ),
@@ -215,6 +216,7 @@ ElevatedButtonThemeData _createElevatedButtonTheme({
     style: ElevatedButton.styleFrom(
       backgroundColor: color,
       foregroundColor: textColor ?? contrastColor(color),
+      iconColor: textColor ?? contrastColor(color),
       elevation: 0,
       shadowColor: Colors.transparent,
       shape: RoundedRectangleBorder(
@@ -235,9 +237,9 @@ FilledButtonThemeData _createFilledButtonTheme({
 }) {
   return FilledButtonThemeData(
     style: FilledButton.styleFrom(
-      disabledBackgroundColor: colorScheme.onSurface.withOpacity(0.12),
-      backgroundColor: colorScheme.onSurface.withOpacity(0.1),
-      surfaceTintColor: colorScheme.onSurface.withOpacity(0.1),
+      disabledBackgroundColor: colorScheme.onSurface.withValues(alpha: 0.12),
+      backgroundColor: colorScheme.onSurface.withValues(alpha: 0.1),
+      surfaceTintColor: colorScheme.onSurface.withValues(alpha: 0.1),
       foregroundColor: colorScheme.onSurface,
       elevation: 0,
       shadowColor: Colors.transparent,
@@ -261,7 +263,7 @@ IconButtonThemeData _createIconButtonTheme({
     style: IconButton.styleFrom(
       padding: EdgeInsets.zero,
       foregroundColor: colorScheme.onSurface,
-      highlightColor: colorScheme.onSurface.withOpacity(0.05),
+      highlightColor: colorScheme.onSurface.withValues(alpha: 0.05),
       surfaceTintColor: colorScheme.surface,
       fixedSize: const Size(kCompactButtonHeight, kCompactButtonHeight),
       minimumSize: const Size(kCompactButtonHeight, kCompactButtonHeight),
@@ -320,7 +322,7 @@ ToggleButtonsThemeData _createToggleButtonsTheme(ColorScheme colorScheme) {
     selectedBorderColor:
         colorScheme.isHighContrast ? colorScheme.outlineVariant : null,
     fillColor: colorScheme.outline,
-    hoverColor: colorScheme.onSurface.withOpacity(.05),
+    hoverColor: colorScheme.onSurface.withValues(alpha: 0.05),
   );
 }
 
@@ -336,7 +338,7 @@ DialogTheme _createDialogTheme(ColorScheme colorScheme) {
       side: colorScheme.isDark
           ? BorderSide(
               color: Colors.white
-                  .withOpacity(colorScheme.isHighContrast ? 1 : 0.2),
+                  .withValues(alpha: colorScheme.isHighContrast ? 1 : 0.2),
             )
           : BorderSide.none,
     ),
@@ -362,18 +364,18 @@ SwitchThemeData _createSwitchTheme(ColorScheme colorScheme) {
 Color _getSwitchThumbColor(Set<WidgetState> states, ColorScheme colorScheme) {
   if (states.contains(WidgetState.disabled)) {
     if (states.contains(WidgetState.selected)) {
-      return colorScheme.onSurface.withOpacity(0.5);
+      return colorScheme.onSurface.withValues(alpha: 0.5);
     }
-    return colorScheme.onSurface.withOpacity(0.5);
+    return colorScheme.onSurface.withValues(alpha: 0.5);
   } else {
     return colorScheme.onPrimary;
   }
 }
 
 Color _getSwitchTrackColor(Set<WidgetState> states, ColorScheme colorScheme) {
-  final uncheckedColor = colorScheme.onSurface.withOpacity(.25);
-  final disabledUncheckedColor = colorScheme.onSurface.withOpacity(.15);
-  final disabledCheckedColor = colorScheme.onSurface.withOpacity(.18);
+  final uncheckedColor = colorScheme.onSurface.withValues(alpha: 0.25);
+  final disabledUncheckedColor = colorScheme.onSurface.withValues(alpha: 0.15);
+  final disabledCheckedColor = colorScheme.onSurface.withValues(alpha: 0.18);
 
   if (states.contains(WidgetState.disabled)) {
     if (states.contains(WidgetState.selected)) {
@@ -400,12 +402,12 @@ Color _getToggleFillColor({
     if (states.contains(WidgetState.selected)) {
       return colorScheme.primary;
     }
-    return colorScheme.onSurface.withOpacity(radio ? 0.5 : 0.14);
+    return colorScheme.onSurface.withValues(alpha: radio ? 0.5 : 0.14);
   }
   if (states.contains(WidgetState.selected)) {
-    return colorScheme.onSurface.withOpacity(0.2);
+    return colorScheme.onSurface.withValues(alpha: 0.2);
   }
-  return colorScheme.onSurface.withOpacity(0.2);
+  return colorScheme.onSurface.withValues(alpha: 0.2);
 }
 
 Color _getCheckColor(Set<WidgetState> states, ColorScheme colorScheme) {
@@ -454,11 +456,11 @@ TabBarTheme _createTabBarTheme(ColorScheme colorScheme, Color dividerColor) {
   return TabBarTheme(
     labelColor: colorScheme.isLight
         ? colorScheme.onSurface
-        : Colors.white.withOpacity(0.8),
+        : Colors.white.withValues(alpha: 0.8),
     indicatorColor: colorScheme.primary,
     dividerColor: dividerColor,
     overlayColor: WidgetStateColor.resolveWith(
-      (states) => colorScheme.onSurface.withOpacity(0.05),
+      (states) => colorScheme.onSurface.withValues(alpha: 0.05),
     ),
   );
 }
@@ -467,8 +469,8 @@ ProgressIndicatorThemeData _createProgressIndicatorTheme(
   ColorScheme colorScheme,
 ) {
   return ProgressIndicatorThemeData(
-    circularTrackColor: colorScheme.primary.withOpacity(0.3),
-    linearTrackColor: colorScheme.primary.withOpacity(0.3),
+    circularTrackColor: colorScheme.primary.withValues(alpha: 0.3),
+    linearTrackColor: colorScheme.primary.withValues(alpha: 0.3),
     color: colorScheme.primary,
   );
 }
@@ -504,9 +506,9 @@ SliderThemeData _createSliderTheme(ColorScheme colorScheme) {
       overlayRadius: 13,
     ),
     overlayColor:
-        colorScheme.primary.withOpacity(colorScheme.isLight ? 0.4 : 0.7),
+        colorScheme.primary.withValues(alpha: colorScheme.isLight ? 0.4 : 0.7),
     thumbShape: const RoundSliderThumbShape(elevation: 3.0),
-    inactiveTrackColor: colorScheme.onSurface.withOpacity(0.3),
+    inactiveTrackColor: colorScheme.onSurface.withValues(alpha: 0.3),
   );
 }
 
@@ -530,8 +532,8 @@ PopupMenuThemeData _createPopupMenuTheme(ColorScheme colorScheme) {
       borderSide: BorderSide(
         color: colorScheme.isHighContrast
             ? colorScheme.outlineVariant
-            : colorScheme.onSurface.withOpacity(
-                colorScheme.isLight ? 0.3 : 0.2,
+            : colorScheme.onSurface.withValues(
+                alpha: colorScheme.isLight ? 0.3 : 0.2,
               ),
         width: 1,
       ),
@@ -548,8 +550,8 @@ MenuStyle _createMenuStyle(ColorScheme colorScheme) {
         side: BorderSide(
           color: colorScheme.isHighContrast
               ? colorScheme.outlineVariant
-              : colorScheme.onSurface.withOpacity(
-                  colorScheme.isLight ? 0.3 : 0.2,
+              : colorScheme.onSurface.withValues(
+                  alpha: colorScheme.isLight ? 0.3 : 0.2,
                 ),
           width: 1,
         ),
@@ -560,8 +562,8 @@ MenuStyle _createMenuStyle(ColorScheme colorScheme) {
       (states) => BorderSide(
         color: colorScheme.isHighContrast
             ? colorScheme.outlineVariant
-            : colorScheme.onSurface.withOpacity(
-                colorScheme.isLight ? 0.3 : 0.2,
+            : colorScheme.onSurface.withValues(
+                alpha: colorScheme.isLight ? 0.3 : 0.2,
               ),
         width: 1,
       ),
@@ -594,11 +596,11 @@ NavigationBarThemeData _createNavigationBarTheme(ColorScheme colorScheme) {
     height: kCompactNavigationBarHeight,
     backgroundColor: colorScheme.surface,
     surfaceTintColor: colorScheme.surface,
-    indicatorColor: colorScheme.onSurface.withOpacity(0.1),
+    indicatorColor: colorScheme.onSurface.withValues(alpha: 0.1),
     iconTheme: WidgetStateProperty.resolveWith(
       (states) => states.contains(WidgetState.selected)
           ? IconThemeData(color: colorScheme.onSurface)
-          : IconThemeData(color: colorScheme.onSurface.withOpacity(0.8)),
+          : IconThemeData(color: colorScheme.onSurface.withValues(alpha: 0.8)),
     ),
   );
 }
@@ -606,13 +608,13 @@ NavigationBarThemeData _createNavigationBarTheme(ColorScheme colorScheme) {
 NavigationRailThemeData _createNavigationRailTheme(ColorScheme colorScheme) {
   return NavigationRailThemeData(
     backgroundColor: colorScheme.surface,
-    indicatorColor: colorScheme.onSurface.withOpacity(0.1),
+    indicatorColor: colorScheme.onSurface.withValues(alpha: 0.1),
     selectedIconTheme: IconThemeData(
       color: colorScheme.onSurface,
       size: kCompactIconSize,
     ),
     unselectedIconTheme: IconThemeData(
-      color: colorScheme.onSurface.withOpacity(0.8),
+      color: colorScheme.onSurface.withValues(alpha: 0.8),
       size: kCompactIconSize,
     ),
   );
@@ -640,13 +642,13 @@ SnackBarThemeData _createSnackBarTheme(ColorScheme colorScheme) {
   const fg = Colors.white;
   const bg = Colors.black;
   return SnackBarThemeData(
-    backgroundColor: bg.withOpacity(0.9),
+    backgroundColor: bg.withValues(alpha: 0.9),
     closeIconColor: fg,
     actionTextColor: colorScheme.primary,
     contentTextStyle: const TextStyle(color: fg),
     actionBackgroundColor: bg,
-    disabledActionBackgroundColor: bg.withOpacity(0.8),
-    disabledActionTextColor: fg.withOpacity(0.7),
+    disabledActionBackgroundColor: bg.withValues(alpha: 0.8),
+    disabledActionTextColor: fg.withValues(alpha: 0.7),
     behavior: SnackBarBehavior.floating,
     elevation: 0,
     shape: RoundedRectangleBorder(
@@ -669,7 +671,7 @@ ChipThemeData _createChipTheme({
       isHC ? colorScheme.onInverseSurface : colorScheme.onSurface;
 
   return ChipThemeData(
-    selectedColor: selectedBackgroundColor.withOpacity(isHC ? 1 : 0.4),
+    selectedColor: selectedBackgroundColor.withValues(alpha: isHC ? 1 : 0.4),
     labelStyle: textStyle?.copyWith(color: colorScheme.onSurface),
     checkmarkColor: selectedForeGroundColor,
     secondaryLabelStyle: textStyle?.copyWith(
@@ -679,10 +681,11 @@ ChipThemeData _createChipTheme({
     side: WidgetStateBorderSide.resolveWith(
       (s) => BorderSide(
         color: s.contains(WidgetState.selected)
-            ? selectedBackgroundColor.withOpacity(isHC ? 1 : 0.1)
+            ? selectedBackgroundColor.withValues(alpha: isHC ? 1 : 0.1)
             : (isHC ? colorScheme.outlineVariant : colorScheme.outline)
-                .withOpacity(
-                s.contains(WidgetState.disabled) ? (isHC ? 0.3 : 0.7) : 1,
+                .withValues(
+                alpha:
+                    s.contains(WidgetState.disabled) ? (isHC ? 0.3 : 0.7) : 1,
               ),
       ),
     ),
@@ -778,7 +781,7 @@ ThemeData createYaruTheme({
         _createFloatingActionButtonTheme(colorScheme, elevatedButtonColor),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedItemColor: colorScheme.primary,
-      unselectedItemColor: colorScheme.onSurface.withOpacity(0.8),
+      unselectedItemColor: colorScheme.onSurface.withValues(alpha: 0.8),
     ),
     inputDecorationTheme: _createInputDecorationTheme(colorScheme),
     toggleButtonsTheme: _createToggleButtonsTheme(colorScheme),
@@ -818,10 +821,11 @@ ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
   return ListTileThemeData(
     selectedColor:
         isHighContrast ? colorScheme.onInverseSurface : colorScheme.onSurface,
-    iconColor: colorScheme.onSurface.withOpacity(0.8),
+    iconColor: colorScheme.onSurface.withValues(alpha: 0.8),
     selectedTileColor: isHighContrast
         ? colorScheme.inverseSurface
-        : colorScheme.onSurface.withOpacity(colorScheme.isDark ? 0.035 : 0.04),
+        : colorScheme.onSurface
+            .withValues(alpha: colorScheme.isDark ? 0.035 : 0.04),
     minVerticalPadding: 6,
     visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
     shape: const RoundedRectangleBorder(

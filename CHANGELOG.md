@@ -1,5 +1,27 @@
 # Changelog
 
+## [6.0.0](https://github.com/ubuntu/yaru.dart/compare/v5.3.2...v6.0.0) (2024-12-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove hardcoded colors and darken dark base color to improve contrast of dark theme and light theme text ([#957](https://github.com/ubuntu/yaru.dart/issues/957))
+* unify ChipTheme and YaruChoiceChipBar and make them work with high contrast ([#955](https://github.com/ubuntu/yaru.dart/issues/955))
+
+### Features
+
+* **example:** monospace text style in `_CodeDialog` ([#970](https://github.com/ubuntu/yaru.dart/issues/970)) ([78397bf](https://github.com/ubuntu/yaru.dart/commit/78397bfa9b6bbb5598689a1244dc77305f0d9939))
+* new indeterminated progress design ([#958](https://github.com/ubuntu/yaru.dart/issues/958)) ([c8c094d](https://github.com/ubuntu/yaru.dart/commit/c8c094de8440ded3f89ab3556e467191b439f0bb))
+* remove hardcoded colors and darken dark base color to improve contrast of dark theme and light theme text ([#957](https://github.com/ubuntu/yaru.dart/issues/957)) ([855e4d5](https://github.com/ubuntu/yaru.dart/commit/855e4d5735aecb6a0def0e88eb40cdf71051e1da))
+* unify ChipTheme and YaruChoiceChipBar and make them work with high contrast ([#955](https://github.com/ubuntu/yaru.dart/issues/955)) ([0365af5](https://github.com/ubuntu/yaru.dart/commit/0365af5edf4ad8477fb3dc2fca8c603e548c316f))
+
+
+### Bug Fixes
+
+* added mixin on _CodeDialog ([#965](https://github.com/ubuntu/yaru.dart/issues/965)) ([ca0e8ee](https://github.com/ubuntu/yaru.dart/commit/ca0e8ee68e79adf627b5f78a64309873b499183d))
+* **Chips:** chip height altered by wrong label style, padding at the right ([#962](https://github.com/ubuntu/yaru.dart/issues/962)) ([b907e6b](https://github.com/ubuntu/yaru.dart/commit/b907e6bf9d84ee3b15bfe0cb9c6cb58b45ca3fe2))
+* Square Windows title controls ([#967](https://github.com/ubuntu/yaru.dart/issues/967)) ([e81046e](https://github.com/ubuntu/yaru.dart/commit/e81046e141d93881c4399c40efcb2da8a8302ae5))
+
 ## [5.3.2](https://github.com/ubuntu/yaru.dart/compare/v5.3.0...v5.3.2) (2024-10-28)
 
 

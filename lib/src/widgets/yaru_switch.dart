@@ -176,7 +176,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 
     // Normal colors
     final uncheckedColor = switchTheme.color?.resolve(unselectedState) ??
-        colorScheme.onSurface.withOpacity(.25);
+        colorScheme.onSurface.withValues(alpha: 0.25);
     final uncheckedBorderColor =
         switchTheme.borderColor?.resolve(unselectedState) ?? defaultBorderColor;
     final uncheckedThumbColor =
@@ -197,7 +197,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
         switchTheme.borderColor?.resolve(disabledState) ?? defaultBorderColor;
     final disabledUncheckedThumbColor =
         switchTheme.thumbColor?.resolve(disabledState) ??
-            colorScheme.onSurface.withOpacity(.4);
+            colorScheme.onSurface.withValues(alpha: 0.4);
     final disabledCheckedColor =
         switchTheme.color?.resolve(selectedDisabledState) ??
             painter.disabledCheckedColor;

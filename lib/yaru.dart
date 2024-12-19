@@ -1,4 +1,4 @@
-library yaru;
+library;
 
 export 'constants.dart';
 export 'foundation.dart';

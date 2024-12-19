@@ -212,14 +212,14 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     final onSurface = colorScheme.onSurface;
 
     if (!interactive) {
-      return onSurface.withOpacity(0.05);
+      return onSurface.withValues(alpha: 0.05);
     }
 
     return _active
-        ? onSurface.withOpacity(0.2)
+        ? onSurface.withValues(alpha: 0.2)
         : _hovered
-            ? onSurface.withOpacity(0.15)
-            : onSurface.withOpacity(0.1);
+            ? onSurface.withValues(alpha: 0.15)
+            : onSurface.withValues(alpha: 0.1);
   }
 
   Color _getWindowsBackgroundColor(ColorScheme colorScheme) {
@@ -231,8 +231,8 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     const closeButtonHoverBackgroundColor = Color(0xffe81123);
 
     if (widget.type == YaruWindowControlType.close) {
-      return closeButtonHoverBackgroundColor.withOpacity(
-        _active
+      return closeButtonHoverBackgroundColor.withValues(
+        alpha: _active
             ? 0.5
             : _hovered
                 ? 1.0
@@ -241,9 +241,9 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     }
 
     return _active
-        ? onSurface.withOpacity(0.15)
+        ? onSurface.withValues(alpha: 0.15)
         : _hovered
-            ? onSurface.withOpacity(0.1)
+            ? onSurface.withValues(alpha: 0.1)
             : Colors.transparent;
   }
 
@@ -253,7 +253,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
       YaruWindowControlPlatform.windows => _getWindowsIconColor(colorScheme)
     };
 
-    return color.withOpacity(interactive ? 1.0 : 0.5);
+    return color.withValues(alpha: interactive ? 1.0 : 0.5);
   }
 
   Color _getYaruIconColor(ColorScheme colorScheme) {

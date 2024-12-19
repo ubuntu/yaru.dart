@@ -3,7 +3,7 @@
 // Generated using icon_font_generator.
 // Copyright © 2024 icon_font_generator (https://pub.dev/packages/icon_font_generator).
 
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, unintended_html_in_doc_comment
 
 import 'package:flutter/widgets.dart';
 
