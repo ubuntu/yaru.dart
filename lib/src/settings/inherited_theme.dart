@@ -142,10 +142,8 @@ class YaruTheme extends StatefulWidget {
 class _YaruThemeState extends State<YaruTheme> {
   YaruVariant? _variant;
   YaruSettings? _settings;
-  final Map<String, List<String>?> _customTitleButtonLayout = {
-    'left': null,
-    'right': null,
-  };
+  List<String>? _leftButtonLayout;
+  List<String>? _rightButtonLayout;
   StreamSubscription<String?>? _themeNameSub;
   StreamSubscription<String?>? _accentColorSub;
   StreamSubscription<String?>? _buttonLayoutSub;
@@ -161,19 +159,17 @@ class _YaruThemeState extends State<YaruTheme> {
             resolveGtkThemeVariant(_settings?.getThemeName());
         _accentColorSub ??= _settings!.accentColorChanged.listen(updateVariant);
         _themeNameSub ??= _settings!.themeNameChanged.listen(updateVariant);
-
-        _buttonLayoutSub ??=
-            _settings!.buttonLayoutChanged.listen(updateButtonLayout);
-
-        final buttonLayout = _settings?.getButtonLayout();
-
-        final buttons = buttonLayout?.split(':');
-
-        _customTitleButtonLayout['left'] =
-            buttons?.firstOrNull?.split(',') ?? <String>[];
-        _customTitleButtonLayout['right'] =
-            buttons?.lastOrNull?.split(',') ?? [];
       }
+
+      _buttonLayoutSub ??=
+          _settings!.buttonLayoutChanged.listen(updateButtonLayout);
+
+      final buttonLayout = _settings?.getButtonLayout();
+
+      final buttons = buttonLayout?.split(':');
+
+      _leftButtonLayout = buttons?.firstOrNull?.split(',') ?? <String>[];
+      _rightButtonLayout = buttons?.lastOrNull?.split(',') ?? [];
     }
   }
 
@@ -255,14 +251,8 @@ class _YaruThemeState extends State<YaruTheme> {
     final buttons = buttonLayout?.split(':');
 
     setState(() {
-      _customTitleButtonLayout.update(
-        'left',
-        (value) => buttons?.firstOrNull?.split(',') ?? <String>[],
-      );
-      _customTitleButtonLayout.update(
-        'right',
-        (value) => buttons?.lastOrNull?.split(',') ?? [],
-      );
+      _leftButtonLayout = buttons?.firstOrNull?.split(',') ?? <String>[];
+      _rightButtonLayout = buttons?.lastOrNull?.split(',') ?? [];
     });
   }
 
@@ -282,8 +272,8 @@ class _YaruThemeState extends State<YaruTheme> {
       highContrast:
           widget.data.highContrast ?? MediaQuery.highContrastOf(context),
       themeMode: resolveMode(),
-      customTitleButtonLayout:
-          widget.data.customTitleButtonLayout ?? _customTitleButtonLayout,
+      leftButtonLayout: widget.data.leftButtonLayout ?? _leftButtonLayout,
+      rightButtonLayout: widget.data.rightButtonLayout ?? _rightButtonLayout,
     );
   }
 
@@ -325,19 +315,24 @@ class YaruThemeData with Diagnosticable {
     this.pageTransitionsTheme,
     this.useMaterial3,
     this.visualDensity,
-    this.customTitleButtonLayout,
+    this.leftButtonLayout,
+    this.rightButtonLayout,
   });
 
   /// Specifies the theme variant.
   final YaruVariant? variant;
 
-  final Map<String, List<String>?>? customTitleButtonLayout;
+  /// If different from the default in GNOME, the title buttons on the left of the window.
+  final List<String>? leftButtonLayout;
 
-  bool get hasLeftWindowControls =>
-      customTitleButtonLayout?['left']?.isNotEmpty ?? false;
+  /// If different from the default in GNOME, the title buttons on the left of the window.
+  final List<String>? rightButtonLayout;
 
-  bool get hasRightWindowControls =>
-      customTitleButtonLayout?['right']?.isNotEmpty ?? false;
+  /// If different from the default in GNOME, indicates if there are title buttons on the left of the window.
+  bool get hasLeftWindowControls => leftButtonLayout?.isNotEmpty ?? false;
+
+  /// If different from the default in GNOME, indicates if there are title buttons on the left of the window.
+  bool get hasRightWindowControls => rightButtonLayout?.isNotEmpty ?? false;
 
   /// Whether to use high contrast colors.
   final bool? highContrast;
@@ -375,7 +370,8 @@ class YaruThemeData with Diagnosticable {
     PageTransitionsTheme? pageTransitionsTheme,
     bool? useMaterial3,
     VisualDensity? visualDensity,
-    Map<String, List<String>?>? customTitleButtonLayout,
+    List<String>? leftButtonLayout,
+    List<String>? rightButtonLayout,
   }) {
     return YaruThemeData(
       variant: variant ?? this.variant,
@@ -385,8 +381,8 @@ class YaruThemeData with Diagnosticable {
       pageTransitionsTheme: pageTransitionsTheme ?? this.pageTransitionsTheme,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       visualDensity: visualDensity ?? this.visualDensity,
-      customTitleButtonLayout:
-          customTitleButtonLayout ?? this.customTitleButtonLayout,
+      leftButtonLayout: leftButtonLayout ?? this.leftButtonLayout,
+      rightButtonLayout: rightButtonLayout ?? this.rightButtonLayout,
     );
   }
 
@@ -402,7 +398,10 @@ class YaruThemeData with Diagnosticable {
     properties.add(DiagnosticsProperty('useMaterial3', useMaterial3));
     properties.add(DiagnosticsProperty('visualDensity', visualDensity));
     properties.add(
-      DiagnosticsProperty('customTitleButtonLayout', customTitleButtonLayout),
+      DiagnosticsProperty('leftButtonLayout', leftButtonLayout),
+    );
+    properties.add(
+      DiagnosticsProperty('rightButtonLayout', rightButtonLayout),
     );
   }
 
@@ -418,7 +417,8 @@ class YaruThemeData with Diagnosticable {
         other.pageTransitionsTheme == pageTransitionsTheme &&
         other.useMaterial3 == useMaterial3 &&
         other.visualDensity == visualDensity &&
-        other.customTitleButtonLayout == customTitleButtonLayout;
+        other.leftButtonLayout == leftButtonLayout &&
+        other.rightButtonLayout == rightButtonLayout;
   }
 
   @override
@@ -431,7 +431,8 @@ class YaruThemeData with Diagnosticable {
       pageTransitionsTheme,
       useMaterial3,
       visualDensity,
-      customTitleButtonLayout,
+      leftButtonLayout,
+      rightButtonLayout,
     );
   }
 }

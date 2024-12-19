@@ -244,14 +244,14 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       onTap: onClose != null ? () => onClose!(context) : null,
     );
 
-    final leftButtons = yaruTheme?.customTitleButtonLayout?['left']
+    final leftButtons = yaruTheme?.leftButtonLayout
             ?.map(YaruWindowControlType.fromName)
             .toList() ??
         <YaruWindowControlType>[];
 
     leftButtons.removeWhere((e) => e == null);
 
-    final rightButtons = yaruTheme?.customTitleButtonLayout?['right']
+    final rightButtons = yaruTheme?.rightButtonLayout
             ?.map(YaruWindowControlType.fromName)
             .toList() ??
         <YaruWindowControlType>[];
