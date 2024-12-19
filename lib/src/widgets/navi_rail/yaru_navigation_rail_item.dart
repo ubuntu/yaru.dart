@@ -142,7 +142,7 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
   }
 
   Color _selectedIndicatorColor(ThemeData theme) {
-    return theme.colorScheme.onSurface.withOpacity(.1);
+    return theme.colorScheme.onSurface.withValues(alpha: 0.1);
   }
 
   Widget _buildSizedBox({required Widget child}) {

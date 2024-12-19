@@ -183,7 +183,7 @@ class _YaruScrollViewUndershootState extends State<YaruScrollViewUndershoot> {
               begin: alignment,
               end: -alignment,
               colors: [
-                Colors.black.withOpacity(light ? 0.1 : 0.3),
+                Colors.black.withValues(alpha: light ? 0.1 : 0.3),
                 Colors.transparent,
               ],
             ),

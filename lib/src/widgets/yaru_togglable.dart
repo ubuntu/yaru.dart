@@ -283,19 +283,19 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     final checkmarkColor = colorScheme.onPrimary;
 
     // Disabled colors
-    final disabledUncheckedColor = colorScheme.onSurface.withOpacity(.1);
+    final disabledUncheckedColor = colorScheme.onSurface.withValues(alpha: 0.1);
     final disabledUncheckedBorderColor = colorScheme.isHighContrast
         ? colorScheme.outlineVariant
         : disabledUncheckedColor;
-    final disabledCheckedColor = colorScheme.onSurface.withOpacity(.2);
+    final disabledCheckedColor = colorScheme.onSurface.withValues(alpha: 0.2);
     final disabledCheckedBorderColor = colorScheme.isHighContrast
         ? colorScheme.outlineVariant
         : Colors.transparent;
-    final disabledCheckmarkColor = colorScheme.onSurface.withOpacity(.5);
+    final disabledCheckmarkColor = colorScheme.onSurface.withValues(alpha: 0.5);
 
     // Indicator colors
-    final hoverIndicatorColor = colorScheme.onSurface.withOpacity(.05);
-    final focusIndicatorColor = colorScheme.onSurface.withOpacity(.1);
+    final hoverIndicatorColor = colorScheme.onSurface.withValues(alpha: 0.05);
+    final focusIndicatorColor = colorScheme.onSurface.withValues(alpha: 0.1);
 
     painter
       ..interactive = widget.interactive

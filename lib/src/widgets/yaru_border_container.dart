@@ -172,7 +172,7 @@ class YaruTranslucentContainer extends StatelessWidget {
     return YaruBorderContainer(
       alignment: alignment,
       padding: padding,
-      color: color.withOpacity(opacity),
+      color: color.withValues(alpha: opacity),
       border: Border.all(color: color),
       width: width,
       height: height,

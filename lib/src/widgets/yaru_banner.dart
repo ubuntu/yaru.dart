@@ -93,14 +93,14 @@ class YaruBanner extends StatelessWidget {
         .scale(lightness: theme.brightness == Brightness.light ? 0 : 0.03);
     return Material(
       color: selected == true
-          ? theme.primaryColor.withOpacity(0.8)
+          ? theme.primaryColor.withValues(alpha: 0.8)
           : Colors.transparent,
       borderRadius: borderRadius,
       child: InkWell(
         onTap: onTap,
         onHover: onHover,
         borderRadius: borderRadius,
-        hoverColor: theme.colorScheme.onSurface.withOpacity(0.1),
+        hoverColor: theme.colorScheme.onSurface.withValues(alpha: 0.1),
         mouseCursor: mouseCursor,
         child: Card(
           color: color ?? defaultSurfaceTintColor,
