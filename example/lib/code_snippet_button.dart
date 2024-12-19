@@ -121,6 +121,7 @@ class _CodeDialogState extends State<_CodeDialog> {
                     textStyle: const TextStyle(
                       fontFamily: 'UbuntuMono',
                       fontSize: 16,
+                      package: 'yaru'
                     ),
                   ),
                 );
