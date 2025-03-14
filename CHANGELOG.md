@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.1.0](https://github.com/ubuntu/yaru.dart/compare/v7.0.0...v7.1.0) (2025-03-14)
+
+
+### Features
+
+* reduce YaruInfoBox titleTextStyle default height ([#977](https://github.com/ubuntu/yaru.dart/issues/977)) ([f7a3e33](https://github.com/ubuntu/yaru.dart/commit/f7a3e33130f07a8cf829033cff0a8ff1316522b2))
+
+
+### Bug Fixes
+
+* provide optional YaruTabBar label colors ([#975](https://github.com/ubuntu/yaru.dart/issues/975)) ([0a1ee4f](https://github.com/ubuntu/yaru.dart/commit/0a1ee4f16a5efb332b9a62286f39d2ab6735cfb4))
+
 ## [7.0.0](https://github.com/ubuntu/yaru.dart/compare/v6.0.0...v7.0.0) (2024-12-19)
 
 
