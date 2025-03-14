@@ -169,12 +169,12 @@ class YaruInfoBox extends StatelessWidget {
                           theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
-                            height: 1.8,
+                            height: 1.3,
                           ) ??
                           TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
-                            height: 1.8,
+                            height: 1.3,
                             color: theme.colorScheme.onSurface,
                           ),
                       child: title!,
