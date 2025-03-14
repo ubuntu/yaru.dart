@@ -135,7 +135,7 @@ class YaruInfoBox extends StatelessWidget {
   final Color? color;
 
   /// The optional style used for the [DefaultTextStyle] around the [title], defaults to
-  /// `Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, fontSize: 16.0, height: 1.8)`
+  /// `Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, fontSize: 16.0, height: 1.3)`
   final TextStyle? titleTextStyle;
 
   /// The optional style used for the [DefaultTextStyle] around the [title], defaults to
