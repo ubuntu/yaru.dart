@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru/constants.dart';
+import 'package:yaru/settings.dart';
 import 'package:yaru/theme.dart';
 import 'package:yaru_window/yaru_window.dart';
 
@@ -11,7 +12,8 @@ import 'yaru_title_bar_gesture_detector.dart';
 import 'yaru_title_bar_theme.dart';
 import 'yaru_window_control.dart';
 
-const _kYaruTitleBarHeroTag = '<YaruTitleBar hero tag>';
+const _kYaruTitleBarHeroTagRight = '<YaruTitleBar hero tag right>';
+const _kYaruTitleBarHeroTagLeft = '<YaruTitleBar hero tag left>';
 
 /// A generic title bar widget.
 ///
@@ -44,10 +46,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.onMinimize,
     this.onRestore,
     this.onShowMenu,
-    this.heroTag = _kYaruTitleBarHeroTag,
+    this.rightHeroTag = _kYaruTitleBarHeroTagRight,
+    this.leftHeroTag = _kYaruTitleBarHeroTagLeft,
     this.platform,
     this.buttonPadding,
     this.buttonSpacing,
+    this.leadingWidth,
   });
 
   /// The primary title widget.
@@ -64,6 +68,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// Spacing around the title.
   final double? titleSpacing;
+
+  /// The width of the leading widget.
+  final double? leadingWidth;
 
   /// The foreground color.
   final Color? foregroundColor;
@@ -122,7 +129,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   ///
   /// By default, a unique tag is used to ensure that the window controls stay
   /// in place during page transitions. If set to `null`, no [Hero] will be used.
-  final Object? heroTag;
+  final Object? rightHeroTag;
+
+  final Object? leftHeroTag;
 
   /// Platform style of this window control, see [YaruWindowControlPlatform].
   ///
@@ -146,6 +155,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final yaruTheme = YaruTheme.maybeOf(context);
     final titleBarTheme = YaruTitleBarTheme.of(context);
     final style = this.style ?? titleBarTheme.style ?? YaruTitleBarStyle.normal;
     if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
@@ -215,13 +225,14 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
     Widget maybeHero({
       required Widget child,
+      required Object? tag,
     }) {
-      if (heroTag == null ||
+      if (tag == null ||
           context.findAncestorWidgetOfExactType<Hero>() != null) {
         return child;
       }
       return Hero(
-        tag: heroTag!,
+        tag: tag,
         child: child,
       );
     }
@@ -232,6 +243,96 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       type: YaruWindowControlType.close,
       onTap: onClose != null ? () => onClose!(context) : null,
     );
+
+    final leftButtons = yaruTheme?.leftButtonLayout
+            ?.map(YaruWindowControlType.fromName)
+            .toList() ??
+        <YaruWindowControlType>[];
+
+    leftButtons.removeWhere((e) => e == null);
+
+    final rightButtons = yaruTheme?.rightButtonLayout
+            ?.map(YaruWindowControlType.fromName)
+            .toList() ??
+        <YaruWindowControlType>[];
+
+    final minimizeButton = YaruWindowControl(
+      platform: windowControlPlatform,
+      iconColor: WidgetStatePropertyAll(foregroundColor),
+      type: YaruWindowControlType.minimize,
+      onTap: onMinimize != null ? () => onMinimize!(context) : null,
+    );
+
+    final restoreButton = YaruWindowControl(
+      platform: windowControlPlatform,
+      iconColor: WidgetStatePropertyAll(foregroundColor),
+      type: YaruWindowControlType.restore,
+      onTap: onRestore != null ? () => onRestore!(context) : null,
+    );
+
+    final maximizeButton = YaruWindowControl(
+      platform: windowControlPlatform,
+      iconColor: WidgetStatePropertyAll(foregroundColor),
+      type: YaruWindowControlType.maximize,
+      onTap: onMaximize != null ? () => onMaximize!(context) : null,
+    );
+
+    final rightWindowControls = Padding(
+      padding: bPadding,
+      child: Row(
+        children: [
+          if (isMinimizable == true &&
+              (rightButtons.contains(YaruWindowControlType.minimize) ||
+                  leftButtons.isEmpty))
+            minimizeButton,
+          if (isRestorable == true &&
+              (rightButtons.contains(YaruWindowControlType.maximize) ||
+                  leftButtons.isEmpty))
+            restoreButton,
+          if (isMaximizable == true &&
+              (rightButtons.contains(YaruWindowControlType.maximize) ||
+                  leftButtons.isEmpty))
+            maximizeButton,
+          if (isClosable == true &&
+              (rightButtons.contains(YaruWindowControlType.close) ||
+                  leftButtons.isEmpty))
+            closeButton,
+        ].withSpacing(bSpacing),
+      ),
+    );
+
+    final leftWindowControls = Padding(
+      padding: bPadding,
+      child: Row(
+        children: [
+          if (isClosable == true &&
+              leftButtons.contains(YaruWindowControlType.close))
+            closeButton,
+          if (isMaximizable == true &&
+              leftButtons.contains(YaruWindowControlType.maximize))
+            maximizeButton,
+          if (isRestorable == true &&
+              leftButtons.contains(YaruWindowControlType.maximize))
+            restoreButton,
+          if (isMinimizable == true &&
+              leftButtons.contains(YaruWindowControlType.minimize))
+            minimizeButton,
+        ].withSpacing(bSpacing),
+      ),
+    );
+
+    final leadingBlock = Row(
+      children: [
+        if ((style == YaruTitleBarStyle.onlyLeftWindowControls) &&
+            (isMinimizable == true ||
+                isRestorable == true ||
+                isMaximizable == true ||
+                isClosable == true))
+          leftWindowControls,
+        if (leading != null) leading!,
+      ].withSpacing(bSpacing),
+    );
+
     return TextFieldTapRegion(
       child: YaruTitleBarGestureDetector(
         onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
@@ -244,7 +345,14 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         child: AppBar(
           elevation: titleBarTheme.elevation,
           automaticallyImplyLeading: false,
-          leading: backdropEffect(leading),
+          leading: windowControlPlatform == YaruWindowControlPlatform.yaru
+              ? maybeHero(
+                  tag: leftHeroTag,
+                  child: backdropEffect(leadingBlock)!,
+                )
+              : leading,
+          leadingWidth: leadingWidth ??
+              (leftButtons.isEmpty ? null : leftButtons.length * 60),
           title: backdropEffect(title),
           centerTitle: centerTitle ?? titleBarTheme.centerTitle,
           titleSpacing: titleSpacing ?? titleBarTheme.titleSpacing,
@@ -255,62 +363,20 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
           shape: shape,
           actions: [
             maybeHero(
+              tag: rightHeroTag,
               child: backdropEffect(
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ...?actions,
-                    if (style == YaruTitleBarStyle.normal &&
+                    if ((style == YaruTitleBarStyle.normal ||
+                            style ==
+                                YaruTitleBarStyle.onlyRightWindowControls) &&
                         (isMinimizable == true ||
                             isRestorable == true ||
                             isMaximizable == true ||
                             isClosable == true))
-                      Padding(
-                        padding: bPadding,
-                        child: Row(
-                          children: [
-                            if (isMinimizable == true)
-                              YaruWindowControl(
-                                platform: windowControlPlatform,
-                                iconColor:
-                                    WidgetStatePropertyAll(foregroundColor),
-                                type: YaruWindowControlType.minimize,
-                                onTap: onMinimize != null
-                                    ? () => onMinimize!(context)
-                                    : null,
-                              ),
-                            if (isRestorable == true)
-                              YaruWindowControl(
-                                platform: windowControlPlatform,
-                                iconColor:
-                                    WidgetStatePropertyAll(foregroundColor),
-                                type: YaruWindowControlType.restore,
-                                onTap: onRestore != null
-                                    ? () => onRestore!(context)
-                                    : null,
-                              ),
-                            if (isMaximizable == true)
-                              YaruWindowControl(
-                                platform: windowControlPlatform,
-                                iconColor:
-                                    WidgetStatePropertyAll(foregroundColor),
-                                type: YaruWindowControlType.maximize,
-                                onTap: onMaximize != null
-                                    ? () => onMaximize!(context)
-                                    : null,
-                              ),
-                            if (isClosable == true)
-                              isMaximizable == true
-                                  ? closeButton
-                                  : ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(6),
-                                      ),
-                                      child: closeButton,
-                                    ),
-                          ].withSpacing(bSpacing),
-                        ),
-                      ),
+                      rightWindowControls,
                   ],
                 ),
               )!,
@@ -445,10 +511,12 @@ class YaruWindowTitleBar extends StatelessWidget
     this.onMinimize = YaruWindow.minimize,
     this.onRestore = YaruWindow.restore,
     this.onShowMenu = YaruWindow.showMenu,
-    this.heroTag = _kYaruTitleBarHeroTag,
+    this.rightHeroTag = _kYaruTitleBarHeroTagRight,
+    this.leftHeroTag = _kYaruTitleBarHeroTagLeft,
     this.platform,
     this.buttonPadding,
     this.buttonSpacing,
+    this.leadingWidth,
   });
 
   /// The primary title widget.
@@ -465,6 +533,9 @@ class YaruWindowTitleBar extends StatelessWidget
 
   /// Spacing around the title.
   final double? titleSpacing;
+
+  /// The width of the leading widget.
+  final double? leadingWidth;
 
   /// The foreground color.
   final Color? foregroundColor;
@@ -523,7 +594,8 @@ class YaruWindowTitleBar extends StatelessWidget
   ///
   /// By default, a unique tag is used to ensure that the window controls stay
   /// in place during page transitions. If set to `null`, no [Hero] will be used.
-  final Object? heroTag;
+  final Object? rightHeroTag;
+  final Object? leftHeroTag;
 
   final YaruWindowControlPlatform? platform;
 
@@ -564,6 +636,7 @@ class YaruWindowTitleBar extends StatelessWidget
           buttonPadding: buttonPadding,
           buttonSpacing: buttonSpacing,
           leading: leading,
+          leadingWidth: leadingWidth,
           title: title ?? Text(state?.title ?? ''),
           actions: actions,
           centerTitle: centerTitle,
@@ -588,7 +661,7 @@ class YaruWindowTitleBar extends StatelessWidget
           onMinimize: onMinimize,
           onRestore: onRestore,
           onShowMenu: onShowMenu,
-          heroTag: heroTag,
+          rightHeroTag: rightHeroTag,
         );
       },
     );
@@ -626,7 +699,8 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.onMinimize = null,
     super.onRestore = null,
     super.onShowMenu = YaruWindow.showMenu,
-    super.heroTag = _kYaruTitleBarHeroTag,
+    super.rightHeroTag = _kYaruTitleBarHeroTagRight,
+    super.leftHeroTag = _kYaruTitleBarHeroTagLeft,
     super.platform,
     super.buttonPadding,
     super.buttonSpacing,
