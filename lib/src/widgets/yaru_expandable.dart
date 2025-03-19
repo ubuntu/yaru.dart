@@ -95,9 +95,7 @@ class _YaruExpandableState extends State<YaruExpandable> {
       ),
     );
 
-    final header = Flexible(
-      child: GestureDetector(onTap: _onTap, child: widget.header),
-    );
+    final header = Flexible(child: widget.header);
 
     final MainAxisAlignment expandButtonPosition;
     final List<Widget> headerChildren;
@@ -115,9 +113,13 @@ class _YaruExpandableState extends State<YaruExpandable> {
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: expandButtonPosition,
-          children: headerChildren,
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: _onTap,
+          child: Row(
+            mainAxisAlignment: expandButtonPosition,
+            children: headerChildren,
+          ),
         ),
         AnimatedCrossFade(
           firstChild: _buildChild(widget.child),
