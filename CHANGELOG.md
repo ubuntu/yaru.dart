@@ -1,5 +1,20 @@
 # Changelog
 
+## [7.1.0](https://github.com/ubuntu/yaru.dart/compare/v7.0.0...v7.1.0) (2025-04-05)
+
+
+### Features
+
+* add emoji categories ([#978](https://github.com/ubuntu/yaru.dart/issues/978)) ([4fac410](https://github.com/ubuntu/yaru.dart/commit/4fac4105b66d4e0ed3ec3abc11c37e4e306bd61e))
+* reduce YaruInfoBox titleTextStyle default height ([#977](https://github.com/ubuntu/yaru.dart/issues/977)) ([f7a3e33](https://github.com/ubuntu/yaru.dart/commit/f7a3e33130f07a8cf829033cff0a8ff1316522b2))
+* **YaruExpansionPanel:** add optional isInitiallyExpanded property ([#982](https://github.com/ubuntu/yaru.dart/issues/982)) ([7fbf081](https://github.com/ubuntu/yaru.dart/commit/7fbf081ae7de2602d9f1f142a02ff625a423e4db))
+
+
+### Bug Fixes
+
+* provide optional YaruTabBar label colors ([#975](https://github.com/ubuntu/yaru.dart/issues/975)) ([0a1ee4f](https://github.com/ubuntu/yaru.dart/commit/0a1ee4f16a5efb332b9a62286f39d2ab6735cfb4))
+* YaruExpandable: handle tap on header background ([#980](https://github.com/ubuntu/yaru.dart/issues/980)) ([f9db616](https://github.com/ubuntu/yaru.dart/commit/f9db616a71e0cb0b82ad0b994928b8cbc0688acc))
+
 ## [7.0.0](https://github.com/ubuntu/yaru.dart/compare/v6.0.0...v7.0.0) (2024-12-19)
 
 
