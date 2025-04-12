@@ -39,7 +39,7 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
         ),
     iconTheme: IconThemeData(
       color: colorScheme.onSurface,
-      size: kCompactIconSize,
+      size: kYaruIconSize,
     ),
     actionsIconTheme: IconThemeData(color: colorScheme.onSurface),
     toolbarHeight: kYaruAppBarHeight,
@@ -274,7 +274,7 @@ IconButtonThemeData _createIconButtonTheme({
       minimumSize: const Size(kYaruButtonHeight, kYaruButtonHeight),
       maximumSize: const Size(kYaruButtonHeight, kYaruButtonHeight),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      iconSize: kCompactIconSize,
+      iconSize: kYaruIconSize,
     ).merge(
       _createCommonButtonStyle().copyWith(
         iconColor: _createCommonButtonIconColor(
@@ -616,11 +616,11 @@ NavigationRailThemeData _createNavigationRailTheme(ColorScheme colorScheme) {
     indicatorColor: colorScheme.onSurface.withValues(alpha: 0.1),
     selectedIconTheme: IconThemeData(
       color: colorScheme.onSurface,
-      size: kCompactIconSize,
+      size: kYaruIconSize,
     ),
     unselectedIconTheme: IconThemeData(
       color: colorScheme.onSurface.withValues(alpha: 0.8),
-      size: kCompactIconSize,
+      size: kYaruIconSize,
     ),
   );
 }
@@ -735,7 +735,7 @@ ThemeData createYaruTheme({
   return themeData.copyWith(
     iconTheme: IconThemeData(
       color: colorScheme.onSurface,
-      size: kCompactIconSize,
+      size: kYaruIconSize,
     ),
     primaryIconTheme: IconThemeData(color: colorScheme.onSurface),
     progressIndicatorTheme: _createProgressIndicatorTheme(colorScheme),
