@@ -11,19 +11,17 @@ const kYaruContainerRadius = 12.0;
 const kYaruButtonRadius = 8.0;
 
 /// The default border radius for Yaru-style checkboxes.
-const kCheckRadius = 6.0;
+const kYaruCheckRadius = 6.0;
 
 /// The default border radius for .
-const kWindowRadius = 14.0;
+const kYaruWindowRadius = 14.0;
 
 /// The default border radius for Yaru-style text fields.
-const kAppBarElevation = 0.0;
+const kYaruAppBarElevation = 0.0;
 
-const kCompactAppBarHeight = 46.0;
-const kCompactNavigationBarHeight = 64.0;
-const kCompactButtonHeight = 34.0;
-const kCompactButtonIconSize = 20.0;
-const kCompactIconSize = 20.0;
+const kYaruAppBarHeight = 46.0;
+const kYaruNavigationBarHeight = 64.0;
+const kYaruButtonHeight = 34.0;
 
 /// The default breakpoint width [YaruMasterDetailPage] uses for switching
 /// between portrait and landscape modes.
