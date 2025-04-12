@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:yaru/constants.dart';
 import 'package:yaru/theme.dart';
 
-import 'constants.dart';
 import 'text_theme.dart';
 
 bool get isMobile =>
@@ -48,7 +47,7 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
 }
 
 InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
-  final radius = BorderRadius.circular(kButtonRadius);
+  final radius = BorderRadius.circular(kYaruButtonRadius);
   const width = 1.0;
   const strokeAlign = 0.0;
   final fill =
@@ -162,7 +161,7 @@ ButtonStyle _createCommonButtonStyle() {
 
 final _buttonThemeData = ButtonThemeData(
   shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(kButtonRadius),
+    borderRadius: BorderRadius.circular(kYaruButtonRadius),
   ),
 );
 
@@ -181,7 +180,7 @@ OutlinedButtonThemeData _createOutlinedButtonTheme({
       foregroundColor: colorScheme.onSurface,
       iconColor: colorScheme.onSurface,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(kButtonRadius),
+        borderRadius: BorderRadius.circular(kYaruButtonRadius),
       ),
     ).merge(
       _createCommonButtonStyle(),
@@ -198,7 +197,7 @@ TextButtonThemeData _createTextButtonTheme({
       iconColor: colorScheme.primary,
       foregroundColor: colorScheme.primary,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(kButtonRadius),
+        borderRadius: BorderRadius.circular(kYaruButtonRadius),
       ),
     ).merge(
       _createCommonButtonStyle(),
@@ -223,7 +222,7 @@ ElevatedButtonThemeData _createElevatedButtonTheme({
         side: colorScheme.isHighContrast
             ? BorderSide(color: colorScheme.outlineVariant)
             : BorderSide.none,
-        borderRadius: BorderRadius.circular(kButtonRadius),
+        borderRadius: BorderRadius.circular(kYaruButtonRadius),
       ),
     ).merge(
       _createCommonButtonStyle(),
@@ -247,7 +246,7 @@ FilledButtonThemeData _createFilledButtonTheme({
         side: colorScheme.isHighContrast
             ? BorderSide(color: colorScheme.outlineVariant)
             : BorderSide.none,
-        borderRadius: BorderRadius.circular(kButtonRadius),
+        borderRadius: BorderRadius.circular(kYaruButtonRadius),
       ),
     ).merge(
       _createCommonButtonStyle(),
@@ -314,7 +313,7 @@ ToggleButtonsThemeData _createToggleButtonsTheme(ColorScheme colorScheme) {
       maxWidth: double.infinity,
       maxHeight: kCompactButtonHeight,
     ),
-    borderRadius: const BorderRadius.all(Radius.circular(kButtonRadius)),
+    borderRadius: const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
     borderColor: colorScheme.isHighContrast
         ? colorScheme.outlineVariant
         : colorScheme.outline,
@@ -744,7 +743,6 @@ ThemeData createYaruTheme({
     cardColor: _cardColor(colorScheme),
     cardTheme: _createCardTheme(colorScheme),
     dividerColor: dividerColor,
-    dialogBackgroundColor: colorScheme.surface,
     textTheme: textTheme,
     indicatorColor: colorScheme.primary,
     applyElevationOverlayColor: colorScheme.isDark,
