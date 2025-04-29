@@ -9,6 +9,18 @@ class ExpansionPanelPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(kYaruPagePadding),
       child: YaruExpansionPanel(
+        isInitiallyExpanded: const [
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+        ],
         width: 500,
         height: 500,
         headers: List.generate(
