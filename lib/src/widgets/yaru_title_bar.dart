@@ -42,6 +42,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.isRestorable,
     this.onClose,
     this.onDrag,
+    this.onDoubleTap,
     this.onMaximize,
     this.onMinimize,
     this.onRestore,
@@ -110,6 +111,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// Called when the title bar is dragged to move the window.
   final FutureOr<void> Function(BuildContext)? onDrag;
+
+  /// Called when the title bar is double-tapped.
+  final FutureOr<void> Function(BuildContext)? onDoubleTap;
 
   /// Called when the maximize button is pressed or the title bar is
   /// double-clicked while the window is not maximized.
@@ -336,11 +340,13 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     return TextFieldTapRegion(
       child: YaruTitleBarGestureDetector(
         onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
-        onDoubleTap: () => isMaximizable == true
-            ? onMaximize?.call(context)
-            : isRestorable == true
-                ? onRestore?.call(context)
-                : null,
+        onDoubleTap: () => onDoubleTap != null
+            ? onDoubleTap!(context)
+            : isMaximizable == true
+                ? onMaximize?.call(context)
+                : isRestorable == true
+                    ? onRestore?.call(context)
+                    : null,
         onSecondaryTap: onShowMenu != null ? () => onShowMenu!(context) : null,
         child: AppBar(
           elevation: titleBarTheme.elevation,
@@ -657,6 +663,13 @@ class YaruWindowTitleBar extends StatelessWidget
               isRestorable ?? state?.isRestorable?.exceptMacOS(context),
           onClose: onClose,
           onDrag: onDrag,
+          onDoubleTap: (context) {
+            if (isMaximizable ?? state?.isMaximizable == true) {
+              onMaximize?.call(context);
+            } else if (isRestorable ?? state?.isRestorable == true) {
+              onRestore?.call(context);
+            }
+          },
           onMaximize: onMaximize,
           onMinimize: onMinimize,
           onRestore: onRestore,
