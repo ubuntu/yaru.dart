@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:yaru/constants.dart';
 
 import 'yaru_check_button.dart';
 import 'yaru_checkbox_theme.dart';
@@ -11,7 +12,7 @@ import 'yaru_togglable.dart';
 const _kCheckboxActivableAreaPadding = EdgeInsets.all(6);
 const _kCheckboxTogglableSize = Size.square(20);
 
-const _kCheckboxBorderRadius = Radius.circular(4);
+const _kCheckboxBorderRadius = Radius.circular(kYaruCheckRadius);
 const _kCheckboxDashStroke = 2.0;
 const _kDashSizeFactor = 0.52;
 
