@@ -87,7 +87,7 @@ class YaruBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final borderRadius = BorderRadius.circular(kYaruBannerRadius);
+    final borderRadius = BorderRadius.circular(kYaruContainerRadius);
 
     final defaultSurfaceTintColor = theme.scaffoldBackgroundColor
         .scale(lightness: theme.brightness == Brightness.light ? 0 : 0.03);

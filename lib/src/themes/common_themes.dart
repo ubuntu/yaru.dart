@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:yaru/constants.dart';
 import 'package:yaru/theme.dart';
 
-import 'constants.dart';
 import 'text_theme.dart';
 
 bool get isMobile =>
@@ -26,9 +25,9 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
               ),
       ),
     ),
-    scrolledUnderElevation: kAppBarElevation,
+    scrolledUnderElevation: kYaruAppBarElevation,
     surfaceTintColor: colorScheme.surface,
-    elevation: kAppBarElevation,
+    elevation: kYaruAppBarElevation,
     systemOverlayStyle: colorScheme.isLight
         ? SystemUiOverlayStyle.light
         : SystemUiOverlayStyle.dark,
@@ -40,15 +39,15 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
         ),
     iconTheme: IconThemeData(
       color: colorScheme.onSurface,
-      size: kCompactIconSize,
+      size: kYaruIconSize,
     ),
     actionsIconTheme: IconThemeData(color: colorScheme.onSurface),
-    toolbarHeight: kCompactAppBarHeight,
+    toolbarHeight: kYaruAppBarHeight,
   );
 }
 
 InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
-  final radius = BorderRadius.circular(kButtonRadius);
+  final radius = BorderRadius.circular(kYaruButtonRadius);
   const width = 1.0;
   const strokeAlign = 0.0;
   final fill =
@@ -156,13 +155,19 @@ WidgetStateColor _createCommonButtonIconColor({
 ButtonStyle _createCommonButtonStyle() {
   return const ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.all(16)),
-    iconSize: WidgetStatePropertyAll(kCompactButtonIconSize),
+    iconSize: WidgetStatePropertyAll(kYaruIconSize),
+    minimumSize: WidgetStatePropertyAll(
+      Size(
+        kYaruButtonHeight,
+        kYaruButtonHeight,
+      ),
+    ),
   );
 }
 
 final _buttonThemeData = ButtonThemeData(
   shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(kButtonRadius),
+    borderRadius: BorderRadius.circular(kYaruButtonRadius),
   ),
 );
 
@@ -181,7 +186,7 @@ OutlinedButtonThemeData _createOutlinedButtonTheme({
       foregroundColor: colorScheme.onSurface,
       iconColor: colorScheme.onSurface,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(kButtonRadius),
+        borderRadius: BorderRadius.circular(kYaruButtonRadius),
       ),
     ).merge(
       _createCommonButtonStyle(),
@@ -198,7 +203,7 @@ TextButtonThemeData _createTextButtonTheme({
       iconColor: colorScheme.primary,
       foregroundColor: colorScheme.primary,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(kButtonRadius),
+        borderRadius: BorderRadius.circular(kYaruButtonRadius),
       ),
     ).merge(
       _createCommonButtonStyle(),
@@ -223,7 +228,7 @@ ElevatedButtonThemeData _createElevatedButtonTheme({
         side: colorScheme.isHighContrast
             ? BorderSide(color: colorScheme.outlineVariant)
             : BorderSide.none,
-        borderRadius: BorderRadius.circular(kButtonRadius),
+        borderRadius: BorderRadius.circular(kYaruButtonRadius),
       ),
     ).merge(
       _createCommonButtonStyle(),
@@ -247,7 +252,7 @@ FilledButtonThemeData _createFilledButtonTheme({
         side: colorScheme.isHighContrast
             ? BorderSide(color: colorScheme.outlineVariant)
             : BorderSide.none,
-        borderRadius: BorderRadius.circular(kButtonRadius),
+        borderRadius: BorderRadius.circular(kYaruButtonRadius),
       ),
     ).merge(
       _createCommonButtonStyle(),
@@ -265,11 +270,11 @@ IconButtonThemeData _createIconButtonTheme({
       foregroundColor: colorScheme.onSurface,
       highlightColor: colorScheme.onSurface.withValues(alpha: 0.05),
       surfaceTintColor: colorScheme.surface,
-      fixedSize: const Size(kCompactButtonHeight, kCompactButtonHeight),
-      minimumSize: const Size(kCompactButtonHeight, kCompactButtonHeight),
-      maximumSize: const Size(kCompactButtonHeight, kCompactButtonHeight),
+      fixedSize: const Size(kYaruButtonHeight, kYaruButtonHeight),
+      minimumSize: const Size(kYaruButtonHeight, kYaruButtonHeight),
+      maximumSize: const Size(kYaruButtonHeight, kYaruButtonHeight),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      iconSize: kCompactIconSize,
+      iconSize: kYaruIconSize,
     ).merge(
       _createCommonButtonStyle().copyWith(
         iconColor: _createCommonButtonIconColor(
@@ -293,13 +298,13 @@ MenuButtonThemeData _createMenuItemTheme(
       maximumSize: const WidgetStatePropertyAll(
         Size(
           999,
-          kCompactButtonHeight + 10,
+          kYaruButtonHeight + 10,
         ),
       ),
       minimumSize: const WidgetStatePropertyAll(
         Size(
           20,
-          kCompactButtonHeight + 10,
+          kYaruButtonHeight + 10,
         ),
       ),
     ),
@@ -309,12 +314,12 @@ MenuButtonThemeData _createMenuItemTheme(
 ToggleButtonsThemeData _createToggleButtonsTheme(ColorScheme colorScheme) {
   return ToggleButtonsThemeData(
     constraints: const BoxConstraints(
-      minHeight: kCompactButtonHeight,
+      minHeight: kYaruButtonHeight,
       minWidth: 50,
       maxWidth: double.infinity,
-      maxHeight: kCompactButtonHeight,
+      maxHeight: kYaruButtonHeight,
     ),
-    borderRadius: const BorderRadius.all(Radius.circular(kButtonRadius)),
+    borderRadius: const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
     borderColor: colorScheme.isHighContrast
         ? colorScheme.outlineVariant
         : colorScheme.outline,
@@ -334,7 +339,7 @@ DialogTheme _createDialogTheme(ColorScheme colorScheme) {
     backgroundColor: bgColor,
     surfaceTintColor: bgColor,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(kWindowRadius),
+      borderRadius: BorderRadius.circular(kYaruWindowRadius),
       side: colorScheme.isDark
           ? BorderSide(
               color: Colors.white
@@ -421,7 +426,7 @@ Color _getCheckColor(Set<WidgetState> states, ColorScheme colorScheme) {
 CheckboxThemeData _createCheckBoxTheme(ColorScheme colorScheme) {
   return CheckboxThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(kCheckRadius),
+      borderRadius: BorderRadius.circular(kYaruCheckRadius),
     ),
     side: BorderSide(
       color: colorScheme.outline
@@ -583,8 +588,8 @@ DropdownMenuThemeData _createDropdownMenuTheme(ColorScheme colorScheme) {
   return DropdownMenuThemeData(
     inputDecorationTheme: _createInputDecorationTheme(colorScheme).copyWith(
       constraints: const BoxConstraints(
-        maxHeight: kCompactButtonHeight,
-        minHeight: kCompactButtonHeight,
+        maxHeight: kYaruButtonHeight,
+        minHeight: kYaruButtonHeight,
       ),
     ),
     menuStyle: _createMenuStyle(colorScheme),
@@ -593,7 +598,7 @@ DropdownMenuThemeData _createDropdownMenuTheme(ColorScheme colorScheme) {
 
 NavigationBarThemeData _createNavigationBarTheme(ColorScheme colorScheme) {
   return NavigationBarThemeData(
-    height: kCompactNavigationBarHeight,
+    height: kYaruNavigationBarHeight,
     backgroundColor: colorScheme.surface,
     surfaceTintColor: colorScheme.surface,
     indicatorColor: colorScheme.onSurface.withValues(alpha: 0.1),
@@ -611,11 +616,11 @@ NavigationRailThemeData _createNavigationRailTheme(ColorScheme colorScheme) {
     indicatorColor: colorScheme.onSurface.withValues(alpha: 0.1),
     selectedIconTheme: IconThemeData(
       color: colorScheme.onSurface,
-      size: kCompactIconSize,
+      size: kYaruIconSize,
     ),
     unselectedIconTheme: IconThemeData(
       color: colorScheme.onSurface.withValues(alpha: 0.8),
-      size: kCompactIconSize,
+      size: kYaruIconSize,
     ),
   );
 }
@@ -627,8 +632,8 @@ DrawerThemeData _createDrawerTheme(
   return DrawerThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: const BorderRadiusDirectional.only(
-        topEnd: Radius.circular(kWindowRadius),
-        bottomEnd: Radius.circular(kWindowRadius),
+        topEnd: Radius.circular(kYaruWindowRadius),
+        bottomEnd: Radius.circular(kYaruWindowRadius),
       ),
       side: BorderSide(
         color: colorScheme.isLight ? Colors.transparent : dividerColor,
@@ -653,7 +658,7 @@ SnackBarThemeData _createSnackBarTheme(ColorScheme colorScheme) {
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(
-        kCompactButtonHeight,
+        kYaruButtonHeight,
       ),
     ),
   );
@@ -730,7 +735,7 @@ ThemeData createYaruTheme({
   return themeData.copyWith(
     iconTheme: IconThemeData(
       color: colorScheme.onSurface,
-      size: kCompactIconSize,
+      size: kYaruIconSize,
     ),
     primaryIconTheme: IconThemeData(color: colorScheme.onSurface),
     progressIndicatorTheme: _createProgressIndicatorTheme(colorScheme),
@@ -744,7 +749,6 @@ ThemeData createYaruTheme({
     cardColor: _cardColor(colorScheme),
     cardTheme: _createCardTheme(colorScheme),
     dividerColor: dividerColor,
-    dialogBackgroundColor: colorScheme.surface,
     textTheme: textTheme,
     indicatorColor: colorScheme.primary,
     applyElevationOverlayColor: colorScheme.isDark,
