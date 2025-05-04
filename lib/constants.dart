@@ -11,7 +11,7 @@ const kYaruContainerRadius = 12.0;
 const kYaruButtonRadius = 8.0;
 
 /// The default border radius for Yaru-style checkboxes.
-const kYaruCheckRadius = 6.0;
+const kYaruCheckRadius = 4.0;
 
 /// The default border radius for .
 const kYaruWindowRadius = 14.0;
