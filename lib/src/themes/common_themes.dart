@@ -1,15 +1,9 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yaru/constants.dart';
 import 'package:yaru/theme.dart';
 
 import 'text_theme.dart';
-
-bool get isMobile =>
-    !kIsWeb && (Platform.isAndroid || Platform.isIOS || Platform.isFuchsia);
 
 // AppBar
 
@@ -711,21 +705,6 @@ ThemeData createYaruTheme({
       ? colorScheme.outlineVariant
       : colorScheme.outline.scale(lightness: colorScheme.isLight ? 0.1 : -0.06);
   final textTheme = createTextTheme(colorScheme.onSurface);
-
-  if (isMobile) {
-    return ThemeData(
-      textTheme: textTheme,
-      dividerColor: dividerColor,
-      scaffoldBackgroundColor: colorScheme.surface,
-      dividerTheme: DividerThemeData(
-        color: dividerColor,
-        space: 1.0,
-        thickness: 1.0,
-      ),
-      useMaterial3: true,
-      colorScheme: colorScheme,
-    );
-  }
 
   final themeData = ThemeData.from(
     useMaterial3: useMaterial3,
