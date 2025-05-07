@@ -102,10 +102,9 @@ class MaterialThemeHomePageState extends State<MaterialThemeHomePage> {
                   onDestinationSelected: (index) =>
                       setState(() => _selectedIndex = index),
                 ),
-                if (!isMobile)
-                  const VerticalDivider(
-                    width: 0.0,
-                  ),
+                const VerticalDivider(
+                  width: 0.0,
+                ),
                 Expanded(
                   child: Center(
                     child: _items.entries.elementAt(_selectedIndex).key,
@@ -121,10 +120,9 @@ class MaterialThemeHomePageState extends State<MaterialThemeHomePage> {
                     child: _items.entries.elementAt(_selectedIndex).key,
                   ),
                 ),
-                if (!isMobile)
-                  const Divider(
-                    height: 0.0,
-                  ),
+                const Divider(
+                  height: 0.0,
+                ),
                 NavigationBar(
                   destinations: [
                     for (final item in _items.entries)
