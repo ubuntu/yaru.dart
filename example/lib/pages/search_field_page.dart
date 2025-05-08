@@ -62,7 +62,7 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                 shadowColor: light ? Colors.black : null,
                 titlePadding: EdgeInsets.zero,
                 title: YaruDialogTitleBar(
-                  heroTag: 'bar2',
+                  rightHeroTag: 'bar2',
                   titleSpacing: 0,
                   centerTitle: true,
                   title: _fieldSearchActive

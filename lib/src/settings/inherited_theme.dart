@@ -142,33 +142,47 @@ class YaruTheme extends StatefulWidget {
 class _YaruThemeState extends State<YaruTheme> {
   YaruVariant? _variant;
   YaruSettings? _settings;
-  StreamSubscription<String?>? _themeNameSubscription;
-  StreamSubscription<String?>? _accentColorSubScription;
+  List<String>? _leftButtonLayout;
+  List<String>? _rightButtonLayout;
+  StreamSubscription<String?>? _themeNameSub;
+  StreamSubscription<String?>? _accentColorSub;
+  StreamSubscription<String?>? _buttonLayoutSub;
 
   @override
   void initState() {
     super.initState();
-    if (widget.data.variant == null && canDetectVariant()) {
+    if (canDetectGnome()) {
       _settings = widget._settings ?? YaruSettings();
       _settings?.init();
-      _variant = resolveAccentColorVariant(_settings?.getAccentColor()) ??
-          resolveGtkThemeVariant(_settings?.getThemeName());
-      _accentColorSubScription ??=
-          _settings!.accentColorChanged.listen(updateVariant);
-      _themeNameSubscription ??=
-          _settings!.themeNameChanged.listen(updateVariant);
+      if (widget.data.variant == null) {
+        _variant = resolveAccentColorVariant(_settings?.getAccentColor()) ??
+            resolveGtkThemeVariant(_settings?.getThemeName());
+        _accentColorSub ??= _settings!.accentColorChanged.listen(updateVariant);
+        _themeNameSub ??= _settings!.themeNameChanged.listen(updateVariant);
+      }
+
+      _buttonLayoutSub ??=
+          _settings!.buttonLayoutChanged.listen(updateButtonLayout);
+
+      final buttonLayout = _settings?.getButtonLayout();
+
+      final buttons = buttonLayout?.split(':');
+
+      _leftButtonLayout = buttons?.firstOrNull?.split(',') ?? <String>[];
+      _rightButtonLayout = buttons?.lastOrNull?.split(',') ?? [];
     }
   }
 
   @override
   void dispose() {
-    _themeNameSubscription?.cancel();
-    _accentColorSubScription?.cancel();
+    _themeNameSub?.cancel();
+    _accentColorSub?.cancel();
+    _buttonLayoutSub?.cancel();
     _settings?.dispose();
     super.dispose();
   }
 
-  bool canDetectVariant() {
+  bool canDetectGnome() {
     return !kIsWeb &&
         widget._platform.isLinux &&
         !widget._platform.environment.containsKey('FLUTTER_TEST');
@@ -221,13 +235,25 @@ class _YaruThemeState extends State<YaruTheme> {
       };
 
   void updateVariant([String? value]) {
-    assert(canDetectVariant());
+    assert(canDetectGnome());
     final gtkThemeName = value ?? _settings?.getThemeName();
     final accentColor = value ?? _settings?.getAccentColor();
     setState(
       () => _variant = resolveAccentColorVariant(accentColor) ??
           resolveGtkThemeVariant(gtkThemeName),
     );
+  }
+
+  void updateButtonLayout([String? value]) {
+    assert(canDetectGnome());
+    final buttonLayout = value ?? _settings?.getButtonLayout();
+
+    final buttons = buttonLayout?.split(':');
+
+    setState(() {
+      _leftButtonLayout = buttons?.firstOrNull?.split(',') ?? <String>[];
+      _rightButtonLayout = buttons?.lastOrNull?.split(',') ?? [];
+    });
   }
 
   ThemeMode resolveMode() {
@@ -246,6 +272,8 @@ class _YaruThemeState extends State<YaruTheme> {
       highContrast:
           widget.data.highContrast ?? MediaQuery.highContrastOf(context),
       themeMode: resolveMode(),
+      leftButtonLayout: widget.data.leftButtonLayout ?? _leftButtonLayout,
+      rightButtonLayout: widget.data.rightButtonLayout ?? _rightButtonLayout,
     );
   }
 
@@ -262,7 +290,7 @@ class _YaruThemeState extends State<YaruTheme> {
 
   @override
   Widget build(BuildContext context) {
-    if (_settings != null && _themeNameSubscription == null) {
+    if (_settings != null && _themeNameSub == null) {
       return const SizedBox.shrink(); // #231
     }
     final data = resolveData();
@@ -287,10 +315,24 @@ class YaruThemeData with Diagnosticable {
     this.pageTransitionsTheme,
     this.useMaterial3,
     this.visualDensity,
+    this.leftButtonLayout,
+    this.rightButtonLayout,
   });
 
   /// Specifies the theme variant.
   final YaruVariant? variant;
+
+  /// If different from the default in GNOME, the title buttons on the left of the window.
+  final List<String>? leftButtonLayout;
+
+  /// If different from the default in GNOME, the title buttons on the left of the window.
+  final List<String>? rightButtonLayout;
+
+  /// If different from the default in GNOME, indicates if there are title buttons on the left of the window.
+  bool get hasLeftWindowControls => leftButtonLayout?.isNotEmpty ?? false;
+
+  /// If different from the default in GNOME, indicates if there are title buttons on the left of the window.
+  bool get hasRightWindowControls => rightButtonLayout?.isNotEmpty ?? false;
 
   /// Whether to use high contrast colors.
   final bool? highContrast;
@@ -328,6 +370,8 @@ class YaruThemeData with Diagnosticable {
     PageTransitionsTheme? pageTransitionsTheme,
     bool? useMaterial3,
     VisualDensity? visualDensity,
+    List<String>? leftButtonLayout,
+    List<String>? rightButtonLayout,
   }) {
     return YaruThemeData(
       variant: variant ?? this.variant,
@@ -337,6 +381,8 @@ class YaruThemeData with Diagnosticable {
       pageTransitionsTheme: pageTransitionsTheme ?? this.pageTransitionsTheme,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       visualDensity: visualDensity ?? this.visualDensity,
+      leftButtonLayout: leftButtonLayout ?? this.leftButtonLayout,
+      rightButtonLayout: rightButtonLayout ?? this.rightButtonLayout,
     );
   }
 
@@ -351,6 +397,12 @@ class YaruThemeData with Diagnosticable {
         .add(DiagnosticsProperty('pageTransitionsTheme', pageTransitionsTheme));
     properties.add(DiagnosticsProperty('useMaterial3', useMaterial3));
     properties.add(DiagnosticsProperty('visualDensity', visualDensity));
+    properties.add(
+      DiagnosticsProperty('leftButtonLayout', leftButtonLayout),
+    );
+    properties.add(
+      DiagnosticsProperty('rightButtonLayout', rightButtonLayout),
+    );
   }
 
   @override
@@ -364,7 +416,9 @@ class YaruThemeData with Diagnosticable {
         iterableEquals(other.extensions, extensions) &&
         other.pageTransitionsTheme == pageTransitionsTheme &&
         other.useMaterial3 == useMaterial3 &&
-        other.visualDensity == visualDensity;
+        other.visualDensity == visualDensity &&
+        other.leftButtonLayout == leftButtonLayout &&
+        other.rightButtonLayout == rightButtonLayout;
   }
 
   @override
@@ -377,6 +431,8 @@ class YaruThemeData with Diagnosticable {
       pageTransitionsTheme,
       useMaterial3,
       visualDensity,
+      leftButtonLayout,
+      rightButtonLayout,
     );
   }
 }
