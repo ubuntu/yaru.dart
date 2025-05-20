@@ -327,9 +327,9 @@ ToggleButtonsThemeData _createToggleButtonsTheme(ColorScheme colorScheme) {
 
 // Dialogs
 
-DialogTheme _createDialogTheme(ColorScheme colorScheme) {
+DialogThemeData _createDialogTheme(ColorScheme colorScheme) {
   final bgColor = _createMenuBg(colorScheme);
-  return DialogTheme(
+  return DialogThemeData(
     backgroundColor: bgColor,
     surfaceTintColor: bgColor,
     shape: RoundedRectangleBorder(
@@ -451,8 +451,11 @@ RadioThemeData _createRadioTheme(ColorScheme colorScheme) {
   );
 }
 
-TabBarTheme _createTabBarTheme(ColorScheme colorScheme, Color dividerColor) {
-  return TabBarTheme(
+TabBarThemeData _createTabBarTheme(
+  ColorScheme colorScheme,
+  Color dividerColor,
+) {
+  return TabBarThemeData(
     labelColor: colorScheme.isLight
         ? colorScheme.onSurface
         : Colors.white.withValues(alpha: 0.8),
@@ -729,7 +732,6 @@ ThemeData createYaruTheme({
     cardTheme: _createCardTheme(colorScheme),
     dividerColor: dividerColor,
     textTheme: textTheme,
-    indicatorColor: colorScheme.primary,
     applyElevationOverlayColor: colorScheme.isDark,
     buttonTheme: _buttonThemeData,
     outlinedButtonTheme: _createOutlinedButtonTheme(
@@ -818,8 +820,8 @@ ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
   );
 }
 
-CardTheme _createCardTheme(ColorScheme colorScheme) {
-  return CardTheme(
+CardThemeData _createCardTheme(ColorScheme colorScheme) {
+  return CardThemeData(
     color: _cardColor(colorScheme),
   );
 }
