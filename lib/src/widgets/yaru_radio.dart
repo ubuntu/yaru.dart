@@ -198,44 +198,44 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
     const unselectedState = <WidgetState>{};
     const selectedState = {WidgetState.selected};
     const disabledState = {WidgetState.disabled};
-    const selectedDisabledState = {
-      WidgetState.selected,
-      WidgetState.disabled,
-    };
+    const selectedDisabledState = {WidgetState.selected, WidgetState.disabled};
 
     // Normal colors
     final uncheckedColor =
         radioTheme.color?.resolve(unselectedState) ?? painter.uncheckedColor;
     final uncheckedBorderColor =
         radioTheme.borderColor?.resolve(unselectedState) ??
-            painter.uncheckedBorderColor;
-    final checkedColor = widget.selectedColor ??
+        painter.uncheckedBorderColor;
+    final checkedColor =
+        widget.selectedColor ??
         radioTheme.color?.resolve(selectedState) ??
         painter.checkedColor;
-    final checkmarkColor = widget.checkmarkColor ??
+    final checkmarkColor =
+        widget.checkmarkColor ??
         radioTheme.checkmarkColor?.resolve(selectedState) ??
         painter.checkmarkColor;
 
     // Disabled colors
-    final disabledUncheckedColor = radioTheme.color?.resolve(disabledState) ??
+    final disabledUncheckedColor =
+        radioTheme.color?.resolve(disabledState) ??
         painter.disabledUncheckedColor;
     final disabledUncheckedBorderColor =
         radioTheme.borderColor?.resolve(disabledState) ??
-            painter.disabledUncheckedBorderColor;
+        painter.disabledUncheckedBorderColor;
     final disabledCheckedColor =
         radioTheme.color?.resolve(selectedDisabledState) ??
-            painter.disabledCheckedColor;
+        painter.disabledCheckedColor;
     final disabledCheckmarkColor =
         radioTheme.checkmarkColor?.resolve(selectedDisabledState) ??
-            painter.disabledCheckmarkColor;
+        painter.disabledCheckmarkColor;
 
     // Indicator colors
     final hoverIndicatorColor =
         radioTheme.indicatorColor?.resolve({WidgetState.hovered}) ??
-            painter.hoverIndicatorColor;
+        painter.hoverIndicatorColor;
     final focusIndicatorColor =
         radioTheme.indicatorColor?.resolve({WidgetState.focused}) ??
-            painter.focusIndicatorColor;
+        painter.focusIndicatorColor;
 
     return buildToggleable(
       painter
@@ -249,20 +249,18 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
         ..disabledCheckmarkColor = disabledCheckmarkColor
         ..hoverIndicatorColor = hoverIndicatorColor
         ..focusIndicatorColor = focusIndicatorColor,
-      mouseCursor: widget.mouseCursor ??
-          radioTheme.mouseCursor
-              ?.resolve({if (!widget.interactive) WidgetState.disabled}),
+      mouseCursor:
+          widget.mouseCursor ??
+          radioTheme.mouseCursor?.resolve({
+            if (!widget.interactive) WidgetState.disabled,
+          }),
     );
   }
 }
 
 class _YaruRadioPainter extends YaruTogglablePainter {
   @override
-  void paintTogglable(
-    Canvas canvas,
-    Size size,
-    double t,
-  ) {
+  void paintTogglable(Canvas canvas, Size size, double t) {
     drawStateIndicator(canvas, size);
     _drawBox(canvas, size, t);
     _drawDot(canvas, size, t);

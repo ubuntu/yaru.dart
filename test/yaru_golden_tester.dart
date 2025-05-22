@@ -22,10 +22,7 @@ extension YaruGoldenTester on WidgetTester {
         darkTheme: darkTheme ?? yaruDark,
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: Align(
-            alignment: alignment,
-            child: widget,
-          ),
+          body: Align(alignment: alignment, child: widget),
         ),
       ),
     );
@@ -89,15 +86,7 @@ extension YaruGoldenVariantStateMap
 
 List<YaruGoldenVariant<T>> goldenThemeVariants<T>(String label, [T? value]) {
   return [
-    YaruGoldenVariant(
-      label: label,
-      themeMode: ThemeMode.light,
-      value: value,
-    ),
-    YaruGoldenVariant(
-      label: label,
-      themeMode: ThemeMode.dark,
-      value: value,
-    ),
+    YaruGoldenVariant(label: label, themeMode: ThemeMode.light, value: value),
+    YaruGoldenVariant(label: label, themeMode: ThemeMode.dark, value: value),
   ];
 }

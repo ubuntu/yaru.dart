@@ -22,7 +22,8 @@ class YaruDraggable extends StatefulWidget {
     Offset position,
     bool isDragging,
     bool isHovering,
-  ) childBuilder;
+  )
+  childBuilder;
 
   /// Callback called when this element starts to be dragged
   final VoidCallback? onDragStart;
@@ -31,10 +32,8 @@ class YaruDraggable extends StatefulWidget {
   ///
   /// It takes the current position and the candidate new one and should return the real next position.
   /// If null, the candidate next position is simply used.
-  final Offset Function(
-    Offset currentPosition,
-    Offset nextPosition,
-  )? onDragUpdate;
+  final Offset Function(Offset currentPosition, Offset nextPosition)?
+  onDragUpdate;
 
   /// Callback called when this element finished to be dragged
   final VoidCallback? onDragEnd;

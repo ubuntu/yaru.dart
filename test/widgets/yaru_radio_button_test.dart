@@ -22,8 +22,9 @@ void main() {
       );
     }
 
-    await tester
-        .pumpWidget(builder(title: const Text('title'), subtitle: null));
+    await tester.pumpWidget(
+      builder(title: const Text('title'), subtitle: null),
+    );
     expect(find.text('title'), findsOneWidget);
     expect(find.text('subtitle'), findsNothing);
     expect(find.byType(YaruRadio<int>), findsOneWidget);
@@ -57,13 +58,15 @@ void main() {
       );
     }
 
-    await tester
-        .pumpWidget(builder(value: 1, groupValue: 1, toggleable: false));
+    await tester.pumpWidget(
+      builder(value: 1, groupValue: 1, toggleable: false),
+    );
     await tester.tap(find.text('title'));
     expect(changedValue, equals(1));
 
-    await tester
-        .pumpWidget(builder(value: 2, groupValue: 3, toggleable: false));
+    await tester.pumpWidget(
+      builder(value: 2, groupValue: 3, toggleable: false),
+    );
     await tester.tap(find.text('subtitle'));
     expect(changedValue, equals(2));
 
@@ -100,21 +103,25 @@ void main() {
       ),
     );
 
-    final gesture =
-        await tester.createGesture(kind: PointerDeviceKind.mouse, pointer: 1);
+    final gesture = await tester.createGesture(
+      kind: PointerDeviceKind.mouse,
+      pointer: 1,
+    );
     await gesture.addPointer(location: Offset.zero);
     addTearDown(gesture.removePointer);
 
-    await gesture
-        .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'enabled')));
+    await gesture.moveTo(
+      tester.getCenter(find.widgetWithText(MouseRegion, 'enabled')),
+    );
     await tester.pump();
     expect(
       RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
       SystemMouseCursors.click,
     );
 
-    await gesture
-        .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'disabled')));
+    await gesture.moveTo(
+      tester.getCenter(find.widgetWithText(MouseRegion, 'disabled')),
+    );
     await tester.pump();
     expect(
       RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),

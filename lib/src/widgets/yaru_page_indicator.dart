@@ -4,16 +4,10 @@ import 'yaru_carousel.dart';
 import 'yaru_page_indicator_layout_delegate.dart';
 import 'yaru_page_indicator_theme.dart';
 
-typedef YaruPageIndicatorItemBuilder<T> = T Function(
-  int index,
-  int selectedIndex,
-  int length,
-);
+typedef YaruPageIndicatorItemBuilder<T> =
+    T Function(int index, int selectedIndex, int length);
 
-typedef YaruPageIndicatorTextBuilder = Widget Function(
-  int page,
-  int length,
-);
+typedef YaruPageIndicatorTextBuilder = Widget Function(int page, int length);
 
 /// A responsive page indicator.
 ///
@@ -37,10 +31,11 @@ class YaruPageIndicator extends StatelessWidget {
     double? dotSpacing,
     this.animationDuration,
     this.animationCurve,
-  })  : assert(page >= 0 && page <= length - 1),
-        itemBuilder = null {
-    itemSizeBuilder =
-        dotSize != null ? (_, __, ___) => Size.square(dotSize) : null;
+  }) : assert(page >= 0 && page <= length - 1),
+       itemBuilder = null {
+    itemSizeBuilder = dotSize != null
+        ? (_, __, ___) => Size.square(dotSize)
+        : null;
     layoutDelegate = dotSpacing != null
         ? YaruPageIndicatorSteppedDelegate(baseItemSpacing: dotSpacing)
         : null;
@@ -123,33 +118,36 @@ class YaruPageIndicator extends StatelessWidget {
     final theme = Theme.of(context);
     final indicatorTheme = YaruPageIndicatorTheme.of(context);
 
-    final layoutDelegate = this.layoutDelegate ??
+    final layoutDelegate =
+        this.layoutDelegate ??
         indicatorTheme?.layoutDelegate ??
         YaruPageIndicatorSteppedDelegate();
-    final itemSizeBuilder = this.itemSizeBuilder ??
+    final itemSizeBuilder =
+        this.itemSizeBuilder ??
         indicatorTheme?.itemSizeBuilder ??
         (_, __, ___) => const Size.square(12.0);
-    final itemBuilder = this.itemBuilder ??
+    final itemBuilder =
+        this.itemBuilder ??
         indicatorTheme?.itemBuilder ??
         (index, selectedIndex, _) =>
             YaruPageIndicatorItem(selected: selectedIndex == index);
-    final states = {
-      if (onTap == null) WidgetState.disabled,
-    };
+    final states = {if (onTap == null) WidgetState.disabled};
     final mouseCursor =
         WidgetStateProperty.resolveAs(this.mouseCursor, states) ??
-            indicatorTheme?.mouseCursor?.resolve(states) ??
-            WidgetStateMouseCursor.clickable.resolve(states);
-    final textStyle = this.textStyle ??
+        indicatorTheme?.mouseCursor?.resolve(states) ??
+        WidgetStateMouseCursor.clickable.resolve(states);
+    final textStyle =
+        this.textStyle ??
         indicatorTheme?.textStyle ??
         theme.textTheme.bodySmall;
-    final textBuilder = this.textBuilder ??
+    final textBuilder =
+        this.textBuilder ??
         indicatorTheme?.textBuilder ??
         (page, length) => Text(
-              '$page/$length',
-              style: textStyle,
-              textAlign: TextAlign.center,
-            );
+          '$page/$length',
+          style: textStyle,
+          textAlign: TextAlign.center,
+        );
 
     final itemSizes = <Size>[];
     var maxHeight = 0.0;
@@ -159,8 +157,9 @@ class YaruPageIndicator extends StatelessWidget {
       itemSizes.add(itemSizeBuilder(i, page, length));
 
       maxWidth = itemSizes[i].width > maxWidth ? itemSizes[i].width : maxWidth;
-      maxHeight =
-          itemSizes[i].height > maxHeight ? itemSizes[i].height : maxHeight;
+      maxHeight = itemSizes[i].height > maxHeight
+          ? itemSizes[i].height
+          : maxHeight;
     }
 
     return LayoutBuilder(
@@ -218,11 +217,7 @@ class YaruPageIndicator extends StatelessWidget {
             height: height,
             child: child,
           )
-        : SizedBox(
-            width: width,
-            height: height,
-            child: child,
-          );
+        : SizedBox(width: width, height: height, child: child);
   }
 }
 

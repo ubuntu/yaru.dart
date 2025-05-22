@@ -9,20 +9,20 @@ enum YaruInfoType {
   danger;
 
   Color getColor(BuildContext context) => switch (this) {
-        information => YaruColors.of(context).link,
-        success => YaruColors.of(context).success,
-        important => YaruColors.purple,
-        warning => YaruColors.of(context).warning,
-        danger => YaruColors.of(context).error,
-      };
+    information => YaruColors.of(context).link,
+    success => YaruColors.of(context).success,
+    important => YaruColors.purple,
+    warning => YaruColors.of(context).warning,
+    danger => YaruColors.of(context).error,
+  };
 
   IconData get iconData => switch (this) {
-        information => YaruIcons.information,
-        success => YaruIcons.ok,
-        important => YaruIcons.important,
-        warning => YaruIcons.warning,
-        danger => YaruIcons.error,
-      };
+    information => YaruIcons.information,
+    success => YaruIcons.ok,
+    important => YaruIcons.important,
+    warning => YaruIcons.warning,
+    danger => YaruIcons.error,
+  };
 }
 
 /// A [YaruTranslucentContainer] which wraps a title [Widget] in a [DefaultTextStyle]
@@ -65,15 +65,14 @@ class YaruInfoBadge extends StatelessWidget {
       color: baseColor,
       borderRadius: borderRadius ?? BorderRadius.circular(20),
       child: Padding(
-        padding: padding ??
+        padding:
+            padding ??
             const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
         child: DefaultTextStyle(
-          style: style ??
+          style:
+              style ??
               theme.textTheme.bodySmall ??
-              const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-              ),
+              const TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
           child: title,
         ),
       ),
@@ -92,17 +91,18 @@ class YaruInfoBox extends StatelessWidget {
     this.isThreeLine = false,
     super.key,
     required this.yaruInfoType,
-    this.borderRadius =
-        const BorderRadius.all(Radius.circular(kYaruContainerRadius)),
+    this.borderRadius = const BorderRadius.all(
+      Radius.circular(kYaruContainerRadius),
+    ),
     this.icon,
     this.color,
     this.titleTextStyle,
     this.subTitleTextStyle,
     this.trailing,
   }) : assert(
-          (subtitle != null) ^ (child != null),
-          'Either a subtitle or a child must be provided',
-        );
+         (subtitle != null) ^ (child != null),
+         'Either a subtitle or a child must be provided',
+       );
 
   /// The [YaruInfoType] which is used to use predefined its predefined color and [Icon] for the leading widget
   /// of the internal [ListTile]
@@ -165,7 +165,8 @@ class YaruInfoBox extends StatelessWidget {
               iconColor: baseColor,
               title: title != null
                   ? DefaultTextStyle(
-                      style: titleTextStyle ??
+                      style:
+                          titleTextStyle ??
                           theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
@@ -180,9 +181,11 @@ class YaruInfoBox extends StatelessWidget {
                       child: title!,
                     )
                   : null,
-              subtitle: child ??
+              subtitle:
+                  child ??
                   DefaultTextStyle(
-                    style: subTitleTextStyle ??
+                    style:
+                        subTitleTextStyle ??
                         theme.textTheme.bodyMedium ??
                         TextStyle(
                           fontSize: 14,

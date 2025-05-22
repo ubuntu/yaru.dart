@@ -10,8 +10,9 @@ class YaruExpansionPanel extends StatefulWidget {
   const YaruExpansionPanel({
     super.key,
     required this.children,
-    this.borderRadius =
-        const BorderRadius.all(Radius.circular(kYaruContainerRadius)),
+    this.borderRadius = const BorderRadius.all(
+      Radius.circular(kYaruContainerRadius),
+    ),
     this.border,
     required this.headers,
     this.isInitiallyExpanded,

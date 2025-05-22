@@ -28,9 +28,9 @@ class YaruOptionButton extends OutlinedButton {
     ButtonStyle? style,
     required Widget child,
   }) : super(
-          style: _styleFrom(padding: EdgeInsets.zero).merge(style),
-          child: child,
-        );
+         style: _styleFrom(padding: EdgeInsets.zero).merge(style),
+         child: child,
+       );
 
   /// Creates a [YaruOptionButton] with a color disk.
   YaruOptionButton.color({
@@ -41,13 +41,13 @@ class YaruOptionButton extends OutlinedButton {
     ButtonStyle? style,
     required Color color,
   }) : super(
-          style: _styleFrom(padding: const EdgeInsets.all(10)).merge(style),
-          child: SizedBox.expand(
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-            ),
-          ),
-        );
+         style: _styleFrom(padding: const EdgeInsets.all(10)).merge(style),
+         child: SizedBox.expand(
+           child: DecoratedBox(
+             decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+           ),
+         ),
+       );
 
   static ButtonStyle _styleFrom({EdgeInsetsGeometry? padding}) {
     return OutlinedButton.styleFrom(

@@ -30,8 +30,9 @@ part of 'yaru_toggle_button.dart';
 
 enum _YaruToggleButtonSlot { leading, title, subtitle }
 
-class _YaruToggleButtonLayout extends SlottedMultiChildRenderObjectWidget<
-    _YaruToggleButtonSlot, RenderBox> {
+class _YaruToggleButtonLayout
+    extends
+        SlottedMultiChildRenderObjectWidget<_YaruToggleButtonSlot, RenderBox> {
   const _YaruToggleButtonLayout({
     required this.leading,
     required this.title,
@@ -87,9 +88,9 @@ class _YaruRenderToggleButton extends RenderBox
     required double horizontalSpacing,
     required double verticalSpacing,
     required TextDirection textDirection,
-  })  : _horizontalSpacing = horizontalSpacing,
-        _verticalSpacing = verticalSpacing,
-        _textDirection = textDirection;
+  }) : _horizontalSpacing = horizontalSpacing,
+       _verticalSpacing = verticalSpacing,
+       _textDirection = textDirection;
 
   RenderBox? get leading => childForSlot(_YaruToggleButtonSlot.leading);
   RenderBox? get title => childForSlot(_YaruToggleButtonSlot.title);
@@ -203,8 +204,9 @@ class _YaruRenderToggleButton extends RenderBox
     if (!availableWidth.isInfinite) {
       textConstraints = loosened.tighten(width: availableWidth - titleX);
     } else {
-      textConstraints =
-          constraints.tighten(width: availableWidth - titleX).loosen();
+      textConstraints = constraints
+          .tighten(width: availableWidth - titleX)
+          .loosen();
     }
 
     final titleSize = _layoutBox(title, textConstraints);
@@ -214,7 +216,8 @@ class _YaruRenderToggleButton extends RenderBox
     final titleY = math.max(0.0, (leadingSize.height - titleSize.height) / 2);
     final subtitleY = titleY + titleSize.height + verticalSpacing;
 
-    final buttonWidth = leadingSize.width +
+    final buttonWidth =
+        leadingSize.width +
         horizontalSpacing +
         math.max(titleSize.width, subtitleSize.width);
 

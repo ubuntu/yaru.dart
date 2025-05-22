@@ -24,11 +24,11 @@ class YaruSegmentedEntry extends StatefulWidget {
     this.onChanged,
     this.onSaved,
     this.onFieldSubmitted,
-  })  : assert(segments.length >= 0),
-        assert(
-          delimiters.length == segments.length - 1 ||
-              segments.length == 0 && delimiters.length == 0,
-        );
+  }) : assert(segments.length >= 0),
+       assert(
+         delimiters.length == segments.length - 1 ||
+             segments.length == 0 && delimiters.length == 0,
+       );
 
   /// A list of [YaruEntrySegment] which represent each selectable and editable part of this entry.
   final List<YaruEntrySegment> segments;
@@ -155,18 +155,17 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
     if (widgetOnKey != null) {
       _focusNode.onKeyEvent = (node, event) =>
           widgetOnKey(node, event) == KeyEventResult.handled
-              ? KeyEventResult.handled
-              : _onKeyEvent(node, event);
+          ? KeyEventResult.handled
+          : _onKeyEvent(node, event);
     } else {
       _focusNode.onKeyEvent = _onKeyEvent;
     }
   }
 
   void _updateController() {
-    _controller = widget.controller ??
-        YaruSegmentedEntryController(
-          length: widget.segments.length,
-        );
+    _controller =
+        widget.controller ??
+        YaruSegmentedEntryController(length: widget.segments.length);
   }
 
   void _updateTextEditingValue() {
@@ -204,8 +203,9 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
       final baseOffset = _getBaseOffsetOfIndex(i);
       final extentOffset = _getExtentOffsetOfIndex(i);
       final isLastSegment = i == widget.segments.length - 1;
-      final delimiterLength =
-          !isLastSegment ? _getDelimiterOfIndex(i).length : 1;
+      final delimiterLength = !isLastSegment
+          ? _getDelimiterOfIndex(i).length
+          : 1;
 
       if (selection >= baseOffset &&
           selection < extentOffset + delimiterLength) {
@@ -284,12 +284,8 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
     return TextEditingValue(
       text: text,
       selection: TextSelection(
-        baseOffset: _getBaseOffsetOfIndex(
-          _controller.index,
-        ),
-        extentOffset: _getExtentOffsetOfIndex(
-          _controller.index,
-        ),
+        baseOffset: _getBaseOffsetOfIndex(_controller.index),
+        extentOffset: _getExtentOffsetOfIndex(_controller.index),
       ),
     );
   }
@@ -363,8 +359,9 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
     final prefix = _getPrefixOfIndex(_controller.index);
     final suffix = _getSuffixOfIndex(_controller.index);
 
-    final input =
-        newValue.text.replaceFirst(prefix, '').replaceFirst(suffix, '');
+    final input = newValue.text
+        .replaceFirst(prefix, '')
+        .replaceFirst(suffix, '');
 
     final action = _selectedSegment.onInput(input);
 
@@ -392,14 +389,8 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
     final ltr = Directionality.of(context) == TextDirection.ltr;
 
     return YaruEdgeFocusInterceptor(
-      onFocusFromPreviousNode: () => _onFocusFromEdge(
-        previous: true,
-        ltr: ltr,
-      ),
-      onFocusFromNextNode: () => _onFocusFromEdge(
-        previous: false,
-        ltr: ltr,
-      ),
+      onFocusFromPreviousNode: () => _onFocusFromEdge(previous: true, ltr: ltr),
+      onFocusFromNextNode: () => _onFocusFromEdge(previous: false, ltr: ltr),
       child: TextFormField(
         focusNode: _focusNode,
         autofocus: widget.autofocus ?? false,
@@ -411,9 +402,7 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
         keyboardType: widget.keyboardType,
         decoration: widget.decoration,
         validator: widget.validator,
-        inputFormatters: [
-          TextInputFormatter.withFunction(_valueFormatter),
-        ],
+        inputFormatters: [TextInputFormatter.withFunction(_valueFormatter)],
       ),
     );
   }

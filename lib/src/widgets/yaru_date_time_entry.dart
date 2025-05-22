@@ -52,11 +52,11 @@ class YaruDateTimeEntry extends _YaruDateTimeEntry {
     super.autofocus = false,
     super.acceptEmpty = true,
   }) : super(
-          controller: controller,
-          type: includeTime
-              ? _YaruDateTimeEntryType.dateTime
-              : _YaruDateTimeEntryType.date,
-        );
+         controller: controller,
+         type: includeTime
+             ? _YaruDateTimeEntryType.dateTime
+             : _YaruDateTimeEntryType.date,
+       );
 }
 
 /// A [YaruSegmentedEntry] configured to accepts and validates a time entered by a user.
@@ -169,16 +169,17 @@ class YaruTimeEntry extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       initialDateTime: initialTimeOfDay?.toDateTime(),
-      firstDateTime:
-          (firstTime ?? const TimeOfDay(hour: 0, minute: 0)).toDateTime(),
-      lastDateTime:
-          (lastTime ?? const TimeOfDay(hour: 23, minute: 59)).toDateTime(),
+      firstDateTime: (firstTime ?? const TimeOfDay(hour: 0, minute: 0))
+          .toDateTime(),
+      lastDateTime: (lastTime ?? const TimeOfDay(hour: 23, minute: 59))
+          .toDateTime(),
       force24HourFormat: force24HourFormat,
       onFieldSubmitted: _valueChangedCallbackAdapter(onFieldSubmitted),
       onSaved: _valueChangedCallbackAdapter(onSaved),
       onChanged: _valueChangedCallbackAdapter(onChanged),
-      selectableDateTimePredicate:
-          _predicateCallbackAdapter(selectableTimeOfDayPredicate),
+      selectableDateTimePredicate: _predicateCallbackAdapter(
+        selectableTimeOfDayPredicate,
+      ),
       errorFormatText: errorFormatText,
       errorInvalidText: errorInvalidText,
       autofocus: autofocus,
@@ -215,8 +216,8 @@ class _YaruDateTimeEntry extends StatefulWidget {
     this.errorInvalidText,
     this.autofocus,
     this.acceptEmpty,
-  })  : assert(initialDateTime == null || controller == null),
-        assert((initialDateTime == null) != (controller == null));
+  }) : assert(initialDateTime == null || controller == null),
+       assert((initialDateTime == null) != (controller == null));
 
   final _YaruDateTimeEntryType type;
 
@@ -364,10 +365,9 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   }
 
   void _updateController() {
-    dateTimeController = widget.controller ??
-        YaruDateTimeEntryController(
-          dateTime: widget.initialDateTime,
-        );
+    dateTimeController =
+        widget.controller ??
+        YaruDateTimeEntryController(dateTime: widget.initialDateTime);
     dateTimeController.addListener(_controllerCallback);
   }
 
@@ -379,8 +379,8 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     yearSegment.value = dateTimeController.dateTime?.year ?? yearSegment.value;
     hourSegment.value = dateTimeController.dateTime != null
         ? use24HourFormat
-            ? dateTimeController.dateTime!.hour
-            : dateTimeController.dateTime!.toTimeOfDay().hourOfPeriod
+              ? dateTimeController.dateTime!.hour
+              : dateTimeController.dateTime!.toTimeOfDay().hourOfPeriod
         : hourSegment.value;
     minuteSegment.value =
         dateTimeController.dateTime?.minute ?? minuteSegment.value;
@@ -392,9 +392,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     _onChanged();
   }
 
-  YaruNumericSegmentCallback _dateTimeSegmentOnValueChange(
-    int maxValue,
-  ) {
+  YaruNumericSegmentCallback _dateTimeSegmentOnValueChange(int maxValue) {
     return (_, value, __) {
       if (value == null) {
         return value;
@@ -404,8 +402,9 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
         return 0;
       }
 
-      final effectiveMaxValue =
-          dateTimeController.dateTime == null ? maxValue : maxValue + 1;
+      final effectiveMaxValue = dateTimeController.dateTime == null
+          ? maxValue
+          : maxValue + 1;
 
       if (value > effectiveMaxValue) {
         return effectiveMaxValue;
@@ -491,8 +490,9 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     final localizations = MaterialLocalizations.of(context);
     is24HourLocalized =
         hourFormat(of: localizations.timeOfDayFormat()) != HourFormat.h;
-    final formattedDateTime =
-        localizations.formatCompactDate(DateTime(year, month, day));
+    final formattedDateTime = localizations.formatCompactDate(
+      DateTime(year, month, day),
+    );
 
     late final String yearPlaceholder;
     late final String monthPlaceholder;
@@ -552,8 +552,8 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     hourSegment = YaruNumericSegment.fixed(
       initialValue: dateTimeController.dateTime != null
           ? use24HourFormat
-              ? dateTimeController.dateTime!.hour
-              : dateTimeController.dateTime!.toTimeOfDay().hourOfPeriod
+                ? dateTimeController.dateTime!.hour
+                : dateTimeController.dateTime!.toTimeOfDay().hourOfPeriod
           : null,
       length: 2,
       placeholderLetter: timePlaceholder,
@@ -593,10 +593,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     }
 
     if (widget.type.hasTime) {
-      segments.addAll([
-        hourSegment,
-        minuteSegment,
-      ]);
+      segments.addAll([hourSegment, minuteSegment]);
 
       if (widget.type.hasDate) {
         delimiters.add(' ');
@@ -657,8 +654,8 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       (widget.type.hasDate && day != null) ? day! : 1,
       (widget.type.hasTime && hour != null)
           ? use24HourFormat
-              ? hour!
-              : to24hour(hour!)
+                ? hour!
+                : to24hour(hour!)
           : 0,
       (widget.type.hasTime && minute != null) ? minute! : 0,
     );
@@ -799,13 +796,7 @@ extension _StringX on String {
 
 extension _TimeOfDayX on TimeOfDay {
   DateTime toDateTime() {
-    return DateTime(
-      0,
-      1,
-      1,
-      hour,
-      minute,
-    );
+    return DateTime(0, 1, 1, hour, minute);
   }
 }
 

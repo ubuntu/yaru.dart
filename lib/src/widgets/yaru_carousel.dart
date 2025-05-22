@@ -113,19 +113,17 @@ class _YaruCarouselState extends State<YaruCarousel> {
         children: [
           _buildCarousel(),
           if (widget.placeIndicator && widget.children.length > 1) ...[
-            SizedBox(
-              height: widget.placeIndicatorMarginTop,
-            ),
+            SizedBox(height: widget.placeIndicatorMarginTop),
             YaruPageIndicator.builder(
               length: widget.children.length,
               page: _page,
               onTap: (page) => _controller.animateToPage(page),
               itemBuilder: (index, selectedIndex, length) =>
                   YaruPageIndicatorItem(
-                selected: index == selectedIndex,
-                animationDuration: _controller.scrollAnimationDuration,
-                animationCurve: _controller.scrollAnimationCurve,
-              ),
+                    selected: index == selectedIndex,
+                    animationDuration: _controller.scrollAnimationDuration,
+                    animationCurve: _controller.scrollAnimationCurve,
+                  ),
             ),
           ],
         ],
@@ -152,9 +150,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
               ? GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () => _controller.animateToPage(index),
-                  child: IgnorePointer(
-                    child: widget.children[index],
-                  ),
+                  child: IgnorePointer(child: widget.children[index]),
                 )
               : widget.children[index],
         ),
@@ -272,14 +268,14 @@ class YaruCarouselController extends PageController {
 
       return super
           .animateToPage(
-        page,
-        duration: duration ?? scrollAnimationDuration,
-        curve: curve ?? scrollAnimationCurve,
-      )
+            page,
+            duration: duration ?? scrollAnimationDuration,
+            curve: curve ?? scrollAnimationCurve,
+          )
           .then((value) {
-        _animating = false;
-        startTimer();
-      });
+            _animating = false;
+            startTimer();
+          });
     }
   }
 

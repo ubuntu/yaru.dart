@@ -51,16 +51,15 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     final style = this.style ?? OutlinedButtonTheme.of(context).style;
     final state = <WidgetState>{if (!enabled) WidgetState.disabled};
     final side = style?.side?.resolve(state);
-    final shape = style?.shape?.resolve(state) ??
+    final shape =
+        style?.shape?.resolve(state) ??
         RoundedRectangleBorder(
-          side: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-          ),
+          side: BorderSide(color: Theme.of(context).colorScheme.outline),
         );
     final mouseCursor =
         WidgetStateProperty.resolveAs(this.mouseCursor, state) ??
-            style?.mouseCursor?.resolve(state) ??
-            WidgetStateMouseCursor.clickable.resolve(state);
+        style?.mouseCursor?.resolve(state) ??
+        WidgetStateMouseCursor.clickable.resolve(state);
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
       child: Material(
@@ -89,7 +88,8 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                 padding: padding,
                 child: DefaultTextStyle(
                   style: TextStyle(
-                    color: style?.foregroundColor?.resolve({}) ??
+                    color:
+                        style?.foregroundColor?.resolve({}) ??
                         Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w500,
                   ),
@@ -97,13 +97,11 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: childPadding,
-                        child: child,
-                      ),
+                      Padding(padding: childPadding, child: child),
                       SizedBox(
                         height: kYaruTitleBarItemHeight,
-                        child: icon ??
+                        child:
+                            icon ??
                             Icon(
                               YaruIcons.pan_down,
                               color: style?.foregroundColor?.resolve({}),

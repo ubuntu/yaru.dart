@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class YaruPageController extends ChangeNotifier {
   YaruPageController({required this.length, this.initialIndex = -1})
-      : _index = initialIndex,
-        _previousIndex = initialIndex;
+    : _index = initialIndex,
+      _previousIndex = initialIndex;
   final int length;
   final int initialIndex;
 

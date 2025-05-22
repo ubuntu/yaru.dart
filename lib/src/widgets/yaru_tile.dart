@@ -96,9 +96,7 @@ class YaruTile extends StatelessWidget {
     }
 
     return DefaultTextStyle(
-      style: TextStyle(
-        color: Theme.of(context).disabledColor,
-      ),
+      style: TextStyle(color: Theme.of(context).disabledColor),
       child: child,
     );
   }
@@ -113,8 +111,9 @@ class YaruTile extends StatelessWidget {
       case YaruTileStyle.normal:
         return theme.textTheme.bodySmall!;
       case YaruTileStyle.banner:
-        return theme.textTheme.bodyMedium!
-            .copyWith(color: enabled ? theme.textTheme.bodySmall!.color : null);
+        return theme.textTheme.bodyMedium!.copyWith(
+          color: enabled ? theme.textTheme.bodySmall!.color : null,
+        );
     }
   }
 }

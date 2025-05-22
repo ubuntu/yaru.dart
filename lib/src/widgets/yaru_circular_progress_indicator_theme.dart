@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:yaru/src/widgets/yaru_progress_indicator.dart';
 
 class YaruCircularProgressIndicatorThemeData
-    extends YaruProgressIndicatorThemeData<
-        YaruCircularProgressIndicatorThemeData> {
+    extends
+        YaruProgressIndicatorThemeData<YaruCircularProgressIndicatorThemeData> {
   YaruCircularProgressIndicatorThemeData(
     super.color,
     super.trackColor,
@@ -53,8 +53,10 @@ class YaruCircularProgressIndicatorTheme extends InheritedWidget {
   final YaruCircularProgressIndicatorThemeData data;
 
   static YaruCircularProgressIndicatorThemeData? of(BuildContext context) {
-    final t = context.dependOnInheritedWidgetOfExactType<
-        YaruCircularProgressIndicatorTheme>();
+    final t = context
+        .dependOnInheritedWidgetOfExactType<
+          YaruCircularProgressIndicatorTheme
+        >();
     return t?.data ??
         Theme.of(context).extension<YaruCircularProgressIndicatorThemeData>();
   }

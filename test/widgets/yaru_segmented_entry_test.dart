@@ -5,44 +5,43 @@ import 'package:yaru/yaru.dart';
 
 void main() {
   testWidgets(
-      'previous segment input is cleared when navigating to other segment',
-      (tester) async {
-    final controller = YaruSegmentedEntryController(length: 2);
-    final segment1 = YaruStringSegment.fixed(
-      length: 4,
-      inputFormatter: (_, __, ___) => 'abcd',
-    );
-    final segment2 = YaruStringSegment.fixed(
-      length: 4,
-      inputFormatter: (_, __, ___) => 'efgh',
-    );
+    'previous segment input is cleared when navigating to other segment',
+    (tester) async {
+      final controller = YaruSegmentedEntryController(length: 2);
+      final segment1 = YaruStringSegment.fixed(
+        length: 4,
+        inputFormatter: (_, __, ___) => 'abcd',
+      );
+      final segment2 = YaruStringSegment.fixed(
+        length: 4,
+        inputFormatter: (_, __, ___) => 'efgh',
+      );
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: YaruSegmentedEntry(
-            controller: controller,
-            segments: [
-              segment1,
-              segment2,
-            ],
-            delimiters: const ['/'],
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: YaruSegmentedEntry(
+              controller: controller,
+              segments: [segment1, segment2],
+              delimiters: const ['/'],
+            ),
           ),
         ),
-      ),
-    );
+      );
 
-    final finder = find.byType(YaruSegmentedEntry);
-    await tester.tap(finder);
-    await tester.enterText(finder, '12');
-    controller.maybeSelectNextSegment();
-    controller.maybeSelectPreviousSegment();
-    await tester.enterText(finder, '34');
-    expect(segment1.input, '34');
-  });
+      final finder = find.byType(YaruSegmentedEntry);
+      await tester.tap(finder);
+      await tester.enterText(finder, '12');
+      controller.maybeSelectNextSegment();
+      controller.maybeSelectPreviousSegment();
+      await tester.enterText(finder, '34');
+      expect(segment1.input, '34');
+    },
+  );
 
-  testWidgets('next segment is selected when current segment input is full',
-      (tester) async {
+  testWidgets('next segment is selected when current segment input is full', (
+    tester,
+  ) async {
     final controller = YaruSegmentedEntryController(length: 3);
     await tester.pumpWidget(
       MaterialApp(
@@ -79,8 +78,9 @@ void main() {
     expect(controller.index, 2);
   });
 
-  testWidgets('entry is navigable using arrow/tab keyboard keys',
-      (tester) async {
+  testWidgets('entry is navigable using arrow/tab keyboard keys', (
+    tester,
+  ) async {
     final controller = YaruSegmentedEntryController(length: 3);
 
     await tester.pumpWidget(
@@ -155,10 +155,7 @@ void main() {
                 ],
                 delimiters: const [],
               ),
-              Focus(
-                focusNode: nextFocusNode,
-                child: const SizedBox.shrink(),
-              ),
+              Focus(focusNode: nextFocusNode, child: const SizedBox.shrink()),
             ],
           ),
         ),
@@ -180,8 +177,9 @@ void main() {
     expect(nextFocusNode.hasFocus, false);
   });
 
-  testWidgets('numeric value is modified using up/down keyboard keys',
-      (tester) async {
+  testWidgets('numeric value is modified using up/down keyboard keys', (
+    tester,
+  ) async {
     final segment = YaruNumericSegment.fixed(
       length: 2,
       initialValue: 0,
@@ -191,10 +189,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: YaruSegmentedEntry(
-            segments: [segment],
-            delimiters: const [],
-          ),
+          body: YaruSegmentedEntry(segments: [segment], delimiters: const []),
         ),
       ),
     );
@@ -208,8 +203,9 @@ void main() {
     expect(segment.value, -1);
   });
 
-  testWidgets('segment value is cleared using backspace keyboard key',
-      (tester) async {
+  testWidgets('segment value is cleared using backspace keyboard key', (
+    tester,
+  ) async {
     final controller = YaruSegmentedEntryController(length: 2);
     final segment1 = YaruNumericSegment.fixed(
       length: 2,
@@ -255,9 +251,7 @@ void main() {
 }
 
 extension WidgetTesterX on WidgetTester {
-  Future<void> sendShiftKeyEvent(
-    LogicalKeyboardKey key,
-  ) async {
+  Future<void> sendShiftKeyEvent(LogicalKeyboardKey key) async {
     await sendKeyDownEvent(LogicalKeyboardKey.shift);
     await sendKeyDownEvent(key);
     await sendKeyUpEvent(key);

@@ -45,12 +45,7 @@ class YaruTabBar extends StatelessWidget {
 }
 
 class YaruTab extends StatelessWidget {
-  const YaruTab({
-    super.key,
-    required this.label,
-    this.icon,
-    this.padding,
-  });
+  const YaruTab({super.key, required this.label, this.icon, this.padding});
 
   final String label;
   final Widget? icon;
@@ -70,21 +65,11 @@ class YaruTab extends StatelessWidget {
                 child: icon,
               ),
             ),
-          Flexible(
-            child: Text(
-              label,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
+          Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
         ],
       ),
     );
 
-    return padding != null
-        ? Padding(
-            padding: padding!,
-            child: tab,
-          )
-        : tab;
+    return padding != null ? Padding(padding: padding!, child: tab) : tab;
   }
 }

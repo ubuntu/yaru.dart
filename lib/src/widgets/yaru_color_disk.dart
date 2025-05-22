@@ -29,13 +29,14 @@ class YaruColorDisk extends StatelessWidget {
               return CircleBorder(
                 side: BorderSide(
                   color: color.withValues(
-                    alpha: states.contains(WidgetState.selected) ||
+                    alpha:
+                        states.contains(WidgetState.selected) ||
                             states.contains(WidgetState.pressed)
                         ? 1.0
                         : states.contains(WidgetState.hovered) ||
-                                states.contains(WidgetState.focused)
-                            ? 0.5
-                            : 0,
+                              states.contains(WidgetState.focused)
+                        ? 0.5
+                        : 0,
                   ),
                 ),
               );

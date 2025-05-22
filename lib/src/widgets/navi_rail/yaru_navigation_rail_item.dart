@@ -151,10 +151,7 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
       alignment: _alignment,
       child: Align(
         alignment: _alignment,
-        child: SizedBox(
-          width: _width,
-          child: child,
-        ),
+        child: SizedBox(width: _width, child: child),
       ),
     );
   }
@@ -180,10 +177,9 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
       child = AnimatedContainer(
         duration: _kSelectedIconAnimationDuration,
         decoration: BoxDecoration(
-          borderRadius: widget.borderRadius ??
-              const BorderRadius.all(
-                Radius.circular(kYaruButtonRadius),
-              ),
+          borderRadius:
+              widget.borderRadius ??
+              const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
           color: _selected ? _selectedIndicatorColor(Theme.of(context)) : null,
         ),
         child: Center(
@@ -209,8 +205,9 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
         child: Padding(
           padding: EdgeInsets.symmetric(
             vertical: _labelledExtended && !_extendedSelectedIndicator ? 10 : 5,
-            horizontal:
-                _labelledExtended && !_extendedSelectedIndicator ? 8 : 5,
+            horizontal: _labelledExtended && !_extendedSelectedIndicator
+                ? 8
+                : 5,
           ),
           child: child,
         ),
@@ -222,24 +219,15 @@ class _YaruNavigationRailItemState extends State<YaruNavigationRailItem> {
     const mainAxisAlignment = MainAxisAlignment.start;
 
     if (_labelledExtended) {
-      return Row(
-        mainAxisAlignment: mainAxisAlignment,
-        children: children,
-      );
+      return Row(mainAxisAlignment: mainAxisAlignment, children: children);
     }
 
-    return Column(
-      mainAxisAlignment: mainAxisAlignment,
-      children: children,
-    );
+    return Column(mainAxisAlignment: mainAxisAlignment, children: children);
   }
 
   Widget _buildIcon(BuildContext context) {
     final icon = Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 2,
-        horizontal: 10,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
       child: widget.icon,
     );
 

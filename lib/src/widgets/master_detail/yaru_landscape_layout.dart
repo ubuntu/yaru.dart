@@ -101,10 +101,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           child: Column(
             children: [
               if (widget.appBar != null)
-                SizedBox(
-                  height: kYaruTitleBarHeight,
-                  child: widget.appBar!,
-                ),
+                SizedBox(height: kYaruTitleBarHeight, child: widget.appBar!),
               Expanded(
                 child: Container(
                   color: theme.sideBarColor,
@@ -120,10 +117,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                 ),
               ),
               if (widget.bottomBar != null)
-                Material(
-                  color: theme.sideBarColor,
-                  child: widget.bottomBar,
-                ),
+                Material(color: theme.sideBarColor, child: widget.bottomBar),
             ],
           ),
         );
@@ -135,9 +129,9 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     final theme = YaruMasterDetailTheme.of(context);
 
     return Theme(
-      data: Theme.of(context).copyWith(
-        pageTransitionsTheme: theme.landscapeTransitions,
-      ),
+      data: Theme.of(
+        context,
+      ).copyWith(pageTransitionsTheme: theme.landscapeTransitions),
       child: ScaffoldMessenger(
         child: Navigator(
           key: widget.navigatorKey,
