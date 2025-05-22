@@ -15,10 +15,7 @@ class ExampleYaruVariantPicker extends StatelessWidget with WatchItMixin {
     return PopupMenuButton<Color>(
       tooltip: 'Pick a YaruVariant',
       padding: EdgeInsets.zero,
-      icon: Icon(
-        YaruIcons.color_select,
-        color: Theme.of(context).primaryColor,
-      ),
+      icon: Icon(YaruIcons.color_select, color: Theme.of(context).primaryColor),
       itemBuilder: (context) {
         return [
           for (final variant in YaruVariant.values) // skip flavors

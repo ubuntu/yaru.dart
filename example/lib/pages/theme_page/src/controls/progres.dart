@@ -38,18 +38,14 @@ class _ProgressState extends State<Progress> {
               onChanged: (value) => setState(() => _level = value),
             ),
           ),
-          const Divider(
-            height: 2 * kWrapSpacing,
-          ),
+          const Divider(height: 2 * kWrapSpacing),
           const YaruInfoBox(
             yaruInfoType: YaruInfoType.information,
             subtitle: Text(
               'The following material progress indicators are only fallbacks, due to insufficient styling capabilities. Please use YaruLinearProgressIndicator and YaruCircularProgressIndicator instead!',
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           Wrap(
             spacing: kWrapSpacing,
             runSpacing: kWrapSpacing,

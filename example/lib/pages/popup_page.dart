@@ -100,21 +100,11 @@ class _PopupPageState extends State<PopupPage> {
       itemBuilder: (context) {
         return [
           for (final value in MyEnum.values)
-            PopupMenuItem(
-              value: value,
-              child: Text(
-                value.name,
-              ),
-            ),
+            PopupMenuItem(value: value, child: Text(value.name)),
         ];
       },
     );
   }
 }
 
-enum MyEnum {
-  option1,
-  option2,
-  option3,
-  option4,
-}
+enum MyEnum { option1, option2, option3, option4 }

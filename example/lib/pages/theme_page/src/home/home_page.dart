@@ -24,35 +24,29 @@ class MaterialThemeHomePageState extends State<MaterialThemeHomePage> {
 
   final _items = <Widget, (Widget, Widget, String)>{
     const FontsView(): (
-      const Badge(
-        label: Text('123'),
-        child: Icon(YaruIcons.font),
-      ),
-      const Badge(
-        label: Text('123'),
-        child: Icon(YaruIcons.font),
-      ),
-      'Fonts'
+      const Badge(label: Text('123'), child: Icon(YaruIcons.font)),
+      const Badge(label: Text('123'), child: Icon(YaruIcons.font)),
+      'Fonts',
     ),
     const ControlsView(): (
       const Icon(YaruIcons.radiobox_checked),
       const Icon(YaruIcons.radiobox_checked_filled),
-      'Controls'
+      'Controls',
     ),
     const TextFieldsView(): (
       const Icon(YaruIcons.text_editor),
       const Icon(YaruIcons.text_editor_filled),
-      'TextFields'
+      'TextFields',
     ),
     const ColorsView(): (
       const Icon(YaruIcons.colors),
       const Icon(YaruIcons.colors_filled),
-      'Palette'
+      'Palette',
     ),
     const ContainersView(): (
       const Icon(YaruIcons.window),
       const Icon(YaruIcons.window_filled),
-      'Containers'
+      'Containers',
     ),
   };
 
@@ -102,9 +96,7 @@ class MaterialThemeHomePageState extends State<MaterialThemeHomePage> {
                   onDestinationSelected: (index) =>
                       setState(() => _selectedIndex = index),
                 ),
-                const VerticalDivider(
-                  width: 0.0,
-                ),
+                const VerticalDivider(width: 0.0),
                 Expanded(
                   child: Center(
                     child: _items.entries.elementAt(_selectedIndex).key,
@@ -120,9 +112,7 @@ class MaterialThemeHomePageState extends State<MaterialThemeHomePage> {
                     child: _items.entries.elementAt(_selectedIndex).key,
                   ),
                 ),
-                const Divider(
-                  height: 0.0,
-                ),
+                const Divider(height: 0.0),
                 NavigationBar(
                   destinations: [
                     for (final item in _items.entries)
@@ -162,9 +152,7 @@ class _Drawer extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         children: [
-          const DrawerHeader(
-            child: Text('Drawer Header'),
-          ),
+          const DrawerHeader(child: Text('Drawer Header')),
           for (var i = 0; i < items.length; i++)
             ListTile(
               selected: i == selectedIndex,

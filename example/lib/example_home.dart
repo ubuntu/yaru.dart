@@ -16,8 +16,9 @@ class ExampleHome extends StatelessWidget with WatchItMixin {
   Widget build(BuildContext context) {
     final themeMode = watchPropertyValue((ExampleModel m) => m.themeMode);
     final yaruVariant = watchPropertyValue((ExampleModel m) => m.yaruVariant);
-    final forceHighContrast =
-        watchPropertyValue((ExampleModel m) => m.forceHighContrast);
+    final forceHighContrast = watchPropertyValue(
+      (ExampleModel m) => m.forceHighContrast,
+    );
 
     if (!kIsWeb && Platform.isLinux) {
       return YaruTheme(
