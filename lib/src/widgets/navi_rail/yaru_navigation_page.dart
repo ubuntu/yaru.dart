@@ -6,11 +6,8 @@ import 'package:yaru/foundation.dart' show YaruPageController;
 import 'yaru_navigation_page_theme.dart';
 import 'yaru_navigation_rail.dart';
 
-typedef YaruNavigationPageBuilder = Widget Function(
-  BuildContext context,
-  int index,
-  bool selected,
-);
+typedef YaruNavigationPageBuilder =
+    Widget Function(BuildContext context, int index, bool selected);
 
 const _kScrollbarThickness = 4.0;
 
@@ -32,8 +29,8 @@ class YaruNavigationPage extends StatefulWidget {
     this.initialRoute,
     this.onGenerateRoute,
     this.onUnknownRoute,
-  })  : assert(initialIndex == null || controller == null),
-        assert((length == null) != (controller == null));
+  }) : assert(initialIndex == null || controller == null),
+       assert((length == null) != (controller == null));
 
   /// The total number of pages.
   final int? length;
@@ -129,7 +126,8 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
   }
 
   void _updatePageController() {
-    _pageController = widget.controller ??
+    _pageController =
+        widget.controller ??
         YaruPageController(
           length: widget.length!,
           initialIndex: widget.initialIndex ?? -1,
@@ -169,9 +167,9 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
   Widget _buildNavigationRail(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        scrollbarTheme: ScrollbarTheme.of(context).copyWith(
-          thickness: WidgetStateProperty.all(_kScrollbarThickness),
-        ),
+        scrollbarTheme: ScrollbarTheme.of(
+          context,
+        ).copyWith(thickness: WidgetStateProperty.all(_kScrollbarThickness)),
       ),
       child: YaruNavigationRail(
         selectedIndex: max(_pageController.index, 0),
@@ -194,9 +192,9 @@ class _YaruNavigationPageState extends State<YaruNavigationPage> {
 
     return Expanded(
       child: Theme(
-        data: Theme.of(context).copyWith(
-          pageTransitionsTheme: theme.pageTransitions,
-        ),
+        data: Theme.of(
+          context,
+        ).copyWith(pageTransitionsTheme: theme.pageTransitions),
         child: Navigator(
           key: _navigatorKey,
           pages: [

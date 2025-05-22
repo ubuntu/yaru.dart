@@ -73,7 +73,7 @@ class _YaruSwitchButtonState extends State<YaruSwitchButton> {
     final states = _statesController.value;
     final mouseCursor =
         WidgetStateProperty.resolveAs(widget.mouseCursor, states) ??
-            YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
+        YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
 
     return YaruToggleButton(
       title: widget.title,

@@ -7,9 +7,7 @@ import 'package:safe_change_notifier/safe_change_notifier.dart';
 import 'package:yaru/yaru.dart';
 
 class ExampleModel extends SafeChangeNotifier {
-  ExampleModel(
-    this._connectivity,
-  );
+  ExampleModel(this._connectivity);
 
   final Connectivity _connectivity;
   StreamSubscription? _connectivitySub;

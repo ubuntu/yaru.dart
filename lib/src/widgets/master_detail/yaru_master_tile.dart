@@ -48,8 +48,9 @@ class YaruMasterTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollbarThicknessWithTrack =
-        _calcScrollbarThicknessWithTrack(context);
+    final scrollbarThicknessWithTrack = _calcScrollbarThicknessWithTrack(
+      context,
+    );
 
     return Material(
       color: Colors.transparent,
@@ -78,7 +79,7 @@ class YaruMasterTile extends StatelessWidget {
 
     final scrollBarThumbThickness =
         scrollbarTheme.thickness?.resolve({WidgetState.hovered}) ??
-            _kScrollbarThickness;
+        _kScrollbarThickness;
 
     return doubleMarginWidth + scrollBarThumbThickness;
   }
@@ -163,16 +164,20 @@ class _YaruMasterTileFocusState extends State<_YaruMasterTileFocus> {
 
     final isSelected = widget.selected ?? scope?.selected ?? false;
 
-    final backgroundColor =
-        isSelected ? listTileTheme.selectedTileColor : listTileTheme.tileColor;
+    final backgroundColor = isSelected
+        ? listTileTheme.selectedTileColor
+        : listTileTheme.tileColor;
 
-    final foregroundColor =
-        isSelected ? listTileTheme.selectedColor : listTileTheme.textColor;
+    final foregroundColor = isSelected
+        ? listTileTheme.selectedColor
+        : listTileTheme.textColor;
 
-    final decoration = widget.decoration ??
+    final decoration =
+        widget.decoration ??
         BoxDecoration(
-          borderRadius:
-              const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(kYaruButtonRadius),
+          ),
           color: backgroundColor,
         );
 
@@ -181,8 +186,9 @@ class _YaruMasterTileFocusState extends State<_YaruMasterTileFocus> {
       decoration: _decoration ?? decoration,
       child: ListTile(
         onFocusChange: (hasFocus) => setState(() {
-          _decoration =
-              hasFocus ? widget.focusDecoration ?? decoration : decoration;
+          _decoration = hasFocus
+              ? widget.focusDecoration ?? decoration
+              : decoration;
         }),
         leading: widget.leading,
         title: _titleStyle(widget.title, foregroundColor),

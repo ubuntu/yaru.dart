@@ -11,14 +11,12 @@ class ExampleHighContrastButton extends StatelessWidget with WatchItMixin {
   Widget build(BuildContext context) {
     final highContrast =
         watchPropertyValue((ExampleModel m) => m.forceHighContrast) ||
-            Theme.of(context).colorScheme.isHighContrast == true;
+        Theme.of(context).colorScheme.isHighContrast == true;
 
     return IconButton(
       tooltip: 'Force HighContrast mode',
       onPressed: di<ExampleModel>().toggleForceHighContrast,
-      icon: Icon(
-        highContrast ? YaruIcons.eye_filled : YaruIcons.eye,
-      ),
+      icon: Icon(highContrast ? YaruIcons.eye_filled : YaruIcons.eye),
     );
   }
 }

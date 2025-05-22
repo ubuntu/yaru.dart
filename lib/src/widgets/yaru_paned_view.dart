@@ -97,8 +97,8 @@ class _YaruPanedViewState extends State<YaruPanedView> {
       return MouseRegion(
         cursor: _isHovering || _isDragging
             ? widget.layoutDelegate.paneSide.isHorizontal
-                ? SystemMouseCursors.resizeColumn
-                : SystemMouseCursors.resizeRow
+                  ? SystemMouseCursors.resizeColumn
+                  : SystemMouseCursors.resizeRow
             : MouseCursor.defer,
         child: child,
       );
@@ -110,7 +110,8 @@ class _YaruPanedViewState extends State<YaruPanedView> {
   Widget _buildFlexContainer(List<Widget> children) {
     final isRtl = Directionality.of(context) == TextDirection.rtl;
     final top = widget.layoutDelegate.paneSide == YaruPaneSide.top;
-    final left = widget.layoutDelegate.paneSide == YaruPaneSide.left ||
+    final left =
+        widget.layoutDelegate.paneSide == YaruPaneSide.left ||
         (!isRtl && widget.layoutDelegate.paneSide == YaruPaneSide.start ||
             isRtl && widget.layoutDelegate.paneSide == YaruPaneSide.end);
 
@@ -124,8 +125,9 @@ class _YaruPanedViewState extends State<YaruPanedView> {
         : Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            verticalDirection:
-                top ? VerticalDirection.down : VerticalDirection.up,
+            verticalDirection: top
+                ? VerticalDirection.down
+                : VerticalDirection.up,
             children: children,
           );
   }
@@ -151,7 +153,8 @@ class _YaruPanedViewState extends State<YaruPanedView> {
   ) {
     final isRtl = Directionality.of(context) == TextDirection.rtl;
     final top = widget.layoutDelegate.paneSide == YaruPaneSide.top;
-    final left = widget.layoutDelegate.paneSide == YaruPaneSide.left ||
+    final left =
+        widget.layoutDelegate.paneSide == YaruPaneSide.left ||
         (!isRtl && widget.layoutDelegate.paneSide == YaruPaneSide.start ||
             isRtl && widget.layoutDelegate.paneSide == YaruPaneSide.end);
     final isHorizontal = widget.layoutDelegate.paneSide.isHorizontal;
@@ -162,23 +165,23 @@ class _YaruPanedViewState extends State<YaruPanedView> {
       height: isVertical ? _kLeftPaneResizingRegionSize : null,
       top: isVertical
           ? top
-              ? 0
-              : null
+                ? 0
+                : null
           : 0,
       bottom: isVertical
           ? top
-              ? null
-              : 0
+                ? null
+                : 0
           : 0,
       left: isHorizontal
           ? left
-              ? 0
-              : null
+                ? 0
+                : null
           : 0,
       right: isHorizontal
           ? left
-              ? null
-              : 0
+                ? null
+                : 0
           : 0,
       child: AnimatedContainer(
         duration: _kLeftPaneResizingRegionAnimationDuration,
@@ -200,11 +203,11 @@ class _YaruPanedViewState extends State<YaruPanedView> {
             onPanUpdate: (details) => setState(() {
               _paneSizeMove += isHorizontal
                   ? left
-                      ? details.delta.dx
-                      : -details.delta.dx
+                        ? details.delta.dx
+                        : -details.delta.dx
                   : top
-                      ? details.delta.dy
-                      : -details.delta.dy;
+                  ? details.delta.dy
+                  : -details.delta.dy;
               updatePaneSize(
                 constraints: constraints,
                 candidatePaneSize: _oldPaneSize! + _paneSizeMove,

@@ -47,12 +47,13 @@ class YaruToggleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = YaruToggleButtonTheme.of(context);
     final textTheme = Theme.of(context).textTheme;
-    final states = statesController?.value ??
+    final states =
+        statesController?.value ??
         {if (onToggled == null) WidgetState.disabled};
     final enabled = !states.contains(WidgetState.disabled);
     final mouseCursor =
         WidgetStateProperty.resolveAs(this.mouseCursor, states) ??
-            WidgetStateMouseCursor.clickable.resolve(states);
+        WidgetStateMouseCursor.clickable.resolve(states);
 
     return MergeSemantics(
       child: Semantics(

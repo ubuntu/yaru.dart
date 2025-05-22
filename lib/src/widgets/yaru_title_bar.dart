@@ -157,9 +157,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
     final light = theme.colorScheme.isLight;
     final highContrast = theme.colorScheme.isHighContrast;
-    final states = <WidgetState>{
-      if (isActive != false) WidgetState.focused,
-    };
+    final states = <WidgetState>{if (isActive != false) WidgetState.focused};
     final defaultBackgroundColor = WidgetStateProperty.resolveWith((states) {
       if (!states.contains(WidgetState.focused)) {
         return theme.colorScheme.surface;
@@ -168,12 +166,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     });
     final backgroundColor =
         WidgetStateProperty.resolveAs(this.backgroundColor, states) ??
-            titleBarTheme.backgroundColor?.resolve(states) ??
-            defaultBackgroundColor.resolve(states);
+        titleBarTheme.backgroundColor?.resolve(states) ??
+        defaultBackgroundColor.resolve(states);
     final foregroundColor =
         WidgetStateProperty.resolveAs(this.foregroundColor, states) ??
-            titleBarTheme.foregroundColor?.resolve(states) ??
-            theme.colorScheme.onSurface;
+        titleBarTheme.foregroundColor?.resolve(states) ??
+        theme.colorScheme.onSurface;
 
     final titleTextStyle =
         (theme.appBarTheme.titleTextStyle ?? theme.textTheme.titleLarge!)
@@ -190,20 +188,24 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
           ? Colors.black.withValues(alpha: highContrast ? 1 : 0.1)
           : Colors.white.withValues(alpha: highContrast ? 1 : 0.06),
     );
-    final border =
-        Border(bottom: this.border ?? titleBarTheme.border ?? defaultBorder);
+    final border = Border(
+      bottom: this.border ?? titleBarTheme.border ?? defaultBorder,
+    );
     final shape =
         border + (this.shape ?? titleBarTheme.shape ?? const Border());
 
-    final bSpacing = buttonSpacing ??
+    final bSpacing =
+        buttonSpacing ??
         titleBarTheme.buttonSpacing ??
         (!kIsWeb && Platform.isWindows ? 0 : 14);
-    final bPadding = buttonPadding ??
+    final bPadding =
+        buttonPadding ??
         titleBarTheme.buttonPadding ??
         (!kIsWeb && Platform.isWindows
             ? const EdgeInsets.only(bottom: 18)
             : const EdgeInsets.symmetric(horizontal: 10));
-    final windowControlPlatform = platform ??
+    final windowControlPlatform =
+        platform ??
         (!kIsWeb && Platform.isWindows
             ? YaruWindowControlPlatform.windows
             : YaruWindowControlPlatform.yaru);
@@ -217,17 +219,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    Widget maybeHero({
-      required Widget child,
-    }) {
+    Widget maybeHero({required Widget child}) {
       if (heroTag == null ||
           context.findAncestorWidgetOfExactType<Hero>() != null) {
         return child;
       }
-      return Hero(
-        tag: heroTag!,
-        child: child,
-      );
+      return Hero(tag: heroTag!, child: child);
     }
 
     final closeButton = YaruWindowControl(
@@ -242,10 +239,10 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
         onDoubleTap: () => onDoubleTap != null
             ? onDoubleTap!(context)
             : isMaximizable == true
-                ? onMaximize?.call(context)
-                : isRestorable == true
-                    ? onRestore?.call(context)
-                    : null,
+            ? onMaximize?.call(context)
+            : isRestorable == true
+            ? onRestore?.call(context)
+            : null,
         onSecondaryTap: onShowMenu != null ? () => onShowMenu!(context) : null,
         child: AppBar(
           elevation: titleBarTheme.elevation,
@@ -278,8 +275,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isMinimizable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                iconColor:
-                                    WidgetStatePropertyAll(foregroundColor),
+                                iconColor: WidgetStatePropertyAll(
+                                  foregroundColor,
+                                ),
                                 type: YaruWindowControlType.minimize,
                                 onTap: onMinimize != null
                                     ? () => onMinimize!(context)
@@ -288,8 +286,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isRestorable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                iconColor:
-                                    WidgetStatePropertyAll(foregroundColor),
+                                iconColor: WidgetStatePropertyAll(
+                                  foregroundColor,
+                                ),
                                 type: YaruWindowControlType.restore,
                                 onTap: onRestore != null
                                     ? () => onRestore!(context)
@@ -298,8 +297,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isMaximizable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                iconColor:
-                                    WidgetStatePropertyAll(foregroundColor),
+                                iconColor: WidgetStatePropertyAll(
+                                  foregroundColor,
+                                ),
                                 type: YaruWindowControlType.maximize,
                                 onTap: onMaximize != null
                                     ? () => onMaximize!(context)
@@ -551,7 +551,8 @@ class YaruWindowTitleBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final theme = YaruTitleBarTheme.of(context);
-    final style = this.style ??
+    final style =
+        this.style ??
         theme.style ??
         (kIsWeb ? YaruTitleBarStyle.undecorated : YaruTitleBarStyle.normal);
     if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();

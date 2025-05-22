@@ -10,12 +10,13 @@ import 'yaru_portrait_layout.dart';
 
 const _kDefaultPaneWidth = 280.0;
 
-typedef YaruMasterTileBuilder = Widget Function(
-  BuildContext context,
-  int index,
-  bool selected,
-  double availableWidth,
-);
+typedef YaruMasterTileBuilder =
+    Widget Function(
+      BuildContext context,
+      int index,
+      bool selected,
+      double availableWidth,
+    );
 
 typedef YaruAppBarBuilder = PreferredSizeWidget? Function(BuildContext context);
 
@@ -72,8 +73,8 @@ class YaruMasterDetailPage extends StatefulWidget {
     this.initialRoute,
     this.onGenerateRoute,
     this.onUnknownRoute,
-  })  : assert(initialIndex == null || controller == null),
-        assert((length == null) != (controller == null));
+  }) : assert(initialIndex == null || controller == null),
+       assert((length == null) != (controller == null));
 
   /// The total number of pages.
   final int? length;
@@ -182,7 +183,8 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
   late YaruPageController _controller;
   late final GlobalKey<NavigatorState> _navigatorKey;
 
-  void _updateController() => _controller = widget.controller ??
+  void _updateController() => _controller =
+      widget.controller ??
       YaruPageController(
         length: widget.length ?? widget.controller!.length,
         initialIndex: widget.initialIndex ?? -1,
@@ -213,7 +215,8 @@ class _YaruMasterDetailPageState extends State<YaruMasterDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final breakpoint = widget.breakpoint ??
+    final breakpoint =
+        widget.breakpoint ??
         YaruMasterDetailTheme.of(context).breakpoint ??
         YaruMasterDetailThemeData.fallback(context).breakpoint!;
     return Material(

@@ -519,11 +519,7 @@ extension YaruToggleButtonTester on WidgetTester {
     final app = MaterialApp(
       home: Directionality(
         textDirection: textDirection,
-        child: Scaffold(
-          body: Center(
-            child: widget,
-          ),
-        ),
+        child: Scaffold(body: Center(child: widget)),
       ),
     );
     return pumpWidget(app);

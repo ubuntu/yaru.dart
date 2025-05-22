@@ -14,21 +14,16 @@ class IconUsage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usageTextStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
-          fontFamily: 'Monospace',
-        );
+    final usageTextStyle = Theme.of(
+      context,
+    ).textTheme.bodyLarge!.copyWith(fontFamily: 'Monospace');
 
     return Row(
       mainAxisAlignment: mainAxisAlignment,
       children: [
         if (label) ...[
-          Text(
-            'Usage: ',
-            style: usageTextStyle,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
+          Text('Usage: ', style: usageTextStyle),
+          const SizedBox(width: 8),
         ],
         Flexible(
           child: Padding(
@@ -39,10 +34,7 @@ class IconUsage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
                 color: Theme.of(context).highlightColor,
               ),
-              child: SelectableText(
-                usage,
-                style: usageTextStyle,
-              ),
+              child: SelectableText(usage, style: usageTextStyle),
             ),
           ),
         ),

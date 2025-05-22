@@ -8,7 +8,8 @@ import 'package:yaru/theme.dart';
 /// Holds theme data for [YaruMasterDetailTheme].
 @immutable
 class YaruMasterDetailThemeData
-    extends ThemeExtension<YaruMasterDetailThemeData> with Diagnosticable {
+    extends ThemeExtension<YaruMasterDetailThemeData>
+    with Diagnosticable {
   const YaruMasterDetailThemeData({
     this.breakpoint,
     this.tileSpacing,
@@ -30,8 +31,9 @@ class YaruMasterDetailThemeData
       portraitTransitions: YaruPageTransitionsTheme.horizontal,
       landscapeTransitions: YaruPageTransitionsTheme.vertical,
       includeSeparator: true,
-      sideBarColor: materialTheme.colorScheme.surface
-          .scale(lightness: light ? -0.029 : 0.029),
+      sideBarColor: materialTheme.colorScheme.surface.scale(
+        lightness: light ? -0.029 : 0.029,
+      ),
     );
   }
 
@@ -92,10 +94,12 @@ class YaruMasterDetailThemeData
       breakpoint: lerpDouble(breakpoint, o?.breakpoint, t),
       tileSpacing: lerpDouble(tileSpacing, o?.tileSpacing, t),
       listPadding: EdgeInsetsGeometry.lerp(listPadding, o?.listPadding, t),
-      portraitTransitions:
-          t < 0.5 ? portraitTransitions : o?.portraitTransitions,
-      landscapeTransitions:
-          t < 0.5 ? landscapeTransitions : o?.landscapeTransitions,
+      portraitTransitions: t < 0.5
+          ? portraitTransitions
+          : o?.portraitTransitions,
+      landscapeTransitions: t < 0.5
+          ? landscapeTransitions
+          : o?.landscapeTransitions,
     );
   }
 
@@ -105,10 +109,12 @@ class YaruMasterDetailThemeData
     properties.add(DoubleProperty('breakpoint', breakpoint));
     properties.add(DoubleProperty('tileSpacing', tileSpacing));
     properties.add(DiagnosticsProperty('listPadding', listPadding));
-    properties
-        .add(DiagnosticsProperty('portraitTransitions', portraitTransitions));
-    properties
-        .add(DiagnosticsProperty('landscapeTransitions', landscapeTransitions));
+    properties.add(
+      DiagnosticsProperty('portraitTransitions', portraitTransitions),
+    );
+    properties.add(
+      DiagnosticsProperty('landscapeTransitions', landscapeTransitions),
+    );
   }
 
   @override
@@ -145,8 +151,8 @@ class YaruMasterDetailTheme extends InheritedTheme {
   final YaruMasterDetailThemeData data;
 
   static YaruMasterDetailThemeData of(BuildContext context) {
-    final theme =
-        context.dependOnInheritedWidgetOfExactType<YaruMasterDetailTheme>();
+    final theme = context
+        .dependOnInheritedWidgetOfExactType<YaruMasterDetailTheme>();
     return theme?.data ??
         Theme.of(context).extension<YaruMasterDetailThemeData>() ??
         YaruMasterDetailThemeData.fallback(context);

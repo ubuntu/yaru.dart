@@ -28,13 +28,15 @@ void main() {
 
     final radioFinder = find.byType(YaruRadio<int>);
 
-    await tester
-        .pumpWidget(builder(value: 1, groupValue: 1, toggleable: false));
+    await tester.pumpWidget(
+      builder(value: 1, groupValue: 1, toggleable: false),
+    );
     await tester.tap(radioFinder);
     expect(changedValue, equals(1));
 
-    await tester
-        .pumpWidget(builder(value: 2, groupValue: 3, toggleable: false));
+    await tester.pumpWidget(
+      builder(value: 2, groupValue: 3, toggleable: false),
+    );
     await tester.tap(radioFinder);
     expect(changedValue, equals(2));
 
@@ -53,24 +55,18 @@ void main() {
         home: Scaffold(
           body: Column(
             children: [
-              YaruRadio<int>(
-                value: 0,
-                groupValue: 0,
-                onChanged: (_) {},
-              ),
-              const YaruRadio<int>(
-                value: 0,
-                groupValue: 0,
-                onChanged: null,
-              ),
+              YaruRadio<int>(value: 0, groupValue: 0, onChanged: (_) {}),
+              const YaruRadio<int>(value: 0, groupValue: 0, onChanged: null),
             ],
           ),
         ),
       ),
     );
 
-    final gesture =
-        await tester.createGesture(kind: PointerDeviceKind.mouse, pointer: 1);
+    final gesture = await tester.createGesture(
+      kind: PointerDeviceKind.mouse,
+      pointer: 1,
+    );
     await gesture.addPointer(location: Offset.zero);
     addTearDown(gesture.removePointer);
 

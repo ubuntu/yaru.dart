@@ -17,12 +17,7 @@ const _kWindowControlAnimationCurve = Curves.linear;
 const _kWindowControlBackgroundAnimationDuration = Duration(milliseconds: 150);
 
 /// Defines the type of a [YaruWindowControl].
-enum YaruWindowControlType {
-  close,
-  maximize,
-  restore,
-  minimize,
-}
+enum YaruWindowControlType { close, maximize, restore, minimize }
 
 /// Defines the style of a [YaruWindowControl].
 enum YaruWindowControlPlatform {
@@ -214,8 +209,8 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     return _active
         ? onSurface.withValues(alpha: 0.2)
         : _hovered
-            ? onSurface.withValues(alpha: 0.15)
-            : onSurface.withValues(alpha: 0.1);
+        ? onSurface.withValues(alpha: 0.15)
+        : onSurface.withValues(alpha: 0.1);
   }
 
   Color _getWindowsBackgroundColor(ColorScheme colorScheme) {
@@ -231,22 +226,22 @@ class _YaruWindowControlState extends State<YaruWindowControl>
         alpha: _active
             ? 0.5
             : _hovered
-                ? 1.0
-                : 0.0,
+            ? 1.0
+            : 0.0,
       );
     }
 
     return _active
         ? onSurface.withValues(alpha: 0.15)
         : _hovered
-            ? onSurface.withValues(alpha: 0.1)
-            : Colors.transparent;
+        ? onSurface.withValues(alpha: 0.1)
+        : Colors.transparent;
   }
 
   Color _getIconColor(ColorScheme colorScheme) {
     final color = switch (style) {
       YaruWindowControlPlatform.yaru => _getYaruIconColor(colorScheme),
-      YaruWindowControlPlatform.windows => _getWindowsIconColor(colorScheme)
+      YaruWindowControlPlatform.windows => _getWindowsIconColor(colorScheme),
     };
 
     return color.withValues(alpha: interactive ? 1.0 : 0.5);
@@ -285,10 +280,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     }
   }
 
-  Widget _buildYaruBoxDecoration(
-    Widget child,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildYaruBoxDecoration(Widget child, ColorScheme colorScheme) {
     return AnimatedContainer(
       duration: _kWindowControlBackgroundAnimationDuration,
       decoration: BoxDecoration(
@@ -301,17 +293,11 @@ class _YaruWindowControlState extends State<YaruWindowControl>
             : null,
         shape: BoxShape.circle,
       ),
-      child: SizedBox.square(
-        dimension: kYaruWindowControlSize,
-        child: child,
-      ),
+      child: SizedBox.square(dimension: kYaruWindowControlSize, child: child),
     );
   }
 
-  Widget _buildWindowsBoxDecoration(
-    Widget child,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildWindowsBoxDecoration(Widget child, ColorScheme colorScheme) {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: _getBackgoundColor(colorScheme),
@@ -427,10 +413,7 @@ class _YaruWindowControlIconPainter extends CustomPainter {
           drawRect.topLeft.dx + (1 + _kWindowControlIconStrokeAlign),
           drawRect.topLeft.dy,
         )
-        ..lineTo(
-          drawRect.topRight.dx,
-          drawRect.topRight.dy,
-        )
+        ..lineTo(drawRect.topRight.dx, drawRect.topRight.dy)
         ..lineTo(
           drawRect.bottomRight.dx,
           drawRect.bottomRight.dy - (1 + _kWindowControlIconStrokeAlign),
@@ -464,9 +447,7 @@ class _YaruWindowControlIconPainter extends CustomPainter {
       canvas.saveLayer(Rect.largest, Paint());
       canvas.drawRect(
         rect2,
-        _getIconPaint(
-          iconColor.scale(alpha: -1.0 + step2Progress),
-        ),
+        _getIconPaint(iconColor.scale(alpha: -1.0 + step2Progress)),
       );
       canvas.drawRect(rect1, _getFillDiffPaint());
       canvas.restore();

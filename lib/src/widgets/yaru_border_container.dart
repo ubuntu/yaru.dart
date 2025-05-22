@@ -67,7 +67,8 @@ class YaruBorderContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final effectiveBorder = border ??
+    final effectiveBorder =
+        border ??
         Border.all(color: DividerTheme.of(context).color ?? theme.dividerColor);
     final effectiveBorderRadius =
         borderRadius ?? BorderRadius.circular(kYaruContainerRadius);
@@ -90,10 +91,7 @@ class YaruBorderContainer extends StatelessWidget {
         color: color,
         borderRadius: effectiveBorderRadius,
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: child,
-      ),
+      child: Material(color: Colors.transparent, child: child),
     );
   }
 }

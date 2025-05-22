@@ -11,7 +11,8 @@ import 'yaru_page_indicator_layout_delegate.dart';
 /// can be customized with [YaruPageIndicatorThemeData.copyWith].
 @immutable
 class YaruPageIndicatorThemeData
-    extends ThemeExtension<YaruPageIndicatorThemeData> with Diagnosticable {
+    extends ThemeExtension<YaruPageIndicatorThemeData>
+    with Diagnosticable {
   /// Creates a theme that can be used for [YaruPageIndicatorTheme.data].
   const YaruPageIndicatorThemeData({
     this.itemSizeBuilder,
@@ -133,8 +134,8 @@ class YaruPageIndicatorTheme extends InheritedWidget {
   /// Returns the configuration [data] from the closest [YaruPageIndicatorTheme]
   /// ancestor. If there is no ancestor, it returns `null`.
   static YaruPageIndicatorThemeData? of(BuildContext context) {
-    final t =
-        context.dependOnInheritedWidgetOfExactType<YaruPageIndicatorTheme>();
+    final t = context
+        .dependOnInheritedWidgetOfExactType<YaruPageIndicatorTheme>();
     return t?.data ?? Theme.of(context).extension<YaruPageIndicatorThemeData>();
   }
 

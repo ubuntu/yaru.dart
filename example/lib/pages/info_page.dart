@@ -25,18 +25,10 @@ class _InfoPageState extends State<InfoPage> {
                 tooltip: 'Custom icons and colors are possible',
                 isSelected: _idea,
                 onPressed: () => setState(() => _idea = !_idea),
-                icon: const Icon(
-                  YaruIcons.light_bulb_off,
-                  size: 30,
-                ),
-                selectedIcon: const Icon(
-                  YaruIcons.light_bulb_on,
-                  size: 30,
-                ),
+                icon: const Icon(YaruIcons.light_bulb_off, size: 30),
+                selectedIcon: const Icon(YaruIcons.light_bulb_on, size: 30),
               ),
-              const SizedBox(
-                width: 5,
-              ),
+              const SizedBox(width: 5),
               Expanded(
                 child: Slider(
                   value: _take.toDouble(),
@@ -68,14 +60,13 @@ class _InfoPageState extends State<InfoPage> {
                     title: Text(info.name.capitalize()),
                     subtitle: Text(_lorem.characters.take(_take).toString()),
                     trailing: info == YaruInfoType.information && _idea
-                        ? const _CopyButton(
-                            text: _lorem,
-                          )
+                        ? const _CopyButton(text: _lorem)
                         : null,
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: kYaruPagePadding),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: kYaruPagePadding,
+                    ),
                     child: Row(
                       children: [
                         YaruInfoBadge(
@@ -115,14 +106,11 @@ class _CopyButton extends StatelessWidget {
       ),
       onPressed: () {
         Clipboard.setData(ClipboardData(text: text));
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Copied')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Copied')));
       },
-      child: const Icon(
-        YaruIcons.copy,
-        color: YaruColors.magenta,
-      ),
+      child: const Icon(YaruIcons.copy, color: YaruColors.magenta),
     );
   }
 }

@@ -66,10 +66,7 @@ class ColorsView extends StatelessWidget {
     return [
       Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 5),
-        child: Text(
-          headline,
-          style: headlineStyle,
-        ),
+        child: Text(headline, style: headlineStyle),
       ),
       GridView.builder(
         shrinkWrap: true,
@@ -78,11 +75,7 @@ class ColorsView extends StatelessWidget {
         itemCount: colors.length,
         itemBuilder: (context, index) {
           final e = colors.entries.elementAt(index);
-          return _colorContainer(
-            e.key,
-            e.value.$1,
-            e.value.$2,
-          );
+          return _colorContainer(e.key, e.value.$1, e.value.$2);
         },
       ),
       const _SpacedDivider(),
@@ -142,9 +135,7 @@ class _SpacedDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.only(top: 30, bottom: 20),
-      child: Divider(
-        height: 0,
-      ),
+      child: Divider(height: 0),
     );
   }
 }
@@ -221,27 +212,27 @@ Map<String, (Color, Color?)> _getUbuntuFlavourColors(ThemeData theme) {
     'lubuntuBlue': (YaruColors.lubuntuBlue, theme.colorScheme.onPrimary),
     'ubuntuBudgieBlue': (
       YaruColors.ubuntuBudgieBlue,
-      theme.colorScheme.onPrimary
+      theme.colorScheme.onPrimary,
     ),
     'ubuntuButterflyPink': (
       YaruColors.ubuntuButterflyPink,
-      theme.colorScheme.onPrimary
+      theme.colorScheme.onPrimary,
     ),
     'ubuntuCinnamonBrown': (
       YaruColors.ubuntuCinnamonBrown,
-      theme.colorScheme.onPrimary
+      theme.colorScheme.onPrimary,
     ),
     'ubuntuMateGreen': (
       YaruColors.ubuntuMateGreen,
-      theme.colorScheme.onPrimary
+      theme.colorScheme.onPrimary,
     ),
     'ubuntuStudioBlue': (
       YaruColors.ubuntuStudioBlue,
-      theme.colorScheme.onPrimary
+      theme.colorScheme.onPrimary,
     ),
     'ubuntuUnityPurple': (
       YaruColors.ubuntuUnityPurple,
-      theme.colorScheme.onPrimary
+      theme.colorScheme.onPrimary,
     ),
     'xubuntuBlue': (YaruColors.xubuntuBlue, theme.colorScheme.onPrimary),
   };
@@ -251,11 +242,11 @@ Map<String, (Color, Color)> _getExtensionColors(ThemeData theme) {
   return {
     'success': (
       theme.colorScheme.success,
-      contrastColor(theme.colorScheme.success)
+      contrastColor(theme.colorScheme.success),
     ),
     'warning': (
       theme.colorScheme.warning,
-      contrastColor(theme.colorScheme.warning)
+      contrastColor(theme.colorScheme.warning),
     ),
     'link': (theme.colorScheme.link, contrastColor(theme.colorScheme.link)),
   };

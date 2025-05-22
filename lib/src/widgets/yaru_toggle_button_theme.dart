@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 /// can be customized with [YaruToggleButtonThemeData.copyWith].
 @immutable
 class YaruToggleButtonThemeData
-    extends ThemeExtension<YaruToggleButtonThemeData> with Diagnosticable {
+    extends ThemeExtension<YaruToggleButtonThemeData>
+    with Diagnosticable {
   /// Creates a theme that can be used for [YaruToggleButtonTheme.data].
   const YaruToggleButtonThemeData({
     this.horizontalSpacing,
@@ -117,8 +118,8 @@ class YaruToggleButtonTheme extends InheritedWidget {
   /// Returns the configuration [data] from the closest [YaruToggleButtonTheme]
   /// ancestor. If there is no ancestor, it returns `null`.
   static YaruToggleButtonThemeData? of(BuildContext context) {
-    final t =
-        context.dependOnInheritedWidgetOfExactType<YaruToggleButtonTheme>();
+    final t = context
+        .dependOnInheritedWidgetOfExactType<YaruToggleButtonTheme>();
     return t?.data ?? Theme.of(context).extension<YaruToggleButtonThemeData>();
   }
 

@@ -94,9 +94,7 @@ final _yaruLightThemes = Map<YaruVariant, ThemeData>.fromEntries(
       e,
       e == YaruVariant.orange
           ? yaruLight
-          : createYaruLightTheme(
-              primaryColor: e.color,
-            ),
+          : createYaruLightTheme(primaryColor: e.color),
     ),
   ),
 );
@@ -107,9 +105,7 @@ final _yaruDarkThemes = Map<YaruVariant, ThemeData>.fromEntries(
       e,
       e == YaruVariant.orange
           ? yaruDark
-          : createYaruDarkTheme(
-              primaryColor: e.color,
-            ),
+          : createYaruDarkTheme(primaryColor: e.color),
     ),
   ),
 );

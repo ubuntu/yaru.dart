@@ -34,15 +34,9 @@ class _IconsPageState extends State<IconsPage>
               child: YaruTabBar(
                 onTap: (value) => setState(() => _index = value),
                 tabs: const [
-                  Tab(
-                    text: 'Static',
-                  ),
-                  Tab(
-                    text: 'Animated',
-                  ),
-                  Tab(
-                    text: 'Widgets',
-                  ),
+                  Tab(text: 'Static'),
+                  Tab(text: 'Animated'),
+                  Tab(text: 'Widgets'),
                 ],
               ),
             ),
@@ -53,7 +47,7 @@ class _IconsPageState extends State<IconsPage>
                 0 => IconItems.static,
                 1 => IconItems.animated,
                 2 => IconItems.widget,
-                _ => throw 'Invalid index'
+                _ => throw 'Invalid index',
               },
             ),
           ),
@@ -81,8 +75,9 @@ class IconsPageAppBarTitle extends StatelessWidget with WatchItMixin {
   @override
   Widget build(BuildContext context) {
     final model = di<IconViewModel>();
-    final searchActive =
-        watchPropertyValue((IconViewModel m) => m.searchActive);
+    final searchActive = watchPropertyValue(
+      (IconViewModel m) => m.searchActive,
+    );
 
     return searchActive
         ? SizedBox(
@@ -103,10 +98,12 @@ class IconsPageFloatingActionButton extends StatelessWidget with WatchItMixin {
   Widget build(BuildContext context) {
     final model = di<IconViewModel>();
     final iconSize = watchPropertyValue((IconViewModel m) => m.iconSize);
-    final isMinIconSize =
-        watchPropertyValue((IconViewModel m) => m.isMinIconSize);
-    final isMaxIconSize =
-        watchPropertyValue((IconViewModel m) => m.isMaxIconSize);
+    final isMinIconSize = watchPropertyValue(
+      (IconViewModel m) => m.isMinIconSize,
+    );
+    final isMaxIconSize = watchPropertyValue(
+      (IconViewModel m) => m.isMaxIconSize,
+    );
     final gridView = watchPropertyValue((IconViewModel m) => m.gridView);
 
     return Material(

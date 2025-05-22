@@ -41,20 +41,14 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                     onSearchActive: () => setState(
                       () => _titleSearchActive = !_titleSearchActive,
                     ),
-                    title: const Text(
-                      'Any Widget Here',
-                    ),
+                    title: const Text('Any Widget Here'),
                   ),
                 ),
                 children: [
                   SizedBox(
                     height: 300,
                     width: 450,
-                    child: Center(
-                      child: Text(
-                        _titleText,
-                      ),
-                    ),
+                    child: Center(child: Text(_titleText)),
                   ),
                 ],
               ),
@@ -68,9 +62,8 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                   title: _fieldSearchActive
                       ? YaruSearchField(
                           onClear: () {},
-                          onChanged: (value) => setState(
-                            () => _fieldText = value,
-                          ),
+                          onChanged: (value) =>
+                              setState(() => _fieldText = value),
                         )
                       : const Text('Title'),
                   leading: YaruSearchButton(
@@ -84,9 +77,7 @@ class _SearchFieldPageState extends State<SearchFieldPage> {
                   SizedBox(
                     height: 300,
                     width: 450,
-                    child: Center(
-                      child: Text(_fieldText),
-                    ),
+                    child: Center(child: Text(_fieldText)),
                   ),
                 ],
               ),
