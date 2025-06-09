@@ -30,6 +30,7 @@ class YaruSearchField extends StatefulWidget {
     this.controller,
     this.focusNode,
     this.clearIcon,
+    this.clearIconSemanticLabel,
   });
 
   /// Optional [String] forwarded to the internal [TextEditingController]
@@ -78,6 +79,9 @@ class YaruSearchField extends StatefulWidget {
 
   /// Optional icon shown inside the clear button.
   final Widget? clearIcon;
+
+  /// Optional semantic label to add to the clear button icon.
+  final String? clearIconSemanticLabel;
 
   @override
   State<YaruSearchField> createState() => _YaruSearchFieldState();
@@ -193,7 +197,11 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
                     icon: ClipRRect(
                       borderRadius: suffixRadius,
                       child:
-                          widget.clearIcon ?? const Icon(YaruIcons.edit_clear),
+                          widget.clearIcon ??
+                          Icon(
+                            YaruIcons.edit_clear,
+                            semanticLabel: widget.clearIconSemanticLabel,
+                          ),
                     ),
                   ),
           ),
@@ -349,6 +357,7 @@ class YaruSearchButton extends StatelessWidget {
     this.borderColor,
     this.icon,
     this.selectedIcon,
+    this.semanticLabel,
   });
 
   final bool? searchActive;
@@ -359,6 +368,7 @@ class YaruSearchButton extends StatelessWidget {
   final Color? borderColor;
   final Widget? icon;
   final Widget? selectedIcon;
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -396,6 +406,7 @@ class YaruSearchButton extends StatelessWidget {
                 //
                 size: kYaruIconSize - 4,
                 color: theme.colorScheme.onSurface,
+                semanticLabel: semanticLabel,
               ),
           icon:
               icon ??
@@ -403,6 +414,7 @@ class YaruSearchButton extends StatelessWidget {
                 YaruIcons.search,
                 size: kYaruIconSize - 4,
                 color: theme.colorScheme.onSurface,
+                semanticLabel: semanticLabel,
               ),
           onPressed: onPressed,
         ),

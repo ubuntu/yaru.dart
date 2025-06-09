@@ -26,6 +26,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.style,
     this.mouseCursor,
     this.icon,
+    this.semanticLabel,
   });
 
   final T? initialValue;
@@ -45,6 +46,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final ButtonStyle? style;
   final MouseCursor? mouseCursor;
   final Widget? icon;
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +107,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                             Icon(
                               YaruIcons.pan_down,
                               color: style?.foregroundColor?.resolve({}),
+                              semanticLabel: semanticLabel,
                             ),
                       ),
                     ],
