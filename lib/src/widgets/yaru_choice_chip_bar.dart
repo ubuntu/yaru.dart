@@ -125,7 +125,7 @@ class YaruChoiceChipBar extends StatefulWidget {
 class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
   late ScrollController _controller;
   bool _enableGoPreviousButton = false;
-  bool _enableGoNextButton = true;
+  bool _enableGoNextButton = false;
 
   @override
   void initState() {
