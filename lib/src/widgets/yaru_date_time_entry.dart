@@ -51,6 +51,7 @@ class YaruDateTimeEntry extends _YaruDateTimeEntry {
     super.errorInvalidText,
     super.autofocus = false,
     super.acceptEmpty = true,
+    super.clearIconSemanticLabel,
   }) : super(
          controller: controller,
          type: includeTime
@@ -95,6 +96,7 @@ class YaruTimeEntry extends StatelessWidget {
     this.errorInvalidText,
     this.autofocus,
     this.acceptEmpty,
+    this.clearIconSemanticLabel,
   });
 
   /// A controller that can retrieve parsed [TimeOfDay] from the input and modify its value.
@@ -149,6 +151,9 @@ class YaruTimeEntry extends StatelessWidget {
   /// If true, [errorFormatText] is not shown when the date input field is empty.
   final bool? acceptEmpty;
 
+  /// Optional semantic label to add to the clear button icon.
+  final String? clearIconSemanticLabel;
+
   static ValueChanged<DateTime?>? _valueChangedCallbackAdapter(
     ValueChanged<TimeOfDay?>? callback,
   ) {
@@ -185,6 +190,7 @@ class YaruTimeEntry extends StatelessWidget {
       autofocus: autofocus,
       acceptEmpty: acceptEmpty,
       type: _YaruDateTimeEntryType.time,
+      clearIconSemanticLabel: clearIconSemanticLabel,
     );
   }
 }
@@ -216,6 +222,7 @@ class _YaruDateTimeEntry extends StatefulWidget {
     this.errorInvalidText,
     this.autofocus,
     this.acceptEmpty,
+    this.clearIconSemanticLabel,
   }) : assert(initialDateTime == null || controller == null),
        assert((initialDateTime == null) != (controller == null));
 
@@ -273,6 +280,9 @@ class _YaruDateTimeEntry extends StatefulWidget {
   ///
   /// If null, defaults to true.
   final bool? acceptEmpty;
+
+  /// Optional semantic label to add to the clear button icon.
+  final String? clearIconSemanticLabel;
 
   @override
   State<_YaruDateTimeEntry> createState() => YaruDateTimeEntryState();
@@ -704,7 +714,10 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
 
         _onChanged();
       },
-      icon: const Icon(YaruIcons.edit_clear),
+      icon: Icon(
+        YaruIcons.edit_clear,
+        semanticLabel: widget.clearIconSemanticLabel,
+      ),
     );
   }
 

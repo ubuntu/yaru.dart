@@ -26,6 +26,8 @@ class YaruCarousel extends StatefulWidget {
     this.navigationControls = false,
     this.previousIcon,
     this.nextIcon,
+    this.previousIconSemanticLabel,
+    this.nextIconSemanticLabel,
   });
 
   /// The height of the children, defaults to 500.0.
@@ -60,6 +62,12 @@ class YaruCarousel extends StatefulWidget {
   /// Icon used for the next button.
   /// Require [navigationControls] to be true.
   final Widget? nextIcon;
+
+  /// Optional semantic label to add to the previous button icon.
+  final String? previousIconSemanticLabel;
+
+  /// Optional semantic label to add to the next button icon.
+  final String? nextIconSemanticLabel;
 
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
@@ -165,12 +173,20 @@ class _YaruCarouselState extends State<YaruCarousel> {
             _buildNavigationButton(
               Alignment.centerLeft,
               _isFirstPage() ? null : _controller.previousPage,
-              widget.previousIcon ?? const Icon(YaruIcons.go_previous),
+              widget.previousIcon ??
+                  Icon(
+                    YaruIcons.go_previous,
+                    semanticLabel: widget.previousIconSemanticLabel,
+                  ),
             ),
             _buildNavigationButton(
               Alignment.centerRight,
               _isLastPage() ? null : _controller.nextPage,
-              widget.nextIcon ?? const Icon(YaruIcons.go_next),
+              widget.nextIcon ??
+                  Icon(
+                    YaruIcons.go_next,
+                    semanticLabel: widget.nextIconSemanticLabel,
+                  ),
             ),
           ],
         ),

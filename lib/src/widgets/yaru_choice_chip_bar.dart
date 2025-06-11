@@ -26,6 +26,8 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.wrapTextDirection,
     this.goPreviousIcon,
     this.goNextIcon,
+    this.goPreviousIconSemanticLabel,
+    this.goNextIconSemanticLabel,
     this.clearOnSelect = true,
     this.shrinkWrap = true,
     this.showCheckMarks = true,
@@ -102,6 +104,12 @@ class YaruChoiceChipBar extends StatefulWidget {
 
   /// The [Widget] shown inside the right navigation button.
   final Widget? goNextIcon;
+
+  /// Optional semantic label to add to the previous button icon.
+  final String? goPreviousIconSemanticLabel;
+
+  /// Optional semantic label to add to the next button icon.
+  final String? goNextIconSemanticLabel;
 
   /// Flag to select if the scroll view should to back to the start on selection.
   /// Defaults to `true`.
@@ -207,7 +215,12 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     final goPreviousButton = _NavigationButton(
       elevation: widget.navigationButtonElevation,
       chipHeight: widget.chipHeight,
-      icon: widget.goPreviousIcon ?? const Icon(YaruIcons.go_previous),
+      icon:
+          widget.goPreviousIcon ??
+          Icon(
+            YaruIcons.go_previous,
+            semanticLabel: widget.goPreviousIconSemanticLabel,
+          ),
       onTap: _enableGoPreviousButton
           ? () => _controller.animateTo(
               _controller.position.pixels - widget.navigationStep,
@@ -220,7 +233,12 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     final goNextButton = _NavigationButton(
       elevation: widget.navigationButtonElevation,
       chipHeight: widget.chipHeight,
-      icon: widget.goNextIcon ?? const Icon(YaruIcons.go_next),
+      icon:
+          widget.goNextIcon ??
+          Icon(
+            YaruIcons.go_next,
+            semanticLabel: widget.goNextIconSemanticLabel,
+          ),
       onTap: _enableGoNextButton
           ? () => _controller.animateTo(
               _controller.position.pixels + widget.navigationStep,
