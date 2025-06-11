@@ -358,6 +358,7 @@ class YaruSearchButton extends StatelessWidget {
     this.icon,
     this.selectedIcon,
     this.semanticLabel,
+    this.selectedSemanticLabel,
   });
 
   final bool? searchActive;
@@ -369,6 +370,7 @@ class YaruSearchButton extends StatelessWidget {
   final Widget? icon;
   final Widget? selectedIcon;
   final String? semanticLabel;
+  final String? selectedSemanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -406,7 +408,7 @@ class YaruSearchButton extends StatelessWidget {
                 //
                 size: kYaruIconSize - 4,
                 color: theme.colorScheme.onSurface,
-                semanticLabel: semanticLabel,
+                semanticLabel: selectedSemanticLabel,
               ),
           icon:
               icon ??
