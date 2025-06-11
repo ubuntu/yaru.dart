@@ -1,5 +1,18 @@
 # Changelog
 
+## [8.1.0](https://github.com/ubuntu/yaru.dart/compare/v8.0.0...v8.1.0) (2025-06-11)
+
+
+### Features
+
+* **a11y:** Add field for a semantic label for all icon buttons ([#1000](https://github.com/ubuntu/yaru.dart/issues/1000)) ([0c040ff](https://github.com/ubuntu/yaru.dart/commit/0c040ffb27be3aebadfba213738b55036bdba36e))
+
+
+### Bug Fixes
+
+* use consistent text styles in `InputDecorationTheme` ([#1005](https://github.com/ubuntu/yaru.dart/issues/1005)) ([dc8a84e](https://github.com/ubuntu/yaru.dart/commit/dc8a84e14ff30ea88fdd2e848ae06977daa2ca92))
+* **YaruChoiceChipBar:** do not always show scroll buttons on init ([#1001](https://github.com/ubuntu/yaru.dart/issues/1001)) ([8103703](https://github.com/ubuntu/yaru.dart/commit/8103703947b001fa2abe03f0a23261d397cee1c7))
+
 ## [8.0.0](https://github.com/ubuntu/yaru.dart/compare/v7.0.0...v8.0.0) (2025-06-05)
 
 
