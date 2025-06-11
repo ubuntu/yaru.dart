@@ -107,6 +107,7 @@ InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
       bottom: 9,
       top: 10,
     ),
+    errorStyle: textStyle,
     helperStyle: textStyle,
     hintStyle: textStyle,
     labelStyle: textStyle,
