@@ -1,5 +1,34 @@
 # Changelog
 
+## [8.0.0](https://github.com/ubuntu/yaru.dart/compare/v7.0.0...v8.0.0) (2025-06-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to flutter 3.32.0 ([#992](https://github.com/ubuntu/yaru.dart/issues/992))
+* remove isMobile getter and do not change theme if on mobile ([#989](https://github.com/ubuntu/yaru.dart/issues/989))
+
+### Features
+
+* adapt border radii to gnome design ([#983](https://github.com/ubuntu/yaru.dart/issues/983)) ([0ecc78d](https://github.com/ubuntu/yaru.dart/commit/0ecc78dc15318df19435c20f622e3b44ad25d9f3))
+* add emoji categories ([#978](https://github.com/ubuntu/yaru.dart/issues/978)) ([4fac410](https://github.com/ubuntu/yaru.dart/commit/4fac4105b66d4e0ed3ec3abc11c37e4e306bd61e))
+* add focus ring to YaruMasterTile ([#990](https://github.com/ubuntu/yaru.dart/issues/990)) ([163b4b5](https://github.com/ubuntu/yaru.dart/commit/163b4b5e1ad79bf5eb8677e7f4cd78e2eb566627))
+* reduce YaruInfoBox titleTextStyle default height ([#977](https://github.com/ubuntu/yaru.dart/issues/977)) ([f7a3e33](https://github.com/ubuntu/yaru.dart/commit/f7a3e33130f07a8cf829033cff0a8ff1316522b2))
+* **YaruExpansionPanel:** add optional isInitiallyExpanded property ([#982](https://github.com/ubuntu/yaru.dart/issues/982)) ([7fbf081](https://github.com/ubuntu/yaru.dart/commit/7fbf081ae7de2602d9f1f142a02ff625a423e4db))
+
+
+### Bug Fixes
+
+* provide optional YaruTabBar label colors ([#975](https://github.com/ubuntu/yaru.dart/issues/975)) ([0a1ee4f](https://github.com/ubuntu/yaru.dart/commit/0a1ee4f16a5efb332b9a62286f39d2ab6735cfb4))
+* remove isMobile getter and do not change theme if on mobile ([#989](https://github.com/ubuntu/yaru.dart/issues/989)) ([9902d72](https://github.com/ubuntu/yaru.dart/commit/9902d7230d0d3be31317eb0558114f28afc861ce))
+* YaruExpandable: handle tap on header background ([#980](https://github.com/ubuntu/yaru.dart/issues/980)) ([f9db616](https://github.com/ubuntu/yaru.dart/commit/f9db616a71e0cb0b82ad0b994928b8cbc0688acc))
+* YaruWindowTitleBar double-tap on macOS ([#985](https://github.com/ubuntu/yaru.dart/issues/985)) ([b75bb6e](https://github.com/ubuntu/yaru.dart/commit/b75bb6e2b3c30126b17d73a67577ad43f5c65d7c))
+
+
+### Miscellaneous Chores
+
+* update to flutter 3.32.0 ([#992](https://github.com/ubuntu/yaru.dart/issues/992)) ([2f131c7](https://github.com/ubuntu/yaru.dart/commit/2f131c78f73807de48ce60f23ae75bd4881ad2dc))
+
 ## [7.0.0](https://github.com/ubuntu/yaru.dart/compare/v6.0.0...v7.0.0) (2024-12-19)
 
 

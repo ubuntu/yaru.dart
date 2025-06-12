@@ -12,6 +12,7 @@ class YaruSplitButton extends StatelessWidget {
     this.child,
     this.onOptionsPressed,
     this.icon,
+    this.iconSemanticLabel,
     this.radius,
     this.menuWidth,
   }) : _variant = _YaruSplitButtonVariant.elevated;
@@ -23,6 +24,7 @@ class YaruSplitButton extends StatelessWidget {
     this.child,
     this.onOptionsPressed,
     this.icon,
+    this.iconSemanticLabel,
     this.radius,
     this.menuWidth,
   }) : _variant = _YaruSplitButtonVariant.filled;
@@ -34,6 +36,7 @@ class YaruSplitButton extends StatelessWidget {
     this.child,
     this.onOptionsPressed,
     this.icon,
+    this.iconSemanticLabel,
     this.radius,
     this.menuWidth,
   }) : _variant = _YaruSplitButtonVariant.outlined;
@@ -43,6 +46,7 @@ class YaruSplitButton extends StatelessWidget {
   final void Function()? onOptionsPressed;
   final Widget? child;
   final Widget? icon;
+  final String? iconSemanticLabel;
   final List<PopupMenuEntry<Object?>>? items;
   final double? radius;
   final double? menuWidth;
@@ -95,7 +99,8 @@ class YaruSplitButton extends StatelessWidget {
             ),
     );
 
-    final dropdownIcon = icon ?? const Icon(YaruIcons.pan_down);
+    final dropdownIcon =
+        icon ?? Icon(YaruIcons.pan_down, semanticLabel: iconSemanticLabel);
 
     return Row(
       mainAxisSize: MainAxisSize.min,
