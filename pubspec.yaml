@@ -36,7 +36,7 @@ dev_dependencies:
 
 flutter:
   fonts:
-    - family: Ubuntu
+    - family: UbuntuSans
       fonts:
         - asset: assets/fonts/UbuntuSans[wdth,wght].ttf
           weight: 100

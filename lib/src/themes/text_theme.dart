@@ -85,6 +85,6 @@ class _UbuntuTextStyle extends TextStyle {
     super.fontSize,
     super.fontWeight,
     required this.textColor,
-  }) : super(fontFamily: 'Ubuntu', package: 'yaru', color: textColor);
+  }) : super(fontFamily: 'UbuntuSans', package: 'yaru', color: textColor);
   final Color textColor;
 }
