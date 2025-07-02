@@ -133,25 +133,29 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
         context,
       ).copyWith(pageTransitionsTheme: theme.landscapeTransitions),
       child: ScaffoldMessenger(
-        child: Navigator(
-          key: widget.navigatorKey,
-          initialRoute: widget.initialRoute,
-          onGenerateRoute: widget.onGenerateRoute,
-          onUnknownRoute: widget.onUnknownRoute,
-          pages: [
-            MaterialPage(
-              key: ValueKey(_selectedIndex),
-              child: Builder(
-                builder: (context) => widget.controller.length > _selectedIndex
-                    ? widget.pageBuilder(context, _selectedIndex)
-                    : widget.pageBuilder(context, 0),
+        child: Semantics(
+          container: true,
+          child: Navigator(
+            key: widget.navigatorKey,
+            initialRoute: widget.initialRoute,
+            onGenerateRoute: widget.onGenerateRoute,
+            onUnknownRoute: widget.onUnknownRoute,
+            pages: [
+              MaterialPage(
+                key: ValueKey(_selectedIndex),
+                child: Builder(
+                  builder: (context) =>
+                      widget.controller.length > _selectedIndex
+                      ? widget.pageBuilder(context, _selectedIndex)
+                      : widget.pageBuilder(context, 0),
+                ),
               ),
-            ),
-          ],
-          // TODO: implement replacement if we keep YaruMasterDetailPage
-          // ignore: deprecated_member_use
-          onPopPage: (route, result) => route.didPop(result),
-          observers: [...widget.navigatorObservers, HeroController()],
+            ],
+            // TODO: implement replacement if we keep YaruMasterDetailPage
+            // ignore: deprecated_member_use
+            onPopPage: (route, result) => route.didPop(result),
+            observers: [...widget.navigatorObservers, HeroController()],
+          ),
         ),
       ),
     );
