@@ -49,6 +49,10 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.platform,
     this.buttonPadding,
     this.buttonSpacing,
+    this.closeSemanticLabel,
+    this.maximizeSemanticLabel,
+    this.minimizeSemanticLabel,
+    this.restoreSemanticLabel,
   });
 
   /// The primary title widget.
@@ -121,6 +125,18 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// Called when the secondary mouse button is pressed.
   final FutureOr<void> Function(BuildContext)? onShowMenu;
+
+  /// Semantic label used for the close button.
+  final String? closeSemanticLabel;
+
+  /// Semantic label used for the maximize button.
+  final String? maximizeSemanticLabel;
+
+  /// Semantic label used for the minimize button.
+  final String? minimizeSemanticLabel;
+
+  /// Semantic label used for the restore button.
+  final String? restoreSemanticLabel;
 
   /// The tag to use for the [Hero] wrapping the window controls.
   ///
@@ -232,6 +248,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       iconColor: WidgetStatePropertyAll(foregroundColor),
       type: YaruWindowControlType.close,
       onTap: onClose != null ? () => onClose!(context) : null,
+      semanticLabel: closeSemanticLabel,
     );
     return TextFieldTapRegion(
       child: YaruTitleBarGestureDetector(
@@ -282,6 +299,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                                 onTap: onMinimize != null
                                     ? () => onMinimize!(context)
                                     : null,
+                                semanticLabel: minimizeSemanticLabel,
                               ),
                             if (isRestorable == true)
                               YaruWindowControl(
@@ -293,6 +311,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                                 onTap: onRestore != null
                                     ? () => onRestore!(context)
                                     : null,
+                                semanticLabel: restoreSemanticLabel,
                               ),
                             if (isMaximizable == true)
                               YaruWindowControl(
@@ -304,6 +323,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                                 onTap: onMaximize != null
                                     ? () => onMaximize!(context)
                                     : null,
+                                semanticLabel: maximizeSemanticLabel,
                               ),
                             if (isClosable == true)
                               isMaximizable == true
@@ -455,6 +475,10 @@ class YaruWindowTitleBar extends StatelessWidget
     this.platform,
     this.buttonPadding,
     this.buttonSpacing,
+    this.closeSemanticLabel,
+    this.maximizeSemanticLabel,
+    this.minimizeSemanticLabel,
+    this.restoreSemanticLabel,
   });
 
   /// The primary title widget.
@@ -524,6 +548,18 @@ class YaruWindowTitleBar extends StatelessWidget
 
   /// Called when the secondary mouse button is pressed.
   final FutureOr<void> Function(BuildContext)? onShowMenu;
+
+  /// Semantic label used for the close button.
+  final String? closeSemanticLabel;
+
+  /// Semantic label used for the maximize button.
+  final String? maximizeSemanticLabel;
+
+  /// Semantic label used for the minimize button.
+  final String? minimizeSemanticLabel;
+
+  /// Semantic label used for the restore button.
+  final String? restoreSemanticLabel;
 
   /// The tag to use for the [Hero] wrapping the window controls.
   ///
@@ -603,6 +639,10 @@ class YaruWindowTitleBar extends StatelessWidget
           onRestore: onRestore,
           onShowMenu: onShowMenu,
           heroTag: heroTag,
+          closeSemanticLabel: closeSemanticLabel,
+          maximizeSemanticLabel: maximizeSemanticLabel,
+          minimizeSemanticLabel: minimizeSemanticLabel,
+          restoreSemanticLabel: restoreSemanticLabel,
         );
       },
     );
@@ -644,6 +684,10 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.platform,
     super.buttonPadding,
     super.buttonSpacing,
+    super.closeSemanticLabel,
+    super.maximizeSemanticLabel,
+    super.minimizeSemanticLabel,
+    super.restoreSemanticLabel,
   });
 
   static const defaultShape = RoundedRectangleBorder(
