@@ -38,6 +38,7 @@ class YaruWindowControl extends StatefulWidget {
     required this.onTap,
     this.iconColor,
     this.backgroundColor,
+    this.semanticLabel,
   });
 
   /// Type of this window control, see [YaruWindowControlType].
@@ -62,6 +63,9 @@ class YaruWindowControl extends StatefulWidget {
   /// Color used to draw the control background decoration.
   /// Leave to null, or return null, to use the default value.
   final WidgetStateProperty<Color?>? backgroundColor;
+
+  /// Semantic label used for the control.
+  final String? semanticLabel;
 
   @override
   State<YaruWindowControl> createState() {
@@ -319,20 +323,23 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return _buildEventDetectors(
-      child: RepaintBoundary(
-        child: _buildBoxDecoration(
-          colorScheme: colorScheme,
-          child: Center(
-            child: AnimatedBuilder(
-              animation: _animationProgress,
-              builder: (context, child) => CustomPaint(
-                size: Size.square(_iconSize),
-                painter: _YaruWindowControlIconPainter(
-                  type: widget.type,
-                  style: style,
-                  iconColor: _getIconColor(colorScheme),
-                  progress: _animationProgress.value,
+    return Semantics(
+      label: widget.semanticLabel,
+      child: _buildEventDetectors(
+        child: RepaintBoundary(
+          child: _buildBoxDecoration(
+            colorScheme: colorScheme,
+            child: Center(
+              child: AnimatedBuilder(
+                animation: _animationProgress,
+                builder: (context, child) => CustomPaint(
+                  size: Size.square(_iconSize),
+                  painter: _YaruWindowControlIconPainter(
+                    type: widget.type,
+                    style: style,
+                    iconColor: _getIconColor(colorScheme),
+                    progress: _animationProgress.value,
+                  ),
                 ),
               ),
             ),
