@@ -108,6 +108,87 @@ void main() {
     await tester.pumpAndSettle();
     expectDetailPage(1);
   }, variant: orientationVariant);
+
+  testWidgets('availableWidth is updated with screen resize in portrait', (
+    tester,
+  ) async {
+    const variant = Orientation.portrait;
+    final initialSize = Size(variant.width, 480);
+    const length = 3;
+
+    await tester.pumpScaffold(
+      YaruMasterDetailPage(
+        length: length,
+        paneLayoutDelegate: const YaruFixedPaneDelegate(
+          paneSize: kYaruMasterDetailBreakpoint / 3,
+        ),
+        tileBuilder: (context, index, selected, availableWidth) =>
+            YaruMasterTile(title: Text(availableWidth.toString())),
+        pageBuilder: (context, index) => const SizedBox(),
+      ),
+      size: initialSize,
+    );
+
+    expect(
+      find.text(initialSize.width.toString()),
+      findsNWidgets(length),
+      reason: 'Available width should match initial screen width',
+    );
+
+    final newSize = Size(initialSize.width / 2, initialSize.height);
+    tester.view.physicalSize = newSize;
+    await tester.pump();
+
+    expect(
+      find.text(newSize.width.toString()),
+      findsNWidgets(length),
+      reason: 'Available width should update to new screen width',
+    );
+  });
+
+  testWidgets('availableWidth is updated when pane resized in landscape', (
+    tester,
+  ) async {
+    const variant = Orientation.landscape;
+    const length = 3;
+
+    const initialPaneSize = kYaruMasterDetailBreakpoint / 3;
+    const minPaneSize = initialPaneSize * 0.8;
+
+    await tester.pumpScaffold(
+      YaruMasterDetailPage(
+        length: length,
+        paneLayoutDelegate: const YaruResizablePaneDelegate(
+          initialPaneSize: initialPaneSize,
+          minPaneSize: minPaneSize,
+          minPageSize: 1,
+        ),
+        tileBuilder: (context, index, selected, availableWidth) =>
+            YaruMasterTile(title: Text(availableWidth.toString())),
+        pageBuilder: (context, index) => const SizedBox(),
+      ),
+      size: Size(variant.width, 480),
+    );
+
+    expect(
+      find.text(initialPaneSize.toString()),
+      findsNWidgets(length),
+      reason: 'Available width should match initial pane size',
+    );
+
+    // Resize pane to minimum
+    await tester.drag(
+      find.byKey(const ValueKey('YaruPanedView.leftPaneResizer')),
+      const Offset(-100, 0),
+    );
+    await tester.pump();
+
+    expect(
+      find.text(minPaneSize.toString()),
+      findsNWidgets(length),
+      reason: 'Available width should be updated when pane is resized',
+    );
+  });
 }
 
 final goldenVariant = ValueVariant({

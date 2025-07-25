@@ -196,6 +196,7 @@ class _YaruPanedViewState extends State<YaruPanedView> {
             _isHovering = false;
           }),
           child: GestureDetector(
+            key: const ValueKey('YaruPanedView.leftPaneResizer'),
             onPanStart: (details) => setState(() {
               _isDragging = true;
               _oldPaneSize = _paneSize;
