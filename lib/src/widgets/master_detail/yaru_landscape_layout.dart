@@ -41,7 +41,7 @@ class YaruLandscapeLayout extends StatefulWidget {
 
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
-  double? _paneWidth;
+  late final _paneWidth = ValueNotifier<double?>(0.0);
 
   @override
   void initState() {
@@ -54,6 +54,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   @override
   void dispose() {
     widget.controller.removeListener(_controllerCallback);
+    _paneWidth.dispose();
     super.dispose();
   }
 
@@ -87,13 +88,14 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
       page: _buildPage(context),
       layoutDelegate: widget.paneLayoutDelegate,
       includeSeparator: theme.includeSeparator ?? true,
-      onPaneSizeChange: (size) => _paneWidth = size,
+      onPaneSizeChange: (size) => _paneWidth.value = size,
     );
   }
 
   Widget _buildLeftPane(YaruMasterDetailThemeData theme) {
-    return Builder(
-      builder: (context) {
+    return ValueListenableBuilder(
+      valueListenable: _paneWidth,
+      builder: (context, _paneWidth, child) {
         return YaruTitleBarTheme(
           data: const YaruTitleBarThemeData(
             style: YaruTitleBarStyle.undecorated,
