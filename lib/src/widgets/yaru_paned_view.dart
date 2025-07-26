@@ -1,21 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/src/widgets/yaru_paned_view_layout_delegate.dart';
 
+typedef YaruPaneBuilder =
+    Widget Function(BuildContext context, double availableSpace);
+
 class YaruPanedView extends StatefulWidget {
   const YaruPanedView({
     super.key,
-    required this.pane,
-    required this.page,
+    required Widget this.pane,
+    required Widget this.page,
     required this.layoutDelegate,
     this.onPaneSizeChange,
     this.includeSeparator = true,
-  });
+  }) : paneBuilder = null,
+       pageBuilder = null;
+
+  const YaruPanedView.builder({
+    super.key,
+    required YaruPaneBuilder this.paneBuilder,
+    required WidgetBuilder this.pageBuilder,
+    required this.layoutDelegate,
+    this.onPaneSizeChange,
+    this.includeSeparator = true,
+  }) : pane = null,
+       page = null;
 
   /// Pane widget child.
-  final Widget pane;
+  final Widget? pane;
+
+  /// Pane widget child builder, taking the available space as a parameter.
+  final YaruPaneBuilder? paneBuilder;
 
   /// Page widget child.
-  final Widget page;
+  final Widget? page;
+
+  /// Page widget child builder.
+  final WidgetBuilder? pageBuilder;
 
   /// Controls the size, side and resizing capacity of the pane.
   final YaruPanedViewLayoutDelegate layoutDelegate;
@@ -73,18 +93,35 @@ class _YaruPanedViewState extends State<YaruPanedView> {
             candidatePaneSize: _paneSize,
           );
 
+          final page =
+              widget.page ??
+              widget.pageBuilder?.call(context) ??
+              const SizedBox();
+          final pane =
+              widget.pane ??
+              widget.paneBuilder?.call(context, _paneSize!) ??
+              const SizedBox();
+
           return _buildFlexContainer([
-            _buildPane(),
+            SizedBox(
+              width: widget.layoutDelegate.paneSide.isHorizontal
+                  ? _paneSize
+                  : null,
+              height: widget.layoutDelegate.paneSide.isVertical
+                  ? _paneSize
+                  : null,
+              child: pane,
+            ),
             if (widget.includeSeparator != false) _buildVerticalSeparator(),
             Expanded(
               child: widget.layoutDelegate.allowPaneResizing
                   ? Stack(
                       children: [
-                        widget.page,
+                        page,
                         _buildLeftPaneResizer(context, constraints, theme),
                       ],
                     )
-                  : widget.page,
+                  : page,
             ),
           ]);
         },
@@ -130,14 +167,6 @@ class _YaruPanedViewState extends State<YaruPanedView> {
                 : VerticalDirection.up,
             children: children,
           );
-  }
-
-  Widget _buildPane() {
-    return SizedBox(
-      width: widget.layoutDelegate.paneSide.isHorizontal ? _paneSize : null,
-      height: widget.layoutDelegate.paneSide.isVertical ? _paneSize : null,
-      child: widget.pane,
-    );
   }
 
   Widget _buildVerticalSeparator() {
