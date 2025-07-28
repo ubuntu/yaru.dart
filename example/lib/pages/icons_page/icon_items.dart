@@ -24,10 +24,7 @@ final List<IconItem> _staticIconItems = [
         if (data == null) {
           return const Placeholder();
         }
-        return Icon(
-          data,
-          size: iconSize,
-        );
+        return Icon(data, size: iconSize);
       },
     ),
 ];
@@ -48,9 +45,8 @@ final List<IconItem> _widgetIconItems = [
   IconItem(
     name: 'Placeholder',
     usage: 'YaruPlaceholderIcon()',
-    iconBuilder: (context, iconSize) => YaruPlaceholderIcon(
-      size: Size.square(iconSize),
-    ),
+    iconBuilder: (context, iconSize) =>
+        YaruPlaceholderIcon(size: Size.square(iconSize)),
   ),
 ];
 

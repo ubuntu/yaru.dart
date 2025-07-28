@@ -17,45 +17,20 @@ class _ButtonsState extends State<Buttons> {
     const icon = Icon(YaruIcons.notification_filled);
     final buttons = <(Widget, Widget)>[
       (
-        TextButton(
-          onPressed: () {},
-          child: const Text('Text'),
-        ),
-        const TextButton(
-          onPressed: null,
-          autofocus: true,
-          child: Text('Text'),
-        ),
+        TextButton(onPressed: () {}, child: const Text('Text')),
+        const TextButton(onPressed: null, autofocus: true, child: Text('Text')),
       ),
       (
-        OutlinedButton(
-          onPressed: () {},
-          child: const Text('Outlined'),
-        ),
-        const OutlinedButton(
-          onPressed: null,
-          child: Text('Outlined'),
-        ),
+        OutlinedButton(onPressed: () {}, child: const Text('Outlined')),
+        const OutlinedButton(onPressed: null, child: Text('Outlined')),
       ),
       (
-        FilledButton(
-          onPressed: () {},
-          child: const Text('Filled'),
-        ),
-        const FilledButton(
-          onPressed: null,
-          child: Text('Filled'),
-        ),
+        FilledButton(onPressed: () {}, child: const Text('Filled')),
+        const FilledButton(onPressed: null, child: Text('Filled')),
       ),
       (
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Elevated'),
-        ),
-        const ElevatedButton(
-          onPressed: null,
-          child: Text('Elevated'),
-        ),
+        ElevatedButton(onPressed: () {}, child: const Text('Elevated')),
+        const ElevatedButton(onPressed: null, child: Text('Elevated')),
       ),
       (
         ElevatedButton.icon(
@@ -70,34 +45,16 @@ class _ButtonsState extends State<Buttons> {
         ),
       ),
       (
-        IconButton.filled(
-          onPressed: () {},
-          icon: icon,
-        ),
-        const IconButton.filled(
-          onPressed: null,
-          icon: icon,
-        ),
+        IconButton.filled(onPressed: () {}, icon: icon),
+        const IconButton.filled(onPressed: null, icon: icon),
       ),
       (
-        IconButton.outlined(
-          onPressed: () {},
-          icon: icon,
-        ),
-        const IconButton.outlined(
-          onPressed: null,
-          icon: icon,
-        ),
+        IconButton.outlined(onPressed: () {}, icon: icon),
+        const IconButton.outlined(onPressed: null, icon: icon),
       ),
       (
-        IconButton.filledTonal(
-          onPressed: () {},
-          icon: icon,
-        ),
-        const IconButton.filledTonal(
-          onPressed: null,
-          icon: icon,
-        ),
+        IconButton.filledTonal(onPressed: () {}, icon: icon),
+        const IconButton.filledTonal(onPressed: null, icon: icon),
       ),
       (
         IconButton(
@@ -105,10 +62,7 @@ class _ButtonsState extends State<Buttons> {
           onPressed: () => setState(() => _selected = !_selected),
           icon: icon,
         ),
-        const IconButton(
-          onPressed: null,
-          icon: icon,
-        ),
+        const IconButton(onPressed: null, icon: icon),
       ),
     ];
 
@@ -118,10 +72,7 @@ class _ButtonsState extends State<Buttons> {
       runSpacing: kWrapSpacing,
       children: [
         for (final button in buttons)
-          Wrap(
-            spacing: kWrapSpacing,
-            children: [button.$1, button.$2],
-          ),
+          Wrap(spacing: kWrapSpacing, children: [button.$1, button.$2]),
       ],
     );
   }

@@ -42,12 +42,7 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
   ) {
     final o = other as YaruSwitchThemeData?;
     return YaruSwitchThemeData(
-      color: WidgetStateProperty.lerp<Color?>(
-        color,
-        o?.color,
-        t,
-        Color.lerp,
-      ),
+      color: WidgetStateProperty.lerp<Color?>(color, o?.color, t, Color.lerp),
       borderColor: WidgetStateProperty.lerp<Color?>(
         borderColor,
         o?.borderColor,
@@ -79,9 +74,7 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('color', color));
-    properties.add(
-      DiagnosticsProperty('borderColor', borderColor),
-    );
+    properties.add(DiagnosticsProperty('borderColor', borderColor));
     properties.add(DiagnosticsProperty('thumbColor', thumbColor));
     properties.add(DiagnosticsProperty('indicatorColor', indicatorColor));
     properties.add(DiagnosticsProperty('mouseCursor', mouseCursor));
@@ -111,11 +104,7 @@ class YaruSwitchThemeData extends ThemeExtension<YaruSwitchThemeData>
 }
 
 class YaruSwitchTheme extends InheritedTheme {
-  const YaruSwitchTheme({
-    super.key,
-    required this.data,
-    required super.child,
-  });
+  const YaruSwitchTheme({super.key, required this.data, required super.child});
 
   final YaruSwitchThemeData data;
 

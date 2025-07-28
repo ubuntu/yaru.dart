@@ -60,9 +60,7 @@ class _DialogPageState extends State<DialogPage> {
                                 ? 'You can close me'
                                 : 'You cannot close me',
                           ),
-                          subtitle: Text(
-                            isCloseable ? 'Please' : 'No way',
-                          ),
+                          subtitle: Text(isCloseable ? 'Please' : 'No way'),
                           icon: Text(
                             isCloseable ? '🪟' : '💅',
                             style: const TextStyle(fontSize: 30),

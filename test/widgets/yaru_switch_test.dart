@@ -37,22 +37,18 @@ void main() {
         home: Scaffold(
           body: Column(
             children: [
-              YaruSwitch(
-                value: false,
-                onChanged: (_) {},
-              ),
-              const YaruSwitch(
-                value: false,
-                onChanged: null,
-              ),
+              YaruSwitch(value: false, onChanged: (_) {}),
+              const YaruSwitch(value: false, onChanged: null),
             ],
           ),
         ),
       ),
     );
 
-    final gesture =
-        await tester.createGesture(kind: PointerDeviceKind.mouse, pointer: 1);
+    final gesture = await tester.createGesture(
+      kind: PointerDeviceKind.mouse,
+      pointer: 1,
+    );
     await gesture.addPointer(location: Offset.zero);
     addTearDown(gesture.removePointer);
 

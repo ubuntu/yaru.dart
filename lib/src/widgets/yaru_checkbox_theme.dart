@@ -42,12 +42,7 @@ class YaruCheckboxThemeData extends ThemeExtension<YaruCheckboxThemeData>
   ) {
     final o = other as YaruCheckboxThemeData?;
     return YaruCheckboxThemeData(
-      color: WidgetStateProperty.lerp<Color?>(
-        color,
-        o?.color,
-        t,
-        Color.lerp,
-      ),
+      color: WidgetStateProperty.lerp<Color?>(color, o?.color, t, Color.lerp),
       borderColor: WidgetStateProperty.lerp<Color?>(
         borderColor,
         o?.borderColor,
@@ -79,9 +74,7 @@ class YaruCheckboxThemeData extends ThemeExtension<YaruCheckboxThemeData>
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('color', color));
-    properties.add(
-      DiagnosticsProperty('borderColor', borderColor),
-    );
+    properties.add(DiagnosticsProperty('borderColor', borderColor));
     properties.add(DiagnosticsProperty('checkmarkColor', checkmarkColor));
     properties.add(DiagnosticsProperty('indicatorColor', indicatorColor));
     properties.add(DiagnosticsProperty('mouseCursor', mouseCursor));
@@ -120,8 +113,8 @@ class YaruCheckboxTheme extends InheritedTheme {
   final YaruCheckboxThemeData data;
 
   static YaruCheckboxThemeData of(BuildContext context) {
-    final theme =
-        context.dependOnInheritedWidgetOfExactType<YaruCheckboxTheme>();
+    final theme = context
+        .dependOnInheritedWidgetOfExactType<YaruCheckboxTheme>();
     return theme?.data ??
         Theme.of(context).extension<YaruCheckboxThemeData>() ??
         const YaruCheckboxThemeData();

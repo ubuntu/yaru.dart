@@ -3,6 +3,12 @@ import 'package:yaru/src/widgets/yaru_linear_progress_indicator_theme.dart';
 
 import 'yaru_progress_indicator.dart';
 
+const _kIndeterminateAnimationDuration = 8000;
+const _kDefaultStrokeWidth = 4.0;
+const _kIndeterminateAnimationCurve = Curves.easeInOutSine;
+const _kDefaultTrackColorOpacity = 0.25;
+const _kIndeterminateAnimationCycles = 7.0;
+
 class YaruLinearProgressIndicator extends YaruProgressIndicator {
   /// Creates a Yaru linear progress indicator.
   ///
@@ -10,7 +16,6 @@ class YaruLinearProgressIndicator extends YaruProgressIndicator {
   const YaruLinearProgressIndicator({
     super.key,
     super.value,
-    this.minHeight,
     super.strokeWidth,
     super.trackStrokeWidth,
     super.color,
@@ -19,11 +24,7 @@ class YaruLinearProgressIndicator extends YaruProgressIndicator {
     super.trackValueColor,
     super.semanticsLabel,
     super.semanticsValue,
-  }) : assert(minHeight == null || minHeight > 0);
-
-  /// {@macro yaru.widget.YaruProgressIndicator.strokeWidth}
-  @Deprecated('Use [strokeWidth] instead.')
-  final double? minHeight;
+  });
 
   @override
   State<YaruLinearProgressIndicator> createState() =>
@@ -33,18 +34,13 @@ class YaruLinearProgressIndicator extends YaruProgressIndicator {
 class _YaruLinearProgressIndicatorState
     extends State<YaruLinearProgressIndicator>
     with SingleTickerProviderStateMixin {
-  static final Animatable<double> _positionTween = Tween(begin: 0.0, end: 6.0)
-      .chain(CurveTween(curve: kIndeterminateAnimationCurve));
-  static final Animatable<double> _speedTween = Tween(begin: -1.0, end: 1.0)
-      .chain(CurveTween(curve: kIndeterminateAnimationCurve));
-
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: kIndeterminateAnimationDuration),
+      duration: const Duration(milliseconds: _kIndeterminateAnimationDuration),
       vsync: this,
     );
 
@@ -74,24 +70,24 @@ class _YaruLinearProgressIndicatorState
     final theme = Theme.of(context);
     final progressTheme = YaruLinearProgressIndicatorTheme.of(context);
 
-    final color = widget.valueColor?.value ??
+    final color =
+        widget.valueColor?.value ??
         widget.color ??
         progressTheme?.color ??
         theme.colorScheme.primary;
-    final defaultTrackColor =
-        widget.value != null ? color.withOpacity(.25) : color.withOpacity(.1);
-    final trackColor = widget.trackValueColor?.value ??
+    final trackColor =
+        widget.trackValueColor?.value ??
         widget.trackColor ??
         progressTheme?.trackColor ??
-        defaultTrackColor;
-    final strokeWidth = widget.strokeWidth ??
-        // ignore: deprecated_member_use_from_same_package
-        widget.minHeight ??
+        color.withValues(alpha: _kDefaultTrackColorOpacity);
+    final strokeWidth =
+        widget.strokeWidth ??
         progressTheme?.strokeWidth ??
-        kDefaultStrokeWidth;
-    final trackStrokeWidth = widget.trackStrokeWidth ??
+        _kDefaultStrokeWidth;
+    final trackStrokeWidth =
+        widget.trackStrokeWidth ??
         progressTheme?.trackStrokeWidth ??
-        widget.computeDefaultTrackSize(strokeWidth);
+        strokeWidth;
 
     Widget buildContainer(BuildContext context, Widget child) {
       return widget.buildSemanticsWrapper(
@@ -101,9 +97,7 @@ class _YaruLinearProgressIndicatorState
             minWidth: double.infinity,
             minHeight: strokeWidth,
           ),
-          child: RepaintBoundary(
-            child: child,
-          ),
+          child: RepaintBoundary(child: child),
         ),
       );
     }
@@ -127,18 +121,27 @@ class _YaruLinearProgressIndicatorState
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
+        final progress = _controller.value;
+        final spacingProgress =
+            1 -
+            Tween<double>(begin: -1.0, end: 1.0)
+                .chain(CurveTween(curve: _kIndeterminateAnimationCurve))
+                .transform(progress)
+                .abs();
+        final trackProgress =
+            Tween<double>(begin: 0.0, end: _kIndeterminateAnimationCycles)
+                .chain(CurveTween(curve: _kIndeterminateAnimationCurve))
+                .transform(progress);
+
         return buildContainer(
           context,
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(strokeWidth)),
+          ClipRect(
             child: CustomPaint(
               painter: _IndeterminateYaruLinearProgressIndicatorPainter(
                 color,
-                trackColor,
                 strokeWidth,
-                trackStrokeWidth,
-                _positionTween.evaluate(_controller),
-                _speedTween.evaluate(_controller).abs(),
+                spacingProgress,
+                trackProgress,
                 Directionality.of(context),
               ),
             ),
@@ -152,118 +155,71 @@ class _YaruLinearProgressIndicatorState
 class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   const _IndeterminateYaruLinearProgressIndicatorPainter(
     this.color,
-    this.trackColor,
     this.strokeWidth,
-    this.trackStrokeWidth,
-    this.position,
-    this.speed,
+    this.spacingProgress,
+    this.trackProgress,
     this.textDirection,
   ) : super();
 
   final Color color;
-  final Color trackColor;
   final double strokeWidth;
-  final double trackStrokeWidth;
-  final double position;
-  final double speed;
+  final double spacingProgress;
+  final double trackProgress;
   final TextDirection textDirection;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final realPosition = position - position.truncate();
-    final realStrokeWidth = size.height;
-    final realTrackStrokeWidth =
-        trackStrokeWidth * (realStrokeWidth / strokeWidth);
-    final strokeLength = size.width / 6;
+    canvas.saveLayer(null, Paint());
+
+    final realTrackPosition = trackProgress - trackProgress.truncate();
+
     final y = size.height / 2;
 
-    final fillPaint = Paint()
+    final strokePaint = Paint()
       ..color = color
-      ..style = PaintingStyle.fill;
-    final trackStrokePaint = Paint()
-      ..color = trackColor
-      ..strokeWidth = realTrackStrokeWidth
+      ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
-
-    if (textDirection == TextDirection.rtl) {
-      canvas.scale(-1, 1);
-      canvas.translate(-size.width, 0);
-    }
+    final invertStrokePaint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.square
+      ..style = PaintingStyle.stroke
+      ..blendMode = BlendMode.dstOut;
 
     canvas.drawLine(
-      Offset(realTrackStrokeWidth / 2, y),
-      Offset(size.width - realTrackStrokeWidth / 2, y),
-      trackStrokePaint,
+      Offset(strokeWidth / 2, y),
+      Offset(size.width - strokeWidth / 2, y),
+      strokePaint,
     );
 
-    for (var i = 0; i < 3; i++) {
-      final x1 = size.width * realPosition +
-          (strokeLength * i / 2 + (strokeLength * i * speed));
-      final x2 = size.width * realPosition +
-          size.width / 6 +
-          (strokeLength * i / 2 + (strokeLength * i * speed));
-
-      canvas.drawLine(
-        Offset(x1, y),
-        Offset(x2, y),
-        _getGradientPaint(color, x1, strokeLength, size.height, speed),
-      );
-      canvas.drawCircle(Offset(x2, y), size.height / 2, fillPaint);
-
-      // If a line overflow on the right, redraw it on the left
-      if (x2 > size.width) {
-        canvas.drawLine(
-          Offset(x1 - size.width, y),
-          Offset(x2 - size.width, y),
-          _getGradientPaint(
-            color,
-            x1 - size.width,
-            strokeLength,
-            size.height,
-            speed,
-          ),
-        );
-        canvas.drawCircle(
-          Offset(x2 - size.width, y),
-          size.height / 2,
-          fillPaint,
-        );
-      }
+    final points = <Offset>[];
+    for (var i = -1; i <= 1; i++) {
+      final x =
+          size.width / 2 +
+          50 * i +
+          (size.width / 3 - 50) * spacingProgress * i +
+          size.width * realTrackPosition;
+      points.add(Offset(x < size.width ? x : x - size.width, y));
     }
-  }
 
-  Paint _getGradientPaint(
-    Color color,
-    double x,
-    double width,
-    double height,
-    double speed,
-  ) {
-    final gradient = LinearGradient(
-      colors: [
-        color.withAlpha(0),
-        color.withAlpha(20 + (230 * speed).toInt()),
-        color.withAlpha(150 + (100 * speed).toInt()),
-      ],
-      stops: const [0.15, 0.75, 1],
-    );
+    for (final point in points) {
+      final gap = size.width / 20 * spacingProgress;
+      canvas.drawLine(
+        point + Offset(-gap / 2, 0),
+        point + Offset(gap / 2, 0),
+        invertStrokePaint,
+      );
+    }
 
-    return Paint()
-      ..shader = gradient.createShader(Rect.fromLTWH(x, 0.0, width, height))
-      ..strokeWidth = height
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
+    canvas.restore();
   }
 
   @override
   bool shouldRepaint(
     _IndeterminateYaruLinearProgressIndicatorPainter oldDelegate,
   ) {
-    return oldDelegate.color != color ||
-        oldDelegate.position != position ||
-        oldDelegate.speed != speed ||
-        oldDelegate.textDirection != textDirection;
+    return true;
   }
 }
 
@@ -289,8 +245,8 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
     final revisedValue = value >= 0 && value <= 1
         ? value
         : value < 0
-            ? 0
-            : 1;
+        ? 0
+        : 1;
     final realStrokeWidth = size.height;
     final realTrackStrokeWidth =
         trackStrokeWidth * (realStrokeWidth / strokeWidth);
@@ -339,6 +295,9 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   ) {
     return oldDelegate.value != value ||
         oldDelegate.color != color ||
+        oldDelegate.trackColor != trackColor ||
+        oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.trackStrokeWidth != trackStrokeWidth ||
         oldDelegate.textDirection != textDirection;
   }
 }

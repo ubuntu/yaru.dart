@@ -25,11 +25,7 @@ void main() {
     }
 
     await tester.pumpWidget(
-      builder(
-        title: const Text('title'),
-        subtitle: null,
-        secondary: null,
-      ),
+      builder(title: const Text('title'), subtitle: null, secondary: null),
     );
     expect(find.text('title'), findsOneWidget);
     expect(find.byType(YaruSwitch), findsOneWidget);

@@ -5,21 +5,11 @@ import '../icon_items.dart';
 import '../utils.dart';
 import 'icon_usage.dart';
 
-const _iconDialogSizes = [
-  16.0,
-  24.0,
-  32.0,
-  48.0,
-  64.0,
-  128.0,
-];
+const _iconDialogSizes = [16.0, 24.0, 32.0, 48.0, 64.0, 128.0];
 const _dialogContentPaddingValue = 16.0;
 
 class IconDialog extends StatelessWidget {
-  const IconDialog({
-    super.key,
-    required this.iconItem,
-  });
+  const IconDialog({super.key, required this.iconItem});
 
   final IconItem iconItem;
 
@@ -27,11 +17,10 @@ class IconDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return SimpleDialog(
       titlePadding: EdgeInsets.zero,
-      contentPadding:
-          const EdgeInsets.symmetric(vertical: _dialogContentPaddingValue),
-      title: YaruDialogTitleBar(
-        title: Text(beautifyIconName(iconItem.name)),
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: _dialogContentPaddingValue,
       ),
+      title: YaruDialogTitleBar(title: Text(beautifyIconName(iconItem.name))),
       children: [
         Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -39,7 +28,8 @@ class IconDialog extends StatelessWidget {
             for (final size in _iconDialogSizes)
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: (_iconDialogSizes.last - size) / 10 +
+                  horizontal:
+                      (_iconDialogSizes.last - size) / 10 +
                       _dialogContentPaddingValue / 2,
                 ),
                 child: Column(
@@ -47,16 +37,13 @@ class IconDialog extends StatelessWidget {
                     DecoratedBox(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(size / 10),
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withOpacity(0.05),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.05),
                       ),
                       child: iconItem.iconBuilder(context, size),
                     ),
-                    const SizedBox(
-                      height: 6,
-                    ),
+                    const SizedBox(height: 6),
                     Text(
                       '${size.toInt().toString()}px',
                       style: Theme.of(context).textTheme.bodySmall,

@@ -75,10 +75,7 @@ class YaruDetailPage extends StatelessWidget {
 
     return PreferredSize(
       preferredSize: appBar!.preferredSize,
-      child: Hero(
-        tag: heroTag!,
-        child: appBar!,
-      ),
+      child: Hero(tag: heroTag!, child: appBar!),
     );
   }
 

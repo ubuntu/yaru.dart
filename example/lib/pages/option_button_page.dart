@@ -23,23 +23,17 @@ class _OptionButtonPageState extends State<OptionButtonPage> {
                   onPressed: () {},
                   child: const Icon(YaruIcons.search),
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                const SizedBox(width: 10.0),
                 YaruOptionButton(
                   onPressed: () {},
                   child: const Icon(YaruIcons.music_note),
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                const SizedBox(width: 10.0),
                 YaruOptionButton(
                   onPressed: () {},
                   child: const Icon(YaruIcons.address_book),
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                const SizedBox(width: 10.0),
                 YaruOptionButton.color(
                   onPressed: () {},
                   color: Theme.of(context).primaryColor,

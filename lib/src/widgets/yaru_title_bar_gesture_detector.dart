@@ -25,19 +25,19 @@ class YaruTitleBarGestureDetector extends StatelessWidget {
       gestures: {
         PanGestureRecognizer:
             GestureRecognizerFactoryWithHandlers<PanGestureRecognizer>(
-          PanGestureRecognizer.new,
-          (instance) => instance
-            ..onStart = onDrag
-            ..gestureSettings = settings,
-        ),
+              PanGestureRecognizer.new,
+              (instance) => instance
+                ..onStart = onDrag
+                ..gestureSettings = settings,
+            ),
         _PassiveTapGestureRecognizer:
             GestureRecognizerFactoryWithHandlers<_PassiveTapGestureRecognizer>(
-          _PassiveTapGestureRecognizer.new,
-          (instance) => instance
-            ..onDoubleTap = onDoubleTap
-            ..onSecondaryTap = onSecondaryTap
-            ..gestureSettings = settings,
-        ),
+              _PassiveTapGestureRecognizer.new,
+              (instance) => instance
+                ..onDoubleTap = onDoubleTap
+                ..onSecondaryTap = onSecondaryTap
+                ..gestureSettings = settings,
+            ),
       },
       child: child,
     );

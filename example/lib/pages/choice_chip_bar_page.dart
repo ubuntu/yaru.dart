@@ -9,9 +9,7 @@ class ChoiceChipBarPage extends StatefulWidget {
 }
 
 class _ChoiceChipBarPageState extends State<ChoiceChipBarPage> {
-  final _labels = [
-    for (var i = 0; i < 15; i++) 'Choice $i',
-  ];
+  final _labels = [for (var i = 0; i < 15; i++) 'Choice $i'];
 
   late List<bool> _isSelected;
 
@@ -42,17 +40,14 @@ class _ChoiceChipBarPageState extends State<ChoiceChipBarPage> {
             ),
             Expanded(
               child: ListView(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 50,
+                  vertical: 20,
+                ),
                 children: [
                   for (int i = 0; i < _labels.length; i++)
                     if (_isSelected[i])
-                      Text(
-                        _labels[i],
-                        style: const TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
+                      Text(_labels[i], style: const TextStyle(fontSize: 30)),
                 ],
               ),
             ),

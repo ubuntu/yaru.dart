@@ -8,8 +8,10 @@ import 'yaru_switch_button.dart';
 import 'yaru_switch_theme.dart';
 import 'yaru_togglable.dart';
 
-const _kSwitchActivableAreaPadding =
-    EdgeInsets.symmetric(horizontal: 2, vertical: 5);
+const _kSwitchActivableAreaPadding = EdgeInsets.symmetric(
+  horizontal: 2,
+  vertical: 5,
+);
 const _kSwitchSize = Size(55, 30);
 const _kSwitchThumbSizeFactor = 0.8;
 
@@ -114,12 +116,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
-      FlagProperty(
-        'value',
-        value: checked,
-        ifTrue: 'on',
-        ifFalse: 'off',
-      ),
+      FlagProperty('value', value: checked, ifTrue: 'on', ifFalse: 'off'),
     );
     properties.add(
       ObjectFlagProperty<ValueChanged<bool>>(
@@ -165,56 +162,57 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
     const unselectedState = <WidgetState>{};
     const selectedState = {WidgetState.selected};
     const disabledState = {WidgetState.disabled};
-    const selectedDisabledState = {
-      WidgetState.selected,
-      WidgetState.disabled,
-    };
+    const selectedDisabledState = {WidgetState.selected, WidgetState.disabled};
 
     final defaultBorderColor = colorScheme.isHighContrast
         ? colorScheme.outlineVariant
         : Colors.transparent;
 
     // Normal colors
-    final uncheckedColor = switchTheme.color?.resolve(unselectedState) ??
-        colorScheme.onSurface.withOpacity(.25);
+    final uncheckedColor =
+        switchTheme.color?.resolve(unselectedState) ??
+        colorScheme.onSurface.withValues(alpha: 0.25);
     final uncheckedBorderColor =
         switchTheme.borderColor?.resolve(unselectedState) ?? defaultBorderColor;
     final uncheckedThumbColor =
         switchTheme.thumbColor?.resolve(unselectedState) ?? Colors.white;
-    final checkedColor = widget.selectedColor ??
+    final checkedColor =
+        widget.selectedColor ??
         switchTheme.color?.resolve(selectedState) ??
         painter.checkedColor;
     final checkedBorderColor =
         switchTheme.borderColor?.resolve(selectedState) ?? defaultBorderColor;
-    final checkedThumbColor = widget.thumbColor ??
+    final checkedThumbColor =
+        widget.thumbColor ??
         switchTheme.thumbColor?.resolve(selectedState) ??
         painter.checkmarkColor;
 
     // Disabled colors
-    final disabledUncheckedColor = switchTheme.color?.resolve(disabledState) ??
+    final disabledUncheckedColor =
+        switchTheme.color?.resolve(disabledState) ??
         painter.disabledUncheckedColor;
     final disabledUncheckedBorderColor =
         switchTheme.borderColor?.resolve(disabledState) ?? defaultBorderColor;
     final disabledUncheckedThumbColor =
         switchTheme.thumbColor?.resolve(disabledState) ??
-            colorScheme.onSurface.withOpacity(.4);
+        colorScheme.onSurface.withValues(alpha: 0.4);
     final disabledCheckedColor =
         switchTheme.color?.resolve(selectedDisabledState) ??
-            painter.disabledCheckedColor;
+        painter.disabledCheckedColor;
     final disabledCheckedBorderColor =
         switchTheme.borderColor?.resolve(selectedDisabledState) ??
-            defaultBorderColor;
+        defaultBorderColor;
     final disabledCheckedThumbColor =
         switchTheme.thumbColor?.resolve(selectedDisabledState) ??
-            disabledUncheckedThumbColor;
+        disabledUncheckedThumbColor;
 
     // Indicator colors
     final hoverIndicatorColor =
         switchTheme.indicatorColor?.resolve({WidgetState.hovered}) ??
-            painter.hoverIndicatorColor;
+        painter.hoverIndicatorColor;
     final focusIndicatorColor =
         switchTheme.indicatorColor?.resolve({WidgetState.focused}) ??
-            painter.focusIndicatorColor;
+        painter.focusIndicatorColor;
 
     return _maybeBuildGestureDetector(
       buildToggleable(
@@ -233,9 +231,11 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
           ..disabledCheckedThumbColor = disabledCheckedThumbColor
           ..hoverIndicatorColor = hoverIndicatorColor
           ..focusIndicatorColor = focusIndicatorColor,
-        mouseCursor: widget.mouseCursor ??
-            switchTheme.mouseCursor
-                ?.resolve({if (!widget.interactive) WidgetState.disabled}),
+        mouseCursor:
+            widget.mouseCursor ??
+            switchTheme.mouseCursor?.resolve({
+              if (!widget.interactive) WidgetState.disabled,
+            }),
       ),
     );
   }
@@ -302,21 +302,14 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
   late Color disabledUncheckedThumbColor;
 
   @override
-  void paintTogglable(
-    Canvas canvas,
-    Size size,
-    double t,
-  ) {
+  void paintTogglable(Canvas canvas, Size size, double t) {
     _drawBox(canvas, size, t);
     _drawThumb(canvas, size, t);
   }
 
   void _drawBox(Canvas canvas, Size size, double t) {
     canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Offset.zero & size,
-        Radius.circular(size.height),
-      ),
+      RRect.fromRectAndRadius(Offset.zero & size, Radius.circular(size.height)),
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedColor, checkedColor, t)!
@@ -326,12 +319,7 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
-        Rect.fromLTWH(
-          0.5,
-          0.5,
-          size.width - 1.0,
-          size.height - 1.0,
-        ),
+        Rect.fromLTWH(0.5, 0.5, size.width - 1.0, size.height - 1.0),
         Radius.circular(size.height),
       ),
       Paint()
@@ -348,10 +336,7 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
 
   void _drawThumb(Canvas canvas, Size size, double t) {
     final margin = (size.height - size.height * _kSwitchThumbSizeFactor) / 2;
-    final innerSize = Size(
-      size.width - margin * 2,
-      size.height - margin * 2,
-    );
+    final innerSize = Size(size.width - margin * 2, size.height - margin * 2);
     final radius = innerSize.height / 2;
 
     final start = Offset(radius + margin, radius + margin);

@@ -56,9 +56,7 @@ class _SelectableContainerPageState extends State<SelectableContainerPage> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               YaruSelectableContainer(
                 selected: _isTextSelected,
                 onTap: () => setState(() => _isTextSelected = !_isTextSelected),
@@ -67,9 +65,7 @@ class _SelectableContainerPageState extends State<SelectableContainerPage> {
                   child: Text('This is just text but can be selected!'),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               YaruSelectableContainer(
                 borderRadius: BorderRadius.circular(100.0),
                 selected: _isOvalSelected,

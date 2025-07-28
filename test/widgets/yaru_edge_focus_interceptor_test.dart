@@ -20,21 +20,13 @@ void main() {
       home: Scaffold(
         body: Column(
           children: [
-            Focus(
-              focusNode: previousFocusNode,
-              child: const SizedBox.shrink(),
-            ),
+            Focus(focusNode: previousFocusNode, child: const SizedBox.shrink()),
             YaruEdgeFocusInterceptor(
               onFocusFromPreviousNode: previousCallback.call,
               onFocusFromNextNode: nextCallback.call,
-              child: const Focus(
-                child: SizedBox.shrink(),
-              ),
+              child: const Focus(child: SizedBox.shrink()),
             ),
-            Focus(
-              focusNode: nextFocusNode,
-              child: const SizedBox.shrink(),
-            ),
+            Focus(focusNode: nextFocusNode, child: const SizedBox.shrink()),
           ],
         ),
       ),

@@ -45,8 +45,8 @@ class YaruScrollViewUndershoot extends StatefulWidget {
     this.startUndershoot = true,
     this.endUndershoot = true,
     required this.builder,
-  })  : controller = null,
-        child = null;
+  }) : controller = null,
+       child = null;
 
   /// Controller that manage the related scroll view.
   final ScrollController? controller;
@@ -85,13 +85,12 @@ class _YaruScrollViewUndershootState extends State<YaruScrollViewUndershoot> {
   void initState() {
     super.initState();
 
-    _controller =
-        widget.controller != null ? widget.controller! : ScrollController();
+    _controller = widget.controller != null
+        ? widget.controller!
+        : ScrollController();
 
     _controller.addListener(_onScroll);
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => _onScroll(),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) => _onScroll());
   }
 
   @override
@@ -131,15 +130,9 @@ class _YaruScrollViewUndershootState extends State<YaruScrollViewUndershoot> {
             ? widget.builder!.call(context, _controller)
             : widget.child!,
         if (widget.startUndershoot)
-          _buildUndershoot(
-            position: _UndershootPosition.start,
-            light: light,
-          ),
+          _buildUndershoot(position: _UndershootPosition.start, light: light),
         if (widget.endUndershoot)
-          _buildUndershoot(
-            position: _UndershootPosition.end,
-            light: light,
-          ),
+          _buildUndershoot(position: _UndershootPosition.end, light: light),
       ],
     );
   }
@@ -183,7 +176,7 @@ class _YaruScrollViewUndershootState extends State<YaruScrollViewUndershoot> {
               begin: alignment,
               end: -alignment,
               colors: [
-                Colors.black.withOpacity(light ? 0.1 : 0.3),
+                Colors.black.withValues(alpha: light ? 0.1 : 0.3),
                 Colors.transparent,
               ],
             ),

@@ -57,15 +57,18 @@ class _YaruHorizontalPageTransitions extends StatelessWidget {
     required Animation<double> animation,
     required Animation<double> secondaryAnimation,
     required this.child,
-  })  : _position = animation.drive(_tween.chain(_fastOutSlowInTween)),
-        _secondaryPosition = secondaryAnimation
-            .drive(_secondaryTween.chain(_fastOutSlowInTween)),
-        _opacity = animation.drive(_easeInTween),
-        _secondaryOpacity = secondaryAnimation.drive(_easeInTween);
+  }) : _position = animation.drive(_tween.chain(_fastOutSlowInTween)),
+       _secondaryPosition = secondaryAnimation.drive(
+         _secondaryTween.chain(_fastOutSlowInTween),
+       ),
+       _opacity = animation.drive(_easeInTween),
+       _secondaryOpacity = secondaryAnimation.drive(_easeInTween);
 
   static final _tween = Tween(begin: const Offset(0.2, 0.0), end: Offset.zero);
-  static final _secondaryTween =
-      Tween(begin: Offset.zero, end: const Offset(-0.2, 0.0));
+  static final _secondaryTween = Tween(
+    begin: Offset.zero,
+    end: const Offset(-0.2, 0.0),
+  );
   static final _fastOutSlowInTween = CurveTween(curve: Curves.fastOutSlowIn);
   static final _easeInTween = CurveTween(curve: Curves.easeIn);
 
@@ -115,11 +118,12 @@ class _YaruVerticalPageTransitions extends StatelessWidget {
     required Animation<double> animation,
     required Animation<double> secondaryAnimation,
     required this.child,
-  })  : _position = animation.drive(_tween.chain(_fastOutSlowInTween)),
-        _secondaryPosition = secondaryAnimation
-            .drive(_secondaryTween.chain(_fastOutSlowInTween)),
-        _opacity = animation.drive(_easeInTween),
-        _secondaryOpacity = secondaryAnimation.drive(_easeOutTween);
+  }) : _position = animation.drive(_tween.chain(_fastOutSlowInTween)),
+       _secondaryPosition = secondaryAnimation.drive(
+         _secondaryTween.chain(_fastOutSlowInTween),
+       ),
+       _opacity = animation.drive(_easeInTween),
+       _secondaryOpacity = secondaryAnimation.drive(_easeOutTween);
 
   static final _tween = Tween(begin: const Offset(0.0, 0.1), end: Offset.zero);
   static final _secondaryTween = Tween(begin: Offset.zero, end: Offset.zero);

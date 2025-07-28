@@ -13,13 +13,11 @@ class ExampleDarkLightToggleButton extends StatelessWidget with WatchItMixin {
 
     return IconButton(
       tooltip: 'ThemeMode (System, Light, Dark)',
-      onPressed: () => di<ExampleModel>().setThemeMode(
-        switch (themeMode) {
-          ThemeMode.system => ThemeMode.light,
-          ThemeMode.light => ThemeMode.dark,
-          ThemeMode.dark => ThemeMode.system,
-        },
-      ),
+      onPressed: () => di<ExampleModel>().setThemeMode(switch (themeMode) {
+        ThemeMode.system => ThemeMode.light,
+        ThemeMode.light => ThemeMode.dark,
+        ThemeMode.dark => ThemeMode.system,
+      }),
       icon: switch (themeMode) {
         ThemeMode.system => const Icon(YaruIcons.private_mask),
         ThemeMode.light => const Icon(YaruIcons.sun),

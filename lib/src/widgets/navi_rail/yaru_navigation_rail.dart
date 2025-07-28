@@ -13,11 +13,11 @@ class YaruNavigationRail extends StatelessWidget {
     required this.onDestinationSelected,
     this.leading,
     this.trailing,
-  })  : assert(length >= 2),
-        assert(
-          selectedIndex == null ||
-              (0 <= selectedIndex && selectedIndex < length),
-        );
+  }) : assert(length >= 2),
+       assert(
+         selectedIndex == null ||
+             (0 <= selectedIndex && selectedIndex < length),
+       );
 
   /// The total number of pages.
   final int length;
@@ -55,11 +55,7 @@ class YaruNavigationRail extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(bottom: 1.0),
               decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: colorScheme.outline,
-                  ),
-                ),
+                border: Border(bottom: BorderSide(color: colorScheme.outline)),
               ),
               child: leading!,
             ),
@@ -73,11 +69,8 @@ class YaruNavigationRail extends StatelessWidget {
                       selected: i == selectedIndex,
                       onTap: () => onDestinationSelected?.call(i),
                       child: Builder(
-                        builder: (context) => itemBuilder(
-                          context,
-                          i,
-                          i == selectedIndex,
-                        ),
+                        builder: (context) =>
+                            itemBuilder(context, i, i == selectedIndex),
                       ),
                     ),
                 ],
@@ -88,11 +81,7 @@ class YaruNavigationRail extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 1.0),
               decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: colorScheme.outline,
-                  ),
-                ),
+                border: Border(top: BorderSide(color: colorScheme.outline)),
               ),
               child: trailing!,
             ),

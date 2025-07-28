@@ -9,10 +9,7 @@ import 'package:yaru/yaru.dart';
 import 'example_model.dart';
 
 class CodeSnippedButton extends StatelessWidget {
-  const CodeSnippedButton({
-    super.key,
-    required this.snippetUrl,
-  });
+  const CodeSnippedButton({super.key, required this.snippetUrl});
 
   final String snippetUrl;
 
@@ -33,10 +30,8 @@ class CodeSnippedButton extends StatelessWidget {
   }
 }
 
-class _CodeDialog extends StatefulWidget {
-  const _CodeDialog({
-    required this.snippetUrl,
-  });
+class _CodeDialog extends StatefulWidget with WatchItStatefulWidgetMixin {
+  const _CodeDialog({required this.snippetUrl});
 
   final String snippetUrl;
 
@@ -50,9 +45,7 @@ class _CodeDialogState extends State<_CodeDialog> {
   @override
   void initState() {
     super.initState();
-    _snippet = di<ExampleModel>().getCodeSnippet(
-      widget.snippetUrl,
-    );
+    _snippet = di<ExampleModel>().getCodeSnippet(widget.snippetUrl);
   }
 
   @override
@@ -71,9 +64,7 @@ class _CodeDialogState extends State<_CodeDialog> {
                   tooltip: 'Copy',
                   onPressed: () async {
                     await _snippet.then(
-                      (value) => Clipboard.setData(
-                        ClipboardData(text: value),
-                      ),
+                      (value) => Clipboard.setData(ClipboardData(text: value)),
                     );
                   },
                 ),
@@ -104,9 +95,7 @@ class _CodeDialogState extends State<_CodeDialog> {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(
-                    child: YaruCircularProgressIndicator(
-                      strokeWidth: 3,
-                    ),
+                    child: YaruCircularProgressIndicator(strokeWidth: 3),
                   );
                 }
 
@@ -119,7 +108,9 @@ class _CodeDialogState extends State<_CodeDialog> {
                         : vsTheme,
                     padding: const EdgeInsets.all(12),
                     textStyle: const TextStyle(
+                      fontFamily: 'UbuntuMono',
                       fontSize: 16,
+                      package: 'yaru',
                     ),
                   ),
                 );

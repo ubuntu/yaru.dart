@@ -42,12 +42,7 @@ class YaruRadioThemeData extends ThemeExtension<YaruRadioThemeData>
   ) {
     final o = other as YaruRadioThemeData?;
     return YaruRadioThemeData(
-      color: WidgetStateProperty.lerp<Color?>(
-        color,
-        o?.color,
-        t,
-        Color.lerp,
-      ),
+      color: WidgetStateProperty.lerp<Color?>(color, o?.color, t, Color.lerp),
       borderColor: WidgetStateProperty.lerp<Color?>(
         borderColor,
         o?.borderColor,
@@ -79,9 +74,7 @@ class YaruRadioThemeData extends ThemeExtension<YaruRadioThemeData>
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('color', color));
-    properties.add(
-      DiagnosticsProperty('borderColor', borderColor),
-    );
+    properties.add(DiagnosticsProperty('borderColor', borderColor));
     properties.add(DiagnosticsProperty('checkmarkColor', checkmarkColor));
     properties.add(DiagnosticsProperty('indicatorColor', indicatorColor));
     properties.add(DiagnosticsProperty('mouseCursor', mouseCursor));
@@ -111,11 +104,7 @@ class YaruRadioThemeData extends ThemeExtension<YaruRadioThemeData>
 }
 
 class YaruRadioTheme extends InheritedTheme {
-  const YaruRadioTheme({
-    super.key,
-    required this.data,
-    required super.child,
-  });
+  const YaruRadioTheme({super.key, required this.data, required super.child});
 
   final YaruRadioThemeData data;
 

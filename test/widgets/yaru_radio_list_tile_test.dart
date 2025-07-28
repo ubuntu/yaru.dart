@@ -26,11 +26,7 @@ void main() {
     }
 
     await tester.pumpWidget(
-      builder(
-        title: const Text('title'),
-        subtitle: null,
-        secondary: null,
-      ),
+      builder(title: const Text('title'), subtitle: null, secondary: null),
     );
     expect(find.text('title'), findsOneWidget);
     expect(find.text('subtitle'), findsNothing);
@@ -72,13 +68,15 @@ void main() {
 
     final tileFinder = find.byType(YaruRadioListTile<int>);
 
-    await tester
-        .pumpWidget(builder(value: 1, groupValue: 1, toggleable: false));
+    await tester.pumpWidget(
+      builder(value: 1, groupValue: 1, toggleable: false),
+    );
     await tester.tap(tileFinder);
     expect(changedValue, equals(1));
 
-    await tester
-        .pumpWidget(builder(value: 2, groupValue: 3, toggleable: false));
+    await tester.pumpWidget(
+      builder(value: 2, groupValue: 3, toggleable: false),
+    );
     await tester.tap(tileFinder);
     expect(changedValue, equals(2));
 

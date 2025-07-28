@@ -40,9 +40,7 @@ void main() {
 
       await expectLater(
         find.byType(MaterialApp),
-        matchesGoldenFile(
-          'goldens/yaru_popup_menu_item-${variant.label}.png',
-        ),
+        matchesGoldenFile('goldens/yaru_popup_menu_item-${variant.label}.png'),
       );
     },
     variant: goldenVariant,

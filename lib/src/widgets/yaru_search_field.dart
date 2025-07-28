@@ -30,6 +30,7 @@ class YaruSearchField extends StatefulWidget {
     this.controller,
     this.focusNode,
     this.clearIcon,
+    this.clearIconSemanticLabel,
   });
 
   /// Optional [String] forwarded to the internal [TextEditingController]
@@ -78,6 +79,9 @@ class YaruSearchField extends StatefulWidget {
 
   /// Optional icon shown inside the clear button.
   final Widget? clearIcon;
+
+  /// Optional semantic label to add to the clear button icon.
+  final String? clearIconSemanticLabel;
 
   @override
   State<YaruSearchField> createState() => _YaruSearchFieldState();
@@ -134,9 +138,11 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
       borderSide: widget.style == YaruSearchFieldStyle.filled
           ? BorderSide.none
           : BorderSide(
-              color: widget.borderColor ??
-                  theme.colorScheme.outline
-                      .scale(lightness: light ? -0.1 : 0.1),
+              color:
+                  widget.borderColor ??
+                  theme.colorScheme.outline.scale(
+                    lightness: light ? -0.1 : 0.1,
+                  ),
               width: 1,
             ),
       borderRadius: BorderRadius.all(widget.radius),
@@ -159,9 +165,7 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
         child: TextField(
           autofocus: widget.autofocus,
           style: theme.textTheme.bodyMedium,
-          strutStyle: const StrutStyle(
-            leading: 0.2,
-          ),
+          strutStyle: const StrutStyle(leading: 0.2),
           textAlignVertical: TextAlignVertical.center,
           cursorWidth: 1,
           onSubmitted: widget.onSubmitted,
@@ -176,28 +180,30 @@ class _YaruSearchFieldState extends State<YaruSearchField> {
             contentPadding: widget.contentPadding,
             hintText: widget.hintText,
             fillColor: widget.fillColor ?? theme.dividerColor,
-            hoverColor:
-                (widget.fillColor ?? theme.dividerColor).scale(lightness: 0.1),
-            suffixIconConstraints:
-                const BoxConstraints(maxWidth: kYaruTitleBarItemHeight),
+            hoverColor: (widget.fillColor ?? theme.dividerColor).scale(
+              lightness: 0.1,
+            ),
+            suffixIconConstraints: const BoxConstraints(
+              maxWidth: kYaruTitleBarItemHeight,
+            ),
             suffixIcon:
                 widget.onClear == null || _controller.text.isEmpty == true
-                    ? null
-                    : IconButton(
-                        style: IconButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: suffixRadius,
+                ? null
+                : IconButton(
+                    style: IconButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: suffixRadius),
+                    ),
+                    onPressed: _clear,
+                    icon: ClipRRect(
+                      borderRadius: suffixRadius,
+                      child:
+                          widget.clearIcon ??
+                          Icon(
+                            YaruIcons.edit_clear,
+                            semanticLabel: widget.clearIconSemanticLabel,
                           ),
-                        ),
-                        onPressed: _clear,
-                        icon: ClipRRect(
-                          borderRadius: suffixRadius,
-                          child: widget.clearIcon ??
-                              const Icon(
-                                YaruIcons.edit_clear,
-                              ),
-                        ),
-                      ),
+                    ),
+                  ),
           ),
         ),
       ),
@@ -317,10 +323,7 @@ class _YaruSearchTitleFieldState extends State<YaruSearchTitleField> {
             else
               Padding(
                 padding: widget.titlePadding,
-                child: Align(
-                  alignment: widget.alignment,
-                  child: widget.title,
-                ),
+                child: Align(alignment: widget.alignment, child: widget.title),
               ),
             YaruSearchButton(
               icon: widget.searchIcon,
@@ -354,6 +357,8 @@ class YaruSearchButton extends StatelessWidget {
     this.borderColor,
     this.icon,
     this.selectedIcon,
+    this.semanticLabel,
+    this.selectedSemanticLabel,
   });
 
   final bool? searchActive;
@@ -364,6 +369,8 @@ class YaruSearchButton extends StatelessWidget {
   final Color? borderColor;
   final Widget? icon;
   final Widget? selectedIcon;
+  final String? semanticLabel;
+  final String? selectedSemanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -382,15 +389,18 @@ class YaruSearchButton extends StatelessWidget {
               side: style == YaruSearchFieldStyle.filled
                   ? BorderSide.none
                   : BorderSide(
-                      color: borderColor ??
-                          theme.colorScheme.outline
-                              .scale(lightness: light ? -0.1 : 0.1),
+                      color:
+                          borderColor ??
+                          theme.colorScheme.outline.scale(
+                            lightness: light ? -0.1 : 0.1,
+                          ),
                       width: 1,
                     ),
             ),
           ),
           isSelected: searchActive,
-          selectedIcon: selectedIcon ??
+          selectedIcon:
+              selectedIcon ??
               Icon(
                 YaruIcons.search,
                 // Note: Center is needed for when the button is leading
@@ -398,12 +408,15 @@ class YaruSearchButton extends StatelessWidget {
                 //
                 size: kYaruIconSize - 4,
                 color: theme.colorScheme.onSurface,
+                semanticLabel: selectedSemanticLabel,
               ),
-          icon: icon ??
+          icon:
+              icon ??
               Icon(
                 YaruIcons.search,
                 size: kYaruIconSize - 4,
                 color: theme.colorScheme.onSurface,
+                semanticLabel: semanticLabel,
               ),
           onPressed: onPressed,
         ),
@@ -412,8 +425,4 @@ class YaruSearchButton extends StatelessWidget {
   }
 }
 
-enum YaruSearchFieldStyle {
-  outlined,
-  filled,
-  filledOutlined;
-}
+enum YaruSearchFieldStyle { outlined, filled, filledOutlined }

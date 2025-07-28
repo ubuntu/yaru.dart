@@ -20,6 +20,7 @@ class YaruExpandable extends StatefulWidget {
     required this.header,
     this.expandIcon,
     this.expandIconPadding = EdgeInsets.zero,
+    this.expandIconSemanticLabel,
     this.expandButtonPosition = YaruExpandableButtonPosition.end,
     required this.child,
     this.collapsedChild,
@@ -38,6 +39,9 @@ class YaruExpandable extends StatefulWidget {
 
   /// Optional padding around the expand button.
   final EdgeInsetsGeometry expandIconPadding;
+
+  /// Optional semantic label to add to the expand button.
+  final String? expandIconSemanticLabel;
 
   /// Controls expand button position, see [YaruExpandableButtonPosition].
   final YaruExpandableButtonPosition expandButtonPosition;
@@ -90,14 +94,17 @@ class _YaruExpandableState extends State<YaruExpandable> {
           turns: _isExpanded ? .25 : 0,
           duration: _kAnimationDuration,
           curve: _kAnimationCurve,
-          child: widget.expandIcon ?? const Icon(YaruIcons.pan_end),
+          child:
+              widget.expandIcon ??
+              Icon(
+                YaruIcons.pan_end,
+                semanticLabel: widget.expandIconSemanticLabel,
+              ),
         ),
       ),
     );
 
-    final header = Flexible(
-      child: GestureDetector(onTap: _onTap, child: widget.header),
-    );
+    final header = Flexible(child: widget.header);
 
     final MainAxisAlignment expandButtonPosition;
     final List<Widget> headerChildren;
@@ -115,9 +122,13 @@ class _YaruExpandableState extends State<YaruExpandable> {
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: expandButtonPosition,
-          children: headerChildren,
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: _onTap,
+          child: Row(
+            mainAxisAlignment: expandButtonPosition,
+            children: headerChildren,
+          ),
         ),
         AnimatedCrossFade(
           firstChild: _buildChild(widget.child),

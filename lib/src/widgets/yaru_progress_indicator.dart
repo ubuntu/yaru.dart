@@ -2,11 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-const int kIndeterminateAnimationDuration = 8000;
-const Curve kIndeterminateAnimationCurve =
-    Cubic(.35, .75, .65, .25); // Kind of `Curves.slowMiddle` curve
-const double kDefaultStrokeWidth = 6;
-
 abstract class YaruProgressIndicator extends StatefulWidget {
   /// Creates a Yaru progress indicator.
   ///
@@ -32,8 +27,8 @@ abstract class YaruProgressIndicator extends StatefulWidget {
     this.trackStrokeWidth,
     this.semanticsLabel,
     this.semanticsValue,
-  })  : assert(strokeWidth == null || strokeWidth > 0),
-        assert(trackStrokeWidth == null || trackStrokeWidth > 0);
+  }) : assert(strokeWidth == null || strokeWidth > 0),
+       assert(trackStrokeWidth == null || trackStrokeWidth > 0);
 
   /// If non-null, the value of this progress indicator.
   ///
@@ -91,8 +86,7 @@ abstract class YaruProgressIndicator extends StatefulWidget {
 
   /// {@template yaru.widget.YaruProgressIndicator.trackStrokeWidth}
   /// The thickness of the line drawn below the value indicator line.
-  /// Defaults to a slightly smaller value than [strokeWidth].
-  /// See: [computeDefaultTrackSize].
+  /// Defaults to [strokeWidth].
   /// {@endtemplate}
   final double? trackStrokeWidth;
 
@@ -142,16 +136,12 @@ abstract class YaruProgressIndicator extends StatefulWidget {
       child: child,
     );
   }
-
-  double computeDefaultTrackSize(double size) {
-    final candidateTrackHeight = (size / 3 * 2).truncate();
-    return (candidateTrackHeight + (candidateTrackHeight.isEven ? 0 : 1))
-        .toDouble();
-  }
 }
 
 abstract class YaruProgressIndicatorThemeData<
-    T extends YaruProgressIndicatorThemeData<T>> extends ThemeExtension<T> {
+  T extends YaruProgressIndicatorThemeData<T>
+>
+    extends ThemeExtension<T> {
   YaruProgressIndicatorThemeData(
     this.color,
     this.trackColor,

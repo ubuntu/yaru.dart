@@ -43,10 +43,8 @@ class _ControlsViewState extends State<ControlsView>
             controller: tabController,
             children: items
                 .map(
-                  (e) => Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: e.$2,
-                  ),
+                  (e) =>
+                      Padding(padding: const EdgeInsets.all(20), child: e.$2),
                 )
                 .toList(),
           ),

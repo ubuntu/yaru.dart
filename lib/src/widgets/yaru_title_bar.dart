@@ -40,6 +40,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.isRestorable,
     this.onClose,
     this.onDrag,
+    this.onDoubleTap,
     this.onMaximize,
     this.onMinimize,
     this.onRestore,
@@ -48,6 +49,10 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     this.platform,
     this.buttonPadding,
     this.buttonSpacing,
+    this.closeSemanticLabel,
+    this.maximizeSemanticLabel,
+    this.minimizeSemanticLabel,
+    this.restoreSemanticLabel,
   });
 
   /// The primary title widget.
@@ -104,6 +109,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
   /// Called when the title bar is dragged to move the window.
   final FutureOr<void> Function(BuildContext)? onDrag;
 
+  /// Called when the title bar is double-tapped.
+  final FutureOr<void> Function(BuildContext)? onDoubleTap;
+
   /// Called when the maximize button is pressed or the title bar is
   /// double-clicked while the window is not maximized.
   final FutureOr<void> Function(BuildContext)? onMaximize;
@@ -117,6 +125,18 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// Called when the secondary mouse button is pressed.
   final FutureOr<void> Function(BuildContext)? onShowMenu;
+
+  /// Semantic label used for the close button.
+  final String? closeSemanticLabel;
+
+  /// Semantic label used for the maximize button.
+  final String? maximizeSemanticLabel;
+
+  /// Semantic label used for the minimize button.
+  final String? minimizeSemanticLabel;
+
+  /// Semantic label used for the restore button.
+  final String? restoreSemanticLabel;
 
   /// The tag to use for the [Hero] wrapping the window controls.
   ///
@@ -153,9 +173,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
     final light = theme.colorScheme.isLight;
     final highContrast = theme.colorScheme.isHighContrast;
-    final states = <WidgetState>{
-      if (isActive != false) WidgetState.focused,
-    };
+    final states = <WidgetState>{if (isActive != false) WidgetState.focused};
     final defaultBackgroundColor = WidgetStateProperty.resolveWith((states) {
       if (!states.contains(WidgetState.focused)) {
         return theme.colorScheme.surface;
@@ -164,12 +182,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     });
     final backgroundColor =
         WidgetStateProperty.resolveAs(this.backgroundColor, states) ??
-            titleBarTheme.backgroundColor?.resolve(states) ??
-            defaultBackgroundColor.resolve(states);
+        titleBarTheme.backgroundColor?.resolve(states) ??
+        defaultBackgroundColor.resolve(states);
     final foregroundColor =
         WidgetStateProperty.resolveAs(this.foregroundColor, states) ??
-            titleBarTheme.foregroundColor?.resolve(states) ??
-            theme.colorScheme.onSurface;
+        titleBarTheme.foregroundColor?.resolve(states) ??
+        theme.colorScheme.onSurface;
 
     final titleTextStyle =
         (theme.appBarTheme.titleTextStyle ?? theme.textTheme.titleLarge!)
@@ -183,23 +201,27 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final defaultBorder = BorderSide(
       strokeAlign: -1,
       color: light
-          ? Colors.black.withOpacity(highContrast ? 1 : 0.1)
-          : Colors.white.withOpacity(highContrast ? 1 : 0.06),
+          ? Colors.black.withValues(alpha: highContrast ? 1 : 0.1)
+          : Colors.white.withValues(alpha: highContrast ? 1 : 0.06),
     );
-    final border =
-        Border(bottom: this.border ?? titleBarTheme.border ?? defaultBorder);
+    final border = Border(
+      bottom: this.border ?? titleBarTheme.border ?? defaultBorder,
+    );
     final shape =
         border + (this.shape ?? titleBarTheme.shape ?? const Border());
 
-    final bSpacing = buttonSpacing ??
+    final bSpacing =
+        buttonSpacing ??
         titleBarTheme.buttonSpacing ??
         (!kIsWeb && Platform.isWindows ? 0 : 14);
-    final bPadding = buttonPadding ??
+    final bPadding =
+        buttonPadding ??
         titleBarTheme.buttonPadding ??
         (!kIsWeb && Platform.isWindows
             ? const EdgeInsets.only(bottom: 18)
             : const EdgeInsets.symmetric(horizontal: 10));
-    final windowControlPlatform = platform ??
+    final windowControlPlatform =
+        platform ??
         (!kIsWeb && Platform.isWindows
             ? YaruWindowControlPlatform.windows
             : YaruWindowControlPlatform.yaru);
@@ -213,17 +235,12 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    Widget maybeHero({
-      required Widget child,
-    }) {
+    Widget maybeHero({required Widget child}) {
       if (heroTag == null ||
           context.findAncestorWidgetOfExactType<Hero>() != null) {
         return child;
       }
-      return Hero(
-        tag: heroTag!,
-        child: child,
-      );
+      return Hero(tag: heroTag!, child: child);
     }
 
     final closeButton = YaruWindowControl(
@@ -231,15 +248,18 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
       iconColor: WidgetStatePropertyAll(foregroundColor),
       type: YaruWindowControlType.close,
       onTap: onClose != null ? () => onClose!(context) : null,
+      semanticLabel: closeSemanticLabel,
     );
     return TextFieldTapRegion(
       child: YaruTitleBarGestureDetector(
         onDrag: isDraggable == true ? (_) => onDrag?.call(context) : null,
-        onDoubleTap: () => isMaximizable == true
+        onDoubleTap: () => onDoubleTap != null
+            ? onDoubleTap!(context)
+            : isMaximizable == true
             ? onMaximize?.call(context)
             : isRestorable == true
-                ? onRestore?.call(context)
-                : null,
+            ? onRestore?.call(context)
+            : null,
         onSecondaryTap: onShowMenu != null ? () => onShowMenu!(context) : null,
         child: AppBar(
           elevation: titleBarTheme.elevation,
@@ -272,32 +292,38 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                             if (isMinimizable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                iconColor:
-                                    WidgetStatePropertyAll(foregroundColor),
+                                iconColor: WidgetStatePropertyAll(
+                                  foregroundColor,
+                                ),
                                 type: YaruWindowControlType.minimize,
                                 onTap: onMinimize != null
                                     ? () => onMinimize!(context)
                                     : null,
+                                semanticLabel: minimizeSemanticLabel,
                               ),
                             if (isRestorable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                iconColor:
-                                    WidgetStatePropertyAll(foregroundColor),
+                                iconColor: WidgetStatePropertyAll(
+                                  foregroundColor,
+                                ),
                                 type: YaruWindowControlType.restore,
                                 onTap: onRestore != null
                                     ? () => onRestore!(context)
                                     : null,
+                                semanticLabel: restoreSemanticLabel,
                               ),
                             if (isMaximizable == true)
                               YaruWindowControl(
                                 platform: windowControlPlatform,
-                                iconColor:
-                                    WidgetStatePropertyAll(foregroundColor),
+                                iconColor: WidgetStatePropertyAll(
+                                  foregroundColor,
+                                ),
                                 type: YaruWindowControlType.maximize,
                                 onTap: onMaximize != null
                                     ? () => onMaximize!(context)
                                     : null,
+                                semanticLabel: maximizeSemanticLabel,
                               ),
                             if (isClosable == true)
                               isMaximizable == true
@@ -449,6 +475,10 @@ class YaruWindowTitleBar extends StatelessWidget
     this.platform,
     this.buttonPadding,
     this.buttonSpacing,
+    this.closeSemanticLabel,
+    this.maximizeSemanticLabel,
+    this.minimizeSemanticLabel,
+    this.restoreSemanticLabel,
   });
 
   /// The primary title widget.
@@ -519,6 +549,18 @@ class YaruWindowTitleBar extends StatelessWidget
   /// Called when the secondary mouse button is pressed.
   final FutureOr<void> Function(BuildContext)? onShowMenu;
 
+  /// Semantic label used for the close button.
+  final String? closeSemanticLabel;
+
+  /// Semantic label used for the maximize button.
+  final String? maximizeSemanticLabel;
+
+  /// Semantic label used for the minimize button.
+  final String? minimizeSemanticLabel;
+
+  /// Semantic label used for the restore button.
+  final String? restoreSemanticLabel;
+
   /// The tag to use for the [Hero] wrapping the window controls.
   ///
   /// By default, a unique tag is used to ensure that the window controls stay
@@ -545,7 +587,8 @@ class YaruWindowTitleBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final theme = YaruTitleBarTheme.of(context);
-    final style = this.style ??
+    final style =
+        this.style ??
         theme.style ??
         (kIsWeb ? YaruTitleBarStyle.undecorated : YaruTitleBarStyle.normal);
     if (style == YaruTitleBarStyle.hidden) return const SizedBox.shrink();
@@ -584,11 +627,22 @@ class YaruWindowTitleBar extends StatelessWidget
               isRestorable ?? state?.isRestorable?.exceptMacOS(context),
           onClose: onClose,
           onDrag: onDrag,
+          onDoubleTap: (context) {
+            if (isMaximizable ?? state?.isMaximizable == true) {
+              onMaximize?.call(context);
+            } else if (isRestorable ?? state?.isRestorable == true) {
+              onRestore?.call(context);
+            }
+          },
           onMaximize: onMaximize,
           onMinimize: onMinimize,
           onRestore: onRestore,
           onShowMenu: onShowMenu,
           heroTag: heroTag,
+          closeSemanticLabel: closeSemanticLabel,
+          maximizeSemanticLabel: maximizeSemanticLabel,
+          minimizeSemanticLabel: minimizeSemanticLabel,
+          restoreSemanticLabel: restoreSemanticLabel,
         );
       },
     );
@@ -630,6 +684,10 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
     super.platform,
     super.buttonPadding,
     super.buttonSpacing,
+    super.closeSemanticLabel,
+    super.maximizeSemanticLabel,
+    super.minimizeSemanticLabel,
+    super.restoreSemanticLabel,
   });
 
   static const defaultShape = RoundedRectangleBorder(

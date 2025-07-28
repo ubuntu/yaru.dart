@@ -26,15 +26,11 @@ class Toggleables extends StatelessWidget {
               isSelected: const [true, false, false],
               children: const [Text('Off'), Text('Off'), Text('Off')],
             ),
-            const Divider(
-              height: 2 * kWrapSpacing,
-            ),
+            const Divider(height: 2 * kWrapSpacing),
           ],
         ),
         const Padding(
-          padding: EdgeInsets.only(
-            bottom: 10,
-          ),
+          padding: EdgeInsets.only(bottom: 10),
           child: YaruInfoBox(
             yaruInfoType: YaruInfoType.information,
             subtitle: Text(
@@ -52,26 +48,10 @@ class Toggleables extends StatelessWidget {
         ),
         Row(
           children: [
-            Radio(
-              value: true,
-              groupValue: true,
-              onChanged: (_) {},
-            ),
-            Radio(
-              value: false,
-              groupValue: true,
-              onChanged: (_) {},
-            ),
-            const Radio(
-              value: true,
-              groupValue: true,
-              onChanged: null,
-            ),
-            const Radio(
-              value: false,
-              groupValue: true,
-              onChanged: null,
-            ),
+            Radio(value: true, groupValue: true, onChanged: (_) {}),
+            Radio(value: false, groupValue: true, onChanged: (_) {}),
+            const Radio(value: true, groupValue: true, onChanged: null),
+            const Radio(value: false, groupValue: true, onChanged: null),
           ],
         ),
         Wrap(

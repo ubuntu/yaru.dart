@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class YaruPlaceholderIcon extends StatelessWidget {
-  const YaruPlaceholderIcon({
-    super.key,
-    required this.size,
-    this.borderRadius,
-  });
+  const YaruPlaceholderIcon({super.key, required this.size, this.borderRadius});
 
   /// Determines the icon canvas size.
   final Size size;
