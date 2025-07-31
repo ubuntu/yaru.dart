@@ -174,12 +174,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
     final light = theme.colorScheme.isLight;
     final highContrast = theme.colorScheme.isHighContrast;
     final states = <WidgetState>{if (isActive != false) WidgetState.focused};
-    final defaultBackgroundColor = WidgetStateProperty.resolveWith((states) {
-      if (!states.contains(WidgetState.focused)) {
-        return theme.colorScheme.surface;
-      }
-      return light ? YaruColors.titleBarLight : YaruColors.titleBarDark;
-    });
+    final defaultBackgroundColor = WidgetStateProperty.resolveWith(
+      (states) => theme.scaffoldBackgroundColor,
+    );
     final backgroundColor =
         WidgetStateProperty.resolveAs(this.backgroundColor, states) ??
         titleBarTheme.backgroundColor?.resolve(states) ??
@@ -330,7 +327,9 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                                   ? closeButton
                                   : ClipRRect(
                                       borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(6),
+                                        topRight: Radius.circular(
+                                          kYaruWindowRadius,
+                                        ),
                                       ),
                                       child: closeButton,
                                     ),
@@ -692,7 +691,7 @@ class YaruDialogTitleBar extends YaruWindowTitleBar {
 
   static const defaultShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.vertical(
-      top: Radius.circular(kYaruContainerRadius),
+      top: Radius.circular(kYaruWindowRadius),
     ),
   );
 
