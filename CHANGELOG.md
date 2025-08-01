@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.2.0](https://github.com/ubuntu/yaru.dart/compare/v8.1.0...v8.2.0) (2025-08-01)
+
+
+### Features
+
+* add YaruPanedView.builder constructor ([#1011](https://github.com/ubuntu/yaru.dart/issues/1011)) ([290cda5](https://github.com/ubuntu/yaru.dart/commit/290cda55ef5cdf1788b3718d68469af287d867d9))
+
+
+### Bug Fixes
+
+* use scaffold background color instead of hardcoded color and kYaruWindowRadius for titlebars ([#1013](https://github.com/ubuntu/yaru.dart/issues/1013)) ([4764cb8](https://github.com/ubuntu/yaru.dart/commit/4764cb86aac99d53a8b226ee762caa3c9b3c3f7c)), closes [#1008](https://github.com/ubuntu/yaru.dart/issues/1008)
+
 ## [8.1.0](https://github.com/ubuntu/yaru.dart/compare/v8.0.0...v8.1.0) (2025-07-17)
 
 
