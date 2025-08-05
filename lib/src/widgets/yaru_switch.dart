@@ -46,6 +46,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
     this.autofocus = false,
     this.mouseCursor,
     this.statesController,
+    this.onOffShapes,
   });
 
   /// Whether this switch is on or off.
@@ -94,6 +95,9 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   ///
   /// Defaults to [ColorScheme.onPrimary].
   final Color? thumbColor;
+
+  /// Whether to draw on/off shapes or not.
+  final bool? onOffShapes;
 
   @override
   bool get interactive => onChanged != null;
@@ -156,7 +160,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
   Widget build(BuildContext context) {
     final switchTheme = YaruSwitchTheme.of(context);
     final colorScheme = Theme.of(context).colorScheme;
-    final painter = _YaruSwitchPainter();
+    final painter = _YaruSwitchPainter(onOffShapes: widget.onOffShapes);
     fillPainterDefaults(painter);
 
     const unselectedState = <WidgetState>{};
@@ -296,15 +300,22 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
 }
 
 class _YaruSwitchPainter extends YaruTogglablePainter {
+  _YaruSwitchPainter({this.onOffShapes});
+
   late Color uncheckedThumbColor;
   late Color checkedThumbColor;
   late Color disabledCheckedThumbColor;
   late Color disabledUncheckedThumbColor;
 
+  final bool? onOffShapes;
+
   @override
   void paintTogglable(Canvas canvas, Size size, double t) {
     _drawBox(canvas, size, t);
     _drawThumb(canvas, size, t);
+    if (onOffShapes == true) {
+      _drawOnOffShapes(canvas, size, t);
+    }
   }
 
   void _drawBox(Canvas canvas, Size size, double t) {
@@ -355,5 +366,49 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
 
     drawStateIndicator(canvas, size, center);
     canvas.drawCircle(center, radius, paint);
+  }
+
+  void _drawOnOffShapes(Canvas canvas, Size size, double t) {
+    final margin = (size.height - size.height * _kSwitchThumbSizeFactor) / 2;
+    final innerSize = Size(size.width - margin * 2, size.height - margin * 2);
+
+    if (t == 1) {
+      // on |
+      canvas.drawRect(
+        Rect.fromCenter(
+          center: Offset((size.width - innerSize.height) / 2, size.height / 2),
+          width: 2,
+          height: size.height / 2.5,
+        ),
+        Paint()
+          ..color = interactive
+              ? Color.lerp(uncheckedThumbColor, checkedThumbColor, t)!
+              : Color.lerp(
+                  disabledUncheckedThumbColor,
+                  disabledCheckedThumbColor,
+                  t,
+                )!
+          ..style = PaintingStyle.fill,
+      );
+    } else {
+      // off o
+      canvas.drawCircle(
+        Offset(
+          innerSize.height + ((size.width - innerSize.height) / 2),
+          size.height / 2,
+        ),
+        size.height / 7,
+        Paint()
+          ..color = interactive
+              ? Color.lerp(uncheckedThumbColor, checkedThumbColor, t)!
+              : Color.lerp(
+                  disabledUncheckedThumbColor,
+                  disabledCheckedThumbColor,
+                  t,
+                )!
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2,
+      );
+    }
   }
 }
