@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
+import 'yaru_switch_test.dart' show switchGoldenThemeVariants;
 
 void main() {
   testWidgets('contains switch and labels', (tester) async {
@@ -167,6 +168,7 @@ void main() {
           onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
           title: const Text('YaruSwitchButton'),
           subtitle: const Text('Lorem ipsum dolor sit amet'),
+          onOffShapes: variant.label.contains('-shapes'),
         ),
         themeMode: variant.themeMode,
         size: const Size(248, 56),
@@ -190,71 +192,28 @@ void main() {
     variant: goldenVariant,
     tags: 'golden',
   );
-
-  testWidgets(
-    'golden images (with shapes)',
-    (tester) async {
-      final variant = goldenVariant.currentValue!;
-
-      // ensure traditional focus highlight
-      FocusManager.instance.highlightStrategy =
-          FocusHighlightStrategy.alwaysTraditional;
-
-      await tester.pumpScaffold(
-        YaruSwitchButton(
-          autofocus: variant.hasState(WidgetState.focused),
-          value: variant.hasState(WidgetState.selected),
-          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
-          title: const Text('YaruSwitchButton'),
-          subtitle: const Text('Lorem ipsum dolor sit amet'),
-          onOffShapes: true,
-        ),
-        themeMode: variant.themeMode,
-        size: const Size(248, 56),
-        alignment: Alignment.centerLeft,
-      );
-      await tester.pumpAndSettle();
-
-      if (variant.hasState(WidgetState.pressed)) {
-        await tester.down(find.byType(YaruSwitch));
-        await tester.pumpAndSettle();
-      } else if (variant.hasState(WidgetState.hovered)) {
-        await tester.hover(find.byType(YaruSwitch));
-        await tester.pumpAndSettle();
-      }
-
-      await expectLater(
-        find.byType(YaruSwitchButton),
-        matchesGoldenFile(
-          'goldens/yaru_switch_button-${variant.label}-shapes.png',
-        ),
-      );
-    },
-    variant: goldenVariant,
-    tags: 'golden',
-  );
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('off', <WidgetState>{}),
-  ...goldenThemeVariants('off-disabled', {WidgetState.disabled}),
-  ...goldenThemeVariants('off-focused', {WidgetState.focused}),
-  ...goldenThemeVariants('off-hovered', {WidgetState.hovered}),
-  ...goldenThemeVariants('off-pressed', {WidgetState.pressed}),
-  ...goldenThemeVariants('on', {WidgetState.selected}),
-  ...goldenThemeVariants('on-disabled', {
+  ...switchGoldenThemeVariants('off', <WidgetState>{}),
+  ...switchGoldenThemeVariants('off-disabled', {WidgetState.disabled}),
+  ...switchGoldenThemeVariants('off-focused', {WidgetState.focused}),
+  ...switchGoldenThemeVariants('off-hovered', {WidgetState.hovered}),
+  ...switchGoldenThemeVariants('off-pressed', {WidgetState.pressed}),
+  ...switchGoldenThemeVariants('on', {WidgetState.selected}),
+  ...switchGoldenThemeVariants('on-disabled', {
     WidgetState.selected,
     WidgetState.disabled,
   }),
-  ...goldenThemeVariants('on-focused', {
+  ...switchGoldenThemeVariants('on-focused', {
     WidgetState.selected,
     WidgetState.focused,
   }),
-  ...goldenThemeVariants('on-hovered', {
+  ...switchGoldenThemeVariants('on-hovered', {
     WidgetState.selected,
     WidgetState.hovered,
   }),
-  ...goldenThemeVariants('on-pressed', {
+  ...switchGoldenThemeVariants('on-pressed', {
     WidgetState.selected,
     WidgetState.pressed,
   }),
