@@ -190,6 +190,49 @@ void main() {
     variant: goldenVariant,
     tags: 'golden',
   );
+
+  testWidgets(
+    'golden images (with shapes)',
+    (tester) async {
+      final variant = goldenVariant.currentValue!;
+
+      // ensure traditional focus highlight
+      FocusManager.instance.highlightStrategy =
+          FocusHighlightStrategy.alwaysTraditional;
+
+      await tester.pumpScaffold(
+        YaruSwitchButton(
+          autofocus: variant.hasState(WidgetState.focused),
+          value: variant.hasState(WidgetState.selected),
+          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
+          title: const Text('YaruSwitchButton'),
+          subtitle: const Text('Lorem ipsum dolor sit amet'),
+          onOffShapes: true,
+        ),
+        themeMode: variant.themeMode,
+        size: const Size(248, 56),
+        alignment: Alignment.centerLeft,
+      );
+      await tester.pumpAndSettle();
+
+      if (variant.hasState(WidgetState.pressed)) {
+        await tester.down(find.byType(YaruSwitch));
+        await tester.pumpAndSettle();
+      } else if (variant.hasState(WidgetState.hovered)) {
+        await tester.hover(find.byType(YaruSwitch));
+        await tester.pumpAndSettle();
+      }
+
+      await expectLater(
+        find.byType(YaruSwitchButton),
+        matchesGoldenFile(
+          'goldens/yaru_switch_button-${variant.label}-shapes.png',
+        ),
+      );
+    },
+    variant: goldenVariant,
+    tags: 'golden',
+  );
 }
 
 final goldenVariant = ValueVariant({

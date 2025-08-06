@@ -115,6 +115,44 @@ void main() {
     variant: goldenVariant,
     tags: 'golden',
   );
+
+  testWidgets(
+    'golden images (with shapes)',
+    (tester) async {
+      final variant = goldenVariant.currentValue!;
+
+      // ensure traditional focus highlight
+      FocusManager.instance.highlightStrategy =
+          FocusHighlightStrategy.alwaysTraditional;
+
+      await tester.pumpScaffold(
+        YaruSwitch(
+          autofocus: variant.hasState(WidgetState.focused),
+          value: variant.hasState(WidgetState.selected),
+          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
+          onOffShapes: true,
+        ),
+        themeMode: variant.themeMode,
+        size: const Size(62, 37),
+      );
+      await tester.pumpAndSettle();
+
+      if (variant.hasState(WidgetState.pressed)) {
+        await tester.down(find.byType(YaruSwitch));
+        await tester.pumpAndSettle();
+      } else if (variant.hasState(WidgetState.hovered)) {
+        await tester.hover(find.byType(YaruSwitch));
+        await tester.pumpAndSettle();
+      }
+
+      await expectLater(
+        find.byType(YaruSwitch),
+        matchesGoldenFile('goldens/yaru_switch-${variant.label}-shapes.png'),
+      );
+    },
+    variant: goldenVariant,
+    tags: 'golden',
+  );
 }
 
 final goldenVariant = ValueVariant({
