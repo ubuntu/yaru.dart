@@ -93,6 +93,7 @@ void main() {
           autofocus: variant.hasState(WidgetState.focused),
           value: variant.hasState(WidgetState.selected),
           onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
+          onOffShapes: variant.label.contains('-shapes'),
         ),
         themeMode: variant.themeMode,
         size: const Size(62, 37),
@@ -115,66 +116,38 @@ void main() {
     variant: goldenVariant,
     tags: 'golden',
   );
+}
 
-  testWidgets(
-    'golden images (with shapes)',
-    (tester) async {
-      final variant = goldenVariant.currentValue!;
-
-      // ensure traditional focus highlight
-      FocusManager.instance.highlightStrategy =
-          FocusHighlightStrategy.alwaysTraditional;
-
-      await tester.pumpScaffold(
-        YaruSwitch(
-          autofocus: variant.hasState(WidgetState.focused),
-          value: variant.hasState(WidgetState.selected),
-          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
-          onOffShapes: true,
-        ),
-        themeMode: variant.themeMode,
-        size: const Size(62, 37),
-      );
-      await tester.pumpAndSettle();
-
-      if (variant.hasState(WidgetState.pressed)) {
-        await tester.down(find.byType(YaruSwitch));
-        await tester.pumpAndSettle();
-      } else if (variant.hasState(WidgetState.hovered)) {
-        await tester.hover(find.byType(YaruSwitch));
-        await tester.pumpAndSettle();
-      }
-
-      await expectLater(
-        find.byType(YaruSwitch),
-        matchesGoldenFile('goldens/yaru_switch-${variant.label}-shapes.png'),
-      );
-    },
-    variant: goldenVariant,
-    tags: 'golden',
-  );
+List<YaruGoldenVariant<T>> switchGoldenThemeVariants<T>(
+  String label,
+  T widgetStates,
+) {
+  return [
+    ...goldenThemeVariants(label, widgetStates),
+    ...goldenThemeVariants(label + '-shapes', widgetStates),
+  ];
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('unchecked', <WidgetState>{}),
-  ...goldenThemeVariants('unckecked-disabled', {WidgetState.disabled}),
-  ...goldenThemeVariants('unckecked-focused', {WidgetState.focused}),
-  ...goldenThemeVariants('unckecked-hovered', {WidgetState.hovered}),
-  ...goldenThemeVariants('unckecked-pressed', {WidgetState.pressed}),
-  ...goldenThemeVariants('checked', {WidgetState.selected}),
-  ...goldenThemeVariants('checked-disabled', {
+  ...switchGoldenThemeVariants('unchecked', <WidgetState>{}),
+  ...switchGoldenThemeVariants('unckecked-disabled', {WidgetState.disabled}),
+  ...switchGoldenThemeVariants('unckecked-focused', {WidgetState.focused}),
+  ...switchGoldenThemeVariants('unckecked-hovered', {WidgetState.hovered}),
+  ...switchGoldenThemeVariants('unckecked-pressed', {WidgetState.pressed}),
+  ...switchGoldenThemeVariants('checked', {WidgetState.selected}),
+  ...switchGoldenThemeVariants('checked-disabled', {
     WidgetState.selected,
     WidgetState.disabled,
   }),
-  ...goldenThemeVariants('checked-focused', {
+  ...switchGoldenThemeVariants('checked-focused', {
     WidgetState.selected,
     WidgetState.focused,
   }),
-  ...goldenThemeVariants('checked-hovered', {
+  ...switchGoldenThemeVariants('checked-hovered', {
     WidgetState.selected,
     WidgetState.hovered,
   }),
-  ...goldenThemeVariants('checked-pressed', {
+  ...switchGoldenThemeVariants('checked-pressed', {
     WidgetState.selected,
     WidgetState.pressed,
   }),
