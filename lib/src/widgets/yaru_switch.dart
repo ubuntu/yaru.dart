@@ -168,7 +168,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
     const disabledState = {WidgetState.disabled};
     const selectedDisabledState = {WidgetState.selected, WidgetState.disabled};
 
-    final defaultBorderColor = colorScheme.isHighContrast
+    final defaultBorderColor = colorScheme.isHighContrast && widget.interactive
         ? colorScheme.outlineVariant
         : Colors.transparent;
 
@@ -190,6 +190,16 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
         widget.thumbColor ??
         switchTheme.thumbColor?.resolve(selectedState) ??
         painter.checkmarkColor;
+    final checkedThumbBorderColor = colorScheme.isLight
+        ? checkedBorderColor
+        : checkedThumbColor;
+    final uncheckedThumbBorderColor = colorScheme.isLight
+        ? uncheckedBorderColor
+        : uncheckedThumbColor;
+    final checkedShapeColor = checkedThumbColor;
+    final uncheckedShapeColor = colorScheme.isLight
+        ? colorScheme.outlineVariant
+        : uncheckedThumbColor;
 
     // Disabled colors
     final disabledUncheckedColor =
@@ -209,6 +219,10 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
     final disabledCheckedThumbColor =
         switchTheme.thumbColor?.resolve(selectedDisabledState) ??
         disabledUncheckedThumbColor;
+    final disabledCheckedShapeColor = disabledCheckedThumbColor;
+    final disabledUncheckedShapeColor = colorScheme.isLight
+        ? colorScheme.outlineVariant.withValues(alpha: 0.4)
+        : disabledUncheckedThumbColor;
 
     // Indicator colors
     final hoverIndicatorColor =
@@ -234,7 +248,13 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
           ..disabledCheckedBorderColor = disabledCheckedBorderColor
           ..disabledCheckedThumbColor = disabledCheckedThumbColor
           ..hoverIndicatorColor = hoverIndicatorColor
-          ..focusIndicatorColor = focusIndicatorColor,
+          ..focusIndicatorColor = focusIndicatorColor
+          ..checkedThumbBorderColor = checkedThumbBorderColor
+          ..uncheckedThumbBorderColor = uncheckedThumbBorderColor
+          ..checkedShapeColor = checkedShapeColor
+          ..uncheckedShapeColor = uncheckedShapeColor
+          ..disabledCheckedShapeColor = disabledCheckedShapeColor
+          ..disabledUncheckedShapeColor = disabledUncheckedShapeColor,
         mouseCursor:
             widget.mouseCursor ??
             switchTheme.mouseCursor?.resolve({
@@ -306,6 +326,12 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
   late Color checkedThumbColor;
   late Color disabledCheckedThumbColor;
   late Color disabledUncheckedThumbColor;
+  late Color uncheckedThumbBorderColor;
+  late Color checkedThumbBorderColor;
+  late Color checkedShapeColor;
+  late Color uncheckedShapeColor;
+  late Color disabledCheckedShapeColor;
+  late Color disabledUncheckedShapeColor;
 
   final bool? onOffShapes;
 
@@ -366,11 +392,28 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
 
     drawStateIndicator(canvas, size, center);
     canvas.drawCircle(center, radius, paint);
+
+    canvas.drawCircle(
+      center,
+      radius - 0.5,
+      Paint()
+        ..color = interactive
+            ? Color.lerp(uncheckedThumbBorderColor, checkedThumbColor, t)!
+            : Colors.transparent
+        ..style = PaintingStyle.stroke,
+    );
   }
 
   void _drawOnOffShapes(Canvas canvas, Size size, double t) {
     final margin = (size.height - size.height * _kSwitchThumbSizeFactor) / 2;
     final innerSize = Size(size.width - margin * 2, size.height - margin * 2);
+    final shapeColor = interactive
+        ? Color.lerp(uncheckedShapeColor, checkedShapeColor, t)!
+        : Color.lerp(
+            disabledUncheckedShapeColor,
+            disabledCheckedShapeColor,
+            t,
+          )!;
 
     if (t == 1) {
       // on |
@@ -381,13 +424,7 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
           height: size.height / 2.5,
         ),
         Paint()
-          ..color = interactive
-              ? Color.lerp(uncheckedThumbColor, checkedThumbColor, t)!
-              : Color.lerp(
-                  disabledUncheckedThumbColor,
-                  disabledCheckedThumbColor,
-                  t,
-                )!
+          ..color = shapeColor
           ..style = PaintingStyle.fill,
       );
     } else {
@@ -399,13 +436,7 @@ class _YaruSwitchPainter extends YaruTogglablePainter {
         ),
         size.height / 7,
         Paint()
-          ..color = interactive
-              ? Color.lerp(uncheckedThumbColor, checkedThumbColor, t)!
-              : Color.lerp(
-                  disabledUncheckedThumbColor,
-                  disabledCheckedThumbColor,
-                  t,
-                )!
+          ..color = shapeColor
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2,
       );
