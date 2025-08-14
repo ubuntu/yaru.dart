@@ -12,6 +12,7 @@ class YaruBackButton extends StatelessWidget {
     this.onPressed,
     this.style,
     this.icon,
+    this.semanticLabel,
   });
 
   /// An optional callback that is called when the button is pressed.
@@ -27,17 +28,18 @@ class YaruBackButton extends StatelessWidget {
   /// Defaults to `const Icon(YaruIcons.go_previous)`
   final Widget? icon;
 
+  /// Optional semantic label to add to the back button icon.
+  final String? semanticLabel;
+
   @override
   Widget build(BuildContext context) {
     final theme = YaruBackButtonTheme.of(context);
     final round = (style ?? theme?.style) == YaruBackButtonStyle.rounded;
     final shape = round ? const CircleBorder() : const BeveledRectangleBorder();
     final button = YaruIconButton(
-      icon: icon ?? const Icon(YaruIcons.go_previous),
+      icon: icon ?? Icon(YaruIcons.go_previous, semanticLabel: semanticLabel),
       tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-      style: ButtonStyle(
-        shape: ButtonStyleButton.allOrNull(shape),
-      ),
+      style: ButtonStyle(shape: ButtonStyleButton.allOrNull(shape)),
       onPressed: () {
         if (onPressed != null) {
           onPressed!();

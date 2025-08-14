@@ -34,12 +34,12 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
               ),
               itemBuilder: (index, selectedIndex, length) =>
                   YaruPageIndicatorItem(
-                selected: index == selectedIndex,
-                size: Size.square(
-                  index == selectedIndex ? _dotSize + 8 : _dotSize,
-                ),
-                animationDuration: duration,
-              ),
+                    selected: index == selectedIndex,
+                    size: Size.square(
+                      index == selectedIndex ? _dotSize + 8 : _dotSize,
+                    ),
+                    animationDuration: duration,
+                  ),
             ),
             const SizedBox(height: 15),
             YaruPageIndicator.builder(
@@ -52,12 +52,12 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
               ),
               itemBuilder: (index, selectedIndex, length) =>
                   YaruPageIndicatorItem(
-                selected: index <= selectedIndex,
-                size: Size.square(
-                  index <= selectedIndex ? _dotSize + 8 : _dotSize,
-                ),
-                animationDuration: duration,
-              ),
+                    selected: index <= selectedIndex,
+                    size: Size.square(
+                      index <= selectedIndex ? _dotSize + 8 : _dotSize,
+                    ),
+                    animationDuration: duration,
+                  ),
             ),
             const SizedBox(height: 20),
             YaruPageIndicator.builder(
@@ -66,21 +66,21 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
               onTap: (page) => setState(() => _page = page),
               itemSizeBuilder: (index, selectedIndex, length) =>
                   index == selectedIndex
-                      ? Size(_dotSize * 3, _dotSize)
-                      : Size.square(_dotSize),
+                  ? Size(_dotSize * 3, _dotSize)
+                  : Size.square(_dotSize),
               layoutDelegate: YaruPageIndicatorSteppedDelegate(
                 baseItemSpacing: _dotSpacing,
               ),
               animationDuration: duration,
               itemBuilder: (index, selectedIndex, length) =>
                   YaruPageIndicatorItem(
-                selected: index == selectedIndex,
-                size: index == selectedIndex
-                    ? Size(_dotSize * 3, _dotSize)
-                    : Size.square(_dotSize),
-                animationDuration: duration,
-                borderRadius: BorderRadius.circular(24),
-              ),
+                    selected: index == selectedIndex,
+                    size: index == selectedIndex
+                        ? Size(_dotSize * 3, _dotSize)
+                        : Size.square(_dotSize),
+                    animationDuration: duration,
+                    borderRadius: BorderRadius.circular(24),
+                  ),
             ),
             const SizedBox(height: 15),
             OverflowBar(
@@ -91,9 +91,7 @@ class _PageIndicatorPageState extends State<PageIndicatorPage> {
                   }),
                   child: const Icon(YaruIcons.plus),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10),
                 YaruOptionButton(
                   onPressed: () => setState(() {
                     _length = _length > 1 ? _length - 1 : _length;

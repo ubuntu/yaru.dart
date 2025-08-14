@@ -36,22 +36,22 @@ class YaruBanner extends StatelessWidget {
     bool? selected,
     MouseCursor? mouseCursor,
   }) : this(
-          key: key,
-          onTap: onTap,
-          onHover: onHover,
-          padding: EdgeInsets.zero,
-          color: color,
-          elevation: elevation,
-          surfaceTintColor: surfaceTintColor,
-          selected: selected,
-          mouseCursor: mouseCursor,
-          child: YaruTile(
-            leading: icon,
-            title: title,
-            subtitle: subtitle,
-            padding: padding,
-          ),
-        );
+         key: key,
+         onTap: onTap,
+         onHover: onHover,
+         padding: EdgeInsets.zero,
+         color: color,
+         elevation: elevation,
+         surfaceTintColor: surfaceTintColor,
+         selected: selected,
+         mouseCursor: mouseCursor,
+         child: YaruTile(
+           leading: icon,
+           title: title,
+           subtitle: subtitle,
+           padding: padding,
+         ),
+       );
 
   /// The widget to display inside the banner.
   final Widget child;
@@ -87,20 +87,21 @@ class YaruBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final borderRadius = BorderRadius.circular(kYaruBannerRadius);
+    final borderRadius = BorderRadius.circular(kYaruContainerRadius);
 
-    final defaultSurfaceTintColor = theme.scaffoldBackgroundColor
-        .scale(lightness: theme.brightness == Brightness.light ? 0 : 0.03);
+    final defaultSurfaceTintColor = theme.scaffoldBackgroundColor.scale(
+      lightness: theme.brightness == Brightness.light ? 0 : 0.03,
+    );
     return Material(
       color: selected == true
-          ? theme.primaryColor.withOpacity(0.8)
+          ? theme.primaryColor.withValues(alpha: 0.8)
           : Colors.transparent,
       borderRadius: borderRadius,
       child: InkWell(
         onTap: onTap,
         onHover: onHover,
         borderRadius: borderRadius,
-        hoverColor: theme.colorScheme.onSurface.withOpacity(0.1),
+        hoverColor: theme.colorScheme.onSurface.withValues(alpha: 0.1),
         mouseCursor: mouseCursor,
         child: Card(
           color: color ?? defaultSurfaceTintColor,
@@ -108,9 +109,10 @@ class YaruBanner extends StatelessWidget {
           surfaceTintColor: surfaceTintColor ?? defaultSurfaceTintColor,
           elevation: elevation ?? 1,
           shape: RoundedRectangleBorder(
-            borderRadius: borderRadius
-                .inner(const EdgeInsets.all(4.0)), // 4 is the default margin
-            side: BorderSide(color: theme.dividerColor, width: 1),
+            borderRadius: borderRadius.inner(
+              const EdgeInsets.all(4.0),
+            ), // 4 is the default margin
+            side: BorderSide(color: theme.dividerColor, width: 0),
           ),
           child: Container(
             width: double.infinity,

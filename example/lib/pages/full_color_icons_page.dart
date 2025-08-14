@@ -25,8 +25,9 @@ class _FullColorIconsPageState extends State<FullColorIconsPage>
       vsync: this,
       initialIndex: 1,
     );
-    _iconUrls = iconDirsToIconNames
-        .map((key, value) => MapEntry(key, _fetchIconUrls(key)));
+    _iconUrls = iconDirsToIconNames.map(
+      (key, value) => MapEntry(key, _fetchIconUrls(key)),
+    );
   }
 
   @override
@@ -38,11 +39,7 @@ class _FullColorIconsPageState extends State<FullColorIconsPage>
           child: YaruTabBar(
             tabController: _tabController,
             tabs: iconDirsToIconNames.entries
-                .map(
-                  (e) => Tab(
-                    text: e.key,
-                  ),
-                )
+                .map((e) => Tab(text: e.key))
                 .toList(),
           ),
         ),
@@ -59,14 +56,16 @@ class _FullColorIconsPageState extends State<FullColorIconsPage>
                       itemBuilder: (context, index) {
                         final icon = snapshot.data!.elementAt(index);
                         return Tooltip(
-                          message: icon
+                          message:
+                              icon
                                   .split('/')
                                   .lastOrNull
                                   ?.replaceAll(_urlSuffix, '') ??
                               '',
                           child: InkWell(
-                            borderRadius:
-                                BorderRadius.circular(kYaruButtonRadius),
+                            borderRadius: BorderRadius.circular(
+                              kYaruButtonRadius,
+                            ),
                             onTap: () => kIsWeb
                                 ? html.window.open(icon, '')
                                 : launchUrl(Uri.parse(icon)),
@@ -74,10 +73,7 @@ class _FullColorIconsPageState extends State<FullColorIconsPage>
                               icon,
                               filterQuality: FilterQuality.medium,
                               errorBuilder: (context, error, stackTrace) =>
-                                  const Icon(
-                                YaruIcons.question,
-                                size: 35,
-                              ),
+                                  const Icon(YaruIcons.question, size: 35),
                             ),
                           ),
                         );
@@ -85,11 +81,11 @@ class _FullColorIconsPageState extends State<FullColorIconsPage>
                       itemCount: snapshot.data!.length,
                       gridDelegate:
                           const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 100,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        mainAxisExtent: 100,
-                      ),
+                            maxCrossAxisExtent: 100,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            mainAxisExtent: 100,
+                          ),
                     );
                   }
                   return const Center(child: YaruCircularProgressIndicator());
@@ -344,12 +340,7 @@ const iconDirsToIconNames = <String, Set<String>>{
     'emblem-urgent',
     'emblem-videos',
   },
-  'legacy': {
-    'document-export',
-    'document-import',
-    'list-add',
-    'list-remove',
-  },
+  'legacy': {'document-export', 'document-import', 'list-add', 'list-remove'},
   'mimetypes': {
     'application-apk',
     'application-epub+zip',

@@ -41,7 +41,6 @@ class YaruLandscapeLayout extends StatefulWidget {
 
 class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   late int _selectedIndex;
-  double? _paneWidth;
 
   @override
   void initState() {
@@ -82,16 +81,16 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
   @override
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
-    return YaruPanedView(
-      pane: _buildLeftPane(theme),
-      page: _buildPage(context),
+    return YaruPanedView.builder(
+      paneBuilder: _buildLeftPane,
+      pageBuilder: _buildPage,
       layoutDelegate: widget.paneLayoutDelegate,
       includeSeparator: theme.includeSeparator ?? true,
-      onPaneSizeChange: (size) => _paneWidth = size,
     );
   }
 
-  Widget _buildLeftPane(YaruMasterDetailThemeData theme) {
+  Widget _buildLeftPane(BuildContext context, double availableSpace) {
+    final theme = YaruMasterDetailTheme.of(context);
     return Builder(
       builder: (context) {
         return YaruTitleBarTheme(
@@ -101,10 +100,7 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
           child: Column(
             children: [
               if (widget.appBar != null)
-                SizedBox(
-                  height: kYaruTitleBarHeight,
-                  child: widget.appBar!,
-                ),
+                SizedBox(height: kYaruTitleBarHeight, child: widget.appBar!),
               Expanded(
                 child: Container(
                   color: theme.sideBarColor,
@@ -113,17 +109,14 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
                     selectedIndex: _selectedIndex,
                     onTap: _onTap,
                     builder: widget.tileBuilder,
-                    availableWidth: _paneWidth!,
+                    availableWidth: availableSpace,
                     startUndershoot: widget.appBar != null,
                     endUndershoot: widget.bottomBar != null,
                   ),
                 ),
               ),
               if (widget.bottomBar != null)
-                Material(
-                  color: theme.sideBarColor,
-                  child: widget.bottomBar,
-                ),
+                Material(color: theme.sideBarColor, child: widget.bottomBar),
             ],
           ),
         );
@@ -135,29 +128,33 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     final theme = YaruMasterDetailTheme.of(context);
 
     return Theme(
-      data: Theme.of(context).copyWith(
-        pageTransitionsTheme: theme.landscapeTransitions,
-      ),
+      data: Theme.of(
+        context,
+      ).copyWith(pageTransitionsTheme: theme.landscapeTransitions),
       child: ScaffoldMessenger(
-        child: Navigator(
-          key: widget.navigatorKey,
-          initialRoute: widget.initialRoute,
-          onGenerateRoute: widget.onGenerateRoute,
-          onUnknownRoute: widget.onUnknownRoute,
-          pages: [
-            MaterialPage(
-              key: ValueKey(_selectedIndex),
-              child: Builder(
-                builder: (context) => widget.controller.length > _selectedIndex
-                    ? widget.pageBuilder(context, _selectedIndex)
-                    : widget.pageBuilder(context, 0),
+        child: Semantics(
+          container: true,
+          child: Navigator(
+            key: widget.navigatorKey,
+            initialRoute: widget.initialRoute,
+            onGenerateRoute: widget.onGenerateRoute,
+            onUnknownRoute: widget.onUnknownRoute,
+            pages: [
+              MaterialPage(
+                key: ValueKey(_selectedIndex),
+                child: Builder(
+                  builder: (context) =>
+                      widget.controller.length > _selectedIndex
+                      ? widget.pageBuilder(context, _selectedIndex)
+                      : widget.pageBuilder(context, 0),
+                ),
               ),
-            ),
-          ],
-          // TODO: implement replacement if we keep YaruMasterDetailPage
-          // ignore: deprecated_member_use
-          onPopPage: (route, result) => route.didPop(result),
-          observers: [...widget.navigatorObservers, HeroController()],
+            ],
+            // TODO: implement replacement if we keep YaruMasterDetailPage
+            // ignore: deprecated_member_use
+            onPopPage: (route, result) => route.didPop(result),
+            observers: [...widget.navigatorObservers, HeroController()],
+          ),
         ),
       ),
     );

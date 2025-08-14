@@ -4,7 +4,8 @@ import 'package:yaru/theme.dart';
 
 @immutable
 class YaruNavigationPageThemeData
-    extends ThemeExtension<YaruNavigationPageThemeData> with Diagnosticable {
+    extends ThemeExtension<YaruNavigationPageThemeData>
+    with Diagnosticable {
   /// Creates a theme that can be used with [YaruNavigationPage].
   const YaruNavigationPageThemeData({
     this.railPadding,
@@ -85,10 +86,7 @@ class YaruNavigationPageThemeData
 
   @override
   int get hashCode {
-    return Object.hashAll([
-      railPadding,
-      pageTransitions,
-    ]);
+    return Object.hashAll([railPadding, pageTransitions]);
   }
 }
 
@@ -102,8 +100,8 @@ class YaruNavigationPageTheme extends InheritedTheme {
   final YaruNavigationPageThemeData data;
 
   static YaruNavigationPageThemeData of(BuildContext context) {
-    final theme =
-        context.dependOnInheritedWidgetOfExactType<YaruNavigationPageTheme>();
+    final theme = context
+        .dependOnInheritedWidgetOfExactType<YaruNavigationPageTheme>();
     return theme?.data ??
         Theme.of(context).extension<YaruNavigationPageThemeData>() ??
         YaruNavigationPageThemeData.fallback(context);

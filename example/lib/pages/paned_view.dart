@@ -7,10 +7,8 @@ class PanedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pane = Container(
-      color: Theme.of(context).colorScheme.onSurface.withOpacity(.025),
-      child: const Center(
-        child: Text('pane'),
-      ),
+      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.025),
+      child: const Center(child: Text('pane')),
     );
 
     return Column(
@@ -27,9 +25,7 @@ class PanedPage extends StatelessWidget {
                 pane: pane,
                 page: YaruPanedView(
                   pane: pane,
-                  page: const Center(
-                    child: Text('YaruPanedView Inception'),
-                  ),
+                  page: const Center(child: Text('YaruPanedView Inception')),
                   layoutDelegate: const YaruResizablePaneDelegate(
                     initialPaneSize: 200,
                     minPaneSize: 25,

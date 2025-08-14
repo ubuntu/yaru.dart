@@ -17,6 +17,7 @@ class YaruSwitchButton extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.mouseCursor,
+    this.onOffShapes,
   });
 
   /// See [Switch.value]
@@ -42,6 +43,9 @@ class YaruSwitchButton extends StatefulWidget {
 
   /// See [Switch.mouseCursor].
   final MouseCursor? mouseCursor;
+
+  /// See [YaruSwitch.onOffShapes]
+  final bool? onOffShapes;
 
   @override
   State<YaruSwitchButton> createState() => _YaruSwitchButtonState();
@@ -73,7 +77,7 @@ class _YaruSwitchButtonState extends State<YaruSwitchButton> {
     final states = _statesController.value;
     final mouseCursor =
         WidgetStateProperty.resolveAs(widget.mouseCursor, states) ??
-            YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
+        YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
 
     return YaruToggleButton(
       title: widget.title,
@@ -86,6 +90,7 @@ class _YaruSwitchButtonState extends State<YaruSwitchButton> {
         autofocus: widget.autofocus,
         mouseCursor: mouseCursor,
         statesController: _statesController,
+        onOffShapes: widget.onOffShapes,
       ),
       mouseCursor:
           mouseCursor ?? WidgetStateMouseCursor.clickable.resolve(states),

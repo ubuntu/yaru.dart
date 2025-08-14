@@ -7,9 +7,7 @@ enum YaruBackButtonStyle { rounded, square }
 class YaruBackButtonThemeData extends ThemeExtension<YaruBackButtonThemeData>
     with Diagnosticable {
   /// Creates a theme that can be used with [YaruBackButton].
-  const YaruBackButtonThemeData({
-    this.style,
-  });
+  const YaruBackButtonThemeData({this.style});
 
   /// The button style to use.
   final YaruBackButtonStyle? style;
@@ -17,12 +15,8 @@ class YaruBackButtonThemeData extends ThemeExtension<YaruBackButtonThemeData>
   /// Creates a copy of this object but with the given fields replaced with the
   /// new values.
   @override
-  YaruBackButtonThemeData copyWith({
-    YaruBackButtonStyle? style,
-  }) {
-    return YaruBackButtonThemeData(
-      style: style ?? this.style,
-    );
+  YaruBackButtonThemeData copyWith({YaruBackButtonStyle? style}) {
+    return YaruBackButtonThemeData(style: style ?? this.style);
   }
 
   @override
@@ -31,9 +25,7 @@ class YaruBackButtonThemeData extends ThemeExtension<YaruBackButtonThemeData>
     double t,
   ) {
     final o = other as YaruBackButtonThemeData?;
-    return YaruBackButtonThemeData(
-      style: t < 0.5 ? style : o?.style,
-    );
+    return YaruBackButtonThemeData(style: t < 0.5 ? style : o?.style);
   }
 
   @override
@@ -62,8 +54,8 @@ class YaruBackButtonTheme extends InheritedTheme {
   final YaruBackButtonThemeData data;
 
   static YaruBackButtonThemeData? of(BuildContext context) {
-    final theme =
-        context.dependOnInheritedWidgetOfExactType<YaruBackButtonTheme>();
+    final theme = context
+        .dependOnInheritedWidgetOfExactType<YaruBackButtonTheme>();
     return theme?.data ??
         Theme.of(context).extension<YaruBackButtonThemeData>();
   }

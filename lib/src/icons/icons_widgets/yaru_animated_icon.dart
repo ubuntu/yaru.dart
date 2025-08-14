@@ -7,7 +7,7 @@ enum YaruAnimationMode {
   once,
 
   /// Play the animation indefinitely.
-  repeat
+  repeat,
 }
 
 /// A runner widget for all Yaru animated icons.

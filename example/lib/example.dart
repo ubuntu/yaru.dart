@@ -27,7 +27,7 @@ class Example extends StatelessWidget with WatchItMixin {
 
 class _MasterDetailPage extends StatelessWidget {
   _MasterDetailPage({required List<PageItem> pageItems})
-      : pageItems = pageItems.where(isSupported).toList();
+    : pageItems = pageItems.where(isSupported).toList();
 
   final List<PageItem> pageItems;
 
@@ -51,37 +51,31 @@ class _MasterDetailPage extends StatelessWidget {
       ),
       pageBuilder: (context, index) => YaruDetailPage(
         appBar: YaruWindowTitleBar(
-          backgroundColor: Colors.transparent,
           border: BorderSide.none,
-          leading:
-              Navigator.of(context).canPop() ? const YaruBackButton() : null,
+          leading: Navigator.of(context).canPop()
+              ? const YaruBackButton()
+              : null,
           title: buildTitle(context, pageItems[index]),
           actions: buildActions(context, pageItems[index]),
         ),
         body: pageItems[index].pageBuilder(context),
-        floatingActionButton:
-            buildFloatingActionButton(context, pageItems[index]),
+        floatingActionButton: buildFloatingActionButton(
+          context,
+          pageItems[index],
+        ),
       ),
       appBar: YaruWindowTitleBar(
         title: const Text('Yaru'),
         border: BorderSide.none,
         backgroundColor: YaruMasterDetailTheme.of(context).sideBarColor,
         actions: const [
-          SizedBox(
-            width: 5,
-          ),
+          SizedBox(width: 5),
           ExampleDarkLightToggleButton(),
-          SizedBox(
-            width: 5,
-          ),
+          SizedBox(width: 5),
           ExampleYaruVariantPicker(),
-          SizedBox(
-            width: 5,
-          ),
+          SizedBox(width: 5),
           ExampleHighContrastButton(),
-          SizedBox(
-            width: 5,
-          ),
+          SizedBox(width: 5),
         ],
       ),
       bottomBar: Padding(
@@ -98,7 +92,7 @@ class _MasterDetailPage extends StatelessWidget {
 
 class _CompactPage extends StatefulWidget {
   _CompactPage({required List<PageItem> pageItems})
-      : pageItems = pageItems.where(_CompactPage.isSupported).toList();
+    : pageItems = pageItems.where(_CompactPage.isSupported).toList();
 
   final List<PageItem> pageItems;
 
@@ -119,8 +113,8 @@ class _CompactPageState extends State<_CompactPage> {
     final style = width > 1000
         ? YaruNavigationRailStyle.labelledExtended
         : width > 500
-            ? YaruNavigationRailStyle.labelled
-            : YaruNavigationRailStyle.compact;
+        ? YaruNavigationRailStyle.labelled
+        : YaruNavigationRailStyle.compact;
 
     return Scaffold(
       appBar: PreferredSize(
@@ -147,8 +141,10 @@ class _CompactPageState extends State<_CompactPage> {
         ),
         pageBuilder: (context, index) => Scaffold(
           body: widget.pageItems[index].pageBuilder(context),
-          floatingActionButton:
-              buildFloatingActionButton(context, widget.pageItems[index]),
+          floatingActionButton: buildFloatingActionButton(
+            context,
+            widget.pageItems[index],
+          ),
         ),
         trailing: YaruNavigationRailItem(
           icon: const Icon(YaruIcons.gear),
@@ -164,10 +160,7 @@ class _CompactPageState extends State<_CompactPage> {
 }
 
 void showSettingsDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) => const SettingsDialog(),
-  );
+  showDialog(context: context, builder: (context) => const SettingsDialog());
 }
 
 Widget? buildLeading(BuildContext context, PageItem item) {
@@ -194,9 +187,7 @@ class SettingsDialog extends StatelessWidget with WatchItMixin {
     final model = di<ExampleModel>();
 
     return AlertDialog(
-      title: const YaruDialogTitleBar(
-        title: Text('Settings'),
-      ),
+      title: const YaruDialogTitleBar(title: Text('Settings')),
       titlePadding: EdgeInsets.zero,
       contentPadding: const EdgeInsets.all(kYaruPagePadding),
       content: Column(

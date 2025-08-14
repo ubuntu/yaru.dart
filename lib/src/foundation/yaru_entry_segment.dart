@@ -19,11 +19,8 @@ abstract interface class YaruEntrySegment implements Listenable {
   YaruSegmentEventReturnAction onBackspaceKey();
 }
 
-typedef YaruSegmentInputFormatter = String Function(
-  String? segmentInput,
-  int minLength,
-  int? maxLength,
-);
+typedef YaruSegmentInputFormatter =
+    String Function(String? segmentInput, int minLength, int? maxLength);
 
 /// Represents a single segment of a [YaruSegmentedEntry].
 /// You can listen for [text] and [input] change using [addListener].
@@ -34,17 +31,17 @@ class YaruStringSegment extends ChangeNotifier implements YaruEntrySegment {
     required this.maxLength,
     String? intialInput,
     required this.inputFormatter,
-  })  : assert(minLength > 0),
-        assert(maxLength == null || maxLength >= minLength);
+  }) : assert(minLength > 0),
+       assert(maxLength == null || maxLength >= minLength);
 
   /// Creates a [YaruStringSegment] with a fixed length.
   YaruStringSegment.fixed({
     required int length,
     String? intialInput,
     required this.inputFormatter,
-  })  : assert(length > 0),
-        minLength = length,
-        maxLength = length;
+  }) : assert(length > 0),
+       minLength = length,
+       maxLength = length;
 
   /// Minimal length of this segment.
   final int minLength;
@@ -124,11 +121,8 @@ class YaruStringSegment extends ChangeNotifier implements YaruEntrySegment {
       YaruSegmentEventReturnAction.ignored;
 }
 
-typedef YaruNumericSegmentCallback = int? Function(
-  String? input,
-  int? value,
-  int? oldValue,
-)?;
+typedef YaruNumericSegmentCallback =
+    int? Function(String? input, int? value, int? oldValue)?;
 
 class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
   /// Creates a [YaruNumericSegment].
@@ -141,9 +135,9 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
     this.onInputCallback,
     this.onDownArrowKeyCallback,
     this.onUpArrowKeyCallback,
-  })  : assert(minLength > 0),
-        assert(maxLength == null || maxLength >= minLength),
-        _value = initialValue;
+  }) : assert(minLength > 0),
+       assert(maxLength == null || maxLength >= minLength),
+       _value = initialValue;
 
   /// Creates a [YaruNumericSegment] with a fixed length.
   YaruNumericSegment.fixed({
@@ -154,10 +148,10 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
     this.onInputCallback,
     this.onDownArrowKeyCallback,
     this.onUpArrowKeyCallback,
-  })  : assert(length > 0),
-        _value = initialValue,
-        minLength = length,
-        maxLength = length;
+  }) : assert(length > 0),
+       _value = initialValue,
+       minLength = length,
+       maxLength = length;
 
   int? _value;
   int? get value => _value;
@@ -165,11 +159,7 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
     final oldValue = _value;
 
     _value = onValueChange != null
-        ? onValueChange!(
-            _input,
-            value,
-            oldValue,
-          )
+        ? onValueChange!(_input, value, oldValue)
         : value;
     if (maxLength != null && _value != null && _value!.length > maxLength!) {
       _value = oldValue;
@@ -315,10 +305,8 @@ class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
 
 class YaruEnumSegment<T extends Enum> extends ChangeNotifier
     implements YaruEntrySegment {
-  YaruEnumSegment({
-    T? initialValue,
-    required this.values,
-  }) : value = initialValue ?? values.first;
+  YaruEnumSegment({T? initialValue, required this.values})
+    : value = initialValue ?? values.first;
 
   T value;
 
@@ -383,12 +371,10 @@ class YaruEnumSegment<T extends Enum> extends ChangeNotifier
 /// A controller for a [YaruSegmentedEntry].
 class YaruSegmentedEntryController extends ChangeNotifier {
   /// Creates a [YaruSegmentedEntryController].
-  YaruSegmentedEntryController({
-    required this.length,
-    int initialIndex = 0,
-  })  : assert(initialIndex >= 0 && initialIndex < length || length == 0),
-        assert(length >= 0),
-        _index = initialIndex;
+  YaruSegmentedEntryController({required this.length, int initialIndex = 0})
+    : assert(initialIndex >= 0 && initialIndex < length || length == 0),
+      assert(length >= 0),
+      _index = initialIndex;
 
   /// Number of segments. Must correspond to [YaruSegmentedEntry.segments.length].
   final int length;

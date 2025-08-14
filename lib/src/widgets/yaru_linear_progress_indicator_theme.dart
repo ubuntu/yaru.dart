@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:yaru/src/widgets/yaru_progress_indicator.dart';
 
 class YaruLinearProgressIndicatorThemeData
-    extends YaruProgressIndicatorThemeData<
-        YaruLinearProgressIndicatorThemeData> {
+    extends
+        YaruProgressIndicatorThemeData<YaruLinearProgressIndicatorThemeData> {
   YaruLinearProgressIndicatorThemeData(
     super.color,
     super.trackColor,

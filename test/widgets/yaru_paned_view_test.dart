@@ -3,187 +3,171 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru/yaru.dart';
 
 void main() {
-  testWidgets(
-    'Fixed paned view',
-    (tester) async {
-      final variant = fixedPaneTestVariant.currentValue!;
+  testWidgets('Fixed paned view', (tester) async {
+    final variant = fixedPaneTestVariant.currentValue!;
 
-      const pane = Key('pane');
-      const page = Key('page');
+    const pane = Key('pane');
+    const page = Key('page');
 
-      await tester.pumpPanedView(
-        SizedBox(
-          width: 500,
-          height: 500,
-          child: YaruPanedView(
-            pane: const SizedBox.expand(key: pane),
-            page: const SizedBox.expand(key: page),
-            layoutDelegate: variant.layoutDelegate,
-          ),
+    await tester.pumpPanedView(
+      SizedBox(
+        width: 500,
+        height: 500,
+        child: YaruPanedView(
+          pane: const SizedBox.expand(key: pane),
+          page: const SizedBox.expand(key: page),
+          layoutDelegate: variant.layoutDelegate,
         ),
-        textDirection: variant.textDirection,
-      );
+      ),
+      textDirection: variant.textDirection,
+    );
 
-      final panedViewRect = tester.getRect(find.byType(YaruPanedView));
-      final paneRect = tester.getRect(find.byKey(pane));
-      final pageRect = tester.getRect(find.byKey(page));
+    final panedViewRect = tester.getRect(find.byType(YaruPanedView));
+    final paneRect = tester.getRect(find.byKey(pane));
+    final pageRect = tester.getRect(find.byKey(page));
 
-      expect(
-        find.byType(
-          variant.layoutDelegate.paneSide.isHorizontal
-              ? VerticalDivider
-              : Divider,
-        ),
-        findsOneWidget,
-      );
-      expect(find.byType(GestureDetector), findsNothing);
-      switch (variant.expectedSide) {
-        case Side.left:
-          expect(pageRect.left, greaterThan(paneRect.right));
-          break;
-        case Side.right:
-          expect(paneRect.left, greaterThan(pageRect.right));
-          break;
-        case Side.top:
-          expect(pageRect.top, greaterThan(paneRect.bottom));
-          break;
-        case Side.bottom:
-          expect(paneRect.top, greaterThan(pageRect.bottom));
-          break;
-      }
-      expect(panedViewRect.width, 500);
-      expect(paneRect.width, variant.expectedPaneSize.width);
-      expect(pageRect.width, variant.expectedPageSize.width);
-      expect(panedViewRect.height, 500);
-      expect(paneRect.height, variant.expectedPaneSize.height);
-      expect(pageRect.height, variant.expectedPageSize.height);
-    },
-    variant: fixedPaneTestVariant,
-  );
-
-  testWidgets(
-    'Resizable pane view',
-    (tester) async {
-      final variant = resizablePaneTestVariant.currentValue!;
-
-      const pane = Key('pane');
-      const page = Key('page');
-      double? onPaneSizeChangeValue;
-
-      await tester.pumpPanedView(
-        SizedBox(
-          width: 500,
-          height: 500,
-          child: YaruPanedView(
-            pane: const SizedBox.expand(key: pane),
-            page: const SizedBox.expand(key: page),
-            layoutDelegate: variant.layoutDelegate,
-            onPaneSizeChange: (value) => onPaneSizeChangeValue = value,
-          ),
-        ),
-        textDirection: variant.textDirection,
-      );
-      await tester.pump();
-
-      var panedViewRect = tester.getRect(find.byType(YaruPanedView));
-      var paneRect = tester.getRect(find.byKey(pane));
-      var pageRect = tester.getRect(find.byKey(page));
-
-      expect(
-        find.byType(
-          variant.layoutDelegate.paneSide.isHorizontal
-              ? VerticalDivider
-              : Divider,
-        ),
-        findsOneWidget,
-      );
-      switch (variant.expectedSide) {
-        case Side.left:
-          expect(pageRect.left, greaterThan(paneRect.right));
-          break;
-        case Side.right:
-          expect(paneRect.left, greaterThan(pageRect.right));
-          break;
-        case Side.top:
-          expect(pageRect.top, greaterThan(paneRect.bottom));
-          break;
-        case Side.bottom:
-          expect(paneRect.top, greaterThan(pageRect.bottom));
-          break;
-      }
-      expect(panedViewRect.width, 500);
-      expect(paneRect.width, variant.expectedInitialPaneSize.width);
-      expect(pageRect.width, variant.expectedInitialPageSize.width);
-      expect(panedViewRect.height, 500);
-      expect(paneRect.height, variant.expectedInitialPaneSize.height);
-      expect(pageRect.height, variant.expectedInitialPageSize.height);
-
-      await tester.drag(find.byType(GestureDetector), variant.offset);
-      await tester.pump();
-
-      panedViewRect = tester.getRect(find.byType(YaruPanedView));
-      paneRect = tester.getRect(find.byKey(pane));
-      pageRect = tester.getRect(find.byKey(page));
-
-      expect(paneRect.width, variant.expectedResizedPaneSize.width);
-      expect(pageRect.width, variant.expectedResizedPageSize.width);
-      expect(paneRect.height, variant.expectedResizedPaneSize.height);
-      expect(pageRect.height, variant.expectedResizedPageSize.height);
-      expect(
-        onPaneSizeChangeValue,
+    expect(
+      find.byType(
         variant.layoutDelegate.paneSide.isHorizontal
-            ? variant.expectedResizedPaneSize.width
-            : variant.expectedResizedPaneSize.height,
-      );
-    },
-    variant: resizablePaneTestVariant,
-  );
+            ? VerticalDivider
+            : Divider,
+      ),
+      findsOneWidget,
+    );
+    expect(find.byType(GestureDetector), findsNothing);
+    switch (variant.expectedSide) {
+      case Side.left:
+        expect(pageRect.left, greaterThan(paneRect.right));
+        break;
+      case Side.right:
+        expect(paneRect.left, greaterThan(pageRect.right));
+        break;
+      case Side.top:
+        expect(pageRect.top, greaterThan(paneRect.bottom));
+        break;
+      case Side.bottom:
+        expect(paneRect.top, greaterThan(pageRect.bottom));
+        break;
+    }
+    expect(panedViewRect.width, 500);
+    expect(paneRect.width, variant.expectedPaneSize.width);
+    expect(pageRect.width, variant.expectedPageSize.width);
+    expect(panedViewRect.height, 500);
+    expect(paneRect.height, variant.expectedPaneSize.height);
+    expect(pageRect.height, variant.expectedPageSize.height);
+  }, variant: fixedPaneTestVariant);
 
-  testWidgets(
-    'Resizing',
-    (tester) async {
-      const pane = Key('pane');
-      const page = Key('page');
+  testWidgets('Resizable pane view', (tester) async {
+    final variant = resizablePaneTestVariant.currentValue!;
 
-      final binding = TestWidgetsFlutterBinding.ensureInitialized();
-      await binding.setSurfaceSize(const Size(500, 500));
+    const pane = Key('pane');
+    const page = Key('page');
+    double? onPaneSizeChangeValue;
 
-      await tester.pumpPanedView(
-        const YaruPanedView(
-          pane: SizedBox.expand(key: pane),
-          page: SizedBox.expand(key: page),
-          layoutDelegate: YaruFixedPaneDelegate(paneSize: 200),
+    await tester.pumpPanedView(
+      SizedBox(
+        width: 500,
+        height: 500,
+        child: YaruPanedView(
+          pane: const SizedBox.expand(key: pane),
+          page: const SizedBox.expand(key: page),
+          layoutDelegate: variant.layoutDelegate,
+          onPaneSizeChange: (value) => onPaneSizeChangeValue = value,
         ),
-      );
+      ),
+      textDirection: variant.textDirection,
+    );
+    await tester.pump();
 
-      var panedViewRect = tester.getRect(find.byType(YaruPanedView));
-      var paneRect = tester.getRect(find.byKey(pane));
-      var pageRect = tester.getRect(find.byKey(page));
+    var panedViewRect = tester.getRect(find.byType(YaruPanedView));
+    var paneRect = tester.getRect(find.byKey(pane));
+    var pageRect = tester.getRect(find.byKey(page));
 
-      expect(panedViewRect.width, 500);
-      expect(paneRect.width, 200);
-      expect(pageRect.width, 284);
+    expect(
+      find.byType(
+        variant.layoutDelegate.paneSide.isHorizontal
+            ? VerticalDivider
+            : Divider,
+      ),
+      findsOneWidget,
+    );
+    switch (variant.expectedSide) {
+      case Side.left:
+        expect(pageRect.left, greaterThan(paneRect.right));
+        break;
+      case Side.right:
+        expect(paneRect.left, greaterThan(pageRect.right));
+        break;
+      case Side.top:
+        expect(pageRect.top, greaterThan(paneRect.bottom));
+        break;
+      case Side.bottom:
+        expect(paneRect.top, greaterThan(pageRect.bottom));
+        break;
+    }
+    expect(panedViewRect.width, 500);
+    expect(paneRect.width, variant.expectedInitialPaneSize.width);
+    expect(pageRect.width, variant.expectedInitialPageSize.width);
+    expect(panedViewRect.height, 500);
+    expect(paneRect.height, variant.expectedInitialPaneSize.height);
+    expect(pageRect.height, variant.expectedInitialPageSize.height);
 
-      await binding.setSurfaceSize(const Size(200, 500));
-      await tester.pump();
+    await tester.drag(find.byType(GestureDetector), variant.offset);
+    await tester.pump();
 
-      panedViewRect = tester.getRect(find.byType(YaruPanedView));
-      paneRect = tester.getRect(find.byKey(pane));
-      pageRect = tester.getRect(find.byKey(page));
+    panedViewRect = tester.getRect(find.byType(YaruPanedView));
+    paneRect = tester.getRect(find.byKey(pane));
+    pageRect = tester.getRect(find.byKey(page));
 
-      expect(panedViewRect.width, 200);
-      expect(paneRect.width, 100);
-      expect(pageRect.width, 84);
-    },
-  );
+    expect(paneRect.width, variant.expectedResizedPaneSize.width);
+    expect(pageRect.width, variant.expectedResizedPageSize.width);
+    expect(paneRect.height, variant.expectedResizedPaneSize.height);
+    expect(pageRect.height, variant.expectedResizedPageSize.height);
+    expect(
+      onPaneSizeChangeValue,
+      variant.layoutDelegate.paneSide.isHorizontal
+          ? variant.expectedResizedPaneSize.width
+          : variant.expectedResizedPaneSize.height,
+    );
+  }, variant: resizablePaneTestVariant);
+
+  testWidgets('Resizing', (tester) async {
+    const pane = Key('pane');
+    const page = Key('page');
+
+    final binding = TestWidgetsFlutterBinding.ensureInitialized();
+    await binding.setSurfaceSize(const Size(500, 500));
+
+    await tester.pumpPanedView(
+      const YaruPanedView(
+        pane: SizedBox.expand(key: pane),
+        page: SizedBox.expand(key: page),
+        layoutDelegate: YaruFixedPaneDelegate(paneSize: 200),
+      ),
+    );
+
+    var panedViewRect = tester.getRect(find.byType(YaruPanedView));
+    var paneRect = tester.getRect(find.byKey(pane));
+    var pageRect = tester.getRect(find.byKey(page));
+
+    expect(panedViewRect.width, 500);
+    expect(paneRect.width, 200);
+    expect(pageRect.width, 284);
+
+    await binding.setSurfaceSize(const Size(200, 500));
+    await tester.pump();
+
+    panedViewRect = tester.getRect(find.byType(YaruPanedView));
+    paneRect = tester.getRect(find.byKey(pane));
+    pageRect = tester.getRect(find.byKey(page));
+
+    expect(panedViewRect.width, 200);
+    expect(paneRect.width, 100);
+    expect(pageRect.width, 84);
+  });
 }
 
-enum Side {
-  top,
-  right,
-  bottom,
-  left;
-}
+enum Side { top, right, bottom, left }
 
 class FixedPaneTestVariant {
   FixedPaneTestVariant({
@@ -198,23 +182,23 @@ class FixedPaneTestVariant {
     required YaruPaneSide paneSide,
     required this.textDirection,
     required this.expectedSide,
-  })  : layoutDelegate = YaruFixedPaneDelegate(
-          paneSize: 200,
-          paneSide: paneSide,
-        ),
-        expectedPaneSize = const Size(200, 500),
-        expectedPageSize = const Size(284, 500);
+  }) : layoutDelegate = YaruFixedPaneDelegate(
+         paneSize: 200,
+         paneSide: paneSide,
+       ),
+       expectedPaneSize = const Size(200, 500),
+       expectedPageSize = const Size(284, 500);
 
   FixedPaneTestVariant.vertical({
     required YaruPaneSide paneSide,
     required this.textDirection,
     required this.expectedSide,
-  })  : layoutDelegate = YaruFixedPaneDelegate(
-          paneSize: 200,
-          paneSide: paneSide,
-        ),
-        expectedPaneSize = const Size(500, 200),
-        expectedPageSize = const Size(500, 284);
+  }) : layoutDelegate = YaruFixedPaneDelegate(
+         paneSize: 200,
+         paneSide: paneSide,
+       ),
+       expectedPaneSize = const Size(500, 200),
+       expectedPageSize = const Size(500, 284);
 
   final YaruFixedPaneDelegate layoutDelegate;
   final TextDirection textDirection;
@@ -244,38 +228,46 @@ class ResizablePaneTestVariant {
     required this.textDirection,
     required this.expectedSide,
     required double offset,
-  })  : layoutDelegate = YaruResizablePaneDelegate(
-          initialPaneSize: 200,
-          minPaneSize: 20,
-          minPageSize: 20,
-          paneSide: paneSide,
-        ),
-        expectedInitialPaneSize = const Size(200, 500),
-        expectedInitialPageSize = const Size(284, 500),
-        offset = Offset(offset, 0),
-        expectedResizedPaneSize =
-            Size(200 + (expectedSide == Side.left ? offset : -offset), 500),
-        expectedResizedPageSize =
-            Size(284 - (expectedSide == Side.left ? offset : -offset), 500);
+  }) : layoutDelegate = YaruResizablePaneDelegate(
+         initialPaneSize: 200,
+         minPaneSize: 20,
+         minPageSize: 20,
+         paneSide: paneSide,
+       ),
+       expectedInitialPaneSize = const Size(200, 500),
+       expectedInitialPageSize = const Size(284, 500),
+       offset = Offset(offset, 0),
+       expectedResizedPaneSize = Size(
+         200 + (expectedSide == Side.left ? offset : -offset),
+         500,
+       ),
+       expectedResizedPageSize = Size(
+         284 - (expectedSide == Side.left ? offset : -offset),
+         500,
+       );
 
   ResizablePaneTestVariant.vertical({
     required YaruPaneSide paneSide,
     required this.textDirection,
     required this.expectedSide,
     required double offset,
-  })  : layoutDelegate = YaruResizablePaneDelegate(
-          initialPaneSize: 200,
-          minPaneSize: 20,
-          minPageSize: 20,
-          paneSide: paneSide,
-        ),
-        expectedInitialPaneSize = const Size(500, 200),
-        expectedInitialPageSize = const Size(500, 284),
-        offset = Offset(0, offset),
-        expectedResizedPaneSize =
-            Size(500, 200 + (expectedSide == Side.top ? offset : -offset)),
-        expectedResizedPageSize =
-            Size(500, 284 - (expectedSide == Side.top ? offset : -offset));
+  }) : layoutDelegate = YaruResizablePaneDelegate(
+         initialPaneSize: 200,
+         minPaneSize: 20,
+         minPageSize: 20,
+         paneSide: paneSide,
+       ),
+       expectedInitialPaneSize = const Size(500, 200),
+       expectedInitialPageSize = const Size(500, 284),
+       offset = Offset(0, offset),
+       expectedResizedPaneSize = Size(
+         500,
+         200 + (expectedSide == Side.top ? offset : -offset),
+       ),
+       expectedResizedPageSize = Size(
+         500,
+         284 - (expectedSide == Side.top ? offset : -offset),
+       );
 
   final YaruResizablePaneDelegate layoutDelegate;
   final TextDirection textDirection;
@@ -398,11 +390,7 @@ extension YaruPanedViewTester on WidgetTester {
       MaterialApp(
         home: Directionality(
           textDirection: textDirection,
-          child: Scaffold(
-            body: Center(
-              child: widget,
-            ),
-          ),
+          child: Scaffold(body: Center(child: widget)),
         ),
       ),
     );

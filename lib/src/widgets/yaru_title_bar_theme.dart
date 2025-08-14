@@ -84,8 +84,11 @@ class YaruTitleBarThemeData extends ThemeExtension<YaruTitleBarThemeData>
       centerTitle: t < 0.5 ? centerTitle : o?.centerTitle,
       titleSpacing: lerpDouble(titleSpacing, o?.titleSpacing, t),
       buttonSpacing: lerpDouble(buttonSpacing, o?.buttonSpacing, t),
-      buttonPadding:
-          EdgeInsetsGeometry.lerp(buttonPadding, o?.buttonPadding, t),
+      buttonPadding: EdgeInsetsGeometry.lerp(
+        buttonPadding,
+        o?.buttonPadding,
+        t,
+      ),
       foregroundColor: WidgetStateProperty.lerp<Color?>(
         foregroundColor,
         o?.foregroundColor,
@@ -188,8 +191,8 @@ class YaruTitleBarTheme extends InheritedTheme {
   final YaruTitleBarThemeData data;
 
   static YaruTitleBarThemeData of(BuildContext context) {
-    final theme =
-        context.dependOnInheritedWidgetOfExactType<YaruTitleBarTheme>();
+    final theme = context
+        .dependOnInheritedWidgetOfExactType<YaruTitleBarTheme>();
     return theme?.data ??
         Theme.of(context).extension<YaruTitleBarThemeData>() ??
         const YaruTitleBarThemeData();

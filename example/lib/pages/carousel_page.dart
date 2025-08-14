@@ -53,9 +53,7 @@ class _CarouselPageState extends State<CarouselPage> {
                   }),
                   child: const Icon(YaruIcons.plus),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10),
                 YaruOptionButton(
                   onPressed: () => setState(() {
                     length >= 2 ? length-- : length = length;
@@ -77,7 +75,9 @@ class _CarouselPageState extends State<CarouselPage> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.1),
           ),
           image: const DecorationImage(
             fit: BoxFit.contain,

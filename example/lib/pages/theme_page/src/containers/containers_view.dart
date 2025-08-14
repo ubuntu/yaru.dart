@@ -30,9 +30,7 @@ class _ContainersViewState extends State<ContainersView> {
       child: const SizedBox(
         height: 150,
         width: 200,
-        child: Center(
-          child: Text('Card'),
-        ),
+        child: Center(child: Text('Card')),
       ),
     );
 
@@ -85,17 +83,13 @@ class _ContainersViewState extends State<ContainersView> {
       width: 400,
       child: ListView(
         children: [
-          const SizedBox(
-            height: kWrapSpacing,
-          ),
+          const SizedBox(height: kWrapSpacing),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Switch(
                 value: _inDialog,
-                onChanged: (v) => setState(
-                  () => _inDialog = v,
-                ),
+                onChanged: (v) => setState(() => _inDialog = v),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),

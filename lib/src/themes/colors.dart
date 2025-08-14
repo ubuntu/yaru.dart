@@ -81,10 +81,7 @@ class YaruColors {
   static const Color inkstone = Color(0xFF3B3B3B);
 
   /// Jet
-  static const Color jet = Color(0xFF2B2B2B);
-
-  /// Dark Jet
-  static const Color darkJet = Color(0xFF252525);
+  static const Color jet = Color(0xFF202020);
 
   /// Light title bar
   static const Color titleBarLight = Color(0xFFEBEBEB);
@@ -214,7 +211,7 @@ extension YaruColorExtension on Color {
     }
 
     return hslColor
-        .withAlpha(scale(opacity, alpha))
+        .withAlpha(scale(a, alpha))
         .withHue(scale(hslColor.hue, hue, 360.0))
         .withSaturation(scale(hslColor.saturation, saturation))
         .withLightness(scale(hslColor.lightness, lightness))
@@ -322,13 +319,14 @@ extension YaruColorExtension on Color {
 
     // A pure dark color have saturation level at 1.0, which results in red when lighten it.
     // We reset this value to 0.0, so the result is desaturated as expected:
-    return hslColor
-        .withSaturation(hslColor.lightness == 0.0 ? 0.0 : hslColor.saturation);
+    return hslColor.withSaturation(
+      hslColor.lightness == 0.0 ? 0.0 : hslColor.saturation,
+    );
   }
 
   /// Returns a hex representation (`#AARRGGBB`) of the color.
   String toHex() {
-    return '#${alpha.toHex()}${red.toHex()}${green.toHex()}${blue.toHex()}';
+    return '#${a.toInt().toHex()}${r.toInt().toHex()}${g.toInt().toHex()}${b.toInt().toHex()}';
   }
 }
 

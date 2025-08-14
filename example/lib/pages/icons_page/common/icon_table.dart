@@ -7,11 +7,7 @@ import 'icon_usage.dart';
 
 @immutable
 class IconTable extends StatelessWidget {
-  const IconTable({
-    super.key,
-    required this.iconItems,
-    required this.iconSize,
-  });
+  const IconTable({super.key, required this.iconItems, required this.iconSize});
 
   final List<IconItem> iconItems;
   final double iconSize;
@@ -32,9 +28,7 @@ class IconTable extends StatelessWidget {
                     iconSize: iconSize,
                   ),
                 ),
-                const SizedBox(
-                  width: 16,
-                ),
+                const SizedBox(width: 16),
                 Expanded(
                   child: SelectableText(
                     beautifyIconName(iconItems[index].name),

@@ -21,9 +21,9 @@ class YaruGtkSettings extends YaruSettings {
   YaruGtkSettings([
     @visibleForTesting GtkSettings? settings,
     @visibleForTesting GSettingsService? settingsService,
-  ])  : _gtkSettings = settings ?? GtkSettings(),
-        _gSettingsService = settingsService ?? GSettingsService(),
-        super._();
+  ]) : _gtkSettings = settings ?? GtkSettings(),
+       _gSettingsService = settingsService ?? GSettingsService(),
+       super._();
 
   final GtkSettings _gtkSettings;
   final GSettingsService _gSettingsService;
@@ -43,9 +43,7 @@ class YaruGtkSettings extends YaruSettings {
   @override
   void init() {
     _gSettings ??= _gSettingsService.lookup(kSchemaInterface);
-    _gSettings?.addListener(
-      () => _accentColorController.add(getAccentColor()),
-    );
+    _gSettings?.addListener(() => _accentColorController.add(getAccentColor()));
   }
 
   @override

@@ -10,15 +10,19 @@ class YaruTabBar extends StatelessWidget {
     this.onTap,
     required this.tabs,
     this.height,
+    this.labelColor,
+    this.unselectedLabelColor,
   });
 
   final TabController? tabController;
   final void Function(int)? onTap;
   final List<Widget> tabs;
   final double? height;
+  final Color? labelColor, unselectedLabelColor;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(5),
       height: height ?? kYaruTitleBarItemHeight + 10,
@@ -26,11 +30,12 @@ class YaruTabBar extends StatelessWidget {
         onTap: onTap,
         dividerColor: Colors.transparent,
         controller: tabController,
-        labelColor: Theme.of(context).colorScheme.onSurface,
+        labelColor: labelColor ?? theme.colorScheme.onSurface,
+        unselectedLabelColor: unselectedLabelColor,
         indicatorSize: TabBarIndicatorSize.tab,
         indicator: BoxDecoration(
           borderRadius: BorderRadius.circular(kYaruButtonRadius),
-          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+          color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
         ),
         splashBorderRadius: BorderRadius.circular(kYaruButtonRadius),
         tabs: [for (final tab in tabs) tab],
@@ -40,12 +45,7 @@ class YaruTabBar extends StatelessWidget {
 }
 
 class YaruTab extends StatelessWidget {
-  const YaruTab({
-    super.key,
-    required this.label,
-    this.icon,
-    this.padding,
-  });
+  const YaruTab({super.key, required this.label, this.icon, this.padding});
 
   final String label;
   final Widget? icon;
@@ -65,21 +65,11 @@ class YaruTab extends StatelessWidget {
                 child: icon,
               ),
             ),
-          Flexible(
-            child: Text(
-              label,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
+          Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
         ],
       ),
     );
 
-    return padding != null
-        ? Padding(
-            padding: padding!,
-            child: tab,
-          )
-        : tab;
+    return padding != null ? Padding(padding: padding!, child: tab) : tab;
   }
 }

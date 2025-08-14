@@ -61,14 +61,15 @@ class YaruSelectableContainer extends StatelessWidget {
           borderRadius: borderRadius,
           color: selected
               ? selectionColor ??
-                  Theme.of(context).primaryColor.withOpacity(0.8)
+                    Theme.of(context).primaryColor.withValues(alpha: 0.8)
               : Colors.transparent,
         ),
         child: Padding(
           padding: padding,
           child: ClipRRect(
-            borderRadius:
-                borderRadius.inner(padding.resolve(Directionality.of(context))),
+            borderRadius: borderRadius.inner(
+              padding.resolve(Directionality.of(context)),
+            ),
             child: child,
           ),
         ),

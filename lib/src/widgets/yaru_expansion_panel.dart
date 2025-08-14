@@ -10,10 +10,12 @@ class YaruExpansionPanel extends StatefulWidget {
   const YaruExpansionPanel({
     super.key,
     required this.children,
-    this.borderRadius =
-        const BorderRadius.all(Radius.circular(kYaruContainerRadius)),
+    this.borderRadius = const BorderRadius.all(
+      Radius.circular(kYaruContainerRadius),
+    ),
     this.border,
     required this.headers,
+    this.isInitiallyExpanded,
     this.width,
     this.height,
     this.padding,
@@ -33,6 +35,13 @@ class YaruExpansionPanel extends StatefulWidget {
   /// The length mus be equal to the length of the [headers]
 
   final List<Widget> children;
+
+  /// A list of [bool]s
+  /// where each element defines if the corresponding [YaruExpandable]
+  /// is expanded or not.
+  /// If null, all [YaruExpandable]s are collapsed.
+  /// The length must be equal to the length of the [children]
+  final List<bool>? isInitiallyExpanded;
 
   /// A list of [Widget]s
   /// where each element is put it a [YaruExpandable] as its header.
@@ -93,13 +102,15 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
   @override
   void initState() {
     super.initState();
-    _expandedStore =
-        List<bool>.generate(widget.children.length, (index) => false);
+    _expandedStore = widget.isInitiallyExpanded != null
+        ? List<bool>.from(widget.isInitiallyExpanded!)
+        : List<bool>.generate(widget.children.length, (index) => false);
   }
 
   @override
   Widget build(BuildContext context) {
     assert(widget.children.length == widget.headers.length);
+    assert(_expandedStore.length == widget.children.length);
 
     return YaruBorderContainer(
       border: widget.border,
@@ -135,7 +146,7 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
     );
   }
 
-  Widget? _itemBuilder(context, index) {
+  Widget? _itemBuilder(BuildContext context, int index) {
     return YaruExpandable(
       expandIcon: widget.expandIcon,
       expandIconPadding: widget.expandIconPadding,
