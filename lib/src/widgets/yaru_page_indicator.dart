@@ -261,7 +261,7 @@ class YaruPageIndicatorItem extends StatelessWidget {
     final decoration = BoxDecoration(
       color: selected
           ? theme.colorScheme.primary
-          : theme.colorScheme.onSurface.withValues(alpha: 0.3),
+          : theme.colorScheme.onSurface.withValues(alpha: 0.6),
       shape: borderRadius == null ? BoxShape.circle : BoxShape.rectangle,
       borderRadius: borderRadius,
     );
