@@ -20,19 +20,19 @@ dependencies:
   gtk: ^2.1.0
   platform: ^3.1.5
   platform_linux: ^0.1.2
-  yaru_window: ^0.2.1+1
+  yaru_window: ^0.2.2
 
 dev_dependencies:
   animated_vector_gen: ^0.2.1
   build_runner: ^2.4.12
-  flutter_lints: ^5.0.0
+  flutter_lints: ">=5.0.0 <7.0.0"
   flutter_test:
     sdk: flutter
   golden_toolkit: ^0.15.0
   mocktail: ^1.0.4
   plugin_platform_interface: ^2.1.8
   test: ^1.21.4
-  yaru_window_platform_interface: ^0.1.2
+  yaru_window_platform_interface: ^0.1.3
 
 flutter:
   fonts:
