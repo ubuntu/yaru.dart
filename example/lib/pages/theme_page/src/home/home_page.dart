@@ -28,6 +28,11 @@ class MaterialThemeHomePageState extends State<MaterialThemeHomePage> {
       const Badge(label: Text('123'), child: Icon(YaruIcons.font)),
       'Fonts',
     ),
+    const FontPreviewView(): (
+      const Icon(YaruIcons.font),
+      const Icon(YaruIcons.font),
+      'Font Preview',
+    ),
     const ControlsView(): (
       const Icon(YaruIcons.radiobox_checked),
       const Icon(YaruIcons.radiobox_checked_filled),
