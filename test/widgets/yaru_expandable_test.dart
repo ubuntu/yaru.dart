@@ -17,6 +17,7 @@ void main() {
           body: YaruExpandable(
             isExpanded: isExpanded,
             onChange: (value) => isExpanded = value,
+            usePadding: true,
             header: const Text(kHeaderText),
             child: const Text(kContentText),
           ),
@@ -48,6 +49,7 @@ void main() {
           body: YaruExpandable(
             isExpanded: isExpanded,
             onChange: (value) => isExpanded = value,
+            usePadding: true,
             header: const Text(kHeaderText),
             child: const Text(kContentText),
           ),
@@ -79,6 +81,7 @@ void main() {
           body: YaruExpandable(
             isExpanded: isExpanded,
             onChange: (value) => isExpanded = value,
+            usePadding: true,
             header: const Text(kHeaderText),
             child: const Text(kContentText),
           ),
