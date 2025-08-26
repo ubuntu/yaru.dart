@@ -51,7 +51,6 @@ class _MasterDetailPage extends StatelessWidget {
       ),
       pageBuilder: (context, index) => YaruDetailPage(
         appBar: YaruWindowTitleBar(
-          backgroundColor: Colors.transparent,
           border: BorderSide.none,
           leading: Navigator.of(context).canPop()
               ? const YaruBackButton()

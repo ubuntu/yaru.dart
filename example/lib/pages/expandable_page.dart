@@ -16,6 +16,7 @@ class ExpandablePage extends StatelessWidget {
           padding: const EdgeInsets.all(kYaruPagePadding),
           children: const [
             YaruExpandable(
+              usePadding: true,
               header: Text(
                 'Lorem ipsum dolor sit amet',
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -29,6 +30,7 @@ class ExpandablePage extends StatelessWidget {
                 maxLines: 5,
                 overflow: TextOverflow.fade,
               ),
+              usePadding: true,
               header: Text(
                 'Lorem ipsum dolor sit amet',
                 style: TextStyle(fontWeight: FontWeight.bold),
