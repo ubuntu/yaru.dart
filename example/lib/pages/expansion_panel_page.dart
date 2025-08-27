@@ -23,6 +23,10 @@ class ExpansionPanelPage extends StatelessWidget {
         ],
         width: 500,
         height: 500,
+        expandIconBuilder: (expanded) => Icon(
+          YaruIcons.pan_end,
+          semanticLabel: expanded ? 'Collapse' : 'Expand',
+        ),
         headers: List.generate(
           10,
           (index) => Text(
