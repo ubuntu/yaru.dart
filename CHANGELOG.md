@@ -1,5 +1,22 @@
 # Changelog
 
+## [8.2.0](https://github.com/ubuntu/yaru.dart/compare/v8.1.0...v8.2.0) (2025-08-27)
+
+
+### Features
+
+* **a11y:** Add switch on/off shapes ([#1015](https://github.com/ubuntu/yaru.dart/issues/1015)) ([1f114d1](https://github.com/ubuntu/yaru.dart/commit/1f114d1b8566503d88a95d548112ae983debaef6))
+* add icon builder to YaruExpansionPanel ([#1027](https://github.com/ubuntu/yaru.dart/issues/1027)) ([879f6fd](https://github.com/ubuntu/yaru.dart/commit/879f6fdbec9a95e58692b210e405778705baf2da))
+* add YaruPanedView.builder constructor ([#1011](https://github.com/ubuntu/yaru.dart/issues/1011)) ([290cda5](https://github.com/ubuntu/yaru.dart/commit/290cda55ef5cdf1788b3718d68469af287d867d9))
+* **YaruExpandable:** add `usePadding` flag ([#1026](https://github.com/ubuntu/yaru.dart/issues/1026)) ([b1ff80e](https://github.com/ubuntu/yaru.dart/commit/b1ff80eb2bc81034138604ae2de3c5a24a1cac41)), closes [#1024](https://github.com/ubuntu/yaru.dart/issues/1024)
+
+
+### Bug Fixes
+
+* **a11y:** Accessible switch colors and borders ([#1017](https://github.com/ubuntu/yaru.dart/issues/1017)) ([570195c](https://github.com/ubuntu/yaru.dart/commit/570195c807cec71e72add6a1237621d98773fc7d))
+* **test:** better on/off shape golden tests ([#1016](https://github.com/ubuntu/yaru.dart/issues/1016)) ([786d0e2](https://github.com/ubuntu/yaru.dart/commit/786d0e28fc22e8fb136728e3bf7109929ea9ed9e))
+* use scaffold background color instead of hardcoded color and kYaruWindowRadius for titlebars ([#1013](https://github.com/ubuntu/yaru.dart/issues/1013)) ([4764cb8](https://github.com/ubuntu/yaru.dart/commit/4764cb86aac99d53a8b226ee762caa3c9b3c3f7c)), closes [#1008](https://github.com/ubuntu/yaru.dart/issues/1008)
+
 ## [8.1.0](https://github.com/ubuntu/yaru.dart/compare/v8.0.0...v8.1.0) (2025-07-17)
 
 
