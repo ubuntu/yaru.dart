@@ -1,5 +1,66 @@
 # Changelog
 
+## [8.2.0](https://github.com/ubuntu/yaru.dart/compare/v8.1.0...v8.2.0) (2025-08-27)
+
+
+### Features
+
+* **a11y:** Add switch on/off shapes ([#1015](https://github.com/ubuntu/yaru.dart/issues/1015)) ([1f114d1](https://github.com/ubuntu/yaru.dart/commit/1f114d1b8566503d88a95d548112ae983debaef6))
+* add icon builder to YaruExpansionPanel ([#1027](https://github.com/ubuntu/yaru.dart/issues/1027)) ([879f6fd](https://github.com/ubuntu/yaru.dart/commit/879f6fdbec9a95e58692b210e405778705baf2da))
+* add YaruPanedView.builder constructor ([#1011](https://github.com/ubuntu/yaru.dart/issues/1011)) ([290cda5](https://github.com/ubuntu/yaru.dart/commit/290cda55ef5cdf1788b3718d68469af287d867d9))
+* **YaruExpandable:** add `usePadding` flag ([#1026](https://github.com/ubuntu/yaru.dart/issues/1026)) ([b1ff80e](https://github.com/ubuntu/yaru.dart/commit/b1ff80eb2bc81034138604ae2de3c5a24a1cac41)), closes [#1024](https://github.com/ubuntu/yaru.dart/issues/1024)
+
+
+### Bug Fixes
+
+* **a11y:** Accessible switch colors and borders ([#1017](https://github.com/ubuntu/yaru.dart/issues/1017)) ([570195c](https://github.com/ubuntu/yaru.dart/commit/570195c807cec71e72add6a1237621d98773fc7d))
+* **test:** better on/off shape golden tests ([#1016](https://github.com/ubuntu/yaru.dart/issues/1016)) ([786d0e2](https://github.com/ubuntu/yaru.dart/commit/786d0e28fc22e8fb136728e3bf7109929ea9ed9e))
+* use scaffold background color instead of hardcoded color and kYaruWindowRadius for titlebars ([#1013](https://github.com/ubuntu/yaru.dart/issues/1013)) ([4764cb8](https://github.com/ubuntu/yaru.dart/commit/4764cb86aac99d53a8b226ee762caa3c9b3c3f7c)), closes [#1008](https://github.com/ubuntu/yaru.dart/issues/1008)
+
+## [8.1.0](https://github.com/ubuntu/yaru.dart/compare/v8.0.0...v8.1.0) (2025-07-17)
+
+
+### Features
+
+* **a11y:** Add field for a semantic label for all icon buttons ([#1000](https://github.com/ubuntu/yaru.dart/issues/1000)) ([0c040ff](https://github.com/ubuntu/yaru.dart/commit/0c040ffb27be3aebadfba213738b55036bdba36e))
+* **a11y:** Expose semantic label options for window controls ([#1007](https://github.com/ubuntu/yaru.dart/issues/1007)) ([bbd6d6e](https://github.com/ubuntu/yaru.dart/commit/bbd6d6e73eb2965e919f8b199ad68413056eac40))
+
+
+### Bug Fixes
+
+* semantics being discarded for each Navigator ([#1006](https://github.com/ubuntu/yaru.dart/issues/1006)) ([843d1c8](https://github.com/ubuntu/yaru.dart/commit/843d1c85bacd7d6f68e9ab6bf09ec2e944cc8649))
+* use consistent text styles in `InputDecorationTheme` ([#1005](https://github.com/ubuntu/yaru.dart/issues/1005)) ([dc8a84e](https://github.com/ubuntu/yaru.dart/commit/dc8a84e14ff30ea88fdd2e848ae06977daa2ca92))
+* **YaruChoiceChipBar:** do not always show scroll buttons on init ([#1001](https://github.com/ubuntu/yaru.dart/issues/1001)) ([8103703](https://github.com/ubuntu/yaru.dart/commit/8103703947b001fa2abe03f0a23261d397cee1c7))
+
+## [8.0.0](https://github.com/ubuntu/yaru.dart/compare/v7.0.0...v8.0.0) (2025-06-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to flutter 3.32.0 ([#992](https://github.com/ubuntu/yaru.dart/issues/992))
+* remove isMobile getter and do not change theme if on mobile ([#989](https://github.com/ubuntu/yaru.dart/issues/989))
+
+### Features
+
+* adapt border radii to gnome design ([#983](https://github.com/ubuntu/yaru.dart/issues/983)) ([0ecc78d](https://github.com/ubuntu/yaru.dart/commit/0ecc78dc15318df19435c20f622e3b44ad25d9f3))
+* add emoji categories ([#978](https://github.com/ubuntu/yaru.dart/issues/978)) ([4fac410](https://github.com/ubuntu/yaru.dart/commit/4fac4105b66d4e0ed3ec3abc11c37e4e306bd61e))
+* add focus ring to YaruMasterTile ([#990](https://github.com/ubuntu/yaru.dart/issues/990)) ([163b4b5](https://github.com/ubuntu/yaru.dart/commit/163b4b5e1ad79bf5eb8677e7f4cd78e2eb566627))
+* reduce YaruInfoBox titleTextStyle default height ([#977](https://github.com/ubuntu/yaru.dart/issues/977)) ([f7a3e33](https://github.com/ubuntu/yaru.dart/commit/f7a3e33130f07a8cf829033cff0a8ff1316522b2))
+* **YaruExpansionPanel:** add optional isInitiallyExpanded property ([#982](https://github.com/ubuntu/yaru.dart/issues/982)) ([7fbf081](https://github.com/ubuntu/yaru.dart/commit/7fbf081ae7de2602d9f1f142a02ff625a423e4db))
+
+
+### Bug Fixes
+
+* provide optional YaruTabBar label colors ([#975](https://github.com/ubuntu/yaru.dart/issues/975)) ([0a1ee4f](https://github.com/ubuntu/yaru.dart/commit/0a1ee4f16a5efb332b9a62286f39d2ab6735cfb4))
+* remove isMobile getter and do not change theme if on mobile ([#989](https://github.com/ubuntu/yaru.dart/issues/989)) ([9902d72](https://github.com/ubuntu/yaru.dart/commit/9902d7230d0d3be31317eb0558114f28afc861ce))
+* YaruExpandable: handle tap on header background ([#980](https://github.com/ubuntu/yaru.dart/issues/980)) ([f9db616](https://github.com/ubuntu/yaru.dart/commit/f9db616a71e0cb0b82ad0b994928b8cbc0688acc))
+* YaruWindowTitleBar double-tap on macOS ([#985](https://github.com/ubuntu/yaru.dart/issues/985)) ([b75bb6e](https://github.com/ubuntu/yaru.dart/commit/b75bb6e2b3c30126b17d73a67577ad43f5c65d7c))
+
+
+### Miscellaneous Chores
+
+* update to flutter 3.32.0 ([#992](https://github.com/ubuntu/yaru.dart/issues/992)) ([2f131c7](https://github.com/ubuntu/yaru.dart/commit/2f131c78f73807de48ce60f23ae75bd4881ad2dc))
+
 ## [7.0.0](https://github.com/ubuntu/yaru.dart/compare/v6.0.0...v7.0.0) (2024-12-19)
 
 

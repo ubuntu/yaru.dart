@@ -89,25 +89,23 @@ final goldenVariant = ValueVariant({
   for (final platform in YaruWindowControlPlatform.values)
     for (final type in YaruWindowControlType.values)
       ...() {
-        final platformPrefix =
-            platform == YaruWindowControlPlatform.windows ? 'windows-' : '';
+        final platformPrefix = platform == YaruWindowControlPlatform.windows
+            ? 'windows-'
+            : '';
         return {
           ...goldenThemeVariants(
             '$platformPrefix${type.name}',
             <WidgetState>{},
           ),
-          ...goldenThemeVariants(
-            '$platformPrefix${type.name}-disabled',
-            {WidgetState.disabled},
-          ),
-          ...goldenThemeVariants(
-            '$platformPrefix${type.name}-hovered',
-            {WidgetState.hovered},
-          ),
-          ...goldenThemeVariants(
-            '$platformPrefix${type.name}-pressed',
-            {WidgetState.pressed},
-          ),
+          ...goldenThemeVariants('$platformPrefix${type.name}-disabled', {
+            WidgetState.disabled,
+          }),
+          ...goldenThemeVariants('$platformPrefix${type.name}-hovered', {
+            WidgetState.hovered,
+          }),
+          ...goldenThemeVariants('$platformPrefix${type.name}-pressed', {
+            WidgetState.pressed,
+          }),
         };
       }(),
 });

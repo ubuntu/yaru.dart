@@ -42,9 +42,7 @@ class _TextFieldsViewState extends State<TextFieldsView> {
               ),
             ),
           ),
-          const SizedBox(
-            width: kWrapSpacing,
-          ),
+          const SizedBox(width: kWrapSpacing),
           Expanded(
             child: OutlinedButton(
               onPressed: () {},
@@ -54,14 +52,10 @@ class _TextFieldsViewState extends State<TextFieldsView> {
               ),
             ),
           ),
-          const SizedBox(
-            width: kWrapSpacing,
-          ),
+          const SizedBox(width: kWrapSpacing),
           const Expanded(
             child: TextField(
-              decoration: InputDecoration(
-                labelText: 'Username',
-              ),
+              decoration: InputDecoration(labelText: 'Username'),
             ),
           ),
         ],
@@ -69,20 +63,14 @@ class _TextFieldsViewState extends State<TextFieldsView> {
       const TextField(
         enabled: false,
         onChanged: null,
-        decoration: InputDecoration(
-          labelText: 'Disabled',
-        ),
+        decoration: InputDecoration(labelText: 'Disabled'),
       ),
       const TextField(
         obscureText: true,
-        decoration: InputDecoration(
-          labelText: 'Password',
-        ),
+        decoration: InputDecoration(labelText: 'Password'),
       ),
       const TextField(
-        decoration: InputDecoration(
-          errorText: "You're doing it wrong",
-        ),
+        decoration: InputDecoration(errorText: "You're doing it wrong"),
       ),
       TextField(
         keyboardType: TextInputType.multiline,

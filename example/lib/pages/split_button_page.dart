@@ -15,21 +15,16 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
   Widget build(BuildContext context) {
     const contentWidth = 500.0;
     const spacing = 16.0;
-    final items = List.generate(
-      10,
-      (index) {
-        final text =
-            '${index.isEven ? 'Super long action name' : 'action'} ${index + 1}';
-        return PopupMenuItem(
-          child: Text(
-            text,
-            overflow: TextOverflow.ellipsis,
-          ),
-          onTap: () => ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(text))),
-        );
-      },
-    );
+    final items = List.generate(10, (index) {
+      final text =
+          '${index.isEven ? 'Super long action name' : 'action'} ${index + 1}';
+      return PopupMenuItem(
+        child: Text(text, overflow: TextOverflow.ellipsis),
+        onTap: () => ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(text))),
+      );
+    });
 
     final tiles = [
       YaruTile(
@@ -37,9 +32,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
         subtitle: const Text('Regular version'),
         trailing: YaruSplitButton(
           menuWidth: _width,
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Main Action')),
-          ),
+          onPressed: () => ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Main Action'))),
           items: items,
           child: const Text('Main Action'),
         ),
@@ -49,9 +44,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
         subtitle: const Text('.filled()'),
         trailing: YaruSplitButton.filled(
           menuWidth: _width,
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Main Action')),
-          ),
+          onPressed: () => ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Main Action'))),
           items: items,
           child: const Text('Main Action'),
         ),
@@ -61,23 +56,22 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
         subtitle: const Text('outlined()'),
         trailing: YaruSplitButton.outlined(
           menuWidth: _width,
-          onPressed: () => ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Main Action'))),
+          onPressed: () => ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Main Action'))),
           items: items,
           child: const Text('Main Action'),
         ),
       ),
       YaruTile(
         title: const Text('YaruSplitButton'),
-        subtitle: const Text(
-          'items: null, onOptionPressed: null',
-        ),
+        subtitle: const Text('items: null, onOptionPressed: null'),
         trailing: YaruSplitButton(
           menuWidth: _width,
           child: const Text('Main Action'),
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Main Action')),
-          ),
+          onPressed: () => ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Main Action'))),
         ),
       ),
       YaruTile(
@@ -91,8 +85,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
       ),
       YaruTile(
         title: const Text('YaruSplitButton'),
-        subtitle:
-            const Text('items: null, onOptionPressed: null, onPressed: null'),
+        subtitle: const Text(
+          'items: null, onOptionPressed: null, onPressed: null',
+        ),
         trailing: YaruSplitButton(
           menuWidth: _width,
           child: const Text('Main Action'),
@@ -106,9 +101,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const Text('Normal alignment'),
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Main Action')),
-            ),
+            onPressed: () => ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('Main Action'))),
             items: items.sublist(0, 3),
             child: const Text('Main Action'),
           ),
@@ -120,9 +115,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
             menuWidth: _width,
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Main Action')),
-            ),
+            onPressed: () => ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('Main Action'))),
             items: items.sublist(0, 3),
             child: const Text('Main Action'),
           ),
@@ -134,9 +129,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const Text('Space between alignment'),
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Main Action')),
-            ),
+            onPressed: () => ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('Main Action'))),
             items: items.sublist(0, 3),
             child: const Text('Main Action'),
           ),
@@ -149,9 +144,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const Text('Center alignment'),
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Main Action')),
-            ),
+            onPressed: () => ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('Main Action'))),
             items: items.sublist(0, 3),
             child: const Text('Main Action'),
           ),

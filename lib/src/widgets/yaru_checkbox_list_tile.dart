@@ -42,8 +42,8 @@ class YaruCheckboxListTile extends StatelessWidget {
     this.focusNode,
     this.enableFeedback,
     this.mouseCursor,
-  })  : assert(tristate || value != null),
-        assert(!isThreeLine || subtitle != null);
+  }) : assert(tristate || value != null),
+       assert(!isThreeLine || subtitle != null);
 
   /// See [CheckboxListTile.value].
   final bool? value;

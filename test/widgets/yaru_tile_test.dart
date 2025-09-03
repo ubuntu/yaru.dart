@@ -29,14 +29,8 @@ void main() {
     final trailing = find.text('Trailing');
     expect(trailing, findsOneWidget);
 
-    expect(
-      tester.getRect(leading).right,
-      lessThan(tester.getRect(title).left),
-    );
-    expect(
-      tester.getRect(title).left,
-      equals(tester.getRect(subtitle).left),
-    );
+    expect(tester.getRect(leading).right, lessThan(tester.getRect(title).left));
+    expect(tester.getRect(title).left, equals(tester.getRect(subtitle).left));
     expect(
       tester.getRect(subtitle).top,
       greaterThan(tester.getRect(title).bottom),
@@ -80,10 +74,7 @@ void main() {
       tester.getRect(leading).left,
       greaterThan(tester.getRect(title).right),
     );
-    expect(
-      tester.getRect(title).right,
-      equals(tester.getRect(subtitle).right),
-    );
+    expect(tester.getRect(title).right, equals(tester.getRect(subtitle).right));
     expect(
       tester.getRect(subtitle).top,
       greaterThan(tester.getRect(title).bottom),

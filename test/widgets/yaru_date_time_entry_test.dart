@@ -46,11 +46,7 @@ void main() {
     final controller = YaruTimeEntryController();
     await tester.pumpWidget(
       MaterialApp(
-        home: Scaffold(
-          body: YaruTimeEntry(
-            controller: controller,
-          ),
-        ),
+        home: Scaffold(body: YaruTimeEntry(controller: controller)),
       ),
     );
 
@@ -63,8 +59,9 @@ void main() {
     expect(controller.timeOfDay, const TimeOfDay(hour: 11, minute: 30));
   });
 
-  testWidgets('overflow bound segment value update other segments',
-      (tester) async {
+  testWidgets('overflow bound segment value update other segments', (
+    tester,
+  ) async {
     final controller = YaruDateTimeEntryController(
       dateTime: DateTime(1999, 12, 31, 23, 59),
     );
@@ -182,8 +179,9 @@ void main() {
     expect(formKey.currentState?.validate(), false);
   });
 
-  testWidgets('out of bound first character selects next segment',
-      (tester) async {
+  testWidgets('out of bound first character selects next segment', (
+    tester,
+  ) async {
     final controller = YaruDateTimeEntryController();
 
     await tester.pumpWidget(
@@ -208,8 +206,9 @@ void main() {
     expect(controller.dateTime, DateTime(2000, 2, 4, 3, 6));
   });
 
-  testWidgets('segments can\'t go below 0 using keyboard arrow',
-      (tester) async {
+  testWidgets('segments can\'t go below 0 using keyboard arrow', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(

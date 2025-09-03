@@ -20,12 +20,14 @@ class YaruExpandable extends StatefulWidget {
     required this.header,
     this.expandIcon,
     this.expandIconPadding = EdgeInsets.zero,
+    this.expandIconSemanticLabel,
     this.expandButtonPosition = YaruExpandableButtonPosition.end,
     required this.child,
     this.collapsedChild,
     this.gapHeight = 4.0,
     this.isExpanded = false,
     this.onChange,
+    this.usePadding = false,
   });
 
   /// Widget placed in the header, against the expand button.
@@ -38,6 +40,9 @@ class YaruExpandable extends StatefulWidget {
 
   /// Optional padding around the expand button.
   final EdgeInsetsGeometry expandIconPadding;
+
+  /// Optional semantic label to add to the expand button.
+  final String? expandIconSemanticLabel;
 
   /// Controls expand button position, see [YaruExpandableButtonPosition].
   final YaruExpandableButtonPosition expandButtonPosition;
@@ -56,6 +61,17 @@ class YaruExpandable extends StatefulWidget {
 
   /// Callback called on expand or collapse.
   final ValueChanged<bool>? onChange;
+
+  /// If true, a [Padding] will be used instead of a [Column],
+  /// around the [child] widget to add a gap between [header] and [child].
+  /// This avoids unexpected behaviour with [Column], especially with a child
+  /// that is not well sized.
+  ///
+  /// See: [#1024](https://github.com/ubuntu/yaru.dart/issues/1024)
+  ///
+  /// In the next major release, the [Padding] will be the default behaviour,
+  /// and this flag will be removed.
+  final bool usePadding;
 
   @override
   State<YaruExpandable> createState() => _YaruExpandableState();
@@ -90,7 +106,12 @@ class _YaruExpandableState extends State<YaruExpandable> {
           turns: _isExpanded ? .25 : 0,
           duration: _kAnimationDuration,
           curve: _kAnimationCurve,
-          child: widget.expandIcon ?? const Icon(YaruIcons.pan_end),
+          child:
+              widget.expandIcon ??
+              Icon(
+                YaruIcons.pan_end,
+                semanticLabel: widget.expandIconSemanticLabel,
+              ),
         ),
       ),
     );
@@ -143,6 +164,13 @@ class _YaruExpandableState extends State<YaruExpandable> {
   }
 
   Widget _buildChild(Widget child) {
+    if (widget.usePadding) {
+      return Padding(
+        padding: EdgeInsetsGeometry.only(top: widget.gapHeight),
+        child: child,
+      );
+    }
+
     return Column(
       children: [
         SizedBox(height: widget.gapHeight),

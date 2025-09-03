@@ -52,19 +52,13 @@ void main() {
 
 final goldenVariant = ValueVariant({
   ...goldenThemeVariants('default', <String, dynamic>{}),
-  ...goldenThemeVariants('clip', {
-    'clipBehavior': Clip.antiAlias,
-  }),
-  ...goldenThemeVariants('padding', {
-    'padding': const EdgeInsets.all(10),
-  }),
+  ...goldenThemeVariants('clip', {'clipBehavior': Clip.antiAlias}),
+  ...goldenThemeVariants('padding', {'padding': const EdgeInsets.all(10)}),
   ...goldenThemeVariants('padding-clip', {
     'padding': const EdgeInsets.all(10),
     'clipBehavior': Clip.antiAlias,
   }),
-  ...goldenThemeVariants('margin', {
-    'margin': const EdgeInsets.all(10),
-  }),
+  ...goldenThemeVariants('margin', {'margin': const EdgeInsets.all(10)}),
   ...goldenThemeVariants('margin-clip', {
     'margin': const EdgeInsets.all(10),
     'clipBehavior': Clip.antiAlias,

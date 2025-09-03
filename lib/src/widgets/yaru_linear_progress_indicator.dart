@@ -70,18 +70,22 @@ class _YaruLinearProgressIndicatorState
     final theme = Theme.of(context);
     final progressTheme = YaruLinearProgressIndicatorTheme.of(context);
 
-    final color = widget.valueColor?.value ??
+    final color =
+        widget.valueColor?.value ??
         widget.color ??
         progressTheme?.color ??
         theme.colorScheme.primary;
-    final trackColor = widget.trackValueColor?.value ??
+    final trackColor =
+        widget.trackValueColor?.value ??
         widget.trackColor ??
         progressTheme?.trackColor ??
         color.withValues(alpha: _kDefaultTrackColorOpacity);
-    final strokeWidth = widget.strokeWidth ??
+    final strokeWidth =
+        widget.strokeWidth ??
         progressTheme?.strokeWidth ??
         _kDefaultStrokeWidth;
-    final trackStrokeWidth = widget.trackStrokeWidth ??
+    final trackStrokeWidth =
+        widget.trackStrokeWidth ??
         progressTheme?.trackStrokeWidth ??
         strokeWidth;
 
@@ -93,9 +97,7 @@ class _YaruLinearProgressIndicatorState
             minWidth: double.infinity,
             minHeight: strokeWidth,
           ),
-          child: RepaintBoundary(
-            child: child,
-          ),
+          child: RepaintBoundary(child: child),
         ),
       );
     }
@@ -120,7 +122,8 @@ class _YaruLinearProgressIndicatorState
       animation: _controller,
       builder: (context, child) {
         final progress = _controller.value;
-        final spacingProgress = 1 -
+        final spacingProgress =
+            1 -
             Tween<double>(begin: -1.0, end: 1.0)
                 .chain(CurveTween(curve: _kIndeterminateAnimationCurve))
                 .transform(progress)
@@ -192,13 +195,12 @@ class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
 
     final points = <Offset>[];
     for (var i = -1; i <= 1; i++) {
-      final x = size.width / 2 +
+      final x =
+          size.width / 2 +
           50 * i +
           (size.width / 3 - 50) * spacingProgress * i +
           size.width * realTrackPosition;
-      points.add(
-        Offset(x < size.width ? x : x - size.width, y),
-      );
+      points.add(Offset(x < size.width ? x : x - size.width, y));
     }
 
     for (final point in points) {
@@ -243,8 +245,8 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
     final revisedValue = value >= 0 && value <= 1
         ? value
         : value < 0
-            ? 0
-            : 1;
+        ? 0
+        : 1;
     final realStrokeWidth = size.height;
     final realTrackStrokeWidth =
         trackStrokeWidth * (realStrokeWidth / strokeWidth);

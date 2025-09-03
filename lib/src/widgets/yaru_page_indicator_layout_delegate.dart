@@ -74,10 +74,7 @@ class YaruPageIndicatorFixedDelegate extends YaruPageIndicatorLayoutDelegate {
 /// Controls a [YaruPageIndicator] items spacing in a boudnded way.
 class YaruPageIndicatorBoundedDelegate extends YaruPageIndicatorLayoutDelegate {
   /// Controls a [YaruPageIndicator] items spacing in a boudnded way.
-  YaruPageIndicatorBoundedDelegate({
-    this.maxItemSpacing,
-    this.minItemSpacing,
-  });
+  YaruPageIndicatorBoundedDelegate({this.maxItemSpacing, this.minItemSpacing});
 
   /// Max length for the space between the items.
   ///

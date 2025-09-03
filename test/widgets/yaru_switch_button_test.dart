@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
+import 'yaru_switch_test.dart' show switchGoldenThemeVariants;
 
 void main() {
   testWidgets('contains switch and labels', (tester) async {
@@ -21,8 +22,9 @@ void main() {
       );
     }
 
-    await tester
-        .pumpWidget(builder(title: const Text('title'), subtitle: null));
+    await tester.pumpWidget(
+      builder(title: const Text('title'), subtitle: null),
+    );
     expect(find.text('title'), findsOneWidget);
     expect(find.text('subtitle'), findsNothing);
     expect(find.byType(YaruSwitch), findsOneWidget);
@@ -89,21 +91,25 @@ void main() {
       ),
     );
 
-    final gesture =
-        await tester.createGesture(kind: PointerDeviceKind.mouse, pointer: 1);
+    final gesture = await tester.createGesture(
+      kind: PointerDeviceKind.mouse,
+      pointer: 1,
+    );
     await gesture.addPointer(location: Offset.zero);
     addTearDown(gesture.removePointer);
 
-    await gesture
-        .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'enabled')));
+    await gesture.moveTo(
+      tester.getCenter(find.widgetWithText(MouseRegion, 'enabled')),
+    );
     await tester.pump();
     expect(
       RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
       SystemMouseCursors.click,
     );
 
-    await gesture
-        .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'disabled')));
+    await gesture.moveTo(
+      tester.getCenter(find.widgetWithText(MouseRegion, 'disabled')),
+    );
     await tester.pump();
     expect(
       RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
@@ -162,6 +168,7 @@ void main() {
           onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
           title: const Text('YaruSwitchButton'),
           subtitle: const Text('Lorem ipsum dolor sit amet'),
+          onOffShapes: variant.label.contains('-shapes'),
         ),
         themeMode: variant.themeMode,
         size: const Size(248, 56),
@@ -188,25 +195,25 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('off', <WidgetState>{}),
-  ...goldenThemeVariants('off-disabled', {WidgetState.disabled}),
-  ...goldenThemeVariants('off-focused', {WidgetState.focused}),
-  ...goldenThemeVariants('off-hovered', {WidgetState.hovered}),
-  ...goldenThemeVariants('off-pressed', {WidgetState.pressed}),
-  ...goldenThemeVariants('on', {WidgetState.selected}),
-  ...goldenThemeVariants('on-disabled', {
+  ...switchGoldenThemeVariants('off', <WidgetState>{}),
+  ...switchGoldenThemeVariants('off-disabled', {WidgetState.disabled}),
+  ...switchGoldenThemeVariants('off-focused', {WidgetState.focused}),
+  ...switchGoldenThemeVariants('off-hovered', {WidgetState.hovered}),
+  ...switchGoldenThemeVariants('off-pressed', {WidgetState.pressed}),
+  ...switchGoldenThemeVariants('on', {WidgetState.selected}),
+  ...switchGoldenThemeVariants('on-disabled', {
     WidgetState.selected,
     WidgetState.disabled,
   }),
-  ...goldenThemeVariants('on-focused', {
+  ...switchGoldenThemeVariants('on-focused', {
     WidgetState.selected,
     WidgetState.focused,
   }),
-  ...goldenThemeVariants('on-hovered', {
+  ...switchGoldenThemeVariants('on-hovered', {
     WidgetState.selected,
     WidgetState.hovered,
   }),
-  ...goldenThemeVariants('on-pressed', {
+  ...switchGoldenThemeVariants('on-pressed', {
     WidgetState.selected,
     WidgetState.pressed,
   }),

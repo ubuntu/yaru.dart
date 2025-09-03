@@ -297,10 +297,7 @@ class _YaruThemeState extends State<YaruTheme> {
     return _YaruInheritedTheme(
       data: data,
       child: widget.builder?.call(context, data, widget.child) ??
-          AnimatedTheme(
-            data: resolveTheme(data),
-            child: widget.child!,
-          ),
+          AnimatedTheme(data: resolveTheme(data), child: widget.child!),
     );
   }
 }
@@ -393,8 +390,9 @@ class YaruThemeData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>('highContrast', highContrast));
     properties.add(DiagnosticsProperty<ThemeMode>('themeMode', themeMode));
     properties.add(IterableProperty('extensions', extensions));
-    properties
-        .add(DiagnosticsProperty('pageTransitionsTheme', pageTransitionsTheme));
+    properties.add(
+      DiagnosticsProperty('pageTransitionsTheme', pageTransitionsTheme),
+    );
     properties.add(DiagnosticsProperty('useMaterial3', useMaterial3));
     properties.add(DiagnosticsProperty('visualDensity', visualDensity));
     properties.add(
@@ -438,10 +436,7 @@ class YaruThemeData with Diagnosticable {
 }
 
 class _YaruInheritedTheme extends InheritedTheme {
-  const _YaruInheritedTheme({
-    required this.data,
-    required super.child,
-  });
+  const _YaruInheritedTheme({required this.data, required super.child});
 
   final YaruThemeData? data;
 

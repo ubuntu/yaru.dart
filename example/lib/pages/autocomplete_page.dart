@@ -14,9 +14,9 @@ class AutocompletePage extends StatelessWidget {
             const options = ['foo', 'bar', 'baz', 'qux', 'quux'];
             return options.where((o) => o.contains(value.text.toLowerCase()));
           },
-          onSelected: (value) => ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(value)),
-          ),
+          onSelected: (value) => ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(value))),
         ),
       ),
     );

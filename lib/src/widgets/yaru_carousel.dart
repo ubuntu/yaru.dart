@@ -26,6 +26,8 @@ class YaruCarousel extends StatefulWidget {
     this.navigationControls = false,
     this.previousIcon,
     this.nextIcon,
+    this.previousIconSemanticLabel,
+    this.nextIconSemanticLabel,
   });
 
   /// The height of the children, defaults to 500.0.
@@ -60,6 +62,12 @@ class YaruCarousel extends StatefulWidget {
   /// Icon used for the next button.
   /// Require [navigationControls] to be true.
   final Widget? nextIcon;
+
+  /// Optional semantic label to add to the previous button icon.
+  final String? previousIconSemanticLabel;
+
+  /// Optional semantic label to add to the next button icon.
+  final String? nextIconSemanticLabel;
 
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
@@ -113,19 +121,17 @@ class _YaruCarouselState extends State<YaruCarousel> {
         children: [
           _buildCarousel(),
           if (widget.placeIndicator && widget.children.length > 1) ...[
-            SizedBox(
-              height: widget.placeIndicatorMarginTop,
-            ),
+            SizedBox(height: widget.placeIndicatorMarginTop),
             YaruPageIndicator.builder(
               length: widget.children.length,
               page: _page,
               onTap: (page) => _controller.animateToPage(page),
               itemBuilder: (index, selectedIndex, length) =>
                   YaruPageIndicatorItem(
-                selected: index == selectedIndex,
-                animationDuration: _controller.scrollAnimationDuration,
-                animationCurve: _controller.scrollAnimationCurve,
-              ),
+                    selected: index == selectedIndex,
+                    animationDuration: _controller.scrollAnimationDuration,
+                    animationCurve: _controller.scrollAnimationCurve,
+                  ),
             ),
           ],
         ],
@@ -152,9 +158,7 @@ class _YaruCarouselState extends State<YaruCarousel> {
               ? GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () => _controller.animateToPage(index),
-                  child: IgnorePointer(
-                    child: widget.children[index],
-                  ),
+                  child: IgnorePointer(child: widget.children[index]),
                 )
               : widget.children[index],
         ),
@@ -169,12 +173,20 @@ class _YaruCarouselState extends State<YaruCarousel> {
             _buildNavigationButton(
               Alignment.centerLeft,
               _isFirstPage() ? null : _controller.previousPage,
-              widget.previousIcon ?? const Icon(YaruIcons.go_previous),
+              widget.previousIcon ??
+                  Icon(
+                    YaruIcons.go_previous,
+                    semanticLabel: widget.previousIconSemanticLabel,
+                  ),
             ),
             _buildNavigationButton(
               Alignment.centerRight,
               _isLastPage() ? null : _controller.nextPage,
-              widget.nextIcon ?? const Icon(YaruIcons.go_next),
+              widget.nextIcon ??
+                  Icon(
+                    YaruIcons.go_next,
+                    semanticLabel: widget.nextIconSemanticLabel,
+                  ),
             ),
           ],
         ),
@@ -272,14 +284,14 @@ class YaruCarouselController extends PageController {
 
       return super
           .animateToPage(
-        page,
-        duration: duration ?? scrollAnimationDuration,
-        curve: curve ?? scrollAnimationCurve,
-      )
+            page,
+            duration: duration ?? scrollAnimationDuration,
+            curve: curve ?? scrollAnimationCurve,
+          )
           .then((value) {
-        _animating = false;
-        startTimer();
-      });
+            _animating = false;
+            startTimer();
+          });
     }
   }
 

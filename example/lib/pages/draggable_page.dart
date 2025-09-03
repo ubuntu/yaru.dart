@@ -12,8 +12,9 @@ class DraggablePage extends StatelessWidget {
           controller: controller,
           padding: const EdgeInsets.all(kYaruPagePadding),
           child: Container(
-            color:
-                Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.1),
             child: SizedBox(
               width: 500,
               height: 250,
@@ -34,27 +35,31 @@ class DraggablePage extends StatelessWidget {
                     },
                     childBuilder: (context, position, isDragging, isHovering) =>
                         SizedBox(
-                      width: 192,
-                      height: 108,
-                      child: AnimatedOpacity(
-                        opacity: isDragging ? 1 : .85,
-                        duration: const Duration(milliseconds: 100),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: const Border(top: BorderSide(width: 10)),
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          child: Center(
-                            child: Text(
-                              position.toString(),
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary,
+                          width: 192,
+                          height: 108,
+                          child: AnimatedOpacity(
+                            opacity: isDragging ? 1 : .85,
+                            duration: const Duration(milliseconds: 100),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: const Border(
+                                  top: BorderSide(width: 10),
+                                ),
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  position.toString(),
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
                     cursor: SystemMouseCursors.grab,
                     dragCursor: SystemMouseCursors.grabbing,
                   ),

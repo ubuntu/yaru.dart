@@ -26,9 +26,7 @@ class _IconButtonPageState extends State<IconButtonPage> {
                 ),
                 const SizedBox(width: 10),
                 YaruIconButton(
-                  onPressed: () => setState(
-                    () => _selected = !_selected,
-                  ),
+                  onPressed: () => setState(() => _selected = !_selected),
                   isSelected: _selected,
                   icon: const Icon(YaruIcons.eye),
                   tooltip: 'View',

@@ -319,8 +319,9 @@ extension YaruColorExtension on Color {
 
     // A pure dark color have saturation level at 1.0, which results in red when lighten it.
     // We reset this value to 0.0, so the result is desaturated as expected:
-    return hslColor
-        .withSaturation(hslColor.lightness == 0.0 ? 0.0 : hslColor.saturation);
+    return hslColor.withSaturation(
+      hslColor.lightness == 0.0 ? 0.0 : hslColor.saturation,
+    );
   }
 
   /// Returns a hex representation (`#AARRGGBB`) of the color.

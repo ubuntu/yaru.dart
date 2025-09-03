@@ -18,9 +18,7 @@ class ProgressIndicatorPage extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(top: 25),
-              child: YaruCircularProgressIndicator(
-                value: .75,
-              ),
+              child: YaruCircularProgressIndicator(value: .75),
             ),
             Padding(
               padding: EdgeInsets.only(top: 25),
@@ -28,9 +26,7 @@ class ProgressIndicatorPage extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(top: 25),
-              child: YaruLinearProgressIndicator(
-                value: .75,
-              ),
+              child: YaruLinearProgressIndicator(value: .75),
             ),
           ],
         );

@@ -22,16 +22,9 @@ class ClickableIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(kYaruButtonRadius),
         onTap: () => showDialog(
           context: context,
-          builder: (context) => IconDialog(
-            iconItem: iconItem,
-          ),
+          builder: (context) => IconDialog(iconItem: iconItem),
         ),
-        child: Center(
-          child: iconItem.iconBuilder(
-            context,
-            iconSize,
-          ),
-        ),
+        child: Center(child: iconItem.iconBuilder(context, iconSize)),
       ),
     );
   }

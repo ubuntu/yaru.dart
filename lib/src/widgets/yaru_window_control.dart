@@ -47,6 +47,7 @@ class YaruWindowControl extends StatefulWidget {
     required this.onTap,
     this.iconColor,
     this.backgroundColor,
+    this.semanticLabel,
   });
 
   /// Type of this window control, see [YaruWindowControlType].
@@ -71,6 +72,9 @@ class YaruWindowControl extends StatefulWidget {
   /// Color used to draw the control background decoration.
   /// Leave to null, or return null, to use the default value.
   final WidgetStateProperty<Color?>? backgroundColor;
+
+  /// Semantic label used for the control.
+  final String? semanticLabel;
 
   @override
   State<YaruWindowControl> createState() {
@@ -250,7 +254,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   Color _getIconColor(ColorScheme colorScheme) {
     final color = switch (style) {
       YaruWindowControlPlatform.yaru => _getYaruIconColor(colorScheme),
-      YaruWindowControlPlatform.windows => _getWindowsIconColor(colorScheme)
+      YaruWindowControlPlatform.windows => _getWindowsIconColor(colorScheme),
     };
 
     return color.withValues(alpha: interactive ? 1.0 : 0.5);
@@ -289,10 +293,7 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     }
   }
 
-  Widget _buildYaruBoxDecoration(
-    Widget child,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildYaruBoxDecoration(Widget child, ColorScheme colorScheme) {
     return AnimatedContainer(
       duration: _kWindowControlBackgroundAnimationDuration,
       decoration: BoxDecoration(
@@ -305,17 +306,11 @@ class _YaruWindowControlState extends State<YaruWindowControl>
             : null,
         shape: BoxShape.circle,
       ),
-      child: SizedBox.square(
-        dimension: kYaruWindowControlSize,
-        child: child,
-      ),
+      child: SizedBox.square(dimension: kYaruWindowControlSize, child: child),
     );
   }
 
-  Widget _buildWindowsBoxDecoration(
-    Widget child,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildWindowsBoxDecoration(Widget child, ColorScheme colorScheme) {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: _getBackgoundColor(colorScheme),
@@ -337,20 +332,23 @@ class _YaruWindowControlState extends State<YaruWindowControl>
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return _buildEventDetectors(
-      child: RepaintBoundary(
-        child: _buildBoxDecoration(
-          colorScheme: colorScheme,
-          child: Center(
-            child: AnimatedBuilder(
-              animation: _animationProgress,
-              builder: (context, child) => CustomPaint(
-                size: Size.square(_iconSize),
-                painter: _YaruWindowControlIconPainter(
-                  type: widget.type,
-                  style: style,
-                  iconColor: _getIconColor(colorScheme),
-                  progress: _animationProgress.value,
+    return Semantics(
+      label: widget.semanticLabel,
+      child: _buildEventDetectors(
+        child: RepaintBoundary(
+          child: _buildBoxDecoration(
+            colorScheme: colorScheme,
+            child: Center(
+              child: AnimatedBuilder(
+                animation: _animationProgress,
+                builder: (context, child) => CustomPaint(
+                  size: Size.square(_iconSize),
+                  painter: _YaruWindowControlIconPainter(
+                    type: widget.type,
+                    style: style,
+                    iconColor: _getIconColor(colorScheme),
+                    progress: _animationProgress.value,
+                  ),
                 ),
               ),
             ),
@@ -431,10 +429,7 @@ class _YaruWindowControlIconPainter extends CustomPainter {
           drawRect.topLeft.dx + (1 + _kWindowControlIconStrokeAlign),
           drawRect.topLeft.dy,
         )
-        ..lineTo(
-          drawRect.topRight.dx,
-          drawRect.topRight.dy,
-        )
+        ..lineTo(drawRect.topRight.dx, drawRect.topRight.dy)
         ..lineTo(
           drawRect.bottomRight.dx,
           drawRect.bottomRight.dy - (1 + _kWindowControlIconStrokeAlign),
@@ -468,9 +463,7 @@ class _YaruWindowControlIconPainter extends CustomPainter {
       canvas.saveLayer(Rect.largest, Paint());
       canvas.drawRect(
         rect2,
-        _getIconPaint(
-          iconColor.scale(alpha: -1.0 + step2Progress),
-        ),
+        _getIconPaint(iconColor.scale(alpha: -1.0 + step2Progress)),
       );
       canvas.drawRect(rect1, _getFillDiffPaint());
       canvas.restore();

@@ -10,8 +10,9 @@ class YaruExpansionPanel extends StatefulWidget {
   const YaruExpansionPanel({
     super.key,
     required this.children,
-    this.borderRadius =
-        const BorderRadius.all(Radius.circular(kYaruContainerRadius)),
+    this.borderRadius = const BorderRadius.all(
+      Radius.circular(kYaruContainerRadius),
+    ),
     this.border,
     required this.headers,
     this.isInitiallyExpanded,
@@ -27,6 +28,7 @@ class YaruExpansionPanel extends StatefulWidget {
     this.shrinkWrap = false,
     this.scrollPhysics = const ClampingScrollPhysics(),
     this.collapseOnExpand = true,
+    this.expandIconBuilder,
   }) : assert(headers.length == children.length);
 
   /// A list of [Widget]s
@@ -80,6 +82,9 @@ class YaruExpansionPanel extends StatefulWidget {
 
   /// The [Widget] used as the icon to expand a [YaruExpandable]
   final Widget? expandIcon;
+
+  /// Builder function used to build the expand icon based on state.
+  final Widget Function(bool isExpanded)? expandIconBuilder;
 
   /// Forwarded to the internal [ListView]
   final bool shrinkWrap;
@@ -146,20 +151,25 @@ class _YaruExpansionPanelState extends State<YaruExpansionPanel> {
   }
 
   Widget? _itemBuilder(BuildContext context, int index) {
+    final icon =
+        widget.expandIconBuilder?.call(_expandedStore[index]) ??
+        widget.expandIcon;
+
     return YaruExpandable(
-      expandIcon: widget.expandIcon,
+      expandIcon: icon,
       expandIconPadding: widget.expandIconPadding,
       isExpanded: _expandedStore[index],
-      onChange: widget.collapseOnExpand
-          ? (_) {
-              _expandedStore[index] = !_expandedStore[index];
-              for (var n = 0; n < _expandedStore.length; n++) {
-                if (n != index && _expandedStore[index]) {
-                  setState(() => _expandedStore[n] = false);
-                }
-              }
+      onChange: (_) => setState(() {
+        _expandedStore[index] = !_expandedStore[index];
+
+        if (widget.collapseOnExpand) {
+          for (var n = 0; n < _expandedStore.length; n++) {
+            if (n != index && _expandedStore[index]) {
+              _expandedStore[n] = false;
             }
-          : null,
+          }
+        }
+      }),
       header: Padding(
         padding: widget.headerPadding,
         child: widget.headers[index],

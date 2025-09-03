@@ -12,12 +12,14 @@ class YaruCloseButton extends StatelessWidget {
     this.onPressed,
     this.alignment = Alignment.center,
     this.icon,
+    this.semanticLabel,
   });
 
   final bool enabled;
   final VoidCallback? onPressed;
   final AlignmentGeometry alignment;
   final Widget? icon;
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,8 @@ class YaruCloseButton extends StatelessWidget {
       child: YaruIconButton(
         padding: EdgeInsets.zero,
         onPressed: enabled ? onPressed ?? Navigator.of(context).maybePop : null,
-        icon: icon ?? const Icon(YaruIcons.window_close),
+        icon:
+            icon ?? Icon(YaruIcons.window_close, semanticLabel: semanticLabel),
         iconSize: _kCloseButtonSize,
       ),
     );

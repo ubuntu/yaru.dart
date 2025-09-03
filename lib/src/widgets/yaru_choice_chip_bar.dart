@@ -26,6 +26,8 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.wrapTextDirection,
     this.goPreviousIcon,
     this.goNextIcon,
+    this.goPreviousIconSemanticLabel,
+    this.goNextIconSemanticLabel,
     this.clearOnSelect = true,
     this.shrinkWrap = true,
     this.showCheckMarks = true,
@@ -103,6 +105,12 @@ class YaruChoiceChipBar extends StatefulWidget {
   /// The [Widget] shown inside the right navigation button.
   final Widget? goNextIcon;
 
+  /// Optional semantic label to add to the previous button icon.
+  final String? goPreviousIconSemanticLabel;
+
+  /// Optional semantic label to add to the next button icon.
+  final String? goNextIconSemanticLabel;
+
   /// Flag to select if the scroll view should to back to the start on selection.
   /// Defaults to `true`.
   final bool clearOnSelect;
@@ -125,7 +133,7 @@ class YaruChoiceChipBar extends StatefulWidget {
 class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
   late ScrollController _controller;
   bool _enableGoPreviousButton = false;
-  bool _enableGoNextButton = true;
+  bool _enableGoNextButton = false;
 
   @override
   void initState() {
@@ -196,14 +204,10 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
       scrollDirection: Axis.horizontal,
       controller: _controller,
       children: children
-          .expand(
-            (item) sync* {
-              yield SizedBox(
-                width: widget.spacing,
-              );
-              yield item;
-            },
-          )
+          .expand((item) sync* {
+            yield SizedBox(width: widget.spacing);
+            yield item;
+          })
           .skip(1)
           .toList(),
     );
@@ -211,26 +215,36 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
     final goPreviousButton = _NavigationButton(
       elevation: widget.navigationButtonElevation,
       chipHeight: widget.chipHeight,
-      icon: widget.goPreviousIcon ?? const Icon(YaruIcons.go_previous),
+      icon:
+          widget.goPreviousIcon ??
+          Icon(
+            YaruIcons.go_previous,
+            semanticLabel: widget.goPreviousIconSemanticLabel,
+          ),
       onTap: _enableGoPreviousButton
           ? () => _controller.animateTo(
-                _controller.position.pixels - widget.navigationStep,
-                duration: widget.animationDuration,
-                curve: widget.animationCurve,
-              )
+              _controller.position.pixels - widget.navigationStep,
+              duration: widget.animationDuration,
+              curve: widget.animationCurve,
+            )
           : null,
     );
 
     final goNextButton = _NavigationButton(
       elevation: widget.navigationButtonElevation,
       chipHeight: widget.chipHeight,
-      icon: widget.goNextIcon ?? const Icon(YaruIcons.go_next),
+      icon:
+          widget.goNextIcon ??
+          Icon(
+            YaruIcons.go_next,
+            semanticLabel: widget.goNextIconSemanticLabel,
+          ),
       onTap: _enableGoNextButton
           ? () => _controller.animateTo(
-                _controller.position.pixels + widget.navigationStep,
-                duration: widget.animationDuration,
-                curve: widget.animationCurve,
-              )
+              _controller.position.pixels + widget.navigationStep,
+              duration: widget.animationDuration,
+              curve: widget.animationCurve,
+            )
           : null,
     );
 
@@ -271,15 +285,8 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
               child: listView,
             ),
             if (_enableGoPreviousButton)
-              Positioned(
-                left: 0,
-                child: goPreviousButton,
-              ),
-            if (_enableGoNextButton)
-              Positioned(
-                right: 0,
-                child: goNextButton,
-              ),
+              Positioned(left: 0, child: goPreviousButton),
+            if (_enableGoNextButton) Positioned(right: 0, child: goNextButton),
           ],
         ),
       );
@@ -289,15 +296,9 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
         child: Row(
           children: [
             goPreviousButton,
-            SizedBox(
-              width: widget.spacing,
-            ),
-            Expanded(
-              child: listView,
-            ),
-            SizedBox(
-              width: widget.spacing,
-            ),
+            SizedBox(width: widget.spacing),
+            Expanded(child: listView),
+            SizedBox(width: widget.spacing),
             goNextButton,
           ],
         ),
@@ -348,8 +349,4 @@ class _NavigationButton extends StatelessWidget {
   }
 }
 
-enum YaruChoiceChipBarStyle {
-  wrap,
-  row,
-  stack;
-}
+enum YaruChoiceChipBarStyle { wrap, row, stack }

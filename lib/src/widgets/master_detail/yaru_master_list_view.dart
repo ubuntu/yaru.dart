@@ -77,7 +77,7 @@ class _YaruMasterListViewState extends State<YaruMasterListView> {
 
 extension on List<Widget> {
   List<Widget> withSpacing(double height) => expand((item) sync* {
-        yield SizedBox(height: height);
-        yield item;
-      }).skip(1).toList();
+    yield SizedBox(height: height);
+    yield item;
+  }).skip(1).toList();
 }

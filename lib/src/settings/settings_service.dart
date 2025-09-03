@@ -22,7 +22,7 @@ class GSettingsService {
 
 class GnomeSettings {
   GnomeSettings(String schemaId, {String? path})
-      : _settings = GSettings(schemaId, path: path) {
+    : _settings = GSettings(schemaId, path: path) {
     _settings.keysChanged.listen((keys) {
       for (final key in keys) {
         _updateValue(key);
@@ -55,15 +55,18 @@ class GnomeSettings {
 
   T? _updateValue<T>(String key) {
     T? value;
-    _settings.get(key).then((v) {
-      value = v.toNative() as T?;
-      if (_values[key] != value) {
-        _values[key] = value;
-        notifyListeners();
-      }
-    }).catchError((_) {
-      value = null;
-    });
+    _settings
+        .get(key)
+        .then((v) {
+          value = v.toNative() as T?;
+          if (_values[key] != value) {
+            _values[key] = value;
+            notifyListeners();
+          }
+        })
+        .catchError((_) {
+          value = null;
+        });
     return value;
   }
 
@@ -76,8 +79,10 @@ class GnomeSettings {
       const (int) => _settings.set(key, DBusInt32(value as int)),
       const (double) => _settings.set(key, DBusDouble(value as double)),
       const (String) => _settings.set(key, DBusString(value as String)),
-      const (List<String>) =>
-        _settings.set(key, DBusArray.string(value as List<String>)),
+      const (List<String>) => _settings.set(
+        key,
+        DBusArray.string(value as List<String>),
+      ),
       _ => throw UnsupportedError('Unsupported type: $T'),
     };
   }

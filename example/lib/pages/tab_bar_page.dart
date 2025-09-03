@@ -28,52 +28,52 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     final theme = Theme.of(context);
     final light = theme.brightness == Brightness.light;
 
-    return Center(
-      child: SimpleDialog(
-        shadowColor: light ? Colors.black : null,
-        titlePadding: EdgeInsets.zero,
-        title: YaruDialogTitleBar(
-          leading: Center(
-            child: YaruOptionButton(
-              onPressed: () {},
-              child: const Icon(YaruIcons.plus),
+    return ColoredBox(
+      color: theme.colorScheme.outline,
+      child: Center(
+        child: SimpleDialog(
+          shadowColor: light ? Colors.black : null,
+          titlePadding: EdgeInsets.zero,
+          title: YaruDialogTitleBar(
+            leading: Center(
+              child: YaruOptionButton(
+                onPressed: () {},
+                child: const Icon(YaruIcons.plus),
+              ),
+            ),
+            title: SizedBox(
+              width: 500,
+              child: YaruTabBar(
+                tabController: tabController,
+                tabs: const [
+                  YaruTab(
+                    label: 'Gaming',
+                    icon: Icon(YaruIcons.game_controller),
+                  ),
+                  YaruTab(label: 'Keyboard', icon: Icon(YaruIcons.keyboard)),
+                  YaruTab(
+                    label: 'Contacts',
+                    icon: Icon(YaruIcons.address_book),
+                  ),
+                ],
+              ),
             ),
           ),
-          title: SizedBox(
-            width: 500,
-            child: YaruTabBar(
-              tabController: tabController,
-              tabs: const [
-                YaruTab(
-                  label: 'Gaming',
-                  icon: Icon(YaruIcons.game_controller),
-                ),
-                YaruTab(
-                  label: 'Keyboard',
-                  icon: Icon(YaruIcons.keyboard),
-                ),
-                YaruTab(
-                  label: 'Contacts',
-                  icon: Icon(YaruIcons.address_book),
-                ),
-              ],
+          children: [
+            SizedBox(
+              width: 600,
+              height: 400,
+              child: TabBarView(
+                controller: tabController,
+                children: const [
+                  Icon(YaruIcons.game_controller),
+                  Icon(YaruIcons.keyboard),
+                  Icon(YaruIcons.address_book),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
-        children: [
-          SizedBox(
-            width: 600,
-            height: 400,
-            child: TabBarView(
-              controller: tabController,
-              children: const [
-                Icon(YaruIcons.game_controller),
-                Icon(YaruIcons.keyboard),
-                Icon(YaruIcons.address_book),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

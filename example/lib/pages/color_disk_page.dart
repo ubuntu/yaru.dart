@@ -19,7 +19,8 @@ class ColorDiskPage extends StatelessWidget with WatchItMixin {
             YaruColorDisk(
               onPressed: () => di<ExampleModel>().setYaruVariant(variant),
               color: variant.color,
-              selected: watchPropertyValue((ExampleModel m) => m.yaruVariant) ==
+              selected:
+                  watchPropertyValue((ExampleModel m) => m.yaruVariant) ==
                   variant,
             ),
         ],

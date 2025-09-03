@@ -27,8 +27,8 @@ abstract class YaruProgressIndicator extends StatefulWidget {
     this.trackStrokeWidth,
     this.semanticsLabel,
     this.semanticsValue,
-  })  : assert(strokeWidth == null || strokeWidth > 0),
-        assert(trackStrokeWidth == null || trackStrokeWidth > 0);
+  }) : assert(strokeWidth == null || strokeWidth > 0),
+       assert(trackStrokeWidth == null || trackStrokeWidth > 0);
 
   /// If non-null, the value of this progress indicator.
   ///
@@ -139,7 +139,9 @@ abstract class YaruProgressIndicator extends StatefulWidget {
 }
 
 abstract class YaruProgressIndicatorThemeData<
-    T extends YaruProgressIndicatorThemeData<T>> extends ThemeExtension<T> {
+  T extends YaruProgressIndicatorThemeData<T>
+>
+    extends ThemeExtension<T> {
   YaruProgressIndicatorThemeData(
     this.color,
     this.trackColor,

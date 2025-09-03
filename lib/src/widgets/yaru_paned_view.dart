@@ -1,21 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/src/widgets/yaru_paned_view_layout_delegate.dart';
 
+typedef YaruPaneBuilder =
+    Widget Function(BuildContext context, double availableSpace);
+
 class YaruPanedView extends StatefulWidget {
   const YaruPanedView({
     super.key,
-    required this.pane,
-    required this.page,
+    required Widget this.pane,
+    required Widget this.page,
     required this.layoutDelegate,
     this.onPaneSizeChange,
     this.includeSeparator = true,
-  });
+  }) : paneBuilder = null,
+       pageBuilder = null;
+
+  const YaruPanedView.builder({
+    super.key,
+    required YaruPaneBuilder this.paneBuilder,
+    required WidgetBuilder this.pageBuilder,
+    required this.layoutDelegate,
+    this.onPaneSizeChange,
+    this.includeSeparator = true,
+  }) : pane = null,
+       page = null;
 
   /// Pane widget child.
-  final Widget pane;
+  final Widget? pane;
+
+  /// Pane widget child builder, taking the available space as a parameter.
+  final YaruPaneBuilder? paneBuilder;
 
   /// Page widget child.
-  final Widget page;
+  final Widget? page;
+
+  /// Page widget child builder.
+  final WidgetBuilder? pageBuilder;
 
   /// Controls the size, side and resizing capacity of the pane.
   final YaruPanedViewLayoutDelegate layoutDelegate;
@@ -73,18 +93,35 @@ class _YaruPanedViewState extends State<YaruPanedView> {
             candidatePaneSize: _paneSize,
           );
 
+          final page =
+              widget.page ??
+              widget.pageBuilder?.call(context) ??
+              const SizedBox();
+          final pane =
+              widget.pane ??
+              widget.paneBuilder?.call(context, _paneSize!) ??
+              const SizedBox();
+
           return _buildFlexContainer([
-            _buildPane(),
+            SizedBox(
+              width: widget.layoutDelegate.paneSide.isHorizontal
+                  ? _paneSize
+                  : null,
+              height: widget.layoutDelegate.paneSide.isVertical
+                  ? _paneSize
+                  : null,
+              child: pane,
+            ),
             if (widget.includeSeparator != false) _buildVerticalSeparator(),
             Expanded(
               child: widget.layoutDelegate.allowPaneResizing
                   ? Stack(
                       children: [
-                        widget.page,
+                        page,
                         _buildLeftPaneResizer(context, constraints, theme),
                       ],
                     )
-                  : widget.page,
+                  : page,
             ),
           ]);
         },
@@ -97,8 +134,8 @@ class _YaruPanedViewState extends State<YaruPanedView> {
       return MouseRegion(
         cursor: _isHovering || _isDragging
             ? widget.layoutDelegate.paneSide.isHorizontal
-                ? SystemMouseCursors.resizeColumn
-                : SystemMouseCursors.resizeRow
+                  ? SystemMouseCursors.resizeColumn
+                  : SystemMouseCursors.resizeRow
             : MouseCursor.defer,
         child: child,
       );
@@ -110,7 +147,8 @@ class _YaruPanedViewState extends State<YaruPanedView> {
   Widget _buildFlexContainer(List<Widget> children) {
     final isRtl = Directionality.of(context) == TextDirection.rtl;
     final top = widget.layoutDelegate.paneSide == YaruPaneSide.top;
-    final left = widget.layoutDelegate.paneSide == YaruPaneSide.left ||
+    final left =
+        widget.layoutDelegate.paneSide == YaruPaneSide.left ||
         (!isRtl && widget.layoutDelegate.paneSide == YaruPaneSide.start ||
             isRtl && widget.layoutDelegate.paneSide == YaruPaneSide.end);
 
@@ -124,18 +162,11 @@ class _YaruPanedViewState extends State<YaruPanedView> {
         : Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            verticalDirection:
-                top ? VerticalDirection.down : VerticalDirection.up,
+            verticalDirection: top
+                ? VerticalDirection.down
+                : VerticalDirection.up,
             children: children,
           );
-  }
-
-  Widget _buildPane() {
-    return SizedBox(
-      width: widget.layoutDelegate.paneSide.isHorizontal ? _paneSize : null,
-      height: widget.layoutDelegate.paneSide.isVertical ? _paneSize : null,
-      child: widget.pane,
-    );
   }
 
   Widget _buildVerticalSeparator() {
@@ -151,7 +182,8 @@ class _YaruPanedViewState extends State<YaruPanedView> {
   ) {
     final isRtl = Directionality.of(context) == TextDirection.rtl;
     final top = widget.layoutDelegate.paneSide == YaruPaneSide.top;
-    final left = widget.layoutDelegate.paneSide == YaruPaneSide.left ||
+    final left =
+        widget.layoutDelegate.paneSide == YaruPaneSide.left ||
         (!isRtl && widget.layoutDelegate.paneSide == YaruPaneSide.start ||
             isRtl && widget.layoutDelegate.paneSide == YaruPaneSide.end);
     final isHorizontal = widget.layoutDelegate.paneSide.isHorizontal;
@@ -162,23 +194,23 @@ class _YaruPanedViewState extends State<YaruPanedView> {
       height: isVertical ? _kLeftPaneResizingRegionSize : null,
       top: isVertical
           ? top
-              ? 0
-              : null
+                ? 0
+                : null
           : 0,
       bottom: isVertical
           ? top
-              ? null
-              : 0
+                ? null
+                : 0
           : 0,
       left: isHorizontal
           ? left
-              ? 0
-              : null
+                ? 0
+                : null
           : 0,
       right: isHorizontal
           ? left
-              ? null
-              : 0
+                ? null
+                : 0
           : 0,
       child: AnimatedContainer(
         duration: _kLeftPaneResizingRegionAnimationDuration,
@@ -193,6 +225,7 @@ class _YaruPanedViewState extends State<YaruPanedView> {
             _isHovering = false;
           }),
           child: GestureDetector(
+            key: const ValueKey('YaruPanedView.leftPaneResizer'),
             onPanStart: (details) => setState(() {
               _isDragging = true;
               _oldPaneSize = _paneSize;
@@ -200,11 +233,11 @@ class _YaruPanedViewState extends State<YaruPanedView> {
             onPanUpdate: (details) => setState(() {
               _paneSizeMove += isHorizontal
                   ? left
-                      ? details.delta.dx
-                      : -details.delta.dx
+                        ? details.delta.dx
+                        : -details.delta.dx
                   : top
-                      ? details.delta.dy
-                      : -details.delta.dy;
+                  ? details.delta.dy
+                  : -details.delta.dy;
               updatePaneSize(
                 constraints: constraints,
                 candidatePaneSize: _oldPaneSize! + _paneSizeMove,
