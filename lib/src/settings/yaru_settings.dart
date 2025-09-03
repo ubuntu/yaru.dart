@@ -23,9 +23,9 @@ class YaruGtkSettings extends YaruSettings {
   YaruGtkSettings([
     @visibleForTesting GtkSettings? settings,
     @visibleForTesting GSettingsService? settingsService,
-  ])  : _gtkSettings = settings ?? GtkSettings(),
-        _gSettingsService = settingsService ?? GSettingsService(),
-        super._();
+  ]) : _gtkSettings = settings ?? GtkSettings(),
+       _gSettingsService = settingsService ?? GSettingsService(),
+       super._();
 
   final GtkSettings _gtkSettings;
   final GSettingsService _gSettingsService;

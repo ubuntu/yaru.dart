@@ -16,7 +16,7 @@ enum YaruTitleBarStyle {
   onlyLeftWindowControls,
 
   /// The title bar is shown as normal.
-  normal;
+  normal,
 }
 
 @immutable

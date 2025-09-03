@@ -222,8 +222,8 @@ class _YaruWindowControlState extends State<YaruWindowControl>
     return _active
         ? onSurface.withValues(alpha: 0.2)
         : _hovered
-            ? onSurface.withValues(alpha: 0.15)
-            : onSurface.withValues(alpha: 0.1);
+        ? onSurface.withValues(alpha: 0.15)
+        : onSurface.withValues(alpha: 0.1);
   }
 
   Color _getWindowsBackgroundColor(ColorScheme colorScheme) {
@@ -239,16 +239,16 @@ class _YaruWindowControlState extends State<YaruWindowControl>
         alpha: _active
             ? 0.5
             : _hovered
-                ? 1.0
-                : 0.0,
+            ? 1.0
+            : 0.0,
       );
     }
 
     return _active
         ? onSurface.withValues(alpha: 0.15)
         : _hovered
-            ? onSurface.withValues(alpha: 0.1)
-            : Colors.transparent;
+        ? onSurface.withValues(alpha: 0.1)
+        : Colors.transparent;
   }
 
   Color _getIconColor(ColorScheme colorScheme) {

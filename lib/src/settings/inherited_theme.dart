@@ -104,12 +104,12 @@ class YaruTheme extends StatefulWidget {
     this.data = const YaruThemeData(),
     @visibleForTesting Platform? platform,
     @visibleForTesting YaruSettings? settings,
-  })  : assert(
-          builder != null || child != null,
-          'Either builder or child must be provided',
-        ),
-        _platform = platform ?? const LocalPlatform(),
-        _settings = settings;
+  }) : assert(
+         builder != null || child != null,
+         'Either builder or child must be provided',
+       ),
+       _platform = platform ?? const LocalPlatform(),
+       _settings = settings;
 
   /// Builds the widget below this widget in the tree.
   final ValueWidgetBuilder<YaruThemeData>? builder;
@@ -130,8 +130,8 @@ class YaruTheme extends StatefulWidget {
   /// An optional data from the closest [YaruTheme] instance that encloses the
   /// given context or `null` if there is no such ancestor.
   static YaruThemeData? maybeOf(BuildContext context) {
-    final theme =
-        context.dependOnInheritedWidgetOfExactType<_YaruInheritedTheme>();
+    final theme = context
+        .dependOnInheritedWidgetOfExactType<_YaruInheritedTheme>();
     return theme?.data;
   }
 
@@ -155,14 +155,16 @@ class _YaruThemeState extends State<YaruTheme> {
       _settings = widget._settings ?? YaruSettings();
       _settings?.init();
       if (widget.data.variant == null) {
-        _variant = resolveAccentColorVariant(_settings?.getAccentColor()) ??
+        _variant =
+            resolveAccentColorVariant(_settings?.getAccentColor()) ??
             resolveGtkThemeVariant(_settings?.getThemeName());
         _accentColorSub ??= _settings!.accentColorChanged.listen(updateVariant);
         _themeNameSub ??= _settings!.themeNameChanged.listen(updateVariant);
       }
 
-      _buttonLayoutSub ??=
-          _settings!.buttonLayoutChanged.listen(updateButtonLayout);
+      _buttonLayoutSub ??= _settings!.buttonLayoutChanged.listen(
+        updateButtonLayout,
+      );
 
       final buttonLayout = _settings?.getButtonLayout();
 
@@ -221,25 +223,26 @@ class _YaruThemeState extends State<YaruTheme> {
   // At some point we probably want to check which distribution of gnome is run and use the
   // upstream colors instead.
   YaruVariant? resolveAccentColorVariant(String? name) => switch (name) {
-        'blue' => YaruVariant.blue,
-        'teal' || 'Yaru-teal' => YaruVariant.adwaitaTeal,
-        'green' || 'Yaru-green' => YaruVariant.adwaitaGreen,
-        'yellow' || 'Yaru-yellow' => YaruVariant.adwaitaYellow,
-        'orange' => YaruVariant.orange,
-        'red' => YaruVariant.red,
-        'pink' || 'Yaru-pink' => YaruVariant.magenta,
-        'purple' => YaruVariant.purple,
-        'slate' || 'Yaru-slate' => YaruVariant.adwaitaSlate,
-        'brown' => YaruVariant.wartyBrown,
-        _ => null,
-      };
+    'blue' => YaruVariant.blue,
+    'teal' || 'Yaru-teal' => YaruVariant.adwaitaTeal,
+    'green' || 'Yaru-green' => YaruVariant.adwaitaGreen,
+    'yellow' || 'Yaru-yellow' => YaruVariant.adwaitaYellow,
+    'orange' => YaruVariant.orange,
+    'red' => YaruVariant.red,
+    'pink' || 'Yaru-pink' => YaruVariant.magenta,
+    'purple' => YaruVariant.purple,
+    'slate' || 'Yaru-slate' => YaruVariant.adwaitaSlate,
+    'brown' => YaruVariant.wartyBrown,
+    _ => null,
+  };
 
   void updateVariant([String? value]) {
     assert(canDetectGnome());
     final gtkThemeName = value ?? _settings?.getThemeName();
     final accentColor = value ?? _settings?.getAccentColor();
     setState(
-      () => _variant = resolveAccentColorVariant(accentColor) ??
+      () => _variant =
+          resolveAccentColorVariant(accentColor) ??
           resolveGtkThemeVariant(gtkThemeName),
     );
   }
@@ -296,7 +299,8 @@ class _YaruThemeState extends State<YaruTheme> {
     final data = resolveData();
     return _YaruInheritedTheme(
       data: data,
-      child: widget.builder?.call(context, data, widget.child) ??
+      child:
+          widget.builder?.call(context, data, widget.child) ??
           AnimatedTheme(data: resolveTheme(data), child: widget.child!),
     );
   }
@@ -395,12 +399,8 @@ class YaruThemeData with Diagnosticable {
     );
     properties.add(DiagnosticsProperty('useMaterial3', useMaterial3));
     properties.add(DiagnosticsProperty('visualDensity', visualDensity));
-    properties.add(
-      DiagnosticsProperty('leftButtonLayout', leftButtonLayout),
-    );
-    properties.add(
-      DiagnosticsProperty('rightButtonLayout', rightButtonLayout),
-    );
+    properties.add(DiagnosticsProperty('leftButtonLayout', leftButtonLayout));
+    properties.add(DiagnosticsProperty('rightButtonLayout', rightButtonLayout));
   }
 
   @override
