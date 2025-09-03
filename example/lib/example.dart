@@ -65,6 +65,7 @@ class _MasterDetailPage extends StatelessWidget {
         ),
       ),
       appBar: YaruWindowTitleBar(
+        style: getStyle(context),
         title: const Text('Yaru'),
         border: BorderSide.none,
         backgroundColor: YaruMasterDetailTheme.of(context).sideBarColor,
@@ -87,6 +88,12 @@ class _MasterDetailPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  YaruTitleBarStyle getStyle(BuildContext context) {
+    return YaruTheme.maybeOf(context)?.hasLeftWindowControls == true
+        ? YaruTitleBarStyle.onlyLeftWindowControls
+        : YaruTitleBarStyle.undecorated;
   }
 }
 
@@ -126,6 +133,7 @@ class _CompactPageState extends State<_CompactPage> {
               leading: buildLeading(context, widget.pageItems[value]),
               title: buildTitle(context, widget.pageItems[value]),
               actions: buildActions(context, widget.pageItems[value]),
+              style: getStyle(context),
             );
           },
         ),
@@ -157,6 +165,12 @@ class _CompactPageState extends State<_CompactPage> {
       ),
     );
   }
+}
+
+YaruTitleBarStyle getStyle(BuildContext context) {
+  return YaruTheme.maybeOf(context)?.hasLeftWindowControls == true
+      ? YaruTitleBarStyle.onlyLeftWindowControls
+      : YaruTitleBarStyle.normal;
 }
 
 void showSettingsDialog(BuildContext context) {
