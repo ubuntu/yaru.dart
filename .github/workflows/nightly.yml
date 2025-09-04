@@ -5,17 +5,13 @@ on:
     - cron:  '0 0 * * *'
   workflow_dispatch:
 
-env:
-  FLUTTER_VERSION: 3.32.0
 
 jobs:
   goldens:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{env.FLUTTER_VERSION}}
+      - uses: kuhnroyal/flutter-fvm-config-action/setup@v3
       - run: flutter test --update-goldens
       - uses: peter-evans/create-pull-request@v4
         with:
