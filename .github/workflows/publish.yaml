@@ -6,18 +6,13 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  FLUTTER_VERSION: 3.32.0
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          flutter-version: ${{env.FLUTTER_VERSION}}
+      - uses: kuhnroyal/flutter-fvm-config-action/setup@v3
       - uses: bluefireteam/flutter-gh-pages@v9
         with:
           workingDir: example
