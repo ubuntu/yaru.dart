@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.3.0](https://github.com/ubuntu/yaru.dart/compare/v8.2.0...v8.3.0) (2025-09-05)
+
+
+### Features
+
+* update flutter to 3.35.0 and update golden images ([#1030](https://github.com/ubuntu/yaru.dart/issues/1030)) ([ef87f36](https://github.com/ubuntu/yaru.dart/commit/ef87f36b56bf614c3d597b2f5ae271b8695a3979))
+
 ## [8.2.0](https://github.com/ubuntu/yaru.dart/compare/v8.1.0...v8.2.0) (2025-08-27)
 
 
