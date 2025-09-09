@@ -11,8 +11,10 @@ abstract class YaruSettings {
 
   String? getThemeName();
   String? getAccentColor();
+  bool? getStatusShapes();
   Stream<String?> get themeNameChanged;
   Stream<String?> get accentColorChanged;
+  Stream<bool?> get statusShapesChanged;
   void init();
   Future<void> dispose();
 }
@@ -28,6 +30,7 @@ class YaruGtkSettings extends YaruSettings {
   final GtkSettings _gtkSettings;
   final GSettingsService _gSettingsService;
   GnomeSettings? _gSettings;
+  GnomeSettings? _gA11ySettings;
 
   @override
   String? getThemeName() => _gtkSettings.getProperty(kGtkThemeName) as String?;
@@ -40,10 +43,19 @@ class YaruGtkSettings extends YaruSettings {
   @override
   Stream<String?> get accentColorChanged => _accentColorController.stream;
 
+  final _statusShapesController = StreamController<bool?>.broadcast();
+  @override
+  Stream<bool?> get statusShapesChanged => _statusShapesController.stream;
+
   @override
   void init() {
     _gSettings ??= _gSettingsService.lookup(kSchemaInterface);
     _gSettings?.addListener(() => _accentColorController.add(getAccentColor()));
+
+    _gA11ySettings ??= _gSettingsService.lookup(kA11ySchemaInterface);
+    _gA11ySettings?.addListener(
+      () => _statusShapesController.add(getStatusShapes()),
+    );
   }
 
   @override
@@ -54,4 +66,7 @@ class YaruGtkSettings extends YaruSettings {
 
   @override
   String? getAccentColor() => _gSettings?.stringValue(kAccentColorKey);
+
+  @override
+  bool? getStatusShapes() => _gA11ySettings?.boolValue(kStatusShapesKey);
 }

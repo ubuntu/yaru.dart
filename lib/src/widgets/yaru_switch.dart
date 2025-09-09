@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yaru/theme.dart';
+import 'package:yaru/yaru.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
@@ -160,7 +161,10 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
   Widget build(BuildContext context) {
     final switchTheme = YaruSwitchTheme.of(context);
     final colorScheme = Theme.of(context).colorScheme;
-    final painter = _YaruSwitchPainter(onOffShapes: widget.onOffShapes);
+    final settings = YaruTheme.of(context);
+    final painter = _YaruSwitchPainter(
+      onOffShapes: widget.onOffShapes ?? settings.statusShapes,
+    );
     fillPainterDefaults(painter);
 
     const unselectedState = <WidgetState>{};
