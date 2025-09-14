@@ -144,12 +144,16 @@ class _YaruThemeState extends State<YaruTheme> {
   YaruSettings? _settings;
   StreamSubscription<String?>? _themeNameSubscription;
   StreamSubscription<String?>? _accentColorSubScription;
+  StreamSubscription<bool?>? _statusShapesSubscription;
+
+  bool? _statusShapes;
 
   @override
   void initState() {
     super.initState();
     if (widget.data.variant == null && canDetectVariant()) {
       _settings = widget._settings ?? YaruSettings();
+
       _settings?.init();
       _variant =
           resolveAccentColorVariant(_settings?.getAccentColor()) ??
@@ -160,6 +164,12 @@ class _YaruThemeState extends State<YaruTheme> {
       _themeNameSubscription ??= _settings!.themeNameChanged.listen(
         updateVariant,
       );
+      _statusShapesSubscription ??= _settings!.statusShapesChanged.listen(
+        (v) => setState(() {
+          _statusShapes = v;
+        }),
+      );
+      _settings?.getStatusShapes();
     }
   }
 
@@ -167,6 +177,7 @@ class _YaruThemeState extends State<YaruTheme> {
   void dispose() {
     _themeNameSubscription?.cancel();
     _accentColorSubScription?.cancel();
+    _statusShapesSubscription?.cancel();
     _settings?.dispose();
     super.dispose();
   }
@@ -250,6 +261,7 @@ class _YaruThemeState extends State<YaruTheme> {
       highContrast:
           widget.data.highContrast ?? MediaQuery.highContrastOf(context),
       themeMode: resolveMode(),
+      statusShapes: _statusShapes,
     );
   }
 
@@ -289,6 +301,7 @@ class YaruThemeData with Diagnosticable {
     this.pageTransitionsTheme,
     this.useMaterial3,
     this.visualDensity,
+    this.statusShapes,
   });
 
   /// Specifies the theme variant.
@@ -312,6 +325,8 @@ class YaruThemeData with Diagnosticable {
   /// Overrides [ThemeData.visualDensity].
   final VisualDensity? visualDensity;
 
+  final bool? statusShapes;
+
   /// The light theme of [variant] (or [yaruLight] if not available) merged with
   /// the `YaruThemeData` overrides.
   ThemeData? get theme => (variant?.theme ?? yaruLight).overrideWith(this);
@@ -330,6 +345,7 @@ class YaruThemeData with Diagnosticable {
     PageTransitionsTheme? pageTransitionsTheme,
     bool? useMaterial3,
     VisualDensity? visualDensity,
+    bool? statusShapes,
   }) {
     return YaruThemeData(
       variant: variant ?? this.variant,
@@ -339,6 +355,7 @@ class YaruThemeData with Diagnosticable {
       pageTransitionsTheme: pageTransitionsTheme ?? this.pageTransitionsTheme,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       visualDensity: visualDensity ?? this.visualDensity,
+      statusShapes: statusShapes ?? this.statusShapes,
     );
   }
 
@@ -367,7 +384,8 @@ class YaruThemeData with Diagnosticable {
         iterableEquals(other.extensions, extensions) &&
         other.pageTransitionsTheme == pageTransitionsTheme &&
         other.useMaterial3 == useMaterial3 &&
-        other.visualDensity == visualDensity;
+        other.visualDensity == visualDensity &&
+        other.statusShapes == statusShapes;
   }
 
   @override
@@ -380,6 +398,7 @@ class YaruThemeData with Diagnosticable {
       pageTransitionsTheme,
       useMaterial3,
       visualDensity,
+      statusShapes,
     );
   }
 }

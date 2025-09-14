@@ -1,11 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/theme.dart';
+import 'package:yaru/yaru.dart';
 
-import 'yaru_checkbox.dart';
-import 'yaru_radio.dart';
-import 'yaru_switch_button.dart';
-import 'yaru_switch_theme.dart';
 import 'yaru_togglable.dart';
 
 const _kSwitchActivableAreaPadding = EdgeInsets.symmetric(
@@ -160,7 +156,10 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
   Widget build(BuildContext context) {
     final switchTheme = YaruSwitchTheme.of(context);
     final colorScheme = Theme.of(context).colorScheme;
-    final painter = _YaruSwitchPainter(onOffShapes: widget.onOffShapes);
+    final settings = YaruTheme.maybeOf(context);
+    final painter = _YaruSwitchPainter(
+      onOffShapes: widget.onOffShapes ?? settings?.statusShapes,
+    );
     fillPainterDefaults(painter);
 
     const unselectedState = <WidgetState>{};
