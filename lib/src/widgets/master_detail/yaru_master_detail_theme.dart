@@ -26,7 +26,7 @@ class YaruMasterDetailThemeData
 
     return YaruMasterDetailThemeData(
       breakpoint: kYaruMasterDetailBreakpoint,
-      tileSpacing: 6,
+      tileSpacing: 2,
       listPadding: const EdgeInsets.symmetric(vertical: 8),
       portraitTransitions: YaruPageTransitionsTheme.horizontal,
       landscapeTransitions: YaruPageTransitionsTheme.vertical,

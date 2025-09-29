@@ -804,6 +804,7 @@ ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
             alpha: colorScheme.isDark ? 0.035 : 0.04,
           ),
     minVerticalPadding: 6,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
     visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),

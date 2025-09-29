@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
-const double _kScrollbarThickness = 8.0;
-const double _kScrollbarMargin = 2.0;
 const Duration _kSelectedTileAnimationDuration = Duration(milliseconds: 250);
 
 /// Provides the recommended layout for [YaruMasterDetailPage.tileBuilder].
@@ -19,6 +17,7 @@ class YaruMasterTile extends StatelessWidget {
     this.onTap,
     this.decoration,
     this.focusDecoration,
+    this.padding,
   });
 
   /// See [ListTile.selected].
@@ -46,16 +45,15 @@ class YaruMasterTile extends StatelessWidget {
   /// An optional [Decoration] used when the [ListTile] is focused.
   final Decoration? focusDecoration;
 
+  /// Optional padding for the tile.
+  final EdgeInsetsGeometry? padding;
+
   @override
   Widget build(BuildContext context) {
-    final scrollbarThicknessWithTrack = _calcScrollbarThicknessWithTrack(
-      context,
-    );
-
     return Material(
       color: Colors.transparent,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: scrollbarThicknessWithTrack),
+        padding: padding ?? const EdgeInsets.symmetric(horizontal: 8),
         child: _YaruMasterTileFocus(
           selected: selected,
           leading: leading,
@@ -68,20 +66,6 @@ class YaruMasterTile extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  double _calcScrollbarThicknessWithTrack(final BuildContext context) {
-    final scrollbarTheme = Theme.of(context).scrollbarTheme;
-
-    final doubleMarginWidth = scrollbarTheme.crossAxisMargin != null
-        ? scrollbarTheme.crossAxisMargin! * 2
-        : _kScrollbarMargin * 2;
-
-    final scrollBarThumbThickness =
-        scrollbarTheme.thickness?.resolve({WidgetState.hovered}) ??
-        _kScrollbarThickness;
-
-    return doubleMarginWidth + scrollBarThumbThickness;
   }
 }
 
