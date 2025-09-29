@@ -768,8 +768,15 @@ ThemeData createYaruTheme({
       textColor: contrastColor(elevatedButtonColor ?? colorScheme.primary),
     ),
     scrollbarTheme: const ScrollbarThemeData(
-      mainAxisMargin: 3.0,
-      crossAxisMargin: 3.0,
+      mainAxisMargin: 2.0,
+      crossAxisMargin: 2.0,
+      thickness: WidgetStateProperty.fromMap({
+        WidgetState.hovered: 8,
+        WidgetState.dragged: 8,
+        WidgetState.focused: 8,
+        WidgetState.pressed: 8,
+        WidgetState.any: 4,
+      }),
     ),
     splashFactory: NoSplash.splashFactory,
     sliderTheme: _createSliderTheme(colorScheme),
