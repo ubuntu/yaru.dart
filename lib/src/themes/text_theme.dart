@@ -85,6 +85,11 @@ class _UbuntuTextStyle extends TextStyle {
     super.fontSize,
     super.fontWeight,
     required this.textColor,
-  }) : super(fontFamily: 'Ubuntu', package: 'yaru', color: textColor);
+  }) : super(
+         fontFamily: 'Ubuntu',
+         package: 'yaru',
+         color: textColor,
+         letterSpacing: 0, // Override Material/Flutter's letter spacing
+       );
   final Color textColor;
 }
