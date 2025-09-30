@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.4.0](https://github.com/ubuntu/yaru.dart/compare/v8.3.0...v8.4.0) (2025-09-30)
+
+
+### Features
+
+* **a11y:** Automatically enable status shapes ([#1032](https://github.com/ubuntu/yaru.dart/issues/1032)) ([ba93a20](https://github.com/ubuntu/yaru.dart/commit/ba93a209238ab1ea909a441db6c8c6a0e623b630))
+
+
+### Bug Fixes
+
+* Spacing tweaks ([#1035](https://github.com/ubuntu/yaru.dart/issues/1035)) ([011449b](https://github.com/ubuntu/yaru.dart/commit/011449b6a4167fe918cb0d1f3e327455c17df5db))
+
 ## [8.3.0](https://github.com/ubuntu/yaru.dart/compare/v8.2.0...v8.3.0) (2025-09-05)
 
 
