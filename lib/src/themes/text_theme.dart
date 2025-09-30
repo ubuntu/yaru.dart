@@ -43,7 +43,7 @@ TextTheme createTextTheme(Color textColor) {
       textColor: textColor,
     ),
     titleSmall: _UbuntuTextStyle(
-      fontSize: 14,
+      fontSize: 14.66,
       fontWeight: FontWeight.w500,
       textColor: textColor,
     ),
@@ -53,7 +53,7 @@ TextTheme createTextTheme(Color textColor) {
       textColor: textColor,
     ),
     bodyMedium: _UbuntuTextStyle(
-      fontSize: 14,
+      fontSize: 14.66,
       fontWeight: FontWeight.normal,
       textColor: textColor,
     ),
@@ -63,7 +63,7 @@ TextTheme createTextTheme(Color textColor) {
       textColor: textColor,
     ),
     labelLarge: _UbuntuTextStyle(
-      fontSize: 14,
+      fontSize: 14.66,
       fontWeight: FontWeight.w500,
       textColor: textColor,
     ),
