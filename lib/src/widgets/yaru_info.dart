@@ -68,7 +68,7 @@ class YaruInfoBadge extends StatelessWidget {
         padding:
             padding ??
             const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-        child: DefaultTextStyle(
+        child: DefaultTextStyle.merge(
           style:
               style ??
               theme.textTheme.bodySmall ??
@@ -164,7 +164,7 @@ class YaruInfoBox extends StatelessWidget {
               trailing: trailing,
               iconColor: baseColor,
               title: title != null
-                  ? DefaultTextStyle(
+                  ? DefaultTextStyle.merge(
                       style:
                           titleTextStyle ??
                           theme.textTheme.headlineSmall?.copyWith(
@@ -183,7 +183,7 @@ class YaruInfoBox extends StatelessWidget {
                   : null,
               subtitle:
                   child ??
-                  DefaultTextStyle(
+                  DefaultTextStyle.merge(
                     style:
                         subTitleTextStyle ??
                         theme.textTheme.bodyMedium ??

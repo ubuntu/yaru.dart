@@ -88,7 +88,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
               opacity: enabled ? 1 : 0.38,
               child: Padding(
                 padding: padding,
-                child: DefaultTextStyle(
+                child: DefaultTextStyle.merge(
                   style: TextStyle(
                     color:
                         style?.foregroundColor?.resolve({}) ??
