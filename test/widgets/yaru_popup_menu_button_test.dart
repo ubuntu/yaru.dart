@@ -39,6 +39,35 @@ void main() {
     variant: goldenVariant,
     tags: 'golden',
   );
+
+  testWidgets('preserves font', (tester) async {
+    await tester.pumpScaffold(
+      YaruPopupMenuButton(
+        itemBuilder: (context) => [],
+        child: const Text('Menu'),
+      ),
+      themeMode: ThemeMode.light,
+      theme: yaruLight.copyWith(
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontFamily: 'MyCustomFont'),
+        ),
+      ),
+      size: const Size(104, 48),
+    );
+
+    final textContext = tester.element(find.text('Menu'));
+    final textStyle = DefaultTextStyle.of(textContext).style;
+    expect(
+      textStyle.fontWeight,
+      FontWeight.w500,
+      reason: 'Should apply YaruPopupMenuButton styles',
+    );
+    expect(
+      textStyle.fontFamily,
+      'MyCustomFont',
+      reason: 'Should preserve parent styles',
+    );
+  });
 }
 
 final goldenVariant = ValueVariant({
