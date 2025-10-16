@@ -1,5 +1,20 @@
 # Changelog
 
+## [8.4.0](https://github.com/ubuntu/yaru.dart/compare/v8.3.0...v8.4.0) (2025-10-16)
+
+
+### Features
+
+* **a11y:** Automatically enable status shapes ([#1032](https://github.com/ubuntu/yaru.dart/issues/1032)) ([ba93a20](https://github.com/ubuntu/yaru.dart/commit/ba93a209238ab1ea909a441db6c8c6a0e623b630))
+
+
+### Bug Fixes
+
+* preserve parent style with DefaultTextStyle.merge ([#1038](https://github.com/ubuntu/yaru.dart/issues/1038)) ([9aea072](https://github.com/ubuntu/yaru.dart/commit/9aea072497c287e7fea2c9a89efce91a76e720d2))
+* remove rounded corner from close button when window is maximized ([#1039](https://github.com/ubuntu/yaru.dart/issues/1039)) ([8243f3f](https://github.com/ubuntu/yaru.dart/commit/8243f3fdc5e5e3499809a0553c7ef6207c10e2b4))
+* Spacing tweaks ([#1035](https://github.com/ubuntu/yaru.dart/issues/1035)) ([011449b](https://github.com/ubuntu/yaru.dart/commit/011449b6a4167fe918cb0d1f3e327455c17df5db))
+* Tweak default font size to match Yaru GTK and remove letter spacing ([#1036](https://github.com/ubuntu/yaru.dart/issues/1036)) ([d955a71](https://github.com/ubuntu/yaru.dart/commit/d955a714bf68432f13955b3579b4ec257607ae6a))
+
 ## [8.3.0](https://github.com/ubuntu/yaru.dart/compare/v8.2.0...v8.3.0) (2025-09-05)
 
 
