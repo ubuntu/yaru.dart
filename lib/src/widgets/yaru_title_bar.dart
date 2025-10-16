@@ -323,7 +323,7 @@ class YaruTitleBar extends StatelessWidget implements PreferredSizeWidget {
                                 semanticLabel: maximizeSemanticLabel,
                               ),
                             if (isClosable == true)
-                              isMaximizable == true
+                              (isMaximizable == true || isRestorable == true)
                                   ? closeButton
                                   : ClipRRect(
                                       borderRadius: const BorderRadius.only(

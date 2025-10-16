@@ -52,7 +52,7 @@ class YaruSection extends StatelessWidget {
           if (headline != null)
             Padding(
               padding: headlinePadding,
-              child: DefaultTextStyle(
+              child: DefaultTextStyle.merge(
                 style: Theme.of(context).textTheme.titleLarge!,
                 child: headline!,
               ),

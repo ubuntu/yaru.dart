@@ -106,7 +106,7 @@ class YaruToggleButton extends StatelessWidget {
     bool softWrap = false,
   }) {
     final color = onToggled == null ? Theme.of(context).disabledColor : null;
-    return DefaultTextStyle(
+    return DefaultTextStyle.merge(
       style: style.copyWith(color: color),
       overflow: overflow,
       softWrap: softWrap,
