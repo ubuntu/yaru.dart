@@ -28,6 +28,8 @@ class YaruColorDisk extends StatelessWidget {
             shape: WidgetStateProperty.resolveWith<OutlinedBorder?>((states) {
               return CircleBorder(
                 side: BorderSide(
+                  strokeAlign: 1,
+                  width: 2,
                   color: color.withValues(
                     alpha:
                         states.contains(WidgetState.selected) ||
