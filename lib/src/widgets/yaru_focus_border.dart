@@ -108,10 +108,10 @@ class _YaruFocusBorderState extends State<YaruFocusBorder> {
 
     return AnimatedContainer(
       duration: Durations.medium1,
-      padding: widget.borderPadding ?? YaruFocusBorderPadding.small,
-      decoration: BoxDecoration(
+      padding: widget.borderPadding ?? YaruFocusBorderPadding.zero,
+      foregroundDecoration: BoxDecoration(
         border: BoxBorder.all(
-          strokeAlign: widget.borderStrokeAlign ?? 2,
+          strokeAlign: widget.borderStrokeAlign ?? 3,
           color: _focused ? borderColor : Colors.transparent,
           width: widget.borderWidth ?? kYaruBorderWidth,
         ),
