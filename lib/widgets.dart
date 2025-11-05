@@ -24,6 +24,7 @@ export 'src/widgets/yaru_date_time_entry.dart';
 export 'src/widgets/yaru_draggable.dart';
 export 'src/widgets/yaru_expandable.dart';
 export 'src/widgets/yaru_expansion_panel.dart';
+export 'src/widgets/yaru_focus_border.dart';
 export 'src/widgets/yaru_icon_button.dart';
 export 'src/widgets/yaru_info.dart';
 export 'src/widgets/yaru_linear_progress_indicator.dart';
