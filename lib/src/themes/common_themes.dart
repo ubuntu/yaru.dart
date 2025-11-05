@@ -39,7 +39,7 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
 
 InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
   final radius = BorderRadius.circular(kYaruButtonRadius);
-  const width = 1.0;
+  const width = kYaruBorderWidth;
   const strokeAlign = 0.0;
   final fill = colorScheme.surface.scale(
     lightness: colorScheme.isLight ? -0.05 : -0.1,
