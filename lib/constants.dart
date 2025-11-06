@@ -34,4 +34,4 @@ const kYaruTitleBarItemHeight = 34.0;
 const kYaruIconSize = 20.0;
 
 /// The default border width for various Yaru widgets.
-const kYaruBorderWidth = 2.0;
+const kYaruFocusBorderWidth = 2.0;
