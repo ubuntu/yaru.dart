@@ -113,7 +113,7 @@ class _YaruFocusBorderState extends State<YaruFocusBorder> {
         border: BoxBorder.all(
           strokeAlign: widget.borderStrokeAlign ?? 3,
           color: _focused ? borderColor : Colors.transparent,
-          width: widget.borderWidth ?? kYaruBorderWidth,
+          width: widget.borderWidth ?? kYaruFocusBorderWidth,
         ),
         borderRadius:
             widget.borderRadius ??
