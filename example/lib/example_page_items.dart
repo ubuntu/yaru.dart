@@ -147,7 +147,7 @@ final examplePageItems = <PageItem>[
     title: 'YaruDraggable',
     floatingActionButtonBuilder: (_) => const CodeSnippedButton(
       snippetUrl:
-          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/draffable_page.dart',
+          'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/draggable_page.dart',
     ),
     pageBuilder: (context) => const DraggablePage(),
     iconBuilder: (context, selected) => const Icon(YaruIcons.drag_handle),
