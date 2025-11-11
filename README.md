@@ -24,6 +24,10 @@ This repository and package contains:
       ```console
       sudo apt -y install git curl cmake meson make clang libgtk-3-dev pkg-config && mkdir -p ~/development && cd ~/development && git clone https://github.com/flutter/flutter.git -b stable && echo 'export PATH="$PATH:$HOME/development/flutter/bin"' >> ~/.bashrc && source ~/.bashrc
       ```
+      or,
+    ```console
+      sudo snap install flutter --classic && flutter
+      ```
   - VsCode
 
       ```console
