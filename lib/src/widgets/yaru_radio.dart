@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:yaru/src/widgets/yaru_focus_border.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_radio_button.dart';
@@ -51,6 +52,7 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
     this.autofocus = false,
     this.mouseCursor,
     this.statesController,
+    this.hasFocusBorder = true,
   }) : assert(toggleable || value != null);
 
   /// The value represented by this radio button.
@@ -136,6 +138,9 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
   /// {@macro flutter.widgets.Focus.autofocus}
   @override
   final bool autofocus;
+
+  /// Whether to display the default focus border on focus or not.
+  final bool hasFocusBorder;
 
   @override
   final MouseCursor? mouseCursor;
@@ -237,7 +242,7 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
         radioTheme.indicatorColor?.resolve({WidgetState.focused}) ??
         painter.focusIndicatorColor;
 
-    return buildToggleable(
+    final radioWidth = buildToggleable(
       painter
         ..uncheckedColor = uncheckedColor
         ..uncheckedBorderColor = uncheckedBorderColor
@@ -255,6 +260,13 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
             if (!widget.interactive) WidgetState.disabled,
           }),
     );
+
+    return widget.hasFocusBorder
+        ? YaruFocusBorder.primary(
+            borderRadius: BorderRadius.circular(100),
+            child: radioWidth,
+          )
+        : radioWidth;
   }
 }
 
