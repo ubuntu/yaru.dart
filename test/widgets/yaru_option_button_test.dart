@@ -27,7 +27,11 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: YaruOptionButton.color(onPressed: () {}, color: Colors.red),
+          body: YaruOptionButton.color(
+            onPressed: () {},
+            color: Colors.red,
+            hasFocusBorder: false,
+          ),
         ),
       ),
     );

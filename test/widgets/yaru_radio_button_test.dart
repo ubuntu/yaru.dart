@@ -111,7 +111,7 @@ void main() {
     addTearDown(gesture.removePointer);
 
     await gesture.moveTo(
-      tester.getCenter(find.widgetWithText(MouseRegion, 'enabled')),
+      tester.getCenter(find.widgetWithText(MouseRegion, 'enabled').first),
     );
     await tester.pump();
     expect(
@@ -120,7 +120,7 @@ void main() {
     );
 
     await gesture.moveTo(
-      tester.getCenter(find.widgetWithText(MouseRegion, 'disabled')),
+      tester.getCenter(find.widgetWithText(MouseRegion, 'disabled').first),
     );
     await tester.pump();
     expect(

@@ -12,27 +12,33 @@ class ExampleYaruVariantPicker extends StatelessWidget with WatchItMixin {
     final model = di<ExampleModel>();
     final yaruVariant = watchPropertyValue((ExampleModel m) => m.yaruVariant);
 
-    return PopupMenuButton<Color>(
-      tooltip: 'Pick a YaruVariant',
-      padding: EdgeInsets.zero,
-      icon: Icon(YaruIcons.color_select, color: Theme.of(context).primaryColor),
-      itemBuilder: (context) {
-        return [
-          for (final variant in YaruVariant.values) // skip flavors
-            PopupMenuItem(
-              onTap: () => model.setYaruVariant(variant),
-              child: Row(
-                children: [
-                  ColorDisk(
-                    color: variant.color,
-                    selected: variant == yaruVariant,
-                  ),
-                  Text(variant.name),
-                ],
+    return YaruFocusBorder.primary(
+      borderRadius: BorderRadius.circular(100),
+      child: PopupMenuButton<Color>(
+        tooltip: 'Pick a YaruVariant',
+        padding: EdgeInsets.zero,
+        icon: Icon(
+          YaruIcons.color_select,
+          color: Theme.of(context).primaryColor,
+        ),
+        itemBuilder: (context) {
+          return [
+            for (final variant in YaruVariant.values) // skip flavors
+              PopupMenuItem(
+                onTap: () => model.setYaruVariant(variant),
+                child: Row(
+                  children: [
+                    ColorDisk(
+                      color: variant.color,
+                      selected: variant == yaruVariant,
+                    ),
+                    Text(variant.name),
+                  ],
+                ),
               ),
-            ),
-        ];
-      },
+          ];
+        },
+      ),
     );
   }
 }

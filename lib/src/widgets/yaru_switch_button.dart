@@ -18,6 +18,7 @@ class YaruSwitchButton extends StatefulWidget {
     this.focusNode,
     this.mouseCursor,
     this.onOffShapes,
+    this.hasFocusBorder = true,
   });
 
   /// See [Switch.value]
@@ -46,6 +47,9 @@ class YaruSwitchButton extends StatefulWidget {
 
   /// See [YaruSwitch.onOffShapes]
   final bool? onOffShapes;
+
+  /// Whether to display the default focus border on focus or not.
+  final bool hasFocusBorder;
 
   @override
   State<YaruSwitchButton> createState() => _YaruSwitchButtonState();
@@ -83,6 +87,7 @@ class _YaruSwitchButtonState extends State<YaruSwitchButton> {
       title: widget.title,
       subtitle: widget.subtitle,
       contentPadding: widget.contentPadding,
+      hasFocusBorder: widget.hasFocusBorder,
       leading: YaruSwitch(
         value: widget.value,
         onChanged: widget.onChanged,
@@ -91,6 +96,7 @@ class _YaruSwitchButtonState extends State<YaruSwitchButton> {
         mouseCursor: mouseCursor,
         statesController: _statesController,
         onOffShapes: widget.onOffShapes,
+        hasFocusBorder: false,
       ),
       mouseCursor:
           mouseCursor ?? WidgetStateMouseCursor.clickable.resolve(states),

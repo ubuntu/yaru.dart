@@ -21,7 +21,7 @@ class _InfoPageState extends State<InfoPage> {
           padding: const EdgeInsets.all(kYaruPagePadding),
           child: Row(
             children: [
-              IconButton(
+              YaruIconButton(
                 tooltip: 'Custom icons and colors are possible',
                 isSelected: _idea,
                 onPressed: () => setState(() => _idea = !_idea),

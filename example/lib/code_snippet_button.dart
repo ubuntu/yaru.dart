@@ -15,17 +15,19 @@ class CodeSnippedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () => showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) => _CodeDialog(snippetUrl: snippetUrl),
+    return YaruFocusBorder.primary(
+      child: FloatingActionButton(
+        onPressed: () => showDialog(
+          barrierDismissible: true,
+          context: context,
+          builder: (context) => _CodeDialog(snippetUrl: snippetUrl),
+        ),
+        tooltip: 'Example snippet',
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
+        backgroundColor: PopupMenuTheme.of(context).color,
+        shape: PopupMenuTheme.of(context).shape,
+        child: const Icon(YaruIcons.code),
       ),
-      tooltip: 'Example snippet',
-      foregroundColor: Theme.of(context).colorScheme.onSurface,
-      backgroundColor: PopupMenuTheme.of(context).color,
-      shape: PopupMenuTheme.of(context).shape,
-      child: const Icon(YaruIcons.code),
     );
   }
 }

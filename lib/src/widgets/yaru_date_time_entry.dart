@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/src/icons/yaru_icons.dart';
-import 'package:yaru/src/widgets/yaru_segmented_entry.dart';
-
-import '../foundation/yaru_entry_segment.dart';
+import 'package:yaru/yaru.dart';
 
 typedef SelectableDateTimePredicate = bool Function(DateTime dateTime);
 typedef SelectableTimeOfDayPredicate = bool Function(TimeOfDay timeOfDay);
@@ -701,7 +698,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   }
 
   Widget _clearInputButton() {
-    return IconButton(
+    return YaruIconButton(
       onPressed: () {
         _cancelOnChanged = true;
         daySegment.value = null;
