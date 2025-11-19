@@ -302,6 +302,7 @@ class YaruThemeData with Diagnosticable {
     this.useMaterial3,
     this.visualDensity,
     this.statusShapes,
+    this.focusBorders = true,
   });
 
   /// Specifies the theme variant.
@@ -326,6 +327,9 @@ class YaruThemeData with Diagnosticable {
   final VisualDensity? visualDensity;
 
   final bool? statusShapes;
+
+  /// Whether to draw focus borders.
+  final bool? focusBorders;
 
   /// The light theme of [variant] (or [yaruLight] if not available) merged with
   /// the `YaruThemeData` overrides.
@@ -356,6 +360,7 @@ class YaruThemeData with Diagnosticable {
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       visualDensity: visualDensity ?? this.visualDensity,
       statusShapes: statusShapes ?? this.statusShapes,
+      focusBorders: focusBorders ?? this.focusBorders,
     );
   }
 
@@ -371,6 +376,8 @@ class YaruThemeData with Diagnosticable {
     );
     properties.add(DiagnosticsProperty('useMaterial3', useMaterial3));
     properties.add(DiagnosticsProperty('visualDensity', visualDensity));
+    properties.add(DiagnosticsProperty<bool>('statusShapes', statusShapes));
+    properties.add(DiagnosticsProperty<bool>('focusBorders', focusBorders));
   }
 
   @override
@@ -385,7 +392,8 @@ class YaruThemeData with Diagnosticable {
         other.pageTransitionsTheme == pageTransitionsTheme &&
         other.useMaterial3 == useMaterial3 &&
         other.visualDensity == visualDensity &&
-        other.statusShapes == statusShapes;
+        other.statusShapes == statusShapes &&
+        other.focusBorders == focusBorders;
   }
 
   @override
@@ -399,6 +407,7 @@ class YaruThemeData with Diagnosticable {
       useMaterial3,
       visualDensity,
       statusShapes,
+      focusBorders,
     );
   }
 }

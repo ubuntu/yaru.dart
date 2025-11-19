@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 part 'yaru_toggle_button_layout.dart';
 
@@ -20,7 +20,7 @@ class YaruToggleButton extends StatelessWidget {
     this.onToggled,
     this.mouseCursor,
     this.statesController,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   });
 
   /// The toggle indicator.
@@ -44,7 +44,7 @@ class YaruToggleButton extends StatelessWidget {
   final WidgetStatesController? statesController;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,10 @@ class YaruToggleButton extends StatelessWidget {
 
     return MergeSemantics(
       child: Semantics(
-        child: hasFocusBorder ? YaruFocusBorder.primary(child: button) : button,
+        child:
+            hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+            ? YaruFocusBorder.primary(child: button)
+            : button,
       ),
     );
   }

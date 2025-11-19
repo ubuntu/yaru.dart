@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
-import 'package:yaru/foundation.dart' show YaruBorderRadiusExtension;
-import 'package:yaru/src/widgets/yaru_focus_border.dart';
+import 'package:yaru/yaru.dart';
 
 const _kAnimationDuration = Duration(milliseconds: 250);
 
@@ -17,7 +15,7 @@ class YaruSelectableContainer extends StatelessWidget {
     this.padding,
     this.selectionColor,
     this.mouseCursor,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   });
 
   // The child which will be selected with [onTap]
@@ -49,7 +47,7 @@ class YaruSelectableContainer extends StatelessWidget {
   final MouseCursor? mouseCursor;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +79,8 @@ class YaruSelectableContainer extends StatelessWidget {
       ),
     );
 
-    return hasFocusBorder ? YaruFocusBorder.primary(child: content) : content;
+    return hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+        ? YaruFocusBorder.primary(child: content)
+        : content;
   }
 }

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/src/widgets/yaru_focus_border.dart';
-
-import 'yaru_check_button.dart';
-import 'yaru_checkbox.dart';
-import 'yaru_radio_list_tile.dart';
-import 'yaru_switch_list_tile.dart';
+import 'package:yaru/yaru.dart';
 
 /// A [ListTile] with a [YaruCheckbox]. In other words, a checkbox with a label.
 ///
@@ -43,7 +38,7 @@ class YaruCheckboxListTile extends StatelessWidget {
     this.focusNode,
     this.enableFeedback,
     this.mouseCursor,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   }) : assert(tristate || value != null),
        assert(!isThreeLine || subtitle != null);
 
@@ -105,7 +100,7 @@ class YaruCheckboxListTile extends StatelessWidget {
   final MouseCursor? mouseCursor;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   void _handleValueChange() {
     assert(onChanged != null);
@@ -168,7 +163,7 @@ class YaruCheckboxListTile extends StatelessWidget {
     );
 
     return MergeSemantics(
-      child: hasFocusBorder
+      child: hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
           ? YaruFocusBorder.primary(
               borderStrokeAlign: BorderSide.strokeAlignInside,
               child: tile,

@@ -15,7 +15,7 @@ class YaruBanner extends StatelessWidget {
     this.onHover,
     this.selected,
     this.mouseCursor,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   });
 
   /// Creates a banner with a [YaruTile] child widget.
@@ -32,7 +32,7 @@ class YaruBanner extends StatelessWidget {
     EdgeInsetsGeometry padding = const EdgeInsets.all(kYaruPagePadding),
     bool? selected,
     MouseCursor? mouseCursor,
-    bool hasFocusBorder = true,
+    bool? hasFocusBorder,
   }) : this(
          key: key,
          onTap: onTap,
@@ -84,7 +84,7 @@ class YaruBanner extends StatelessWidget {
   final MouseCursor? mouseCursor;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +124,9 @@ class YaruBanner extends StatelessWidget {
           ? theme.primaryColor.withValues(alpha: 0.8)
           : Colors.transparent,
       borderRadius: borderRadius,
-      child: hasFocusBorder ? YaruFocusBorder.primary(child: content) : content,
+      child: hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+          ? YaruFocusBorder.primary(child: content)
+          : content,
     );
   }
 }

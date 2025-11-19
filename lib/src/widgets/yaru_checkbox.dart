@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
-import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import 'yaru_togglable.dart';
 
@@ -50,7 +49,7 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
     this.autofocus = false,
     this.mouseCursor,
     this.statesController,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   }) : assert(tristate || value != null);
 
   /// Whether this checkbox is checked.
@@ -127,7 +126,7 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
   final bool autofocus;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   final MouseCursor? mouseCursor;
@@ -265,7 +264,8 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
           }),
     );
 
-    return widget.hasFocusBorder
+    return widget.hasFocusBorder ??
+            YaruTheme.maybeOf(context)?.focusBorders == true
         ? YaruFocusBorder.primary(child: checkboxWidget)
         : checkboxWidget;
   }

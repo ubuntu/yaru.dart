@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 /// A [ListTile] with a [YaruRadio]. In other words, a radio with a label.
 ///
@@ -41,7 +41,7 @@ class YaruRadioListTile<T> extends StatelessWidget {
     this.focusNode,
     this.enableFeedback,
     this.mouseCursor,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   }) : assert(!isThreeLine || subtitle != null);
 
   /// See [RadioListTile.value].
@@ -105,7 +105,7 @@ class YaruRadioListTile<T> extends StatelessWidget {
   final MouseCursor? mouseCursor;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   void _handleValueChange() {
     assert(onChanged != null);
@@ -163,7 +163,7 @@ class YaruRadioListTile<T> extends StatelessWidget {
     );
 
     return MergeSemantics(
-      child: hasFocusBorder
+      child: hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
           ? YaruFocusBorder.primary(
               borderStrokeAlign: BorderSide.strokeAlignInside,
               child: tile,

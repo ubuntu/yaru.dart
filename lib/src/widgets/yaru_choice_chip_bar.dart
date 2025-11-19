@@ -31,7 +31,7 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.showCheckMarks = true,
     this.selectedFirst = true,
     this.navigationButtonElevation,
-    this.chipHasFocusBorder = true,
+    this.chipHasFocusBorder,
   }) : assert(labels.length == isSelected.length);
 
   /// The [List] of [Widget]'s used to generate a [List] of [ChoiceChip]s
@@ -126,7 +126,7 @@ class YaruChoiceChipBar extends StatefulWidget {
   final bool selectedFirst;
 
   /// Whether the chips display the default focus border when focused.
-  final bool chipHasFocusBorder;
+  final bool? chipHasFocusBorder;
 
   @override
   State<YaruChoiceChipBar> createState() => _YaruChoiceChipBarState();
@@ -187,7 +187,8 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
                 }
               },
       );
-      return widget.chipHasFocusBorder
+      return widget.chipHasFocusBorder ??
+              YaruTheme.maybeOf(context)?.focusBorders == true
           ? YaruFocusBorder.primary(
               borderStrokeAlign: BorderSide.strokeAlignInside,
               borderRadius: BorderRadius.circular(100),

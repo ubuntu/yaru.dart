@@ -43,7 +43,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
     this.mouseCursor,
     this.statesController,
     this.onOffShapes,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   });
 
   /// Whether this switch is on or off.
@@ -108,7 +108,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   final bool autofocus;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   final MouseCursor? mouseCursor;
@@ -266,7 +266,8 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
       ),
     );
 
-    return widget.hasFocusBorder
+    return widget.hasFocusBorder ??
+            YaruTheme.maybeOf(context)?.focusBorders == true
         ? YaruFocusBorder.primary(child: switchWidget)
         : switchWidget;
   }

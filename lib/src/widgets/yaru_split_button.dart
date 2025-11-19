@@ -1,8 +1,6 @@
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
-import 'package:yaru/icons.dart';
-import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 enum _YaruSplitButtonVariant { elevated, filled, outlined }
 
@@ -17,7 +15,7 @@ class YaruSplitButton extends StatelessWidget {
     this.iconSemanticLabel,
     this.radius,
     this.menuWidth,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   }) : _variant = _YaruSplitButtonVariant.elevated;
 
   const YaruSplitButton.filled({
@@ -30,7 +28,7 @@ class YaruSplitButton extends StatelessWidget {
     this.iconSemanticLabel,
     this.radius,
     this.menuWidth,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   }) : _variant = _YaruSplitButtonVariant.filled;
 
   const YaruSplitButton.outlined({
@@ -43,7 +41,7 @@ class YaruSplitButton extends StatelessWidget {
     this.iconSemanticLabel,
     this.radius,
     this.menuWidth,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   }) : _variant = _YaruSplitButtonVariant.outlined;
 
   final _YaruSplitButtonVariant _variant;
@@ -55,7 +53,7 @@ class YaruSplitButton extends StatelessWidget {
   final List<PopupMenuEntry<Object?>>? items;
   final double? radius;
   final double? menuWidth;
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +176,7 @@ class YaruSplitButton extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        hasFocusBorder
+        hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
             ? YaruFocusBorder.primary(
                 borderRadius: mainBorderRadius,
                 child: mainButton,
@@ -186,7 +184,7 @@ class YaruSplitButton extends StatelessWidget {
             : mainButton,
         if (onDropdownPressed != null) ...[
           const SizedBox(width: 2),
-          hasFocusBorder
+          hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
               ? YaruFocusBorder.primary(
                   borderRadius: dropdownBorderRadius,
                   child: dropdownButton,

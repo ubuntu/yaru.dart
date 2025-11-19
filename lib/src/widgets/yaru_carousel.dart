@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:yaru/icons.dart';
+// ignore: unnecessary_import
 import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 /// Display a list of widgets in a carousel view.
 ///
@@ -27,7 +29,7 @@ class YaruCarousel extends StatefulWidget {
     this.nextIcon,
     this.previousIconSemanticLabel,
     this.nextIconSemanticLabel,
-    this.navigationHasFocusBorder = true,
+    this.navigationHasFocusBorder,
   });
 
   /// The height of the children, defaults to 500.0.
@@ -70,7 +72,7 @@ class YaruCarousel extends StatefulWidget {
   final String? nextIconSemanticLabel;
 
   /// Optionally enable/disable the focus border for the navigation buttons.
-  final bool navigationHasFocusBorder;
+  final bool? navigationHasFocusBorder;
 
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
@@ -219,7 +221,9 @@ class _YaruCarouselState extends State<YaruCarousel> {
         curve: _controller.scrollAnimationCurve,
         child: Align(
           alignment: alignment,
-          child: widget.navigationHasFocusBorder
+          child:
+              widget.navigationHasFocusBorder ??
+                  YaruTheme.maybeOf(context)?.focusBorders == true
               ? YaruFocusBorder.primary(child: button)
               : button,
         ),

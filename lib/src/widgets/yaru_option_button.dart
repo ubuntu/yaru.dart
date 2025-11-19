@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
-import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 enum YaruOptionButtonType { normal, color }
 
@@ -29,7 +28,7 @@ class YaruOptionButton extends StatelessWidget {
     this.autofocus = false,
     this.style,
     this.color,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
     required this.child,
   }) : _variant = YaruOptionButtonType.normal;
 
@@ -40,7 +39,7 @@ class YaruOptionButton extends StatelessWidget {
     this.autofocus = false,
     this.style,
     this.color,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
     this.child,
   }) : _variant = YaruOptionButtonType.color;
 
@@ -51,7 +50,7 @@ class YaruOptionButton extends StatelessWidget {
   final ButtonStyle? style;
   final Color? color;
   final Widget? child;
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +74,9 @@ class YaruOptionButton extends StatelessWidget {
       },
     );
 
-    return hasFocusBorder ? YaruFocusBorder.primary(child: button) : button;
+    return hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+        ? YaruFocusBorder.primary(child: button)
+        : button;
   }
 
   static ButtonStyle _styleFrom({EdgeInsetsGeometry? padding}) {

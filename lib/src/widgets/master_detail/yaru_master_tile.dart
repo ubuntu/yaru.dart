@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
-import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 /// Provides the recommended layout for [YaruMasterDetailPage.tileBuilder].
 ///
@@ -17,7 +16,7 @@ class YaruMasterTile extends StatelessWidget {
     this.decoration,
     this.focusDecoration,
     this.padding,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   });
 
   /// See [ListTile.selected].
@@ -49,7 +48,7 @@ class YaruMasterTile extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +94,8 @@ class YaruMasterTile extends StatelessWidget {
       color: Colors.transparent,
       child: Padding(
         padding: padding ?? const EdgeInsets.symmetric(horizontal: 8),
-        child: hasFocusBorder
+        child:
+            hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
             ? YaruFocusBorder(
                 borderStrokeAlign: BorderSide.strokeAlignInside,
                 child: tile,

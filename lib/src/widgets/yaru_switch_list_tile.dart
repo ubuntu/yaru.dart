@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 /// A [ListTile] with a [YaruSwitch]. In other words, a switch with a label.
 ///
@@ -39,7 +39,7 @@ class YaruSwitchListTile extends StatelessWidget {
     this.hoverColor,
     this.mouseCursor,
     this.onOffShapes,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   }) : assert(!isThreeLine || subtitle != null);
 
   /// See [SwitchListTile.value].
@@ -103,7 +103,7 @@ class YaruSwitchListTile extends StatelessWidget {
   final bool? onOffShapes;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +156,7 @@ class YaruSwitchListTile extends StatelessWidget {
     );
 
     return MergeSemantics(
-      child: hasFocusBorder
+      child: hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
           ? YaruFocusBorder.primary(
               borderStrokeAlign: BorderSide.strokeAlignInside,
               child: tile,
