@@ -62,18 +62,20 @@ class _FullColorIconsPageState extends State<FullColorIconsPage>
                                   .lastOrNull
                                   ?.replaceAll(_urlSuffix, '') ??
                               '',
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(
-                              kYaruButtonRadius,
-                            ),
-                            onTap: () => kIsWeb
-                                ? html.window.open(icon, '')
-                                : launchUrl(Uri.parse(icon)),
-                            child: Image.network(
-                              icon,
-                              filterQuality: FilterQuality.medium,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  const Icon(YaruIcons.question, size: 35),
+                          child: YaruFocusBorder.primary(
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(
+                                kYaruButtonRadius,
+                              ),
+                              onTap: () => kIsWeb
+                                  ? html.window.open(icon, '')
+                                  : launchUrl(Uri.parse(icon)),
+                              child: Image.network(
+                                icon,
+                                filterQuality: FilterQuality.medium,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Icon(YaruIcons.question, size: 35),
+                              ),
                             ),
                           ),
                         );

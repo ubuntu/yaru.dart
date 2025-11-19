@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
-import 'package:yaru/foundation.dart' show YaruBorderRadiusExtension;
-import 'package:yaru/src/themes/colors.dart';
-
-import 'yaru_tile.dart';
+import 'package:yaru/yaru.dart';
 
 /// A colorable [Card] with a border which is tap-able via an [onTap] callback.
 class YaruBanner extends StatelessWidget {
@@ -19,6 +15,7 @@ class YaruBanner extends StatelessWidget {
     this.onHover,
     this.selected,
     this.mouseCursor,
+    this.hasFocusBorder,
   });
 
   /// Creates a banner with a [YaruTile] child widget.
@@ -35,6 +32,7 @@ class YaruBanner extends StatelessWidget {
     EdgeInsetsGeometry padding = const EdgeInsets.all(kYaruPagePadding),
     bool? selected,
     MouseCursor? mouseCursor,
+    bool? hasFocusBorder,
   }) : this(
          key: key,
          onTap: onTap,
@@ -45,6 +43,7 @@ class YaruBanner extends StatelessWidget {
          surfaceTintColor: surfaceTintColor,
          selected: selected,
          mouseCursor: mouseCursor,
+         hasFocusBorder: hasFocusBorder,
          child: YaruTile(
            leading: icon,
            title: title,
@@ -84,6 +83,9 @@ class YaruBanner extends StatelessWidget {
   /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor? mouseCursor;
 
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -92,36 +94,39 @@ class YaruBanner extends StatelessWidget {
     final defaultSurfaceTintColor = theme.scaffoldBackgroundColor.scale(
       lightness: theme.brightness == Brightness.light ? 0 : 0.03,
     );
+    final content = InkWell(
+      onTap: onTap,
+      onHover: onHover,
+      borderRadius: borderRadius,
+      hoverColor: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+      mouseCursor: mouseCursor,
+      child: Card(
+        color: color ?? defaultSurfaceTintColor,
+        shadowColor: Colors.transparent,
+        surfaceTintColor: surfaceTintColor ?? defaultSurfaceTintColor,
+        elevation: elevation ?? 1,
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius.inner(
+            const EdgeInsets.all(4.0),
+          ), // 4 is the default margin
+          side: BorderSide(color: theme.dividerColor, width: 0),
+        ),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          padding: padding,
+          child: child,
+        ),
+      ),
+    );
     return Material(
       color: selected == true
           ? theme.primaryColor.withValues(alpha: 0.8)
           : Colors.transparent,
       borderRadius: borderRadius,
-      child: InkWell(
-        onTap: onTap,
-        onHover: onHover,
-        borderRadius: borderRadius,
-        hoverColor: theme.colorScheme.onSurface.withValues(alpha: 0.1),
-        mouseCursor: mouseCursor,
-        child: Card(
-          color: color ?? defaultSurfaceTintColor,
-          shadowColor: Colors.transparent,
-          surfaceTintColor: surfaceTintColor ?? defaultSurfaceTintColor,
-          elevation: elevation ?? 1,
-          shape: RoundedRectangleBorder(
-            borderRadius: borderRadius.inner(
-              const EdgeInsets.all(4.0),
-            ), // 4 is the default margin
-            side: BorderSide(color: theme.dividerColor, width: 0),
-          ),
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            padding: padding,
-            child: child,
-          ),
-        ),
-      ),
+      child: hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+          ? YaruFocusBorder.primary(child: content)
+          : content,
     );
   }
 }

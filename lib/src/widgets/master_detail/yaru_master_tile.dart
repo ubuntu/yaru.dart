@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
-const Duration _kSelectedTileAnimationDuration = Duration(milliseconds: 250);
-
 /// Provides the recommended layout for [YaruMasterDetailPage.tileBuilder].
 ///
 /// This widget is structurally similar to [ListTile].
@@ -18,6 +16,7 @@ class YaruMasterTile extends StatelessWidget {
     this.decoration,
     this.focusDecoration,
     this.padding,
+    this.hasFocusBorder,
   });
 
   /// See [ListTile.selected].
@@ -48,97 +47,8 @@ class YaruMasterTile extends StatelessWidget {
   /// Optional padding for the tile.
   final EdgeInsetsGeometry? padding;
 
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Padding(
-        padding: padding ?? const EdgeInsets.symmetric(horizontal: 8),
-        child: _YaruMasterTileFocus(
-          selected: selected,
-          leading: leading,
-          title: title,
-          subtitle: subtitle,
-          trailing: trailing,
-          onTap: onTap,
-          decoration: decoration,
-          focusDecoration: focusDecoration,
-        ),
-      ),
-    );
-  }
-}
-
-class YaruMasterTileScope extends InheritedWidget {
-  const YaruMasterTileScope({
-    super.key,
-    required super.child,
-    required this.index,
-    required this.selected,
-    required this.onTap,
-  });
-
-  final int index;
-  final bool selected;
-  final VoidCallback onTap;
-
-  static YaruMasterTileScope of(BuildContext context) {
-    return maybeOf(context)!;
-  }
-
-  static YaruMasterTileScope? maybeOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<YaruMasterTileScope>();
-  }
-
-  @override
-  bool updateShouldNotify(YaruMasterTileScope oldWidget) {
-    return selected != oldWidget.selected || index != oldWidget.index;
-  }
-}
-
-class _YaruMasterTileFocus extends StatefulWidget {
-  const _YaruMasterTileFocus({
-    this.selected,
-    this.leading,
-    this.title,
-    this.subtitle,
-    this.trailing,
-    this.onTap,
-    this.decoration,
-    this.focusDecoration,
-  });
-
-  /// See [ListTile.selected].
-  final bool? selected;
-
-  /// See [ListTile.leading].
-  final Widget? leading;
-
-  /// See [ListTile.title].
-  final Widget? title;
-
-  /// See [ListTile.subtitle].
-  final Widget? subtitle;
-
-  /// See [ListTile.trailing].
-  final Widget? trailing;
-
-  /// An optional [VoidCallback] forwarded to the internal [ListTile]
-  /// If not provided [YaruMasterTileScope] `onTap` will be called.
-  final VoidCallback? onTap;
-
-  /// An optional [Decoration] used for the [ListTile].
-  final Decoration? decoration;
-
-  /// An optional [Decoration] used when the [ListTile] is focused.
-  final Decoration? focusDecoration;
-
-  @override
-  State<_YaruMasterTileFocus> createState() => _YaruMasterTileFocusState();
-}
-
-class _YaruMasterTileFocusState extends State<_YaruMasterTileFocus> {
-  Decoration? _decoration;
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +56,7 @@ class _YaruMasterTileFocusState extends State<_YaruMasterTileFocus> {
     final listTileTheme = theme.listTileTheme;
     final scope = YaruMasterTileScope.maybeOf(context);
 
-    final isSelected = widget.selected ?? scope?.selected ?? false;
+    final isSelected = selected ?? scope?.selected ?? false;
 
     final backgroundColor = isSelected
         ? listTileTheme.selectedTileColor
@@ -156,36 +66,41 @@ class _YaruMasterTileFocusState extends State<_YaruMasterTileFocus> {
         ? listTileTheme.selectedColor
         : listTileTheme.textColor;
 
-    final decoration =
-        widget.decoration ??
-        BoxDecoration(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(kYaruButtonRadius),
-          ),
-          color: backgroundColor,
-        );
-
-    return AnimatedContainer(
-      duration: _kSelectedTileAnimationDuration,
-      decoration: _decoration ?? decoration,
+    final tile = AnimatedContainer(
+      duration: Durations.medium1,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(kYaruButtonRadius),
+        ),
+        color: backgroundColor,
+      ),
       child: ListTile(
-        onFocusChange: (hasFocus) => setState(() {
-          _decoration = hasFocus
-              ? widget.focusDecoration ?? decoration
-              : decoration;
-        }),
-        leading: widget.leading,
-        title: _titleStyle(widget.title, foregroundColor),
-        subtitle: _subTitleStyle(widget.subtitle, foregroundColor),
-        trailing: widget.trailing,
+        leading: leading,
+        title: _titleStyle(title, foregroundColor),
+        subtitle: _subTitleStyle(subtitle, foregroundColor),
+        trailing: trailing,
         selected: isSelected,
         onTap: () {
-          if (widget.onTap != null) {
-            widget.onTap!.call();
+          if (onTap != null) {
+            onTap!.call();
           } else {
             scope?.onTap();
           }
         },
+      ),
+    );
+
+    return Material(
+      color: Colors.transparent,
+      child: Padding(
+        padding: padding ?? const EdgeInsets.symmetric(horizontal: 8),
+        child:
+            hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+            ? YaruFocusBorder(
+                borderStrokeAlign: BorderSide.strokeAlignInside,
+                child: tile,
+              )
+            : tile,
       ),
     );
   }
@@ -214,5 +129,32 @@ class _YaruMasterTileFocusState extends State<_YaruMasterTileFocus> {
       overflow: TextOverflow.ellipsis,
       style: TextStyle(color: color),
     );
+  }
+}
+
+class YaruMasterTileScope extends InheritedWidget {
+  const YaruMasterTileScope({
+    super.key,
+    required super.child,
+    required this.index,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final int index;
+  final bool selected;
+  final VoidCallback onTap;
+
+  static YaruMasterTileScope of(BuildContext context) {
+    return maybeOf(context)!;
+  }
+
+  static YaruMasterTileScope? maybeOf(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<YaruMasterTileScope>();
+  }
+
+  @override
+  bool updateShouldNotify(YaruMasterTileScope oldWidget) {
+    return selected != oldWidget.selected || index != oldWidget.index;
   }
 }

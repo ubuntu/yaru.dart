@@ -18,6 +18,7 @@ class YaruCheckButton extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.mouseCursor,
+    this.hasFocusBorder = true,
   });
 
   /// See [Checkbox.value]
@@ -46,6 +47,9 @@ class YaruCheckButton extends StatefulWidget {
 
   /// See [Checkbox.mouseCursor].
   final MouseCursor? mouseCursor;
+
+  /// Whether to display the default focus border on focus or not.
+  final bool hasFocusBorder;
 
   @override
   State<YaruCheckButton> createState() => _YaruCheckButtonState();
@@ -83,6 +87,7 @@ class _YaruCheckButtonState extends State<YaruCheckButton> {
       title: widget.title,
       subtitle: widget.subtitle,
       contentPadding: widget.contentPadding,
+      hasFocusBorder: widget.hasFocusBorder,
       leading: YaruCheckbox(
         value: widget.value,
         onChanged: widget.onChanged,
@@ -91,6 +96,7 @@ class _YaruCheckButtonState extends State<YaruCheckButton> {
         autofocus: widget.autofocus,
         mouseCursor: mouseCursor,
         statesController: _statesController,
+        hasFocusBorder: false,
       ),
       mouseCursor:
           mouseCursor ?? WidgetStateMouseCursor.clickable.resolve(states),

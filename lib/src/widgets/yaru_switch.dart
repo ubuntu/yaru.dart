@@ -43,6 +43,7 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
     this.mouseCursor,
     this.statesController,
     this.onOffShapes,
+    this.hasFocusBorder,
   });
 
   /// Whether this switch is on or off.
@@ -105,6 +106,9 @@ class YaruSwitch extends StatefulWidget implements YaruTogglable<bool> {
   /// {@macro flutter.widgets.Focus.autofocus}
   @override
   final bool autofocus;
+
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
 
   @override
   final MouseCursor? mouseCursor;
@@ -231,7 +235,7 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
         switchTheme.indicatorColor?.resolve({WidgetState.focused}) ??
         painter.focusIndicatorColor;
 
-    return _maybeBuildGestureDetector(
+    final switchWidget = _maybeBuildGestureDetector(
       buildToggleable(
         painter
           ..uncheckedColor = uncheckedColor
@@ -261,6 +265,11 @@ class _YaruSwitchState extends YaruTogglableState<YaruSwitch> {
             }),
       ),
     );
+
+    return widget.hasFocusBorder ??
+            YaruTheme.maybeOf(context)?.focusBorders == true
+        ? YaruFocusBorder.primary(child: switchWidget)
+        : switchWidget;
   }
 
   Widget _maybeBuildGestureDetector(Widget child) {

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:yaru/icons.dart';
-
-import 'yaru_page_indicator.dart';
+// ignore: unnecessary_import
+import 'package:yaru/widgets.dart';
+import 'package:yaru/yaru.dart';
 
 /// Display a list of widgets in a carousel view.
 ///
@@ -28,6 +28,7 @@ class YaruCarousel extends StatefulWidget {
     this.nextIcon,
     this.previousIconSemanticLabel,
     this.nextIconSemanticLabel,
+    this.navigationHasFocusBorder,
   });
 
   /// The height of the children, defaults to 500.0.
@@ -68,6 +69,9 @@ class YaruCarousel extends StatefulWidget {
 
   /// Optional semantic label to add to the next button icon.
   final String? nextIconSemanticLabel;
+
+  /// Optionally enable/disable the focus border for the navigation buttons.
+  final bool? navigationHasFocusBorder;
 
   @override
   State<YaruCarousel> createState() => _YaruCarouselState();
@@ -201,6 +205,14 @@ class _YaruCarouselState extends State<YaruCarousel> {
     VoidCallback? onPressed,
     Widget icon,
   ) {
+    final button = OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        shape: const CircleBorder(),
+        backgroundColor: Theme.of(context).colorScheme.surface,
+      ),
+      onPressed: onPressed,
+      child: icon,
+    );
     return Positioned.fill(
       child: AnimatedOpacity(
         opacity: onPressed != null ? 1 : 0,
@@ -208,14 +220,11 @@ class _YaruCarouselState extends State<YaruCarousel> {
         curve: _controller.scrollAnimationCurve,
         child: Align(
           alignment: alignment,
-          child: OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              shape: const CircleBorder(),
-              backgroundColor: Theme.of(context).colorScheme.surface,
-            ),
-            onPressed: onPressed,
-            child: icon,
-          ),
+          child:
+              widget.navigationHasFocusBorder ??
+                  YaruTheme.maybeOf(context)?.focusBorders == true
+              ? YaruFocusBorder.primary(child: button)
+              : button,
         ),
       ),
     );

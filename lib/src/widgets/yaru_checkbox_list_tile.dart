@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'yaru_check_button.dart';
-import 'yaru_checkbox.dart';
-import 'yaru_radio_list_tile.dart';
-import 'yaru_switch_list_tile.dart';
+import 'package:yaru/yaru.dart';
 
 /// A [ListTile] with a [YaruCheckbox]. In other words, a checkbox with a label.
 ///
@@ -42,6 +38,7 @@ class YaruCheckboxListTile extends StatelessWidget {
     this.focusNode,
     this.enableFeedback,
     this.mouseCursor,
+    this.hasFocusBorder,
   }) : assert(tristate || value != null),
        assert(!isThreeLine || subtitle != null);
 
@@ -102,6 +99,9 @@ class YaruCheckboxListTile extends StatelessWidget {
   /// See [CheckboxListTile.mouseCursor].
   final MouseCursor? mouseCursor;
 
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
+
   void _handleValueChange() {
     assert(onChanged != null);
     switch (value) {
@@ -126,6 +126,7 @@ class YaruCheckboxListTile extends StatelessWidget {
       autofocus: autofocus,
       tristate: tristate,
       mouseCursor: mouseCursor,
+      hasFocusBorder: false,
     );
 
     switch (controlAffinity) {
@@ -140,27 +141,34 @@ class YaruCheckboxListTile extends StatelessWidget {
         break;
     }
 
+    final tile = ListTile(
+      leading: leading,
+      title: title,
+      subtitle: subtitle,
+      trailing: trailing,
+      isThreeLine: isThreeLine,
+      dense: dense,
+      enabled: onChanged != null,
+      onTap: onChanged != null ? _handleValueChange : null,
+      selected: selected,
+      autofocus: autofocus,
+      contentPadding: contentPadding,
+      shape: shape,
+      selectedTileColor: selectedTileColor,
+      tileColor: tileColor,
+      visualDensity: visualDensity,
+      focusNode: focusNode,
+      enableFeedback: enableFeedback,
+      mouseCursor: mouseCursor,
+    );
+
     return MergeSemantics(
-      child: ListTile(
-        leading: leading,
-        title: title,
-        subtitle: subtitle,
-        trailing: trailing,
-        isThreeLine: isThreeLine,
-        dense: dense,
-        enabled: onChanged != null,
-        onTap: onChanged != null ? _handleValueChange : null,
-        selected: selected,
-        autofocus: autofocus,
-        contentPadding: contentPadding,
-        shape: shape,
-        selectedTileColor: selectedTileColor,
-        tileColor: tileColor,
-        visualDensity: visualDensity,
-        focusNode: focusNode,
-        enableFeedback: enableFeedback,
-        mouseCursor: mouseCursor,
-      ),
+      child: hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+          ? YaruFocusBorder.primary(
+              borderStrokeAlign: BorderSide.strokeAlignInside,
+              child: tile,
+            )
+          : tile,
     );
   }
 }

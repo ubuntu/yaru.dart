@@ -1,11 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-
-import 'yaru_checkbox_list_tile.dart';
-import 'yaru_radio.dart';
-import 'yaru_radio_button.dart';
-import 'yaru_switch_list_tile.dart';
+import 'package:yaru/yaru.dart';
 
 /// A [ListTile] with a [YaruRadio]. In other words, a radio with a label.
 ///
@@ -45,6 +41,7 @@ class YaruRadioListTile<T> extends StatelessWidget {
     this.focusNode,
     this.enableFeedback,
     this.mouseCursor,
+    this.hasFocusBorder,
   }) : assert(!isThreeLine || subtitle != null);
 
   /// See [RadioListTile.value].
@@ -107,6 +104,9 @@ class YaruRadioListTile<T> extends StatelessWidget {
   /// See [RadioListTile.mouseCursor].
   final MouseCursor? mouseCursor;
 
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
+
   void _handleValueChange() {
     assert(onChanged != null);
     if (groupValue != value || !toggleable) {
@@ -126,6 +126,7 @@ class YaruRadioListTile<T> extends StatelessWidget {
       toggleable: toggleable,
       autofocus: autofocus,
       mouseCursor: mouseCursor,
+      hasFocusBorder: false,
     );
 
     switch (controlAffinity) {
@@ -140,27 +141,34 @@ class YaruRadioListTile<T> extends StatelessWidget {
         break;
     }
 
+    final tile = ListTile(
+      leading: leading,
+      title: title,
+      subtitle: subtitle,
+      trailing: trailing,
+      isThreeLine: isThreeLine,
+      dense: dense,
+      enabled: onChanged != null,
+      shape: shape,
+      tileColor: tileColor,
+      selectedTileColor: selectedTileColor,
+      onTap: onChanged != null ? _handleValueChange : null,
+      selected: selected,
+      autofocus: autofocus,
+      contentPadding: contentPadding,
+      visualDensity: visualDensity,
+      focusNode: focusNode,
+      enableFeedback: enableFeedback,
+      mouseCursor: mouseCursor,
+    );
+
     return MergeSemantics(
-      child: ListTile(
-        leading: leading,
-        title: title,
-        subtitle: subtitle,
-        trailing: trailing,
-        isThreeLine: isThreeLine,
-        dense: dense,
-        enabled: onChanged != null,
-        shape: shape,
-        tileColor: tileColor,
-        selectedTileColor: selectedTileColor,
-        onTap: onChanged != null ? _handleValueChange : null,
-        selected: selected,
-        autofocus: autofocus,
-        contentPadding: contentPadding,
-        visualDensity: visualDensity,
-        focusNode: focusNode,
-        enableFeedback: enableFeedback,
-        mouseCursor: mouseCursor,
-      ),
+      child: hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+          ? YaruFocusBorder.primary(
+              borderStrokeAlign: BorderSide.strokeAlignInside,
+              child: tile,
+            )
+          : tile,
     );
   }
 }
