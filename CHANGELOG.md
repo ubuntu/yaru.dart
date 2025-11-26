@@ -1,5 +1,29 @@
 # Changelog
 
+## [9.0.0](https://github.com/ubuntu/yaru.dart/compare/v8.3.0...v9.0.0) (2025-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **a11y:** Add focus border to focusable Yaru widgets ([#1045](https://github.com/ubuntu/yaru.dart/issues/1045))
+
+### Features
+
+* **a11y:** Add focus border to focusable Yaru widgets ([#1045](https://github.com/ubuntu/yaru.dart/issues/1045)) ([8501b4b](https://github.com/ubuntu/yaru.dart/commit/8501b4bb2c463fc54386e5494a38a93bb9b0b78b))
+* **a11y:** Add YaruFocusBorder widget ([#1042](https://github.com/ubuntu/yaru.dart/issues/1042)) ([1fd9e5b](https://github.com/ubuntu/yaru.dart/commit/1fd9e5bf74e8baefe84bd410a0bf846efb3ccad7))
+* **a11y:** Automatically enable status shapes ([#1032](https://github.com/ubuntu/yaru.dart/issues/1032)) ([ba93a20](https://github.com/ubuntu/yaru.dart/commit/ba93a209238ab1ea909a441db6c8c6a0e623b630))
+
+
+### Bug Fixes
+
+* **a11y:** Thicken borders around text inputs ([#1043](https://github.com/ubuntu/yaru.dart/issues/1043)) ([013c947](https://github.com/ubuntu/yaru.dart/commit/013c947bb84d6ea0f7e6fc2f6a51ed227a6a9d5d))
+* **example:** correct code snippet url in draggable page example ([#1044](https://github.com/ubuntu/yaru.dart/issues/1044)) ([0b7dd1f](https://github.com/ubuntu/yaru.dart/commit/0b7dd1ff858ee37eb70f6d8261c8feba4db8ff24))
+* increase visibility of color disk borders ([#1041](https://github.com/ubuntu/yaru.dart/issues/1041)) ([9a99a5f](https://github.com/ubuntu/yaru.dart/commit/9a99a5f6c4b6b1ff7382d9cf1c2152a075ba9bf7))
+* preserve parent style with DefaultTextStyle.merge ([#1038](https://github.com/ubuntu/yaru.dart/issues/1038)) ([9aea072](https://github.com/ubuntu/yaru.dart/commit/9aea072497c287e7fea2c9a89efce91a76e720d2))
+* remove rounded corner from close button when window is maximized ([#1039](https://github.com/ubuntu/yaru.dart/issues/1039)) ([8243f3f](https://github.com/ubuntu/yaru.dart/commit/8243f3fdc5e5e3499809a0553c7ef6207c10e2b4))
+* Spacing tweaks ([#1035](https://github.com/ubuntu/yaru.dart/issues/1035)) ([011449b](https://github.com/ubuntu/yaru.dart/commit/011449b6a4167fe918cb0d1f3e327455c17df5db))
+* Tweak default font size to match Yaru GTK and remove letter spacing ([#1036](https://github.com/ubuntu/yaru.dart/issues/1036)) ([d955a71](https://github.com/ubuntu/yaru.dart/commit/d955a714bf68432f13955b3579b4ec257607ae6a))
+
 ## [8.3.0](https://github.com/ubuntu/yaru.dart/compare/v8.2.0...v8.3.0) (2025-09-05)
 
 
