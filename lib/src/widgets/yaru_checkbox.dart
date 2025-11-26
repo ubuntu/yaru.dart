@@ -1,11 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
+import 'package:yaru/yaru.dart';
 
-import 'yaru_check_button.dart';
-import 'yaru_checkbox_theme.dart';
-import 'yaru_radio.dart';
-import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
 
 // NOTE: keep in sync with Radio
@@ -53,6 +49,7 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
     this.autofocus = false,
     this.mouseCursor,
     this.statesController,
+    this.hasFocusBorder,
   }) : assert(tristate || value != null);
 
   /// Whether this checkbox is checked.
@@ -127,6 +124,9 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
   /// {@macro flutter.widgets.Focus.autofocus}
   @override
   final bool autofocus;
+
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
 
   @override
   final MouseCursor? mouseCursor;
@@ -243,7 +243,7 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
         checkboxTheme.indicatorColor?.resolve({WidgetState.focused}) ??
         painter.focusIndicatorColor;
 
-    return buildToggleable(
+    final checkboxWidget = buildToggleable(
       painter
         ..uncheckedColor = uncheckedColor
         ..uncheckedBorderColor = uncheckedBorderColor
@@ -263,6 +263,11 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
             if (!widget.interactive) WidgetState.disabled,
           }),
     );
+
+    return widget.hasFocusBorder ??
+            YaruTheme.maybeOf(context)?.focusBorders == true
+        ? YaruFocusBorder.primary(child: checkboxWidget)
+        : checkboxWidget;
   }
 }
 

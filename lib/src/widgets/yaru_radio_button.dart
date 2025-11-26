@@ -21,6 +21,7 @@ class YaruRadioButton<T> extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.mouseCursor,
+    this.hasFocusBorder = true,
   });
 
   /// See [Radio.value]
@@ -52,6 +53,9 @@ class YaruRadioButton<T> extends StatefulWidget {
 
   /// See [Radio.mouseCursor].
   final MouseCursor? mouseCursor;
+
+  /// Whether to display the default focus border on focus or not.
+  final bool hasFocusBorder;
 
   @override
   State<YaruRadioButton<T>> createState() => _YaruRadioButtonState<T>();
@@ -89,6 +93,7 @@ class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
       title: widget.title,
       subtitle: widget.subtitle,
       contentPadding: widget.contentPadding,
+      hasFocusBorder: widget.hasFocusBorder,
       leading: YaruRadio<T>(
         value: widget.value,
         groupValue: widget.groupValue,
@@ -98,6 +103,7 @@ class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
         autofocus: widget.autofocus,
         mouseCursor: mouseCursor,
         statesController: _statesController,
+        hasFocusBorder: false,
       ),
       mouseCursor:
           mouseCursor ?? WidgetStateMouseCursor.clickable.resolve(states),

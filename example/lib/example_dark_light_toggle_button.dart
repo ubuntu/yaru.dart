@@ -11,7 +11,7 @@ class ExampleDarkLightToggleButton extends StatelessWidget with WatchItMixin {
   Widget build(BuildContext context) {
     final themeMode = watchPropertyValue((ExampleModel m) => m.themeMode);
 
-    return IconButton(
+    return YaruIconButton(
       tooltip: 'ThemeMode (System, Light, Dark)',
       onPressed: () => di<ExampleModel>().setThemeMode(switch (themeMode) {
         ThemeMode.system => ThemeMode.light,

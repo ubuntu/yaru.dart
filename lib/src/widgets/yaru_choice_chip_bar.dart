@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
-import 'package:yaru/icons.dart';
-import 'package:yaru/theme.dart';
+import 'package:yaru/yaru.dart';
 
 /// A list of [ChoiceChipBar]s wrapped either in a controllable [ListView] or [Wrap].
 class YaruChoiceChipBar extends StatefulWidget {
@@ -33,6 +31,7 @@ class YaruChoiceChipBar extends StatefulWidget {
     this.showCheckMarks = true,
     this.selectedFirst = true,
     this.navigationButtonElevation,
+    this.chipHasFocusBorder,
   }) : assert(labels.length == isSelected.length);
 
   /// The [List] of [Widget]'s used to generate a [List] of [ChoiceChip]s
@@ -126,6 +125,9 @@ class YaruChoiceChipBar extends StatefulWidget {
   /// Defines if the selected [ChoiceChip]s should be always placed first.
   final bool selectedFirst;
 
+  /// Whether the chips display the default focus border when focused.
+  final bool? chipHasFocusBorder;
+
   @override
   State<YaruChoiceChipBar> createState() => _YaruChoiceChipBarState();
 }
@@ -170,7 +172,7 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
   @override
   Widget build(BuildContext context) {
     Widget themedChip(int index) {
-      return ChoiceChip(
+      final chip = ChoiceChip(
         showCheckmark: widget.showCheckMarks,
         label: widget.labels[index],
         selected: widget.isSelected[index],
@@ -185,6 +187,14 @@ class _YaruChoiceChipBarState extends State<YaruChoiceChipBar> {
                 }
               },
       );
+      return widget.chipHasFocusBorder ??
+              YaruTheme.maybeOf(context)?.focusBorders == true
+          ? YaruFocusBorder.primary(
+              borderStrokeAlign: BorderSide.strokeAlignInside,
+              borderRadius: BorderRadius.circular(100),
+              child: chip,
+            )
+          : chip;
     }
 
     final children = widget.selectedFirst

@@ -65,14 +65,14 @@ class MaterialThemeHomePageState extends State<MaterialThemeHomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: Center(
-          child: IconButton(
+          child: YaruIconButton(
             onPressed: () => themePageScaffoldKey.currentState?.openDrawer(),
             icon: const Icon(YaruIcons.menu),
           ),
         ),
         title: const Text(''),
         actions: [
-          IconButton(
+          YaruIconButton(
             onPressed: () => showSnack(context),
             icon: const Icon(YaruIcons.plus),
           ),

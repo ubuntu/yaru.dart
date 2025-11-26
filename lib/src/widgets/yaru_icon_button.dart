@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/constants.dart';
+import 'package:yaru/yaru.dart';
 
 /// An [IconButton] with a default fixed size of 40x40.
 class YaruIconButton extends StatelessWidget {
@@ -20,6 +20,7 @@ class YaruIconButton extends StatelessWidget {
     this.style,
     this.tooltip,
     this.visualDensity,
+    this.hasFocusBorder,
     super.key,
   });
 
@@ -39,6 +40,7 @@ class YaruIconButton extends StatelessWidget {
   final ButtonStyle? style;
   final String? tooltip;
   final VisualDensity? visualDensity;
+  final bool? hasFocusBorder;
 
   ButtonStyle defaultStyleOf(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -90,7 +92,7 @@ class YaruIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
+    final button = IconButton(
       alignment: alignment,
       autofocus: autofocus,
       constraints: constraints,
@@ -107,5 +109,11 @@ class YaruIconButton extends StatelessWidget {
       tooltip: tooltip,
       visualDensity: visualDensity,
     );
+    return hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+        ? YaruFocusBorder.primary(
+            borderRadius: BorderRadius.circular(100),
+            child: button,
+          )
+        : button;
   }
 }

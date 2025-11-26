@@ -2,8 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
-import 'yaru_toggle_button_theme.dart';
+import 'package:yaru/yaru.dart';
 
 part 'yaru_toggle_button_layout.dart';
 
@@ -21,6 +20,7 @@ class YaruToggleButton extends StatelessWidget {
     this.onToggled,
     this.mouseCursor,
     this.statesController,
+    this.hasFocusBorder,
   });
 
   /// The toggle indicator.
@@ -43,6 +43,9 @@ class YaruToggleButton extends StatelessWidget {
 
   final WidgetStatesController? statesController;
 
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
+
   @override
   Widget build(BuildContext context) {
     final theme = YaruToggleButtonTheme.of(context);
@@ -55,45 +58,48 @@ class YaruToggleButton extends StatelessWidget {
         WidgetStateProperty.resolveAs(this.mouseCursor, states) ??
         WidgetStateMouseCursor.clickable.resolve(states);
 
-    return MergeSemantics(
-      child: Semantics(
-        child: GestureDetector(
-          onTap: onToggled,
-          onTapDown: (_) =>
-              statesController?.update(WidgetState.pressed, enabled),
-          onTapUp: (_) => statesController?.update(WidgetState.pressed, false),
-          onTapCancel: () =>
-              statesController?.update(WidgetState.pressed, false),
-          child: MouseRegion(
-            cursor: mouseCursor,
-            onEnter: (_) => statesController?.update(WidgetState.hovered, true),
-            onHover: (_) => statesController?.update(WidgetState.hovered, true),
-            onExit: (_) => statesController?.update(WidgetState.hovered, false),
-            child: Padding(
-              padding: contentPadding ?? EdgeInsets.zero,
-              child: _YaruToggleButtonLayout(
-                horizontalSpacing: theme?.horizontalSpacing ?? 8,
-                verticalSpacing: theme?.verticalSpacing ?? 4,
-                textDirection: Directionality.of(context),
-                leading: leading,
-                title: _wrapTextStyle(
-                  context,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme?.titleStyle ?? textTheme.titleMedium!,
-                  child: title,
-                ),
-                subtitle: subtitle != null
-                    ? _wrapTextStyle(
-                        context,
-                        softWrap: true,
-                        style: theme?.subtitleStyle ?? textTheme.bodySmall!,
-                        child: subtitle!,
-                      )
-                    : null,
-              ),
+    final button = GestureDetector(
+      onTap: onToggled,
+      onTapDown: (_) => statesController?.update(WidgetState.pressed, enabled),
+      onTapUp: (_) => statesController?.update(WidgetState.pressed, false),
+      onTapCancel: () => statesController?.update(WidgetState.pressed, false),
+      child: MouseRegion(
+        cursor: mouseCursor,
+        onEnter: (_) => statesController?.update(WidgetState.hovered, true),
+        onHover: (_) => statesController?.update(WidgetState.hovered, true),
+        onExit: (_) => statesController?.update(WidgetState.hovered, false),
+        child: Padding(
+          padding: contentPadding ?? EdgeInsets.zero,
+          child: _YaruToggleButtonLayout(
+            horizontalSpacing: theme?.horizontalSpacing ?? 8,
+            verticalSpacing: theme?.verticalSpacing ?? 4,
+            textDirection: Directionality.of(context),
+            leading: leading,
+            title: _wrapTextStyle(
+              context,
+              overflow: TextOverflow.ellipsis,
+              style: theme?.titleStyle ?? textTheme.titleMedium!,
+              child: title,
             ),
+            subtitle: subtitle != null
+                ? _wrapTextStyle(
+                    context,
+                    softWrap: true,
+                    style: theme?.subtitleStyle ?? textTheme.bodySmall!,
+                    child: subtitle!,
+                  )
+                : null,
           ),
         ),
+      ),
+    );
+
+    return MergeSemantics(
+      child: Semantics(
+        child:
+            hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+            ? YaruFocusBorder.primary(child: button)
+            : button,
       ),
     );
   }

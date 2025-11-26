@@ -18,13 +18,15 @@ class ClickableIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(kYaruButtonRadius),
-        onTap: () => showDialog(
-          context: context,
-          builder: (context) => IconDialog(iconItem: iconItem),
+      child: YaruFocusBorder.primary(
+        child: InkWell(
+          borderRadius: BorderRadius.circular(kYaruButtonRadius),
+          onTap: () => showDialog(
+            context: context,
+            builder: (context) => IconDialog(iconItem: iconItem),
+          ),
+          child: Center(child: iconItem.iconBuilder(context, iconSize)),
         ),
-        child: Center(child: iconItem.iconBuilder(context, iconSize)),
       ),
     );
   }
