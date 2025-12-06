@@ -333,11 +333,11 @@ class YaruThemeData with Diagnosticable {
 
   /// The light theme of [variant] (or [yaruLight] if not available) merged with
   /// the `YaruThemeData` overrides.
-  ThemeData? get theme => (variant?.theme ?? yaruLight).overrideWith(this);
+  ThemeData get theme => (variant?.theme ?? yaruLight).overrideWith(this);
 
   /// The dark theme of [variant] (or [yaruDark] if not available) merged with
   /// the `YaruThemeData` overrides.
-  ThemeData? get darkTheme =>
+  ThemeData get darkTheme =>
       (variant?.darkTheme ?? yaruDark).overrideWith(this);
 
   /// Creates a copy of this [YaruThemeData] with the provided values.
