@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yaru/src/widgets/yaru_edge_focus_interceptor.dart';
 import 'package:yaru/widgets.dart';
 
 import '../foundation/yaru_entry_segment.dart';
@@ -81,7 +80,10 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   late YaruSegmentedEntryController _controller;
   final _textEditingController = TextEditingController();
 
-  YaruEntrySegment get _selectedSegment => widget.segments[_controller.index];
+  YaruEntrySegment get _selectedSegment {
+    final index = _controller.index.clamp(0, widget.segments.length - 1);
+    return widget.segments[index];
+  }
 
   @override
   void initState() {
@@ -108,6 +110,9 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
 
     if (widget.focusNode != oldWidget.focusNode) {
       _focusNode.removeListener(_initialFocusCallback);
+      if (oldWidget.focusNode == null) {
+        _focusNode.dispose();
+      }
       _updateEntryFocusNode();
       if (!_initialized) {
         _focusNode.addListener(_initialFocusCallback);
@@ -117,6 +122,9 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
     if (widget.segments.length != oldWidget.segments.length ||
         widget.controller != oldWidget.controller) {
       _controller.removeListener(_controllerCallback);
+      if (oldWidget.controller == null) {
+        _controller.dispose();
+      }
       _updateController();
       _controller.addListener(_controllerCallback);
     }
@@ -128,7 +136,10 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
       segment.removeListener(_segmentCallback);
     }
     _textEditingController.dispose();
-    _focusNode.dispose();
+
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
+    }
 
     if (widget.controller == null) {
       _controller.dispose();
@@ -149,17 +160,8 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   void _updateEntryFocusNode() {
-    final widgetOnKey = widget.focusNode?.onKeyEvent;
     _focusNode = widget.focusNode ?? FocusNode();
-
-    if (widgetOnKey != null) {
-      _focusNode.onKeyEvent = (node, event) =>
-          widgetOnKey(node, event) == KeyEventResult.handled
-          ? KeyEventResult.handled
-          : _onKeyEvent(node, event);
-    } else {
-      _focusNode.onKeyEvent = _onKeyEvent;
-    }
+    _focusNode.onKeyEvent = _onKeyEvent;
   }
 
   void _updateController() {
@@ -299,33 +301,28 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   String _getPrefixOfIndex(int index) {
-    if (index == 0) {
-      return '';
-    }
+    if (index == 0) return '';
 
-    var prefix = '';
-
+    final prefixBuffer = StringBuffer();
     for (var i = 0; i < index; i++) {
-      final segment = widget.segments[i];
-      prefix += segment.text + _getDelimiterOfIndex(i);
+      prefixBuffer.write(widget.segments[i].text);
+      prefixBuffer.write(_getDelimiterOfIndex(i));
     }
-
-    return prefix;
+    return prefixBuffer.toString();
   }
 
   String _getSuffixOfIndex(int index) {
-    if (index >= widget.segments.length) {
-      return '';
-    }
+    if (index >= widget.segments.length) return '';
 
-    var prefix = _getDelimiterOfIndex(index);
+    final suffixBuffer = StringBuffer();
+    suffixBuffer.write(_getDelimiterOfIndex(index));
 
     for (var i = index + 1; i < widget.segments.length; i++) {
-      final segment = widget.segments[i];
-      prefix += segment.text + _getDelimiterOfIndex(i);
+      suffixBuffer.write(widget.segments[i].text);
+      suffixBuffer.write(_getDelimiterOfIndex(i));
     }
 
-    return prefix;
+    return suffixBuffer.toString();
   }
 
   int _getBaseOffsetOfIndex(int index) {
@@ -343,9 +340,10 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
   }
 
   int _getExtentOffsetOfIndex(int index) {
-    return widget.segments.isNotEmpty
-        ? _getBaseOffsetOfIndex(index) + widget.segments[index].length
-        : 0;
+    if (widget.segments.isEmpty || index >= widget.segments.length) {
+      return 0;
+    }
+    return _getBaseOffsetOfIndex(index) + widget.segments[index].length;
   }
 
   TextEditingValue _valueFormatter(
@@ -378,32 +376,20 @@ class _YaruSegmentedEntryState extends State<YaruSegmentedEntry> {
     return _getTextEditingValue();
   }
 
-  void _onFocusFromEdge({required bool previous, required bool ltr}) {
-    previous && ltr || !previous && !ltr
-        ? _controller.selectFirstSegment()
-        : _controller.selectLastSegment();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final ltr = Directionality.of(context) == TextDirection.ltr;
-
-    return YaruEdgeFocusInterceptor(
-      onFocusFromPreviousNode: () => _onFocusFromEdge(previous: true, ltr: ltr),
-      onFocusFromNextNode: () => _onFocusFromEdge(previous: false, ltr: ltr),
-      child: TextFormField(
-        focusNode: _focusNode,
-        autofocus: widget.autofocus ?? false,
-        controller: _textEditingController,
-        onSaved: widget.onSaved,
-        onFieldSubmitted: widget.onFieldSubmitted,
-        mouseCursor: _initialized ? SystemMouseCursors.basic : null,
-        showCursor: false,
-        keyboardType: widget.keyboardType,
-        decoration: widget.decoration,
-        validator: widget.validator,
-        inputFormatters: [TextInputFormatter.withFunction(_valueFormatter)],
-      ),
+    return TextFormField(
+      focusNode: _focusNode,
+      autofocus: widget.autofocus ?? false,
+      controller: _textEditingController,
+      onSaved: widget.onSaved,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      mouseCursor: _initialized ? SystemMouseCursors.basic : null,
+      showCursor: false,
+      keyboardType: widget.keyboardType,
+      decoration: widget.decoration,
+      validator: widget.validator,
+      inputFormatters: [TextInputFormatter.withFunction(_valueFormatter)],
     );
   }
 }

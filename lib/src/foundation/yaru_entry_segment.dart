@@ -7,7 +7,7 @@ enum YaruSegmentEventReturnAction {
   ignored,
 }
 
-abstract interface class YaruEntrySegment implements Listenable {
+abstract interface class YaruEntrySegment implements ChangeNotifier {
   String? get input;
   String get text;
   int get length;
@@ -396,7 +396,8 @@ class YaruSegmentedEntryController extends ChangeNotifier {
   /// Returns true if successful.
   bool maybeSelectPreviousSegment() {
     if (_index - 1 >= 0) {
-      index--;
+      _index--;
+      notifyListeners();
       return true;
     }
     return false;
@@ -406,7 +407,8 @@ class YaruSegmentedEntryController extends ChangeNotifier {
   /// Returns true if successful.
   bool maybeSelectNextSegment() {
     if (_index + 1 < length) {
-      index++;
+      _index++;
+      notifyListeners();
       return true;
     }
     return false;
@@ -414,12 +416,14 @@ class YaruSegmentedEntryController extends ChangeNotifier {
 
   /// Selects the first segment.
   void selectFirstSegment() {
-    index = 0;
+    _index = 0;
+    notifyListeners();
   }
 
   /// Selects the last segment.
   void selectLastSegment() {
-    index = length - 1;
+    _index = length - 1;
+    notifyListeners();
   }
 }
 
