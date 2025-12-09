@@ -63,7 +63,7 @@ class YaruSplitButton extends StatelessWidget {
 
     final dropdownShape = switch (_variant) {
       _YaruSplitButtonVariant.outlined => NonUniformRoundedRectangleBorder(
-        hideLeftSide: false,
+        hideLeftSide: true,
         borderRadius: BorderRadius.horizontal(
           right: defaultRadius,
           left: Radius.zero,
@@ -172,7 +172,8 @@ class YaruSplitButton extends StatelessWidget {
               )
             : mainButton,
         if (onDropdownPressed != null) ...[
-          const SizedBox(width: 2),
+          if (_variant != _YaruSplitButtonVariant.outlined)
+            const SizedBox(width: 1),
           hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
               ? YaruFocusBorder.primary(
                   borderRadius: dropdownBorderRadius,
