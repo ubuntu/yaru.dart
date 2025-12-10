@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.0.1](https://github.com/ubuntu/yaru.dart/compare/v9.0.0...v9.0.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* Split button spacing ([#1051](https://github.com/ubuntu/yaru.dart/issues/1051)) ([83eec53](https://github.com/ubuntu/yaru.dart/commit/83eec5369524d3edd9eabe45d8ffb4cdd794b2e4))
+
 ## [9.0.0](https://github.com/ubuntu/yaru.dart/compare/v8.3.0...v9.0.0) (2025-11-26)
 
 
