@@ -57,16 +57,13 @@ class YaruSplitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: fix common_themes to use a fixed size for buttons instead of fiddling around with padding
-    // then we can rely on this size here
-    const size = Size.square(36);
-    const dropdownPadding = EdgeInsets.only(top: 16, bottom: 16);
+    const dropdownSize = Size(45, 0);
 
     final defaultRadius = Radius.circular(radius ?? kYaruButtonRadius);
 
     final dropdownShape = switch (_variant) {
       _YaruSplitButtonVariant.outlined => NonUniformRoundedRectangleBorder(
-        hideLeftSide: false,
+        hideLeftSide: true,
         borderRadius: BorderRadius.horizontal(
           right: defaultRadius,
           left: Radius.zero,
@@ -140,10 +137,7 @@ class YaruSplitButton extends StatelessWidget {
     final dropdownButton = switch (_variant) {
       _YaruSplitButtonVariant.elevated => ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: size,
-          minimumSize: size,
-          maximumSize: size,
-          padding: dropdownPadding,
+          minimumSize: dropdownSize,
           shape: dropdownShape,
         ),
         onPressed: onDropdownPressed,
@@ -151,10 +145,7 @@ class YaruSplitButton extends StatelessWidget {
       ),
       _YaruSplitButtonVariant.filled => FilledButton(
         style: FilledButton.styleFrom(
-          fixedSize: size,
-          minimumSize: size,
-          maximumSize: size,
-          padding: dropdownPadding,
+          minimumSize: dropdownSize,
           shape: dropdownShape,
         ),
         onPressed: onDropdownPressed,
@@ -162,10 +153,7 @@ class YaruSplitButton extends StatelessWidget {
       ),
       _YaruSplitButtonVariant.outlined => OutlinedButton(
         style: OutlinedButton.styleFrom(
-          fixedSize: size,
-          minimumSize: size,
-          maximumSize: size,
-          padding: dropdownPadding,
+          minimumSize: dropdownSize,
           shape: dropdownShape,
         ),
         onPressed: onDropdownPressed,
@@ -175,6 +163,7 @@ class YaruSplitButton extends StatelessWidget {
 
     return Row(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
             ? YaruFocusBorder.primary(
@@ -183,7 +172,8 @@ class YaruSplitButton extends StatelessWidget {
               )
             : mainButton,
         if (onDropdownPressed != null) ...[
-          const SizedBox(width: 2),
+          if (_variant != _YaruSplitButtonVariant.outlined)
+            const SizedBox(width: 1),
           hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
               ? YaruFocusBorder.primary(
                   borderRadius: dropdownBorderRadius,
