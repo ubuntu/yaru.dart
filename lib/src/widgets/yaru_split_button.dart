@@ -57,7 +57,7 @@ class YaruSplitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const dropdownSize = Size(45, 0);
+    const dropdownSize = Size(37, 0);
 
     final defaultRadius = Radius.circular(radius ?? kYaruButtonRadius);
 
@@ -138,7 +138,9 @@ class YaruSplitButton extends StatelessWidget {
       _YaruSplitButtonVariant.elevated => ElevatedButton(
         style: ElevatedButton.styleFrom(
           minimumSize: dropdownSize,
+          fixedSize: dropdownSize,
           shape: dropdownShape,
+          padding: EdgeInsets.zero,
         ),
         onPressed: onDropdownPressed,
         child: dropdownIcon,
@@ -146,7 +148,9 @@ class YaruSplitButton extends StatelessWidget {
       _YaruSplitButtonVariant.filled => FilledButton(
         style: FilledButton.styleFrom(
           minimumSize: dropdownSize,
+          fixedSize: dropdownSize,
           shape: dropdownShape,
+          padding: EdgeInsets.zero,
         ),
         onPressed: onDropdownPressed,
         child: dropdownIcon,
@@ -154,34 +158,37 @@ class YaruSplitButton extends StatelessWidget {
       _YaruSplitButtonVariant.outlined => OutlinedButton(
         style: OutlinedButton.styleFrom(
           minimumSize: dropdownSize,
+          fixedSize: dropdownSize,
           shape: dropdownShape,
+          padding: EdgeInsets.zero,
         ),
         onPressed: onDropdownPressed,
         child: dropdownIcon,
       ),
     };
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
-            ? YaruFocusBorder.primary(
-                borderRadius: mainBorderRadius,
-                child: mainButton,
-              )
-            : mainButton,
-        if (onDropdownPressed != null) ...[
-          if (_variant != _YaruSplitButtonVariant.outlined)
-            const SizedBox(width: 1),
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
           hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
               ? YaruFocusBorder.primary(
-                  borderRadius: dropdownBorderRadius,
-                  child: dropdownButton,
+                  borderRadius: mainBorderRadius,
+                  child: mainButton,
                 )
-              : dropdownButton,
+              : mainButton,
+          if (onDropdownPressed != null) ...[
+            if (_variant != _YaruSplitButtonVariant.outlined)
+              const SizedBox(width: 1),
+            hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+                ? YaruFocusBorder.primary(
+                    borderRadius: dropdownBorderRadius,
+                    child: dropdownButton,
+                  )
+                : dropdownButton,
+          ],
         ],
-      ],
+      ),
     );
   }
 
