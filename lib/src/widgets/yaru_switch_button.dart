@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'yaru_switch.dart';
-import 'yaru_toggle_button.dart';
-import 'yaru_toggle_button_theme.dart';
+import 'package:yaru/yaru.dart';
 
 /// A desktop style switch button with an interactive label.
 class YaruSwitchButton extends StatefulWidget {
@@ -18,7 +15,7 @@ class YaruSwitchButton extends StatefulWidget {
     this.focusNode,
     this.mouseCursor,
     this.onOffShapes,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   });
 
   /// See [Switch.value]
@@ -49,7 +46,7 @@ class YaruSwitchButton extends StatefulWidget {
   final bool? onOffShapes;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   State<YaruSwitchButton> createState() => _YaruSwitchButtonState();
@@ -87,7 +84,9 @@ class _YaruSwitchButtonState extends State<YaruSwitchButton> {
       title: widget.title,
       subtitle: widget.subtitle,
       contentPadding: widget.contentPadding,
-      hasFocusBorder: widget.hasFocusBorder,
+      hasFocusBorder:
+          widget.hasFocusBorder ??
+          YaruTheme.maybeOf(context)?.focusBorders == true,
       leading: YaruSwitch(
         value: widget.value,
         onChanged: widget.onChanged,
