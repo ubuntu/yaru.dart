@@ -781,7 +781,7 @@ ThemeData createYaruTheme({
     splashFactory: NoSplash.splashFactory,
     sliderTheme: _createSliderTheme(colorScheme),
     drawerTheme: _createDrawerTheme(colorScheme, dividerColor),
-    listTileTheme: _createListTileTheme(colorScheme),
+    listTileTheme: _createListTileTheme(colorScheme, textTheme),
     snackBarTheme: _createSnackBarTheme(colorScheme),
     chipTheme: _createChipTheme(
       selectedColor: elevatedButtonColor ?? colorScheme.primary,
@@ -791,7 +791,10 @@ ThemeData createYaruTheme({
   );
 }
 
-ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
+ListTileThemeData _createListTileTheme(
+  ColorScheme colorScheme,
+  TextTheme textTheme,
+) {
   final isHighContrast = colorScheme.isHighContrast;
   return ListTileThemeData(
     selectedColor: isHighContrast
@@ -810,6 +813,8 @@ ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
       borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),
       side: BorderSide.none,
     ),
+    titleTextStyle: textTheme.labelLarge,
+    subtitleTextStyle: textTheme.labelMedium,
   );
 }
 
