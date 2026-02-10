@@ -17,20 +17,23 @@ class _ListTilePageState extends State<ListTilePage> {
           controller: controller,
           padding: const EdgeInsets.all(kYaruPagePadding),
           children: [
-            const YaruListTile(titleText: 'YaruListTile'),
-            const YaruListTile(
+            YaruListTile(titleText: 'YaruListTile', onTap: () {}),
+            YaruListTile(
               titleText: 'YaruListTile',
               subtitleText: 'YaruListTile subtitle',
+              onTap: () {},
             ),
-            const YaruListTile(
+            YaruListTile(
               titleText: 'YaruListTile',
               subtitleText: 'YaruListTile subtitle',
-              leading: Icon(YaruIcons.ubuntu_logo_simple),
+              leading: const Icon(YaruIcons.ubuntu_logo_simple),
+              onTap: () {},
             ),
-            const YaruListTile(
+            YaruListTile(
               titleText: 'YaruListTile',
               subtitleText: 'YaruListTile subtitle',
-              trailing: Icon(YaruIcons.ubuntu_logo_simple),
+              trailing: const Icon(YaruIcons.ubuntu_logo_simple),
+              onTap: () {},
             ),
             YaruTileList(
               children: [

@@ -9,7 +9,6 @@ class YaruTileList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruBorderContainer(
-      clipBehavior: Clip.hardEdge,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: children.separatedBy(const Divider()),

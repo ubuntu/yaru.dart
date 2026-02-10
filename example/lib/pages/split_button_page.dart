@@ -27,7 +27,7 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
     });
 
     final tiles = [
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton()'),
         subtitle: const Text('Regular version'),
         trailing: YaruSplitButton(
@@ -39,7 +39,7 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           child: const Text('Main Action'),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text('.filled()'),
         trailing: YaruSplitButton.filled(
@@ -51,7 +51,7 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           child: const Text('Main Action'),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text('outlined()'),
         trailing: YaruSplitButton.outlined(
@@ -63,7 +63,7 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           child: const Text('Main Action'),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text('items: null, onOptionPressed: null'),
         trailing: YaruSplitButton(
@@ -74,7 +74,7 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           ).showSnackBar(const SnackBar(content: Text('Main Action'))),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text('onPressed: null'),
         trailing: YaruSplitButton(
@@ -83,7 +83,7 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           child: const Text('Main Action'),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text(
           'items: null, onOptionPressed: null, onPressed: null',
