@@ -64,7 +64,7 @@ TextTheme createTextTheme(Color textColor) {
     ),
     labelLarge: _UbuntuTextStyle(
       fontSize: 14.66,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.normal,
       textColor: textColor,
     ),
     labelMedium: _UbuntuTextStyle(
