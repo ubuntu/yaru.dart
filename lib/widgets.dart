@@ -52,6 +52,7 @@ export 'src/widgets/yaru_switch_list_tile.dart';
 export 'src/widgets/yaru_switch_theme.dart';
 export 'src/widgets/yaru_tab_bar.dart';
 export 'src/widgets/yaru_tile.dart';
+export 'src/widgets/yaru_tile_list.dart';
 export 'src/widgets/yaru_title_bar.dart';
 export 'src/widgets/yaru_title_bar_theme.dart';
 export 'src/widgets/yaru_toggle_button.dart';

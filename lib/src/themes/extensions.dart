@@ -55,3 +55,12 @@ extension on Brightness {
   Brightness get inverse =>
       this == Brightness.light ? Brightness.dark : Brightness.light;
 }
+
+extension WidgetIterableExtension on Iterable<Widget> {
+  List<Widget> separatedBy(Widget separator) {
+    return expand((item) sync* {
+      yield separator;
+      yield item;
+    }).skip(1).toList();
+  }
+}
