@@ -28,6 +28,7 @@ export 'src/widgets/yaru_focus_border.dart';
 export 'src/widgets/yaru_icon_button.dart';
 export 'src/widgets/yaru_info.dart';
 export 'src/widgets/yaru_linear_progress_indicator.dart';
+export 'src/widgets/yaru_list_tile.dart';
 export 'src/widgets/yaru_option_button.dart';
 export 'src/widgets/yaru_page_indicator.dart';
 export 'src/widgets/yaru_page_indicator_layout_delegate.dart';
