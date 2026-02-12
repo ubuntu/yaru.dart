@@ -36,34 +36,17 @@ dev_dependencies:
 
 flutter:
   fonts:
-    - family: Ubuntu
-      fonts:
-        - asset: assets/fonts/Ubuntu-L.ttf
-          weight: 300
-        - asset: assets/fonts/Ubuntu-LI.ttf
-          weight: 300
-          style: italic
-        - asset: assets/fonts/Ubuntu-R.ttf
-          weight: 400
-        - asset: assets/fonts/Ubuntu-RI.ttf
-          weight: 400
-          style: italic
-        - asset: assets/fonts/Ubuntu-M.ttf
-          weight: 500
-        - asset: assets/fonts/Ubuntu-MI.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/Ubuntu-B.ttf
-          weight: 700
-        - asset: assets/fonts/Ubuntu-BI.ttf
-          weight: 700
-          style: italic
     - family: YaruIcons
       fonts:
         - asset: assets/yaru_icons.otf
     - family: UbuntuMono
       fonts:
         - asset: assets/fonts/UbuntuMono-Regular.ttf
+    - family: UbuntuSans
+      fonts:
+        - asset: assets/fonts/UbuntuSans.ttf
+        - asset: assets/fonts/UbuntuSans-Italic.ttf
+          style: italic
 
 icon_font:
   input_svg_dir: "assets/icons/"
