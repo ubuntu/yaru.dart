@@ -9,6 +9,7 @@ class YaruTileList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruBorderContainer(
+      borderStrokeAlign: BorderSide.strokeAlignOutside,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: children.separatedBy(const Divider()),
