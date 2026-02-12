@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
+/// A tile widget similar to a [ListTile], with more flexible styling.
+///
+/// Using a [YaruListTile.square] is preferable when displaying the tiles inside
+/// a [YaruTileList].
 class YaruListTile extends StatelessWidget {
   const YaruListTile({
     this.title,
@@ -39,11 +43,13 @@ class YaruListTile extends StatelessWidget {
   /// The primary content of the list tile, displayed with [TextTheme.labelLarge].
   final Widget? title;
 
+  /// The text content of the title, mutually exclusive with [title].
   final String? titleText;
 
   /// Optional secondary content displayed below the title.
   final Widget? subtitle;
 
+  /// The text content of the subtitle, mutually exclusive with [subtitle].
   final String? subtitleText;
 
   /// A widget to display before the title.
