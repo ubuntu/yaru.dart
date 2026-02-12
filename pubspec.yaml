@@ -39,9 +39,11 @@ flutter:
     - family: YaruIcons
       fonts:
         - asset: assets/yaru_icons.otf
-    - family: UbuntuMono
+    - family: UbuntuSansMono
       fonts:
-        - asset: assets/fonts/UbuntuMono-Regular.ttf
+        - asset: assets/fonts/UbuntuSansMono.ttf
+        - asset: assets/fonts/UbuntuSansMono-Italic.ttf
+          style: italic
     - family: UbuntuSans
       fonts:
         - asset: assets/fonts/UbuntuSans.ttf
