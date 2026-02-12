@@ -18,6 +18,7 @@ class YaruBanner extends StatelessWidget {
     this.hasFocusBorder,
   });
 
+  // ignore: deprecated_member_use_from_same_package
   /// Creates a banner with a [YaruTile] child widget.
   YaruBanner.tile({
     Key? key,
@@ -44,6 +45,7 @@ class YaruBanner extends StatelessWidget {
          selected: selected,
          mouseCursor: mouseCursor,
          hasFocusBorder: hasFocusBorder,
+         // ignore: deprecated_member_use_from_same_package
          child: YaruTile(
            leading: icon,
            title: title,

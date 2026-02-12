@@ -23,7 +23,7 @@ class _SectionPageState extends State<SectionPage> {
           child: Column(
             children: [
               for (var i = 0; i < 10; ++i)
-                const YaruTile(
+                const YaruListTile(
                   title: Text('Title'),
                   trailing: Icon(YaruIcons.information),
                   leading: Icon(YaruIcons.music_note),
@@ -56,7 +56,7 @@ class DummySection extends StatelessWidget {
         ],
       ),
       width: width,
-      child: const YaruTile(
+      child: const YaruListTile(
         title: Text('Title'),
         trailing: Icon(YaruIcons.information),
         leading: Icon(YaruIcons.music_note),

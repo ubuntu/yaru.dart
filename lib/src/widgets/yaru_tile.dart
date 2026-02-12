@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+@deprecated
 enum YaruTileStyle { normal, banner }
 
+@Deprecated('Use YaruListTile instead')
 class YaruTile extends StatelessWidget {
   /// Creates a Yaru style [ListTile] similar widget.
   ///

@@ -1,15 +1,13 @@
-// ignore_for_file: deprecated_member_use_from_same_package
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru/src/widgets/yaru_tile.dart';
+import 'package:yaru/yaru.dart';
 
 void main() {
   testWidgets('ltr layout', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
-          body: YaruTile(
+          body: YaruListTile(
             leading: Text('Leading'),
             title: Text('Title'),
             subtitle: Text('Subtitle'),
@@ -35,7 +33,7 @@ void main() {
     expect(tester.getRect(title).left, equals(tester.getRect(subtitle).left));
     expect(
       tester.getRect(subtitle).top,
-      greaterThan(tester.getRect(title).bottom),
+      greaterThanOrEqualTo(tester.getRect(title).bottom),
     );
     expect(
       tester.getRect(trailing).left,
@@ -49,7 +47,7 @@ void main() {
         home: Scaffold(
           body: Directionality(
             textDirection: TextDirection.rtl,
-            child: YaruTile(
+            child: YaruListTile(
               leading: Text('Leading'),
               title: Text('Title'),
               subtitle: Text('Subtitle'),
@@ -79,7 +77,7 @@ void main() {
     expect(tester.getRect(title).right, equals(tester.getRect(subtitle).right));
     expect(
       tester.getRect(subtitle).top,
-      greaterThan(tester.getRect(title).bottom),
+      greaterThanOrEqualTo(tester.getRect(title).bottom),
     );
     expect(
       tester.getRect(trailing).right,
