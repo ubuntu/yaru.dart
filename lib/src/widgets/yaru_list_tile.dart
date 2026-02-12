@@ -119,7 +119,10 @@ class YaruListTile extends StatelessWidget {
                         : CrossAxisAlignment.start,
                     children: [
                       titleWidget,
-                      if (subtitleWidget != null) subtitleWidget,
+                      if (subtitleWidget != null) ...[
+                        subtitleWidget,
+                        const SizedBox(height: 1),
+                      ],
                     ],
                   ),
                 ),
