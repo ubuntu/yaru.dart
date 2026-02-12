@@ -14,6 +14,7 @@ class YaruTileList extends StatelessWidget {
   Widget build(BuildContext context) {
     return YaruBorderContainer(
       borderStrokeAlign: BorderSide.strokeAlignOutside,
+      clipBehavior: Clip.hardEdge,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: children.separatedBy(const Divider()),
