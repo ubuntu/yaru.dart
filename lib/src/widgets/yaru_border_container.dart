@@ -19,6 +19,7 @@ class YaruBorderContainer extends StatelessWidget {
     this.clipBehavior = Clip.none,
     this.border,
     this.borderRadius,
+    this.borderStrokeAlign,
   });
 
   /// See [Container.child].
@@ -59,6 +60,9 @@ class YaruBorderContainer extends StatelessWidget {
   /// The default border is 1px wide and the color is [ThemeData.dividerColor].
   final BoxBorder? border;
 
+  /// See [BorderSide.strokeAlign]
+  final double? borderStrokeAlign;
+
   /// The border radius.
   ///
   /// The default border is circular with the radius of `kYaruContainerRadius`.
@@ -69,7 +73,10 @@ class YaruBorderContainer extends StatelessWidget {
     final theme = Theme.of(context);
     final effectiveBorder =
         border ??
-        Border.all(color: DividerTheme.of(context).color ?? theme.dividerColor);
+        Border.all(
+          color: DividerTheme.of(context).color ?? theme.dividerColor,
+          strokeAlign: borderStrokeAlign ?? BorderSide.strokeAlignInside,
+        );
     final effectiveBorderRadius =
         borderRadius ?? BorderRadius.circular(kYaruContainerRadius);
 

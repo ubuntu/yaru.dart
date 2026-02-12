@@ -193,14 +193,14 @@ class SettingsDialog extends StatelessWidget with WatchItMixin {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          YaruTile(
+          YaruListTile(
             title: const Text('Compact mode'),
             trailing: YaruSwitch(
               value: watchPropertyValue((ExampleModel m) => m.compactMode),
               onChanged: (v) => model.compactMode = v,
             ),
           ),
-          YaruTile(
+          YaruListTile(
             title: const Text('RTL mode'),
             trailing: YaruSwitch(
               value: watchPropertyValue((ExampleModel m) => m.rtl),

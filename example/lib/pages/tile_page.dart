@@ -11,6 +11,7 @@ class TilePage extends StatelessWidget {
         return ListView.builder(
           controller: controller,
           padding: const EdgeInsets.all(kYaruPagePadding),
+          // ignore: deprecated_member_use
           itemBuilder: (context, index) => const YaruTile(
             title: Text('Title'),
             trailing: Icon(YaruIcons.information),
