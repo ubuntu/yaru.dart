@@ -110,7 +110,7 @@ class _CodeDialogState extends State<_CodeDialog> {
                         : vsTheme,
                     padding: const EdgeInsets.all(12),
                     textStyle: const TextStyle(
-                      fontFamily: 'UbuntuMono',
+                      fontFamily: 'UbuntuSansMono',
                       fontSize: 16,
                       package: 'yaru',
                     ),

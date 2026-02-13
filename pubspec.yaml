@@ -6,7 +6,7 @@ version: 9.0.1
 
 environment:
   sdk: ">=3.8.0 <4.0.0"
-  flutter: ">=3.32.0"
+  flutter: ">=3.41.0"
 
 dependencies:
   animated_vector: ^0.2.2
@@ -36,34 +36,19 @@ dev_dependencies:
 
 flutter:
   fonts:
-    - family: Ubuntu
-      fonts:
-        - asset: assets/fonts/Ubuntu-L.ttf
-          weight: 300
-        - asset: assets/fonts/Ubuntu-LI.ttf
-          weight: 300
-          style: italic
-        - asset: assets/fonts/Ubuntu-R.ttf
-          weight: 400
-        - asset: assets/fonts/Ubuntu-RI.ttf
-          weight: 400
-          style: italic
-        - asset: assets/fonts/Ubuntu-M.ttf
-          weight: 500
-        - asset: assets/fonts/Ubuntu-MI.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/Ubuntu-B.ttf
-          weight: 700
-        - asset: assets/fonts/Ubuntu-BI.ttf
-          weight: 700
-          style: italic
     - family: YaruIcons
       fonts:
         - asset: assets/yaru_icons.otf
-    - family: UbuntuMono
+    - family: UbuntuSansMono
       fonts:
-        - asset: assets/fonts/UbuntuMono-Regular.ttf
+        - asset: assets/fonts/UbuntuSansMono.ttf
+        - asset: assets/fonts/UbuntuSansMono-Italic.ttf
+          style: italic
+    - family: UbuntuSans
+      fonts:
+        - asset: assets/fonts/UbuntuSans.ttf
+        - asset: assets/fonts/UbuntuSans-Italic.ttf
+          style: italic
 
 icon_font:
   input_svg_dir: "assets/icons/"
