@@ -87,9 +87,6 @@ class _UbuntuTextStyle extends TextStyle {
         package: 'yaru',
         color: textColor,
         letterSpacing: 0, // Override Material/Flutter's letter spacing
-        fontVariations: fontWeight != null
-            ? [FontVariation.weight(fontWeight.value.toDouble())]
-            : null,
       );
   final Color textColor;
 }
