@@ -6,7 +6,7 @@ version: 9.0.1
 
 environment:
   sdk: ">=3.8.0 <4.0.0"
-  flutter: ">=3.32.0"
+  flutter: ">=3.41.0"
 
 dependencies:
   animated_vector: ^0.2.2
