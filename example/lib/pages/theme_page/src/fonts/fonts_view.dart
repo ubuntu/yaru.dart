@@ -24,85 +24,6 @@ class _FontsViewState extends State<FontsView> {
     return ListView(
       padding: const EdgeInsets.all(kYaruPagePadding),
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            YaruSwitchButton(
-              value: italic,
-              onChanged: (value) => setState(() {
-                italic = value;
-              }),
-              title: Text(
-                'Italic',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-            ),
-            const SizedBox(width: kYaruPagePadding),
-            YaruSwitchButton(
-              value: mono,
-              onChanged: (value) => setState(() {
-                mono = value;
-              }),
-              title: Text(
-                'Mono',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontFamily: 'UbuntuSansMono',
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                YaruCheckbox(
-                  value: doWeight,
-                  onChanged: (value) => setState(() {
-                    doWeight = value ?? false;
-                  }),
-                ),
-                Text('Weight $weight'),
-                Slider(
-                  value: weight.toDouble(),
-                  onChanged: doWeight
-                      ? (value) => setState(() {
-                          weight = value.toInt();
-                        })
-                      : null,
-                  min: FontWeight.values.first.value.toDouble(),
-                  max: FontWeight.values.last.value.toDouble(),
-                  divisions: FontWeight.values.length - 1,
-                ),
-              ],
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            YaruCheckbox(
-              value: doWidth,
-              onChanged: (value) => setState(() {
-                doWidth = value ?? false;
-              }),
-            ),
-            Text('Width $width'),
-            Slider(
-              value: width.toDouble(),
-              onChanged: doWidth
-                  ? (value) => setState(() {
-                      width = value.toInt();
-                    })
-                  : null,
-              min: 75,
-              max: 100,
-            ),
-          ],
-        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -227,6 +148,93 @@ class _FontsViewState extends State<FontsView> {
               width: doWidth ? width : null,
             ),
           ],
+        ),
+        const SizedBox(height: kYaruPagePadding),
+        YaruBorderContainer(
+          padding: const EdgeInsets.all(10.0),
+          child: YaruExpandable(
+            header: const Text('Variable Font Options'),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    YaruSwitchButton(
+                      value: italic,
+                      onChanged: (value) => setState(() {
+                        italic = value;
+                      }),
+                      title: Text(
+                        'Italic',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: kYaruPagePadding),
+                    YaruSwitchButton(
+                      value: mono,
+                      onChanged: (value) => setState(() {
+                        mono = value;
+                      }),
+                      title: Text(
+                        'Mono',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontFamily: 'UbuntuSansMono',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        YaruCheckbox(
+                          value: doWeight,
+                          onChanged: (value) => setState(() {
+                            doWeight = value ?? false;
+                          }),
+                        ),
+                        Text('Weight $weight'),
+                        Slider(
+                          value: weight.toDouble(),
+                          onChanged: doWeight
+                              ? (value) => setState(() {
+                                  weight = value.toInt();
+                                })
+                              : null,
+                          min: FontWeight.values.first.value.toDouble(),
+                          max: FontWeight.values.last.value.toDouble(),
+                          divisions: FontWeight.values.length - 1,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    YaruCheckbox(
+                      value: doWidth,
+                      onChanged: (value) => setState(() {
+                        doWidth = value ?? false;
+                      }),
+                    ),
+                    Text('Width $width'),
+                    Slider(
+                      value: width.toDouble(),
+                      onChanged: doWidth
+                          ? (value) => setState(() {
+                              width = value.toInt();
+                            })
+                          : null,
+                      min: 75,
+                      max: 100,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );
