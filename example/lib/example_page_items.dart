@@ -6,6 +6,7 @@ import 'code_snippet_button.dart';
 import 'pages/autocomplete_page.dart';
 import 'pages/banner_page.dart';
 import 'pages/border_container_page.dart';
+import 'pages/calendar_page.dart';
 import 'pages/carousel_page.dart';
 import 'pages/checkbox_page.dart';
 import 'pages/choice_chip_bar_page.dart';
@@ -140,6 +141,14 @@ final examplePageItems = <PageItem>[
           'https://raw.githubusercontent.com/ubuntu/yaru_widgets.dart/main/example/lib/pages/date_time_entry_page.dart',
     ),
     pageBuilder: (context) => const DateTimePage(),
+    iconBuilder: (context, selected) => selected
+        ? const Icon(YaruIcons.calendar_month_filled)
+        : const Icon(YaruIcons.calendar_month),
+  ),
+  PageItem(
+    title: 'YaruCalendar',
+    floatingActionButtonBuilder: null,
+    pageBuilder: (context) => const CalendarPage(),
     iconBuilder: (context, selected) => selected
         ? const Icon(YaruIcons.calendar_month_filled)
         : const Icon(YaruIcons.calendar_month),
