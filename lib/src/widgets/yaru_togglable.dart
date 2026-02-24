@@ -275,7 +275,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
     final uncheckedBorderColor = colorScheme.isHighContrast
         ? colorScheme.outlineVariant
         : theme.brightness == Brightness.light
-        ? const Color(0xFF959595)
+        ? const Color(0xFF909090)
         : const Color(0xFF757575);
     final checkedColor = colorScheme.primary;
     const checkedBorderColor = Colors.transparent;
