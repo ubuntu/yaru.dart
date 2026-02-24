@@ -53,7 +53,7 @@ class _RadioPageState extends State<RadioPage> {
               const SizedBox(height: 10),
             ],
             const Divider(),
-            for (var i = 0; i < 3; ++i)
+            for (var i = 0; i < 3; ++i) ...[
               YaruRadioListTile<int>(
                 value: i,
                 groupValue: _listTileValue,
@@ -61,6 +61,27 @@ class _RadioPageState extends State<RadioPage> {
                 toggleable: true,
                 title: const Text('YaruRadioListTile'),
               ),
+              YaruRadioListTile(
+                value: i,
+                groupValue: _listTileValue,
+                onChanged: (v) => setState(() => _listTileValue = v),
+                title: const Text('YaruRadioListTile'),
+                subtitle: const Text('Custom control'),
+                control: Row(
+                  children: [
+                    YaruRadio(
+                      value: i,
+                      groupValue: _listTileValue,
+                      onChanged: (v) => setState(() => _listTileValue = v),
+                    ),
+                    YaruIconButton(
+                      icon: const Icon(YaruIcons.information),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ],
         );
       },

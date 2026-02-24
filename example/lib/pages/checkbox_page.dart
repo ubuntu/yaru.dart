@@ -57,6 +57,27 @@ class _CheckboxPageState extends State<CheckboxPage> {
                 tristate: true,
                 title: const Text('YaruCheckboxListTile'),
               ),
+              YaruCheckboxListTile(
+                value: _listTileValues[i],
+                onChanged: (v) => setState(() => _listTileValues[i] = v),
+                tristate: true,
+                title: const Text('YaruCheckboxListTile'),
+                subtitle: const Text('Custom control'),
+                control: Row(
+                  children: [
+                    YaruIconButton(
+                      icon: const Icon(YaruIcons.information),
+                      onPressed: () {},
+                    ),
+                    YaruCheckbox(
+                      value: _listTileValues[i],
+                      onChanged: (v) => setState(() => _listTileValues[i] = v),
+                      tristate: true,
+                    ),
+                    const Icon(YaruIcons.pan_end),
+                  ],
+                ),
+              ),
               const SizedBox(height: 10),
             ],
           ],
