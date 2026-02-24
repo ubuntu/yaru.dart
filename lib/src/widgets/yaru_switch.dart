@@ -8,7 +8,7 @@ const _kSwitchActivableAreaPadding = EdgeInsets.symmetric(
   horizontal: 2,
   vertical: 5,
 );
-const _kSwitchSize = Size(55, 30);
+const _kSwitchSize = Size(48, 26);
 const _kSwitchThumbSizeFactor = 0.8;
 
 /// A Yaru switch.
