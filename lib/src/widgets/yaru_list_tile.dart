@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
+const _horizontalGap = 12.0;
+const _verticalGap = 8.0;
+
 /// A tile widget similar to a [ListTile], with more flexible styling.
 ///
 /// Using a [YaruListTile.square] is preferable when displaying the tiles inside
@@ -16,10 +19,17 @@ class YaruListTile extends StatelessWidget {
     this.onTap,
     this.borderRadius,
     this.hasFocusBorder,
+    this.mouseCursor,
+    this.focusNode,
+    this.hoverColor,
+    this.customBorder,
     this.centerTitle = false,
     this.enabled = true,
-    this.horizontalGap = 12.0,
-    this.verticalGap = 8.0,
+    this.contentPadding,
+    this.horizontalGap = _horizontalGap,
+    this.verticalGap = _verticalGap,
+    this.autofocus = false,
+    this.enableFeedback = true,
     super.key,
   }) : assert((title != null) ^ (titleText != null));
 
@@ -32,11 +42,18 @@ class YaruListTile extends StatelessWidget {
     this.trailing,
     this.onTap,
     this.hasFocusBorder,
+    this.mouseCursor,
+    this.focusNode,
+    this.hoverColor,
+    this.customBorder,
     this.borderRadius = BorderRadius.zero,
     this.centerTitle = false,
     this.enabled = true,
-    this.horizontalGap = 12.0,
-    this.verticalGap = 8.0,
+    this.contentPadding,
+    this.horizontalGap = _horizontalGap,
+    this.verticalGap = _verticalGap,
+    this.autofocus = false,
+    this.enableFeedback = true,
     super.key,
   }) : assert((title != null) ^ (titleText != null));
 
@@ -73,11 +90,32 @@ class YaruListTile extends StatelessWidget {
   /// Whether the list tile is enabled. Defaults to true.
   final bool enabled;
 
+  /// The tile's internal padding between content and the outer edge.
+  final EdgeInsetsGeometry? contentPadding;
+
   /// Horizontal gap between widgets.
   final double horizontalGap;
 
   /// Vertical gap between widgets.
   final double verticalGap;
+
+  /// See [InkWell.mouseCursor].
+  final MouseCursor? mouseCursor;
+
+  /// See [InkWell.focusNode].
+  final FocusNode? focusNode;
+
+  /// See [InkWell.enableFeedback].
+  final bool enableFeedback;
+
+  /// See [InkWell.autofocus].
+  final bool autofocus;
+
+  /// See [InkWell.hoverColor].
+  final Color? hoverColor;
+
+  /// See [InkWell.customBorder].
+  final ShapeBorder? customBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -106,11 +144,19 @@ class YaruListTile extends StatelessWidget {
           borderRadius:
               borderRadius ?? BorderRadius.circular(kYaruButtonRadius),
           onTap: enabled ? onTap : null,
+          mouseCursor: mouseCursor,
+          focusNode: focusNode,
+          enableFeedback: enableFeedback,
+          hoverColor: hoverColor,
+          autofocus: autofocus,
+          customBorder: customBorder,
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalGap,
-              vertical: verticalGap,
-            ),
+            padding:
+                contentPadding ??
+                EdgeInsets.symmetric(
+                  horizontal: horizontalGap,
+                  vertical: verticalGap,
+                ),
             child: Row(
               children: [
                 if (leading != null) ...[
