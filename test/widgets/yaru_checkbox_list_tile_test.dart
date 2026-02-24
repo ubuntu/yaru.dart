@@ -102,7 +102,7 @@ void main() {
           subtitle: const Text('Lorem ipsum dolor sit amet'),
         ),
         themeMode: variant.themeMode,
-        size: const Size(325, 72),
+        size: const Size(325, 92),
       );
       await tester.pumpAndSettle();
 
