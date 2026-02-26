@@ -15,7 +15,7 @@ import 'package:yaru/yaru.dart';
 ///  * [YaruCheckboxListTile], a similar widget for checkboxes.
 ///  * [YaruSwitchListTile], a similar widget for switches.
 ///  * [ListTile] and [YaruRadio], the widgets from which this widget is made.
-class YaruRadioListTile<T> extends StatelessWidget {
+class YaruRadioListTile<T> extends YaruToggleListTile {
   /// Creates a combination of a [ListTile] and a [YaruRadio].
   ///
   /// See [RadioListTile].
@@ -25,24 +25,18 @@ class YaruRadioListTile<T> extends StatelessWidget {
     required this.groupValue,
     required this.onChanged,
     this.toggleable = false,
-    this.title,
-    this.subtitle,
-    this.isThreeLine = false,
-    this.dense,
-    this.secondary,
-    this.selected = false,
-    this.controlAffinity = ListTileControlAffinity.platform,
-    this.autofocus = false,
-    this.contentPadding,
-    this.shape,
-    this.tileColor,
-    this.selectedTileColor,
-    this.visualDensity,
-    this.focusNode,
-    this.enableFeedback,
-    this.mouseCursor,
-    this.hasFocusBorder,
-  }) : assert(!isThreeLine || subtitle != null);
+    super.control,
+    super.title,
+    super.subtitle,
+    super.secondary,
+    super.controlAffinity,
+    super.autofocus = false,
+    super.shape,
+    super.focusNode,
+    super.mouseCursor,
+    super.hasFocusBorder,
+    super.contentPadding,
+  });
 
   /// See [RadioListTile.value].
   final T value;
@@ -56,57 +50,6 @@ class YaruRadioListTile<T> extends StatelessWidget {
   /// See [RadioListTile.toggleable].
   final bool toggleable;
 
-  /// See [RadioListTile.title].
-  final Widget? title;
-
-  /// See [RadioListTile.subtitle].
-  final Widget? subtitle;
-
-  /// See [RadioListTile.secondary].
-  final Widget? secondary;
-
-  /// See [RadioListTile.isThreeLine].
-  final bool isThreeLine;
-
-  /// See [RadioListTile.dense].
-  final bool? dense;
-
-  /// See [RadioListTile.selected].
-  final bool selected;
-
-  /// See [RadioListTile.controlAffinity].
-  final ListTileControlAffinity controlAffinity;
-
-  /// See [RadioListTile.autofocus].
-  final bool autofocus;
-
-  /// See [RadioListTile.contentPadding].
-  final EdgeInsetsGeometry? contentPadding;
-
-  /// See [RadioListTile.shape].
-  final ShapeBorder? shape;
-
-  /// See [RadioListTile.tileColor].
-  final Color? tileColor;
-
-  /// See [RadioListTile.selectedTileColor].
-  final Color? selectedTileColor;
-
-  /// See [RadioListTile.visualDensity].
-  final VisualDensity? visualDensity;
-
-  /// See [RadioListTile.focusNode].
-  final FocusNode? focusNode;
-
-  /// See [RadioListTile.enableFeedback].
-  final bool? enableFeedback;
-
-  /// See [RadioListTile.mouseCursor].
-  final MouseCursor? mouseCursor;
-
-  /// Whether to display the default focus border on focus or not.
-  final bool? hasFocusBorder;
-
   void _handleValueChange() {
     assert(onChanged != null);
     if (groupValue != value || !toggleable) {
@@ -119,15 +62,17 @@ class YaruRadioListTile<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget? leading, trailing;
-    final Widget control = YaruRadio<T>(
-      value: value,
-      groupValue: groupValue,
-      onChanged: onChanged,
-      toggleable: toggleable,
-      autofocus: autofocus,
-      mouseCursor: mouseCursor,
-      hasFocusBorder: false,
-    );
+    final control =
+        this.control ??
+        YaruRadio<T>(
+          value: value,
+          groupValue: groupValue,
+          onChanged: onChanged,
+          toggleable: toggleable,
+          autofocus: autofocus,
+          mouseCursor: mouseCursor,
+          hasFocusBorder: false,
+        );
 
     switch (controlAffinity) {
       case ListTileControlAffinity.leading:
@@ -141,25 +86,19 @@ class YaruRadioListTile<T> extends StatelessWidget {
         break;
     }
 
-    final tile = ListTile(
+    final tile = YaruListTile(
       leading: leading,
       title: title,
       subtitle: subtitle,
       trailing: trailing,
-      isThreeLine: isThreeLine,
-      dense: dense,
       enabled: onChanged != null,
-      shape: shape,
-      tileColor: tileColor,
-      selectedTileColor: selectedTileColor,
       onTap: onChanged != null ? _handleValueChange : null,
-      selected: selected,
       autofocus: autofocus,
-      contentPadding: contentPadding,
-      visualDensity: visualDensity,
       focusNode: focusNode,
-      enableFeedback: enableFeedback,
+      hoverColor: hoverColor,
       mouseCursor: mouseCursor,
+      customBorder: shape,
+      contentPadding: contentPadding,
     );
 
     return MergeSemantics(

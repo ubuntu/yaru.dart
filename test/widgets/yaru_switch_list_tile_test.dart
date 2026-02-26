@@ -89,7 +89,7 @@ void main() {
           onOffShapes: variant.label.contains('-shapes'),
         ),
         themeMode: variant.themeMode,
-        size: const Size(325, 72),
+        size: const Size(325, 92),
       );
       await tester.pumpAndSettle();
 
