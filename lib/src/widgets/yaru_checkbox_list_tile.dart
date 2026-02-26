@@ -76,11 +76,11 @@ class YaruCheckboxListTile extends YaruToggleListTile {
 
     switch (controlAffinity) {
       case ListTileControlAffinity.leading:
+      case ListTileControlAffinity.platform:
         leading = control;
         trailing = secondary;
         break;
       case ListTileControlAffinity.trailing:
-      case ListTileControlAffinity.platform:
         leading = secondary;
         trailing = control;
         break;
