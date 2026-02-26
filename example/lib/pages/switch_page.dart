@@ -66,7 +66,10 @@ class _SwitchPageState extends State<SwitchPage> {
                       value: _listTileValues[i],
                       onChanged: (v) => setState(() => _listTileValues[i] = v),
                     ),
-                    const Icon(YaruIcons.pan_end),
+                    YaruIconButton(
+                      icon: const Icon(YaruIcons.go_next),
+                      onPressed: () {},
+                    ),
                   ],
                 ),
               ),
