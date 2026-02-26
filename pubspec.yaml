@@ -2,7 +2,7 @@ name: yaru
 description: Common flutter widgets useful for building desktop and web applications.
 homepage: https://github.com/ubuntu/yaru.dart
 issue_tracker: https://github.com/ubuntu/yaru.dart/issues
-version: 9.0.1
+version: 10.0.0
 
 environment:
   sdk: ">=3.8.0 <4.0.0"

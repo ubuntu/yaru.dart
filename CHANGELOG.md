@@ -1,5 +1,25 @@
 # Changelog
 
+## [10.0.0](https://github.com/ubuntu/yaru.dart/compare/v9.0.1...v10.0.0) (2026-02-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* Adjust toggleables to new styles ([#1064](https://github.com/ubuntu/yaru.dart/issues/1064))
+* YaruInfoBox visual improvements ([#1058](https://github.com/ubuntu/yaru.dart/issues/1058))
+
+### Features
+
+* Add YaruListTile and YaruTileList ([#1062](https://github.com/ubuntu/yaru.dart/issues/1062)) ([a5143b6](https://github.com/ubuntu/yaru.dart/commit/a5143b6536ea7e731c8a7b02bbd116235129d792))
+* Adjust toggleables to new styles ([#1064](https://github.com/ubuntu/yaru.dart/issues/1064)) ([0cca8ec](https://github.com/ubuntu/yaru.dart/commit/0cca8ecf6ab45f76f55bc2e8563873237291951c))
+* YaruInfoBox visual improvements ([#1058](https://github.com/ubuntu/yaru.dart/issues/1058)) ([9082c7e](https://github.com/ubuntu/yaru.dart/commit/9082c7e80076a8bfff6eafe389a29e416c0ee60a))
+
+
+### Bug Fixes
+
+* Reduce default ListTile text size ([#1060](https://github.com/ubuntu/yaru.dart/issues/1060)) ([f5929f4](https://github.com/ubuntu/yaru.dart/commit/f5929f4841536af3477d9144121164e49ac8b9af))
+* Reduce label font weight to normal ([#1061](https://github.com/ubuntu/yaru.dart/issues/1061)) ([bdc86f1](https://github.com/ubuntu/yaru.dart/commit/bdc86f1dc84e1f6be626033167dc347fe42602d6))
+
 ## [9.0.1](https://github.com/ubuntu/yaru.dart/compare/v9.0.0...v9.0.1) (2026-01-15)
 
 
