@@ -61,26 +61,6 @@ class _RadioPageState extends State<RadioPage> {
                 toggleable: true,
                 title: const Text('YaruRadioListTile'),
               ),
-              YaruRadioListTile(
-                value: i,
-                groupValue: _listTileValue,
-                onChanged: (v) => setState(() => _listTileValue = v),
-                title: const Text('YaruRadioListTile'),
-                subtitle: const Text('Custom control'),
-                control: Row(
-                  children: [
-                    YaruRadio(
-                      value: i,
-                      groupValue: _listTileValue,
-                      onChanged: (v) => setState(() => _listTileValue = v),
-                    ),
-                    YaruIconButton(
-                      icon: const Icon(YaruIcons.information),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
             ],
           ],
         );
