@@ -39,7 +39,8 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
 
 InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
   final radius = BorderRadius.circular(kYaruButtonRadius);
-  const width = kYaruFocusBorderWidth;
+  const width = 1.0;
+  const focusWidth = kYaruFocusBorderWidth;
   const strokeAlign = 0.0;
   final fill = colorScheme.surface.scale(
     lightness: colorScheme.isLight ? -0.05 : -0.1,
@@ -52,14 +53,14 @@ InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
   const textStyle = TextStyle(fontSize: 14, fontWeight: FontWeight.normal);
 
   return InputDecorationTheme(
-    filled: true,
+    filled: false,
     fillColor: fill,
     border: OutlineInputBorder(
       borderSide: BorderSide(width: width, color: border),
       borderRadius: radius,
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: width, color: colorScheme.primary),
+      borderSide: BorderSide(width: focusWidth, color: colorScheme.primary),
       borderRadius: radius,
     ),
     enabledBorder: OutlineInputBorder(
@@ -71,13 +72,13 @@ InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
       borderRadius: radius,
     ),
     activeIndicatorBorder: const BorderSide(
-      width: width,
+      width: focusWidth,
       strokeAlign: strokeAlign,
     ),
     outlineBorder: const BorderSide(width: width, strokeAlign: strokeAlign),
     focusedErrorBorder: OutlineInputBorder(
       borderSide: BorderSide(
-        width: width,
+        width: focusWidth,
         color: colorScheme.error,
         strokeAlign: strokeAlign,
       ),
