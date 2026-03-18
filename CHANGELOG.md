@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.1.0](https://github.com/ubuntu/yaru.dart/compare/v10.0.0...v10.1.0) (2026-03-18)
+
+
+### Features
+
+* Add option to hide the default popup icon ([#1068](https://github.com/ubuntu/yaru.dart/issues/1068)) ([c276ca2](https://github.com/ubuntu/yaru.dart/commit/c276ca2c5893d7c4ce90e7ab4b1f1e4e114b23e2))
+
 ## [10.0.0](https://github.com/ubuntu/yaru.dart/compare/v9.0.1...v10.0.0) (2026-03-11)
 
 
