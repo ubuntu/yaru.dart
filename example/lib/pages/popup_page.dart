@@ -77,7 +77,7 @@ class _PopupPageState extends State<PopupPage> {
                         enumSet.add(value);
                       }
                     },
-                    showIcon: false,
+                    showArrow: false,
                     child: const Icon(YaruIcons.view_more),
                     itemBuilder: (context) {
                       return [

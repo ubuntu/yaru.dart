@@ -27,7 +27,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.mouseCursor,
     this.icon,
     this.semanticLabel,
-    this.showIcon = true,
+    this.showArrow = true,
   });
 
   final T? initialValue;
@@ -47,7 +47,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final ButtonStyle? style;
   final MouseCursor? mouseCursor;
   final Widget? icon;
-  final bool showIcon;
+  final bool showArrow;
   final String? semanticLabel;
 
   @override
@@ -104,7 +104,7 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
                       Padding(padding: childPadding, child: child),
                       SizedBox(
                         height: kYaruTitleBarItemHeight,
-                        child: showIcon
+                        child: showArrow
                             ? icon ??
                                   Icon(
                                     YaruIcons.pan_down,
