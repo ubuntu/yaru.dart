@@ -3,7 +3,7 @@ import 'package:yaru/yaru.dart';
 
 /// Abstract class for toggleable list tiles like [YaruRadioListTile],
 /// [YaruCheckboxListTile], and [YaruSwitchListTile].
-abstract class YaruToggleListTile<T> extends StatelessWidget {
+abstract class YaruToggleListTile<T> extends StatefulWidget {
   const YaruToggleListTile({
     super.key,
     this.control,
