@@ -60,51 +60,71 @@ class YaruRadioListTile<T> extends YaruToggleListTile {
   }
 
   @override
+  State<StatefulWidget> createState() => _YaruRadioListTileState<T>();
+}
+
+class _YaruRadioListTileState<T> extends State<YaruRadioListTile<T>> {
+  bool _tileHasFocus = false;
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = widget.focusNode ?? FocusNode();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Widget? leading, trailing;
     final control =
-        this.control ??
+        widget.control ??
         YaruRadio<T>(
-          value: value,
-          groupValue: groupValue,
-          onChanged: onChanged,
-          toggleable: toggleable,
-          autofocus: autofocus,
-          mouseCursor: mouseCursor,
-          hasFocusBorder: false,
+          value: widget.value,
+          groupValue: widget.groupValue,
+          onChanged: widget.onChanged,
+          toggleable: widget.toggleable,
+          autofocus: widget.autofocus,
+          mouseCursor: widget.mouseCursor,
         );
 
-    switch (controlAffinity) {
+    switch (widget.controlAffinity) {
       case ListTileControlAffinity.leading:
       case ListTileControlAffinity.platform:
         leading = control;
-        trailing = secondary;
+        trailing = widget.secondary;
         break;
       case ListTileControlAffinity.trailing:
-        leading = secondary;
+        leading = widget.secondary;
         trailing = control;
         break;
     }
 
     final tile = YaruListTile(
       leading: leading,
-      title: title,
-      subtitle: subtitle,
+      title: widget.title,
+      subtitle: widget.subtitle,
       trailing: trailing,
-      enabled: onChanged != null,
-      onTap: onChanged != null ? _handleValueChange : null,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      hoverColor: hoverColor,
-      mouseCursor: mouseCursor,
-      customBorder: shape,
-      contentPadding: contentPadding,
+      enabled: widget.onChanged != null,
+      onTap: widget.onChanged != null ? widget._handleValueChange : null,
+      autofocus: widget.autofocus,
+      focusNode: _focusNode,
+      hoverColor: widget.hoverColor,
+      mouseCursor: widget.mouseCursor,
+      customBorder: widget.shape,
+      contentPadding: widget.contentPadding,
+      hasFocusBorder: false,
+      onFocusChange: (focus) => setState(() {
+        _tileHasFocus = _focusNode.hasPrimaryFocus;
+      }),
     );
 
     return MergeSemantics(
-      child: hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+      child:
+          widget.hasFocusBorder ??
+              YaruTheme.maybeOf(context)?.focusBorders == true
           ? YaruFocusBorder.primary(
               borderStrokeAlign: BorderSide.strokeAlignInside,
+              borderColor: _tileHasFocus ? null : Colors.transparent,
               child: tile,
             )
           : tile,
