@@ -14,7 +14,7 @@ class YaruPageController extends ChangeNotifier {
   int get previousIndex => _previousIndex;
   int _previousIndex;
 
-  void _setIndex(value) {
+  void _setIndex(int value) {
     assert(value < length || length == 0);
     _previousIndex = _index;
     _index = value;
