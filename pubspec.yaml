@@ -18,6 +18,7 @@ dependencies:
     sdk: flutter
   gsettings: ^0.2.8
   gtk: ^2.1.0
+  intl: ^0.20.0
   platform: ^3.1.5
   platform_linux: ^0.1.2
   yaru_window: ^0.2.2
