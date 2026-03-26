@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 const _lorem =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
@@ -9,30 +9,37 @@ class ExpandablePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(kYaruPagePadding),
-      children: const [
-        YaruExpandable(
-          child: Text(_lorem),
-          header: Text(
-            'Lorem ipsum dolor sit amet',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        YaruExpandable(
-          isExpanded: true,
-          collapsedChild: Text(
-            _lorem,
-            maxLines: 5,
-            overflow: TextOverflow.fade,
-          ),
-          child: Text(_lorem),
-          header: Text(
-            'Lorem ipsum dolor sit amet',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        )
-      ],
+    return YaruScrollViewUndershoot.builder(
+      builder: (context, controller) {
+        return ListView(
+          controller: controller,
+          padding: const EdgeInsets.all(kYaruPagePadding),
+          children: const [
+            YaruExpandable(
+              usePadding: true,
+              header: Text(
+                'Lorem ipsum dolor sit amet',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              child: Text(_lorem),
+            ),
+            YaruExpandable(
+              isExpanded: true,
+              collapsedChild: Text(
+                _lorem,
+                maxLines: 5,
+                overflow: TextOverflow.fade,
+              ),
+              usePadding: true,
+              header: Text(
+                'Lorem ipsum dolor sit amet',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              child: Text(_lorem),
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -2,9 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
+import 'yaru_switch_test.dart' show switchGoldenThemeVariants;
 
 void main() {
   testWidgets('contains switch and labels', (tester) async {
@@ -21,8 +22,9 @@ void main() {
       );
     }
 
-    await tester
-        .pumpWidget(builder(title: const Text('title'), subtitle: null));
+    await tester.pumpWidget(
+      builder(title: const Text('title'), subtitle: null),
+    );
     expect(find.text('title'), findsOneWidget);
     expect(find.text('subtitle'), findsNothing);
     expect(find.byType(YaruSwitch), findsOneWidget);
@@ -89,21 +91,25 @@ void main() {
       ),
     );
 
-    final gesture =
-        await tester.createGesture(kind: PointerDeviceKind.mouse, pointer: 1);
+    final gesture = await tester.createGesture(
+      kind: PointerDeviceKind.mouse,
+      pointer: 1,
+    );
     await gesture.addPointer(location: Offset.zero);
     addTearDown(gesture.removePointer);
 
-    await gesture
-        .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'enabled')));
+    await gesture.moveTo(
+      tester.getCenter(find.widgetWithText(MouseRegion, 'enabled').first),
+    );
     await tester.pump();
     expect(
       RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
       SystemMouseCursors.click,
     );
 
-    await gesture
-        .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'disabled')));
+    await gesture.moveTo(
+      tester.getCenter(find.widgetWithText(MouseRegion, 'disabled').first),
+    );
     await tester.pump();
     expect(
       RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
@@ -157,11 +163,12 @@ void main() {
 
       await tester.pumpScaffold(
         YaruSwitchButton(
-          autofocus: variant.hasState(MaterialState.focused),
-          value: variant.hasState(MaterialState.selected),
-          onChanged: variant.hasState(MaterialState.disabled) ? null : (_) {},
+          autofocus: variant.hasState(WidgetState.focused),
+          value: variant.hasState(WidgetState.selected),
+          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
           title: const Text('YaruSwitchButton'),
           subtitle: const Text('Lorem ipsum dolor sit amet'),
+          onOffShapes: variant.label.contains('-shapes'),
         ),
         themeMode: variant.themeMode,
         size: const Size(248, 56),
@@ -169,10 +176,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruSwitch));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruSwitch));
         await tester.pumpAndSettle();
       }
@@ -188,26 +195,26 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('off', <MaterialState>{}),
-  ...goldenThemeVariants('off-disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('off-focused', {MaterialState.focused}),
-  ...goldenThemeVariants('off-hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('off-pressed', {MaterialState.pressed}),
-  ...goldenThemeVariants('on', {MaterialState.selected}),
-  ...goldenThemeVariants('on-disabled', {
-    MaterialState.selected,
-    MaterialState.disabled,
+  ...switchGoldenThemeVariants('off', <WidgetState>{}),
+  ...switchGoldenThemeVariants('off-disabled', {WidgetState.disabled}),
+  ...switchGoldenThemeVariants('off-focused', {WidgetState.focused}),
+  ...switchGoldenThemeVariants('off-hovered', {WidgetState.hovered}),
+  ...switchGoldenThemeVariants('off-pressed', {WidgetState.pressed}),
+  ...switchGoldenThemeVariants('on', {WidgetState.selected}),
+  ...switchGoldenThemeVariants('on-disabled', {
+    WidgetState.selected,
+    WidgetState.disabled,
   }),
-  ...goldenThemeVariants('on-focused', {
-    MaterialState.selected,
-    MaterialState.focused,
+  ...switchGoldenThemeVariants('on-focused', {
+    WidgetState.selected,
+    WidgetState.focused,
   }),
-  ...goldenThemeVariants('on-hovered', {
-    MaterialState.selected,
-    MaterialState.hovered,
+  ...switchGoldenThemeVariants('on-hovered', {
+    WidgetState.selected,
+    WidgetState.hovered,
   }),
-  ...goldenThemeVariants('on-pressed', {
-    MaterialState.selected,
-    MaterialState.pressed,
+  ...switchGoldenThemeVariants('on-pressed', {
+    WidgetState.selected,
+    WidgetState.pressed,
   }),
 });

@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
 
@@ -21,8 +21,9 @@ void main() {
       );
     }
 
-    await tester
-        .pumpWidget(builder(title: const Text('title'), subtitle: null));
+    await tester.pumpWidget(
+      builder(title: const Text('title'), subtitle: null),
+    );
     expect(find.text('title'), findsOneWidget);
     expect(find.text('subtitle'), findsNothing);
     expect(find.byType(YaruCheckbox), findsOneWidget);
@@ -89,21 +90,25 @@ void main() {
       ),
     );
 
-    final gesture =
-        await tester.createGesture(kind: PointerDeviceKind.mouse, pointer: 1);
+    final gesture = await tester.createGesture(
+      kind: PointerDeviceKind.mouse,
+      pointer: 1,
+    );
     await gesture.addPointer(location: Offset.zero);
     addTearDown(gesture.removePointer);
 
-    await gesture
-        .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'enabled')));
+    await gesture.moveTo(
+      tester.getCenter(find.widgetWithText(MouseRegion, 'enabled').first),
+    );
     await tester.pump();
     expect(
       RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
       SystemMouseCursors.click,
     );
 
-    await gesture
-        .moveTo(tester.getCenter(find.widgetWithText(MouseRegion, 'disabled')));
+    await gesture.moveTo(
+      tester.getCenter(find.widgetWithText(MouseRegion, 'disabled').first),
+    );
     await tester.pump();
     expect(
       RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
@@ -159,10 +164,10 @@ void main() {
 
       await tester.pumpScaffold(
         YaruCheckButton(
-          autofocus: variant.hasState(MaterialState.focused),
+          autofocus: variant.hasState(WidgetState.focused),
           tristate: tristate,
-          value: tristate ? null : variant.hasState(MaterialState.selected),
-          onChanged: variant.hasState(MaterialState.disabled) ? null : (_) {},
+          value: tristate ? null : variant.hasState(WidgetState.selected),
+          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
           title: const Text('YaruCheckButton'),
           subtitle: const Text('Lorem ipsum dolor sit amet'),
         ),
@@ -172,10 +177,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruCheckbox));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruCheckbox));
         await tester.pumpAndSettle();
       }
@@ -191,31 +196,31 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('unchecked', <MaterialState>{}),
-  ...goldenThemeVariants('unckecked-disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('unckecked-focused', {MaterialState.focused}),
-  ...goldenThemeVariants('unckecked-hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('unckecked-pressed', {MaterialState.pressed}),
-  ...goldenThemeVariants('checked', {MaterialState.selected}),
+  ...goldenThemeVariants('unchecked', <WidgetState>{}),
+  ...goldenThemeVariants('unckecked-disabled', {WidgetState.disabled}),
+  ...goldenThemeVariants('unckecked-focused', {WidgetState.focused}),
+  ...goldenThemeVariants('unckecked-hovered', {WidgetState.hovered}),
+  ...goldenThemeVariants('unckecked-pressed', {WidgetState.pressed}),
+  ...goldenThemeVariants('checked', {WidgetState.selected}),
   ...goldenThemeVariants('checked-disabled', {
-    MaterialState.selected,
-    MaterialState.disabled,
+    WidgetState.selected,
+    WidgetState.disabled,
   }),
   ...goldenThemeVariants('checked-focused', {
-    MaterialState.selected,
-    MaterialState.focused,
+    WidgetState.selected,
+    WidgetState.focused,
   }),
   ...goldenThemeVariants('checked-hovered', {
-    MaterialState.selected,
-    MaterialState.hovered,
+    WidgetState.selected,
+    WidgetState.hovered,
   }),
   ...goldenThemeVariants('checked-pressed', {
-    MaterialState.selected,
-    MaterialState.pressed,
+    WidgetState.selected,
+    WidgetState.pressed,
   }),
-  ...goldenThemeVariants('tristate', {MaterialState.selected}),
-  ...goldenThemeVariants('tristate-disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('tristate-focused', {MaterialState.focused}),
-  ...goldenThemeVariants('tristate-hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('tristate-pressed', {MaterialState.pressed}),
+  ...goldenThemeVariants('tristate', {WidgetState.selected}),
+  ...goldenThemeVariants('tristate-disabled', {WidgetState.disabled}),
+  ...goldenThemeVariants('tristate-focused', {WidgetState.focused}),
+  ...goldenThemeVariants('tristate-hovered', {WidgetState.hovered}),
+  ...goldenThemeVariants('tristate-pressed', {WidgetState.pressed}),
 });

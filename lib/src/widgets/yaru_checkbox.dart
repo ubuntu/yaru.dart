@@ -1,19 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
-import 'yaru_check_button.dart';
-import 'yaru_checkbox_theme.dart';
-import 'yaru_radio.dart';
-import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
 
 // NOTE: keep in sync with Radio
 const _kCheckboxActivableAreaPadding = EdgeInsets.all(6);
 const _kCheckboxTogglableSize = Size.square(20);
 
-const _kCheckboxBorderRadius = Radius.circular(4);
+const _kCheckboxBorderRadius = Radius.circular(kYaruCheckRadius);
 const _kCheckboxDashStroke = 2.0;
 const _kDashSizeFactor = 0.52;
+const _kUncheckedBorderWidth = 2.0;
 
 /// A Yaru checkbox.
 ///
@@ -52,6 +50,7 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
     this.autofocus = false,
     this.mouseCursor,
     this.statesController,
+    this.hasFocusBorder,
   }) : assert(tristate || value != null);
 
   /// Whether this checkbox is checked.
@@ -127,11 +126,14 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
   @override
   final bool autofocus;
 
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
+
   @override
   final MouseCursor? mouseCursor;
 
   @override
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -143,8 +145,8 @@ class YaruCheckbox extends StatefulWidget implements YaruTogglable<bool?> {
         description: checked == null
             ? 'mixed'
             : checked == true
-                ? 'checked'
-                : 'unchecked',
+            ? 'checked'
+            : 'unchecked',
         showName: false,
       ),
     );
@@ -194,56 +196,55 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
     final painter = _YaruCheckboxPainter();
     fillPainterDefaults(painter);
 
-    const unselectedState = <MaterialState>{};
-    const selectedState = {MaterialState.selected};
-    const disabledState = {MaterialState.disabled};
-    const selectedDisabledState = {
-      MaterialState.selected,
-      MaterialState.disabled
-    };
+    const unselectedState = <WidgetState>{};
+    const selectedState = {WidgetState.selected};
+    const disabledState = {WidgetState.disabled};
+    const selectedDisabledState = {WidgetState.selected, WidgetState.disabled};
 
     // Normal colors
     final uncheckedColor =
         checkboxTheme.color?.resolve(unselectedState) ?? painter.uncheckedColor;
     final uncheckedBorderColor =
         checkboxTheme.borderColor?.resolve(unselectedState) ??
-            painter.uncheckedBorderColor;
-    final checkedColor = widget.selectedColor ??
+        painter.uncheckedBorderColor;
+    final checkedColor =
+        widget.selectedColor ??
         checkboxTheme.color?.resolve(selectedState) ??
         painter.checkedColor;
     final checkedBorderColor =
         checkboxTheme.borderColor?.resolve(selectedState) ??
-            painter.checkedBorderColor;
-    final checkmarkColor = widget.checkmarkColor ??
+        painter.checkedBorderColor;
+    final checkmarkColor =
+        widget.checkmarkColor ??
         checkboxTheme.checkmarkColor?.resolve(selectedState) ??
         painter.checkmarkColor;
 
     // Disabled colors
     final disabledUncheckedColor =
         checkboxTheme.color?.resolve(disabledState) ??
-            painter.disabledUncheckedColor;
+        painter.disabledUncheckedColor;
     final disabledUncheckedBorderColor =
         checkboxTheme.borderColor?.resolve(disabledState) ??
-            painter.disabledUncheckedBorderColor;
+        painter.disabledUncheckedBorderColor;
     final disabledCheckedColor =
         checkboxTheme.color?.resolve(selectedDisabledState) ??
-            painter.disabledCheckedColor;
+        painter.disabledCheckedColor;
     final disabledCheckedBorderColor =
         checkboxTheme.borderColor?.resolve(selectedDisabledState) ??
-            painter.disabledCheckedBorderColor;
+        painter.disabledCheckedBorderColor;
     final disabledCheckmarkColor =
         checkboxTheme.checkmarkColor?.resolve(selectedDisabledState) ??
-            painter.disabledCheckmarkColor;
+        painter.disabledCheckmarkColor;
 
     // Indicator colors
     final hoverIndicatorColor =
-        checkboxTheme.indicatorColor?.resolve({MaterialState.hovered}) ??
-            painter.hoverIndicatorColor;
+        checkboxTheme.indicatorColor?.resolve({WidgetState.hovered}) ??
+        painter.hoverIndicatorColor;
     final focusIndicatorColor =
-        checkboxTheme.indicatorColor?.resolve({MaterialState.focused}) ??
-            painter.focusIndicatorColor;
+        checkboxTheme.indicatorColor?.resolve({WidgetState.focused}) ??
+        painter.focusIndicatorColor;
 
-    return buildToggleable(
+    final checkboxWidget = buildToggleable(
       painter
         ..uncheckedColor = uncheckedColor
         ..uncheckedBorderColor = uncheckedBorderColor
@@ -257,36 +258,32 @@ class _YaruCheckboxState extends YaruTogglableState<YaruCheckbox> {
         ..disabledCheckmarkColor = disabledCheckmarkColor
         ..hoverIndicatorColor = hoverIndicatorColor
         ..focusIndicatorColor = focusIndicatorColor,
-      mouseCursor: widget.mouseCursor ??
-          checkboxTheme.mouseCursor
-              ?.resolve({if (!widget.interactive) MaterialState.disabled}),
+      mouseCursor:
+          widget.mouseCursor ??
+          checkboxTheme.mouseCursor?.resolve({
+            if (!widget.interactive) WidgetState.disabled,
+          }),
     );
+
+    return widget.hasFocusBorder ??
+            YaruTheme.maybeOf(context)?.focusBorders == true
+        ? YaruFocusBorder.primary(child: checkboxWidget)
+        : checkboxWidget;
   }
 }
 
 class _YaruCheckboxPainter extends YaruTogglablePainter {
   @override
-  void paintTogglable(
-    Canvas canvas,
-    Size realSize,
-    Size size,
-    Offset origin,
-    double t,
-  ) {
-    drawStateIndicator(canvas, realSize, null);
-    _drawBox(
-      canvas,
-      size,
-      origin,
-      oldChecked == false || checked == false ? t : 1,
-    );
+  void paintTogglable(Canvas canvas, Size size, double t) {
+    drawStateIndicator(canvas, size);
+    _drawBox(canvas, size, oldChecked == false || checked == false ? t : 1);
 
     // Four cases: false to null, false to true, null to false, true to false
     if (oldChecked == false || checked == false) {
       if (oldChecked == true || checked == true) {
-        _drawCheckMark(canvas, size, origin, t);
+        _drawCheckMark(canvas, size, t);
       } else if (oldChecked == null || checked == null) {
-        _drawDash(canvas, size, origin, t);
+        _drawDash(canvas, size, t);
       }
     }
     // Two cases: null to true, true to null
@@ -294,27 +291,24 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
       if (t <= 0.5) {
         final tShrink = 1 - t * 2;
         if (oldChecked == true) {
-          _drawCheckMark(canvas, size, origin, tShrink);
+          _drawCheckMark(canvas, size, tShrink);
         } else {
-          _drawDash(canvas, size, origin, tShrink);
+          _drawDash(canvas, size, tShrink);
         }
       } else {
         final tExpand = (t - 0.5) * 2.0;
         if (checked == true) {
-          _drawCheckMark(canvas, size, origin, tExpand);
+          _drawCheckMark(canvas, size, tExpand);
         } else {
-          _drawDash(canvas, size, origin, tExpand);
+          _drawDash(canvas, size, tExpand);
         }
       }
     }
   }
 
-  void _drawBox(Canvas canvas, Size size, Offset origin, double t) {
+  void _drawBox(Canvas canvas, Size size, double t) {
     canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTWH(origin.dx, origin.dy, size.width, size.height),
-        _kCheckboxBorderRadius,
-      ),
+      RRect.fromRectAndRadius(Offset.zero & size, _kCheckboxBorderRadius),
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedColor, checkedColor, t)!
@@ -325,10 +319,10 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromLTWH(
-          origin.dx + 0.5,
-          origin.dy + 0.5,
-          size.width - 1.0,
-          size.height - 1.0,
+          _kUncheckedBorderWidth / 2,
+          _kUncheckedBorderWidth / 2,
+          size.width - _kUncheckedBorderWidth,
+          size.height - _kUncheckedBorderWidth,
         ),
         _kCheckboxBorderRadius,
       ),
@@ -340,11 +334,12 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
                 disabledCheckedBorderColor,
                 t,
               )!
+        ..strokeWidth = _kUncheckedBorderWidth
         ..style = PaintingStyle.stroke,
     );
   }
 
-  void _drawCheckMark(Canvas canvas, Size size, Offset origin, double t) {
+  void _drawCheckMark(Canvas canvas, Size size, double t) {
     final path = Path();
 
     final start = Offset(size.width * 0.1818, size.height * 0.4545);
@@ -355,25 +350,22 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
       final strokeT = t * 2.0;
       final drawMid = Offset.lerp(start, mid, strokeT)!;
 
-      path.moveTo(origin.dx + start.dx, origin.dy + start.dy);
-      path.lineTo(origin.dx + drawMid.dx, origin.dy + drawMid.dy);
-      path.lineTo(origin.dx + start.dx, origin.dy + start.dy);
+      path.moveTo(start.dx, start.dy);
+      path.lineTo(drawMid.dx, drawMid.dy);
+      path.lineTo(start.dx, start.dy);
     } else {
       final strokeT = (t - 0.5) * 2.0;
       final drawEnd = Offset.lerp(mid, end, strokeT)!;
 
-      path.moveTo(origin.dx + start.dx, origin.dy + start.dy);
-      path.lineTo(origin.dx + mid.dx, origin.dy + mid.dy);
-      path.lineTo(origin.dx + drawEnd.dx, origin.dy + drawEnd.dy);
+      path.moveTo(start.dx, start.dy);
+      path.lineTo(mid.dx, mid.dy);
+      path.lineTo(drawEnd.dx, drawEnd.dy);
     }
 
-    canvas.drawPath(
-      path,
-      _getCheckmarkPaint(),
-    );
+    canvas.drawPath(path, _getCheckmarkPaint());
   }
 
-  void _drawDash(Canvas canvas, Size size, Offset origin, double t) {
+  void _drawDash(Canvas canvas, Size size, double t) {
     const dashMarginFactor = (1 - _kDashSizeFactor) / 2;
 
     final start = Offset(size.width * dashMarginFactor, size.height * 0.5);
@@ -383,11 +375,7 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
     final drawStart = Offset.lerp(start, mid, 1.0 - t)!;
     final drawEnd = Offset.lerp(mid, end, t)!;
 
-    canvas.drawLine(
-      origin + drawStart,
-      origin + drawEnd,
-      _getCheckmarkPaint(),
-    );
+    canvas.drawLine(drawStart, drawEnd, _getCheckmarkPaint());
   }
 
   Paint _getCheckmarkPaint() {

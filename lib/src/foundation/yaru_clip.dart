@@ -1,12 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 /// Describe the position of a diagonal clip.
-enum YaruDiagonalClip {
-  topLeft,
-  topRight,
-  bottomLeft,
-  bottomRight,
-}
+enum YaruDiagonalClip { topLeft, topRight, bottomLeft, bottomRight }
 
 /// A widget that clips its child using a custom clipper.
 ///
@@ -36,16 +31,13 @@ abstract class YaruClip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: clipper,
-      child: child,
-    );
+    return ClipPath(clipper: clipper, child: child);
   }
 }
 
 class _YaruDiagonalClip extends YaruClip {
   const _YaruDiagonalClip({super.key, super.child, required this.position})
-      : super._();
+    : super._();
 
   final YaruDiagonalClip position;
 

@@ -11,7 +11,8 @@ import 'yaru_page_indicator_layout_delegate.dart';
 /// can be customized with [YaruPageIndicatorThemeData.copyWith].
 @immutable
 class YaruPageIndicatorThemeData
-    extends ThemeExtension<YaruPageIndicatorThemeData> with Diagnosticable {
+    extends ThemeExtension<YaruPageIndicatorThemeData>
+    with Diagnosticable {
   /// Creates a theme that can be used for [YaruPageIndicatorTheme.data].
   const YaruPageIndicatorThemeData({
     this.itemSizeBuilder,
@@ -30,7 +31,7 @@ class YaruPageIndicatorThemeData
   final YaruPageIndicatorItemBuilder<Widget>? itemBuilder;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the widget.
-  final MaterialStateProperty<MouseCursor?>? mouseCursor;
+  final WidgetStateProperty<MouseCursor?>? mouseCursor;
 
   /// Returns the [Widget] of the text based indicator.
   /// Be careful to use something small enough to fit in a small vertical constraints.
@@ -52,7 +53,7 @@ class YaruPageIndicatorThemeData
   YaruPageIndicatorThemeData copyWith({
     YaruPageIndicatorItemBuilder<Size>? itemSizeBuilder,
     YaruPageIndicatorItemBuilder<Widget>? itemBuilder,
-    MaterialStateProperty<MouseCursor?>? mouseCursor,
+    WidgetStateProperty<MouseCursor?>? mouseCursor,
     YaruPageIndicatorTextBuilder? textBuilder,
     TextStyle? textStyle,
     YaruPageIndicatorLayoutDelegate? layoutDelegate,
@@ -133,8 +134,8 @@ class YaruPageIndicatorTheme extends InheritedWidget {
   /// Returns the configuration [data] from the closest [YaruPageIndicatorTheme]
   /// ancestor. If there is no ancestor, it returns `null`.
   static YaruPageIndicatorThemeData? of(BuildContext context) {
-    final t =
-        context.dependOnInheritedWidgetOfExactType<YaruPageIndicatorTheme>();
+    final t = context
+        .dependOnInheritedWidgetOfExactType<YaruPageIndicatorTheme>();
     return t?.data ?? Theme.of(context).extension<YaruPageIndicatorThemeData>();
   }
 

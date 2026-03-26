@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'yaru_master_detail_page.dart';
-import 'yaru_master_detail_theme.dart';
-import 'yaru_master_tile.dart';
+import '../../../widgets.dart';
 
 class YaruMasterListView extends StatefulWidget {
   const YaruMasterListView({
@@ -11,14 +9,18 @@ class YaruMasterListView extends StatefulWidget {
     required this.selectedIndex,
     required this.builder,
     required this.onTap,
-    this.materialTiles = false,
+    required this.availableWidth,
+    this.startUndershoot = true,
+    this.endUndershoot = true,
   });
 
   final int length;
-  final YaruMasterDetailBuilder builder;
+  final YaruMasterTileBuilder builder;
   final int selectedIndex;
   final ValueChanged<int> onTap;
-  final bool materialTiles;
+  final double availableWidth;
+  final bool startUndershoot;
+  final bool endUndershoot;
 
   @override
   State<YaruMasterListView> createState() => _YaruMasterListViewState();
@@ -36,20 +38,46 @@ class _YaruMasterListViewState extends State<YaruMasterListView> {
   @override
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
-    return ListView.separated(
-      separatorBuilder: (_, __) => SizedBox(height: theme.tileSpacing ?? 0),
-      padding: theme.listPadding,
+    return YaruScrollViewUndershoot(
       controller: _controller,
-      itemCount: widget.length,
-      itemBuilder: (context, index) => YaruMasterTileScope(
-        index: index,
-        selected: index == widget.selectedIndex,
-        onTap: () => widget.onTap(index),
-        child: Builder(
-          builder: (context) =>
-              widget.builder(context, index, index == widget.selectedIndex),
-        ),
+      startUndershoot: widget.startUndershoot,
+      endUndershoot: widget.endUndershoot,
+      child: CustomScrollView(
+        controller: _controller,
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
+              padding: theme.listPadding ?? EdgeInsets.zero,
+              child: Column(
+                children: List.generate(
+                  widget.length,
+                  (index) => YaruMasterTileScope(
+                    index: index,
+                    selected: index == widget.selectedIndex,
+                    onTap: () => widget.onTap(index),
+                    child: Builder(
+                      builder: (context) => widget.builder(
+                        context,
+                        index,
+                        index == widget.selectedIndex,
+                        widget.availableWidth,
+                      ),
+                    ),
+                  ),
+                ).withSpacing(theme.tileSpacing ?? 0),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
+}
+
+extension on List<Widget> {
+  List<Widget> withSpacing(double height) => expand((item) sync* {
+    yield SizedBox(height: height);
+    yield item;
+  }).skip(1).toList();
 }

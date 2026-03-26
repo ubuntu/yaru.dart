@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 /// can be customized with [YaruToggleButtonThemeData.copyWith].
 @immutable
 class YaruToggleButtonThemeData
-    extends ThemeExtension<YaruToggleButtonThemeData> with Diagnosticable {
+    extends ThemeExtension<YaruToggleButtonThemeData>
+    with Diagnosticable {
   /// Creates a theme that can be used for [YaruToggleButtonTheme.data].
   const YaruToggleButtonThemeData({
     this.horizontalSpacing,
@@ -33,7 +34,7 @@ class YaruToggleButtonThemeData
   final TextStyle? subtitleStyle;
 
   /// The mouse cursor.
-  final MaterialStateProperty<MouseCursor?>? mouseCursor;
+  final WidgetStateProperty<MouseCursor?>? mouseCursor;
 
   /// Creates a copy with the given fields replaced with new values.
   @override
@@ -42,7 +43,7 @@ class YaruToggleButtonThemeData
     double? verticalSpacing,
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
-    MaterialStateProperty<MouseCursor?>? mouseCursor,
+    WidgetStateProperty<MouseCursor?>? mouseCursor,
   }) {
     return YaruToggleButtonThemeData(
       horizontalSpacing: horizontalSpacing ?? this.horizontalSpacing,
@@ -117,8 +118,8 @@ class YaruToggleButtonTheme extends InheritedWidget {
   /// Returns the configuration [data] from the closest [YaruToggleButtonTheme]
   /// ancestor. If there is no ancestor, it returns `null`.
   static YaruToggleButtonThemeData? of(BuildContext context) {
-    final t =
-        context.dependOnInheritedWidgetOfExactType<YaruToggleButtonTheme>();
+    final t = context
+        .dependOnInheritedWidgetOfExactType<YaruToggleButtonTheme>();
     return t?.data ?? Theme.of(context).extension<YaruToggleButtonThemeData>();
   }
 

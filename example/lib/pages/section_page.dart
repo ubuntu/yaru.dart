@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 const kMinSectionWidth = 400.0;
 
@@ -8,7 +7,7 @@ class SectionPage extends StatefulWidget {
   const SectionPage({super.key});
 
   @override
-  _SectionPageState createState() => _SectionPageState();
+  State<SectionPage> createState() => _SectionPageState();
 }
 
 class _SectionPageState extends State<SectionPage> {
@@ -24,7 +23,7 @@ class _SectionPageState extends State<SectionPage> {
           child: Column(
             children: [
               for (var i = 0; i < 10; ++i)
-                const YaruTile(
+                const YaruListTile(
                   title: Text('Title'),
                   trailing: Icon(YaruIcons.information),
                   leading: Icon(YaruIcons.music_note),
@@ -32,7 +31,7 @@ class _SectionPageState extends State<SectionPage> {
                 ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -45,24 +44,24 @@ class DummySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YaruSection(
-      headline: Row(
+      headline: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children: [
           Text('Headline'),
           SizedBox(
-            child: YaruCircularProgressIndicator(strokeWidth: 3),
             height: 20,
             width: 20,
-          )
+            child: YaruCircularProgressIndicator(strokeWidth: 3),
+          ),
         ],
       ),
-      child: const YaruTile(
+      width: width,
+      child: const YaruListTile(
         title: Text('Title'),
         trailing: Icon(YaruIcons.information),
         leading: Icon(YaruIcons.music_note),
         subtitle: Text('Subtitle'),
       ),
-      width: width,
     );
   }
 }

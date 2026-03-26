@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/src/widgets/yaru_linear_progress_indicator_theme.dart';
 
 import 'yaru_progress_indicator.dart';
 
-const double _kDefaultLinearProgressMinHeight = 6;
+const _kIndeterminateAnimationDuration = 8000;
+const _kDefaultStrokeWidth = 4.0;
+const _kIndeterminateAnimationCurve = Curves.easeInOutSine;
+const _kDefaultTrackColorOpacity = 0.25;
+const _kIndeterminateAnimationCycles = 7.0;
 
 class YaruLinearProgressIndicator extends YaruProgressIndicator {
   /// Creates a Yaru linear progress indicator.
@@ -11,36 +16,31 @@ class YaruLinearProgressIndicator extends YaruProgressIndicator {
   const YaruLinearProgressIndicator({
     super.key,
     super.value,
-    this.minHeight = _kDefaultLinearProgressMinHeight,
+    super.strokeWidth,
+    super.trackStrokeWidth,
     super.color,
     super.valueColor,
+    super.trackColor,
+    super.trackValueColor,
     super.semanticsLabel,
     super.semanticsValue,
-  }) : assert(minHeight > 0);
-
-  /// The minimum height of the line used to draw the linear indicator (default: 6).
-  final double minHeight;
+  });
 
   @override
-  _YaruLinearProgressIndicatorState createState() =>
+  State<YaruLinearProgressIndicator> createState() =>
       _YaruLinearProgressIndicatorState();
 }
 
 class _YaruLinearProgressIndicatorState
     extends State<YaruLinearProgressIndicator>
     with SingleTickerProviderStateMixin {
-  static final Animatable<double> _positionTween = Tween(begin: 0.0, end: 6.0)
-      .chain(CurveTween(curve: kIndeterminateAnimationCurve));
-  static final Animatable<double> _speedTween = Tween(begin: -1.0, end: 1.0)
-      .chain(CurveTween(curve: kIndeterminateAnimationCurve));
-
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: kIndeterminateAnimationDuration),
+      duration: const Duration(milliseconds: _kIndeterminateAnimationDuration),
       vsync: this,
     );
 
@@ -67,13 +67,51 @@ class _YaruLinearProgressIndicatorState
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final progressTheme = YaruLinearProgressIndicatorTheme.of(context);
+
+    final color =
+        widget.valueColor?.value ??
+        widget.color ??
+        progressTheme?.color ??
+        theme.colorScheme.primary;
+    final trackColor =
+        widget.trackValueColor?.value ??
+        widget.trackColor ??
+        progressTheme?.trackColor ??
+        color.withValues(alpha: _kDefaultTrackColorOpacity);
+    final strokeWidth =
+        widget.strokeWidth ??
+        progressTheme?.strokeWidth ??
+        _kDefaultStrokeWidth;
+    final trackStrokeWidth =
+        widget.trackStrokeWidth ??
+        progressTheme?.trackStrokeWidth ??
+        strokeWidth;
+
+    Widget buildContainer(BuildContext context, Widget child) {
+      return widget.buildSemanticsWrapper(
+        context: context,
+        child: Container(
+          constraints: BoxConstraints(
+            minWidth: double.infinity,
+            minHeight: strokeWidth,
+          ),
+          child: RepaintBoundary(child: child),
+        ),
+      );
+    }
+
     if (widget.value != null) {
-      return _buildContainer(
+      return buildContainer(
         context,
         CustomPaint(
           painter: _DeterminateYaruLinearProgressIndicatorPainter(
             widget.value!,
-            widget.getValueColor(context),
+            color,
+            trackColor,
+            strokeWidth,
+            trackStrokeWidth,
             Directionality.of(context),
           ),
         ),
@@ -83,15 +121,27 @@ class _YaruLinearProgressIndicatorState
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
-        return _buildContainer(
+        final progress = _controller.value;
+        final spacingProgress =
+            1 -
+            Tween<double>(begin: -1.0, end: 1.0)
+                .chain(CurveTween(curve: _kIndeterminateAnimationCurve))
+                .transform(progress)
+                .abs();
+        final trackProgress =
+            Tween<double>(begin: 0.0, end: _kIndeterminateAnimationCycles)
+                .chain(CurveTween(curve: _kIndeterminateAnimationCurve))
+                .transform(progress);
+
+        return buildContainer(
           context,
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(widget.minHeight)),
+          ClipRect(
             child: CustomPaint(
               painter: _IndeterminateYaruLinearProgressIndicatorPainter(
-                widget.getValueColor(context),
-                _positionTween.evaluate(_controller),
-                _speedTween.evaluate(_controller).abs(),
+                color,
+                strokeWidth,
+                spacingProgress,
+                trackProgress,
                 Directionality.of(context),
               ),
             ),
@@ -100,118 +150,76 @@ class _YaruLinearProgressIndicatorState
       },
     );
   }
-
-  Widget _buildContainer(BuildContext context, Widget child) {
-    return widget.buildSemanticsWrapper(
-      context: context,
-      child: Container(
-        constraints: BoxConstraints(
-          minWidth: double.infinity,
-          minHeight: widget.minHeight,
-        ),
-        child: RepaintBoundary(
-          child: child,
-        ),
-      ),
-    );
-  }
 }
 
 class _IndeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   const _IndeterminateYaruLinearProgressIndicatorPainter(
     this.color,
-    this.position,
-    this.speed,
+    this.strokeWidth,
+    this.spacingProgress,
+    this.trackProgress,
     this.textDirection,
   ) : super();
 
   final Color color;
-  final double position;
-  final double speed;
+  final double strokeWidth;
+  final double spacingProgress;
+  final double trackProgress;
   final TextDirection textDirection;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final realPosition = position - position.truncate();
-    final strokeWidth = size.width / 6;
+    canvas.saveLayer(null, Paint());
+
+    final realTrackPosition = trackProgress - trackProgress.truncate();
+
     final y = size.height / 2;
 
-    final fillPaint = Paint()
+    final strokePaint = Paint()
       ..color = color
-      ..style = PaintingStyle.fill;
-
-    if (textDirection == TextDirection.rtl) {
-      canvas.scale(-1, 1);
-      canvas.translate(-size.width, 0);
-    }
-
-    for (var i = 0; i < 3; i++) {
-      final x1 = size.width * realPosition +
-          (strokeWidth * i / 2 + (strokeWidth * i * speed));
-      final x2 = size.width * realPosition +
-          strokeWidth +
-          (strokeWidth * i / 2 + (strokeWidth * i * speed));
-
-      canvas.drawLine(
-        Offset(x1, y),
-        Offset(x2, y),
-        _getGradientPaint(color, x1, strokeWidth, size.height, speed),
-      );
-      canvas.drawCircle(Offset(x2, y), size.height / 2, fillPaint);
-
-      // If a line overflow on the right, redraw it on the left
-      if (x2 > size.width) {
-        canvas.drawLine(
-          Offset(x1 - size.width, y),
-          Offset(x2 - size.width, y),
-          _getGradientPaint(
-            color,
-            x1 - size.width,
-            strokeWidth,
-            size.height,
-            speed,
-          ),
-        );
-        canvas.drawCircle(
-          Offset(x2 - size.width, y),
-          size.height / 2,
-          fillPaint,
-        );
-      }
-    }
-  }
-
-  Paint _getGradientPaint(
-    Color color,
-    double x,
-    double width,
-    double height,
-    double speed,
-  ) {
-    final gradient = LinearGradient(
-      colors: [
-        color.withAlpha(0),
-        color.withAlpha(20 + (230 * speed).toInt()),
-        color.withAlpha(150 + (100 * speed).toInt())
-      ],
-      stops: const [0.15, 0.75, 1],
-    );
-
-    return Paint()
-      ..shader = gradient.createShader(Rect.fromLTWH(x, 0.0, width, height))
-      ..strokeWidth = height
+      ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
+    final invertStrokePaint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.square
+      ..style = PaintingStyle.stroke
+      ..blendMode = BlendMode.dstOut;
+
+    canvas.drawLine(
+      Offset(strokeWidth / 2, y),
+      Offset(size.width - strokeWidth / 2, y),
+      strokePaint,
+    );
+
+    final points = <Offset>[];
+    for (var i = -1; i <= 1; i++) {
+      final x =
+          size.width / 2 +
+          50 * i +
+          (size.width / 3 - 50) * spacingProgress * i +
+          size.width * realTrackPosition;
+      points.add(Offset(x < size.width ? x : x - size.width, y));
+    }
+
+    for (final point in points) {
+      final gap = size.width / 20 * spacingProgress;
+      canvas.drawLine(
+        point + Offset(-gap / 2, 0),
+        point + Offset(gap / 2, 0),
+        invertStrokePaint,
+      );
+    }
+
+    canvas.restore();
   }
 
   @override
   bool shouldRepaint(
     _IndeterminateYaruLinearProgressIndicatorPainter oldDelegate,
   ) {
-    return oldDelegate.color != color ||
-        oldDelegate.position != position ||
-        oldDelegate.speed != speed ||
-        oldDelegate.textDirection != textDirection;
+    return true;
   }
 }
 
@@ -219,11 +227,17 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   const _DeterminateYaruLinearProgressIndicatorPainter(
     this.value,
     this.color,
+    this.trackColor,
+    this.strokeWidth,
+    this.trackStrokeWidth,
     this.textDirection,
   ) : super();
 
   final double value;
   final Color color;
+  final Color trackColor;
+  final double strokeWidth;
+  final double trackStrokeWidth;
   final TextDirection textDirection;
 
   @override
@@ -231,21 +245,21 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
     final revisedValue = value >= 0 && value <= 1
         ? value
         : value < 0
-            ? 0
-            : 1;
-    final candidateBackgroundHeight = (size.height / 3 * 2).truncate();
-    final backgroundHeight =
-        (candidateBackgroundHeight + (candidateBackgroundHeight.isEven ? 0 : 1))
-            .toDouble();
+        ? 0
+        : 1;
+    final realStrokeWidth = size.height;
+    final realTrackStrokeWidth =
+        trackStrokeWidth * (realStrokeWidth / strokeWidth);
+    final y = size.height / 2;
 
-    final backgroundPaint = Paint()
-      ..color = color.withOpacity(.25)
-      ..strokeWidth = backgroundHeight
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
     final strokePaint = Paint()
       ..color = color
-      ..strokeWidth = size.height
+      ..strokeWidth = realStrokeWidth
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+    final trackStrokePaint = Paint()
+      ..color = trackColor
+      ..strokeWidth = realTrackStrokeWidth
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
@@ -254,12 +268,10 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
       canvas.translate(-size.width, 0);
     }
 
-    final y = size.height / 2;
-
     canvas.drawLine(
-      Offset(backgroundHeight / 2, y),
-      Offset(size.width - backgroundHeight / 2, y),
-      backgroundPaint,
+      Offset(realTrackStrokeWidth / 2, y),
+      Offset(size.width - realTrackStrokeWidth / 2, y),
+      trackStrokePaint,
     );
 
     if (size.width * revisedValue > size.height) {
@@ -283,6 +295,9 @@ class _DeterminateYaruLinearProgressIndicatorPainter extends CustomPainter {
   ) {
     return oldDelegate.value != value ||
         oldDelegate.color != color ||
+        oldDelegate.trackColor != trackColor ||
+        oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.trackStrokeWidth != trackStrokeWidth ||
         oldDelegate.textDirection != textDirection;
   }
 }

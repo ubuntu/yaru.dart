@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 class PopupPage extends StatefulWidget {
   const PopupPage({super.key});
@@ -20,26 +20,7 @@ class _PopupPageState extends State<PopupPage> {
         spacing: 10,
         runSpacing: 10,
         children: [
-          YaruPopupMenuButton<MyEnum>(
-            initialValue: myEnum,
-            onSelected: (v) {
-              setState(() {
-                myEnum = v;
-              });
-            },
-            child: Text(myEnum.name),
-            itemBuilder: (context) {
-              return [
-                for (final value in MyEnum.values)
-                  PopupMenuItem(
-                    value: value,
-                    child: Text(
-                      value.name,
-                    ),
-                  )
-              ];
-            },
-          ),
+          _buildPopup(),
           YaruPopupMenuButton<MyEnum>(
             onSelected: (value) {
               if (enumSet.contains(value)) {
@@ -56,7 +37,7 @@ class _PopupPageState extends State<PopupPage> {
                     value: value,
                     checked: enumSet.contains(value),
                     child: Text(value.name),
-                  )
+                  ),
               ];
             },
           ),
@@ -67,7 +48,6 @@ class _PopupPageState extends State<PopupPage> {
                 for (final value in MyEnum.values)
                   YaruMultiSelectPopupMenuItem<MyEnum>(
                     value: value,
-                    child: Text(value.name),
                     checked: enumSet.contains(value),
                     onChanged: (checked) {
                       // Handle model changes here
@@ -75,19 +55,90 @@ class _PopupPageState extends State<PopupPage> {
                         checked ? enumSet.add(value) : enumSet.remove(value);
                       });
                     },
-                  )
+                    child: Text(value.name),
+                  ),
               ];
             },
-          )
+          ),
+          Card(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('With custom icon'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: YaruPopupMenuButton<MyEnum>(
+                    onSelected: (value) {
+                      if (enumSet.contains(value)) {
+                        enumSet.remove(value);
+                      } else {
+                        enumSet.add(value);
+                      }
+                    },
+                    showArrow: false,
+                    child: const Icon(YaruIcons.view_more),
+                    itemBuilder: (context) {
+                      return [
+                        for (final value in MyEnum.values)
+                          YaruCheckedPopupMenuItem<MyEnum>(
+                            value: value,
+                            checked: enumSet.contains(value),
+                            child: Text(value.name),
+                          ),
+                      ];
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Card(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('With custom style'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: _buildPopup(
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      backgroundColor: YaruColors.prussianGreen,
+                      foregroundColor: Colors.yellow,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
+
+  YaruPopupMenuButton<MyEnum> _buildPopup({ButtonStyle? style}) {
+    return YaruPopupMenuButton<MyEnum>(
+      style: style,
+      initialValue: myEnum,
+      onSelected: (v) {
+        setState(() {
+          myEnum = v;
+        });
+      },
+      child: Text(myEnum.name),
+      itemBuilder: (context) {
+        return [
+          for (final value in MyEnum.values)
+            PopupMenuItem(value: value, child: Text(value.name)),
+        ];
+      },
+    );
+  }
 }
 
-enum MyEnum {
-  option1,
-  option2,
-  option3,
-  option4,
-}
+enum MyEnum { option1, option2, option3, option4 }

@@ -1,6 +1,8 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/src/widgets/yaru_tile.dart';
+import 'package:yaru/src/widgets/yaru_tile.dart';
 
 void main() {
   testWidgets('ltr layout', (tester) async {
@@ -29,14 +31,8 @@ void main() {
     final trailing = find.text('Trailing');
     expect(trailing, findsOneWidget);
 
-    expect(
-      tester.getRect(leading).right,
-      lessThan(tester.getRect(title).left),
-    );
-    expect(
-      tester.getRect(title).left,
-      equals(tester.getRect(subtitle).left),
-    );
+    expect(tester.getRect(leading).right, lessThan(tester.getRect(title).left));
+    expect(tester.getRect(title).left, equals(tester.getRect(subtitle).left));
     expect(
       tester.getRect(subtitle).top,
       greaterThan(tester.getRect(title).bottom),
@@ -80,10 +76,7 @@ void main() {
       tester.getRect(leading).left,
       greaterThan(tester.getRect(title).right),
     );
-    expect(
-      tester.getRect(title).right,
-      equals(tester.getRect(subtitle).right),
-    );
+    expect(tester.getRect(title).right, equals(tester.getRect(subtitle).right));
     expect(
       tester.getRect(subtitle).top,
       greaterThan(tester.getRect(title).bottom),

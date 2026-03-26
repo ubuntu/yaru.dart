@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: deprecated_member_use
 
-import 'yaru_radio.dart';
-import 'yaru_toggle_button.dart';
-import 'yaru_toggle_button_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
 /// A desktop style radio button with an interactive label.
 class YaruRadioButton<T> extends StatefulWidget {
@@ -19,6 +18,7 @@ class YaruRadioButton<T> extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.mouseCursor,
+    this.hasFocusBorder,
   });
 
   /// See [Radio.value]
@@ -51,23 +51,26 @@ class YaruRadioButton<T> extends StatefulWidget {
   /// See [Radio.mouseCursor].
   final MouseCursor? mouseCursor;
 
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
+
   @override
   State<YaruRadioButton<T>> createState() => _YaruRadioButtonState<T>();
 }
 
 class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
-  final _statesController = MaterialStatesController();
+  final _statesController = WidgetStatesController();
 
   @override
   void initState() {
     super.initState();
-    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+    _statesController.update(WidgetState.disabled, widget.onChanged == null);
   }
 
   @override
   void didUpdateWidget(YaruRadioButton<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+    _statesController.update(WidgetState.disabled, widget.onChanged == null);
   }
 
   @override
@@ -80,13 +83,16 @@ class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
   Widget build(BuildContext context) {
     final states = _statesController.value;
     final mouseCursor =
-        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
-            YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
+        WidgetStateProperty.resolveAs(widget.mouseCursor, states) ??
+        YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
 
     return YaruToggleButton(
       title: widget.title,
       subtitle: widget.subtitle,
       contentPadding: widget.contentPadding,
+      hasFocusBorder:
+          widget.hasFocusBorder ??
+          YaruTheme.maybeOf(context)?.focusBorders == true,
       leading: YaruRadio<T>(
         value: widget.value,
         groupValue: widget.groupValue,
@@ -96,9 +102,10 @@ class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
         autofocus: widget.autofocus,
         mouseCursor: mouseCursor,
         statesController: _statesController,
+        hasFocusBorder: false,
       ),
       mouseCursor:
-          mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
+          mouseCursor ?? WidgetStateMouseCursor.clickable.resolve(states),
       statesController: _statesController,
       onToggled: widget.onChanged == null ? null : _onToggled,
     );

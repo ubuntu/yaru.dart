@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
 
@@ -53,19 +52,13 @@ void main() {
 
 final goldenVariant = ValueVariant({
   ...goldenThemeVariants('default', <String, dynamic>{}),
-  ...goldenThemeVariants('clip', {
-    'clipBehavior': Clip.antiAlias,
-  }),
-  ...goldenThemeVariants('padding', {
-    'padding': const EdgeInsets.all(10),
-  }),
+  ...goldenThemeVariants('clip', {'clipBehavior': Clip.antiAlias}),
+  ...goldenThemeVariants('padding', {'padding': const EdgeInsets.all(10)}),
   ...goldenThemeVariants('padding-clip', {
     'padding': const EdgeInsets.all(10),
     'clipBehavior': Clip.antiAlias,
   }),
-  ...goldenThemeVariants('margin', {
-    'margin': const EdgeInsets.all(10),
-  }),
+  ...goldenThemeVariants('margin', {'margin': const EdgeInsets.all(10)}),
   ...goldenThemeVariants('margin-clip', {
     'margin': const EdgeInsets.all(10),
     'clipBehavior': Clip.antiAlias,

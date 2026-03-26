@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru/yaru.dart';
+import 'package:yaru/theme.dart';
 
 extension YaruGoldenTester on WidgetTester {
   Future<void> pumpScaffold(
@@ -13,8 +13,8 @@ extension YaruGoldenTester on WidgetTester {
     Size? size,
     AlignmentGeometry alignment = Alignment.center,
   }) {
-    binding.window.devicePixelRatioTestValue = 1;
-    if (size != null) binding.window.physicalSizeTestValue = size;
+    view.devicePixelRatio = 1;
+    if (size != null) view.physicalSize = size;
     return pumpWidget(
       MaterialApp(
         themeMode: themeMode,
@@ -22,10 +22,7 @@ extension YaruGoldenTester on WidgetTester {
         darkTheme: darkTheme ?? yaruDark,
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: Align(
-            child: widget,
-            alignment: alignment,
-          ),
+          body: Align(alignment: alignment, child: widget),
         ),
       ),
     );
@@ -78,26 +75,18 @@ class YaruGoldenVariant<T> {
   String toString() => '$label: themeMode: $themeMode, value: $value';
 }
 
-extension YaruGoldenVariantStateSet on YaruGoldenVariant<Set<MaterialState>> {
-  bool hasState(MaterialState state) => value?.contains(state) == true;
+extension YaruGoldenVariantStateSet on YaruGoldenVariant<Set<WidgetState>> {
+  bool hasState(WidgetState state) => value?.contains(state) == true;
 }
 
 extension YaruGoldenVariantStateMap
-    on YaruGoldenVariant<Map<MaterialState, bool>> {
-  bool hasState(MaterialState state) => value?[state] == true;
+    on YaruGoldenVariant<Map<WidgetState, bool>> {
+  bool hasState(WidgetState state) => value?[state] == true;
 }
 
 List<YaruGoldenVariant<T>> goldenThemeVariants<T>(String label, [T? value]) {
   return [
-    YaruGoldenVariant(
-      label: label,
-      themeMode: ThemeMode.light,
-      value: value,
-    ),
-    YaruGoldenVariant(
-      label: label,
-      themeMode: ThemeMode.dark,
-      value: value,
-    ),
+    YaruGoldenVariant(label: label, themeMode: ThemeMode.light, value: value),
+    YaruGoldenVariant(label: label, themeMode: ThemeMode.dark, value: value),
   ];
 }

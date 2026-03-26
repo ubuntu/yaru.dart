@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'yaru_switch.dart';
-import 'yaru_toggle_button.dart';
-import 'yaru_toggle_button_theme.dart';
+import 'package:yaru/yaru.dart';
 
 /// A desktop style switch button with an interactive label.
 class YaruSwitchButton extends StatefulWidget {
@@ -17,6 +14,8 @@ class YaruSwitchButton extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.mouseCursor,
+    this.onOffShapes,
+    this.hasFocusBorder,
   });
 
   /// See [Switch.value]
@@ -43,23 +42,29 @@ class YaruSwitchButton extends StatefulWidget {
   /// See [Switch.mouseCursor].
   final MouseCursor? mouseCursor;
 
+  /// See [YaruSwitch.onOffShapes]
+  final bool? onOffShapes;
+
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
+
   @override
   State<YaruSwitchButton> createState() => _YaruSwitchButtonState();
 }
 
 class _YaruSwitchButtonState extends State<YaruSwitchButton> {
-  final _statesController = MaterialStatesController();
+  final _statesController = WidgetStatesController();
 
   @override
   void initState() {
     super.initState();
-    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+    _statesController.update(WidgetState.disabled, widget.onChanged == null);
   }
 
   @override
   void didUpdateWidget(YaruSwitchButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _statesController.update(MaterialState.disabled, widget.onChanged == null);
+    _statesController.update(WidgetState.disabled, widget.onChanged == null);
   }
 
   @override
@@ -72,13 +77,16 @@ class _YaruSwitchButtonState extends State<YaruSwitchButton> {
   Widget build(BuildContext context) {
     final states = _statesController.value;
     final mouseCursor =
-        MaterialStateProperty.resolveAs(widget.mouseCursor, states) ??
-            YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
+        WidgetStateProperty.resolveAs(widget.mouseCursor, states) ??
+        YaruToggleButtonTheme.of(context)?.mouseCursor?.resolve(states);
 
     return YaruToggleButton(
       title: widget.title,
       subtitle: widget.subtitle,
       contentPadding: widget.contentPadding,
+      hasFocusBorder:
+          widget.hasFocusBorder ??
+          YaruTheme.maybeOf(context)?.focusBorders == true,
       leading: YaruSwitch(
         value: widget.value,
         onChanged: widget.onChanged,
@@ -86,9 +94,11 @@ class _YaruSwitchButtonState extends State<YaruSwitchButton> {
         autofocus: widget.autofocus,
         mouseCursor: mouseCursor,
         statesController: _statesController,
+        onOffShapes: widget.onOffShapes,
+        hasFocusBorder: false,
       ),
       mouseCursor:
-          mouseCursor ?? MaterialStateMouseCursor.clickable.resolve(states),
+          mouseCursor ?? WidgetStateMouseCursor.clickable.resolve(states),
       statesController: _statesController,
       onToggled: widget.onChanged != null
           ? () => widget.onChanged!(!widget.value)

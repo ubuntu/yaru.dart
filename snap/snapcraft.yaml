@@ -1,7 +1,7 @@
 name: yaru-widgets-example
 version: git
-summary: Yaru Widgets
-description: Yaru Widgets Example
+summary: Yaru
+description: Yaru Example
 confinement: strict
 base: core22
 grade: stable
@@ -13,7 +13,7 @@ architectures:
 parts:
   flutter-git:
     source: https://github.com/flutter/flutter.git
-    source-branch: stable
+    source-tag: 3.27.1
     source-depth: 1
     plugin: nil
     override-build: |
@@ -49,8 +49,8 @@ parts:
 
 apps:
   yaru-widgets-example:
-    command: bin/yaru_widgets_example
-    desktop: snap/gui/yaru-widgets-example.desktop
+    command: bin/yaru_example
+    desktop: snap/gui/yaru-example.desktop
     extensions: [gnome]
     plugs:
       - gsettings

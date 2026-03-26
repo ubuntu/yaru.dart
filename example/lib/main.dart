@@ -1,43 +1,28 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:flutter/semantics.dart';
+import 'package:watch_it/watch_it.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
 
-import 'example.dart';
-import 'theme.dart';
+import 'example_home.dart';
+import 'example_model.dart';
+import 'pages/icons_page/provider/icon_view_model.dart';
 
 Future<void> main() async {
   await YaruWindowTitleBar.ensureInitialized();
 
-  registerService<Connectivity>(Connectivity.new);
-  runApp(
-    InheritedYaruVariant(
-      child: const Home(),
-    ),
-  );
-}
+  WidgetsFlutterBinding.ensureInitialized();
+  SemanticsBinding.instance.ensureSemantics();
 
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return YaruTheme(
-      data: YaruThemeData(
-        variant: InheritedYaruVariant.of(context),
-      ),
-      builder: (context, yaru, child) {
-        return MaterialApp(
-          title: 'Yaru Widgets',
-          debugShowCheckedModeBanner: false,
-          theme: yaru.theme,
-          darkTheme: yaru.darkTheme,
-          highContrastTheme: yaruHighContrastLight,
-          highContrastDarkTheme: yaruHighContrastDark,
-          home: Example.create(context),
-        );
-      },
+  di
+    ..registerLazySingleton<Connectivity>(Connectivity.new)
+    ..registerLazySingleton<IconViewModel>(IconViewModel.new)
+    ..registerLazySingleton<ExampleModel>(
+      () => ExampleModel(di<Connectivity>()),
+      dispose: (m) => m.dispose(),
     );
-  }
+
+  await di<ExampleModel>().init();
+
+  runApp(const ExampleHome());
 }

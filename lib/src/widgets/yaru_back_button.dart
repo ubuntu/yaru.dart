@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru/icons.dart';
 
 import 'yaru_back_button_theme.dart';
 import 'yaru_icon_button.dart';
@@ -11,6 +11,8 @@ class YaruBackButton extends StatelessWidget {
     super.key,
     this.onPressed,
     this.style,
+    this.icon,
+    this.semanticLabel,
   });
 
   /// An optional callback that is called when the button is pressed.
@@ -22,16 +24,22 @@ class YaruBackButton extends StatelessWidget {
   /// defaults to [YaruBackButtonStyle.square].
   final YaruBackButtonStyle? style;
 
+  /// Optional icon used inside the [YaruIconButton]
+  /// Defaults to `const Icon(YaruIcons.go_previous)`
+  final Widget? icon;
+
+  /// Optional semantic label to add to the back button icon.
+  final String? semanticLabel;
+
   @override
   Widget build(BuildContext context) {
     final theme = YaruBackButtonTheme.of(context);
     final round = (style ?? theme?.style) == YaruBackButtonStyle.rounded;
     final shape = round ? const CircleBorder() : const BeveledRectangleBorder();
     final button = YaruIconButton(
-      icon: const Icon(YaruIcons.go_previous),
-      style: ButtonStyle(
-        shape: ButtonStyleButton.allOrNull(shape),
-      ),
+      icon: icon ?? Icon(YaruIcons.go_previous, semanticLabel: semanticLabel),
+      tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+      style: ButtonStyle(shape: ButtonStyleButton.allOrNull(shape)),
       onPressed: () {
         if (onPressed != null) {
           onPressed!();

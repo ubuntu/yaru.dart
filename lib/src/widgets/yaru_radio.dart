@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
-import 'yaru_checkbox.dart';
-import 'yaru_radio_button.dart';
-import 'yaru_radio_theme.dart';
-import 'yaru_switch.dart';
 import 'yaru_togglable.dart';
 
 // NOTE: keep in sync with Checkbox
@@ -12,6 +9,7 @@ const _kRadioActivableAreaPadding = EdgeInsets.all(6);
 const _kRadioTogglableSize = Size.square(20);
 
 const _kDotSizeFactor = 0.4;
+const _kUncheckedBorderWidth = 2.0;
 
 /// A Yaru radio.
 ///
@@ -51,6 +49,7 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
     this.autofocus = false,
     this.mouseCursor,
     this.statesController,
+    this.hasFocusBorder,
   }) : assert(toggleable || value != null);
 
   /// The value represented by this radio button.
@@ -137,11 +136,14 @@ class YaruRadio<T> extends StatefulWidget implements YaruTogglable<T?> {
   @override
   final bool autofocus;
 
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
+
   @override
   final MouseCursor? mouseCursor;
 
   @override
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -195,49 +197,49 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
     final painter = _YaruRadioPainter();
     fillPainterDefaults(painter);
 
-    const unselectedState = <MaterialState>{};
-    const selectedState = {MaterialState.selected};
-    const disabledState = {MaterialState.disabled};
-    const selectedDisabledState = {
-      MaterialState.selected,
-      MaterialState.disabled
-    };
+    const unselectedState = <WidgetState>{};
+    const selectedState = {WidgetState.selected};
+    const disabledState = {WidgetState.disabled};
+    const selectedDisabledState = {WidgetState.selected, WidgetState.disabled};
 
     // Normal colors
     final uncheckedColor =
         radioTheme.color?.resolve(unselectedState) ?? painter.uncheckedColor;
     final uncheckedBorderColor =
         radioTheme.borderColor?.resolve(unselectedState) ??
-            painter.uncheckedBorderColor;
-    final checkedColor = widget.selectedColor ??
+        painter.uncheckedBorderColor;
+    final checkedColor =
+        widget.selectedColor ??
         radioTheme.color?.resolve(selectedState) ??
         painter.checkedColor;
-    final checkmarkColor = widget.checkmarkColor ??
+    final checkmarkColor =
+        widget.checkmarkColor ??
         radioTheme.checkmarkColor?.resolve(selectedState) ??
         painter.checkmarkColor;
 
     // Disabled colors
-    final disabledUncheckedColor = radioTheme.color?.resolve(disabledState) ??
+    final disabledUncheckedColor =
+        radioTheme.color?.resolve(disabledState) ??
         painter.disabledUncheckedColor;
     final disabledUncheckedBorderColor =
         radioTheme.borderColor?.resolve(disabledState) ??
-            painter.disabledUncheckedBorderColor;
+        painter.disabledUncheckedBorderColor;
     final disabledCheckedColor =
         radioTheme.color?.resolve(selectedDisabledState) ??
-            painter.disabledCheckedColor;
+        painter.disabledCheckedColor;
     final disabledCheckmarkColor =
         radioTheme.checkmarkColor?.resolve(selectedDisabledState) ??
-            painter.disabledCheckmarkColor;
+        painter.disabledCheckmarkColor;
 
     // Indicator colors
     final hoverIndicatorColor =
-        radioTheme.indicatorColor?.resolve({MaterialState.hovered}) ??
-            painter.hoverIndicatorColor;
+        radioTheme.indicatorColor?.resolve({WidgetState.hovered}) ??
+        painter.hoverIndicatorColor;
     final focusIndicatorColor =
-        radioTheme.indicatorColor?.resolve({MaterialState.focused}) ??
-            painter.focusIndicatorColor;
+        radioTheme.indicatorColor?.resolve({WidgetState.focused}) ??
+        painter.focusIndicatorColor;
 
-    return buildToggleable(
+    final radioWidth = buildToggleable(
       painter
         ..uncheckedColor = uncheckedColor
         ..uncheckedBorderColor = uncheckedBorderColor
@@ -249,35 +251,34 @@ class _YaruRadioState<T> extends YaruTogglableState<YaruRadio<T?>> {
         ..disabledCheckmarkColor = disabledCheckmarkColor
         ..hoverIndicatorColor = hoverIndicatorColor
         ..focusIndicatorColor = focusIndicatorColor,
-      mouseCursor: widget.mouseCursor ??
-          radioTheme.mouseCursor
-              ?.resolve({if (!widget.interactive) MaterialState.disabled}),
+      mouseCursor:
+          widget.mouseCursor ??
+          radioTheme.mouseCursor?.resolve({
+            if (!widget.interactive) WidgetState.disabled,
+          }),
     );
+
+    return widget.hasFocusBorder ??
+            YaruTheme.maybeOf(context)?.focusBorders == true
+        ? YaruFocusBorder.primary(
+            borderRadius: BorderRadius.circular(100),
+            child: radioWidth,
+          )
+        : radioWidth;
   }
 }
 
 class _YaruRadioPainter extends YaruTogglablePainter {
   @override
-  void paintTogglable(
-    Canvas canvas,
-    Size realSize,
-    Size size,
-    Offset origin,
-    double t,
-  ) {
-    drawStateIndicator(canvas, realSize, null);
-    _drawBox(canvas, size, origin, t);
-    _drawDot(canvas, size, origin, t);
+  void paintTogglable(Canvas canvas, Size size, double t) {
+    drawStateIndicator(canvas, size);
+    _drawBox(canvas, size, t);
+    _drawDot(canvas, size, t);
   }
 
-  void _drawBox(Canvas canvas, Size size, Offset origin, double t) {
+  void _drawBox(Canvas canvas, Size size, double t) {
     canvas.drawOval(
-      Rect.fromLTWH(
-        origin.dx,
-        origin.dy,
-        size.width,
-        size.height,
-      ),
+      Offset.zero & size,
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedColor, checkedColor, t)!
@@ -287,10 +288,10 @@ class _YaruRadioPainter extends YaruTogglablePainter {
 
     canvas.drawOval(
       Rect.fromLTWH(
-        origin.dx + 0.5,
-        origin.dy + 0.5,
-        size.width - 1.0,
-        size.height - 1.0,
+        _kUncheckedBorderWidth / 2,
+        _kUncheckedBorderWidth / 2,
+        size.width - _kUncheckedBorderWidth,
+        size.height - _kUncheckedBorderWidth,
       ),
       Paint()
         ..color = interactive
@@ -300,12 +301,13 @@ class _YaruRadioPainter extends YaruTogglablePainter {
                 disabledCheckedBorderColor,
                 t,
               )!
-        ..style = PaintingStyle.stroke,
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = _kUncheckedBorderWidth,
     );
   }
 
-  void _drawDot(Canvas canvas, Size size, Offset origin, double t) {
-    final center = (Offset.zero & size).center + origin;
+  void _drawDot(Canvas canvas, Size size, double t) {
+    final center = (Offset.zero & size).center;
     final dotSize = size * _kDotSizeFactor;
 
     canvas.drawOval(

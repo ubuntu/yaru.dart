@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 class AutocompletePage extends StatelessWidget {
   const AutocompletePage({super.key});
@@ -14,9 +14,9 @@ class AutocompletePage extends StatelessWidget {
             const options = ['foo', 'bar', 'baz', 'qux', 'quux'];
             return options.where((o) => o.contains(value.text.toLowerCase()));
           },
-          onSelected: (value) => ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(value)),
-          ),
+          onSelected: (value) => ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(value))),
         ),
       ),
     );

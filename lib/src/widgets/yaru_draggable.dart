@@ -21,8 +21,9 @@ class YaruDraggable extends StatefulWidget {
     BuildContext context,
     Offset position,
     bool isDragging,
-    bool _isHovering,
-  ) childBuilder;
+    bool isHovering,
+  )
+  childBuilder;
 
   /// Callback called when this element starts to be dragged
   final VoidCallback? onDragStart;
@@ -31,10 +32,8 @@ class YaruDraggable extends StatefulWidget {
   ///
   /// It takes the current position and the candidate new one and should return the real next position.
   /// If null, the candidate next position is simply used.
-  final Offset Function(
-    Offset currentPosition,
-    Offset nextPosition,
-  )? onDragUpdate;
+  final Offset Function(Offset currentPosition, Offset nextPosition)?
+  onDragUpdate;
 
   /// Callback called when this element finished to be dragged
   final VoidCallback? onDragEnd;
@@ -46,7 +45,7 @@ class YaruDraggable extends StatefulWidget {
   final MouseCursor? dragCursor;
 
   @override
-  _YaruDraggableState createState() => _YaruDraggableState();
+  State<YaruDraggable> createState() => _YaruDraggableState();
 }
 
 class _YaruDraggableState extends State<YaruDraggable> {

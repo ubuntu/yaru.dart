@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
 
@@ -17,10 +17,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruCloseButton));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruCloseButton));
         await tester.pumpAndSettle();
       }
@@ -36,7 +36,7 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('normal', <MaterialState>{}),
-  ...goldenThemeVariants('hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('pressed', {MaterialState.pressed}),
+  ...goldenThemeVariants('normal', <WidgetState>{}),
+  ...goldenThemeVariants('hovered', {WidgetState.hovered}),
+  ...goldenThemeVariants('pressed', {WidgetState.pressed}),
 });

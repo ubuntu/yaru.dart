@@ -31,7 +31,7 @@ class YaruPageIndicatorSteppedDelegate extends YaruPageIndicatorLayoutDelegate {
     for (final layout in [
       [baseItemSpacing, availableWidth / 2],
       [baseItemSpacing / 2, availableWidth / 3 * 2],
-      [baseItemSpacing / 4, availableWidth / 6 * 5]
+      [baseItemSpacing / 4, availableWidth / 6 * 5],
     ]) {
       final baseItemSpacing = layout[0];
       final maxWidth = layout[1];
@@ -74,10 +74,7 @@ class YaruPageIndicatorFixedDelegate extends YaruPageIndicatorLayoutDelegate {
 /// Controls a [YaruPageIndicator] items spacing in a boudnded way.
 class YaruPageIndicatorBoundedDelegate extends YaruPageIndicatorLayoutDelegate {
   /// Controls a [YaruPageIndicator] items spacing in a boudnded way.
-  YaruPageIndicatorBoundedDelegate({
-    this.maxItemSpacing,
-    this.minItemSpacing,
-  });
+  YaruPageIndicatorBoundedDelegate({this.maxItemSpacing, this.minItemSpacing});
 
   /// Max length for the space between the items.
   ///

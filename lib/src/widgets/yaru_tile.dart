@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+@deprecated
 enum YaruTileStyle { normal, banner }
 
+@Deprecated('Use YaruListTile instead')
 class YaruTile extends StatelessWidget {
   /// Creates a Yaru style [ListTile] similar widget.
   ///
@@ -63,7 +65,7 @@ class YaruTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (title != null)
-                    DefaultTextStyle(
+                    DefaultTextStyle.merge(
                       style: _titleTextStyle(context),
                       child: title!,
                     ),
@@ -72,7 +74,7 @@ class YaruTile extends StatelessWidget {
                       padding: title != null && style != YaruTileStyle.banner
                           ? const EdgeInsets.only(top: 4.0)
                           : EdgeInsets.zero,
-                      child: DefaultTextStyle(
+                      child: DefaultTextStyle.merge(
                         style: _subtitleTextStyle(context),
                         child: subtitle!,
                       ),
@@ -95,10 +97,8 @@ class YaruTile extends StatelessWidget {
       return child;
     }
 
-    return DefaultTextStyle(
-      style: TextStyle(
-        color: Theme.of(context).disabledColor,
-      ),
+    return DefaultTextStyle.merge(
+      style: TextStyle(color: Theme.of(context).disabledColor),
       child: child,
     );
   }
@@ -113,8 +113,9 @@ class YaruTile extends StatelessWidget {
       case YaruTileStyle.normal:
         return theme.textTheme.bodySmall!;
       case YaruTileStyle.banner:
-        return theme.textTheme.bodyMedium!
-            .copyWith(color: enabled ? theme.textTheme.bodySmall!.color : null);
+        return theme.textTheme.bodyMedium!.copyWith(
+          color: enabled ? theme.textTheme.bodySmall!.color : null,
+        );
     }
   }
 }

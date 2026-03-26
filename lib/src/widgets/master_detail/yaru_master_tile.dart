@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_widgets/constants.dart';
-
-const double _kScrollbarThickness = 8.0;
-const double _kScrollbarMargin = 2.0;
-const Duration _kSelectedTileAnimationDuration = Duration(milliseconds: 250);
 
 /// Provides the recommended layout for [YaruMasterDetailPage.tileBuilder].
 ///
@@ -18,6 +13,10 @@ class YaruMasterTile extends StatelessWidget {
     this.subtitle,
     this.trailing,
     this.onTap,
+    this.decoration,
+    this.focusDecoration,
+    this.padding,
+    this.hasFocusBorder,
   });
 
   /// See [ListTile.selected].
@@ -35,57 +34,78 @@ class YaruMasterTile extends StatelessWidget {
   /// See [ListTile.trailing].
   final Widget? trailing;
 
-  /// See [ListTile.onTap].
+  /// An optional [VoidCallback] forwarded to the internal [ListTile]
+  /// If not provided [YaruMasterTileScope] `onTap` will be called.
   final VoidCallback? onTap;
+
+  /// An optional [Decoration] used for the [ListTile].
+  final Decoration? decoration;
+
+  /// An optional [Decoration] used when the [ListTile] is focused.
+  final Decoration? focusDecoration;
+
+  /// Optional padding for the tile.
+  final EdgeInsetsGeometry? padding;
+
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final listTileTheme = theme.listTileTheme;
     final scope = YaruMasterTileScope.maybeOf(context);
-    final isSelected = selected ?? scope?.selected ?? false;
-    final scrollbarThicknessWithTrack =
-        _calcScrollbarThicknessWithTrack(context);
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: scrollbarThicknessWithTrack),
-      child: AnimatedContainer(
-        duration: _kSelectedTileAnimationDuration,
-        decoration: BoxDecoration(
-          borderRadius:
-              const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
-          color:
-              isSelected ? theme.colorScheme.onSurface.withOpacity(0.07) : null,
+    final isSelected = selected ?? scope?.selected ?? false;
+
+    final backgroundColor = isSelected
+        ? listTileTheme.selectedTileColor
+        : listTileTheme.tileColor;
+
+    final foregroundColor = isSelected
+        ? listTileTheme.selectedColor
+        : listTileTheme.textColor;
+
+    final tile = AnimatedContainer(
+      duration: Durations.medium1,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(kYaruButtonRadius),
         ),
-        child: ListTile(
-          selectedColor: theme.colorScheme.onSurface,
-          iconColor: theme.colorScheme.onSurface.withOpacity(0.8),
-          visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-          shape: RoundedRectangleBorder(
-            borderRadius:
-                const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
-            side: theme.colorScheme.isHighContrast && isSelected
-                ? BorderSide(
-                    color: theme.colorScheme.outlineVariant,
-                    strokeAlign: BorderSide.strokeAlignOutside,
-                  )
-                : BorderSide.none,
-          ),
-          leading: leading,
-          title: _titleStyle(context, title),
-          subtitle: _subTitleStyle(context, subtitle),
-          trailing: trailing,
-          selected: isSelected,
-          onTap: () {
-            final scope = YaruMasterTileScope.maybeOf(context);
+        color: backgroundColor,
+      ),
+      child: ListTile(
+        leading: leading,
+        title: _titleStyle(title, foregroundColor),
+        subtitle: _subTitleStyle(subtitle, foregroundColor),
+        trailing: trailing,
+        selected: isSelected,
+        onTap: () {
+          if (onTap != null) {
+            onTap!.call();
+          } else {
             scope?.onTap();
-            onTap?.call();
-          },
-        ),
+          }
+        },
+      ),
+    );
+
+    return Material(
+      color: Colors.transparent,
+      child: Padding(
+        padding: padding ?? const EdgeInsets.symmetric(horizontal: 8),
+        child:
+            hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+            ? YaruFocusBorder(
+                borderStrokeAlign: BorderSide.strokeAlignInside,
+                child: tile,
+              )
+            : tile,
       ),
     );
   }
 
-  Widget? _titleStyle(BuildContext context, Widget? child) {
+  Widget? _titleStyle(Widget? child, Color? color) {
     if (child == null) {
       return child;
     }
@@ -94,11 +114,11 @@ class YaruMasterTile extends StatelessWidget {
       child: child,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+      style: TextStyle(color: color),
     );
   }
 
-  Widget? _subTitleStyle(BuildContext context, Widget? child) {
+  Widget? _subTitleStyle(Widget? child, Color? color) {
     if (child == null) {
       return child;
     }
@@ -107,22 +127,8 @@ class YaruMasterTile extends StatelessWidget {
       child: child,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(color: Theme.of(context).textTheme.bodySmall!.color),
+      style: TextStyle(color: color),
     );
-  }
-
-  double _calcScrollbarThicknessWithTrack(final BuildContext context) {
-    final scrollbarTheme = Theme.of(context).scrollbarTheme;
-
-    final doubleMarginWidth = scrollbarTheme.crossAxisMargin != null
-        ? scrollbarTheme.crossAxisMargin! * 2
-        : _kScrollbarMargin * 2;
-
-    final scrollBarThumbThikness =
-        scrollbarTheme.thickness?.resolve({MaterialState.hovered}) ??
-            _kScrollbarThickness;
-
-    return doubleMarginWidth + scrollBarThumbThikness;
   }
 }
 

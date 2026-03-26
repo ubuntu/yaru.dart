@@ -1,9 +1,9 @@
 {
-    "name": "yaru_widgets.dart factory",
-    "short_name": "yaru_widgets factory",
+    "name": "yaru.dart factory",
+    "short_name": "yaru factory",
     "start_url": ".",
     "display": "standalone",
-    "description": "A widgets factory for yaru_widgets.dart.",
+    "description": "A widgets factory for yaru.dart.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

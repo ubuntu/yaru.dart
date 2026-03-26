@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:watch_it/watch_it.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
-import '../theme.dart';
+import '../example_model.dart';
 
-class ColorDiskPage extends StatefulWidget {
+class ColorDiskPage extends StatelessWidget with WatchItMixin {
   const ColorDiskPage({super.key});
 
-  @override
-  State<ColorDiskPage> createState() => _ColorDiskPageState();
-}
-
-class _ColorDiskPageState extends State<ColorDiskPage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -20,11 +15,13 @@ class _ColorDiskPageState extends State<ColorDiskPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          for (var variant in YaruVariant.values)
+          for (final variant in YaruVariant.accents)
             YaruColorDisk(
-              onPressed: () => InheritedYaruVariant.apply(context, variant),
+              onPressed: () => di<ExampleModel>().setYaruVariant(variant),
               color: variant.color,
-              selected: YaruTheme.of(context).variant == variant,
+              selected:
+                  watchPropertyValue((ExampleModel m) => m.yaruVariant) ==
+                  variant,
             ),
         ],
       ),

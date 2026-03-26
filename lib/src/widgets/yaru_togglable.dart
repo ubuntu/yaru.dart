@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/theme.dart';
 
 import 'yaru_checkbox.dart';
 import 'yaru_radio.dart';
@@ -60,7 +61,7 @@ abstract class YaruTogglable<T> extends StatefulWidget {
   final MouseCursor? mouseCursor;
 
   /// Controls the states of the [YaruTogglable].
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 }
 
 abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
@@ -79,7 +80,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
   late CurvedAnimation indicatorPosition;
   late AnimationController indicatorController;
 
-  late MaterialStatesController statesController;
+  late WidgetStatesController statesController;
 
   late final Map<Type, Action<Intent>> _actionMap = <Type, Action<Intent>>{
     ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: handleTap),
@@ -124,7 +125,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       curve: Curves.fastOutSlowIn,
     );
 
-    statesController = widget.statesController ?? MaterialStatesController();
+    statesController = widget.statesController ?? WidgetStatesController();
     statesController.addListener(handleStateChange);
   }
 
@@ -157,7 +158,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
     if (oldWidget.statesController != widget.statesController) {
       statesController.removeListener(handleStateChange);
-      statesController = widget.statesController ?? MaterialStatesController();
+      statesController = widget.statesController ?? WidgetStatesController();
       statesController.addListener(handleStateChange);
     }
   }
@@ -177,12 +178,12 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
   void handleStateChange() {
     final states = statesController.value;
-    handleFocusChange(states.contains(MaterialState.focused));
-    handleHoverChange(states.contains(MaterialState.hovered));
-    handleActiveChange(states.contains(MaterialState.pressed));
+    handleFocusChange(states.contains(WidgetState.focused));
+    handleHoverChange(states.contains(WidgetState.hovered));
+    handleActiveChange(states.contains(WidgetState.pressed));
   }
 
-  void updateState(MaterialState state, bool add) {
+  void updateState(WidgetState state, bool add) {
     statesController.update(state, add);
   }
 
@@ -247,24 +248,20 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
       enabled: widget.interactive,
       focusNode: widget.focusNode,
       autofocus: widget.autofocus,
-      onShowFocusHighlight: (value) =>
-          updateState(MaterialState.focused, value),
-      onShowHoverHighlight: (value) =>
-          updateState(MaterialState.hovered, value),
-      mouseCursor: mouseCursor ??
+      onShowFocusHighlight: (value) => updateState(WidgetState.focused, value),
+      onShowHoverHighlight: (value) => updateState(WidgetState.hovered, value),
+      mouseCursor:
+          mouseCursor ??
           (widget.interactive
               ? SystemMouseCursors.click
               : SystemMouseCursors.basic),
       child: GestureDetector(
         excludeFromSemantics: !widget.interactive,
-        onTapDown: (_) =>
-            updateState(MaterialState.pressed, widget.interactive),
+        onTapDown: (_) => updateState(WidgetState.pressed, widget.interactive),
         onTap: handleTap,
-        onTapUp: (_) => updateState(MaterialState.pressed, false),
-        onTapCancel: () => updateState(MaterialState.pressed, false),
-        child: AbsorbPointer(
-          child: child,
-        ),
+        onTapUp: (_) => updateState(WidgetState.pressed, false),
+        onTapCancel: () => updateState(WidgetState.pressed, false),
+        child: AbsorbPointer(child: child),
       ),
     );
   }
@@ -275,23 +272,29 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
 
     // Normal colors
     final uncheckedColor = colorScheme.surface;
-    final uncheckedBorderColor = theme.brightness == Brightness.light
-        ? const Color(0xFF959595)
+    final uncheckedBorderColor = colorScheme.isHighContrast
+        ? colorScheme.outlineVariant
+        : theme.brightness == Brightness.light
+        ? const Color(0xFF909090)
         : const Color(0xFF757575);
     final checkedColor = colorScheme.primary;
     const checkedBorderColor = Colors.transparent;
     final checkmarkColor = colorScheme.onPrimary;
 
     // Disabled colors
-    final disabledUncheckedColor = colorScheme.onSurface.withOpacity(.1);
-    final disabledUncheckedBorderColor = disabledUncheckedColor;
-    final disabledCheckedColor = colorScheme.onSurface.withOpacity(.2);
-    const disabledCheckedBorderColor = Colors.transparent;
-    final disabledCheckmarkColor = colorScheme.onSurface.withOpacity(.5);
+    final disabledUncheckedColor = colorScheme.onSurface.withValues(alpha: 0.1);
+    final disabledUncheckedBorderColor = colorScheme.isHighContrast
+        ? colorScheme.outlineVariant
+        : disabledUncheckedColor;
+    final disabledCheckedColor = colorScheme.onSurface.withValues(alpha: 0.2);
+    final disabledCheckedBorderColor = colorScheme.isHighContrast
+        ? colorScheme.outlineVariant
+        : Colors.transparent;
+    final disabledCheckmarkColor = colorScheme.onSurface.withValues(alpha: 0.5);
 
     // Indicator colors
-    final hoverIndicatorColor = colorScheme.onSurface.withOpacity(.05);
-    final focusIndicatorColor = colorScheme.onSurface.withOpacity(.1);
+    final hoverIndicatorColor = colorScheme.onSurface.withValues(alpha: 0.05);
+    final focusIndicatorColor = colorScheme.onSurface.withValues(alpha: 0.1);
 
     painter
       ..interactive = widget.interactive
@@ -331,10 +334,7 @@ abstract class YaruTogglableState<S extends YaruTogglable> extends State<S>
             height: togglableSize.height,
             child: Center(
               child: RepaintBoundary(
-                child: CustomPaint(
-                  size: togglableSize,
-                  painter: painter,
-                ),
+                child: CustomPaint(size: togglableSize, painter: painter),
               ),
             ),
           ),
@@ -404,13 +404,16 @@ abstract class YaruTogglablePainter extends ChangeNotifier
     notifyListeners();
   }
 
-  void drawStateIndicator(Canvas canvas, Size canvasSize, Offset? offset) {
+  void drawStateIndicator(Canvas canvas, Size canvasSize, [Offset? offset]) {
     if (interactive) {
       final defaultOffset = Offset(canvasSize.width / 2, canvasSize.height / 2);
       final color = focused ? focusIndicatorColor : hoverIndicatorColor;
       final paint = Paint()
-        ..color =
-            Color.lerp(Colors.transparent, color, indicatorPosition.value)!
+        ..color = Color.lerp(
+          Colors.transparent,
+          color,
+          indicatorPosition.value,
+        )!
         ..style = PaintingStyle.fill;
 
       canvas.drawCircle(offset ?? defaultOffset, _kIndicatorRadius, paint);
@@ -419,27 +422,28 @@ abstract class YaruTogglablePainter extends ChangeNotifier
 
   @override
   void paint(Canvas canvas, Size size) {
-    final canvasSize = size;
-    final t = position.value;
-    final drawingOrigin = Offset(
-      _kTogglableActiveResizeFactor / 2 * sizePosition.value,
-      _kTogglableActiveResizeFactor / 2 * sizePosition.value,
-    );
-    final drawingSize = Size(
-      canvasSize.width - _kTogglableActiveResizeFactor * sizePosition.value,
-      canvasSize.height - _kTogglableActiveResizeFactor * sizePosition.value,
-    );
+    final origin = (Offset.zero & size).center;
 
-    paintTogglable(canvas, size, drawingSize, drawingOrigin, t);
+    final activeScaleX =
+        1 - (size.width - _kTogglableActiveResizeFactor) / size.width;
+    final activeScaleY =
+        1 - (size.height - _kTogglableActiveResizeFactor) / size.height;
+    final activeScale = activeScaleX > activeScaleY
+        ? activeScaleX
+        : activeScaleY;
+    final scale = 1 - activeScale * sizePosition.value;
+
+    canvas.save();
+    canvas.translate(origin.dx, origin.dy);
+    canvas.scale(scale);
+    canvas.translate(-origin.dx, -origin.dy);
+
+    paintTogglable(canvas, size, position.value);
+
+    canvas.restore();
   }
 
-  void paintTogglable(
-    Canvas canvas,
-    Size realSize,
-    Size size,
-    Offset origin,
-    double t,
-  );
+  void paintTogglable(Canvas canvas, Size size, double t);
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;

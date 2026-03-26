@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 class SwitchPage extends StatefulWidget {
   const SwitchPage({super.key});
 
   @override
-  _SwitchPageState createState() => _SwitchPageState();
+  State<SwitchPage> createState() => _SwitchPageState();
 }
 
 class _SwitchPageState extends State<SwitchPage> {
@@ -15,42 +15,68 @@ class _SwitchPageState extends State<SwitchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(kYaruPagePadding),
-      children: [
-        for (var i = 0; i < _switchValues.length; ++i) ...[
-          Row(
-            children: [
-              YaruSwitch(
-                value: _switchValues[i],
-                onChanged: (v) => setState(() => _switchValues[i] = v),
+    return YaruScrollViewUndershoot.builder(
+      builder: (context, controller) {
+        return ListView(
+          controller: controller,
+          padding: const EdgeInsets.all(kYaruPagePadding),
+          children: [
+            for (var i = 0; i < _switchValues.length; ++i) ...[
+              Row(
+                children: [
+                  YaruSwitch(
+                    value: _switchValues[i],
+                    onChanged: (v) => setState(() => _switchValues[i] = v),
+                  ),
+                  const SizedBox(width: 10),
+                  YaruSwitch(value: _switchValues[i], onChanged: null),
+                  const SizedBox(width: 10),
+                ],
               ),
-              const SizedBox(width: 10),
-              YaruSwitch(
-                value: _switchValues[i],
-                onChanged: null,
-              )
+              const SizedBox(height: 10),
             ],
-          ),
-          const SizedBox(height: 10),
-        ],
-        const Divider(),
-        for (var i = 0; i < _buttonValues.length; ++i) ...[
-          YaruSwitchButton(
-            value: _buttonValues[i],
-            onChanged: (v) => setState(() => _buttonValues[i] = v),
-            title: const Text('YaruSwitchButton'),
-          ),
-          const SizedBox(height: 10),
-        ],
-        const Divider(),
-        for (var i = 0; i < _listTileValues.length; ++i)
-          YaruSwitchListTile(
-            value: _listTileValues[i],
-            onChanged: (v) => setState(() => _listTileValues[i] = v),
-            title: const Text('YaruSwitchListTile'),
-          ),
-      ],
+            const Divider(),
+            for (var i = 0; i < _buttonValues.length; ++i) ...[
+              YaruSwitchButton(
+                value: _buttonValues[i],
+                onChanged: (v) => setState(() => _buttonValues[i] = v),
+                title: const Text('YaruSwitchButton'),
+              ),
+              const SizedBox(height: 10),
+            ],
+            const Divider(),
+            for (var i = 0; i < _listTileValues.length; ++i) ...[
+              YaruSwitchListTile(
+                value: _listTileValues[i],
+                onChanged: (v) => setState(() => _listTileValues[i] = v),
+                title: const Text('YaruSwitchListTile'),
+              ),
+              YaruSwitchListTile(
+                value: _listTileValues[i],
+                onChanged: (v) => setState(() => _listTileValues[i] = v),
+                title: const Text('YaruSwitchListTile'),
+                subtitle: const Text('Custom control'),
+                control: Row(
+                  children: [
+                    YaruIconButton(
+                      icon: const Icon(YaruIcons.information),
+                      onPressed: () {},
+                    ),
+                    YaruSwitch(
+                      value: _listTileValues[i],
+                      onChanged: (v) => setState(() => _listTileValues[i] = v),
+                    ),
+                    YaruIconButton(
+                      icon: const Icon(YaruIcons.go_next),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ],
+        );
+      },
     );
   }
 }

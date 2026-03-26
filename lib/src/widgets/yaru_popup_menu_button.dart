@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru/constants.dart';
+import 'package:yaru/icons.dart';
 
 import 'yaru_check_button.dart';
 
@@ -18,12 +19,15 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
     this.childPadding = const EdgeInsets.symmetric(horizontal: 5),
     this.enabled = true,
-    this.offset = const Offset(0, 40),
+    this.offset = const Offset(0, kYaruTitleBarItemHeight),
     this.enableFeedback,
     this.constraints,
     this.elevation,
     this.style,
     this.mouseCursor,
+    this.icon,
+    this.semanticLabel,
+    this.showArrow = true,
   });
 
   final T? initialValue;
@@ -42,29 +46,32 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
   final double? elevation;
   final ButtonStyle? style;
   final MouseCursor? mouseCursor;
+  final Widget? icon;
+  final bool showArrow;
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? OutlinedButtonTheme.of(context).style;
-    final state = <MaterialState>{if (!enabled) MaterialState.disabled};
+    final state = <WidgetState>{if (!enabled) WidgetState.disabled};
     final side = style?.side?.resolve(state);
-    final shape = style?.shape?.resolve(state) ??
+    final shape =
+        style?.shape?.resolve(state) ??
         RoundedRectangleBorder(
-          side: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-          ),
+          side: BorderSide(color: Theme.of(context).colorScheme.outline),
         );
     final mouseCursor =
-        MaterialStateProperty.resolveAs(this.mouseCursor, state) ??
-            style?.mouseCursor?.resolve(state) ??
-            MaterialStateMouseCursor.clickable.resolve(state);
+        WidgetStateProperty.resolveAs(this.mouseCursor, state) ??
+        style?.mouseCursor?.resolve(state) ??
+        WidgetStateMouseCursor.clickable.resolve(state);
     return DecoratedBox(
       decoration: ShapeDecoration(shape: shape.copyWith(side: side)),
       child: Material(
-        color: Colors.transparent,
+        color: style?.backgroundColor?.resolve({}) ?? Colors.transparent,
         clipBehavior: Clip.antiAlias,
         shape: shape,
         child: PopupMenuButton(
+          iconColor: style?.foregroundColor?.resolve({}),
           enabled: enabled,
           elevation: elevation,
           position: position,
@@ -83,25 +90,28 @@ class YaruPopupMenuButton<T> extends StatelessWidget {
               opacity: enabled ? 1 : 0.38,
               child: Padding(
                 padding: padding,
-                child: DefaultTextStyle(
+                child: DefaultTextStyle.merge(
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color:
+                        style?.foregroundColor?.resolve({}) ??
+                        Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w500,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: childPadding,
-                        child: child,
-                      ),
-                      const SizedBox(
-                        height: 40,
-                        child: Icon(
-                          YaruIcons.pan_down,
-                          size: 20,
-                        ),
+                      Padding(padding: childPadding, child: child),
+                      SizedBox(
+                        height: kYaruTitleBarItemHeight,
+                        child: showArrow
+                            ? icon ??
+                                  Icon(
+                                    YaruIcons.pan_down,
+                                    color: style?.foregroundColor?.resolve({}),
+                                    semanticLabel: semanticLabel,
+                                  )
+                            : null,
                       ),
                     ],
                   ),

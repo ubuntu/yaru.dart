@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({super.key});
@@ -10,8 +10,9 @@ class NavigationPage extends StatelessWidget {
       padding: const EdgeInsets.all(kYaruPagePadding),
       child: Center(
         child: OutlinedButton(
-          onPressed: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => _PageTwo())),
+          onPressed: () => Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (_) => _PageTwo())),
           child: const Text('next page'),
         ),
       ),
@@ -31,8 +32,9 @@ class _PageTwo extends StatelessWidget {
         padding: const EdgeInsets.all(kYaruPagePadding),
         child: Center(
           child: OutlinedButton(
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => _PageThree())),
+            onPressed: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => _PageThree())),
             child: const Text('next page'),
           ),
         ),

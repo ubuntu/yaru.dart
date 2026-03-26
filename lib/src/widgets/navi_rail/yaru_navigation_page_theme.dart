@@ -1,19 +1,28 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
+import 'package:yaru/theme.dart';
 
 @immutable
 class YaruNavigationPageThemeData
-    extends ThemeExtension<YaruNavigationPageThemeData> with Diagnosticable {
+    extends ThemeExtension<YaruNavigationPageThemeData>
+    with Diagnosticable {
   /// Creates a theme that can be used with [YaruNavigationPage].
   const YaruNavigationPageThemeData({
     this.railPadding,
     this.pageTransitions,
+    this.includeSeparator,
+    this.sideBarColor,
   });
 
-  factory YaruNavigationPageThemeData.fallback() {
-    return const YaruNavigationPageThemeData(
+  factory YaruNavigationPageThemeData.fallback(BuildContext context) {
+    final materialTheme = Theme.of(context);
+    final light = materialTheme.brightness == Brightness.light;
+    return YaruNavigationPageThemeData(
       pageTransitions: YaruPageTransitionsTheme.vertical,
+      includeSeparator: true,
+      sideBarColor: light
+          ? materialTheme.colorScheme.surface.scale(lightness: -0.029)
+          : materialTheme.colorScheme.surface,
     );
   }
 
@@ -23,16 +32,28 @@ class YaruNavigationPageThemeData
   /// The page transitions to use.
   final PageTransitionsTheme? pageTransitions;
 
+  /// Controls whether a separator should be included between the content and the sidebar.
+  /// Defaults to `true`
+  final bool? includeSeparator;
+
+  /// The color of the sidebar. Defaults to `Theme.of(context).colorScheme.surface`,
+  /// where `Theme` is the material theme.
+  final Color? sideBarColor;
+
   /// Creates a copy of this object but with the given fields replaced with the
   /// new values.
   @override
   YaruNavigationPageThemeData copyWith({
     EdgeInsetsGeometry? railPadding,
     PageTransitionsTheme? pageTransitions,
+    bool? includeSeparator,
+    Color? sideBarColor,
   }) {
     return YaruNavigationPageThemeData(
       railPadding: railPadding ?? this.railPadding,
       pageTransitions: pageTransitions ?? this.pageTransitions,
+      includeSeparator: includeSeparator ?? this.includeSeparator,
+      sideBarColor: sideBarColor ?? this.sideBarColor,
     );
   }
 
@@ -65,10 +86,7 @@ class YaruNavigationPageThemeData
 
   @override
   int get hashCode {
-    return Object.hashAll([
-      railPadding,
-      pageTransitions,
-    ]);
+    return Object.hashAll([railPadding, pageTransitions]);
   }
 }
 
@@ -82,11 +100,11 @@ class YaruNavigationPageTheme extends InheritedTheme {
   final YaruNavigationPageThemeData data;
 
   static YaruNavigationPageThemeData of(BuildContext context) {
-    final theme =
-        context.dependOnInheritedWidgetOfExactType<YaruNavigationPageTheme>();
+    final theme = context
+        .dependOnInheritedWidgetOfExactType<YaruNavigationPageTheme>();
     return theme?.data ??
         Theme.of(context).extension<YaruNavigationPageThemeData>() ??
-        YaruNavigationPageThemeData.fallback();
+        YaruNavigationPageThemeData.fallback(context);
   }
 
   @override

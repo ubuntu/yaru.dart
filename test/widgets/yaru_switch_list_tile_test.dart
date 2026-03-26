@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
+import 'yaru_switch_test.dart' show switchGoldenThemeVariants;
 
 void main() {
   testWidgets('contains switch, labels and secondary', (tester) async {
@@ -25,11 +26,7 @@ void main() {
     }
 
     await tester.pumpWidget(
-      builder(
-        title: const Text('title'),
-        subtitle: null,
-        secondary: null,
-      ),
+      builder(title: const Text('title'), subtitle: null, secondary: null),
     );
     expect(find.text('title'), findsOneWidget);
     expect(find.byType(YaruSwitch), findsOneWidget);
@@ -84,21 +81,22 @@ void main() {
 
       await tester.pumpScaffold(
         YaruSwitchListTile(
-          autofocus: variant.hasState(MaterialState.focused),
-          value: variant.hasState(MaterialState.selected),
-          onChanged: variant.hasState(MaterialState.disabled) ? null : (_) {},
+          autofocus: variant.hasState(WidgetState.focused),
+          value: variant.hasState(WidgetState.selected),
+          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
           title: const Text('YaruSwitchListTile'),
           subtitle: const Text('Lorem ipsum dolor sit amet'),
+          onOffShapes: variant.label.contains('-shapes'),
         ),
         themeMode: variant.themeMode,
-        size: const Size(325, 72),
+        size: const Size(325, 92),
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruSwitch));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruSwitch));
         await tester.pumpAndSettle();
       }
@@ -114,26 +112,26 @@ void main() {
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('off', <MaterialState>{}),
-  ...goldenThemeVariants('off-disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('off-focused', {MaterialState.focused}),
-  ...goldenThemeVariants('off-hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('off-pressed', {MaterialState.pressed}),
-  ...goldenThemeVariants('on', {MaterialState.selected}),
-  ...goldenThemeVariants('on-disabled', {
-    MaterialState.selected,
-    MaterialState.disabled,
+  ...switchGoldenThemeVariants('off', <WidgetState>{}),
+  ...switchGoldenThemeVariants('off-disabled', {WidgetState.disabled}),
+  ...switchGoldenThemeVariants('off-focused', {WidgetState.focused}),
+  ...switchGoldenThemeVariants('off-hovered', {WidgetState.hovered}),
+  ...switchGoldenThemeVariants('off-pressed', {WidgetState.pressed}),
+  ...switchGoldenThemeVariants('on', {WidgetState.selected}),
+  ...switchGoldenThemeVariants('on-disabled', {
+    WidgetState.selected,
+    WidgetState.disabled,
   }),
-  ...goldenThemeVariants('on-focused', {
-    MaterialState.selected,
-    MaterialState.focused,
+  ...switchGoldenThemeVariants('on-focused', {
+    WidgetState.selected,
+    WidgetState.focused,
   }),
-  ...goldenThemeVariants('on-hovered', {
-    MaterialState.selected,
-    MaterialState.hovered,
+  ...switchGoldenThemeVariants('on-hovered', {
+    WidgetState.selected,
+    WidgetState.hovered,
   }),
-  ...goldenThemeVariants('on-pressed', {
-    MaterialState.selected,
-    MaterialState.pressed,
+  ...switchGoldenThemeVariants('on-pressed', {
+    WidgetState.selected,
+    WidgetState.pressed,
   }),
 });

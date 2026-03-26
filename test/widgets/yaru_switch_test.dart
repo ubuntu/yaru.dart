@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
 
@@ -37,22 +37,18 @@ void main() {
         home: Scaffold(
           body: Column(
             children: [
-              YaruSwitch(
-                value: false,
-                onChanged: (_) {},
-              ),
-              const YaruSwitch(
-                value: false,
-                onChanged: null,
-              ),
+              YaruSwitch(value: false, onChanged: (_) {}),
+              const YaruSwitch(value: false, onChanged: null),
             ],
           ),
         ),
       ),
     );
 
-    final gesture =
-        await tester.createGesture(kind: PointerDeviceKind.mouse, pointer: 1);
+    final gesture = await tester.createGesture(
+      kind: PointerDeviceKind.mouse,
+      pointer: 1,
+    );
     await gesture.addPointer(location: Offset.zero);
     addTearDown(gesture.removePointer);
 
@@ -94,19 +90,20 @@ void main() {
 
       await tester.pumpScaffold(
         YaruSwitch(
-          autofocus: variant.hasState(MaterialState.focused),
-          value: variant.hasState(MaterialState.selected),
-          onChanged: variant.hasState(MaterialState.disabled) ? null : (_) {},
+          autofocus: variant.hasState(WidgetState.focused),
+          value: variant.hasState(WidgetState.selected),
+          onChanged: variant.hasState(WidgetState.disabled) ? null : (_) {},
+          onOffShapes: variant.label.contains('-shapes'),
         ),
         themeMode: variant.themeMode,
         size: const Size(62, 37),
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruSwitch));
         await tester.pumpAndSettle();
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruSwitch));
         await tester.pumpAndSettle();
       }
@@ -121,27 +118,37 @@ void main() {
   );
 }
 
+List<YaruGoldenVariant<T>> switchGoldenThemeVariants<T>(
+  String label,
+  T widgetStates,
+) {
+  return [
+    ...goldenThemeVariants(label, widgetStates),
+    ...goldenThemeVariants(label + '-shapes', widgetStates),
+  ];
+}
+
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('unchecked', <MaterialState>{}),
-  ...goldenThemeVariants('unckecked-disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('unckecked-focused', {MaterialState.focused}),
-  ...goldenThemeVariants('unckecked-hovered', {MaterialState.hovered}),
-  ...goldenThemeVariants('unckecked-pressed', {MaterialState.pressed}),
-  ...goldenThemeVariants('checked', {MaterialState.selected}),
-  ...goldenThemeVariants('checked-disabled', {
-    MaterialState.selected,
-    MaterialState.disabled,
+  ...switchGoldenThemeVariants('unchecked', <WidgetState>{}),
+  ...switchGoldenThemeVariants('unckecked-disabled', {WidgetState.disabled}),
+  ...switchGoldenThemeVariants('unckecked-focused', {WidgetState.focused}),
+  ...switchGoldenThemeVariants('unckecked-hovered', {WidgetState.hovered}),
+  ...switchGoldenThemeVariants('unckecked-pressed', {WidgetState.pressed}),
+  ...switchGoldenThemeVariants('checked', {WidgetState.selected}),
+  ...switchGoldenThemeVariants('checked-disabled', {
+    WidgetState.selected,
+    WidgetState.disabled,
   }),
-  ...goldenThemeVariants('checked-focused', {
-    MaterialState.selected,
-    MaterialState.focused,
+  ...switchGoldenThemeVariants('checked-focused', {
+    WidgetState.selected,
+    WidgetState.focused,
   }),
-  ...goldenThemeVariants('checked-hovered', {
-    MaterialState.selected,
-    MaterialState.hovered,
+  ...switchGoldenThemeVariants('checked-hovered', {
+    WidgetState.selected,
+    WidgetState.hovered,
   }),
-  ...goldenThemeVariants('checked-pressed', {
-    MaterialState.selected,
-    MaterialState.pressed,
+  ...switchGoldenThemeVariants('checked-pressed', {
+    WidgetState.selected,
+    WidgetState.pressed,
   }),
 });

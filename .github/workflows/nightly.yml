@@ -1,18 +1,19 @@
-name: nightly
+name: Nightly
 
 on:
   schedule:
-  - cron:  '0 0 * * *'
+    - cron:  '0 0 * * *'
   workflow_dispatch:
+
 
 jobs:
   goldens:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
+      - uses: kuhnroyal/flutter-fvm-config-action/setup@v3
       - run: flutter test --update-goldens
       - uses: peter-evans/create-pull-request@v4
         with:
-          title: 'Update golden images'
+          title: 'chore: update golden images'
           commit-message: 'Update golden images'

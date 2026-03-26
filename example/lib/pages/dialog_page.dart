@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 class DialogPage extends StatefulWidget {
   const DialogPage({super.key});
@@ -18,7 +18,7 @@ class _DialogPageState extends State<DialogPage> {
         padding: const EdgeInsets.all(kYaruPagePadding),
         child: Column(
           children: [
-            YaruTile(
+            YaruListTile(
               title: const Text('YaruDialogTitleBar'),
               trailing: OutlinedButton(
                 onPressed: () => showDialog(
@@ -36,7 +36,7 @@ class _DialogPageState extends State<DialogPage> {
                                 color: Theme.of(context).colorScheme.error,
                               ),
                             ),
-                          )
+                          ),
                       ],
                       titlePadding: EdgeInsets.zero,
                       title: YaruDialogTitleBar(
@@ -60,9 +60,7 @@ class _DialogPageState extends State<DialogPage> {
                                 ? 'You can close me'
                                 : 'You cannot close me',
                           ),
-                          subtitle: Text(
-                            isCloseable ? 'Please' : 'No way',
-                          ),
+                          subtitle: Text(isCloseable ? 'Please' : 'No way'),
                           icon: Text(
                             isCloseable ? '🪟' : '💅',
                             style: const TextStyle(fontSize: 30),
@@ -75,7 +73,7 @@ class _DialogPageState extends State<DialogPage> {
                 child: const Text('Open dialog'),
               ),
             ),
-            YaruTile(
+            YaruListTile(
               title: const Text('isCloseable'),
               trailing: YaruSwitch(
                 value: isCloseable,

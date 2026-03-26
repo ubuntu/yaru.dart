@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/yaru.dart';
 
 import '../yaru_golden_tester.dart';
 
@@ -12,19 +12,19 @@ void main() {
 
       await tester.pumpScaffold(
         YaruPopupMenuButton<dynamic>(
-          child: const Text('Menu'),
           itemBuilder: (context) => [],
-          enabled: !variant.hasState(MaterialState.disabled),
+          enabled: !variant.hasState(WidgetState.disabled),
+          child: const Text('Menu'),
         ),
         themeMode: variant.themeMode,
         size: const Size(104, 48),
       );
       await tester.pumpAndSettle();
 
-      if (variant.hasState(MaterialState.pressed)) {
+      if (variant.hasState(WidgetState.pressed)) {
         await tester.down(find.byType(YaruPopupMenuButton));
         await tester.pump(const Duration(milliseconds: 200));
-      } else if (variant.hasState(MaterialState.hovered)) {
+      } else if (variant.hasState(WidgetState.hovered)) {
         await tester.hover(find.byType(YaruPopupMenuButton));
         await tester.pumpAndSettle();
       }
@@ -39,10 +39,39 @@ void main() {
     variant: goldenVariant,
     tags: 'golden',
   );
+
+  testWidgets('preserves font', (tester) async {
+    await tester.pumpScaffold(
+      YaruPopupMenuButton(
+        itemBuilder: (context) => [],
+        child: const Text('Menu'),
+      ),
+      themeMode: ThemeMode.light,
+      theme: yaruLight.copyWith(
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontFamily: 'MyCustomFont'),
+        ),
+      ),
+      size: const Size(104, 48),
+    );
+
+    final textContext = tester.element(find.text('Menu'));
+    final textStyle = DefaultTextStyle.of(textContext).style;
+    expect(
+      textStyle.fontWeight,
+      FontWeight.w500,
+      reason: 'Should apply YaruPopupMenuButton styles',
+    );
+    expect(
+      textStyle.fontFamily,
+      'MyCustomFont',
+      reason: 'Should preserve parent styles',
+    );
+  });
 }
 
 final goldenVariant = ValueVariant({
-  ...goldenThemeVariants('normal', <MaterialState>{}),
-  ...goldenThemeVariants('disabled', {MaterialState.disabled}),
-  ...goldenThemeVariants('hovered', {MaterialState.hovered}),
+  ...goldenThemeVariants('normal', <WidgetState>{}),
+  ...goldenThemeVariants('disabled', {WidgetState.disabled}),
+  ...goldenThemeVariants('hovered', {WidgetState.hovered}),
 });

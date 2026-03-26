@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/constants.dart';
-import 'package:yaru_widgets/foundation.dart' show YaruBorderRadiusExtension;
+import 'package:yaru/yaru.dart';
 
 const _kAnimationDuration = Duration(milliseconds: 250);
 
@@ -16,6 +15,7 @@ class YaruSelectableContainer extends StatelessWidget {
     this.padding,
     this.selectionColor,
     this.mouseCursor,
+    this.hasFocusBorder,
   });
 
   // The child which will be selected with [onTap]
@@ -46,12 +46,15 @@ class YaruSelectableContainer extends StatelessWidget {
   /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor? mouseCursor;
 
+  /// Whether to display the default focus border on focus or not.
+  final bool? hasFocusBorder;
+
   @override
   Widget build(BuildContext context) {
     final padding = this.padding ?? const EdgeInsets.all(6);
     final borderRadius = this.borderRadius ?? BorderRadius.circular(radius);
 
-    return InkWell(
+    final content = InkWell(
       borderRadius: borderRadius,
       onTap: onTap,
       mouseCursor: mouseCursor,
@@ -61,18 +64,23 @@ class YaruSelectableContainer extends StatelessWidget {
           borderRadius: borderRadius,
           color: selected
               ? selectionColor ??
-                  Theme.of(context).primaryColor.withOpacity(0.8)
+                    Theme.of(context).primaryColor.withValues(alpha: 0.8)
               : Colors.transparent,
         ),
         child: Padding(
           padding: padding,
           child: ClipRRect(
-            borderRadius:
-                borderRadius.inner(padding.resolve(Directionality.of(context))),
+            borderRadius: borderRadius.inner(
+              padding.resolve(Directionality.of(context)),
+            ),
             child: child,
           ),
         ),
       ),
     );
+
+    return hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+        ? YaruFocusBorder.primary(child: content)
+        : content;
   }
 }

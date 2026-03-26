@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yaru_widgets/foundation.dart' show YaruPageController;
-import 'package:yaru_widgets/widgets.dart'
+import 'package:yaru/foundation.dart' show YaruPageController;
+import 'package:yaru/widgets.dart'
     show YaruTitleBarTheme, YaruTitleBarThemeData, YaruTitleBarStyle;
 
 import 'yaru_master_detail_page.dart';
@@ -11,6 +11,11 @@ import 'yaru_master_list_view.dart';
 class YaruPortraitLayout extends StatefulWidget {
   const YaruPortraitLayout({
     super.key,
+    required this.navigatorKey,
+    this.navigatorObservers = const <NavigatorObserver>[],
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.onUnknownRoute,
     required this.tileBuilder,
     required this.pageBuilder,
     this.onSelected,
@@ -19,7 +24,12 @@ class YaruPortraitLayout extends StatefulWidget {
     required this.controller,
   });
 
-  final YaruMasterDetailBuilder tileBuilder;
+  final GlobalKey<NavigatorState> navigatorKey;
+  final List<NavigatorObserver> navigatorObservers;
+  final String? initialRoute;
+  final RouteFactory? onGenerateRoute;
+  final RouteFactory? onUnknownRoute;
+  final YaruMasterTileBuilder tileBuilder;
   final IndexedWidgetBuilder pageBuilder;
   final ValueChanged<int>? onSelected;
 
@@ -29,14 +39,13 @@ class YaruPortraitLayout extends StatefulWidget {
   final YaruPageController controller;
 
   @override
-  _YaruPortraitLayoutState createState() => _YaruPortraitLayoutState();
+  State<YaruPortraitLayout> createState() => _YaruPortraitLayoutState();
 }
 
 class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   late int _selectedIndex;
-  final _navigatorKey = GlobalKey<NavigatorState>();
 
-  NavigatorState get _navigator => _navigatorKey.currentState!;
+  NavigatorState get _navigator => widget.navigatorKey.currentState!;
 
   @override
   void initState() {
@@ -74,6 +83,7 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
 
   MaterialPage page(int index) {
     return MaterialPage(
+      key: ValueKey(index),
       child: Builder(
         builder: (context) => widget.pageBuilder(context, _selectedIndex),
       ),
@@ -83,20 +93,28 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
   @override
   Widget build(BuildContext context) {
     final theme = YaruMasterDetailTheme.of(context);
-    return WillPopScope(
-      onWillPop: () async => !await _navigator.maybePop(),
+    return PopScope(
+      // TODO: implement replacement if we keep YaruMasterDetailPage
+      // ignore: deprecated_member_use
+      onPopInvoked: (v) async => await _navigator.maybePop(),
       child: Theme(
-        data: Theme.of(context).copyWith(
-          pageTransitionsTheme: theme.portraitTransitions,
-        ),
+        data: Theme.of(
+          context,
+        ).copyWith(pageTransitionsTheme: theme.portraitTransitions),
         child: Navigator(
-          key: _navigatorKey,
+          key: widget.navigatorKey,
+          initialRoute: widget.initialRoute,
+          onGenerateRoute: widget.onGenerateRoute,
+          onUnknownRoute: widget.onUnknownRoute,
+          // TODO: implement replacement if we keep YaruMasterDetailPage
+          // ignore: deprecated_member_use
           onPopPage: (route, result) {
             _selectedIndex = -1;
             return route.didPop(result);
           },
           pages: [
             MaterialPage(
+              key: const ValueKey(-1),
               child: YaruTitleBarTheme(
                 data: const YaruTitleBarThemeData(
                   style: kIsWeb
@@ -104,20 +122,31 @@ class _YaruPortraitLayoutState extends State<YaruPortraitLayout> {
                       : YaruTitleBarStyle.normal,
                 ),
                 child: Scaffold(
+                  backgroundColor: theme.sideBarColor,
                   appBar: widget.appBar,
-                  body: YaruMasterListView(
-                    length: widget.controller.length,
-                    selectedIndex: _selectedIndex,
-                    onTap: _onTap,
-                    builder: widget.tileBuilder,
+                  body: LayoutBuilder(
+                    builder: (context, constraints) => YaruMasterListView(
+                      length: widget.controller.length,
+                      selectedIndex: _selectedIndex,
+                      onTap: _onTap,
+                      builder: widget.tileBuilder,
+                      availableWidth: constraints.maxWidth,
+                      startUndershoot: widget.appBar != null,
+                      endUndershoot: widget.bottomBar != null,
+                    ),
                   ),
-                  bottomNavigationBar: widget.bottomBar,
+                  bottomNavigationBar: widget.bottomBar == null
+                      ? null
+                      : Material(
+                          color: theme.sideBarColor,
+                          child: widget.bottomBar,
+                        ),
                 ),
               ),
             ),
-            if (_selectedIndex != -1) page(_selectedIndex)
+            if (_selectedIndex != -1) page(_selectedIndex),
           ],
-          observers: [HeroController()],
+          observers: [...widget.navigatorObservers, HeroController()],
         ),
       ),
     );
