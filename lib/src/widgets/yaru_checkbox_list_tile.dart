@@ -75,6 +75,14 @@ class _YaruCheckboxListTileState extends State<YaruCheckboxListTile> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     Widget? leading, trailing;
     final control =

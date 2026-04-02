@@ -58,6 +58,14 @@ class _YaruSwitchListTileState extends State<YaruSwitchListTile> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final control =
         widget.control ??
