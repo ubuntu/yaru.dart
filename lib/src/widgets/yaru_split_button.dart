@@ -169,6 +169,7 @@ class YaruSplitButton extends StatelessWidget {
 
     return IntrinsicHeight(
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
