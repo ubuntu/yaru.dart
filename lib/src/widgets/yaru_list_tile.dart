@@ -21,6 +21,7 @@ class YaruListTile extends StatelessWidget {
     this.hasFocusBorder,
     this.mouseCursor,
     this.focusNode,
+    this.onFocusChange,
     this.hoverColor,
     this.customBorder,
     this.centerTitle = false,
@@ -44,6 +45,7 @@ class YaruListTile extends StatelessWidget {
     this.hasFocusBorder,
     this.mouseCursor,
     this.focusNode,
+    this.onFocusChange,
     this.hoverColor,
     this.customBorder,
     this.borderRadius = BorderRadius.zero,
@@ -105,6 +107,8 @@ class YaruListTile extends StatelessWidget {
   /// See [InkWell.focusNode].
   final FocusNode? focusNode;
 
+  final void Function(bool)? onFocusChange;
+
   /// See [InkWell.enableFeedback].
   final bool enableFeedback;
 
@@ -146,6 +150,7 @@ class YaruListTile extends StatelessWidget {
           onTap: enabled ? onTap : null,
           mouseCursor: mouseCursor,
           focusNode: focusNode,
+          onFocusChange: onFocusChange,
           enableFeedback: enableFeedback,
           hoverColor: hoverColor,
           autofocus: autofocus,
