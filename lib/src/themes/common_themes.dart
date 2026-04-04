@@ -685,11 +685,17 @@ ThemeData createYaruTheme({
   Color? elevatedButtonColor,
   Color? elevatedButtonTextColor,
   bool? useMaterial3 = true,
+  String? fontFamily,
+  List<String>? fontFamilyFallback,
 }) {
   final dividerColor = colorScheme.isHighContrast
       ? colorScheme.outlineVariant
       : colorScheme.outline.scale(lightness: colorScheme.isLight ? 0.1 : -0.06);
-  final textTheme = createTextTheme(colorScheme.onSurface);
+  final textTheme = createTextTheme(
+    textColor: colorScheme.onSurface,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
 
   final themeData = ThemeData.from(
     useMaterial3: useMaterial3,
@@ -835,6 +841,8 @@ ThemeData createYaruLightTheme({
   Color? elevatedButtonColor,
   Color? elevatedButtonTextColor,
   bool? useMaterial3 = true,
+  String? fontFamily,
+  List<String>? fontFamilyFallback,
 }) {
   final secondary = primaryColor.scale(lightness: 0.2).cap(saturation: .9);
   final secondaryContainer = primaryColor
@@ -881,6 +889,8 @@ ThemeData createYaruLightTheme({
     elevatedButtonColor: elevatedButtonColor,
     elevatedButtonTextColor: elevatedButtonTextColor,
     useMaterial3: useMaterial3,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }
 
@@ -894,6 +904,8 @@ ThemeData createYaruDarkTheme({
   Color? elevatedButtonTextColor,
   bool? useMaterial3 = true,
   bool highContrast = false,
+  String? fontFamily,
+  List<String>? fontFamilyFallback,
 }) {
   final secondary = primaryColor.scale(lightness: -0.3, saturation: -0.15);
   final secondaryContainer = primaryColor
@@ -939,5 +951,7 @@ ThemeData createYaruDarkTheme({
     elevatedButtonColor: elevatedButtonColor,
     elevatedButtonTextColor: elevatedButtonTextColor,
     useMaterial3: useMaterial3,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }
