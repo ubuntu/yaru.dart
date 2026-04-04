@@ -7,7 +7,7 @@ import 'text_theme.dart';
 
 // AppBar
 
-AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
+AppBarTheme _createAppBarTheme(ColorScheme colorScheme, TextTheme textTheme) {
   return AppBarTheme(
     shape: Border(
       bottom: BorderSide(
@@ -27,7 +27,7 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
         : SystemUiOverlayStyle.dark,
     backgroundColor: colorScheme.surface,
     foregroundColor: colorScheme.onSurface,
-    titleTextStyle: createTextTheme(colorScheme.onSurface).titleLarge!.copyWith(
+    titleTextStyle: textTheme.titleLarge!.copyWith(
       color: colorScheme.onSurface,
       fontWeight: FontWeight.normal,
     ),
@@ -740,7 +740,7 @@ ThemeData createYaruTheme({
     checkboxTheme: _createCheckBoxTheme(colorScheme),
     radioTheme: _createRadioTheme(colorScheme),
     primaryColorDark: colorScheme.isDark ? colorScheme.primary : null,
-    appBarTheme: _createAppBarTheme(colorScheme),
+    appBarTheme: _createAppBarTheme(colorScheme, textTheme),
     floatingActionButtonTheme: _createFloatingActionButtonTheme(
       colorScheme,
       elevatedButtonColor,
