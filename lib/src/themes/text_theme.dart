@@ -5,77 +5,77 @@ TextTheme createTextTheme(Color textColor) {
     displayLarge: _UbuntuTextStyle(
       fontSize: 96,
       fontWeight: FontWeight.w300,
-      textColor: textColor,
+      color: textColor,
     ),
     displayMedium: _UbuntuTextStyle(
       fontSize: 60,
       fontWeight: FontWeight.w300,
-      textColor: textColor,
+      color: textColor,
     ),
     displaySmall: _UbuntuTextStyle(
       fontSize: 48,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     headlineLarge: _UbuntuTextStyle(
       fontSize: 40,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     headlineMedium: _UbuntuTextStyle(
       fontSize: 34,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     headlineSmall: _UbuntuTextStyle(
       fontSize: 24,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     titleLarge: _UbuntuTextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w500,
-      textColor: textColor,
+      color: textColor,
     ),
     titleMedium: _UbuntuTextStyle(
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     titleSmall: _UbuntuTextStyle(
       fontSize: 14.66,
       fontWeight: FontWeight.w500,
-      textColor: textColor,
+      color: textColor,
     ),
     bodyLarge: _UbuntuTextStyle(
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     bodyMedium: _UbuntuTextStyle(
       fontSize: 14.66,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     bodySmall: _UbuntuTextStyle(
       fontSize: 12,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     labelLarge: _UbuntuTextStyle(
       fontSize: 14.66,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     labelMedium: _UbuntuTextStyle(
       fontSize: 12,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
     labelSmall: _UbuntuTextStyle(
       fontSize: 10,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
+      color: textColor,
     ),
   );
 }
@@ -84,11 +84,9 @@ class _UbuntuTextStyle extends TextStyle {
   const _UbuntuTextStyle({
     super.fontSize,
     super.fontWeight,
-    required this.textColor,
+    required Color super.color,
   }) : super(
          fontFamily: 'packages/yaru/Ubuntu',
-         color: textColor,
          letterSpacing: 0, // Override Material/Flutter's letter spacing
        );
-  final Color textColor;
 }
