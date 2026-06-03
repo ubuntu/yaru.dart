@@ -1,5 +1,18 @@
 # Changelog
 
+## [10.1.0](https://github.com/ubuntu/yaru.dart/compare/v10.0.0...v10.1.0) (2026-04-03)
+
+
+### Features
+
+* Add option to hide the default popup icon ([#1068](https://github.com/ubuntu/yaru.dart/issues/1068)) ([c276ca2](https://github.com/ubuntu/yaru.dart/commit/c276ca2c5893d7c4ce90e7ab4b1f1e4e114b23e2))
+
+
+### Bug Fixes
+
+* Hide focus borders for nested list tile focuses ([#1070](https://github.com/ubuntu/yaru.dart/issues/1070)) ([970c824](https://github.com/ubuntu/yaru.dart/commit/970c824fdac2c9ded25c688c63e82b0641a52ff0))
+* Minimize YaruSplitButton width ([#1073](https://github.com/ubuntu/yaru.dart/issues/1073)) ([7442e85](https://github.com/ubuntu/yaru.dart/commit/7442e8513d8af5b82e5beb748dc6f5a510224c44))
+
 ## [10.0.0](https://github.com/ubuntu/yaru.dart/compare/v9.0.1...v10.0.0) (2026-03-11)
 
 
