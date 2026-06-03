@@ -16,6 +16,7 @@ class YaruSplitButton extends StatelessWidget {
     this.radius,
     this.menuWidth,
     this.hasFocusBorder,
+    this.expanded = false,
   }) : _variant = _YaruSplitButtonVariant.elevated;
 
   const YaruSplitButton.filled({
@@ -29,6 +30,7 @@ class YaruSplitButton extends StatelessWidget {
     this.radius,
     this.menuWidth,
     this.hasFocusBorder,
+    this.expanded = false,
   }) : _variant = _YaruSplitButtonVariant.filled;
 
   const YaruSplitButton.outlined({
@@ -42,6 +44,7 @@ class YaruSplitButton extends StatelessWidget {
     this.radius,
     this.menuWidth,
     this.hasFocusBorder,
+    this.expanded = false,
   }) : _variant = _YaruSplitButtonVariant.outlined;
 
   final _YaruSplitButtonVariant _variant;
@@ -54,6 +57,7 @@ class YaruSplitButton extends StatelessWidget {
   final double? radius;
   final double? menuWidth;
   final bool? hasFocusBorder;
+  final bool expanded;
 
   @override
   Widget build(BuildContext context) {
@@ -167,17 +171,22 @@ class YaruSplitButton extends StatelessWidget {
       ),
     };
 
+    final mainButtonWithFocusBorder =
+        hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+        ? YaruFocusBorder.primary(
+            borderRadius: mainBorderRadius,
+            child: mainButton,
+          )
+        : mainButton;
+
     return IntrinsicHeight(
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: expanded ? MainAxisSize.max : MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
-              ? YaruFocusBorder.primary(
-                  borderRadius: mainBorderRadius,
-                  child: mainButton,
-                )
-              : mainButton,
+          expanded
+              ? Expanded(child: mainButtonWithFocusBorder)
+              : mainButtonWithFocusBorder,
           if (onDropdownPressed != null) ...[
             if (_variant != _YaruSplitButtonVariant.outlined)
               const SizedBox(width: 1),
