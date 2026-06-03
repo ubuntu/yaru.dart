@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-@deprecated
+@Deprecated('This enum is deprecated and will be removed in a future version')
 enum YaruTileStyle { normal, banner }
 
 @Deprecated('Use YaruListTile instead')
