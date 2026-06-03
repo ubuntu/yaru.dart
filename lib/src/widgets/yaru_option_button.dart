@@ -46,7 +46,7 @@ class YaruOptionButton extends StatelessWidget {
   final YaruOptionButtonType _variant;
   final VoidCallback? onPressed;
   final FocusNode? focusNode;
-  final bool? autofocus;
+  final bool autofocus;
   final ButtonStyle? style;
   final Color? color;
   final Widget? child;
@@ -55,6 +55,8 @@ class YaruOptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final button = OutlinedButton(
+      focusNode: focusNode,
+      autofocus: autofocus,
       style: switch (_variant) {
         YaruOptionButtonType.normal => _styleFrom(
           padding: EdgeInsets.zero,
