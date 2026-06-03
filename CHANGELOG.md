@@ -1,5 +1,19 @@
 # Changelog
 
+## [10.2.0](https://github.com/ubuntu/yaru.dart/compare/v10.1.0...v10.2.0) (2026-06-03)
+
+
+### Features
+
+* accept fontFamily parameter in createYaruTheme ([#1075](https://github.com/ubuntu/yaru.dart/issues/1075)) ([72d662d](https://github.com/ubuntu/yaru.dart/commit/72d662d6e04fe0c1e824aa8cd2417f3be32209b2))
+* add expanded option to YaruSplitButton ([#1081](https://github.com/ubuntu/yaru.dart/issues/1081)) ([a959780](https://github.com/ubuntu/yaru.dart/commit/a959780dd9c4d3e145e184dbbf7a2fc4bf9dd1e6))
+
+
+### Bug Fixes
+
+* Add missing focus fields to YaruOptionButton ([#1067](https://github.com/ubuntu/yaru.dart/issues/1067)) ([fb3168d](https://github.com/ubuntu/yaru.dart/commit/fb3168d255e9f1326a8201204a8c85d223ec0399))
+* wrap ListTile in Material to fix invisible ink splashes in YaruMasterTile ([#1079](https://github.com/ubuntu/yaru.dart/issues/1079)) ([6461fdc](https://github.com/ubuntu/yaru.dart/commit/6461fdc9d2704a24172f5e994c040f1ca35005e6))
+
 ## [10.1.0](https://github.com/ubuntu/yaru.dart/compare/v10.0.0...v10.1.0) (2026-04-03)
 
 
