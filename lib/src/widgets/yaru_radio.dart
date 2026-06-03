@@ -9,6 +9,7 @@ const _kRadioActivableAreaPadding = EdgeInsets.all(6);
 const _kRadioTogglableSize = Size.square(20);
 
 const _kDotSizeFactor = 0.4;
+const _kUncheckedBorderWidth = 2.0;
 
 /// A Yaru radio.
 ///
@@ -286,7 +287,12 @@ class _YaruRadioPainter extends YaruTogglablePainter {
     );
 
     canvas.drawOval(
-      Rect.fromLTWH(0.5, 0.5, size.width - 1.0, size.height - 1.0),
+      Rect.fromLTWH(
+        _kUncheckedBorderWidth / 2,
+        _kUncheckedBorderWidth / 2,
+        size.width - _kUncheckedBorderWidth,
+        size.height - _kUncheckedBorderWidth,
+      ),
       Paint()
         ..color = interactive
             ? Color.lerp(uncheckedBorderColor, checkedBorderColor, t)!
@@ -295,7 +301,8 @@ class _YaruRadioPainter extends YaruTogglablePainter {
                 disabledCheckedBorderColor,
                 t,
               )!
-        ..style = PaintingStyle.stroke,
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = _kUncheckedBorderWidth,
     );
   }
 

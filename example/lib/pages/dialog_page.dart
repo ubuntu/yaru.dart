@@ -18,7 +18,7 @@ class _DialogPageState extends State<DialogPage> {
         padding: const EdgeInsets.all(kYaruPagePadding),
         child: Column(
           children: [
-            YaruTile(
+            YaruListTile(
               title: const Text('YaruDialogTitleBar'),
               trailing: OutlinedButton(
                 onPressed: () => showDialog(
@@ -73,7 +73,7 @@ class _DialogPageState extends State<DialogPage> {
                 child: const Text('Open dialog'),
               ),
             ),
-            YaruTile(
+            YaruListTile(
               title: const Text('isCloseable'),
               trailing: YaruSwitch(
                 value: isCloseable,

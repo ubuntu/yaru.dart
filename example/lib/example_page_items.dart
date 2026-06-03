@@ -20,6 +20,7 @@ import 'pages/full_color_icons_page.dart';
 import 'pages/icon_button_page.dart';
 import 'pages/icons_page/icons_page.dart';
 import 'pages/info_page.dart';
+import 'pages/list_tile.dart';
 import 'pages/navigation_page.dart';
 import 'pages/option_button_page.dart';
 import 'pages/page_indicator.dart';
@@ -306,6 +307,11 @@ final examplePageItems = <PageItem>[
     ),
     iconBuilder: (context, selected) => const Icon(YaruIcons.unordered_list),
     pageBuilder: (_) => const TilePage(),
+  ),
+  PageItem(
+    title: 'YaruListTile',
+    pageBuilder: (context) => const ListTilePage(),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.unordered_list),
   ),
   PageItem(
     title: 'YaruDialogTitleBar',

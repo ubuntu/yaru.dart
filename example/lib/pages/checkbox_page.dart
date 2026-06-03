@@ -57,7 +57,6 @@ class _CheckboxPageState extends State<CheckboxPage> {
                 tristate: true,
                 title: const Text('YaruCheckboxListTile'),
               ),
-              const SizedBox(height: 10),
             ],
           ],
         );

@@ -13,7 +13,7 @@ import 'package:yaru/yaru.dart';
 ///  * [YaruCheckboxListTile], a similar widget for checkboxes.
 ///  * [YaruRadioListTile], a similar widget for radio buttons.
 ///  * [ListTile] and [YaruSwitch], the widgets from which this widget is made.
-class YaruSwitchListTile extends StatelessWidget {
+class YaruSwitchListTile extends YaruToggleListTile {
   /// Creates a combination of a [ListTile] and a [YaruSwitch].
   ///
   /// See [SwitchListTile].
@@ -21,26 +21,21 @@ class YaruSwitchListTile extends StatelessWidget {
     super.key,
     required this.value,
     required this.onChanged,
-    this.tileColor,
-    this.title,
-    this.subtitle,
-    this.isThreeLine = false,
-    this.dense,
-    this.contentPadding,
-    this.secondary,
-    this.selected = false,
-    this.autofocus = false,
-    this.controlAffinity = ListTileControlAffinity.platform,
-    this.shape,
-    this.selectedTileColor,
-    this.visualDensity,
-    this.focusNode,
-    this.enableFeedback,
-    this.hoverColor,
-    this.mouseCursor,
-    this.onOffShapes,
-    this.hasFocusBorder,
-  }) : assert(!isThreeLine || subtitle != null);
+    super.control,
+    super.title,
+    super.subtitle,
+    super.secondary,
+    super.autofocus = false,
+    super.controlAffinity,
+    super.shape,
+    super.focusNode,
+    super.enableFeedback = true,
+    super.hoverColor,
+    super.mouseCursor,
+    super.onOffShapes,
+    super.hasFocusBorder,
+    super.contentPadding,
+  });
 
   /// See [SwitchListTile.value].
   final bool value;
@@ -48,117 +43,84 @@ class YaruSwitchListTile extends StatelessWidget {
   /// See [SwitchListTile.onChanged].
   final ValueChanged<bool>? onChanged;
 
-  /// See [SwitchListTile.tileColor].
-  final Color? tileColor;
+  @override
+  State<StatefulWidget> createState() => _YaruSwitchListTileState();
+}
 
-  /// See [SwitchListTile.title].
-  final Widget? title;
+class _YaruSwitchListTileState extends State<YaruSwitchListTile> {
+  bool _tileHasFocus = false;
+  late final FocusNode _focusNode;
 
-  /// See [SwitchListTile.subtitle].
-  final Widget? subtitle;
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = widget.focusNode ?? FocusNode();
+  }
 
-  /// See [SwitchListTile.secondary].
-  final Widget? secondary;
-
-  /// See [SwitchListTile.isThreeLine].
-  final bool isThreeLine;
-
-  /// See [SwitchListTile.dense].
-  final bool? dense;
-
-  /// See [SwitchListTile.contentPadding].
-  final EdgeInsetsGeometry? contentPadding;
-
-  /// See [SwitchListTile.selected].
-  final bool selected;
-
-  /// See [SwitchListTile.autofocus].
-  final bool autofocus;
-
-  /// See [SwitchListTile.controlAffinity].
-  final ListTileControlAffinity controlAffinity;
-
-  /// See [SwitchListTile.shape].
-  final ShapeBorder? shape;
-
-  /// See [SwitchListTile.selectedTileColor].
-  final Color? selectedTileColor;
-
-  /// See [SwitchListTile.visualDensity].
-  final VisualDensity? visualDensity;
-
-  /// See [SwitchListTile.focusNode].
-  final FocusNode? focusNode;
-
-  /// See [SwitchListTile.enableFeedback].
-  final bool? enableFeedback;
-
-  /// See [SwitchListTile.hoverColor].
-  final Color? hoverColor;
-
-  /// See [SwitchListTile.mouseCursor].
-  final MouseCursor? mouseCursor;
-
-  /// See [YaruSwitch.onOffShapes]
-  final bool? onOffShapes;
-
-  /// Whether to display the default focus border on focus or not.
-  final bool? hasFocusBorder;
+  @override
+  void dispose() {
+    super.dispose();
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final control = YaruSwitch(
-      value: value,
-      onChanged: onChanged,
-      autofocus: autofocus,
-      mouseCursor: mouseCursor,
-      onOffShapes: onOffShapes,
-      hasFocusBorder: false,
-    );
+    final control =
+        widget.control ??
+        YaruSwitch(
+          value: widget.value,
+          onChanged: widget.onChanged,
+          autofocus: widget.autofocus,
+          mouseCursor: widget.mouseCursor,
+          onOffShapes: widget.onOffShapes,
+        );
 
     Widget? leading, trailing;
-    switch (controlAffinity) {
+    switch (widget.controlAffinity) {
       case ListTileControlAffinity.leading:
         leading = control;
-        trailing = secondary;
+        trailing = widget.secondary;
         break;
       case ListTileControlAffinity.trailing:
       case ListTileControlAffinity.platform:
-        leading = secondary;
+        leading = widget.secondary;
         trailing = control;
         break;
     }
 
-    final tile = ListTile(
+    final tile = YaruListTile(
       leading: leading,
-      title: title,
-      subtitle: subtitle,
+      title: widget.title,
+      subtitle: widget.subtitle,
       trailing: trailing,
-      isThreeLine: isThreeLine,
-      dense: dense,
-      contentPadding: contentPadding,
-      enabled: onChanged != null,
-      onTap: onChanged != null
+      enabled: widget.onChanged != null,
+      onTap: widget.onChanged != null
           ? () {
-              onChanged!(!value);
+              widget.onChanged!(!widget.value);
             }
           : null,
-      selected: selected,
-      selectedTileColor: selectedTileColor,
-      autofocus: autofocus,
-      shape: shape,
-      tileColor: tileColor,
-      visualDensity: visualDensity,
-      focusNode: focusNode,
-      enableFeedback: enableFeedback,
-      hoverColor: hoverColor,
-      mouseCursor: mouseCursor,
+      autofocus: widget.autofocus,
+      focusNode: _focusNode,
+      enableFeedback: widget.enableFeedback,
+      hoverColor: widget.hoverColor,
+      mouseCursor: widget.mouseCursor,
+      customBorder: widget.shape,
+      contentPadding: widget.contentPadding,
+      hasFocusBorder: false,
+      onFocusChange: (focus) => setState(() {
+        _tileHasFocus = _focusNode.hasPrimaryFocus;
+      }),
     );
 
     return MergeSemantics(
-      child: hasFocusBorder ?? YaruTheme.maybeOf(context)?.focusBorders == true
+      child:
+          widget.hasFocusBorder ??
+              YaruTheme.maybeOf(context)?.focusBorders == true
           ? YaruFocusBorder.primary(
               borderStrokeAlign: BorderSide.strokeAlignInside,
+              borderColor: _tileHasFocus ? null : Colors.transparent,
               child: tile,
             )
           : tile,
