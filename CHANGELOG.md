@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.2.1](https://github.com/ubuntu/yaru.dart/compare/v10.2.0...v10.2.1) (2026-07-22)
+
+
+### Bug Fixes
+
+* RTL search field ([#1086](https://github.com/ubuntu/yaru.dart/issues/1086)) ([f930f8a](https://github.com/ubuntu/yaru.dart/commit/f930f8a7bf2b4dc1b48050e18fa521cda47c6722))
+
 ## [10.2.0](https://github.com/ubuntu/yaru.dart/compare/v10.1.0...v10.2.0) (2026-06-03)
 
 
