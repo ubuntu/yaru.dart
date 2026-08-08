@@ -220,8 +220,11 @@ class _YaruDateTimeEntry extends StatefulWidget {
     this.autofocus,
     this.acceptEmpty,
     this.clearIconSemanticLabel,
-  }) : assert(initialDateTime == null || controller == null),
-       assert((initialDateTime == null) != (controller == null));
+  }) : assert(
+         (initialDateTime == null && controller != null) ||
+             (initialDateTime != null && controller == null),
+         'Either provide initialDateTime or controller, not both',
+       );
 
   final _YaruDateTimeEntryType type;
 
@@ -290,8 +293,10 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   late IYaruDateTimeEntryController dateTimeController;
   YaruSegmentedEntryController? segmentedEntryController;
 
-  late bool is24HourLocalized;
-  bool get use24HourFormat => widget.force24HourFormat ?? is24HourLocalized;
+  late FocusNode _focusNode;
+
+  late bool _is24HourLocalized;
+  bool get _use24HourFormat => widget.force24HourFormat ?? _is24HourLocalized;
 
   late YaruNumericSegment daySegment;
   late YaruNumericSegment monthSegment;
@@ -315,10 +320,14 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   // Used to avoid any controller value change while updating segments
   bool _cancelOnChanged = false;
 
+  final overlayLink = LayerLink();
+  final overlayController = OverlayPortalController();
+
   @override
   void initState() {
     super.initState();
 
+    _focusNode = widget.focusNode ?? FocusNode();
     _updateController();
   }
 
@@ -337,6 +346,9 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
 
     if (widget.controller != oldWidget.controller) {
       dateTimeController.removeListener(_controllerCallback);
+      if (widget.controller == null) {
+        dateTimeController.dispose();
+      }
       _updateController();
     }
 
@@ -352,12 +364,23 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       segmentedEntryController?.dispose();
       _updateEntryController();
     }
+
+    if (widget.focusNode != oldWidget.focusNode) {
+      if (oldWidget.focusNode == null) {
+        _focusNode.dispose();
+      }
+      _focusNode = widget.focusNode ?? FocusNode();
+    }
   }
 
   @override
   void dispose() {
     if (widget.controller != null) {
       dateTimeController.dispose();
+    }
+
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
     }
 
     segmentedEntryController?.dispose();
@@ -385,7 +408,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
         dateTimeController.dateTime?.month ?? monthSegment.value;
     yearSegment.value = dateTimeController.dateTime?.year ?? yearSegment.value;
     hourSegment.value = dateTimeController.dateTime != null
-        ? use24HourFormat
+        ? _use24HourFormat
               ? dateTimeController.dateTime!.hour
               : dateTimeController.dateTime!.toTimeOfDay().hourOfPeriod
         : hourSegment.value;
@@ -457,7 +480,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   }
 
   int? onHourUpArrowKey(_, int? value, int? oldValue) {
-    if (use24HourFormat) {
+    if (_use24HourFormat) {
       return value;
     } else if (oldValue == 11) {
       if (period.isPm && daySegment.value != null) {
@@ -472,7 +495,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   }
 
   int? onHourDownArrowKey(_, int? value, int? oldValue) {
-    if (use24HourFormat) {
+    if (_use24HourFormat) {
       return value;
     } else if (oldValue == 12) {
       if (period.isAm && daySegment.value != null) {
@@ -487,15 +510,19 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
   }
 
   void _updateSegmentsAndDelimiters() {
+    for (final segment in segments) {
+      segment.dispose();
+    }
     segments.clear();
     delimiters.clear();
 
+    // Placeholder values
     const year = 2001;
     const month = 12;
     const day = 31;
 
     final localizations = MaterialLocalizations.of(context);
-    is24HourLocalized =
+    _is24HourLocalized =
         hourFormat(of: localizations.timeOfDayFormat()) != HourFormat.h;
     final formattedDateTime = localizations.formatCompactDate(
       DateTime(year, month, day),
@@ -507,6 +534,9 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     final dateDelimiter = localizations.dateSeparator;
 
     final dateParts = formattedDateTime.split(dateDelimiter);
+    if (dateParts.length != 3) {
+      throw StateError('Unexpected date format from localizations');
+    }
     final dateHelpTextParts = localizations.dateHelpText.split(dateDelimiter);
 
     for (var i = 0; i < dateParts.length; i++) {
@@ -558,17 +588,17 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
 
     hourSegment = YaruNumericSegment.fixed(
       initialValue: dateTimeController.dateTime != null
-          ? use24HourFormat
+          ? _use24HourFormat
                 ? dateTimeController.dateTime!.hour
                 : dateTimeController.dateTime!.toTimeOfDay().hourOfPeriod
           : null,
       length: 2,
       placeholderLetter: timePlaceholder,
       onValueChange: _dateTimeSegmentOnValueChange(
-        use24HourFormat ? max24HourValue : max12HourValue,
+        _use24HourFormat ? max24HourValue : max12HourValue,
       ),
       onInputCallback: _dateTimeSegmentOnInput(
-        use24HourFormat ? max24HourValue : max12HourValue,
+        _use24HourFormat ? max24HourValue : max12HourValue,
       ),
       onUpArrowKeyCallback: onHourUpArrowKey,
       onDownArrowKeyCallback: onHourDownArrowKey,
@@ -607,7 +637,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       }
       delimiters.add(timeDelimiter);
 
-      if (!use24HourFormat) {
+      if (!_use24HourFormat) {
         segments.add(periodSegment);
         delimiters.add(' ');
       }
@@ -640,19 +670,10 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     }
 
     int to24hour(int hour) {
-      if (period.isPm) {
-        if (hour != 12) {
-          return hour + 12;
-        } else {
-          return 12;
-        }
-      } else {
-        if (hour != 12) {
-          return hour;
-        } else {
-          return 0;
-        }
-      }
+      return switch (period) {
+        DayPeriod.pm => hour == 12 ? 12 : hour + 12,
+        DayPeriod.am => hour == 12 ? 0 : hour,
+      };
     }
 
     return DateTime(
@@ -660,7 +681,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       (widget.type.hasDate && month != null) ? month! : 1,
       (widget.type.hasDate && day != null) ? day! : 1,
       (widget.type.hasTime && hour != null)
-          ? use24HourFormat
+          ? _use24HourFormat
                 ? hour!
                 : to24hour(hour!)
           : 0,
@@ -697,8 +718,8 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
     widget.onChanged?.call(dateTime);
   }
 
-  Widget _clearInputButton() {
-    return YaruIconButton(
+  Widget _buildSuffixButtons() {
+    final clearButton = YaruIconButton(
       onPressed: () {
         _cancelOnChanged = true;
         daySegment.value = null;
@@ -716,6 +737,59 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
         semanticLabel: widget.clearIconSemanticLabel,
       ),
     );
+
+    final calendarOverlayButton = YaruIconButton(
+      onPressed: () {
+        _focusNode.requestFocus();
+        overlayController.show();
+      },
+      icon: const Icon(YaruIcons.calendar_month),
+    );
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [if (widget.type.hasDate) calendarOverlayButton, clearButton],
+    );
+  }
+
+  Widget _maybeBuildOverlayPortal({required Widget child}) {
+    if (!widget.type.hasDate) {
+      return child;
+    }
+
+    return OverlayPortal.targetsRootOverlay(
+      controller: overlayController,
+      overlayChildBuilder: (context) {
+        return CompositedTransformFollower(
+          targetAnchor: Alignment.bottomLeft,
+          offset: const Offset(0, 1),
+          link: overlayLink,
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: TapRegion(
+              onTapOutside: (_) => overlayController.hide(),
+              child: FocusTraversalGroup(
+                child: _DayPickerOverlay(
+                  firstDate: widget.firstDateTime,
+                  lastDate: widget.lastDateTime,
+                  initialDate: dateTimeController.dateTime,
+                  onDaySelected: (day) {
+                    dateTimeController.dateTime = day.copyWith(
+                      hour: dateTimeController.dateTime?.hour,
+                      minute: dateTimeController.dateTime?.minute,
+                    );
+                    overlayController.hide();
+                    segmentedEntryController?.selectFirstSegment();
+                    _focusNode.requestFocus();
+                  },
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      child: CompositedTransformTarget(link: overlayLink, child: child),
+    );
   }
 
   @override
@@ -725,21 +799,58 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
         ? localizations.timePickerInputHelpText
         : localizations.dateInputLabel;
 
-    return YaruSegmentedEntry(
-      focusNode: widget.focusNode,
-      controller: segmentedEntryController,
-      segments: segments,
-      delimiters: delimiters,
-      validator: _validateDateTime,
-      onChanged: (_) => _onChanged(),
-      onSaved: (_) => widget.onSaved?.call(_tryParseSegments()),
-      onFieldSubmitted: (_) =>
-          widget.onFieldSubmitted?.call(_tryParseSegments()),
-      decoration: InputDecoration(
-        labelText: labelText,
-        suffixIcon: _clearInputButton(),
+    return _maybeBuildOverlayPortal(
+      child: YaruSegmentedEntry(
+        focusNode: _focusNode,
+        controller: segmentedEntryController,
+        segments: segments,
+        delimiters: delimiters,
+        validator: _validateDateTime,
+        onChanged: (_) => _onChanged(),
+        onSaved: (_) => widget.onSaved?.call(_tryParseSegments()),
+        onFieldSubmitted: (_) =>
+            widget.onFieldSubmitted?.call(_tryParseSegments()),
+        decoration: InputDecoration(
+          labelText: labelText,
+          suffixIcon: _buildSuffixButtons(),
+        ),
+        keyboardType: TextInputType.datetime,
       ),
-      keyboardType: TextInputType.datetime,
+    );
+  }
+}
+
+class _DayPickerOverlay extends StatelessWidget {
+  const _DayPickerOverlay({
+    required this.initialDate,
+    required this.firstDate,
+    required this.lastDate,
+    required this.onDaySelected,
+  });
+
+  final DateTime? initialDate;
+  final DateTime firstDate;
+  final DateTime lastDate;
+  final DateTimeCallback? onDaySelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        border: Border.all(color: colorScheme.outline),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: YaruDayPicker(
+          firstDate: firstDate,
+          lastDate: lastDate,
+          initialDate: initialDate,
+          onDaySelected: onDaySelected,
+        ),
+      ),
     );
   }
 }
