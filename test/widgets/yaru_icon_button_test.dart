@@ -42,6 +42,25 @@ void main() {
     variant: goldenVariant,
     tags: 'golden',
   );
+
+  testWidgets('icon color', (tester) async {
+    Color? iconColor() => IconTheme.of(tester.element(find.byType(Icon))).color;
+
+    await tester.pumpScaffold(
+      YaruIconButton(onPressed: () {}, icon: const Icon(YaruIcons.star)),
+    );
+    expect(iconColor(), yaruLight.colorScheme.onSurface);
+
+    await tester.pumpScaffold(
+      YaruIconButton(
+        onPressed: () {},
+        icon: const Icon(YaruIcons.star),
+        style: const ButtonStyle(iconColor: WidgetStatePropertyAll(Colors.red)),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(iconColor(), Colors.red);
+  });
 }
 
 final goldenVariant = ValueVariant({

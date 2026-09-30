@@ -4,8 +4,11 @@ import 'yaru_carousel.dart';
 import 'yaru_page_indicator_layout_delegate.dart';
 import 'yaru_page_indicator_theme.dart';
 
-typedef YaruPageIndicatorItemBuilder<T> =
-    T Function(int index, int selectedIndex, int length);
+typedef YaruPageIndicatorItemBuilder<T> = T Function(
+  int index,
+  int selectedIndex,
+  int length,
+);
 
 typedef YaruPageIndicatorTextBuilder = Widget Function(int page, int length);
 

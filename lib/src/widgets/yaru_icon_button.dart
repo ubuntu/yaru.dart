@@ -105,7 +105,15 @@ class YaruIconButton extends StatelessWidget {
       padding: padding ?? EdgeInsets.zero,
       selectedIcon: selectedIcon,
       splashRadius: splashRadius,
-      style: defaultStyleOf(context).merge(style),
+      // Since Flutter 3.38, IconButton uses foregroundColor as iconColor when
+      // iconColor is unset, which would override the theme's iconColor.
+      style: defaultStyleOf(context)
+          .merge(style)
+          .merge(
+            ButtonStyle(
+              iconColor: IconButtonTheme.of(context).style?.iconColor,
+            ),
+          ),
       tooltip: tooltip,
       visualDensity: visualDensity,
     );

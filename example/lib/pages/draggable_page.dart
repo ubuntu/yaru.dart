@@ -12,9 +12,8 @@ class DraggablePage extends StatelessWidget {
           controller: controller,
           padding: const EdgeInsets.all(kYaruPagePadding),
           child: Container(
-            color: Theme.of(
-              context,
-            ).colorScheme.onSurface.withValues(alpha: 0.1),
+            color: Theme.of(context).colorScheme.onSurface
+                .withValues(alpha: 0.1),
             child: SizedBox(
               width: 500,
               height: 250,
@@ -51,9 +50,9 @@ class DraggablePage extends StatelessWidget {
                                 child: Text(
                                   position.toString(),
                                   style: TextStyle(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onPrimary,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimary,
                                   ),
                                 ),
                               ),
