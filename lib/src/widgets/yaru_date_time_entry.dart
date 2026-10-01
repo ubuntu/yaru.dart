@@ -757,7 +757,7 @@ class YaruDateTimeEntryState extends State<_YaruDateTimeEntry> {
       return child;
     }
 
-    return OverlayPortal.targetsRootOverlay(
+    return OverlayPortal(
       controller: overlayController,
       overlayChildBuilder: (context) {
         return CompositedTransformFollower(
