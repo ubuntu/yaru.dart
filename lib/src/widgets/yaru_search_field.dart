@@ -53,7 +53,7 @@ class YaruSearchField extends StatefulWidget {
   final double height;
 
   /// The padding for the [InputDecoration] that defaults to `EdgeInsets.only(bottom: 10,top: 10, right: 15, left: 15)`
-  final EdgeInsets contentPadding;
+  final EdgeInsetsGeometry contentPadding;
 
   /// Defines if the [TextField] is autofocused on build
   final bool autofocus;
@@ -223,7 +223,7 @@ class YaruSearchTitleField extends StatefulWidget {
     required this.searchActive,
     required this.title,
     this.width = 190,
-    this.titlePadding = const EdgeInsets.only(left: 45.0),
+    this.titlePadding = const EdgeInsetsDirectional.only(start: 45.0),
     this.autoFocus = true,
     this.text,
     this.hintText,
@@ -231,7 +231,7 @@ class YaruSearchTitleField extends StatefulWidget {
     this.onClear,
     this.onSearchActive,
     this.onChanged,
-    this.alignment = Alignment.centerLeft,
+    this.alignment = AlignmentDirectional.centerStart,
     this.radius = const Radius.circular(kYaruTitleBarItemHeight),
     this.style = YaruSearchFieldStyle.filled,
     this.controller,
@@ -243,7 +243,7 @@ class YaruSearchTitleField extends StatefulWidget {
   final bool searchActive;
   final Widget title;
   final double width;
-  final EdgeInsets titlePadding;
+  final EdgeInsetsDirectional titlePadding;
   final bool autoFocus;
   final String? text;
   final String? hintText;
@@ -251,7 +251,7 @@ class YaruSearchTitleField extends StatefulWidget {
   final void Function(String)? onChanged;
   final void Function()? onClear;
   final void Function()? onSearchActive;
-  final Alignment alignment;
+  final AlignmentGeometry alignment;
   final Radius radius;
   final YaruSearchFieldStyle style;
 
@@ -292,7 +292,7 @@ class _YaruSearchTitleFieldState extends State<YaruSearchTitleField> {
         borderRadius: BorderRadius.all(widget.radius),
         clipBehavior: Clip.antiAlias,
         child: Stack(
-          alignment: Alignment.centerLeft,
+          alignment: AlignmentDirectional.centerStart,
           children: [
             if (_searchActive)
               Center(
@@ -311,11 +311,11 @@ class _YaruSearchTitleFieldState extends State<YaruSearchTitleField> {
                     autofocus: widget.autoFocus,
                     onSubmitted: widget.onSubmitted,
                     onChanged: widget.onChanged,
-                    contentPadding: const EdgeInsets.only(
+                    contentPadding: const EdgeInsetsDirectional.only(
                       bottom: 10,
                       top: 10,
-                      right: 15,
-                      left: 45,
+                      end: 15,
+                      start: 45,
                     ),
                   ),
                 ),

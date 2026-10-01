@@ -146,9 +146,8 @@ class _YaruCircularProgressIndicatorState
         late double rotationProgress;
 
         if (_initialAnimation) {
-          barSizeProgress = CurveTween(
-            curve: Curves.easeInOut,
-          ).transform(progress);
+          barSizeProgress = CurveTween(curve: Curves.easeInOut)
+              .transform(progress);
           spacingProgress = 0;
           rotationProgress = 0;
         } else {

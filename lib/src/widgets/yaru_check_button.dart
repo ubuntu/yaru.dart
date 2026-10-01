@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'yaru_checkbox.dart';
-import 'yaru_toggle_button.dart';
-import 'yaru_toggle_button_theme.dart';
+import 'package:yaru/yaru.dart';
 
 /// A desktop style check button with an interactive label.
 class YaruCheckButton extends StatefulWidget {
@@ -18,7 +15,7 @@ class YaruCheckButton extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.mouseCursor,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   });
 
   /// See [Checkbox.value]
@@ -49,7 +46,7 @@ class YaruCheckButton extends StatefulWidget {
   final MouseCursor? mouseCursor;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   State<YaruCheckButton> createState() => _YaruCheckButtonState();
@@ -87,7 +84,9 @@ class _YaruCheckButtonState extends State<YaruCheckButton> {
       title: widget.title,
       subtitle: widget.subtitle,
       contentPadding: widget.contentPadding,
-      hasFocusBorder: widget.hasFocusBorder,
+      hasFocusBorder:
+          widget.hasFocusBorder ??
+          YaruTheme.maybeOf(context)?.focusBorders == true,
       leading: YaruCheckbox(
         value: widget.value,
         onChanged: widget.onChanged,

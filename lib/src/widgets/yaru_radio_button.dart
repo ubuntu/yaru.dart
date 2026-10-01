@@ -1,10 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-
-import 'yaru_radio.dart';
-import 'yaru_toggle_button.dart';
-import 'yaru_toggle_button_theme.dart';
+import 'package:yaru/yaru.dart';
 
 /// A desktop style radio button with an interactive label.
 class YaruRadioButton<T> extends StatefulWidget {
@@ -21,7 +18,7 @@ class YaruRadioButton<T> extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.mouseCursor,
-    this.hasFocusBorder = true,
+    this.hasFocusBorder,
   });
 
   /// See [Radio.value]
@@ -55,7 +52,7 @@ class YaruRadioButton<T> extends StatefulWidget {
   final MouseCursor? mouseCursor;
 
   /// Whether to display the default focus border on focus or not.
-  final bool hasFocusBorder;
+  final bool? hasFocusBorder;
 
   @override
   State<YaruRadioButton<T>> createState() => _YaruRadioButtonState<T>();
@@ -93,7 +90,9 @@ class _YaruRadioButtonState<T> extends State<YaruRadioButton<T>> {
       title: widget.title,
       subtitle: widget.subtitle,
       contentPadding: widget.contentPadding,
-      hasFocusBorder: widget.hasFocusBorder,
+      hasFocusBorder:
+          widget.hasFocusBorder ??
+          YaruTheme.maybeOf(context)?.focusBorders == true,
       leading: YaruRadio<T>(
         value: widget.value,
         groupValue: widget.groupValue,

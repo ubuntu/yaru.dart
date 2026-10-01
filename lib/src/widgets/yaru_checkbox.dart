@@ -11,6 +11,7 @@ const _kCheckboxTogglableSize = Size.square(20);
 const _kCheckboxBorderRadius = Radius.circular(kYaruCheckRadius);
 const _kCheckboxDashStroke = 2.0;
 const _kDashSizeFactor = 0.52;
+const _kUncheckedBorderWidth = 2.0;
 
 /// A Yaru checkbox.
 ///
@@ -317,7 +318,12 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
-        Rect.fromLTWH(0.5, 0.5, size.width - 1.0, size.height - 1.0),
+        Rect.fromLTWH(
+          _kUncheckedBorderWidth / 2,
+          _kUncheckedBorderWidth / 2,
+          size.width - _kUncheckedBorderWidth,
+          size.height - _kUncheckedBorderWidth,
+        ),
         _kCheckboxBorderRadius,
       ),
       Paint()
@@ -328,6 +334,7 @@ class _YaruCheckboxPainter extends YaruTogglablePainter {
                 disabledCheckedBorderColor,
                 t,
               )!
+        ..strokeWidth = _kUncheckedBorderWidth
         ..style = PaintingStyle.stroke,
     );
   }

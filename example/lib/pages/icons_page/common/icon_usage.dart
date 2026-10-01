@@ -14,9 +14,8 @@ class IconUsage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usageTextStyle = Theme.of(
-      context,
-    ).textTheme.bodyLarge!.copyWith(fontFamily: 'Monospace');
+    final usageTextStyle = Theme.of(context).textTheme.bodyLarge!
+        .copyWith(fontFamily: 'Monospace');
 
     return Row(
       mainAxisAlignment: mainAxisAlignment,

@@ -20,61 +20,61 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           '${index.isEven ? 'Super long action name' : 'action'} ${index + 1}';
       return PopupMenuItem(
         child: Text(text, overflow: TextOverflow.ellipsis),
-        onTap: () => ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(text))),
+        onTap: () =>
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(text))),
       );
     });
 
     final tiles = [
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton()'),
         subtitle: const Text('Regular version'),
         trailing: YaruSplitButton(
           menuWidth: _width,
-          onPressed: () => ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Main Action'))),
+          onPressed: () =>
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('Main Action'))),
           items: items,
           child: const Text('Main Action'),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text('.filled()'),
         trailing: YaruSplitButton.filled(
           menuWidth: _width,
-          onPressed: () => ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Main Action'))),
+          onPressed: () =>
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('Main Action'))),
           items: items,
           child: const Text('Main Action'),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text('outlined()'),
         trailing: YaruSplitButton.outlined(
           menuWidth: _width,
-          onPressed: () => ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Main Action'))),
+          onPressed: () =>
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('Main Action'))),
           items: items,
           child: const Text('Main Action'),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text('items: null, onOptionPressed: null'),
         trailing: YaruSplitButton(
           menuWidth: _width,
           child: const Text('Main Action'),
-          onPressed: () => ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Main Action'))),
+          onPressed: () =>
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('Main Action'))),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text('onPressed: null'),
         trailing: YaruSplitButton(
@@ -83,7 +83,7 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           child: const Text('Main Action'),
         ),
       ),
-      YaruTile(
+      YaruListTile(
         title: const Text('YaruSplitButton'),
         subtitle: const Text(
           'items: null, onOptionPressed: null, onPressed: null',
@@ -101,9 +101,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const Text('Normal alignment'),
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
-            onPressed: () => ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text('Main Action'))),
+            onPressed: () =>
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(content: Text('Main Action'))),
             items: items.sublist(0, 3),
             child: const Text('Main Action'),
           ),
@@ -115,9 +115,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
             menuWidth: _width,
-            onPressed: () => ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text('Main Action'))),
+            onPressed: () =>
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(content: Text('Main Action'))),
             items: items.sublist(0, 3),
             child: const Text('Main Action'),
           ),
@@ -129,9 +129,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const Text('Space between alignment'),
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
-            onPressed: () => ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text('Main Action'))),
+            onPressed: () =>
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(content: Text('Main Action'))),
             items: items.sublist(0, 3),
             child: const Text('Main Action'),
           ),
@@ -144,9 +144,9 @@ class _SplitButtonPageState extends State<SplitButtonPage> {
           const Text('Center alignment'),
           const SizedBox(width: spacing),
           YaruSplitButton.outlined(
-            onPressed: () => ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text('Main Action'))),
+            onPressed: () =>
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(content: Text('Main Action'))),
             items: items.sublist(0, 3),
             child: const Text('Main Action'),
           ),

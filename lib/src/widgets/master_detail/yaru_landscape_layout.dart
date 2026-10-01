@@ -128,9 +128,8 @@ class _YaruLandscapeLayoutState extends State<YaruLandscapeLayout> {
     final theme = YaruMasterDetailTheme.of(context);
 
     return Theme(
-      data: Theme.of(
-        context,
-      ).copyWith(pageTransitionsTheme: theme.landscapeTransitions),
+      data: Theme.of(context)
+          .copyWith(pageTransitionsTheme: theme.landscapeTransitions),
       child: ScaffoldMessenger(
         child: Semantics(
           container: true,

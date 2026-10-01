@@ -74,19 +74,22 @@ class YaruMasterTile extends StatelessWidget {
         ),
         color: backgroundColor,
       ),
-      child: ListTile(
-        leading: leading,
-        title: _titleStyle(title, foregroundColor),
-        subtitle: _subTitleStyle(subtitle, foregroundColor),
-        trailing: trailing,
-        selected: isSelected,
-        onTap: () {
-          if (onTap != null) {
-            onTap!.call();
-          } else {
-            scope?.onTap();
-          }
-        },
+      child: Material(
+        color: Colors.transparent,
+        child: ListTile(
+          leading: leading,
+          title: _titleStyle(title, foregroundColor),
+          subtitle: _subTitleStyle(subtitle, foregroundColor),
+          trailing: trailing,
+          selected: isSelected,
+          onTap: () {
+            if (onTap != null) {
+              onTap!.call();
+            } else {
+              scope?.onTap();
+            }
+          },
+        ),
       ),
     );
 

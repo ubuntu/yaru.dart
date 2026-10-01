@@ -7,7 +7,10 @@ import 'text_theme.dart';
 
 // AppBar
 
-AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
+AppBarTheme _createAppBarTheme({
+  required ColorScheme colorScheme,
+  required TextTheme textTheme,
+}) {
   return AppBarTheme(
     shape: Border(
       bottom: BorderSide(
@@ -27,7 +30,7 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
         : SystemUiOverlayStyle.dark,
     backgroundColor: colorScheme.surface,
     foregroundColor: colorScheme.onSurface,
-    titleTextStyle: createTextTheme(colorScheme.onSurface).titleLarge!.copyWith(
+    titleTextStyle: textTheme.titleLarge!.copyWith(
       color: colorScheme.onSurface,
       fontWeight: FontWeight.normal,
     ),
@@ -39,7 +42,8 @@ AppBarTheme _createAppBarTheme(ColorScheme colorScheme) {
 
 InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
   final radius = BorderRadius.circular(kYaruButtonRadius);
-  const width = kYaruFocusBorderWidth;
+  const width = 1.0;
+  const focusWidth = kYaruFocusBorderWidth;
   const strokeAlign = 0.0;
   final fill = colorScheme.surface.scale(
     lightness: colorScheme.isLight ? -0.05 : -0.1,
@@ -52,14 +56,14 @@ InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
   const textStyle = TextStyle(fontSize: 14, fontWeight: FontWeight.normal);
 
   return InputDecorationTheme(
-    filled: true,
+    filled: false,
     fillColor: fill,
     border: OutlineInputBorder(
       borderSide: BorderSide(width: width, color: border),
       borderRadius: radius,
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: width, color: colorScheme.primary),
+      borderSide: BorderSide(width: focusWidth, color: colorScheme.primary),
       borderRadius: radius,
     ),
     enabledBorder: OutlineInputBorder(
@@ -71,13 +75,13 @@ InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
       borderRadius: radius,
     ),
     activeIndicatorBorder: const BorderSide(
-      width: width,
+      width: focusWidth,
       strokeAlign: strokeAlign,
     ),
     outlineBorder: const BorderSide(width: width, strokeAlign: strokeAlign),
     focusedErrorBorder: OutlineInputBorder(
       borderSide: BorderSide(
-        width: width,
+        width: focusWidth,
         color: colorScheme.error,
         strokeAlign: strokeAlign,
       ),
@@ -684,11 +688,17 @@ ThemeData createYaruTheme({
   Color? elevatedButtonColor,
   Color? elevatedButtonTextColor,
   bool? useMaterial3 = true,
+  String? fontFamily,
+  List<String>? fontFamilyFallback,
 }) {
   final dividerColor = colorScheme.isHighContrast
       ? colorScheme.outlineVariant
       : colorScheme.outline.scale(lightness: colorScheme.isLight ? 0.1 : -0.06);
-  final textTheme = createTextTheme(colorScheme.onSurface);
+  final textTheme = createTextTheme(
+    textColor: colorScheme.onSurface,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
 
   final themeData = ThemeData.from(
     useMaterial3: useMaterial3,
@@ -739,7 +749,10 @@ ThemeData createYaruTheme({
     checkboxTheme: _createCheckBoxTheme(colorScheme),
     radioTheme: _createRadioTheme(colorScheme),
     primaryColorDark: colorScheme.isDark ? colorScheme.primary : null,
-    appBarTheme: _createAppBarTheme(colorScheme),
+    appBarTheme: _createAppBarTheme(
+      colorScheme: colorScheme,
+      textTheme: textTheme,
+    ),
     floatingActionButtonTheme: _createFloatingActionButtonTheme(
       colorScheme,
       elevatedButtonColor,
@@ -781,7 +794,7 @@ ThemeData createYaruTheme({
     splashFactory: NoSplash.splashFactory,
     sliderTheme: _createSliderTheme(colorScheme),
     drawerTheme: _createDrawerTheme(colorScheme, dividerColor),
-    listTileTheme: _createListTileTheme(colorScheme),
+    listTileTheme: _createListTileTheme(colorScheme, textTheme),
     snackBarTheme: _createSnackBarTheme(colorScheme),
     chipTheme: _createChipTheme(
       selectedColor: elevatedButtonColor ?? colorScheme.primary,
@@ -791,7 +804,10 @@ ThemeData createYaruTheme({
   );
 }
 
-ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
+ListTileThemeData _createListTileTheme(
+  ColorScheme colorScheme,
+  TextTheme textTheme,
+) {
   final isHighContrast = colorScheme.isHighContrast;
   return ListTileThemeData(
     selectedColor: isHighContrast
@@ -810,6 +826,8 @@ ListTileThemeData _createListTileTheme(ColorScheme colorScheme) {
       borderRadius: BorderRadius.all(Radius.circular(kYaruButtonRadius)),
       side: BorderSide.none,
     ),
+    titleTextStyle: textTheme.labelLarge,
+    subtitleTextStyle: textTheme.labelMedium,
   );
 }
 
@@ -829,6 +847,8 @@ ThemeData createYaruLightTheme({
   Color? elevatedButtonColor,
   Color? elevatedButtonTextColor,
   bool? useMaterial3 = true,
+  String? fontFamily,
+  List<String>? fontFamilyFallback,
 }) {
   final secondary = primaryColor.scale(lightness: 0.2).cap(saturation: .9);
   final secondaryContainer = primaryColor
@@ -875,6 +895,8 @@ ThemeData createYaruLightTheme({
     elevatedButtonColor: elevatedButtonColor,
     elevatedButtonTextColor: elevatedButtonTextColor,
     useMaterial3: useMaterial3,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }
 
@@ -888,6 +910,8 @@ ThemeData createYaruDarkTheme({
   Color? elevatedButtonTextColor,
   bool? useMaterial3 = true,
   bool highContrast = false,
+  String? fontFamily,
+  List<String>? fontFamilyFallback,
 }) {
   final secondary = primaryColor.scale(lightness: -0.3, saturation: -0.15);
   final secondaryContainer = primaryColor
@@ -933,5 +957,7 @@ ThemeData createYaruDarkTheme({
     elevatedButtonColor: elevatedButtonColor,
     elevatedButtonTextColor: elevatedButtonTextColor,
     useMaterial3: useMaterial3,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }

@@ -4,8 +4,11 @@ import 'yaru_carousel.dart';
 import 'yaru_page_indicator_layout_delegate.dart';
 import 'yaru_page_indicator_theme.dart';
 
-typedef YaruPageIndicatorItemBuilder<T> =
-    T Function(int index, int selectedIndex, int length);
+typedef YaruPageIndicatorItemBuilder<T> = T Function(
+  int index,
+  int selectedIndex,
+  int length,
+);
 
 typedef YaruPageIndicatorTextBuilder = Widget Function(int page, int length);
 
@@ -129,8 +132,11 @@ class YaruPageIndicator extends StatelessWidget {
     final itemBuilder =
         this.itemBuilder ??
         indicatorTheme?.itemBuilder ??
-        (index, selectedIndex, _) =>
-            YaruPageIndicatorItem(selected: selectedIndex == index);
+        (index, selectedIndex, _) => YaruPageIndicatorItem(
+          selected: selectedIndex == index,
+          animationDuration: animationDuration,
+          animationCurve: animationCurve,
+        );
     final states = {if (onTap == null) WidgetState.disabled};
     final mouseCursor =
         WidgetStateProperty.resolveAs(this.mouseCursor, states) ??
@@ -185,13 +191,12 @@ class YaruPageIndicator extends StatelessWidget {
               child: _buildSizedContainer(
                 width: itemSizes[index].width,
                 height: itemSizes[index].height,
-                child: Center(
-                  child: GestureDetector(
-                    onTap: onTap == null ? null : () => onTap!(index),
-                    child: MouseRegion(
-                      cursor: mouseCursor,
-                      child: itemBuilder(index, page, length),
-                    ),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: onTap == null ? null : () => onTap!(index),
+                  child: MouseRegion(
+                    cursor: mouseCursor,
+                    child: Center(child: itemBuilder(index, page, length)),
                   ),
                 ),
               ),
@@ -221,8 +226,13 @@ class YaruPageIndicator extends StatelessWidget {
   }
 }
 
+const _kUnselectedItemSizeFactor = 2 / 3;
+
 /// Default item used in [YaruPageIndicator.itemBuilder].
 /// Looks like a simple dot grey when unselected, and accented when selected.
+///
+/// Unless [size] is set, the selected item is also larger than unselected
+/// items, so the selection does not rely on color alone.
 class YaruPageIndicatorItem extends StatelessWidget {
   /// Default item used in [YaruPageIndicator.itemBuilder].
   /// Looks like a simple dot grey when unselected, and accented when selected.
@@ -239,6 +249,9 @@ class YaruPageIndicatorItem extends StatelessWidget {
   final bool selected;
 
   /// Optionnal item size.
+  ///
+  /// If null, a selected item fills the available space and an unselected
+  /// item fills two thirds of it.
   final Size? size;
 
   /// Duration of a transition between two items.
@@ -268,7 +281,9 @@ class YaruPageIndicatorItem extends StatelessWidget {
     final animationDuration = this.animationDuration ?? Duration.zero;
     final animationCurve = this.animationCurve ?? Curves.linear;
 
-    return animationDuration != Duration.zero
+    final animated = animationDuration != Duration.zero;
+
+    final item = animated
         ? AnimatedContainer(
             width: size?.width,
             height: size?.height,
@@ -280,6 +295,24 @@ class YaruPageIndicatorItem extends StatelessWidget {
             width: size?.width,
             height: size?.height,
             decoration: decoration,
+          );
+
+    if (size != null) return item;
+
+    final sizeFactor = selected ? 1.0 : _kUnselectedItemSizeFactor;
+
+    return animated
+        ? AnimatedFractionallySizedBox(
+            duration: animationDuration,
+            curve: animationCurve,
+            widthFactor: sizeFactor,
+            heightFactor: sizeFactor,
+            child: item,
+          )
+        : FractionallySizedBox(
+            widthFactor: sizeFactor,
+            heightFactor: sizeFactor,
+            child: item,
           );
   }
 }

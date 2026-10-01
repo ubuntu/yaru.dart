@@ -80,7 +80,7 @@ class YaruInfoBadge extends StatelessWidget {
   }
 }
 
-/// A [YaruTranslucentContainer] wrapper around [ListTile]
+/// A [YaruTranslucentContainer] wrapper similar to a [ListTile]
 
 class YaruInfoBox extends StatelessWidget {
   /// Creates [YaruTranslucentContainer]
@@ -88,7 +88,6 @@ class YaruInfoBox extends StatelessWidget {
     this.title,
     this.subtitle,
     this.child,
-    this.isThreeLine = false,
     super.key,
     required this.yaruInfoType,
     this.borderRadius = const BorderRadius.all(
@@ -104,27 +103,20 @@ class YaruInfoBox extends StatelessWidget {
          'Either a subtitle or a child must be provided',
        );
 
-  /// The [YaruInfoType] which is used to use predefined its predefined color and [Icon] for the leading widget
-  /// of the internal [ListTile]
+  /// The [YaruInfoType] which is used to use predefined its predefined color and [Icon] for the leading widget.
   final YaruInfoType yaruInfoType;
 
-  /// An optional title [Widget] inserted into the internal [ListTile].
+  /// An optional title [Widget].
   final Widget? title;
 
-  /// A subtitle [Widget] inserted into the internal [ListTile]. Either [subtitle] or [child] mus be provided.
+  /// A subtitle [Widget]. Either [subtitle] or [child] must be provided.
   final Widget? subtitle;
 
-  /// A child [Widget] inserted into the internal [ListTile]. Either [subtitle] or [child] mus be provided.
+  /// A child [Widget]. Either [subtitle] or [child] must be provided.
   final Widget? child;
 
-  /// An optional trailing [Widget] inserted into the internal [ListTile].
+  /// An optional trailing [Widget] inserted to the right of the title.
   final Widget? trailing;
-
-  ///  Whether the internal [ListTile] is intended to display three lines of text.
-  /// If true, then [subtitle] must be non-null (since it is expected to give the second and third lines of text).
-  /// If false, the list tile is treated as having one line if the subtitle is null and treated as having two lines if the subtitle is non-null.
-  /// When using a [Text] widget for [title] and [subtitle], you can enforce line limits using [Text.maxLines].
-  final bool isThreeLine;
 
   final BorderRadiusGeometry borderRadius;
 
@@ -147,59 +139,66 @@ class YaruInfoBox extends StatelessWidget {
     final theme = Theme.of(context);
     final baseColor = color ?? yaruInfoType.getColor(context);
 
-    return Row(
-      children: [
-        Expanded(
-          child: YaruTranslucentContainer(
-            color: baseColor,
-            borderRadius: borderRadius,
-            child: ListTile(
-              leading: IconTheme(
-                data: IconTheme.of(context).copyWith(
-                  size: icon?.size ?? 30,
-                  color: icon?.color ?? baseColor,
+    return YaruTranslucentContainer(
+      color: baseColor,
+      child: Padding(
+        padding: const EdgeInsetsGeometry.symmetric(
+          horizontal: 12.0,
+          vertical: 12.0,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconTheme(
+                  data: IconTheme.of(context).copyWith(
+                    size: icon?.size ?? 24,
+                    color: icon?.color ?? baseColor,
+                  ),
+                  child: icon ?? Icon(yaruInfoType.iconData),
                 ),
-                child: icon ?? Icon(yaruInfoType.iconData),
-              ),
-              trailing: trailing,
-              iconColor: baseColor,
-              title: title != null
-                  ? DefaultTextStyle.merge(
+              ],
+            ),
+            const SizedBox(width: 8.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (title != null)
+                    DefaultTextStyle.merge(
                       style:
                           titleTextStyle ??
-                          theme.textTheme.headlineSmall?.copyWith(
+                          theme.textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                            height: 1.3,
                           ) ??
                           TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                            height: 1.3,
                             color: theme.colorScheme.onSurface,
                           ),
                       child: title!,
-                    )
-                  : null,
-              subtitle:
-                  child ??
-                  DefaultTextStyle.merge(
-                    style:
-                        subTitleTextStyle ??
-                        theme.textTheme.bodyMedium ??
-                        TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          color: theme.colorScheme.onSurface,
+                    ),
+                  if (child != null || subtitle != null)
+                    child ??
+                        DefaultTextStyle.merge(
+                          style:
+                              subTitleTextStyle ??
+                              theme.textTheme.bodyMedium ??
+                              TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                                color: theme.colorScheme.onSurface,
+                              ),
+                          child: subtitle!,
                         ),
-                    child: subtitle!,
-                  ),
-              // contentPadding: kWizardTilePadding,
-              isThreeLine: isThreeLine,
+                ],
+              ),
             ),
-          ),
+            if (trailing != null) ...[const SizedBox(width: 8.0), trailing!],
+          ],
         ),
-      ],
+      ),
     );
   }
 }

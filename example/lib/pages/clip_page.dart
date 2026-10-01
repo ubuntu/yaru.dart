@@ -13,7 +13,7 @@ class ClipPage extends StatelessWidget {
           padding: const EdgeInsets.all(kYaruPagePadding),
           children: [
             for (final position in YaruDiagonalClip.values)
-              YaruTile(
+              YaruListTile(
                 leading: Container(
                   width: 40,
                   height: 40,

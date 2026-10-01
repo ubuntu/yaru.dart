@@ -1,5 +1,62 @@
 # Changelog
 
+## [10.2.0](https://github.com/ubuntu/yaru.dart/compare/v10.1.0...v10.2.0) (2026-06-03)
+
+
+### Features
+
+* accept fontFamily parameter in createYaruTheme ([#1075](https://github.com/ubuntu/yaru.dart/issues/1075)) ([72d662d](https://github.com/ubuntu/yaru.dart/commit/72d662d6e04fe0c1e824aa8cd2417f3be32209b2))
+* add expanded option to YaruSplitButton ([#1081](https://github.com/ubuntu/yaru.dart/issues/1081)) ([a959780](https://github.com/ubuntu/yaru.dart/commit/a959780dd9c4d3e145e184dbbf7a2fc4bf9dd1e6))
+
+
+### Bug Fixes
+
+* Add missing focus fields to YaruOptionButton ([#1067](https://github.com/ubuntu/yaru.dart/issues/1067)) ([fb3168d](https://github.com/ubuntu/yaru.dart/commit/fb3168d255e9f1326a8201204a8c85d223ec0399))
+* wrap ListTile in Material to fix invisible ink splashes in YaruMasterTile ([#1079](https://github.com/ubuntu/yaru.dart/issues/1079)) ([6461fdc](https://github.com/ubuntu/yaru.dart/commit/6461fdc9d2704a24172f5e994c040f1ca35005e6))
+
+## [10.1.0](https://github.com/ubuntu/yaru.dart/compare/v10.0.0...v10.1.0) (2026-04-03)
+
+
+### Features
+
+* Add option to hide the default popup icon ([#1068](https://github.com/ubuntu/yaru.dart/issues/1068)) ([c276ca2](https://github.com/ubuntu/yaru.dart/commit/c276ca2c5893d7c4ce90e7ab4b1f1e4e114b23e2))
+
+
+### Bug Fixes
+
+* Hide focus borders for nested list tile focuses ([#1070](https://github.com/ubuntu/yaru.dart/issues/1070)) ([970c824](https://github.com/ubuntu/yaru.dart/commit/970c824fdac2c9ded25c688c63e82b0641a52ff0))
+* Minimize YaruSplitButton width ([#1073](https://github.com/ubuntu/yaru.dart/issues/1073)) ([7442e85](https://github.com/ubuntu/yaru.dart/commit/7442e8513d8af5b82e5beb748dc6f5a510224c44))
+
+## [10.0.0](https://github.com/ubuntu/yaru.dart/compare/v9.0.1...v10.0.0) (2026-03-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* Adjust toggleables to new styles ([#1064](https://github.com/ubuntu/yaru.dart/issues/1064))
+* YaruInfoBox visual improvements ([#1058](https://github.com/ubuntu/yaru.dart/issues/1058))
+
+### Features
+
+* Add YaruListTile and YaruTileList ([#1062](https://github.com/ubuntu/yaru.dart/issues/1062)) ([a5143b6](https://github.com/ubuntu/yaru.dart/commit/a5143b6536ea7e731c8a7b02bbd116235129d792))
+* Adjust toggleables to new styles ([#1064](https://github.com/ubuntu/yaru.dart/issues/1064)) ([0cca8ec](https://github.com/ubuntu/yaru.dart/commit/0cca8ecf6ab45f76f55bc2e8563873237291951c))
+* YaruInfoBox visual improvements ([#1058](https://github.com/ubuntu/yaru.dart/issues/1058)) ([9082c7e](https://github.com/ubuntu/yaru.dart/commit/9082c7e80076a8bfff6eafe389a29e416c0ee60a))
+
+
+### Bug Fixes
+
+* Reduce default ListTile text size ([#1060](https://github.com/ubuntu/yaru.dart/issues/1060)) ([f5929f4](https://github.com/ubuntu/yaru.dart/commit/f5929f4841536af3477d9144121164e49ac8b9af))
+* Reduce label font weight to normal ([#1061](https://github.com/ubuntu/yaru.dart/issues/1061)) ([bdc86f1](https://github.com/ubuntu/yaru.dart/commit/bdc86f1dc84e1f6be626033167dc347fe42602d6))
+* Reduce non-focus input border width and remove backgrounds ([#1066](https://github.com/ubuntu/yaru.dart/issues/1066)) ([d294572](https://github.com/ubuntu/yaru.dart/commit/d294572b7cb8d1512f17ab230e62e89d4e1ed4ab))
+
+## [9.0.1](https://github.com/ubuntu/yaru.dart/compare/v9.0.0...v9.0.1) (2026-01-15)
+
+
+### Bug Fixes
+
+* Prevent YaruSplitButton from expanding infinitely ([#1054](https://github.com/ubuntu/yaru.dart/issues/1054)) ([323ffc9](https://github.com/ubuntu/yaru.dart/commit/323ffc98bcd9a9998c992d0d785323ce397df6f9))
+* Respect focus border settings for toggle buttons ([#1055](https://github.com/ubuntu/yaru.dart/issues/1055)) ([8faf293](https://github.com/ubuntu/yaru.dart/commit/8faf293ef2182ddb1a3e35a875a4c690529dd506))
+* Split button spacing ([#1051](https://github.com/ubuntu/yaru.dart/issues/1051)) ([83eec53](https://github.com/ubuntu/yaru.dart/commit/83eec5369524d3edd9eabe45d8ffb4cdd794b2e4))
+
 ## [9.0.0](https://github.com/ubuntu/yaru.dart/compare/v8.3.0...v9.0.0) (2025-11-26)
 
 

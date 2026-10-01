@@ -65,6 +65,40 @@ class _PopupPageState extends State<PopupPage> {
               children: [
                 const Padding(
                   padding: EdgeInsets.all(8.0),
+                  child: Text('With custom icon'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: YaruPopupMenuButton<MyEnum>(
+                    onSelected: (value) {
+                      if (enumSet.contains(value)) {
+                        enumSet.remove(value);
+                      } else {
+                        enumSet.add(value);
+                      }
+                    },
+                    showArrow: false,
+                    child: const Icon(YaruIcons.view_more),
+                    itemBuilder: (context) {
+                      return [
+                        for (final value in MyEnum.values)
+                          YaruCheckedPopupMenuItem<MyEnum>(
+                            value: value,
+                            checked: enumSet.contains(value),
+                            child: Text(value.name),
+                          ),
+                      ];
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Card(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text('With custom style'),
                 ),
                 Padding(

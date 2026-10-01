@@ -45,12 +45,35 @@ class _SwitchPageState extends State<SwitchPage> {
               const SizedBox(height: 10),
             ],
             const Divider(),
-            for (var i = 0; i < _listTileValues.length; ++i)
+            for (var i = 0; i < _listTileValues.length; ++i) ...[
               YaruSwitchListTile(
                 value: _listTileValues[i],
                 onChanged: (v) => setState(() => _listTileValues[i] = v),
                 title: const Text('YaruSwitchListTile'),
               ),
+              YaruSwitchListTile(
+                value: _listTileValues[i],
+                onChanged: (v) => setState(() => _listTileValues[i] = v),
+                title: const Text('YaruSwitchListTile'),
+                subtitle: const Text('Custom control'),
+                control: Row(
+                  children: [
+                    YaruIconButton(
+                      icon: const Icon(YaruIcons.information),
+                      onPressed: () {},
+                    ),
+                    YaruSwitch(
+                      value: _listTileValues[i],
+                      onChanged: (v) => setState(() => _listTileValues[i] = v),
+                    ),
+                    YaruIconButton(
+                      icon: const Icon(YaruIcons.go_next),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ],
         );
       },
