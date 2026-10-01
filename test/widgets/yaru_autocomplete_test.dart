@@ -73,8 +73,14 @@ void main() {
       ),
     );
 
-    expect((await _announcementFor(tester, 'ap', 'count 2')).message, 'count 2');
-    expect((await _announcementFor(tester, 'zzz', 'nothing')).message, 'nothing');
+    expect(
+      (await _announcementFor(tester, 'ap', 'count 2')).message,
+      'count 2',
+    );
+    expect(
+      (await _announcementFor(tester, 'zzz', 'nothing')).message,
+      'nothing',
+    );
     expect((await _announcementFor(tester, '', 'cleared')).message, 'cleared');
   });
 
