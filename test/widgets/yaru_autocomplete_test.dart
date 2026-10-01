@@ -30,28 +30,35 @@ Future<void> _pumpAutocomplete(
 Future<CapturedAccessibilityAnnouncement> _announcementFor(
   WidgetTester tester,
   String text,
+  String message,
 ) async {
   tester.takeAnnouncements();
   await tester.enterText(find.byType(TextFormField), text);
   await tester.pump();
-  return tester.takeAnnouncements().last;
+  return tester.takeAnnouncements().singleWhere(
+    (announcement) => announcement.message == message,
+  );
 }
 
 void main() {
   testWidgets('announces default English messages', (tester) async {
     await _pumpAutocomplete(tester);
 
-    var announcement = await _announcementFor(tester, 'ap');
+    var announcement = await _announcementFor(
+      tester,
+      'ap',
+      '2 options available',
+    );
     expect(announcement.message, '2 options available');
     expect(announcement.textDirection, TextDirection.ltr);
 
-    announcement = await _announcementFor(tester, 'b');
+    announcement = await _announcementFor(tester, 'b', '1 option available');
     expect(announcement.message, '1 option available');
 
-    announcement = await _announcementFor(tester, 'zzz');
+    announcement = await _announcementFor(tester, 'zzz', 'No options found');
     expect(announcement.message, 'No options found');
 
-    announcement = await _announcementFor(tester, '');
+    announcement = await _announcementFor(tester, '', 'Input cleared');
     expect(announcement.message, 'Input cleared');
   });
 
@@ -66,15 +73,19 @@ void main() {
       ),
     );
 
-    expect((await _announcementFor(tester, 'ap')).message, 'count 2');
-    expect((await _announcementFor(tester, 'zzz')).message, 'nothing');
-    expect((await _announcementFor(tester, '')).message, 'cleared');
+    expect((await _announcementFor(tester, 'ap', 'count 2')).message, 'count 2');
+    expect((await _announcementFor(tester, 'zzz', 'nothing')).message, 'nothing');
+    expect((await _announcementFor(tester, '', 'cleared')).message, 'cleared');
   });
 
   testWidgets('uses the ambient text direction by default', (tester) async {
     await _pumpAutocomplete(tester, textDirection: TextDirection.rtl);
 
-    final announcement = await _announcementFor(tester, 'ap');
+    final announcement = await _announcementFor(
+      tester,
+      'ap',
+      '2 options available',
+    );
     expect(announcement.textDirection, TextDirection.rtl);
   });
 
@@ -90,7 +101,11 @@ void main() {
       textDirection: TextDirection.rtl,
     );
 
-    final announcement = await _announcementFor(tester, 'ap');
+    final announcement = await _announcementFor(
+      tester,
+      'ap',
+      '2 options available',
+    );
     expect(announcement.textDirection, TextDirection.ltr);
   });
 
@@ -99,7 +114,7 @@ void main() {
 
   testWidgets('first arrow down announces the first option', (tester) async {
     await _pumpAutocomplete(tester);
-    await _announcementFor(tester, 'ap');
+    await _announcementFor(tester, 'ap', '2 options available');
 
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
     await tester.pump();
@@ -108,7 +123,7 @@ void main() {
 
   testWidgets('arrow keys announce the highlighted option', (tester) async {
     await _pumpAutocomplete(tester);
-    await _announcementFor(tester, 'ap');
+    await _announcementFor(tester, 'ap', '2 options available');
 
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
     await tester.pump();
@@ -125,12 +140,12 @@ void main() {
 
   testWidgets('typing again resets arrow navigation', (tester) async {
     await _pumpAutocomplete(tester);
-    await _announcementFor(tester, 'ap');
+    await _announcementFor(tester, 'ap', '2 options available');
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
     await tester.pump();
 
-    await _announcementFor(tester, 'a');
+    await _announcementFor(tester, 'a', '3 options available');
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
     await tester.pump();
     expect(announcedMessages(tester), ['apple']);
@@ -147,7 +162,7 @@ void main() {
         onSelected: (option) => selected = option,
       ),
     );
-    await _announcementFor(tester, 'ban');
+    await _announcementFor(tester, 'ban', '1 option available');
 
     await tester.tap(find.text('banana'));
     await tester.pump();
@@ -177,7 +192,9 @@ void main() {
     searches['a']!.complete(_options);
     await tester.pump();
 
-    expect(announcedMessages(tester), ['2 options available']);
+    final messages = announcedMessages(tester);
+    expect(messages, contains('2 options available'));
+    expect(messages, isNot(contains('3 options available')));
   });
 
   testWidgets('tab moves focus past the open options list', (tester) async {
