@@ -107,15 +107,19 @@ class _YaruMonthGridDelegate extends SliverGridDelegate {
 }
 
 class YaruDayPicker extends StatefulWidget {
-  const YaruDayPicker({
+  YaruDayPicker({
     super.key,
     this.initialDate,
+    DateTime? currentDate,
     required this.firstDate,
     required this.lastDate,
     this.onDaySelected,
-  });
+  }) : _currentDate = currentDate ?? DateTime.now();
 
   final DateTime? initialDate;
+
+  /// The date highlighted as today. Defaults to [DateTime.now].
+  final DateTime _currentDate;
 
   final DateTime firstDate;
 
@@ -135,8 +139,7 @@ class _YaruDayPickerState extends State<YaruDayPicker> {
 
   @override
   void initState() {
-    final now = DateTime.now();
-    var initial = widget.initialDate ?? now;
+    var initial = widget.initialDate ?? widget._currentDate;
 
     if (initial.isBefore(widget.firstDate)) {
       initial = widget.firstDate;
@@ -211,6 +214,7 @@ class _YaruDayPickerState extends State<YaruDayPicker> {
         Expanded(
           child: _YaruMonthPicker(
             initialMonth: displayedMonth,
+            currentDate: widget._currentDate,
             firstDate: widget.firstDate,
             lastDate: widget.lastDate,
             onMonthSelected: (month) => setState(() {
@@ -221,6 +225,7 @@ class _YaruDayPickerState extends State<YaruDayPicker> {
         Expanded(
           child: _YaruYearPicker(
             initialYear: displayedMonth,
+            currentDate: widget._currentDate,
             firstDate: widget.firstDate,
             lastDate: widget.lastDate,
             onYearSelected: (year) => setState(() {
@@ -236,7 +241,7 @@ class _YaruDayPickerState extends State<YaruDayPicker> {
     return YaruMonthGrid(
       displayedMonth: displayedMonth,
       dayItemBuilder: (day) {
-        final now = DateTime.now();
+        final now = widget._currentDate;
         final selected = DateUtils.isSameDay(day, selectedDay);
         final currentMonth = DateUtils.isSameMonth(day, displayedMonth);
         final today = day.day == now.day && currentMonth;
@@ -364,12 +369,15 @@ class _YaruDayButton extends StatelessWidget {
 class _YaruMonthPicker extends StatefulWidget {
   const _YaruMonthPicker({
     required this.initialMonth,
+    required this.currentDate,
     required this.firstDate,
     required this.lastDate,
     required this.onMonthSelected,
   });
 
   final DateTime initialMonth;
+
+  final DateTime currentDate;
   final DateTime firstDate;
   final DateTime lastDate;
   final DateTimeCallback onMonthSelected;
@@ -406,13 +414,12 @@ class _YaruMonthPickerState extends State<_YaruMonthPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
     return _YaruMonthYearPicker(
       controller: controller,
       itemCount: DateTime.monthsPerYear,
       itemBuilder: (context, index) {
         return _YaruMonthYearPickerItem(
-          today: now.month - 1 == index,
+          today: widget.currentDate.month - 1 == index,
           selected: selectedMonth.month - 1 == index,
           onTap: () => setState(() {
             selectedMonth = selectedMonth.copyWith(month: index + 1);
@@ -431,12 +438,15 @@ class _YaruMonthPickerState extends State<_YaruMonthPicker> {
 class _YaruYearPicker extends StatefulWidget {
   const _YaruYearPicker({
     required this.initialYear,
+    required this.currentDate,
     required this.firstDate,
     required this.lastDate,
     required this.onYearSelected,
   });
 
   final DateTime initialYear;
+
+  final DateTime currentDate;
   final DateTime firstDate;
   final DateTime lastDate;
   final DateTimeCallback onYearSelected;
@@ -480,14 +490,12 @@ class _YaruYearPickerState extends State<_YaruYearPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
-
     return _YaruMonthYearPicker(
       controller: controller,
       itemCount: widget.lastDate.year - widget.firstDate.year + 1,
       itemBuilder: (context, index) {
         return _YaruMonthYearPickerItem(
-          today: now.year - widget.firstDate.year == index,
+          today: widget.currentDate.year - widget.firstDate.year == index,
           selected: selectedYear.year - widget.firstDate.year == index,
           onTap: () {
             selectedYear = selectedYear.copyWith(
@@ -597,7 +605,7 @@ class _YaruMonthYearPickerItem extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Center(
-          child: DefaultTextStyle(
+          child: DefaultTextStyle.merge(
             style: TextStyle(color: color),
             child: child,
           ),

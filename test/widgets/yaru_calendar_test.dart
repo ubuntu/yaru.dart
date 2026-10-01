@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru/yaru.dart';
+
+import '../yaru_golden_tester.dart';
 
 void main() {
   group('YaruMonthGrid', () {
@@ -91,6 +94,18 @@ void main() {
   });
 
   group('YaruDayPicker', () {
+    testWidgets('uses currentDate when initialDate is omitted', (tester) async {
+      await tester.pumpScaffold(
+        YaruDayPicker(
+          currentDate: DateTime(2024, 5, 15),
+          firstDate: DateTime(2023),
+          lastDate: DateTime(2025),
+        ),
+      );
+
+      expect(find.text('May 2024'), findsOneWidget);
+    });
+
     for (final theme in [ThemeData(), yaruLight]) {
       for (final textScale in [1.0, 2.0]) {
         testWidgets(
@@ -279,8 +294,95 @@ void main() {
       expect(yearController.page, 0);
       expect(find.text('Dec 2024'), findsOneWidget);
     });
+
+    testWidgets(
+      'golden images',
+      (tester) async {
+        // Yaru references package-qualified font families, while the font manifest
+        // of this package's own tests registers them without the package prefix.
+        final textFont = FontLoader('packages/yaru/Ubuntu')
+          ..addFont(rootBundle.load('assets/fonts/Ubuntu-R.ttf'))
+          ..addFont(rootBundle.load('assets/fonts/Ubuntu-M.ttf'));
+        final iconFont = FontLoader('packages/yaru/YaruIcons')
+          ..addFont(rootBundle.load('assets/yaru_icons.otf'));
+        await textFont.load();
+        await iconFont.load();
+
+        final variant = goldenVariant.currentValue!;
+        final (:initialDate, :monthYearSelection, :hovered) = variant.value!;
+
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        await tester.pumpScaffold(
+          YaruDayPicker(
+            initialDate: initialDate,
+            currentDate: DateTime(2025, 6, 15),
+            firstDate: DateTime(2023),
+            lastDate: DateTime(2026, 12, 31),
+          ),
+          themeMode: variant.themeMode,
+          size: const Size(240, 280),
+        );
+        await tester.pumpAndSettle();
+
+        if (monthYearSelection) {
+          await tester.tap(find.byType(OutlinedButton));
+          await tester.pumpAndSettle();
+          expect(find.byType(PageView), findsNWidgets(2));
+        }
+        if (hovered) {
+          await tester.hover(find.text('20'));
+          await tester.pumpAndSettle();
+        }
+
+        await expectLater(
+          find.byType(YaruDayPicker),
+          matchesGoldenFile('goldens/yaru_calendar-${variant.label}.png'),
+        );
+      },
+      variant: goldenVariant,
+      tags: 'golden',
+    );
   });
 }
+
+final goldenVariant = ValueVariant({
+  ...goldenThemeVariants('days', (
+    initialDate: DateTime(2024, 5, 10),
+    monthYearSelection: false,
+    hovered: false,
+  )),
+  ...goldenThemeVariants('leap-february', (
+    initialDate: DateTime(2024, 2, 29),
+    monthYearSelection: false,
+    hovered: false,
+  )),
+  ...goldenThemeVariants('six-week-month', (
+    initialDate: DateTime(2024, 3, 31),
+    monthYearSelection: false,
+    hovered: false,
+  )),
+  ...goldenThemeVariants('day-hovered', (
+    initialDate: DateTime(2024, 5, 10),
+    monthYearSelection: false,
+    hovered: true,
+  )),
+  ...goldenThemeVariants('month-year', (
+    initialDate: DateTime(2024, 5, 10),
+    monthYearSelection: true,
+    hovered: false,
+  )),
+  ...goldenThemeVariants('month-year-first', (
+    initialDate: DateTime(2023),
+    monthYearSelection: true,
+    hovered: false,
+  )),
+  ...goldenThemeVariants('month-year-last', (
+    initialDate: DateTime(2026, 12, 15),
+    monthYearSelection: true,
+    hovered: false,
+  )),
+});
 
 class _MaterialLocalizations extends DefaultMaterialLocalizations {
   const _MaterialLocalizations(this.firstDayOfWeekIndex);
