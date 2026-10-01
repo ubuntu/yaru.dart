@@ -143,12 +143,14 @@ class _YaruAutocompleteState<T extends Object>
 
   void _announceResultsCount(int count, String text) {
     if (text.isEmpty) {
-      SemanticsService.announce(
+      SemanticsService.sendAnnouncement(
+        View.of(context),
         widget.clearedAnnouncement,
         _announcementTextDirection,
       );
     } else if (count == 0) {
-      SemanticsService.announce(
+      SemanticsService.sendAnnouncement(
+        View.of(context),
         widget.noOptionsAnnouncement,
         _announcementTextDirection,
       );
@@ -158,7 +160,8 @@ class _YaruAutocompleteState<T extends Object>
           return;
         }
       }
-      SemanticsService.announce(
+      SemanticsService.sendAnnouncement(
+        View.of(context),
         widget.optionsCountAnnouncement(count),
         _announcementTextDirection,
       );
@@ -215,7 +218,8 @@ class _YaruAutocompleteState<T extends Object>
                   _hasNavigated = true;
                   if (_latestOptions.isNotEmpty) {
                     final option = _latestOptions.first;
-                    SemanticsService.announce(
+                    SemanticsService.sendAnnouncement(
+                      View.of(context),
                       widget.displayStringForOption(option),
                       _announcementTextDirection,
                     );
@@ -309,7 +313,8 @@ class _YaruAutocompleteOptionsState<T extends Object>
 
       if (highlighted >= 0 && highlighted < widget.options.length) {
         final option = widget.options.elementAt(highlighted);
-        SemanticsService.announce(
+        SemanticsService.sendAnnouncement(
+          View.of(context),
           widget.displayStringForOption(option),
           widget.announcementTextDirection,
         );
