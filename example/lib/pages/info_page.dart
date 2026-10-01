@@ -106,9 +106,8 @@ class _CopyButton extends StatelessWidget {
       ),
       onPressed: () {
         Clipboard.setData(ClipboardData(text: text));
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Copied')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Copied')));
       },
       child: const Icon(YaruIcons.copy, color: YaruColors.magenta),
     );

@@ -37,9 +37,8 @@ class IconDialog extends StatelessWidget {
                     DecoratedBox(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(size / 10),
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.05),
+                        color: Theme.of(context).colorScheme.onSurface
+                            .withValues(alpha: 0.05),
                       ),
                       child: iconItem.iconBuilder(context, size),
                     ),

@@ -19,8 +19,11 @@ abstract interface class YaruEntrySegment implements Listenable {
   YaruSegmentEventReturnAction onBackspaceKey();
 }
 
-typedef YaruSegmentInputFormatter =
-    String Function(String? segmentInput, int minLength, int? maxLength);
+typedef YaruSegmentInputFormatter = String Function(
+  String? segmentInput,
+  int minLength,
+  int? maxLength,
+);
 
 /// Represents a single segment of a [YaruSegmentedEntry].
 /// You can listen for [text] and [input] change using [addListener].
@@ -121,8 +124,11 @@ class YaruStringSegment extends ChangeNotifier implements YaruEntrySegment {
       YaruSegmentEventReturnAction.ignored;
 }
 
-typedef YaruNumericSegmentCallback =
-    int? Function(String? input, int? value, int? oldValue)?;
+typedef YaruNumericSegmentCallback = int? Function(
+  String? input,
+  int? value,
+  int? oldValue,
+)?;
 
 class YaruNumericSegment extends ChangeNotifier implements YaruEntrySegment {
   /// Creates a [YaruNumericSegment].

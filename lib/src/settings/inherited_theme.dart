@@ -108,7 +108,7 @@ class YaruTheme extends StatefulWidget {
          builder != null || child != null,
          'Either builder or child must be provided',
        ),
-       _platform = platform ?? const LocalPlatform(),
+       _platformOverride = platform,
        _settings = settings;
 
   /// Builds the widget below this widget in the tree.
@@ -120,7 +120,8 @@ class YaruTheme extends StatefulWidget {
   /// Specifies the theme for descendant widgets.
   final YaruThemeData data;
 
-  final Platform _platform;
+  final Platform? _platformOverride;
+  Platform get _platform => _platformOverride ?? Platform.current;
   final YaruSettings? _settings;
 
   /// The data from the closest [YaruTheme] instance that encloses the given
@@ -185,7 +186,10 @@ class _YaruThemeState extends State<YaruTheme> {
   bool canDetectVariant() {
     return !kIsWeb &&
         widget._platform.isLinux &&
-        !widget._platform.environment.containsKey('FLUTTER_TEST');
+        !(widget._platform.nativePlatform?.environment.containsKey(
+              'FLUTTER_TEST',
+            ) ??
+            false);
   }
 
   // This very simple but manual solution is the safest approach for now

@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:animated_vector/animated_vector.dart';
 import 'package:animated_vector_annotations/animated_vector_annotations.dart';
 
 part 'yaru_animated_icons.g.dart';
