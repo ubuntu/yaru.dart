@@ -173,7 +173,13 @@ class _YaruDayPickerState extends State<YaruDayPicker> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(DateFormat.yMMM().format(displayedMonth)),
+                  Flexible(
+                    child: Text(
+                      DateFormat.yMMM().format(displayedMonth),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                   const SizedBox(width: 5),
                   yearSelectionMode
                       ? const Icon(YaruIcons.pan_up)
