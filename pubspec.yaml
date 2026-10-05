@@ -23,12 +23,12 @@ dependencies:
   yaru_window: ^0.2.2
 
 dev_dependencies:
+  alchemist: ^0.14.0
   animated_vector_gen: ^0.3.0
   build_runner: ^2.4.12
   flutter_lints: ">=5.0.0 <7.0.0"
   flutter_test:
     sdk: flutter
-  golden_toolkit: ^0.15.0
   mocktail: ^1.0.4
   plugin_platform_interface: ^2.1.8
   yaru_window_platform_interface: ^0.1.3
