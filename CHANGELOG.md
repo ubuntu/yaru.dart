@@ -1,5 +1,26 @@
 # Changelog
 
+## [11.0.0](https://github.com/ubuntu/yaru.dart/compare/v10.2.0...v11.0.0) (2026-10-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **YaruBackButton:** this remove the extra Center widget added when YaruBackButtonStyle.rounded is used. In some context, you should add this Center widget to avoid any layout change.
+* **a11y:** distinguish selected page indicator dot by size ([#1094](https://github.com/ubuntu/yaru.dart/issues/1094))
+* update Flutter to 3.47.5 ([#1092](https://github.com/ubuntu/yaru.dart/issues/1092))
+
+### Bug Fixes
+
+* **a11y:** distinguish selected page indicator dot by size ([#1094](https://github.com/ubuntu/yaru.dart/issues/1094)) ([a4730ed](https://github.com/ubuntu/yaru.dart/commit/a4730edfe3b4940fd2768cca4b93e03f32183acb)), closes [#1093](https://github.com/ubuntu/yaru.dart/issues/1093)
+* **a11y:** improve YaruAutocomplete accessibility and focus traversal ([#1077](https://github.com/ubuntu/yaru.dart/issues/1077)) ([3326932](https://github.com/ubuntu/yaru.dart/commit/33269326082521bd3b302407ee116a10ded77a73))
+* RTL search field ([#1086](https://github.com/ubuntu/yaru.dart/issues/1086)) ([f930f8a](https://github.com/ubuntu/yaru.dart/commit/f930f8a7bf2b4dc1b48050e18fa521cda47c6722))
+* **YaruBackButton:** remove Center when rounded ([#1099](https://github.com/ubuntu/yaru.dart/issues/1099)) ([c070fed](https://github.com/ubuntu/yaru.dart/commit/c070fed881a2a7cc42cea8b9b9f6bd234a715ca8))
+
+
+### Miscellaneous Chores
+
+* update Flutter to 3.47.5 ([#1092](https://github.com/ubuntu/yaru.dart/issues/1092)) ([3fe3f89](https://github.com/ubuntu/yaru.dart/commit/3fe3f895ae5276fb047517f491f8738ba5337b29))
+
 ## [10.2.0](https://github.com/ubuntu/yaru.dart/compare/v10.1.0...v10.2.0) (2026-06-03)
 
 
