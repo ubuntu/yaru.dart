@@ -87,12 +87,14 @@ class _YaruCheckboxListTileState extends State<YaruCheckboxListTile> {
     Widget? leading, trailing;
     final control =
         widget.control ??
-        YaruCheckbox(
-          value: widget.value,
-          onChanged: widget.onChanged,
-          autofocus: widget.autofocus,
-          tristate: widget.tristate,
-          mouseCursor: widget.mouseCursor,
+        ExcludeFocus(
+          child: YaruCheckbox(
+            value: widget.value,
+            onChanged: widget.onChanged,
+            autofocus: widget.autofocus,
+            tristate: widget.tristate,
+            mouseCursor: widget.mouseCursor,
+          ),
         );
 
     switch (widget.controlAffinity) {
