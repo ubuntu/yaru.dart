@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.0.1](https://github.com/ubuntu/yaru.dart/compare/v11.0.0...v11.0.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **a11y:** avoid duplicate tab stops in toggle list tiles ([#1100](https://github.com/ubuntu/yaru.dart/issues/1100)) ([0cbb50c](https://github.com/ubuntu/yaru.dart/commit/0cbb50c715c3c5654981d35c259f276d6fc350f7))
+
 ## [11.0.0](https://github.com/ubuntu/yaru.dart/compare/v10.2.0...v11.0.0) (2026-10-02)
 
 
