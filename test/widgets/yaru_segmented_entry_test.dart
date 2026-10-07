@@ -4,6 +4,81 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru/yaru.dart';
 
 void main() {
+  testWidgets('reselecting the current edge resets pending segment input', (
+    tester,
+  ) async {
+    final controller = YaruSegmentedEntryController(length: 1);
+    final segment = YaruNumericSegment.fixed(length: 4, placeholderLetter: '-');
+    addTearDown(controller.dispose);
+    addTearDown(segment.dispose);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruSegmentedEntry(
+            controller: controller,
+            segments: [segment],
+            delimiters: const [],
+          ),
+        ),
+      ),
+    );
+    final entry = find.byType(YaruSegmentedEntry);
+    await tester.tap(entry);
+    await tester.enterText(entry, '12');
+    expect(segment.input, '12');
+    controller.selectFirstSegment();
+    await tester.enterText(entry, '34');
+    expect(segment.input, '34');
+    expect(segment.value, 34);
+    controller.selectLastSegment();
+    await tester.enterText(entry, '56');
+    expect(segment.input, '56');
+    expect(segment.value, 56);
+  });
+
+  testWidgets('caller-owned focus node survives replacement and unmount', (
+    tester,
+  ) async {
+    final firstFocusNode = FocusNode();
+    final secondFocusNode = FocusNode();
+    final segment = YaruNumericSegment.fixed(length: 2, placeholderLetter: '-');
+    addTearDown(firstFocusNode.dispose);
+    addTearDown(secondFocusNode.dispose);
+    addTearDown(segment.dispose);
+
+    Future<void> pumpEntry(FocusNode? focusNode) => tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: YaruSegmentedEntry(
+            focusNode: focusNode,
+            segments: [segment],
+            delimiters: const [],
+          ),
+        ),
+      ),
+    );
+
+    await pumpEntry(null);
+    await pumpEntry(firstFocusNode);
+    firstFocusNode.requestFocus();
+    await tester.pump();
+    expect(firstFocusNode.hasFocus, isTrue);
+    await pumpEntry(secondFocusNode);
+    secondFocusNode.requestFocus();
+    await tester.pump();
+    expect(firstFocusNode.hasFocus, isFalse);
+    expect(secondFocusNode.hasFocus, isTrue);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    void listener() {}
+    // ChangeNotifier rejects adding listeners after disposal.
+    firstFocusNode.addListener(listener);
+    secondFocusNode.addListener(listener);
+    firstFocusNode.removeListener(listener);
+    secondFocusNode.removeListener(listener);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
     'previous segment input is cleared when navigating to other segment',
     (tester) async {
