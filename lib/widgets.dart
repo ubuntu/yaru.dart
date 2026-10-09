@@ -22,6 +22,7 @@ export 'src/widgets/yaru_close_button.dart';
 export 'src/widgets/yaru_color_disk.dart';
 export 'src/widgets/yaru_date_time_entry.dart';
 export 'src/widgets/yaru_draggable.dart';
+export 'src/widgets/yaru_dropdown.dart';
 export 'src/widgets/yaru_expandable.dart';
 export 'src/widgets/yaru_expansion_panel.dart';
 export 'src/widgets/yaru_focus_border.dart';
