@@ -3,20 +3,30 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:platform_linux/platform.dart';
+import 'package:platform/platform.dart';
 import 'package:yaru/src/settings/yaru_settings.dart';
 
 import '../../theme.dart';
 
 YaruVariant? _defaultFallBackVariant(Platform platform) {
-  if (platform.isBudgie) return YaruVariant.ubuntuBudgieBlue;
-  if (platform.isCinnamon) return YaruVariant.ubuntuCinnamonBrown;
-  if (platform.isGNOME) return YaruVariant.orange;
-  if (platform.isKDE) return YaruVariant.kubuntuBlue;
-  if (platform.isLXQt) return YaruVariant.lubuntuBlue;
-  if (platform.isMATE) return YaruVariant.ubuntuMateGreen;
-  if (platform.isUnity) return YaruVariant.ubuntuUnityPurple;
-  if (platform.isXfce) return YaruVariant.xubuntuBlue;
+  final environment = platform.nativePlatform?.environment;
+  if (environment == null) return null;
+  // When set, `ORIGINAL_XDG_CURRENT_DESKTOP` takes precedence over
+  // `XDG_CURRENT_DESKTOP`, matching the previous behavior.
+  final currentDesktop =
+      environment['ORIGINAL_XDG_CURRENT_DESKTOP'] ??
+      environment['XDG_CURRENT_DESKTOP'];
+  if (currentDesktop == null) return null;
+  final desktops = currentDesktop.toLowerCase().split(':');
+
+  if (desktops.contains('budgie')) return YaruVariant.ubuntuBudgieBlue;
+  if (desktops.contains('x-cinnamon')) return YaruVariant.ubuntuCinnamonBrown;
+  if (desktops.contains('gnome')) return YaruVariant.orange;
+  if (desktops.contains('kde')) return YaruVariant.kubuntuBlue;
+  if (desktops.contains('lxqt')) return YaruVariant.lubuntuBlue;
+  if (desktops.contains('mate')) return YaruVariant.ubuntuMateGreen;
+  if (desktops.contains('unity')) return YaruVariant.ubuntuUnityPurple;
+  if (desktops.contains('xfce')) return YaruVariant.xubuntuBlue;
   return null;
 }
 
