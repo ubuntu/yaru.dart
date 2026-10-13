@@ -259,7 +259,7 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
       final index = _focusIndex;
       final node = index == null ? null : _itemFocusNode(index);
       if (node != null && node.context != null) {
-        node.requestFocus();
+        _focusEntry(index!);
       } else {
         // No entry can take focus: keep it on the button, which closes the
         // menu on Escape.

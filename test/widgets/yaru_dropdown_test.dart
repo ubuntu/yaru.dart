@@ -668,6 +668,31 @@ void main() {
       }
     });
 
+    testWidgets('a selected entry far down the list is scrolled into view', (
+      tester,
+    ) async {
+      await _pumpDropdown(
+        tester,
+        selected: 35,
+        entries: [
+          for (var i = 1; i <= 40; i++) YaruDropdownEntry<int>(value: i),
+        ],
+      );
+      await tester.tap(_button);
+      await tester.pumpAndSettle();
+
+      final item = find.byWidget(_focusedMenuItem()!);
+      final scrollable = find.ancestor(
+        of: item,
+        matching: find.byType(Scrollable),
+      );
+      final view = tester.getRect(scrollable.first);
+      final rect = tester.getRect(item);
+      expect(_focusedItemText(tester), 'Item 35');
+      expect(rect.top, greaterThanOrEqualTo(view.top - 0.5));
+      expect(rect.bottom, lessThanOrEqualTo(view.bottom + 0.5));
+    });
+
     testWidgets('disabled selected entry: first enabled entry gets focus', (
       tester,
     ) async {
