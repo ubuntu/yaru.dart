@@ -137,7 +137,6 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
   final _selectedFocusNode = FocusNode();
   FocusNode? _internalFocusNode;
   bool _isOpen = false;
-  bool _restoringFocus = false;
   bool _buttonFocused = false;
   Size? _size;
 
@@ -242,21 +241,11 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
 
   void _onClose() {
     if (!mounted) return;
-    // Keep the outline highlighted until focus is back on the button, so it
-    // does not drop for a frame.
-    setState(() {
-      _isOpen = false;
-      _restoringFocus = true;
-    });
+    setState(() => _isOpen = false);
     // Return focus after this frame has been built, so the button already
     // carries the newly selected value when assistive technologies read it.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      _buttonFocusNode.requestFocus();
-      // Focus changes are applied in a microtask; clear the flag after that.
-      Future.microtask(() {
-        if (mounted) setState(() => _restoringFocus = false);
-      });
+      if (mounted) _buttonFocusNode.requestFocus();
     });
   }
 
@@ -305,7 +294,7 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
                 expands: true,
                 decoration: widget.decoration,
                 isEmpty: selectedIndex == null && widget.child == null,
-                isFocused: _buttonFocused || _isOpen || _restoringFocus,
+                isFocused: _buttonFocused,
               ),
             ),
           ),

@@ -623,7 +623,7 @@ void main() {
       );
     });
 
-    testWidgets('outline is highlighted when focused and while open', (
+    testWidgets('outline follows focus: on the button, then into the menu', (
       tester,
     ) async {
       await _pumpDropdown(tester);
@@ -638,30 +638,25 @@ void main() {
 
       await tester.sendKeyEvent(LogicalKeyboardKey.enter);
       await tester.pumpAndSettle();
-      expect(find.byType(MenuItemButton), findsWidgets);
-      expect(isFocused(), isTrue);
+      expect(_focusedMenuItem(), isNotNull);
+      expect(isFocused(), isFalse);
 
       await tester.sendKeyEvent(LogicalKeyboardKey.escape);
       await tester.pumpAndSettle();
       expect(isFocused(), isTrue);
     });
 
-    testWidgets('outline stays highlighted in every frame after picking', (
-      tester,
-    ) async {
+    testWidgets('outline is back on the button after picking', (tester) async {
       await _pumpDropdown(tester);
       await tester.tap(_button);
       await tester.pumpAndSettle();
       await tester.tap(find.text('Item 1'));
+      await tester.pumpAndSettle();
 
-      for (var i = 0; i < 4; i++) {
-        await tester.pump(const Duration(milliseconds: 16));
-        expect(
-          tester.widget<InputDecorator>(find.byType(InputDecorator)).isFocused,
-          isTrue,
-          reason: 'frame $i',
-        );
-      }
+      expect(
+        tester.widget<InputDecorator>(find.byType(InputDecorator)).isFocused,
+        isTrue,
+      );
     });
   });
 
