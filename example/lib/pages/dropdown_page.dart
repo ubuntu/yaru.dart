@@ -18,6 +18,7 @@ class _DropdownPageState extends State<DropdownPage> {
   _MyEnum _icons = _MyEnum.option1;
   _MyEnum _compact = _MyEnum.option1;
   _MyEnum _over = _MyEnum.option1;
+  int _long = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +107,14 @@ class _DropdownPageState extends State<DropdownPage> {
               selected: _over,
               onSelected: (value) => setState(() => _over = value),
               itemBuilder: (context, value, _) => Text(value.name),
+            ),
+            const SizedBox(height: 10),
+            YaruDropdown<int>(
+              decoration: const InputDecoration(labelText: 'Long list'),
+              values: List.generate(40, (index) => index + 1),
+              selected: _long,
+              onSelected: (value) => setState(() => _long = value),
+              itemBuilder: (context, value, _) => Text('Option $value'),
             ),
             const SizedBox(height: 10),
             YaruDropdown<_MyEnum>(

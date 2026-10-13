@@ -56,6 +56,28 @@ MenuItemButton? _focusedMenuItem() => FocusManager
     ?.context
     ?.findAncestorWidgetOfExactType<MenuItemButton>();
 
+String? _focusedItemText(WidgetTester tester) {
+  final item = _focusedMenuItem();
+  if (item == null) return null;
+  final text = find.descendant(
+    of: find.byWidget(item),
+    matching: find.byType(Text),
+  );
+  return tester.widget<Text>(text.first).data;
+}
+
+Matcher _buttonSemantics({required bool expanded}) => matchesSemantics(
+  isButton: true,
+  hasEnabledState: true,
+  isEnabled: true,
+  isFocusable: true,
+  hasExpandedState: true,
+  isExpanded: expanded,
+  label: 'Label, Item 2',
+  hasTapAction: true,
+  hasFocusAction: true,
+);
+
 final _selectedItems = find.semantics.byPredicate(
   (node) => node.flagsCollection.isSelected == Tristate.isTrue,
 );
@@ -97,47 +119,14 @@ void main() {
     tags: 'golden',
   );
 
-  testWidgets('closed button semantics', (tester) async {
+  testWidgets('button semantics when closed and when open', (tester) async {
     final handle = tester.ensureSemantics();
     await _pumpDropdown(tester);
+    expect(_buttonNode(tester), _buttonSemantics(expanded: false));
 
-    expect(
-      _buttonNode(tester),
-      matchesSemantics(
-        isButton: true,
-        hasEnabledState: true,
-        isEnabled: true,
-        isFocusable: true,
-        hasExpandedState: true,
-        isExpanded: false,
-        label: 'Label, Item 2',
-        hasTapAction: true,
-        hasFocusAction: true,
-      ),
-    );
-    handle.dispose();
-  });
-
-  testWidgets('open button semantics', (tester) async {
-    final handle = tester.ensureSemantics();
-    await _pumpDropdown(tester);
     await tester.tap(_button);
     await tester.pumpAndSettle();
-
-    expect(
-      _buttonNode(tester),
-      matchesSemantics(
-        isButton: true,
-        hasEnabledState: true,
-        isEnabled: true,
-        isFocusable: true,
-        hasExpandedState: true,
-        isExpanded: true,
-        label: 'Label, Item 2',
-        hasTapAction: true,
-        hasFocusAction: true,
-      ),
-    );
+    expect(_buttonNode(tester), _buttonSemantics(expanded: true));
     handle.dispose();
   });
 
@@ -209,103 +198,48 @@ void main() {
     handle.dispose();
   });
 
-  testWidgets('tap selects an item and closes the menu', (tester) async {
+  testWidgets('tapping selects an entry and closes the menu', (tester) async {
     int? selected;
     await _pumpDropdown(tester, onSelected: (v) => selected = v);
     await tester.tap(_button);
     await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Item 3'), warnIfMissed: false);
+    await tester.pumpAndSettle();
+    expect(selected, isNull);
+    expect(find.byType(MenuItemButton), findsWidgets);
+
     await tester.tap(find.text('Item 1'));
     await tester.pumpAndSettle();
-
     expect(selected, 1);
     expect(find.byType(MenuItemButton), findsNothing);
   });
 
-  testWidgets('disabled entry cannot be selected', (tester) async {
-    int? selected;
-    await _pumpDropdown(tester, onSelected: (v) => selected = v);
-    await tester.tap(_button);
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Item 3'), warnIfMissed: false);
-    await tester.pumpAndSettle();
-
-    expect(selected, isNull);
-    expect(find.byType(MenuItemButton), findsWidgets);
-  });
-
-  testWidgets('no selection: nothing is marked selected', (tester) async {
-    final handle = tester.ensureSemantics();
-    await _pumpDropdown(tester, selected: null);
-
-    expect(
-      _buttonNode(tester),
-      matchesSemantics(
-        isButton: true,
-        hasEnabledState: true,
-        isEnabled: true,
-        isFocusable: true,
-        hasExpandedState: true,
-        label: 'Label',
-        hasTapAction: true,
-        hasFocusAction: true,
-      ),
-    );
-
-    await tester.tap(_button);
-    await tester.pumpAndSettle();
-    expect(
-      find.semantics.byPredicate(
-        (node) => node.flagsCollection.isSelected == Tristate.isTrue,
-      ),
-      findsNothing,
-    );
-    handle.dispose();
-  });
-
-  testWidgets('no selection: first enabled entry gets focus', (tester) async {
-    await _pumpDropdown(
+  for (final selected in [null, 42]) {
+    testWidgets('selected $selected matches no entry: nothing is selected', (
       tester,
-      selected: null,
-      entries: const [
-        YaruDropdownEntry.divider(),
-        YaruDropdownEntry(value: 1, enabled: false),
-        YaruDropdownEntry(value: 2),
-        YaruDropdownEntry(value: 3),
-      ],
-    );
-    await tester.tap(_button);
-    await tester.pumpAndSettle();
+    ) async {
+      final handle = tester.ensureSemantics();
+      await _pumpDropdown(
+        tester,
+        selected: selected,
+        entries: const [
+          YaruDropdownEntry.divider(),
+          YaruDropdownEntry(value: 1, enabled: false),
+          YaruDropdownEntry(value: 2),
+          YaruDropdownEntry(value: 3),
+        ],
+      );
+      expect(_buttonNode(tester).label, 'Label');
 
-    final focused = FocusManager.instance.primaryFocus!;
-    final item = focused.context!
-        .findAncestorWidgetOfExactType<MenuItemButton>();
-    expect(item, isNotNull);
-    expect(
-      find.descendant(of: find.byWidget(item!), matching: find.text('Item 2')),
-      findsOneWidget,
-    );
-  });
+      await tester.tap(_button);
+      await tester.pumpAndSettle();
 
-  testWidgets('selected value not in entries behaves as no selection', (
-    tester,
-  ) async {
-    final handle = tester.ensureSemantics();
-    await _pumpDropdown(tester, selected: 42);
-    expect(_buttonNode(tester).label, 'Label');
-
-    await tester.tap(_button);
-    await tester.pumpAndSettle();
-
-    expect(_selectedItems, findsNothing);
-    expect(
-      find.descendant(
-        of: find.byWidget(_focusedMenuItem()!),
-        matching: find.text('Item 1'),
-      ),
-      findsOneWidget,
-    );
-    handle.dispose();
-  });
+      expect(_selectedItems, findsNothing);
+      expect(_focusedItemText(tester), 'Item 2');
+      handle.dispose();
+    });
+  }
 
   testWidgets(
     'duplicate values: only the first match is selected and focused',
@@ -623,7 +557,7 @@ void main() {
       );
     });
 
-    testWidgets('outline follows focus: on the button, then into the menu', (
+    testWidgets('outline follows focus: button, menu, then back on Escape', (
       tester,
     ) async {
       await _pumpDropdown(tester);
@@ -643,20 +577,8 @@ void main() {
 
       await tester.sendKeyEvent(LogicalKeyboardKey.escape);
       await tester.pumpAndSettle();
+      expect(find.byType(MenuItemButton), findsNothing);
       expect(isFocused(), isTrue);
-    });
-
-    testWidgets('outline is back on the button after picking', (tester) async {
-      await _pumpDropdown(tester);
-      await tester.tap(_button);
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Item 1'));
-      await tester.pumpAndSettle();
-
-      expect(
-        tester.widget<InputDecorator>(find.byType(InputDecorator)).isFocused,
-        isTrue,
-      );
     });
   });
 
@@ -721,7 +643,9 @@ void main() {
       expect(selected, 3);
     });
 
-    testWidgets('arrows navigate, Enter selects', (tester) async {
+    testWidgets('arrows navigate, Enter selects and focus returns', (
+      tester,
+    ) async {
       int? selected;
       await _pumpDropdown(tester, onSelected: (v) => selected = v);
       await tester.tap(_button);
@@ -733,45 +657,10 @@ void main() {
 
       expect(selected, 1);
       expect(find.byType(MenuItemButton), findsNothing);
-    });
-
-    testWidgets('Escape closes and returns focus to the button', (
-      tester,
-    ) async {
-      await _pumpDropdown(tester);
-      await tester.tap(_button);
-      await tester.pumpAndSettle();
-      await tester.sendKeyEvent(LogicalKeyboardKey.escape);
-      await tester.pumpAndSettle();
-
-      expect(find.byType(MenuItemButton), findsNothing);
-      final focused = FocusManager.instance.primaryFocus!;
       expect(
-        focused.context!.findAncestorWidgetOfExactType<OutlinedButton>(),
-        isNotNull,
+        tester.widget<InputDecorator>(find.byType(InputDecorator)).isFocused,
+        isTrue,
       );
-    });
-
-    testWidgets('arrow navigation skips disabled entries', (tester) async {
-      int? selected;
-      await _pumpDropdown(
-        tester,
-        selected: 1,
-        onSelected: (v) => selected = v,
-        entries: const [
-          YaruDropdownEntry(value: 1),
-          YaruDropdownEntry(value: 2, enabled: false),
-          YaruDropdownEntry(value: 3),
-        ],
-      );
-      await tester.tap(_button);
-      await tester.pumpAndSettle();
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
-      await tester.pump();
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
-      await tester.pumpAndSettle();
-
-      expect(selected, 3);
     });
 
     testWidgets('Escape closes the menu when every entry is disabled', (
@@ -793,22 +682,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(MenuItemButton), findsNothing);
-    });
-
-    testWidgets('selecting returns focus to the button', (tester) async {
-      await _pumpDropdown(tester);
-      await tester.tap(_button);
-      await tester.pumpAndSettle();
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
-      await tester.pump();
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
-      await tester.pumpAndSettle();
-
-      expect(
-        FocusManager.instance.primaryFocus!.context!
-            .findAncestorWidgetOfExactType<OutlinedButton>(),
-        isNotNull,
-      );
     });
 
     testWidgets('closing by clicking elsewhere keeps focus on the button', (
@@ -850,6 +723,385 @@ void main() {
       await tester.tap(find.byType(TextField));
       await tester.pumpAndSettle();
       expect(other.hasFocus, isTrue);
+    });
+
+    testWidgets('Home and End focus the first and last enabled entry', (
+      tester,
+    ) async {
+      await _pumpDropdown(
+        tester,
+        selected: 2,
+        entries: const [
+          YaruDropdownEntry<int>(value: 0, enabled: false),
+          YaruDropdownEntry<int>(value: 1),
+          YaruDropdownEntry<int>(value: 2),
+          YaruDropdownEntry<int>.divider(),
+          YaruDropdownEntry<int>(value: 4),
+          YaruDropdownEntry<int>(value: 5, enabled: false),
+        ],
+      );
+      await tester.tap(_button);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.end);
+      await tester.pumpAndSettle();
+      expect(_focusedItemText(tester), 'Item 4');
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.home);
+      await tester.pumpAndSettle();
+      expect(_focusedItemText(tester), 'Item 1');
+    });
+
+    group('Tab', () {
+      Future<void> pumpBetweenFields(
+        WidgetTester tester, {
+        ValueChanged<int>? onSelected,
+        List<YaruDropdownEntry<int>> entries = const [
+          YaruDropdownEntry(value: 1),
+          YaruDropdownEntry(value: 2),
+          YaruDropdownEntry(value: 3),
+        ],
+        int selected = 2,
+      }) {
+        return tester.pumpWidget(
+          MaterialApp(
+            theme: yaruLight,
+            home: Scaffold(
+              body: Column(
+                children: [
+                  const TextField(key: ValueKey('before')),
+                  YaruDropdown<int>(
+                    entries: entries,
+                    selected: selected,
+                    onSelected: onSelected ?? (_) {},
+                    itemBuilder: (context, value, _) => Text('Item $value'),
+                  ),
+                  const TextField(key: ValueKey('after')),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+
+      Key? focusedFieldKey() => FocusManager.instance.primaryFocus?.context
+          ?.findAncestorWidgetOfExactType<TextField>()
+          ?.key;
+
+      Future<void> tab(WidgetTester tester, {bool shift = false}) async {
+        if (shift) await tester.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        if (shift) await tester.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
+        await tester.pumpAndSettle();
+      }
+
+      Future<void> open(WidgetTester tester) async {
+        await tester.tap(_button);
+        await tester.pumpAndSettle();
+      }
+
+      testWidgets('cycles through the entries and wraps, staying in the menu', (
+        tester,
+      ) async {
+        await pumpBetweenFields(tester);
+        await open(tester);
+        expect(_focusedItemText(tester), 'Item 2');
+
+        final seen = <String?>[];
+        for (final shift in [false, false, false, true, true]) {
+          await tab(tester, shift: shift);
+          seen.add(_focusedItemText(tester));
+          expect(focusedFieldKey(), isNull);
+        }
+
+        expect(seen, ['Item 3', 'Item 1', 'Item 2', 'Item 1', 'Item 3']);
+        expect(find.byType(MenuItemButton), findsNWidgets(3));
+      });
+
+      testWidgets('skips dividers and disabled entries', (tester) async {
+        await pumpBetweenFields(
+          tester,
+          selected: 1,
+          entries: const [
+            YaruDropdownEntry(value: 1),
+            YaruDropdownEntry.divider(),
+            YaruDropdownEntry(value: 2, enabled: false),
+            YaruDropdownEntry(value: 3),
+          ],
+        );
+        await open(tester);
+
+        await tab(tester);
+
+        expect(_focusedItemText(tester), 'Item 3');
+      });
+
+      testWidgets('with every entry disabled it keeps focus on the button', (
+        tester,
+      ) async {
+        await pumpBetweenFields(
+          tester,
+          selected: 1,
+          entries: const [
+            YaruDropdownEntry(value: 1, enabled: false),
+            YaruDropdownEntry(value: 2, enabled: false),
+          ],
+        );
+        await open(tester);
+
+        await tab(tester);
+
+        expect(find.byType(MenuItemButton), findsNWidgets(2));
+        expect(focusedFieldKey(), isNull);
+        expect(
+          FocusManager.instance.primaryFocus!.context!
+              .findAncestorWidgetOfExactType<OutlinedButton>(),
+          isNotNull,
+        );
+      });
+
+      testWidgets('after the menu closes Tab traverses normally', (
+        tester,
+      ) async {
+        await pumpBetweenFields(tester);
+        await open(tester);
+        await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+        await tester.pumpAndSettle();
+
+        await tab(tester);
+
+        expect(find.byType(MenuItemButton), findsNothing);
+        expect(focusedFieldKey(), const ValueKey('after'));
+      });
+
+      testWidgets('closed dropdown still takes part in normal traversal', (
+        tester,
+      ) async {
+        await pumpBetweenFields(tester);
+        await tester.tap(find.byKey(const ValueKey('before')));
+        await tester.pumpAndSettle();
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.pump();
+        expect(
+          FocusManager.instance.primaryFocus!.context!
+              .findAncestorWidgetOfExactType<OutlinedButton>(),
+          isNotNull,
+        );
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.pump();
+        expect(focusedFieldKey(), const ValueKey('after'));
+      });
+    });
+
+    group('PageUp and PageDown', () {
+      final many = [
+        for (var i = 1; i <= 40; i++) YaruDropdownEntry<int>(value: i),
+      ];
+
+      int focusedValue(WidgetTester tester) =>
+          int.parse(_focusedItemText(tester)!.split(' ').last);
+
+      bool focusedItemIsVisible(WidgetTester tester) {
+        final item = find.byWidget(_focusedMenuItem()!);
+        final scrollable = Scrollable.of(tester.element(item));
+        final itemRect = tester.getRect(item);
+        final viewRect = tester.getRect(find.byWidget(scrollable.widget));
+        return itemRect.top >= viewRect.top - 0.5 &&
+            itemRect.bottom <= viewRect.bottom + 0.5;
+      }
+
+      Future<void> press(WidgetTester tester, LogicalKeyboardKey key) async {
+        await tester.sendKeyEvent(key);
+        await tester.pumpAndSettle();
+      }
+
+      Future<void> open(
+        WidgetTester tester, {
+        required int selected,
+        List<YaruDropdownEntry<int>>? entries,
+      }) async {
+        await _pumpDropdown(
+          tester,
+          selected: selected,
+          entries: entries ?? many,
+        );
+        await tester.tap(_button);
+        await tester.pumpAndSettle();
+      }
+
+      testWidgets('jump a page at a time and keep the entry visible', (
+        tester,
+      ) async {
+        await open(tester, selected: 20);
+
+        await press(tester, LogicalKeyboardKey.pageDown);
+        expect(focusedValue(tester), inInclusiveRange(22, 39));
+        expect(focusedItemIsVisible(tester), isTrue);
+
+        await press(tester, LogicalKeyboardKey.pageUp);
+        expect(focusedValue(tester), 20);
+        expect(focusedItemIsVisible(tester), isTrue);
+      });
+
+      testWidgets('stop at the ends', (tester) async {
+        await open(tester, selected: 1);
+
+        await press(tester, LogicalKeyboardKey.pageUp);
+        expect(focusedValue(tester), 1);
+
+        for (var i = 0; i < 10; i++) {
+          await press(tester, LogicalKeyboardKey.pageDown);
+        }
+        expect(focusedValue(tester), 40);
+
+        for (var i = 0; i < 10; i++) {
+          await press(tester, LogicalKeyboardKey.pageUp);
+        }
+        expect(focusedValue(tester), 1);
+      });
+
+      testWidgets('when every entry fits they go to the last and first', (
+        tester,
+      ) async {
+        await open(
+          tester,
+          selected: 2,
+          entries: const [
+            YaruDropdownEntry(value: 1),
+            YaruDropdownEntry(value: 2),
+            YaruDropdownEntry(value: 3),
+          ],
+        );
+
+        await press(tester, LogicalKeyboardKey.pageDown);
+        expect(focusedValue(tester), 3);
+
+        await press(tester, LogicalKeyboardKey.pageUp);
+        expect(focusedValue(tester), 1);
+      });
+
+      testWidgets('a page spans the visible rows when entries are disabled', (
+        tester,
+      ) async {
+        await open(
+          tester,
+          selected: 1,
+          entries: [
+            for (var i = 1; i <= 80; i++)
+              YaruDropdownEntry<int>(value: i, enabled: i.isOdd),
+          ],
+        );
+        final first = tester.element(
+          find.widgetWithText(MenuItemButton, 'Item 1'),
+        );
+        final rows =
+            (Scrollable.of(first).position.viewportDimension /
+                    first.size!.height)
+                .floor();
+
+        await press(tester, LogicalKeyboardKey.pageDown);
+
+        expect(focusedValue(tester) - 1, inInclusiveRange(rows - 1, rows));
+        expect(_focusedMenuItem()!.onPressed, isNotNull);
+      });
+    });
+
+    testWidgets('navigation keys do not change the value', (tester) async {
+      final selections = <int>[];
+      await _pumpDropdown(
+        tester,
+        selected: 20,
+        onSelected: selections.add,
+        entries: [
+          for (var i = 1; i <= 40; i++) YaruDropdownEntry<int>(value: i),
+        ],
+      );
+      await tester.tap(_button);
+      await tester.pumpAndSettle();
+
+      for (final key in [
+        LogicalKeyboardKey.tab,
+        LogicalKeyboardKey.home,
+        LogicalKeyboardKey.end,
+        LogicalKeyboardKey.pageUp,
+        LogicalKeyboardKey.pageDown,
+      ]) {
+        await tester.sendKeyEvent(key);
+        await tester.pumpAndSettle();
+      }
+
+      expect(selections, isEmpty);
+      expect(find.byType(MenuItemButton), findsWidgets);
+    });
+
+    testWidgets('entries can shrink while the menu is open', (tester) async {
+      final count = ValueNotifier(10);
+      addTearDown(count.dispose);
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: yaruLight,
+          home: Scaffold(
+            body: ValueListenableBuilder<int>(
+              valueListenable: count,
+              builder: (context, n, _) => YaruDropdown<int>(
+                values: [for (var i = 1; i <= n; i++) i],
+                selected: 1,
+                onSelected: (_) {},
+                itemBuilder: (context, value, _) => Text('Item $value'),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(_button);
+      await tester.pumpAndSettle();
+
+      count.value = 3;
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.end);
+      await tester.pumpAndSettle();
+      expect(_focusedItemText(tester), 'Item 3');
+    });
+
+    testWidgets('Escape still dismisses a dialog when the menu is closed', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: yaruLight,
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: TextButton(
+                onPressed: () => showDialog<void>(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    content: YaruDropdown<int>(
+                      autofocus: true,
+                      values: const [1, 2],
+                      selected: 1,
+                      onSelected: (_) {},
+                      itemBuilder: (context, value, _) => Text('Item $value'),
+                    ),
+                  ),
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsOneWidget);
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(AlertDialog), findsNothing);
     });
   });
 }

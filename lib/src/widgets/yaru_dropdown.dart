@@ -43,6 +43,9 @@ class YaruDropdownEntry<T> {
 /// entry is marked as selected in the menu and receives focus when the menu
 /// opens.
 ///
+/// While the menu is open, Tab and Shift+Tab cycle through the entries, like
+/// a GTK dropdown, and Home, End, PageUp and PageDown jump through them.
+///
 /// Focus is shown by highlighting the outline of the [decoration], so
 /// [YaruTheme] `focusBorders` has no effect on this widget.
 ///
@@ -134,7 +137,7 @@ class YaruDropdown<T> extends StatefulWidget {
 
 class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
   final _controller = MenuController();
-  final _selectedFocusNode = FocusNode();
+  final _itemFocusNodes = <FocusNode>[];
   FocusNode? _internalFocusNode;
   bool _isOpen = false;
   bool _buttonFocused = false;
@@ -142,6 +145,13 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
 
   FocusNode get _buttonFocusNode =>
       widget.focusNode ?? (_internalFocusNode ??= FocusNode());
+
+  FocusNode _itemFocusNode(int index) {
+    while (_itemFocusNodes.length <= index) {
+      _itemFocusNodes.add(FocusNode());
+    }
+    return _itemFocusNodes[index];
+  }
 
   @override
   void initState() {
@@ -165,13 +175,27 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
       _buttonFocusNode.addListener(_onFocusChanged);
       _buttonFocused = _buttonFocusNode.hasFocus;
     }
+    if (widget.entries.length < _itemFocusNodes.length) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _trimItemFocusNodes(),
+      );
+    }
+  }
+
+  void _trimItemFocusNodes() {
+    if (!mounted) return;
+    while (_itemFocusNodes.length > widget.entries.length) {
+      _itemFocusNodes.removeLast().dispose();
+    }
   }
 
   @override
   void dispose() {
     _buttonFocusNode.removeListener(_onFocusChanged);
     _internalFocusNode?.dispose();
-    _selectedFocusNode.dispose();
+    for (final node in _itemFocusNodes) {
+      node.dispose();
+    }
     super.dispose();
   }
 
@@ -229,8 +253,10 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
     setState(() => _isOpen = true);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      if (_selectedFocusNode.context != null) {
-        _selectedFocusNode.requestFocus();
+      final index = _focusIndex;
+      final node = index == null ? null : _itemFocusNode(index);
+      if (node != null && node.context != null) {
+        node.requestFocus();
       } else {
         // No entry can take focus: keep it on the button, which closes the
         // menu on Escape.
@@ -249,11 +275,87 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
     });
   }
 
+  List<int> get _enabledIndices => [
+    for (var i = 0; i < widget.entries.length; i++)
+      if (!widget.entries[i].isDivider && widget.entries[i].enabled) i,
+  ];
+
+  void _focusEntry(int index) {
+    final node = _itemFocusNode(index);
+    node.requestFocus();
+    final context = node.context;
+    if (context != null) Scrollable.ensureVisible(context);
+  }
+
+  void _focusEdge({required bool last}) {
+    final enabled = _enabledIndices;
+    if (enabled.isNotEmpty) _focusEntry(last ? enabled.last : enabled.first);
+  }
+
+  void _cycleFocus({required bool forward}) {
+    final enabled = _enabledIndices;
+    if (enabled.isEmpty) return;
+    final current = enabled.indexWhere((i) => _itemFocusNode(i).hasFocus);
+    final next = current == -1
+        ? (forward ? 0 : enabled.length - 1)
+        : (current + (forward ? 1 : -1)) % enabled.length;
+    _focusEntry(enabled[next]);
+  }
+
+  double? _top(int index) {
+    final box = _itemFocusNode(index).context?.findRenderObject();
+    return box is RenderBox && box.attached
+        ? box.localToGlobal(Offset.zero).dy
+        : null;
+  }
+
+  /// Moves focus about one viewport height up or down, stopping at the ends.
+  void _focusPage({required bool down}) {
+    final enabled = _enabledIndices;
+    final from = enabled.indexWhere((i) => _itemFocusNode(i).hasFocus);
+    if (from == -1) return;
+    final step = down ? 1 : -1;
+    final context = _itemFocusNode(enabled[from]).context;
+    final viewport = context == null
+        ? null
+        : Scrollable.maybeOf(context)?.position.viewportDimension;
+    final start = _top(enabled[from]);
+    var target = (from + step).clamp(0, enabled.length - 1);
+    if (viewport != null && start != null) {
+      for (var i = target + step; i >= 0 && i < enabled.length; i += step) {
+        final top = _top(enabled[i]);
+        if (top == null || (top - start).abs() > viewport) break;
+        target = i;
+      }
+    }
+    _focusEntry(enabled[target]);
+  }
+
+  /// Handles keys only while the menu is open; the rest are left to the app.
+  KeyEventResult _onMenuKey(KeyEvent event) {
+    if (!_isOpen || event is! KeyDownEvent) return KeyEventResult.ignored;
+    final key = event.logicalKey;
+    if (key == LogicalKeyboardKey.tab) {
+      // Like a GTK popover, Tab cycles through the entries.
+      _cycleFocus(forward: !HardwareKeyboard.instance.isShiftPressed);
+    } else if (key == LogicalKeyboardKey.home) {
+      _focusEdge(last: false);
+    } else if (key == LogicalKeyboardKey.end) {
+      _focusEdge(last: true);
+    } else if (key == LogicalKeyboardKey.pageUp) {
+      _focusPage(down: false);
+    } else if (key == LogicalKeyboardKey.pageDown) {
+      _focusPage(down: true);
+    } else {
+      return KeyEventResult.ignored;
+    }
+    return KeyEventResult.handled;
+  }
+
   @override
   Widget build(BuildContext context) {
     final enabled = widget.onSelected != null;
     final selectedIndex = _selectedIndex;
-    final focusIndex = _focusIndex;
     final label = widget.child != null
         ? widget.child!
         : selectedIndex != null
@@ -279,11 +381,7 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
       builder: (context, controller, child) => child!,
       menuChildren: [
         for (var i = 0; i < widget.entries.length; i++)
-          _buildMenuItem(
-            widget.entries[i],
-            isSelected: i == selectedIndex,
-            hasInitialFocus: i == focusIndex,
-          ),
+          _buildMenuItem(i, widget.entries[i], isSelected: i == selectedIndex),
       ],
       child: Stack(
         children: [
@@ -312,14 +410,13 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
             expanded: _isOpen,
             onTap: enabled ? _toggle : null,
             onFocus: enabled ? _buttonFocusNode.requestFocus : null,
-            child: CallbackShortcuts(
-              // The menu handles Escape while an item has focus. When no item
-              // can take focus (all entries disabled), close it from the button.
-              bindings: {
-                const SingleActivator(LogicalKeyboardKey.escape): () {
-                  if (_isOpen) _controller.close();
-                },
-              },
+            child: Focus(
+              // Focus stays on the button when no entry is enabled; Tab must
+              // not leave the open menu then.
+              canRequestFocus: false,
+              skipTraversal: true,
+              includeSemantics: false,
+              onKeyEvent: (_, event) => _onMenuKey(event),
               child: OutlinedButton(
                 focusNode: _buttonFocusNode,
                 autofocus: widget.autofocus,
@@ -350,9 +447,9 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
   }
 
   Widget _buildMenuItem(
+    int index,
     YaruDropdownEntry<T> item, {
     required bool isSelected,
-    required bool hasInitialFocus,
   }) {
     if (item.isDivider) {
       return const Divider();
@@ -370,25 +467,33 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
     return MergeSemantics(
       child: Semantics(
         selected: isSelected,
-        child: MenuItemButton(
-          focusNode: hasInitialFocus ? _selectedFocusNode : null,
-          leadingIcon: widget.iconBuilder?.call(context, value, null),
-          onPressed: item.enabled ? () => widget.onSelected?.call(value) : null,
-          style:
-              widget.itemStyle ??
-              MenuItemButton.styleFrom(
-                minimumSize: minimumSize ?? const Size(0, _kItemHeight),
-                maximumSize:
-                    maximumSize ?? const Size(double.infinity, _kItemHeight),
-                padding: ButtonStyleButton.scaledPadding(
-                  const EdgeInsets.symmetric(horizontal: 16),
-                  const EdgeInsets.symmetric(horizontal: 8),
-                  const EdgeInsets.symmetric(horizontal: 4),
-                  MediaQuery.maybeOf(context)?.textScaler.scale(1) ?? 1,
+        child: Focus(
+          canRequestFocus: false,
+          skipTraversal: true,
+          includeSemantics: false,
+          onKeyEvent: (_, event) => _onMenuKey(event),
+          child: MenuItemButton(
+            focusNode: _itemFocusNode(index),
+            leadingIcon: widget.iconBuilder?.call(context, value, null),
+            onPressed: item.enabled
+                ? () => widget.onSelected?.call(value)
+                : null,
+            style:
+                widget.itemStyle ??
+                MenuItemButton.styleFrom(
+                  minimumSize: minimumSize ?? const Size(0, _kItemHeight),
+                  maximumSize:
+                      maximumSize ?? const Size(double.infinity, _kItemHeight),
+                  padding: ButtonStyleButton.scaledPadding(
+                    const EdgeInsets.symmetric(horizontal: 16),
+                    const EdgeInsets.symmetric(horizontal: 8),
+                    const EdgeInsets.symmetric(horizontal: 4),
+                    MediaQuery.maybeOf(context)?.textScaler.scale(1) ?? 1,
+                  ),
+                  textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-          child: item.child ?? widget.itemBuilder(context, value, null),
+            child: item.child ?? widget.itemBuilder(context, value, null),
+          ),
         ),
       ),
     );
