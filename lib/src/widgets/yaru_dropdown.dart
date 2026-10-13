@@ -46,8 +46,9 @@ class YaruDropdownEntry<T> {
 /// While the menu is open, Tab and Shift+Tab cycle through the entries, like
 /// a GTK dropdown, and Home, End, PageUp and PageDown jump through them.
 ///
-/// Focus is shown by highlighting the outline of the [decoration], so
-/// [YaruTheme] `focusBorders` has no effect on this widget.
+/// Focus on the button is shown by highlighting the outline of the
+/// [decoration]. Focus on an entry is shown by a [YaruFocusBorder] when
+/// [YaruTheme] `focusBorders` is enabled.
 ///
 /// ```dart
 /// YaruDropdown<MyEnum>(
@@ -115,6 +116,8 @@ class YaruDropdown<T> extends StatefulWidget {
   /// keeps the button visible while the menu is open.
   final PopupMenuPosition menuPosition;
 
+  /// The style of the entries. Replaces the default, which hides the focus
+  /// background so that only the focus border marks the focused entry.
   final ButtonStyle? itemStyle;
 
   /// Whether the button fills the available width. Defaults to true.
@@ -472,30 +475,53 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
           skipTraversal: true,
           includeSemantics: false,
           onKeyEvent: (_, event) => _onMenuKey(event),
-          child: MenuItemButton(
-            focusNode: _itemFocusNode(index),
-            leadingIcon: widget.iconBuilder?.call(context, value, null),
-            onPressed: item.enabled
-                ? () => widget.onSelected?.call(value)
-                : null,
-            style:
-                widget.itemStyle ??
-                MenuItemButton.styleFrom(
-                  minimumSize: minimumSize ?? const Size(0, _kItemHeight),
-                  maximumSize:
-                      maximumSize ?? const Size(double.infinity, _kItemHeight),
-                  padding: ButtonStyleButton.scaledPadding(
-                    const EdgeInsets.symmetric(horizontal: 16),
-                    const EdgeInsets.symmetric(horizontal: 8),
-                    const EdgeInsets.symmetric(horizontal: 4),
-                    MediaQuery.maybeOf(context)?.textScaler.scale(1) ?? 1,
+          child: _withFocusBorder(
+            MenuItemButton(
+              focusNode: _itemFocusNode(index),
+              leadingIcon: widget.iconBuilder?.call(context, value, null),
+              onPressed: item.enabled
+                  ? () => widget.onSelected?.call(value)
+                  : null,
+              style:
+                  widget.itemStyle ??
+                  MenuItemButton.styleFrom(
+                    minimumSize: minimumSize ?? const Size(0, _kItemHeight),
+                    maximumSize:
+                        maximumSize ??
+                        const Size(double.infinity, _kItemHeight),
+                    padding: ButtonStyleButton.scaledPadding(
+                      const EdgeInsets.symmetric(horizontal: 16),
+                      const EdgeInsets.symmetric(horizontal: 8),
+                      const EdgeInsets.symmetric(horizontal: 4),
+                      MediaQuery.maybeOf(context)?.textScaler.scale(1) ?? 1,
+                    ),
+                    textStyle: Theme.of(context).textTheme.labelLarge,
+                  ).copyWith(
+                    // The focus border marks the focused entry; hovering
+                    // still highlights it.
+                    overlayColor: WidgetStateProperty.resolveWith(
+                      (states) =>
+                          states.contains(WidgetState.focused) &&
+                              !states.contains(WidgetState.hovered) &&
+                              !states.contains(WidgetState.pressed)
+                          ? Colors.transparent
+                          : null,
+                    ),
                   ),
-                  textStyle: Theme.of(context).textTheme.labelLarge,
-                ),
-            child: item.child ?? widget.itemBuilder(context, value, null),
+              child: item.child ?? widget.itemBuilder(context, value, null),
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _withFocusBorder(Widget item) {
+    if (YaruTheme.maybeOf(context)?.focusBorders != true) return item;
+    return YaruFocusBorder.primary(
+      borderRadius: const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
+      borderStrokeAlign: BorderSide.strokeAlignInside,
+      child: item,
     );
   }
 }

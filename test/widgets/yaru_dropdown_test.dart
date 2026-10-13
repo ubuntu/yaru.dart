@@ -557,6 +557,66 @@ void main() {
       );
     });
 
+    testWidgets('focused entry gets a Yaru focus border when enabled', (
+      tester,
+    ) async {
+      for (final enabled in [true, false]) {
+        await tester.pumpWidget(
+          YaruTheme(
+            data: YaruThemeData(focusBorders: enabled),
+            child: MaterialApp(
+              theme: yaruLight,
+              home: Scaffold(
+                body: YaruDropdown<int>(
+                  values: const [1, 2, 3],
+                  selected: 2,
+                  onSelected: (_) {},
+                  itemBuilder: (context, value, _) => Text('Item $value'),
+                ),
+              ),
+            ),
+          ),
+        );
+        await tester.tap(_button);
+        await tester.pumpAndSettle();
+
+        final border = find.ancestor(
+          of: find.byWidget(_focusedMenuItem()!),
+          matching: find.byType(YaruFocusBorder),
+        );
+        expect(border, enabled ? findsOneWidget : findsNothing);
+        if (enabled) {
+          final container = tester.widget<AnimatedContainer>(
+            find.descendant(
+              of: border,
+              matching: find.byType(AnimatedContainer),
+            ),
+          );
+          final decoration = container.foregroundDecoration! as BoxDecoration;
+          expect(
+            (decoration.border! as Border).top.color,
+            yaruLight.colorScheme.primary,
+          );
+        }
+        await tester.pumpWidget(const SizedBox());
+      }
+    });
+
+    testWidgets('focused entry has no background, hovered entry does', (
+      tester,
+    ) async {
+      await _pumpDropdown(tester);
+      await tester.tap(_button);
+      await tester.pumpAndSettle();
+
+      final overlay = _focusedMenuItem()!.style!.overlayColor!;
+      expect(overlay.resolve({WidgetState.focused}), Colors.transparent);
+      expect(
+        overlay.resolve({WidgetState.focused, WidgetState.hovered}),
+        isNull,
+      );
+    });
+
     testWidgets('outline follows focus: button, menu, then back on Escape', (
       tester,
     ) async {
