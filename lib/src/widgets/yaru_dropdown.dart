@@ -95,6 +95,20 @@ class YaruDropdown<T> extends StatefulWidget {
 
   final List<YaruDropdownEntry<T>> entries;
 
+  int? get _selectedIndex {
+    final index = entries.indexWhere(
+      (e) => !e.isDivider && e.value == selected,
+    );
+    return index == -1 ? null : index;
+  }
+
+  /// The first entry matching [selected]. A null [selected] only matches an
+  /// entry whose value is null (a "None" entry).
+  YaruDropdownEntry<T>? get selectedEntry {
+    final index = _selectedIndex;
+    return index == null ? null : entries[index];
+  }
+
   /// Called when the user selects an entry. If null, the dropdown is disabled.
   final ValueChanged<T>? onSelected;
 
@@ -202,14 +216,7 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
     super.dispose();
   }
 
-  /// The index of the first entry matching [YaruDropdown.selected]. A null
-  /// `selected` only matches an entry whose value is null (a "None" entry).
-  int? get _selectedIndex {
-    final index = widget.entries.indexWhere(
-      (e) => !e.isDivider && e.value == widget.selected,
-    );
-    return index == -1 ? null : index;
-  }
+  int? get _selectedIndex => widget._selectedIndex;
 
   /// The index of the entry that receives focus when the menu opens: the
   /// selected one if it is enabled, or else the first enabled one. Disabled

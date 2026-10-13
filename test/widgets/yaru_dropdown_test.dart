@@ -268,6 +268,24 @@ void main() {
     },
   );
 
+  testWidgets('selectedEntry is the entry matching selected', (tester) async {
+    const entries = [
+      YaruDropdownEntry<int?>.divider(),
+      YaruDropdownEntry<int?>(value: null, child: Text('None')),
+      YaruDropdownEntry<int?>(value: 1),
+    ];
+    YaruDropdown<int?> dropdown(int? selected) => YaruDropdown<int?>(
+      entries: entries,
+      selected: selected,
+      onSelected: (_) {},
+      itemBuilder: (context, value, _) => Text('Item $value'),
+    );
+
+    expect(dropdown(1).selectedEntry, entries[2]);
+    expect(dropdown(null).selectedEntry, entries[1]);
+    expect(dropdown(42).selectedEntry, isNull);
+  });
+
   testWidgets('button name follows the selected value', (tester) async {
     final handle = tester.ensureSemantics();
     var selected = 2;
