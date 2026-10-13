@@ -11,6 +11,7 @@ export 'src/widgets/yaru_back_button.dart';
 export 'src/widgets/yaru_back_button_theme.dart';
 export 'src/widgets/yaru_banner.dart';
 export 'src/widgets/yaru_border_container.dart';
+export 'src/widgets/yaru_calendar.dart';
 export 'src/widgets/yaru_carousel.dart';
 export 'src/widgets/yaru_check_button.dart';
 export 'src/widgets/yaru_checkbox.dart';
