@@ -1,8 +1,10 @@
 import 'dart:async';
 
-import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:alchemist/alchemist.dart';
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
-  await loadAppFonts();
-  return testMain();
+  return AlchemistConfig.runWithConfig(
+    config: const AlchemistConfig(),
+    run: testMain,
+  );
 }

@@ -86,13 +86,15 @@ class _YaruRadioListTileState<T> extends State<YaruRadioListTile<T>> {
     Widget? leading, trailing;
     final control =
         widget.control ??
-        YaruRadio<T>(
-          value: widget.value,
-          groupValue: widget.groupValue,
-          onChanged: widget.onChanged,
-          toggleable: widget.toggleable,
-          autofocus: widget.autofocus,
-          mouseCursor: widget.mouseCursor,
+        ExcludeFocus(
+          child: YaruRadio<T>(
+            value: widget.value,
+            groupValue: widget.groupValue,
+            onChanged: widget.onChanged,
+            toggleable: widget.toggleable,
+            autofocus: widget.autofocus,
+            mouseCursor: widget.mouseCursor,
+          ),
         );
 
     switch (widget.controlAffinity) {

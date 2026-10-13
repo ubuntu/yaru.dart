@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   collection: ^1.17.0
-  connectivity_plus: ^6.0.4
+  connectivity_plus: ^7.3.2
   flutter:
     sdk: flutter
   flutter_highlight: ^0.7.0

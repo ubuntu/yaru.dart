@@ -69,12 +69,14 @@ class _YaruSwitchListTileState extends State<YaruSwitchListTile> {
   Widget build(BuildContext context) {
     final control =
         widget.control ??
-        YaruSwitch(
-          value: widget.value,
-          onChanged: widget.onChanged,
-          autofocus: widget.autofocus,
-          mouseCursor: widget.mouseCursor,
-          onOffShapes: widget.onOffShapes,
+        ExcludeFocus(
+          child: YaruSwitch(
+            value: widget.value,
+            onChanged: widget.onChanged,
+            autofocus: widget.autofocus,
+            mouseCursor: widget.mouseCursor,
+            onOffShapes: widget.onOffShapes,
+          ),
         );
 
     Widget? leading, trailing;

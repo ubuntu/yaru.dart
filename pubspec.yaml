@@ -2,7 +2,7 @@ name: yaru
 description: Common flutter widgets useful for building desktop and web applications.
 homepage: https://github.com/ubuntu/yaru.dart
 issue_tracker: https://github.com/ubuntu/yaru.dart/issues
-version: 10.2.0
+version: 11.0.0
 
 environment:
   sdk: ">=3.13.0 <4.0.0"
@@ -13,10 +13,10 @@ dependencies:
   animated_vector_annotations: ^0.3.0
   assorted_layout_widgets: ^11.0.0
   collection: ^1.17.0
-  dbus: ^0.7.10
+  dbus: ^0.8.0
   flutter:
     sdk: flutter
-  gsettings: ^0.2.8
+  gsettings: ^0.2.9
   gtk: ^2.1.0
   intl: ^0.20.3
   platform: ^3.2.0
@@ -24,12 +24,12 @@ dependencies:
   yaru_window: ^0.2.2
 
 dev_dependencies:
+  alchemist: ^0.14.0
   animated_vector_gen: ^0.3.0
   build_runner: ^2.4.12
   flutter_lints: ">=5.0.0 <7.0.0"
   flutter_test:
     sdk: flutter
-  golden_toolkit: ^0.15.0
   mocktail: ^1.0.4
   plugin_platform_interface: ^2.1.8
   yaru_window_platform_interface: ^0.1.3
