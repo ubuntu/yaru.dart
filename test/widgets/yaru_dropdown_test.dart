@@ -286,6 +286,39 @@ void main() {
     expect(dropdown(42).selectedEntry, isNull);
   });
 
+  testWidgets('a long label is truncated and does not overflow', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: yaruLight,
+        home: Scaffold(
+          body: SizedBox(
+            width: 150,
+            child: YaruDropdown<int>(
+              values: const [1],
+              selected: 1,
+              onSelected: (_) {},
+              itemBuilder: (context, value, _) =>
+                  const Text('A very long option label that cannot fit'),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    expect(tester.takeException(), isNull);
+    final label = tester.widget<DefaultTextStyle>(
+      find
+          .ancestor(
+            of: find.descendant(of: _button, matching: find.byType(Text)),
+            matching: find.byType(DefaultTextStyle),
+          )
+          .first,
+    );
+    expect(label.style.overflow, TextOverflow.ellipsis);
+  });
+
   testWidgets('button name follows the selected value', (tester) async {
     final handle = tester.ensureSemantics();
     var selected = 2;
