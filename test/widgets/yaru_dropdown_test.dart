@@ -1,5 +1,6 @@
 import 'dart:ui' show Tristate;
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
@@ -657,6 +658,23 @@ void main() {
         }
         await tester.pumpWidget(const SizedBox());
       }
+    });
+
+    testWidgets('hovering an entry does not move focus to it', (tester) async {
+      await _pumpDropdown(tester);
+      await tester.tap(_button);
+      await tester.pumpAndSettle();
+      expect(_focusedItemText(tester), 'Item 2');
+
+      final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      await mouse.addPointer(location: Offset.zero);
+      addTearDown(mouse.removePointer);
+      await mouse.moveTo(
+        tester.getCenter(find.widgetWithText(MenuItemButton, 'Item 1')),
+      );
+      await tester.pumpAndSettle();
+
+      expect(_focusedItemText(tester), 'Item 2');
     });
 
     testWidgets('focused entry has no background, hovered entry does', (

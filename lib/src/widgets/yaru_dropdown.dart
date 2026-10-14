@@ -487,6 +487,7 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
           child: _withFocusBorder(
             MenuItemButton(
               focusNode: _itemFocusNode(index),
+              requestFocusOnHover: false,
               leadingIcon: widget.iconBuilder?.call(context, value, null),
               onPressed: item.enabled
                   ? () => widget.onSelected?.call(value)
