@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:yaru/yaru.dart';
 
 const _kItemHeight = 40.0;
+const _kMenuGap = 6.0;
 
 /// An entry of a [YaruDropdown].
 class YaruDropdownEntry<T> {
@@ -127,7 +128,8 @@ class YaruDropdown<T> extends StatefulWidget {
   final MenuStyle? menuStyle;
 
   /// The position of the menu. Defaults to [PopupMenuPosition.under], which
-  /// keeps the button visible while the menu is open.
+  /// keeps the button visible while the menu is open, with a small gap between
+  /// the button and the menu.
   final PopupMenuPosition menuPosition;
 
   /// The style of the entries. Replaces the default, which hides the focus
@@ -236,7 +238,7 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
   Offset _menuOffset(Size? size) {
     switch (widget.menuPosition) {
       case PopupMenuPosition.under:
-        return Offset(0, size?.height ?? 0);
+        return Offset(0, (size?.height ?? 0) + _kMenuGap);
       case PopupMenuPosition.over:
         final padding = MenuTheme.of(context).style?.padding
             ?.resolve({})

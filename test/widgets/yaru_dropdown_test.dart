@@ -478,9 +478,15 @@ void main() {
     await tester.tap(_button);
     await tester.pumpAndSettle();
 
+    final menu = find
+        .ancestor(
+          of: find.widgetWithText(MenuItemButton, 'Item 1'),
+          matching: find.byType(Material),
+        )
+        .first;
     expect(
-      tester.getTopLeft(find.widgetWithText(MenuItemButton, 'Item 1')).dy,
-      greaterThanOrEqualTo(tester.getBottomLeft(_button).dy),
+      tester.getTopLeft(menu).dy - tester.getBottomLeft(_button).dy,
+      closeTo(6, 0.01),
     );
   });
 
