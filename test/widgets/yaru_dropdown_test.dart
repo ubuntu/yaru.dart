@@ -2,7 +2,7 @@ import 'dart:ui' show Tristate;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaru/yaru.dart';
@@ -615,11 +615,13 @@ void main() {
       );
     });
 
-    testWidgets('focused entry gets a Yaru focus border when enabled', (
-      tester,
-    ) async {
-      for (final enabled in [true, false]) {
-        await tester.pumpWidget(
+    group('entry focus border', () {
+      Future<void> pumpWithFocusBorders(
+        WidgetTester tester, {
+        bool enabled = true,
+        int selected = 2,
+      }) {
+        return tester.pumpWidget(
           YaruTheme(
             data: YaruThemeData(focusBorders: enabled),
             child: MaterialApp(
@@ -627,7 +629,7 @@ void main() {
               home: Scaffold(
                 body: YaruDropdown<int>(
                   values: const [1, 2, 3],
-                  selected: 2,
+                  selected: selected,
                   onSelected: (_) {},
                   itemBuilder: (context, value, _) => Text('Item $value'),
                 ),
@@ -635,29 +637,175 @@ void main() {
             ),
           ),
         );
+      }
+
+      Finder focusedBorder() => find.ancestor(
+        of: find.byWidget(_focusedMenuItem()!),
+        matching: find.byType(YaruFocusBorder),
+      );
+
+      Color? ringColor(WidgetTester tester) {
+        final container = tester.widget<AnimatedContainer>(
+          find.descendant(
+            of: focusedBorder(),
+            matching: find.byType(AnimatedContainer),
+          ),
+        );
+        final decoration = container.foregroundDecoration! as BoxDecoration;
+        return (decoration.border! as Border).top.color;
+      }
+
+      testWidgets('is shown with the keyboard, square, in the primary colour', (
+        tester,
+      ) async {
+        await pumpWithFocusBorders(tester);
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
+
+        expect(ringColor(tester), yaruLight.colorScheme.primary);
+        final container = tester.widget<AnimatedContainer>(
+          find.descendant(
+            of: focusedBorder(),
+            matching: find.byType(AnimatedContainer),
+          ),
+        );
+        final decoration = container.foregroundDecoration! as BoxDecoration;
+        expect(decoration.borderRadius, BorderRadius.zero);
+      });
+
+      testWidgets('is hidden after opening with the mouse until a key is '
+          'pressed', (tester) async {
+        await pumpWithFocusBorders(tester);
+        await tester.tap(_button);
+        await tester.pumpAndSettle();
+        expect(ringColor(tester), Colors.transparent);
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await tester.pumpAndSettle();
+        expect(ringColor(tester), yaruLight.colorScheme.primary);
+      });
+
+      testWidgets('is hidden again after a click on the button', (
+        tester,
+      ) async {
+        await pumpWithFocusBorders(tester);
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
+        await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+        await tester.pumpAndSettle();
+
         await tester.tap(_button);
         await tester.pumpAndSettle();
 
-        final border = find.ancestor(
-          of: find.byWidget(_focusedMenuItem()!),
-          matching: find.byType(YaruFocusBorder),
+        expect(ringColor(tester), Colors.transparent);
+      });
+
+      testWidgets('follows focus moved by a screen reader after a pointer '
+          'open', (tester) async {
+        final handle = tester.ensureSemantics();
+        await pumpWithFocusBorders(tester);
+        await tester.tap(_button);
+        await tester.pumpAndSettle();
+        expect(_focusedItemText(tester), 'Item 2');
+        expect(ringColor(tester), Colors.transparent);
+
+        tester.semantics.performAction(
+          find.semantics.byLabel('Item 3'),
+          SemanticsAction.focus,
         );
-        expect(border, enabled ? findsOneWidget : findsNothing);
-        if (enabled) {
-          final container = tester.widget<AnimatedContainer>(
-            find.descendant(
-              of: border,
-              matching: find.byType(AnimatedContainer),
-            ),
-          );
-          final decoration = container.foregroundDecoration! as BoxDecoration;
-          expect(
-            (decoration.border! as Border).top.color,
-            yaruLight.colorScheme.primary,
-          );
-        }
-        await tester.pumpWidget(const SizedBox());
-      }
+        await tester.pumpAndSettle();
+        expect(_focusedItemText(tester), 'Item 3');
+        expect(ringColor(tester), yaruLight.colorScheme.primary);
+
+        tester.semantics.performAction(_selectedItems, SemanticsAction.focus);
+        await tester.pumpAndSettle();
+        expect(_focusedItemText(tester), 'Item 2');
+        expect(ringColor(tester), yaruLight.colorScheme.primary);
+        handle.dispose();
+      });
+
+      testWidgets(
+        'is shown when a screen reader opens the menu after a pointer '
+        'open',
+        (tester) async {
+          final handle = tester.ensureSemantics();
+          await pumpWithFocusBorders(tester);
+          await tester.tap(_button);
+          await tester.pumpAndSettle();
+          await tester.tap(find.text('Item 1'));
+          await tester.pumpAndSettle();
+          expect(find.byType(MenuItemButton), findsNothing);
+
+          tester.semantics.tap(find.semantics.byLabel('Item 2'));
+          await tester.pumpAndSettle();
+
+          expect(_focusedItemText(tester), 'Item 2');
+          expect(ringColor(tester), yaruLight.colorScheme.primary);
+          handle.dispose();
+        },
+      );
+
+      testWidgets('is shown when a screen reader opens the menu after a click '
+          'closed it', (tester) async {
+        final handle = tester.ensureSemantics();
+        await pumpWithFocusBorders(tester);
+        await tester.tap(_button);
+        await tester.pumpAndSettle();
+        await tester.tap(_button, warnIfMissed: false);
+        await tester.pumpAndSettle();
+        expect(find.byType(MenuItemButton), findsNothing);
+
+        tester.semantics.tap(find.semantics.byLabel('Item 2'));
+        await tester.pumpAndSettle();
+
+        expect(ringColor(tester), yaruLight.colorScheme.primary);
+        handle.dispose();
+      });
+
+      testWidgets('is shown when a screen reader opens the menu after a press '
+          'dragged off the button', (tester) async {
+        final handle = tester.ensureSemantics();
+        await pumpWithFocusBorders(tester);
+        final gesture = await tester.startGesture(tester.getCenter(_button));
+        await gesture.moveTo(const Offset(790, 590));
+        await gesture.up();
+        await tester.pumpAndSettle();
+        expect(find.byType(MenuItemButton), findsNothing);
+
+        tester.semantics.tap(find.semantics.byLabel('Item 2'));
+        await tester.pumpAndSettle();
+
+        expect(ringColor(tester), yaruLight.colorScheme.primary);
+        handle.dispose();
+      });
+
+      testWidgets('is shown by a key that leaves focus where it is', (
+        tester,
+      ) async {
+        await pumpWithFocusBorders(tester, selected: 1);
+        await tester.tap(_button);
+        await tester.pumpAndSettle();
+        expect(ringColor(tester), Colors.transparent);
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.home);
+        await tester.pumpAndSettle();
+
+        expect(_focusedItemText(tester), 'Item 1');
+        expect(ringColor(tester), yaruLight.colorScheme.primary);
+      });
+
+      testWidgets('is absent when YaruTheme.focusBorders is off', (
+        tester,
+      ) async {
+        await pumpWithFocusBorders(tester, enabled: false);
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
+
+        expect(focusedBorder(), findsNothing);
+      });
     });
 
     testWidgets('hovering an entry does not move focus to it', (tester) async {
@@ -677,18 +825,161 @@ void main() {
       expect(_focusedItemText(tester), 'Item 2');
     });
 
-    testWidgets('focused entry has no background, hovered entry does', (
-      tester,
-    ) async {
-      await _pumpDropdown(tester);
-      await tester.tap(_button);
-      await tester.pumpAndSettle();
+    group('highlights', () {
+      final boundary = GlobalKey();
 
-      final overlay = _focusedMenuItem()!.style!.overlayColor!;
-      expect(overlay.resolve({WidgetState.focused}), Colors.transparent);
-      expect(
-        overlay.resolve({WidgetState.focused, WidgetState.hovered}),
-        isNull,
+      Future<void> pumpBoundary(WidgetTester tester) {
+        tester.view.devicePixelRatio = 1;
+        tester.view.physicalSize = const Size(400, 400);
+        addTearDown(tester.view.reset);
+        return tester.pumpWidget(
+          RepaintBoundary(
+            key: boundary,
+            child: MaterialApp(
+              theme: yaruLight,
+              home: Scaffold(
+                body: Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox(
+                    width: 260,
+                    child: YaruDropdown<int>(
+                      values: const [1, 2, 3],
+                      selected: 1,
+                      onSelected: (_) {},
+                      itemBuilder: (context, value, _) => Text('Item $value'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+
+      Future<Color> colorAt(WidgetTester tester, Offset position) async {
+        final color = await tester.runAsync(() async {
+          final image = await tester
+              .renderObject<RenderRepaintBoundary>(find.byKey(boundary))
+              .toImage();
+          final data = (await image.toByteData())!;
+          final i =
+              (position.dy.round() * image.width + position.dx.round()) * 4;
+          return Color.fromARGB(
+            255,
+            data.getUint8(i),
+            data.getUint8(i + 1),
+            data.getUint8(i + 2),
+          );
+        });
+        return color!;
+      }
+
+      Future<TestGesture> mouse(WidgetTester tester) async {
+        final gesture = await tester.createGesture(
+          kind: PointerDeviceKind.mouse,
+        );
+        await gesture.addPointer(location: const Offset(399, 399));
+        addTearDown(gesture.removePointer);
+        return gesture;
+      }
+
+      testWidgets('an entry is tinted by hover, not by focus, and not twice', (
+        tester,
+      ) async {
+        await pumpBoundary(tester);
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
+
+        Offset point(String text) {
+          final rect = tester.getRect(
+            find.widgetWithText(MenuItemButton, text),
+          );
+          return Offset(rect.right - 12, rect.center.dy);
+        }
+
+        final idle = await colorAt(tester, point('Item 3'));
+        expect(await colorAt(tester, point('Item 1')), idle);
+
+        final pointer = await mouse(tester);
+        await pointer.moveTo(point('Item 2'));
+        await tester.pumpAndSettle();
+        final hovered = await colorAt(tester, point('Item 2'));
+        expect(hovered, isNot(idle));
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await tester.pumpAndSettle();
+        expect(_focusedItemText(tester), 'Item 2');
+        expect(await colorAt(tester, point('Item 2')), hovered);
+      });
+
+      testWidgets('the entry that already has focus is tinted by hover', (
+        tester,
+      ) async {
+        await pumpBoundary(tester);
+        final pointer = await mouse(tester);
+        await pointer.moveTo(tester.getCenter(_button));
+        await pointer.down(tester.getCenter(_button));
+        await pointer.up();
+        await tester.pumpAndSettle();
+        expect(_focusedItemText(tester), 'Item 1');
+
+        Offset point(String text) {
+          final rect = tester.getRect(
+            find.widgetWithText(MenuItemButton, text),
+          );
+          return Offset(rect.right - 12, rect.center.dy);
+        }
+
+        final idle = await colorAt(tester, point('Item 3'));
+        await pointer.moveTo(point('Item 2'));
+        await tester.pumpAndSettle();
+        final hoveredOther = await colorAt(tester, point('Item 2'));
+        expect(hoveredOther, isNot(idle));
+
+        await pointer.moveTo(point('Item 1'));
+        await tester.pumpAndSettle();
+        expect(await colorAt(tester, point('Item 1')), hoveredOther);
+      });
+
+      testWidgets('the focused button is tinted by hover', (tester) async {
+        await pumpBoundary(tester);
+        final rect = tester.getRect(_button);
+        final point = Offset(rect.right - 40, rect.center.dy);
+        final idle = await colorAt(tester, point);
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.pumpAndSettle();
+        expect(await colorAt(tester, point), idle);
+
+        final pointer = await mouse(tester);
+        await pointer.moveTo(point);
+        await tester.pumpAndSettle();
+        expect(await colorAt(tester, point), isNot(idle));
+      });
+
+      testWidgets(
+        'the button is tinted by hover, not by focus, and not twice',
+        (tester) async {
+          await pumpBoundary(tester);
+          final rect = tester.getRect(_button);
+          final point = Offset(rect.right - 40, rect.center.dy);
+          final idle = await colorAt(tester, point);
+
+          final pointer = await mouse(tester);
+          await pointer.moveTo(point);
+          await tester.pumpAndSettle();
+          final hovered = await colorAt(tester, point);
+          expect(hovered, isNot(idle));
+
+          await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+          await tester.pumpAndSettle();
+          expect(await colorAt(tester, point), hovered);
+
+          await pointer.moveTo(const Offset(399, 399));
+          await tester.pumpAndSettle();
+          expect(await colorAt(tester, point), idle);
+        },
       );
     });
 

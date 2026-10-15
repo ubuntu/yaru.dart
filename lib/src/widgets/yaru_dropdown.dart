@@ -4,6 +4,7 @@ import 'package:yaru/yaru.dart';
 
 const _kItemHeight = 40.0;
 const _kMenuGap = 6.0;
+const _kHoverAlpha = 20;
 
 /// An entry of a [YaruDropdown].
 class YaruDropdownEntry<T> {
@@ -49,7 +50,8 @@ class YaruDropdownEntry<T> {
 ///
 /// Focus on the button is shown by highlighting the outline of the
 /// [decoration]. Focus on an entry is shown by a [YaruFocusBorder] when
-/// [YaruTheme] `focusBorders` is enabled.
+/// [YaruTheme] `focusBorders` is enabled, except on the entry focused when a
+/// pointer opens the menu, until a key is pressed or focus moves.
 ///
 /// ```dart
 /// YaruDropdown<MyEnum>(
@@ -160,6 +162,8 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
   FocusNode? _internalFocusNode;
   bool _isOpen = false;
   bool _buttonFocused = false;
+  bool _openedByPointer = false;
+  int? _ringHiddenFor;
   Size? _size;
 
   FocusNode get _buttonFocusNode =>
@@ -235,6 +239,36 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
     return null;
   }
 
+  /// Focus is shown by the outline and the focus border, so only hovering and
+  /// pressing highlight the button and the entries. Hover is painted as the
+  /// background, because the ink highlights are resolved separately and
+  /// either stack with, or are lost to, the focus highlight.
+  static ButtonStyle _highlightStyle(Color hoverColor) => ButtonStyle(
+    animationDuration: Duration.zero,
+    overlayColor: WidgetStateProperty.resolveWith(
+      (states) =>
+          states.contains(WidgetState.pressed) ? null : Colors.transparent,
+    ),
+    backgroundColor: WidgetStateProperty.resolveWith(
+      (states) =>
+          states.contains(WidgetState.hovered) &&
+              !states.contains(WidgetState.disabled)
+          ? hoverColor
+          : null,
+    ),
+  );
+
+  /// Clears the flag once the tap has had the chance to open the menu, so a
+  /// press that closes it or is dragged away does not affect a later open.
+  void _endPointerGesture() {
+    Future.microtask(() => _openedByPointer = false);
+  }
+
+  void _showEntryRing() {
+    _openedByPointer = false;
+    if (_ringHiddenFor != null) setState(() => _ringHiddenFor = null);
+  }
+
   Offset _menuOffset(Size? size) {
     switch (widget.menuPosition) {
       case PopupMenuPosition.under:
@@ -262,6 +296,10 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
   }
 
   void _onOpen() {
+    // Opening with a pointer still focuses an entry for assistive technologies.
+    // Its ring stays hidden until a key is pressed or focus moves elsewhere.
+    _ringHiddenFor = _openedByPointer ? _focusIndex : null;
+    _openedByPointer = false;
     setState(() => _isOpen = true);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
@@ -345,6 +383,7 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
 
   /// Handles keys only while the menu is open; the rest are left to the app.
   KeyEventResult _onMenuKey(KeyEvent event) {
+    if (event is KeyDownEvent) _showEntryRing();
     if (!_isOpen || event is! KeyDownEvent) return KeyEventResult.ignored;
     final key = event.logicalKey;
     if (key == LogicalKeyboardKey.tab) {
@@ -422,33 +461,45 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
             expanded: _isOpen,
             onTap: enabled ? _toggle : null,
             onFocus: enabled ? _buttonFocusNode.requestFocus : null,
-            child: Focus(
-              // Focus stays on the button when no entry is enabled; Tab must
-              // not leave the open menu then.
-              canRequestFocus: false,
-              skipTraversal: true,
-              includeSemantics: false,
-              onKeyEvent: (_, event) => _onMenuKey(event),
-              child: OutlinedButton(
-                focusNode: _buttonFocusNode,
-                autofocus: widget.autofocus,
-                style:
-                    widget.style ??
-                    OutlinedButton.styleFrom(side: BorderSide.none),
-                onPressed: enabled ? _toggle : null,
-                child: Row(
-                  mainAxisSize: widget.expanded
-                      ? MainAxisSize.max
-                      : MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    DefaultTextStyle(
-                      style: _labelStyle,
-                      child: Flexible(child: label),
-                    ),
-                    const SizedBox(width: 8),
-                    const Icon(YaruIcons.pan_down, size: 20),
-                  ],
+            child: Listener(
+              onPointerDown: (_) {
+                if (enabled) _openedByPointer = true;
+              },
+              onPointerUp: (_) => _endPointerGesture(),
+              onPointerCancel: (_) => _endPointerGesture(),
+              child: Focus(
+                // Focus stays on the button when no entry is enabled; Tab must
+                // not leave the open menu then.
+                canRequestFocus: false,
+                skipTraversal: true,
+                includeSemantics: false,
+                onKeyEvent: (_, event) => _onMenuKey(event),
+                child: OutlinedButton(
+                  focusNode: _buttonFocusNode,
+                  autofocus: widget.autofocus,
+                  style:
+                      widget.style ??
+                      OutlinedButton.styleFrom(side: BorderSide.none).merge(
+                        _highlightStyle(
+                          Theme.of(context).colorScheme.onSurface
+                              .withAlpha(_kHoverAlpha),
+                        ),
+                      ),
+                  onPressed: enabled ? _toggle : null,
+                  child: Row(
+                    mainAxisSize: widget.expanded
+                        ? MainAxisSize.max
+                        : MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      DefaultTextStyle(
+                        style: _labelStyle,
+                        child: Flexible(child: label),
+                      ),
+                      const SizedBox(width: 8),
+                      const Icon(YaruIcons.pan_down, size: 20),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -484,7 +535,13 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
           skipTraversal: true,
           includeSemantics: false,
           onKeyEvent: (_, event) => _onMenuKey(event),
+          onFocusChange: (hasFocus) {
+            if (hasFocus && _ringHiddenFor != null && _ringHiddenFor != index) {
+              setState(() => _ringHiddenFor = null);
+            }
+          },
           child: _withFocusBorder(
+            index,
             MenuItemButton(
               focusNode: _itemFocusNode(index),
               requestFocusOnHover: false,
@@ -506,16 +563,10 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
                       MediaQuery.maybeOf(context)?.textScaler.scale(1) ?? 1,
                     ),
                     textStyle: Theme.of(context).textTheme.labelLarge,
-                  ).copyWith(
-                    // The focus border marks the focused entry; hovering
-                    // still highlights it.
-                    overlayColor: WidgetStateProperty.resolveWith(
-                      (states) =>
-                          states.contains(WidgetState.focused) &&
-                              !states.contains(WidgetState.hovered) &&
-                              !states.contains(WidgetState.pressed)
-                          ? Colors.transparent
-                          : null,
+                  ).merge(
+                    _highlightStyle(
+                      Theme.of(context).colorScheme.primary
+                          .withAlpha(_kHoverAlpha),
                     ),
                   ),
               child: item.child ?? widget.itemBuilder(context, value, null),
@@ -526,11 +577,12 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
     );
   }
 
-  Widget _withFocusBorder(Widget item) {
+  Widget _withFocusBorder(int index, Widget item) {
     if (YaruTheme.maybeOf(context)?.focusBorders != true) return item;
     return YaruFocusBorder.primary(
-      borderRadius: const BorderRadius.all(Radius.circular(kYaruButtonRadius)),
+      borderRadius: BorderRadius.zero,
       borderStrokeAlign: BorderSide.strokeAlignInside,
+      borderColor: _ringHiddenFor == index ? Colors.transparent : null,
       child: item,
     );
   }
