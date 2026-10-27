@@ -122,6 +122,35 @@ void main() {
         expect(after.hasPrimaryFocus, isTrue);
       });
 
+      testWidgets('draws the focus border outside of the tile', (tester) async {
+        final before = FocusNode();
+        final tile = FocusNode();
+        final after = FocusNode();
+        addTearDown(before.dispose);
+        addTearDown(tile.dispose);
+        addTearDown(after.dispose);
+
+        await _pumpTile(
+          tester,
+          before: before,
+          after: after,
+          child: entry.value(tile, () {}, null),
+        );
+
+        final container = tester.widget<AnimatedContainer>(
+          find
+              .descendant(
+                of: find.byType(YaruFocusBorder),
+                matching: find.byType(AnimatedContainer),
+              )
+              .first,
+        );
+        final decoration = container.foregroundDecoration! as BoxDecoration;
+        final side = (decoration.border! as Border).top;
+        expect(side.strokeAlign, greaterThan(BorderSide.strokeAlignInside));
+        expect(side.strokeInset, lessThanOrEqualTo(0));
+      });
+
       testWidgets('skips disabled tiles during keyboard traversal', (
         tester,
       ) async {
