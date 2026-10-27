@@ -50,7 +50,7 @@ class YaruInfoBadge extends StatelessWidget {
   /// Optional [Color] to overwrite the color received from [YaruInfoType]
   final Color? color;
 
-  /// Optional [TextStyle], defaults to `EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0)`
+  /// Optional [TextStyle], defaults to `Theme.of(context).textTheme.bodySmall`
   final TextStyle? style;
 
   /// Optional [BorderRadiusGeometry], defaults to `BorderRadius.circular(20)`
@@ -127,7 +127,7 @@ class YaruInfoBox extends StatelessWidget {
   final Color? color;
 
   /// The optional style used for the [DefaultTextStyle] around the [title], defaults to
-  /// `Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, fontSize: 16.0, height: 1.3)`
+  /// `Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)`
   final TextStyle? titleTextStyle;
 
   /// The optional style used for the [DefaultTextStyle] around the [title], defaults to
