@@ -14,6 +14,7 @@ import 'pages/color_disk_page.dart';
 import 'pages/date_time_entry_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/draggable_page.dart';
+import 'pages/dropdown_page.dart';
 import 'pages/expandable_page.dart';
 import 'pages/expansion_panel_page.dart';
 import 'pages/full_color_icons_page.dart';
@@ -358,6 +359,14 @@ final examplePageItems = <PageItem>[
     floatingActionButtonBuilder: (_) => const CodeSnippedButton(
       snippetUrl: 'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/border_container_page.dart',
     ),
+  ),
+  PageItem(
+    title: 'YaruDropdown',
+    floatingActionButtonBuilder: (_) => const CodeSnippedButton(
+      snippetUrl: 'https://raw.githubusercontent.com/ubuntu/yaru.dart/main/example/lib/pages/dropdown_page.dart',
+    ),
+    pageBuilder: (context) => const DropdownPage(),
+    iconBuilder: (context, selected) => const Icon(YaruIcons.pan_down),
   ),
   PageItem(
     title: 'YaruSplitButton',
