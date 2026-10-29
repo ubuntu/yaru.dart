@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=Yaru Example
-Comment=Yaru Example
-Exec=bin/yaru_example
-Icon=${SNAP}/meta/gui/icon.svg
-Terminal=false
