@@ -1,5 +1,17 @@
 # Changelog
 
+## [11.1.0](https://github.com/ubuntu/yaru.dart/compare/v11.0.0...v11.1.0) (2026-10-29)
+
+
+### Features
+
+* add YaruDropdown ([#1103](https://github.com/ubuntu/yaru.dart/issues/1103)) ([90916be](https://github.com/ubuntu/yaru.dart/commit/90916be13dbb9a159ef0f3853db5bfe3797d815a))
+
+
+### Bug Fixes
+
+* **a11y:** avoid duplicate tab stops in toggle list tiles ([#1100](https://github.com/ubuntu/yaru.dart/issues/1100)) ([0cbb50c](https://github.com/ubuntu/yaru.dart/commit/0cbb50c715c3c5654981d35c259f276d6fc350f7))
+
 ## [11.0.0](https://github.com/ubuntu/yaru.dart/compare/v10.2.0...v11.0.0) (2026-10-02)
 
 
