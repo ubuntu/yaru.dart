@@ -133,7 +133,6 @@ class _YaruRadioListTileState<T> extends State<YaruRadioListTile<T>> {
           widget.hasFocusBorder ??
               YaruTheme.maybeOf(context)?.focusBorders == true
           ? YaruFocusBorder.primary(
-              borderStrokeAlign: BorderSide.strokeAlignInside,
               borderColor: _tileHasFocus ? null : Colors.transparent,
               child: tile,
             )
