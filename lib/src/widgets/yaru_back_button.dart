@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:yaru/icons.dart';
 
 import 'yaru_back_button_theme.dart';

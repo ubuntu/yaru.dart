@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A draggable positioned widget - have to be child of a [Stack]
 class YaruDraggable extends StatefulWidget {
