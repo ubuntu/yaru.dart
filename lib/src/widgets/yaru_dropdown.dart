@@ -420,6 +420,7 @@ class _YaruDropdownState<T> extends State<YaruDropdown<T>> {
 
     return MenuAnchor(
       controller: _controller,
+      childFocusNode: _buttonFocusNode,
       crossAxisUnconstrained: false,
       onOpen: _onOpen,
       onClose: _onClose,
