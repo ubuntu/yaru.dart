@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:yaru/src/widgets/yaru_paned_view.dart';
 
 /// Define the side placement of a [YaruPanedView] pane.
