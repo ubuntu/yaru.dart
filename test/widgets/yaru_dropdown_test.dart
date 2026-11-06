@@ -1300,15 +1300,16 @@ void main() {
         );
         await open(tester);
 
-        await tab(tester);
+        final focusNode = tester.widget<OutlinedButton>(_button).focusNode!;
+        expect(focusNode.hasPrimaryFocus, isTrue);
 
-        expect(find.byType(MenuItemButton), findsNWidgets(2));
-        expect(focusedFieldKey(), isNull);
-        expect(
-          FocusManager.instance.primaryFocus!.context!
-              .findAncestorWidgetOfExactType<OutlinedButton>(),
-          isNotNull,
-        );
+        for (final shift in [false, true]) {
+          await tab(tester, shift: shift);
+
+          expect(find.byType(MenuItemButton), findsNWidgets(2));
+          expect(focusedFieldKey(), isNull);
+          expect(focusNode.hasPrimaryFocus, isTrue);
+        }
       });
 
       testWidgets('after the menu closes Tab traverses normally', (
