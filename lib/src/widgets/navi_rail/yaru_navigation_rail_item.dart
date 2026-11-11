@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:yaru/src/widgets/navi_rail/yaru_navigation_page_theme.dart';
 
 import '../../../constants.dart';

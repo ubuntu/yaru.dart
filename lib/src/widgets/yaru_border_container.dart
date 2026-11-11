@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:yaru/constants.dart';
 
 /// A container with a rounded Yaru-style border.
