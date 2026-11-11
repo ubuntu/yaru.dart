@@ -1,5 +1,23 @@
 # Changelog
 
+## [12.0.0](https://github.com/ubuntu/yaru.dart/compare/v11.0.0...v12.0.0) (2026-11-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to standalone material_ui package ([#1110](https://github.com/ubuntu/yaru.dart/issues/1110))
+
+### Features
+
+* add YaruDropdown ([#1103](https://github.com/ubuntu/yaru.dart/issues/1103)) ([90916be](https://github.com/ubuntu/yaru.dart/commit/90916be13dbb9a159ef0f3853db5bfe3797d815a))
+* migrate to standalone material_ui package ([#1110](https://github.com/ubuntu/yaru.dart/issues/1110)) ([97b0d90](https://github.com/ubuntu/yaru.dart/commit/97b0d90d059943d885270eb0c9659fc5ede3e03f))
+
+
+### Bug Fixes
+
+* **a11y:** avoid duplicate tab stops in toggle list tiles ([#1100](https://github.com/ubuntu/yaru.dart/issues/1100)) ([0cbb50c](https://github.com/ubuntu/yaru.dart/commit/0cbb50c715c3c5654981d35c259f276d6fc350f7))
+* retain dropdown button focus when all entries are disabled ([#1111](https://github.com/ubuntu/yaru.dart/issues/1111)) ([0cda2e1](https://github.com/ubuntu/yaru.dart/commit/0cda2e18300085c97b8d1029b3a1103b78430742))
+
 ## [11.0.0](https://github.com/ubuntu/yaru.dart/compare/v10.2.0...v11.0.0) (2026-10-02)
 
 
