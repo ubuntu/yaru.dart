@@ -839,9 +839,11 @@ Color _cardColor(ColorScheme colorScheme) =>
     colorScheme.surface.scale(lightness: colorScheme.isLight ? -0.05 : 0.05);
 
 /// Helper function to create a new Yaru light theme
+///
+/// Defaults to the GTK Yaru window background (#FAFAFA).
 ThemeData createYaruLightTheme({
   required Color primaryColor,
-  Color lightBaseColor = Colors.white,
+  Color lightBaseColor = YaruColors.porcelain,
   Color darkBaseColor = YaruColors.jet,
   Color? errorColor,
   Color? elevatedButtonColor,
@@ -901,10 +903,14 @@ ThemeData createYaruLightTheme({
 }
 
 /// Helper function to create a new Yaru dark theme
+///
+/// Defaults to the GTK Yaru window background: lighten(#181818, 8%).
+/// This is separate from [YaruColors.jet], which is also used for light text.
+/// [darkBaseColor] overrides the final background color without transformation.
 ThemeData createYaruDarkTheme({
   required Color primaryColor,
   Color lightBaseColor = YaruColors.porcelain,
-  Color darkBaseColor = YaruColors.jet,
+  Color darkBaseColor = YaruColors.darkWindowBackground,
   Color? errorColor,
   Color? elevatedButtonColor,
   Color? elevatedButtonTextColor,

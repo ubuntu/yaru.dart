@@ -83,6 +83,9 @@ class YaruColors {
   /// Jet
   static const Color jet = Color(0xFF202020);
 
+  /// GTK Yaru dark window background: lighten(#181818, 8%).
+  static const Color darkWindowBackground = Color(0xFF2C2C2C);
+
   /// Light title bar
   static const Color titleBarLight = Color(0xFFEBEBEB);
 
