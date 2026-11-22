@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:yaru/foundation.dart' show YaruPageController;
 import 'package:yaru/src/widgets/yaru_paned_view_layout_delegate.dart';
 

@@ -1,5 +1,5 @@
 import 'package:animated_vector/animated_vector.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Describes how a [YaruAnimatedIcon] will run.
 enum YaruAnimationMode {

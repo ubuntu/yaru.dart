@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class YaruPageController extends ChangeNotifier {
   YaruPageController({required this.length, this.initialIndex = -1})

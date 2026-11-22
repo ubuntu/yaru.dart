@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:yaru/src/widgets/yaru_linear_progress_indicator_theme.dart';
 
 import 'yaru_progress_indicator.dart';

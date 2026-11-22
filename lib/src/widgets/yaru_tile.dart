@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 @Deprecated('This enum is deprecated and will be removed in a future version')
 enum YaruTileStyle { normal, banner }

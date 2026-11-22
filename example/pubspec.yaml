@@ -15,6 +15,7 @@ dependencies:
   flutter_highlight: ^0.7.0
   handy_window: ^0.4.0
   http: ^1.2.2
+  material_ui: ^1.0.0
   path: ^1.9.0
   safe_change_notifier: ^0.3.2
   universal_html: ^2.2.4

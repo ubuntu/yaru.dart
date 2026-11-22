@@ -1,6 +1,6 @@
 // ignore_for_file: sort_constructors_first, constant_identifier_names
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../icons.dart';
 

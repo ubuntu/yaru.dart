@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:yaru/foundation.dart' show YaruPageController;
 
 import 'yaru_navigation_page_theme.dart';
