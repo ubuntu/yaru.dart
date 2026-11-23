@@ -11,7 +11,7 @@ environment:
 dependencies:
   animated_vector: ^0.2.3
   animated_vector_annotations: ^0.3.0
-  assorted_layout_widgets: ^11.0.0
+  assorted_layout_widgets: ">=11.0.0 <14.0.0"
   collection: ^1.17.0
   dbus: ^0.8.0
   flutter:
