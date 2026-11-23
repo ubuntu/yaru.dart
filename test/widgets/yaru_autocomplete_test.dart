@@ -144,6 +144,44 @@ void main() {
     expect(announcedMessages(tester), ['apple']);
   });
 
+  testWidgets('uses custom options view and option announcements', (
+    tester,
+  ) async {
+    String? selected;
+    await _pumpAutocomplete(
+      tester,
+      autocomplete: YaruAutocomplete<String>(
+        optionsBuilder: _optionsBuilder,
+        optionAnnouncement: (option) => 'Option $option',
+        optionsViewBuilder: (context, onSelected, options) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (final option in options)
+              TextButton(
+                onPressed: () => onSelected(option),
+                child: Text('Custom $option'),
+              ),
+          ],
+        ),
+        onSelected: (option) => selected = option,
+      ),
+    );
+    await _announcementFor(tester, 'ap', '2 options available');
+    expect(find.text('Custom apple'), findsOne);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await tester.pump();
+    expect(announcedMessages(tester), ['Option apple']);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+    await tester.pump();
+    expect(announcedMessages(tester), ['Option apricot']);
+
+    await tester.tap(find.text('Custom apricot'));
+    await tester.pump();
+    expect(selected, 'apricot');
+  });
+
   testWidgets('typing again resets arrow navigation', (tester) async {
     await _pumpAutocomplete(tester);
     await _announcementFor(tester, 'ap', '2 options available');
@@ -212,6 +250,46 @@ void main() {
           body: Column(
             children: [
               const YaruAutocomplete<String>(optionsBuilder: _optionsBuilder),
+              TextButton(
+                focusNode: nextFocus,
+                onPressed: () {},
+                child: const Text('next'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    await tester.enterText(find.byType(TextFormField), 'ap');
+    await tester.pump();
+    expect(find.text('apple'), findsOne);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    expect(nextFocus.hasFocus, isTrue);
+  });
+
+  testWidgets('tab moves focus past a custom options view', (tester) async {
+    final nextFocus = FocusNode();
+    addTearDown(nextFocus.dispose);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Column(
+            children: [
+              YaruAutocomplete<String>(
+                optionsBuilder: _optionsBuilder,
+                optionsViewBuilder: (context, onSelected, options) => Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final option in options)
+                      TextButton(
+                        onPressed: () => onSelected(option),
+                        child: Text(option),
+                      ),
+                  ],
+                ),
+              ),
               TextButton(
                 focusNode: nextFocus,
                 onPressed: () {},

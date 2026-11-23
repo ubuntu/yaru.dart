@@ -16,6 +16,8 @@ class YaruAutocomplete<T extends Object> extends StatefulWidget {
     this.onSelected,
     this.optionsWidth,
     this.optionsMaxHeight = 200.0,
+    this.optionsViewBuilder,
+    this.optionAnnouncement,
     this.initialValue,
     this.clearedAnnouncement = 'Input cleared',
     this.noOptionsAnnouncement = 'No options found',
@@ -51,6 +53,22 @@ class YaruAutocomplete<T extends Object> extends StatefulWidget {
   ///
   /// The default value is 200.
   final double optionsMaxHeight;
+
+  /// Builds the options view.
+  ///
+  /// If not provided, a Yaru-style options list is used. The returned view is
+  /// excluded from keyboard focus, and highlighted options are announced using
+  /// [optionAnnouncement].
+  ///
+  /// A custom view needs to scroll the highlighted option into view itself.
+  /// [optionsWidth] and [optionsMaxHeight] are not applied to it.
+  final AutocompleteOptionsViewBuilder<T>? optionsViewBuilder;
+
+  /// Builds the message announced to screen readers when an option is
+  /// highlighted.
+  ///
+  /// Defaults to [displayStringForOption].
+  final AutocompleteOptionToString<T>? optionAnnouncement;
 
   /// {@macro flutter.widgets.RawAutocomplete.initialValue}
   final TextEditingValue? initialValue;
@@ -221,7 +239,8 @@ class _YaruAutocompleteState<T extends Object>
                     final option = _latestOptions.first;
                     SemanticsService.sendAnnouncement(
                       View.of(context),
-                      widget.displayStringForOption(option),
+                      widget.optionAnnouncement?.call(option) ??
+                          widget.displayStringForOption(option),
                       _announcementTextDirection,
                     );
                   }
@@ -256,6 +275,9 @@ class _YaruAutocompleteState<T extends Object>
       },
       optionsViewBuilder: (context, onSelected, options) {
         return _YaruAutocompleteOptions<T>(
+          optionAnnouncement:
+              widget.optionAnnouncement ?? widget.displayStringForOption,
+          optionsViewBuilder: widget.optionsViewBuilder,
           displayStringForOption: widget.displayStringForOption,
           onSelected: onSelected,
           options: options,
@@ -271,6 +293,8 @@ class _YaruAutocompleteState<T extends Object>
 class _YaruAutocompleteOptions<T extends Object> extends StatefulWidget {
   const _YaruAutocompleteOptions({
     super.key,
+    required this.optionAnnouncement,
+    required this.optionsViewBuilder,
     required this.displayStringForOption,
     required this.onSelected,
     required this.options,
@@ -279,6 +303,8 @@ class _YaruAutocompleteOptions<T extends Object> extends StatefulWidget {
     required this.announcementTextDirection,
   });
 
+  final AutocompleteOptionToString<T> optionAnnouncement;
+  final AutocompleteOptionsViewBuilder<T>? optionsViewBuilder;
   final AutocompleteOptionToString<T> displayStringForOption;
   final AutocompleteOnSelected<T> onSelected;
   final Iterable<T> options;
@@ -316,7 +342,7 @@ class _YaruAutocompleteOptionsState<T extends Object>
         final option = widget.options.elementAt(highlighted);
         SemanticsService.sendAnnouncement(
           View.of(context),
-          widget.displayStringForOption(option),
+          widget.optionAnnouncement(option),
           widget.announcementTextDirection,
         );
       }
@@ -325,46 +351,55 @@ class _YaruAutocompleteOptionsState<T extends Object>
 
   @override
   Widget build(BuildContext context) {
+    final optionsView =
+        widget.optionsViewBuilder?.call(
+          context,
+          widget.onSelected,
+          widget.options,
+        ) ??
+        _defaultOptionsView(context);
+    return ExcludeFocus(child: optionsView);
+  }
+
+  Widget _defaultOptionsView(BuildContext context) {
     final theme = Theme.of(context);
     return Align(
       alignment: Alignment.topLeft,
-      child: ExcludeFocus(
-        child: YaruBorderContainer(
-          width: widget.optionsWidth,
-          clipBehavior: Clip.antiAlias,
-          color: theme.menuTheme.style?.backgroundColor?.resolve({}),
-          constraints: BoxConstraints(maxHeight: widget.maxOptionsHeight),
-          child: ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            itemCount: widget.options.length,
-            itemBuilder: (context, index) {
-              return Builder(
-                builder: (context) {
-                  final highlighted = AutocompleteHighlightedOption.of(context);
-                  if (index == highlighted) {
-                    SchedulerBinding.instance.addPostFrameCallback((_) {
-                      if (context.mounted) {
-                        Scrollable.ensureVisible(context, alignment: 0.5);
-                      }
-                    });
-                  }
-                  final option = widget.options.elementAt(index);
+      child: YaruBorderContainer(
+        width: widget.optionsWidth,
+        clipBehavior: Clip.antiAlias,
+        color: theme.menuTheme.style?.backgroundColor?.resolve({}),
+        constraints: BoxConstraints(maxHeight: widget.maxOptionsHeight),
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          itemCount: widget.options.length,
+          itemBuilder: (context, index) {
+            return Builder(
+              builder: (context) {
+                final highlighted = AutocompleteHighlightedOption.of(context);
+                if (index == highlighted) {
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
+                    if (context.mounted) {
+                      Scrollable.ensureVisible(context, alignment: 0.5);
+                    }
+                  });
+                }
+                final option = widget.options.elementAt(index);
 
-                  return MenuItemButton(
-                    requestFocusOnHover: false,
-                    onPressed: () => widget.onSelected(option),
-                    style: MenuItemButton.styleFrom(
-                      backgroundColor: index == highlighted
-                          ? Theme.of(context).focusColor
-                          : null,
-                    ),
-                    child: Text(widget.displayStringForOption(option)),
-                  );
-                },
-              );
-            },
-          ),
+                return MenuItemButton(
+                  requestFocusOnHover: false,
+                  onPressed: () => widget.onSelected(option),
+                  style: MenuItemButton.styleFrom(
+                    backgroundColor: index == highlighted
+                        ? Theme.of(context).focusColor
+                        : null,
+                  ),
+                  child: Text(widget.displayStringForOption(option)),
+                );
+              },
+            );
+          },
         ),
       ),
     );
