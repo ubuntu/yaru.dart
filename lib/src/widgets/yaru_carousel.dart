@@ -170,25 +170,27 @@ class _YaruCarouselState extends State<YaruCarousel> {
     );
 
     if (widget.navigationControls) {
+      final isRtl = Directionality.of(context) == TextDirection.rtl;
+
       return Expanded(
         child: Stack(
           children: [
             carousel,
             _buildNavigationButton(
-              Alignment.centerLeft,
+              AlignmentDirectional.centerStart,
               _isFirstPage() ? null : _controller.previousPage,
               widget.previousIcon ??
                   Icon(
-                    YaruIcons.go_previous,
+                    isRtl ? YaruIcons.go_next : YaruIcons.go_previous,
                     semanticLabel: widget.previousIconSemanticLabel,
                   ),
             ),
             _buildNavigationButton(
-              Alignment.centerRight,
+              AlignmentDirectional.centerEnd,
               _isLastPage() ? null : _controller.nextPage,
               widget.nextIcon ??
                   Icon(
-                    YaruIcons.go_next,
+                    isRtl ? YaruIcons.go_previous : YaruIcons.go_next,
                     semanticLabel: widget.nextIconSemanticLabel,
                   ),
             ),
