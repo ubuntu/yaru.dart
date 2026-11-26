@@ -1,5 +1,12 @@
 # Changelog
 
+## [12.0.1](https://github.com/ubuntu/yaru.dart/compare/v12.0.0...v12.0.1) (2026-11-26)
+
+
+### Bug Fixes
+
+* **YaruCarousel:** adapt navigation controls in RTL locales ([#1115](https://github.com/ubuntu/yaru.dart/issues/1115)) ([1c8f2e3](https://github.com/ubuntu/yaru.dart/commit/1c8f2e3def12d0d4ef303d7c707f0f115b19e9a9))
+
 ## [12.0.0](https://github.com/ubuntu/yaru.dart/compare/v11.0.0...v12.0.0) (2026-11-11)
 
 
