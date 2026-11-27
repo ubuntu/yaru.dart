@@ -59,11 +59,19 @@ InputDecorationTheme _createInputDecorationTheme(ColorScheme colorScheme) {
     filled: false,
     fillColor: fill,
     border: OutlineInputBorder(
-      borderSide: BorderSide(width: width, color: border),
+      borderSide: BorderSide(
+        width: width,
+        color: border,
+        strokeAlign: strokeAlign,
+      ),
       borderRadius: radius,
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: focusWidth, color: colorScheme.primary),
+      borderSide: BorderSide(
+        width: focusWidth,
+        color: colorScheme.primary,
+        strokeAlign: strokeAlign,
+      ),
       borderRadius: radius,
     ),
     enabledBorder: OutlineInputBorder(
